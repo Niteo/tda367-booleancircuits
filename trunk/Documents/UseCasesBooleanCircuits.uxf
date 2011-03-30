@@ -253,7 +253,7 @@ bg=yellow</panel_attributes>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
       <x>742</x>
-      <y>238</y>
+      <y>245</y>
       <w>84</w>
       <h>21</h>
     </coordinates>
@@ -339,11 +339,11 @@ bg=yellow</panel_attributes>
       <x>616</x>
       <y>182</y>
       <w>139</w>
-      <h>76</h>
+      <h>83</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;extends&gt;&gt;</panel_attributes>
-    <additional_attributes>21;21;126;63</additional_attributes>
+    <additional_attributes>21;21;126;70</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -373,7 +373,7 @@ bg=yellow</panel_attributes>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
       <x>742</x>
-      <y>175</y>
+      <y>203</y>
       <w>84</w>
       <h>21</h>
     </coordinates>
@@ -385,25 +385,25 @@ bg=yellow</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>616</x>
-      <y>161</y>
+      <y>175</y>
       <w>139</w>
-      <h>55</h>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;extends&gt;&gt;</panel_attributes>
-    <additional_attributes>21;42;126;21</additional_attributes>
+    <additional_attributes>21;28;126;35</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>735</x>
-      <y>154</y>
+      <y>182</y>
       <w>83</w>
-      <h>118</h>
+      <h>76</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;include&gt;&gt;</panel_attributes>
-    <additional_attributes>49;105;42;21</additional_attributes>
+    <additional_attributes>49;63;42;21</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.UseCase</type>
@@ -687,5 +687,53 @@ bg=red</panel_attributes>
     <panel_attributes>lt=&lt;.
 &lt;&lt;extends&gt;&gt;</panel_attributes>
     <additional_attributes>21;35;189;35</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>714</x>
+      <y>154</y>
+      <w>84</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>Deselect
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>882</x>
+      <y>140</y>
+      <w>84</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>Deselect all
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>623</x>
+      <y>147</y>
+      <w>104</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>21;49;91;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>777</x>
+      <y>119</y>
+      <w>118</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>21;42;105;28</additional_attributes>
   </element>
 </diagram>
