@@ -11,7 +11,9 @@ package edu.chl.tda367.booleancircuits.view;
  * @author  __USER__
  */
 public class MainWindow extends javax.swing.JFrame {
-
+	
+	private Toolbar toolbar = new Toolbar();
+	
 	/** Creates new form View */
 	public MainWindow() {
 		initComponents();
@@ -255,6 +257,8 @@ public class MainWindow extends javax.swing.JFrame {
 				verticalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 327,
 				Short.MAX_VALUE));
 
+		verticalSplitPane.setTopComponent(toolbar.getToolbarPanel());
+		
 		pack();
 	}// </editor-fold>
 	//GEN-END:initComponents
