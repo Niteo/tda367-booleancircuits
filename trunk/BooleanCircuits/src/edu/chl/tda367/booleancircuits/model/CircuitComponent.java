@@ -8,7 +8,7 @@ public class CircuitComponent {
 	public void setPosition(Coordinate coordinate){
 		this.coordinate = coordinate.clone();
 	}
-	public void setConnectedOutput(ICircuitComponent component){
+	public void setConnectedOutput(CircuitComponent component){
 		throw new UnsupportedOperationException();
 		//TODO: Write
 	}
