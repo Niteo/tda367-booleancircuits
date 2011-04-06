@@ -1,11 +1,13 @@
 package edu.chl.tda367.booleancircuits.controller;
 
+import edu.chl.tda367.booleancircuits.model.Coordinate;
+
 /**
- * Interface for a main controller in BooleanCircuits.
+ * Main controller in BooleanCircuits.
  * @author Kaufmann
  */
 
-public interface IMasterController {
+public final class MasterController {
 	/* ##########################
 	 * #       WORKSPACES       #
 	 * ##########################
@@ -14,33 +16,45 @@ public interface IMasterController {
 	/**
 	 * Closes the currently active workspace.
 	 */
-	public abstract void closeActiveWorkspace();
+	public void closeActiveWorkspace(){
+		throw new UnsupportedOperationException();
+	}
 	
 	/**
 	 * Creates a new blank workspace.
 	 */
-	public abstract void newWorkspace();
+	public void newWorkspace(){
+		throw new UnsupportedOperationException();
+	}
 	
 	/**
 	 * Opens the specified workspace.
 	 * @param path Path to the workspace to open.
 	 */
-	public abstract void openWorkspace(String path);
+	public void openWorkspace(String path){
+		throw new UnsupportedOperationException();
+	}
 	
 	/**
 	 * Saves the active workspace.
 	 */
-	public abstract void saveActiveWorkspace();
+	public void saveActiveWorkspace(){
+		throw new UnsupportedOperationException();
+	}
 	
 	/**
 	 * Saves the active workspace as a component.
 	 */
-	public abstract void saveActiveWorskpaceAsComponent(String path);
+	public void saveActiveWorskpaceAsComponent(String path){
+		throw new UnsupportedOperationException();
+	}
 	
 	/**
 	 * Saves all workspaces.
 	 */
-	public abstract void saveAllWorkspaces();
+	public void saveAllWorkspaces(){
+		throw new UnsupportedOperationException();
+	}
 	
 	/* ##########################
 	 * #       COMPONENTS       #
@@ -49,28 +63,34 @@ public interface IMasterController {
 	/**
 	 * Adds the currently selected component in the palette to the
 	 * specified coordinate in the active workspace.
-	 * @param x The x-coordinate to add to
-	 * @param y The y-coordinate to add to
+	 * @param coord the coordinate to add to
 	 */
-	public abstract void addComponent(int x, int y);
+	public void addComponent(Coordinate coord){
+		throw new UnsupportedOperationException();
+	}
 	
 	//public abstract void useComponent(Component);
 	// TODO: Above method
 	/**
 	 * Removes the currently selected component(s) in the active workspace.
 	 */
-	public abstract void removeSelectedComponents();
+	public void removeSelectedComponents(){
+		throw new UnsupportedOperationException();
+	}
 	/**
 	 * Selects all components in the active workspace.
 	 */
-	public abstract void selectAllComponents();
+	public void selectAllComponents(){
+		throw new UnsupportedOperationException();
+	}
 	/**
 	 * Selects the first occurance of a component at the given coordinate
 	 * in the active workspace
-	 * @param x The x-coordinate to select from
-	 * @param y The y-coordinate to select from
+	 * @param coord the coordinate to select from
 	 */
-	public abstract void selectComponent(int x, int y);
+	public void selectComponent(Coordinate coord){
+		throw new UnsupportedOperationException();
+	}
 	
 	/* ##########################
 	 * #      CutCopyPaste      #
@@ -79,15 +99,20 @@ public interface IMasterController {
 	/**
 	 * Copies the selected components in the active workspace to clipboard.
 	 */
-	public abstract void copySelectedComponents();
+	public void copySelectedComponents(){
+		throw new UnsupportedOperationException();
+	}
 	/**
 	 * Cut the selected components in the active workspace to clipboard.
 	 */
-	public abstract void cutSelectedComponents();
+	public void cutSelectedComponents(){
+		throw new UnsupportedOperationException();
+	}
 	/**
 	 * Pastes the selected components to the active workspace from the clipboard.
-	 * @param x The x-coordinate to paste to
-	 * @param y The y-coordinate to paste to
+	 * @param coord the coordinate to paste to
 	 */
-	public abstract void pasteSelectedComponent(int x, int y);
+	public void pasteSelectedComponent(Coordinate coord){
+		throw new UnsupportedOperationException();
+	}
 }
