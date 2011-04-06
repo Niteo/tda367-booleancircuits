@@ -40,67 +40,46 @@ public class ToolbarPanel extends javax.swing.JPanel {
 		setPreferredSize(new java.awt.Dimension(220, 24));
 		setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-		newWorkspaceButton
-				.setIcon(new javax.swing.ImageIcon(
-						"C:\\Users\\Boel_\\Documents\\Javafiler\\BooleanCircuits\\Resources\\Icons\\New-Document-icon.png")); // NOI18N
 		newWorkspaceButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(newWorkspaceButton);
 
-		openFileButton
-				.setIcon(new javax.swing.ImageIcon(
-						"C:\\Users\\Boel_\\Documents\\Javafiler\\BooleanCircuits\\Resources\\Icons\\Open-icon.png")); // NOI18N
 		openFileButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(openFileButton);
 
-		saveButton
-				.setIcon(new javax.swing.ImageIcon(
-						"C:\\Users\\Boel_\\Documents\\Javafiler\\BooleanCircuits\\Resources\\Icons\\Save-icon.png")); // NOI18N
 		saveButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(saveButton);
 
-		saveAllButton
-				.setIcon(new javax.swing.ImageIcon(
-						"C:\\Users\\Boel_\\Documents\\Javafiler\\BooleanCircuits\\Resources\\Icons\\save-all-icon.png")); // NOI18N
 		saveAllButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(saveAllButton);
 
-		saveAsComponentButton
-				.setIcon(new javax.swing.ImageIcon(
-						"C:\\Users\\Boel_\\Documents\\Javafiler\\BooleanCircuits\\Resources\\Icons\\save-component.png")); // NOI18N
 		saveAsComponentButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(saveAsComponentButton);
 
-		cutButton
-				.setIcon(new javax.swing.ImageIcon(
-						"C:\\Users\\Boel_\\Documents\\Javafiler\\BooleanCircuits\\Resources\\Icons\\cut-icon.png")); // NOI18N
 		cutButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		cutButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				cutButtonActionPerformed(evt);
+			}
+		});
 		add(cutButton);
 
-		copyButton
-				.setIcon(new javax.swing.ImageIcon(
-						"C:\\Users\\Boel_\\Documents\\Javafiler\\BooleanCircuits\\Resources\\Icons\\copy-icon.png")); // NOI18N
 		copyButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(copyButton);
 
-		pasteButton
-				.setIcon(new javax.swing.ImageIcon(
-						"C:\\Users\\Boel_\\Documents\\Javafiler\\BooleanCircuits\\Resources\\Icons\\paste-icon.png")); // NOI18N
 		pasteButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(pasteButton);
 
-		undoButton
-				.setIcon(new javax.swing.ImageIcon(
-						"C:\\Users\\Boel_\\Documents\\Javafiler\\BooleanCircuits\\Resources\\Icons\\Undo-icon.png")); // NOI18N
 		undoButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(undoButton);
 
-		redoButton
-				.setIcon(new javax.swing.ImageIcon(
-						"C:\\Users\\Boel_\\Documents\\Javafiler\\BooleanCircuits\\Resources\\Icons\\Redo-icon.png")); // NOI18N
 		redoButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(redoButton);
 	}// </editor-fold>
 	//GEN-END:initComponents
+
+	private void cutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
 
 	//GEN-BEGIN:variables
 	// Variables declaration - do not modify
