@@ -32,8 +32,7 @@ public class MainWindow extends javax.swing.JFrame {
 		horizontalSplitPane = new javax.swing.JSplitPane();
 		paletteContainerPanel = new javax.swing.JPanel();
 		canvasContainerPanel = new javax.swing.JPanel();
-		toolbarContainerPanel = new javax.swing.JPanel();
-		jButton1 = new javax.swing.JButton();
+		toolbarPanel1 = new edu.chl.tda367.booleancircuits.view.ToolbarPanel();
 		menuBar = new javax.swing.JMenuBar();
 		fileMenu = new javax.swing.JMenu();
 		newWorkspaceMenuItem = new javax.swing.JMenuItem();
@@ -81,12 +80,12 @@ public class MainWindow extends javax.swing.JFrame {
 				.setHorizontalGroup(paletteContainerPanelLayout
 						.createParallelGroup(
 								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGap(0, 100, Short.MAX_VALUE));
+						.addGap(0, 0, Short.MAX_VALUE));
 		paletteContainerPanelLayout
 				.setVerticalGroup(paletteContainerPanelLayout
 						.createParallelGroup(
 								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGap(0, 264, Short.MAX_VALUE));
+						.addGap(0, 283, Short.MAX_VALUE));
 
 		horizontalSplitPane.setLeftComponent(paletteContainerPanel);
 
@@ -97,19 +96,15 @@ public class MainWindow extends javax.swing.JFrame {
 				.setHorizontalGroup(canvasContainerPanelLayout
 						.createParallelGroup(
 								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGap(0, 563, Short.MAX_VALUE));
+						.addGap(0, 580, Short.MAX_VALUE));
 		canvasContainerPanelLayout.setVerticalGroup(canvasContainerPanelLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 264, Short.MAX_VALUE));
+				.addGap(0, 283, Short.MAX_VALUE));
 
 		horizontalSplitPane.setRightComponent(canvasContainerPanel);
 
 		verticalSplitPane.setBottomComponent(horizontalSplitPane);
-
-		jButton1.setPreferredSize(new java.awt.Dimension(20, 20));
-		toolbarContainerPanel.add(jButton1);
-
-		verticalSplitPane.setLeftComponent(toolbarContainerPanel);
+		verticalSplitPane.setLeftComponent(toolbarPanel1);
 
 		fileMenu.setText("File");
 
@@ -255,11 +250,11 @@ public class MainWindow extends javax.swing.JFrame {
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(
 				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				verticalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 672,
+				verticalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 589,
 				Short.MAX_VALUE));
 		layout.setVerticalGroup(layout.createParallelGroup(
 				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				verticalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 373,
+				verticalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 327,
 				Short.MAX_VALUE));
 
 		pack();
@@ -302,7 +297,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JSplitPane horizontalSplitPane;
 	private javax.swing.JRadioButtonMenuItem iecStandardRadioButtonMenuItem;
 	private javax.swing.JMenu insertMenu;
-	private javax.swing.JButton jButton1;
 	private javax.swing.JMenuBar menuBar;
 	private javax.swing.JMenuItem newWorkspaceMenuItem;
 	private javax.swing.JMenuItem openFileMenuItem;
@@ -317,7 +311,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.JMenuItem selectAllMenuItem;
 	private javax.swing.JMenuItem selectMenuItem;
 	private javax.swing.JRadioButtonMenuItem squaresRadioButtonMenuItem;
-	private javax.swing.JPanel toolbarContainerPanel;
+	private edu.chl.tda367.booleancircuits.view.ToolbarPanel toolbarPanel1;
 	private javax.swing.JMenuItem undoMenuItem;
 	private javax.swing.JRadioButtonMenuItem usStandardRadioButtonMenuItem;
 	private javax.swing.JSplitPane verticalSplitPane;
