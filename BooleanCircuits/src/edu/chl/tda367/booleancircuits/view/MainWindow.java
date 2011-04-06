@@ -17,7 +17,15 @@ public class MainWindow extends javax.swing.JFrame {
 	/** Creates new form View */
 	public MainWindow() {
 		initComponents();
+		initToolbar();
 	}
+	
+	private void initToolbar(){
+		verticalSplitPane.setTopComponent(toolbar.getToolbarPanel());
+		verticalSplitPane.setEnabled(false);
+		verticalSplitPane.setDividerSize(0);
+	}
+	
 
 	/** This method is called from within the constructor to
 	 * initialize the form.
@@ -256,8 +264,6 @@ public class MainWindow extends javax.swing.JFrame {
 				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
 				verticalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 327,
 				Short.MAX_VALUE));
-
-		verticalSplitPane.setTopComponent(toolbar.getToolbarPanel());
 		
 		pack();
 	}// </editor-fold>
