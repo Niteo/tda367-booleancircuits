@@ -1,6 +1,5 @@
 package edu.chl.tda367.booleancircuits.model;
 
-//TODO: Use interface above this?
 /**
  * Simple class representing a coordinate.
  * @author Kaufmann
