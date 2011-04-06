@@ -5,8 +5,8 @@ import javax.swing.*;
 
 public final class PaletteFolderButton extends JPanel {
 	
-	JLabel folderName;
-	JPanel componentButtonsContainer;
+	JLabel folderNameLabel;
+	JPanel buttonsContainerPanel;
 	JSplitPane splitPane;
 	//String kommer bytas ut mot Component när sistnämnda implementerats
 	List<String> componentList; 
@@ -15,21 +15,21 @@ public final class PaletteFolderButton extends JPanel {
 	
 	public PaletteFolderButton(String name){
 		isOpened = false;
-		folderName = new JLabel();
-		folderName.setText(name);
+		folderNameLabel = new JLabel();
+		folderNameLabel.setText(name);
 		
-		componentButtonsContainer = new JPanel();
-		componentButtonsContainer.setLayout(new BoxLayout(componentButtonsContainer,BoxLayout.Y_AXIS));
+		buttonsContainerPanel = new JPanel();
+		buttonsContainerPanel.setLayout(new BoxLayout(buttonsContainerPanel,BoxLayout.Y_AXIS));
 		
 		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-		splitPane.setTopComponent(folderName);
-		splitPane.setBottomComponent(componentButtonsContainer);
+		splitPane.setTopComponent(folderNameLabel);
+		splitPane.setBottomComponent(buttonsContainerPanel);
 	}
 	/**
 	 * Inserts a panel representing a component in to folder.
 	 */
 	public void addComponent(JPanel componentButton){
-		componentButtonsContainer.add(componentButton);
+		buttonsContainerPanel.add(componentButton);
 	}
 	/**
 	 * toggles if selected folder on palette is open or closed
