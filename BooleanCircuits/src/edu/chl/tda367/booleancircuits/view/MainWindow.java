@@ -10,10 +10,10 @@ package edu.chl.tda367.booleancircuits.view;
  *
  * @author  __USER__
  */
-public class View extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame {
 
 	/** Creates new form View */
-	public View() {
+	public MainWindow() {
 		initComponents();
 	}
 
@@ -33,6 +33,7 @@ public class View extends javax.swing.JFrame {
 		paletteContainerPanel = new javax.swing.JPanel();
 		canvasContainerPanel = new javax.swing.JPanel();
 		toolbarContainerPanel = new javax.swing.JPanel();
+		jButton1 = new javax.swing.JButton();
 		menuBar = new javax.swing.JMenuBar();
 		fileMenu = new javax.swing.JMenu();
 		newWorkspaceMenuItem = new javax.swing.JMenuItem();
@@ -104,6 +105,10 @@ public class View extends javax.swing.JFrame {
 		horizontalSplitPane.setRightComponent(canvasContainerPanel);
 
 		verticalSplitPane.setBottomComponent(horizontalSplitPane);
+
+		jButton1.setPreferredSize(new java.awt.Dimension(20, 20));
+		toolbarContainerPanel.add(jButton1);
+
 		verticalSplitPane.setLeftComponent(toolbarContainerPanel);
 
 		fileMenu.setText("File");
@@ -267,7 +272,7 @@ public class View extends javax.swing.JFrame {
 	public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new View().setVisible(true);
+				new MainWindow().setVisible(true);
 			}
 		});
 	}
@@ -297,6 +302,7 @@ public class View extends javax.swing.JFrame {
 	private javax.swing.JSplitPane horizontalSplitPane;
 	private javax.swing.JRadioButtonMenuItem iecStandardRadioButtonMenuItem;
 	private javax.swing.JMenu insertMenu;
+	private javax.swing.JButton jButton1;
 	private javax.swing.JMenuBar menuBar;
 	private javax.swing.JMenuItem newWorkspaceMenuItem;
 	private javax.swing.JMenuItem openFileMenuItem;
