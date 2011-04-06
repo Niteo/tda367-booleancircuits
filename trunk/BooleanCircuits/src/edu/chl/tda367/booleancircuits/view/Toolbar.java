@@ -1,11 +1,11 @@
 package edu.chl.tda367.booleancircuits.view;
 
 public class Toolbar {
-	Toolbar toolBar = new Toolbar();
+	private ToolbarPanel toolbarPanel = new ToolbarPanel();
 
-	/** returns the Toolbar*/
-	public Toolbar getToolbarPanel() {
-		return toolBar;
+	/** returns the ToolbarPanel*/
+	public ToolbarPanel getToolbarPanel() {
+		return toolbarPanel;
 	}
 
 }
