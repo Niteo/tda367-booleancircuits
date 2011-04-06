@@ -25,8 +25,8 @@ public final class ModelManager {
 	 * Creates a new workspace and makes it active.
 	 */
 	public void newWorkspace(){
-		firePropertyChanged();
 		addWorkspace(new Model());
+		firePropertyChanged();
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public final class ModelManager {
 	 */
 	public void addWorkspace(Model workspace){
 		modelList.add(workspace);
-		activeWorkspace = modelList.get(modelList.size());
+		activeWorkspace = modelList.get(modelList.size()-1);
 	}
 	
 	/**
