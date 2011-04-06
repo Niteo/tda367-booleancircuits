@@ -3,16 +3,25 @@ package edu.chl.tda367.booleancircuits.controller;
 import edu.chl.tda367.booleancircuits.model.*;
 
 /**
- * Main controller in BooleanCircuits.
+ * Controller for ModelManager.
  * @author Kaufmann
  */
 
 public final class MasterController {
 	
-	private ModelManager mm = new ModelManager();
+	private ModelManager mm = null;
 	
-	public MasterController(){
-		
+	/**
+	 * Returns an instance of a MasterController
+	 * @param mm the ModelManager to control
+	 * @throws NullPOinterException if mm is null
+	 */
+	public MasterController(ModelManager mm){
+		if(mm == null){
+			throw new NullPointerException("mm must not be null!");
+		} else {
+			this.mm = mm;
+		}
 	}
 	
 	/* ##########################
