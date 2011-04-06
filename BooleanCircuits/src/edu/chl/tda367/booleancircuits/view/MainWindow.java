@@ -12,12 +12,12 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author  __USER__
+ * @author  Boel
  */
 public class MainWindow extends javax.swing.JFrame {
 
 	private Toolbar toolbar = new Toolbar();
-	private Canvas canvas = new Canvas();
+	private CenterStage canvas = new CenterStage();
 
 	/** Creates new form View */
 	public MainWindow() {
