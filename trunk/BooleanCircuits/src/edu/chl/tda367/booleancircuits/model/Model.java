@@ -3,40 +3,54 @@ package edu.chl.tda367.booleancircuits.model;
 import java.util.*;
 
 
+/**
+ * The model can add components, set and get selected components, selectAll, removes selected component
+ */
 public final class Model {
-List<CircuitComponent> componentList;
-	public Model(){
+
+	List<CircuitComponent> componentList;
+	List<CircuitComponent> selectedComponentList;
+
+	public Model() {
 
 		List componentList = new ArrayList();
+		List selectedComponentList = new ArrayList();
 	}
+
 	/**
-	 * adds a new component
+	 * @param the new component is selected  
+	 * adds the component that the user has chosen in the palette
 	 */
-	private void addComponent(){
-		//componentList.add(<CircuitComponent> component);
+	public void addComponent(CircuitComponent component) {
+		componentList.add(component);
 	}
+
 	/**
-	 * 
-	 * @return a list of selected components
+	 * gets a list of selected components
+	 * @return a list of selected components 
 	 */
-	private  List<CircuitComponent> getSelectedComponents(){
-		return null;
-		
+	public List<CircuitComponent> getSelectedComponents() {
+		return selectedComponentList;
+
 	}
-	
+
 	/**
-	 * 
+	 * removes the components that are selected
 	 */
-	private void removeSelectedComponent(){
+	private void removeSelectedComponent() {
+		for (CircuitComponent i : selectedComponentList) {
+			componentList.remove(i);
+
+		}
+		selectedComponentList.clear();
+	}
+
+	private void setSelectedComponent(Coordinate coordinate) {
+
+	}
+
+	private void selectAll() {
 		
 	}
-	
-	private void setSelectedComponent(Coordinate coordinate){
-		
-	}
-	
-	private void selectAll(){
-		
-	}
-	//TODO: private void setNewConnection(){}
+	// TODO: private void setNewConnection(){}, setSelectedComponent(Coordinate coordinate) and selectAll()
 }
