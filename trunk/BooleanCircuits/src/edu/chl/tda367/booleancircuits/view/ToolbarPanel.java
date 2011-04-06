@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author  __USER__
+ * @author  Boel
  */
 public class ToolbarPanel extends javax.swing.JPanel {
 
