@@ -13,21 +13,24 @@ import edu.chl.tda367.booleancircuits.model.ModelManager;
  */
 public class CenterStage {
 
-	private JPanel panel = new JPanel();
+	private JPanel centerStagePanel = new JPanel();
+	private JPanel tabPanel = new JPanel();
 	private Canvas canvas = new Canvas();
 
 	/** Returns an instance of Canvas. */
 	public CenterStage() {
-		panel.setLayout(new BorderLayout());
-		panel.add(canvas.getCanvas(), BorderLayout.CENTER);
+		tabPanel.setLayout(new FlowLayout());
+		centerStagePanel.setLayout(new BorderLayout());
+		centerStagePanel.add(tabPanel, BorderLayout.NORTH);
+		centerStagePanel.add(canvas.getCanvas(), BorderLayout.CENTER);
 	}
 	
 	private void newTab(String s, Color c){
-		panel.add(new Tab(s, c),BorderLayout.NORTH);
+		tabPanel.add(new Tab(s, c));
 	}
 
 	public void update(ModelManager mm) {
-
+		tabPanel.removeAll();
 		for(Model m  : mm.getWorkspaces()){
 			if(m == mm.getActiveWorkspace()){
 				newTab(m.toString(), new Color(228,228,255));
@@ -35,6 +38,8 @@ public class CenterStage {
 				newTab(m.toString(), new Color(212,208,200));
 			}
 		}
+		tabPanel.repaint();
+		tabPanel.revalidate();
 	}
 	
 	/**
@@ -43,7 +48,7 @@ public class CenterStage {
 	 * @return canvas JPanel
 	 */
 	public JPanel getPanel() {
-		return panel;
+		return centerStagePanel;
 	}
 
 }
