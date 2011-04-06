@@ -1,9 +1,8 @@
 package edu.chl.tda367.booleancircuits.controller;
 
 /**
- * 
+ * Interface for a main controller in BooleanCircuits.
  * @author Kaufmann
- * Interface for the main controller in BooleanCircuits
  */
 
 public interface IMasterController {
@@ -66,7 +65,7 @@ public interface IMasterController {
 	 */
 	public abstract void selectAllComponents();
 	/**
-	 * Selects the first occurance of a component in the given coordinate
+	 * Selects the first occurance of a component at the given coordinate
 	 * in the active workspace
 	 * @param x The x-coordinate to select from
 	 * @param y The y-coordinate to select from
