@@ -6,6 +6,8 @@
 
 package edu.chl.tda367.booleancircuits.view;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author  __USER__
@@ -40,21 +42,30 @@ public class ToolbarPanel extends javax.swing.JPanel {
 		setPreferredSize(new java.awt.Dimension(220, 24));
 		setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
+		newWorkspaceButton.setIcon(new ImageIcon(
+				"Resources/Icons/New-Document-icon.png"));
 		newWorkspaceButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(newWorkspaceButton);
 
+		openFileButton.setIcon(new ImageIcon("Resources/Icons/Open-icon.png"));
 		openFileButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(openFileButton);
 
+		saveButton.setIcon(new ImageIcon("Resources/Icons/Save-icon.png"));
 		saveButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(saveButton);
 
+		saveAllButton
+				.setIcon(new ImageIcon("Resources/Icons/save-all-icon.png"));
 		saveAllButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(saveAllButton);
 
+		saveAsComponentButton.setIcon(new ImageIcon(
+				"Resources/Icons/save-component.png"));
 		saveAsComponentButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(saveAsComponentButton);
 
+		cutButton.setIcon(new ImageIcon("Resources/Icons/cut-icon.png"));
 		cutButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		cutButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,15 +74,19 @@ public class ToolbarPanel extends javax.swing.JPanel {
 		});
 		add(cutButton);
 
+		copyButton.setIcon(new ImageIcon("Resources/Icons/copy-icon.png"));
 		copyButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(copyButton);
 
+		pasteButton.setIcon(new ImageIcon("Resources/Icons/paste-icon.png"));
 		pasteButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(pasteButton);
 
+		undoButton.setIcon(new ImageIcon("Resources/Icons/Undo-icon.png"));
 		undoButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(undoButton);
 
+		redoButton.setIcon(new ImageIcon("Resources/Icons/Redo-icon.png"));
 		redoButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(redoButton);
 	}// </editor-fold>
