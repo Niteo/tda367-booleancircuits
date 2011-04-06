@@ -75,6 +75,6 @@ public final class ModelManager {
 	}
 	
 	private void firePropertyChanged(){
-		pcs.firePropertyChange(new PropertyChangeEvent(this, "ModelManager", 0, 0));
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "ModelManager", 0, 1));
 	}
 }
