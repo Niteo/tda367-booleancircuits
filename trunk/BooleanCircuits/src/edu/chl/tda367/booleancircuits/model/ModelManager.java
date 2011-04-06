@@ -46,6 +46,14 @@ public final class ModelManager {
 	}
 	
 	/**
+	 * Returns all workspaces.
+	 * @return list of all workspaces.
+	 */
+	public List<Model> getWorkspaces(){
+		return modelList;
+	}
+	
+	/**
 	 * Adds a new workspace and makes it active.
 	 * @param workspace the workspace to be added
 	 */

@@ -1,6 +1,6 @@
 package edu.chl.tda367.booleancircuits.controller;
 
-import edu.chl.tda367.booleancircuits.model.Coordinate;
+import edu.chl.tda367.booleancircuits.model.*;
 
 /**
  * Main controller in BooleanCircuits.
@@ -8,23 +8,29 @@ import edu.chl.tda367.booleancircuits.model.Coordinate;
  */
 
 public final class MasterController {
+	
+	private ModelManager mm = new ModelManager();
+	
+	public MasterController(){
+		
+	}
+	
 	/* ##########################
 	 * #       WORKSPACES       #
 	 * ##########################
 	 * */
-
 	/**
 	 * Closes the currently active workspace.
 	 */
 	public void closeActiveWorkspace(){
-		throw new UnsupportedOperationException();
+		mm.closeActiveWorkspace();
 	}
 	
 	/**
 	 * Creates a new blank workspace.
 	 */
 	public void newWorkspace(){
-		throw new UnsupportedOperationException();
+		mm.newWorkspace();
 	}
 	
 	/**
@@ -61,16 +67,15 @@ public final class MasterController {
 	 * ##########################
 	 * */
 	/**
-	 * Adds the currently selected component in the palette to the
+	 * Adds a CircuitComponent in the palette to the
 	 * specified coordinate in the active workspace.
+	 * @param component the component to add
 	 * @param coord the coordinate to add to
 	 */
-	public void addComponent(Coordinate coord){
+	public void addComponent(CircuitComponent component, Coordinate coord){
 		throw new UnsupportedOperationException();
 	}
-	
-	//public abstract void useComponent(Component);
-	// TODO: Above method
+
 	/**
 	 * Removes the currently selected component(s) in the active workspace.
 	 */
