@@ -1,5 +1,6 @@
 package edu.chl.tda367.booleancircuits.model;
 
+import java.beans.*;
 import java.util.*;
 
 /**
@@ -10,6 +11,7 @@ public final class ModelManager {
 	
 	private List<Model> modelList;
 	private Model activeWorkspace;
+	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	
 	/**
 	 * Creates an instance of ModelManager.
@@ -23,8 +25,19 @@ public final class ModelManager {
 	 * Creates a new workspace and makes it active.
 	 */
 	public void newWorkspace(){
+		firePropertyChanged();
 		addWorkspace(new Model());
 	}
+	
+	/**
+	 * Adds a new workspace and makes it active.
+	 * @param workspace the workspace to be added
+	 */
+	public void addWorkspace(Model workspace){
+		modelList.add(workspace);
+		activeWorkspace = modelList.get(modelList.size());
+	}
+	
 	/**
 	 * Closes the active workspace.
 	 */
@@ -53,12 +66,15 @@ public final class ModelManager {
 		return modelList;
 	}
 	
-	/**
-	 * Adds a new workspace and makes it active.
-	 * @param workspace the workspace to be added
-	 */
-	public void addWorkspace(Model workspace){
-		modelList.add(workspace);
-		activeWorkspace = modelList.get(modelList.size());
+	public void addPropertyChangeListener(PropertyChangeListener listener){
+		pcs.addPropertyChangeListener(listener);
+	}
+	
+	public void removePropertyChangeListener(PropertyChangeListener listener){
+		pcs.removePropertyChangeListener(listener);
+	}
+	
+	private void firePropertyChanged(){
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "ModelManager", 0, 0));
 	}
 }
