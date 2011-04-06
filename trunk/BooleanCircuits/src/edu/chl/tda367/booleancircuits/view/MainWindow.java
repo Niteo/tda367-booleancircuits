@@ -6,26 +6,31 @@
 
 package edu.chl.tda367.booleancircuits.view;
 
+import java.awt.Color;
+
+import javax.swing.JPanel;
+
 /**
  *
  * @author  __USER__
  */
 public class MainWindow extends javax.swing.JFrame {
-	
+
 	private Toolbar toolbar = new Toolbar();
-	
+	private Canvas canvas = new Canvas();
+
 	/** Creates new form View */
 	public MainWindow() {
 		initComponents();
 		initToolbar();
+		horizontalSplitPane.setRightComponent(canvas.getPanel());
 	}
-	
-	private void initToolbar(){
+
+	private void initToolbar() {
 		verticalSplitPane.setTopComponent(toolbar.getToolbarPanel());
 		verticalSplitPane.setEnabled(false);
 		verticalSplitPane.setDividerSize(0);
 	}
-	
 
 	/** This method is called from within the constructor to
 	 * initialize the form.
@@ -41,7 +46,6 @@ public class MainWindow extends javax.swing.JFrame {
 		verticalSplitPane = new javax.swing.JSplitPane();
 		horizontalSplitPane = new javax.swing.JSplitPane();
 		paletteContainerPanel = new javax.swing.JPanel();
-		canvasContainerPanel = new javax.swing.JPanel();
 		menuBar = new javax.swing.JMenuBar();
 		fileMenu = new javax.swing.JMenu();
 		newWorkspaceMenuItem = new javax.swing.JMenuItem();
@@ -80,6 +84,8 @@ public class MainWindow extends javax.swing.JFrame {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+		verticalSplitPane.setDividerLocation(24);
+		verticalSplitPane.setDividerSize(0);
 		verticalSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
 		javax.swing.GroupLayout paletteContainerPanelLayout = new javax.swing.GroupLayout(
@@ -94,23 +100,9 @@ public class MainWindow extends javax.swing.JFrame {
 				.setVerticalGroup(paletteContainerPanelLayout
 						.createParallelGroup(
 								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGap(0, 295, Short.MAX_VALUE));
+						.addGap(0, 300, Short.MAX_VALUE));
 
 		horizontalSplitPane.setLeftComponent(paletteContainerPanel);
-
-		javax.swing.GroupLayout canvasContainerPanelLayout = new javax.swing.GroupLayout(
-				canvasContainerPanel);
-		canvasContainerPanel.setLayout(canvasContainerPanelLayout);
-		canvasContainerPanelLayout
-				.setHorizontalGroup(canvasContainerPanelLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGap(0, 580, Short.MAX_VALUE));
-		canvasContainerPanelLayout.setVerticalGroup(canvasContainerPanelLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 295, Short.MAX_VALUE));
-
-		horizontalSplitPane.setRightComponent(canvasContainerPanel);
 
 		verticalSplitPane.setBottomComponent(horizontalSplitPane);
 
@@ -264,7 +256,7 @@ public class MainWindow extends javax.swing.JFrame {
 				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
 				verticalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 327,
 				Short.MAX_VALUE));
-		
+
 		pack();
 	}// </editor-fold>
 	//GEN-END:initComponents
@@ -286,7 +278,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private javax.swing.ButtonGroup backgroundButtonGroup;
 	private javax.swing.JMenu backgroundMenu;
 	private javax.swing.JRadioButtonMenuItem blankRadioButtonMenuItem;
-	private javax.swing.JPanel canvasContainerPanel;
 	private javax.swing.JMenuItem closeMenuItem;
 	private javax.swing.JMenuItem componentMenuItem;
 	private javax.swing.JMenuItem copyMenuItem;
