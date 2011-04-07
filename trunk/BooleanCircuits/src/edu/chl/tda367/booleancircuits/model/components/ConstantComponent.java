@@ -12,7 +12,7 @@ public class ConstantComponent extends AbstractCircuitComponent {
 	}
 	
 	@Override
-	public void updateStrategy() {
+	public void updateOutput() {
 		super.setOutput(0, constant);
 	}
 	

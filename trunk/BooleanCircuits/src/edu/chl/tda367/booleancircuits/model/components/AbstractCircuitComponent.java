@@ -69,8 +69,8 @@ public abstract class AbstractCircuitComponent {
 	 * Updates this component
 	 */
 	public void update(){
-		updateStrategy();
+		updateOutput();
 	}
 	
-	public abstract void updateStrategy();
+	public abstract void updateOutput();
 }
