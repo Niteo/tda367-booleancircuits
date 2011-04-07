@@ -5,10 +5,10 @@ import java.util.List;
 /**
  * 
  * @author Jennifer
- * Represents an AND-component
+ * Represents an AND-gate
  * Creates input and outputs and updates the output
  */
-public class AndComponent extends AbstractCircuitComponent{
+public class AndComponent extends AbstractCircuitGate{
 	
 	public AndComponent(){
 		super.createInputs(2);
