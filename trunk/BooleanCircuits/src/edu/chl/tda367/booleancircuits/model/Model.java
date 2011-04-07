@@ -2,14 +2,16 @@ package edu.chl.tda367.booleancircuits.model;
 
 import java.util.*;
 
+import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitComponent;
+
 
 /**
  * The model can add components, set and get selected components, selectAll, removes selected component
  */
 public final class Model {
 
-	private List<CircuitComponent> componentList;
-	private List<CircuitComponent> selectedComponentList;
+	private List<AbstractCircuitComponent> componentList;
+	private List<AbstractCircuitComponent> selectedComponentList;
 
 	public Model() {
 
@@ -21,7 +23,7 @@ public final class Model {
 	 * @param the new component is selected  
 	 * adds the component that the user has chosen in the palette
 	 */
-	public void addComponent(CircuitComponent component) {
+	public void addComponent(AbstractCircuitComponent component) {
 		componentList.add(component);
 	}
 
@@ -29,7 +31,7 @@ public final class Model {
 	 * gets a list of selected components
 	 * @return a list of selected components 
 	 */
-	public List<CircuitComponent> getSelectedComponents() {
+	public List<AbstractCircuitComponent> getSelectedComponents() {
 		return selectedComponentList;
 
 	}
@@ -38,7 +40,7 @@ public final class Model {
 	 * removes the components that are selected
 	 */
 	private void removeSelectedComponent() {
-		for (CircuitComponent i : selectedComponentList) {
+		for (AbstractCircuitComponent i : selectedComponentList) {
 			componentList.remove(i);
 
 		}
