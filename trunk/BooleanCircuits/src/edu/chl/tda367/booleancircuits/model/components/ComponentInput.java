@@ -2,7 +2,7 @@ package edu.chl.tda367.booleancircuits.model.components;
 
 
 public final class ComponentInput {
-	private AbstractCircuitComponent inputComponent;
+	private AbstractCircuitGate inputComponent;
 	private int inputComponentPort;
 	
 	public ComponentInput(){
@@ -10,11 +10,11 @@ public final class ComponentInput {
 		inputComponentPort = 0;
 	}
 	
-	public AbstractCircuitComponent getInputComponent(){
+	public AbstractCircuitGate getInputComponent(){
 		return inputComponent;
 	}
 	
-	public void setInputComponent(AbstractCircuitComponent component, int port){
+	public void setInputComponent(AbstractCircuitGate component, int port){
 		this.inputComponent = component;
 	}
 	

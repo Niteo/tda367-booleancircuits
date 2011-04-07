@@ -3,7 +3,7 @@ package edu.chl.tda367.booleancircuits.model.components;
 import java.util.List;
 
 
-public class ConstantComponent extends AbstractCircuitComponent {
+public class ConstantComponent extends AbstractCircuitGate {
 	private boolean constant;
 	
 	public ConstantComponent(boolean value){

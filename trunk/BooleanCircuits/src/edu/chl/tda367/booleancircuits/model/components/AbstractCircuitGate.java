@@ -7,7 +7,7 @@ import java.util.*;
  * @author Kaufmann
  *
  */
-public abstract class AbstractCircuitComponent {
+public abstract class AbstractCircuitGate {
 	private List<ComponentInput> inputs;
 	private Boolean[] outputs;
 	
@@ -53,7 +53,7 @@ public abstract class AbstractCircuitComponent {
 	 * @param component the component to connect this component to
 	 * @param outputPort the output port to connect to
 	 */
-	public void connectInput(int inputPort, AbstractCircuitComponent component, int outputPort){
+	public void connectInput(int inputPort, AbstractCircuitGate component, int outputPort){
 		inputs.get(inputPort).setInputComponent(component, outputPort);
 	}
 	/**
@@ -63,6 +63,22 @@ public abstract class AbstractCircuitComponent {
 	 */
 	public boolean getOutputValue(int index){
 		return outputs[index];
+	}
+	
+	/**
+	 * Gets the number of inputs
+	 * @return number of inputs
+	 */
+	public int getNoOfInputs(){
+		return inputs.size();
+	}
+	
+	/**
+	 * Gets the number of outputs
+	 * @return number of outputs
+	 */
+	public int getNoOfOutput(){
+		return outputs.length;
 	}
 	
 	/**

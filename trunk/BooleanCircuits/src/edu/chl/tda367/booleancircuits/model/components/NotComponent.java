@@ -7,10 +7,10 @@ import java.util.List;
 
 /**
  * @author Jennifer
- * represents a NOT-component
+ * represents a NOT-gate
  * Creates input and outputs and updates the output
  */
-public class NotComponent extends AbstractCircuitComponent {
+public class NotComponent extends AbstractCircuitGate {
 	public NotComponent(){
 		super.createInputs(1);
 		super.createOutputs(1);
