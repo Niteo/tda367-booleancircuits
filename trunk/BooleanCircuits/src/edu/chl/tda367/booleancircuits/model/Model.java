@@ -8,8 +8,8 @@ import java.util.*;
  */
 public final class Model {
 
-	List<CircuitComponent> componentList;
-	List<CircuitComponent> selectedComponentList;
+	private List<CircuitComponent> componentList;
+	private List<CircuitComponent> selectedComponentList;
 
 	public Model() {
 
