@@ -52,6 +52,12 @@ public class ComponentFolder {
 		return componentList.get(index);
 	}
 
+	/**
+	 * returns a list of AbstractCircuitGate, during tests(in development) it
+	 * will just return a list of strings
+	 * 
+	 * @return
+	 */
 	public List<AbstractCircuitGate> getAllComponents() {
 		return componentList;
 	}
