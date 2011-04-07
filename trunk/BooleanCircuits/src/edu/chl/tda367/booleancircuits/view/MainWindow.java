@@ -28,7 +28,7 @@ public class MainWindow extends javax.swing.JFrame implements
 	private MasterController mc;
 	private Toolbar toolbar = new Toolbar();
 	private CenterStage cs = new CenterStage();
-	private ActionController actionController = new ActionController();
+	private ActionController actionController = new ActionController(mc);
 
 	/** Creates new form View */
 	public MainWindow() {
@@ -73,6 +73,11 @@ public class MainWindow extends javax.swing.JFrame implements
 		// init representation menu
 		iecStandardRadioButtonMenuItem.addActionListener(actionController);
 		usStandardRadioButtonMenuItem.addActionListener(actionController);
+		
+		// init background menu
+		dotsRadioButtonMenuItem.addActionListener(actionController);
+		squaresRadioButtonMenuItem.addActionListener(actionController);
+		blankRadioButtonMenuItem.addActionListener(actionController);
 
 		// init insert menu
 		componentMenuItem.addActionListener(actionController);
@@ -397,9 +402,7 @@ public class MainWindow extends javax.swing.JFrame implements
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getSource() instanceof ModelManager) {
 			cs.update((ModelManager) evt.getSource());
-			System.out.println("MODEL");
 		}
-		System.out.println("Not model");
 
 	}
 
