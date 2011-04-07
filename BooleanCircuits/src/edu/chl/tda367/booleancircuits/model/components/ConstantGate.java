@@ -24,7 +24,7 @@ public class ConstantGate extends AbstractCircuitGate {
 	}
 
 	@Override
-	public void updateOutput() {
+	protected void updateOutput() {
 		super.setOutput(0, constant);
 	}
 
