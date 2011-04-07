@@ -8,7 +8,7 @@ import java.util.*;
  *
  */
 public abstract class AbstractCircuitGate {
-	private List<ComponentInput> inputs;
+	private List<GateInput> inputs;
 	private Boolean[] outputs;
 	
 	/**
@@ -16,9 +16,9 @@ public abstract class AbstractCircuitGate {
 	 * @param amount the amount of inputs to be created
 	 */
 	protected void createInputs(int amount){
-		inputs = new ArrayList<ComponentInput>();
+		inputs = new ArrayList<GateInput>();
 		for(int i = 0; i < amount; i++){
-			inputs.add(new ComponentInput());
+			inputs.add(new GateInput());
 		}
 	}
 	
@@ -43,7 +43,7 @@ public abstract class AbstractCircuitGate {
 	 * Retrieves the inputs of the component
 	 * @return inputs of the component
 	 */
-	protected List<ComponentInput> getInputs(){
+	protected List<GateInput> getInputs(){
 		return inputs;
 	}
 	
