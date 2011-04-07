@@ -2,7 +2,7 @@ import edu.chl.tda367.booleancircuits.model.components.*;
 
 public class TestApplication {
 	public static void main(String []args){
-		boolean result = ComponentTester.testComponent(new AndComponent(),
+		boolean result = ComponentTester.testComponent(new AndGate(),
 				new boolean[]{false, false},
 				new boolean[]{true});
 		
