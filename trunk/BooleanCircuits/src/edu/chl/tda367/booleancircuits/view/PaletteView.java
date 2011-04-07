@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public final class PaletteView {
 
 	private final JPanel paletteView;
-	private final JScrollPane scrollPane;
 	// private final List<ComponentFolder> folderList;
 	// Just for Test
 	private final List<String> folderTestList;
@@ -29,9 +27,7 @@ public final class PaletteView {
 		folderTestList.add("You");
 		folderTestList.add("Up");
 
-		scrollPane = new JScrollPane();
 		paletteView = new JPanel(new BorderLayout());
-		scrollPane.add(paletteView);
 		initPaletteTree();
 
 	}
@@ -60,7 +56,7 @@ public final class PaletteView {
 
 	}
 
-	public JScrollPane getView() {
-		return scrollPane;
+	public JPanel getView() {
+		return paletteView;
 	}
 }
