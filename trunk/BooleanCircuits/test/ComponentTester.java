@@ -12,7 +12,7 @@ public final class ComponentTester {
 			boolean[] desiredOutput){
 		//
 		if(component.getNoOfInputs() != input.length ||
-				component.getNoOfOutput() != desiredOutput.length)
+				component.getNoOfOutputs() != desiredOutput.length)
 			throw new IllegalArgumentException("Number of component inputs must ");
 		
 		// Set up constants
