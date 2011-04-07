@@ -42,6 +42,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		initButtons();
 		horizontalSplitPane.setRightComponent(cs.getPanel());
 		mc.newWorkspace();
+		setTitle("Boolean Circuits");
 	}
 
 	private void initToolbar() {
