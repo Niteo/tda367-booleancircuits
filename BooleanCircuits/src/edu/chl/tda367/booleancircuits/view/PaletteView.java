@@ -41,6 +41,10 @@ public final class PaletteView {
 		componentTree.setRootVisible(false);
 	}
 
+	private void initComponentNode(List<DefaultMutableTreeNode> folderNodeList) {
+
+	}
+
 	public JScrollPane getView() {
 		return paletteView;
 	}
