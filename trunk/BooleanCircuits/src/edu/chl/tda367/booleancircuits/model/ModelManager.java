@@ -7,7 +7,7 @@ import java.util.*;
  * A class which manages Models as workspaces.
  * @author Kaufmann
  */
-public final class ModelManager {
+public final class ModelManager implements IObservable {
 	
 	private List<Model> modelList;
 	private Model activeWorkspace;
@@ -43,13 +43,12 @@ public final class ModelManager {
 	 */
 	public void closeActiveWorkspace(){
 		if(activeWorkspace == null){
-			throw new UnsupportedOperationException();
+			throw new NullPointerException();
 		} else {
 			modelList.remove(activeWorkspace);
 		}
-			
-		//TODO: THROW BETTER EXCEPTION.
 	}
+	
 	/**
 	 * Returns the active workspace.
 	 * @return the active workspace to return.
