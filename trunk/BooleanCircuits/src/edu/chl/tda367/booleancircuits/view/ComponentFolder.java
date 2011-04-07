@@ -1,6 +1,10 @@
 package edu.chl.tda367.booleancircuits.view;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitComponent;
 
 /**
  * This class creates a file in which there are a number of logical components
@@ -11,7 +15,7 @@ import java.io.File;
 
 public class ComponentFolder {
 
-	private final File[] componentList;
+	private List<AbstractCircuitComponent> componentList;
 	private final File folder;
 	private final String name;
 
@@ -24,7 +28,13 @@ public class ComponentFolder {
 	public ComponentFolder(String pathName, String name) {
 		folder = new File(pathName);
 		this.name = name;
-		componentList = folder.listFiles();
+		initComponentList();
+	}
+
+	private void initComponentList() {
+		// TODO: Implement so that a list of AbstractCircuitComponent is
+		// generated from List containing string files;
+		componentList = new ArrayList<AbstractCircuitComponent>();
 	}
 
 	public String getName() {
@@ -37,8 +47,13 @@ public class ComponentFolder {
 	 * @param index
 	 * @return component at specified index in list
 	 */
-	public File getComponent(int index) {
-		return componentList[index];
+	public AbstractCircuitComponent getComponent(int index) {
+		// TODO: implementation
+		return componentList.get(index);
+	}
+
+	public List<AbstractCircuitComponent> getAllComponents() {
+		return componentList;
 	}
 
 }
