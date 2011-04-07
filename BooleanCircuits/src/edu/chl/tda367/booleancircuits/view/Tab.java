@@ -18,11 +18,20 @@ public final class Tab {
 	private JTabbedPane tabbedPane = new JTabbedPane();
 	private Canvas canvas;
 
-	public void addTab(String s, Canvas c) {
-		canvas = c;
-		tabbedPane.addTab(s, c.getCanvas());
+	/**
+	 * Adds a new tab to the tabbedPane.
+	 * @param name String displayed name of the tab
+	 * @param canvas Canvas the canvas connected to the tab
+	 */
+	public void addTab(String name, Canvas canvas) {
+		this.canvas = canvas;
+		tabbedPane.addTab(name, canvas.getCanvas());
 	}
 
+	/**
+	 * Returns the tabbedPane.
+	 * @return JTabbedPane the tabbedPane containing the tabs
+	 */
 	public JTabbedPane getTabbedPane() {
 		return tabbedPane;
 	}
