@@ -1,7 +1,7 @@
 package edu.chl.tda367.booleancircuits.controller;
 
 import edu.chl.tda367.booleancircuits.model.*;
-import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitComponent;
+import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 
 /**
  * Controller for ModelManager.
@@ -82,7 +82,7 @@ public final class MasterController {
 	 * @param component the component to add
 	 * @param coord the coordinate to add to
 	 */
-	public void addComponent(AbstractCircuitComponent component, Coordinate coord){
+	public void addComponent(AbstractCircuitGate component, Coordinate coord){
 		throw new UnsupportedOperationException();
 	}
 

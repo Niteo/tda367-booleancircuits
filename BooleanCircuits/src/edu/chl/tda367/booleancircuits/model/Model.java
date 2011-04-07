@@ -2,7 +2,7 @@ package edu.chl.tda367.booleancircuits.model;
 
 import java.util.*;
 
-import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitComponent;
+import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 
 
 /**
@@ -10,22 +10,22 @@ import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitComponent;
  */
 public final class Model {
 
-	private final List<AbstractCircuitComponent> componentList;
-	private final List<AbstractCircuitComponent> selectedComponentList;
+	private final List<AbstractCircuitGate> componentList;
+	private final List<AbstractCircuitGate> selectedComponentList;
 
 	/**
 	 * Returns an instance of Model
 	 */
 	public Model() {
-		componentList = new ArrayList<AbstractCircuitComponent>();
-		selectedComponentList = new ArrayList<AbstractCircuitComponent>();
+		componentList = new ArrayList<AbstractCircuitGate>();
+		selectedComponentList = new ArrayList<AbstractCircuitGate>();
 	}
 
 	/**
 	 * Adds a component to the model.
 	 * @param the new component to add
 	 */
-	public void addComponent(AbstractCircuitComponent component) {
+	public void addComponent(AbstractCircuitGate component) {
 		componentList.add(component);
 		// TODO: Add a copy instead of the reference(!!)
 	}
@@ -34,7 +34,7 @@ public final class Model {
 	 * Returns a list of selected components
 	 * @return a list of selected components 
 	 */
-	public List<AbstractCircuitComponent> getSelectedComponents() {
+	public List<AbstractCircuitGate> getSelectedComponents() {
 		return selectedComponentList;
 	}
 
@@ -59,7 +59,7 @@ public final class Model {
 	 * Removes the components that are selected
 	 */
 	public void removeSelectedComponent() {
-		for (AbstractCircuitComponent i : selectedComponentList) {
+		for (AbstractCircuitGate i : selectedComponentList) {
 			componentList.remove(i);
 		}
 		selectedComponentList.clear();
