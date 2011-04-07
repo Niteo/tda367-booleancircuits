@@ -7,41 +7,38 @@ import edu.chl.tda367.booleancircuits.model.Model;
 import edu.chl.tda367.booleancircuits.model.ModelManager;
 
 /**
- * A class that represents a workspace with a panel and potentially several tabs.
+ * A class that represents a workspace with a panel and potentially several
+ * tabs.
+ * 
  * @author Boel
- *
+ * 
  */
 public class CenterStage {
 
 	private JPanel centerStagePanel = new JPanel();
-	private JPanel tabPanel = new JPanel();
-	private Canvas canvas = new Canvas();
+	private Tab tab = new Tab();
+	private JTabbedPane tabbedPane = tab.getTabbedPane();
 
 	/** Returns an instance of Canvas. */
 	public CenterStage() {
-		tabPanel.setLayout(new FlowLayout());
-		centerStagePanel.setLayout(new BorderLayout());
-		centerStagePanel.add(tabPanel, BorderLayout.NORTH);
-		centerStagePanel.add(canvas.getCanvas(), BorderLayout.CENTER);
+		centerStagePanel.add(tabbedPane);
 	}
-	
-	private void newTab(String s, Color c){
-		tabPanel.add(new Tab(s, c));
+
+	private void newTab(String s) {
+		tab.addTab(s, new Canvas());
 	}
 
 	public void update(ModelManager mm) {
-		tabPanel.removeAll();
-		for(Model m  : mm.getWorkspaces()){
-			if(m == mm.getActiveWorkspace()){
-				newTab(m.toString(), new Color(228,228,255));
-			} else{
-				newTab(m.toString(), new Color(212,208,200));
-			}
+		int selected = tabbedPane.getSelectedIndex();
+		tabbedPane.removeAll();
+		for (Model m : mm.getWorkspaces()) {
+			newTab(m.toString());
 		}
-		tabPanel.repaint();
-		tabPanel.revalidate();
+		tabbedPane.setSelectedIndex(selected);
+		tabbedPane.repaint();
+		tabbedPane.revalidate();
 	}
-	
+
 	/**
 	 * Returns the panel of the canvas.
 	 * 
