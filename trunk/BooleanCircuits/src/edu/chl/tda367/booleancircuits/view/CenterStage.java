@@ -28,11 +28,15 @@ public class CenterStage {
 		tab.addTab(s, new Canvas());
 	}
 
-	public void update(ModelManager mm) {
+	/**
+	 * Updates the view by repainting the workspace.
+	 * @param modelManager
+	 */
+	public void update(ModelManager modelManager) {
 		int selected = tabbedPane.getSelectedIndex();
 		tabbedPane.removeAll();
-		for (Model m : mm.getWorkspaces()) {
-			newTab(m.toString());
+		for (Model model : modelManager.getWorkspaces()) {
+			newTab(model.toString());
 		}
 		tabbedPane.setSelectedIndex(selected);
 		tabbedPane.repaint();
