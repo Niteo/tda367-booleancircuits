@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Panel;
 
 import javax.swing.*;
@@ -8,30 +9,21 @@ import javax.swing.border.LineBorder;
 
 /**
  * A class to represent a tab.
+ * 
  * @author Boel
- *
+ * 
  */
-public final class Tab extends JPanel {
+public final class Tab {
 
-	private JButton closeButton = new JButton("X");
-	private JLabel label = new JLabel();
+	private JTabbedPane tabbedPane = new JTabbedPane();
+	private Canvas canvas;
 
-	/**
-	 * Returns an instance of tab.
-	 * @param s string to set the text
-	 */
-	public Tab(String s, Color c) {
-		setBackground(c);
-		setName(s);
-		add(label);
-		add(closeButton);
-		setBorder(new LineBorder(Color.black, 1));
+	public void addTab(String s, Canvas c) {
+		canvas = c;
+		tabbedPane.addTab(s, c.getCanvas());
 	}
 
-	/**
-	 * Sets the name of the tab.
-	 */
-	public void setName(String s) {
-		label.setText(s);
+	public JTabbedPane getTabbedPane() {
+		return tabbedPane;
 	}
 }
