@@ -6,53 +6,68 @@ import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitComponent;
 
 
 /**
- * The model can add components, set and get selected components, selectAll, removes selected component
+ * Model for managing and updating circuit components.
  */
 public final class Model {
 
-	private List<AbstractCircuitComponent> componentList;
-	private List<AbstractCircuitComponent> selectedComponentList;
+	private final List<AbstractCircuitComponent> componentList;
+	private final List<AbstractCircuitComponent> selectedComponentList;
 
+	/**
+	 * Returns an instance of Model
+	 */
 	public Model() {
-
-		List componentList = new ArrayList();
-		List selectedComponentList = new ArrayList();
+		componentList = new ArrayList<AbstractCircuitComponent>();
+		selectedComponentList = new ArrayList<AbstractCircuitComponent>();
 	}
 
 	/**
-	 * @param the new component is selected  
-	 * adds the component that the user has chosen in the palette
+	 * Adds a component to the model.
+	 * @param the new component to add
 	 */
 	public void addComponent(AbstractCircuitComponent component) {
 		componentList.add(component);
+		// TODO: Add a copy instead of the reference(!!)
 	}
 
 	/**
-	 * gets a list of selected components
+	 * Returns a list of selected components
 	 * @return a list of selected components 
 	 */
 	public List<AbstractCircuitComponent> getSelectedComponents() {
 		return selectedComponentList;
-
 	}
 
 	/**
-	 * removes the components that are selected
+	 * Selects all components in the model.
 	 */
-	private void removeSelectedComponent() {
+	public void selectAllComponents() {
+		selectedComponentList.clear();
+		selectedComponentList.addAll(componentList);
+	}
+	
+	/**
+	 * Selects the first found component at the specified coordinate
+	 * @param coordinate the coordinate for the component
+	 */
+	public void selectComponent(Coordinate coordinate) {
+		// TODO: Add logic here
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * Removes the components that are selected
+	 */
+	public void removeSelectedComponent() {
 		for (AbstractCircuitComponent i : selectedComponentList) {
 			componentList.remove(i);
-
 		}
 		selectedComponentList.clear();
 	}
 
-	private void setSelectedComponent(Coordinate coordinate) {
-
+	
+	private void updateComponents(){
+		throw new UnsupportedOperationException();
+		// TODO: Add code here!
 	}
-
-	private void selectAll() {
-		
-	}
-	// TODO: private void setNewConnection(){}, setSelectedComponent(Coordinate coordinate) and selectAll()
 }
