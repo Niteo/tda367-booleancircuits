@@ -22,7 +22,7 @@ public class OrGate extends AbstractCircuitGate {
 	}
 
 	@Override
-	public void updateOutput() {
+	protected void updateOutput() {
 		List<GateInput> input = super.getInputs();
 
 		boolean output = false;
