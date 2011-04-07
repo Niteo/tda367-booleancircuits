@@ -77,7 +77,7 @@ public abstract class AbstractCircuitGate {
 	 * Gets the number of outputs
 	 * @return number of outputs
 	 */
-	public int getNoOfOutput(){
+	public int getNoOfOutputs(){
 		return outputs.length;
 	}
 	
@@ -88,5 +88,8 @@ public abstract class AbstractCircuitGate {
 		updateOutput();
 	}
 	
-	public abstract void updateOutput();
+	/**
+	 * Template-method for updating outputs of the component.
+	 */
+	protected abstract void updateOutput();
 }
