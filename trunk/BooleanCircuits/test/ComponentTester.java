@@ -16,9 +16,9 @@ public final class ComponentTester {
 			throw new IllegalArgumentException("Number of component inputs must ");
 		
 		// Set up constants
-		List<ConstantComponent> constantList = new ArrayList<ConstantComponent>();
+		List<ConstantGate> constantList = new ArrayList<ConstantGate>();
 		for(boolean b : input){
-			constantList.add(new ConstantComponent(b));
+			constantList.add(new ConstantGate(b));
 		}
 		
 		// Set up components
@@ -27,7 +27,7 @@ public final class ComponentTester {
 		}
 		
 		// Update all
-		for(ConstantComponent c : constantList){
+		for(ConstantGate c : constantList){
 			c.update();
 		}
 		component.update();

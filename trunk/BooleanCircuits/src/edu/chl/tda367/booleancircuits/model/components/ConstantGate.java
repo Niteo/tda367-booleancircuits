@@ -3,10 +3,10 @@ package edu.chl.tda367.booleancircuits.model.components;
 import java.util.List;
 
 
-public class ConstantComponent extends AbstractCircuitGate {
+public class ConstantGate extends AbstractCircuitGate {
 	private boolean constant;
 	
-	public ConstantComponent(boolean value){
+	public ConstantGate(boolean value){
 		constant = value;
 		super.createOutputs(2);
 	}
