@@ -1,7 +1,5 @@
-package edu.chl.tda367.booleancircuits.view;
+package edu.chl.tda367.booleancircuits.utilities;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
@@ -16,7 +14,6 @@ import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 public class ComponentFolder {
 
 	private List<AbstractCircuitGate> componentList;
-	private final File folder;
 	private final String name;
 
 	/**
@@ -25,16 +22,9 @@ public class ComponentFolder {
 	 * 
 	 * @param pathName
 	 */
-	public ComponentFolder(String pathName, String name) {
-		folder = new File(pathName);
+	public ComponentFolder(List<AbstractCircuitGate> componentList, String name) {
 		this.name = name;
-		initComponentList();
-	}
-
-	private void initComponentList() {
-		// TODO: Implement so that a list of AbstractCircuitComponent is
-		// generated from List containing string files;
-		componentList = new ArrayList<AbstractCircuitGate>();
+		this.componentList = componentList;
 	}
 
 	public String getName() {
@@ -48,7 +38,8 @@ public class ComponentFolder {
 	 * @return component at specified index in list
 	 */
 	public AbstractCircuitGate getComponent(int index) {
-		// TODO: implementation
+		// TODO: implementation, not sure if it's going to singel out a
+		// component by it's index. But for now, let it be.
 		return componentList.get(index);
 	}
 
