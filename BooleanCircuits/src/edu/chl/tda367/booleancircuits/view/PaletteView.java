@@ -8,15 +8,17 @@ import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import edu.chl.tda367.booleancircuits.utilities.ComponentFolder;
+
 public final class PaletteView {
 
-	private final JPanel paletteView;
-	// private final List<ComponentFolder> folderList;
+	private JPanel paletteView;
+	private List<ComponentFolder> folderList;
 	// Just for Test
-	private final List<String> folderTestList;
+	private List<String> folderTestList;
 	private JTree componentTree;
 
-	// kolla JTree...
+	// Testkonstruktor
 	public PaletteView() {
 		// Test
 		folderTestList = new ArrayList<String>();
@@ -30,6 +32,10 @@ public final class PaletteView {
 		paletteView = new JPanel(new BorderLayout());
 		initPaletteTree();
 
+	}
+
+	public PaletteView(List<ComponentFolder> folderList) {
+		this.folderList = folderList;
 	}
 
 	private void initPaletteTree() {
