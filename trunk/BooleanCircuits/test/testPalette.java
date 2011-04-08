@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -10,7 +11,7 @@ public class testPalette extends javax.swing.JPanel {
 	/**
 	 * Auto-generated main method to display this JPanel inside a new JFrame.
 	 */
-	private final Palette palette = new Palette();
+	private final Palette palette;
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
@@ -23,12 +24,14 @@ public class testPalette extends javax.swing.JPanel {
 	public testPalette() {
 		super();
 		initGUI();
-		this.add(palette.getView());
+		palette = new Palette();
+		this.add(palette.getView(), BorderLayout.CENTER);
 	}
 
 	private void initGUI() {
 		try {
 			setPreferredSize(new Dimension(400, 300));
+			setLayout(new BorderLayout());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
