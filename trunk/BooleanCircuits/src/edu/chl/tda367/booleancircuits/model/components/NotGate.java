@@ -7,8 +7,8 @@ import java.util.List;
  * 
  * @author Jennifer
  */
-public final class NotComponent extends AbstractCircuitGate {
-	public NotComponent() {
+public final class NotGate extends AbstractCircuitGate {
+	public NotGate() {
 		super.createInputs(1);
 		super.createOutputs(1);
 	}
