@@ -10,7 +10,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import edu.chl.tda367.booleancircuits.utilities.ComponentFolder;
 
-public final class PaletteView {
+public final class Palette {
 
 	private JPanel paletteView;
 	private List<ComponentFolder> folderList;
@@ -19,7 +19,7 @@ public final class PaletteView {
 	private JTree componentTree;
 
 	// Testkonstruktor
-	public PaletteView() {
+	public Palette() {
 		// Test
 		folderTestList = new ArrayList<String>();
 		folderTestList.add("Yo");
@@ -28,13 +28,16 @@ public final class PaletteView {
 		folderTestList.add("Fuck");
 		folderTestList.add("You");
 		folderTestList.add("Up");
+		folderTestList.add("Straight");
+		folderTestList.add("Outta");
+		folderTestList.add("Compton");
 
 		paletteView = new JPanel(new BorderLayout());
 		initPaletteTree();
 
 	}
 
-	public PaletteView(List<ComponentFolder> folderList) {
+	public Palette(List<ComponentFolder> folderList) {
 		this.folderList = folderList;
 	}
 
