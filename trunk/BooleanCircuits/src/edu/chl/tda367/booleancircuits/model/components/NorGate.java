@@ -1,20 +1,31 @@
 package edu.chl.tda367.booleancircuits.model.components;
 
+import java.util.List;
+
 public final class NorGate extends AbstractCircuitGate {
 
 	/**
-	 * TODO: Enter javadoc here
+	 * Represents a NOR gate.
+	 * 
+	 * @param inputs
+	 *            the amount of inputs for the gate
 	 */
-	public NorGate(){
-		
+	public NorGate(int inputs) {
+		super.createInputs(inputs);
+		super.createOutputs(1);
 	}
-	/**
-	 * TODO: Enter javadoc here
-	 */
+
 	@Override
 	protected void updateOutput() {
-		// TODO Auto-generated method stub
+		boolean output = false;
+		for (GateInput c : super.getInputs()) {
+			if (c.getInputValue() == true) {
+				output = true;
+				break;
+			}
+		}
 
+		super.setOutput(0, !output);
 	}
 
 }
