@@ -1,10 +1,9 @@
 package edu.chl.tda367.booleancircuits.view;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -12,7 +11,7 @@ import edu.chl.tda367.booleancircuits.utilities.ComponentFolder;
 
 public final class Palette {
 
-	private JPanel paletteView;
+	private JScrollPane scrollPane;
 	private List<ComponentFolder> folderList;
 	// Just for Test
 	private List<String> folderTestList;
@@ -22,23 +21,39 @@ public final class Palette {
 	public Palette() {
 		// Test
 		folderTestList = new ArrayList<String>();
-		folderTestList.add("Yo");
-		folderTestList.add("Nigga");
-		folderTestList.add("Gonna");
-		folderTestList.add("Fuck");
-		folderTestList.add("You");
-		folderTestList.add("Up");
-		folderTestList.add("Straight");
-		folderTestList.add("Outta");
-		folderTestList.add("Compton");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
+		folderTestList.add("hej");
 
-		paletteView = new JPanel(new BorderLayout());
 		initPaletteTree();
+		scrollPane = new JScrollPane(componentTree);
 
 	}
 
 	public Palette(List<ComponentFolder> folderList) {
 		this.folderList = folderList;
+		initPaletteTree();
+		scrollPane = new JScrollPane(componentTree);
 	}
 
 	private void initPaletteTree() {
@@ -51,12 +66,19 @@ public final class Palette {
 			// initComponentNodes(temp, componentFolder);
 			rootNode.add(temp);
 		}
+		// Test
+		DefaultMutableTreeNode hipHop = new DefaultMutableTreeNode("HipHop");
+		hipHop.add(new DefaultMutableTreeNode("Q-tip"));
+		rootNode.add(hipHop);
+
 		System.out.println(folderTestList);
 		componentTree = new JTree(rootNode);
 		componentTree.setRootVisible(false);
-		paletteView.add(componentTree, BorderLayout.CENTER);
-		componentTree.setPreferredSize(new java.awt.Dimension(326, 300));
-		paletteView.revalidate();
+		/*
+		 * paletteView.add(componentTree, BorderLayout.CENTER);
+		 * componentTree.setPreferredSize(new java.awt.Dimension(326, 300));
+		 * paletteView.revalidate();
+		 */
 	}
 
 	private void initComponentNodes(DefaultMutableTreeNode folderNodeList,
@@ -65,7 +87,7 @@ public final class Palette {
 
 	}
 
-	public JPanel getView() {
-		return paletteView;
+	public JScrollPane getView() {
+		return scrollPane;
 	}
 }
