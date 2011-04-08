@@ -82,7 +82,7 @@ public abstract class AbstractCircuitGate {
 	}
 	
 	/**
-	 * Updates this component
+	 * Updates this components output based on its input.
 	 */
 	public void update(){
 		updateOutput();

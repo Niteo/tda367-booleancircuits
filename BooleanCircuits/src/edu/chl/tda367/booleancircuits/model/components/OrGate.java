@@ -23,16 +23,13 @@ public class OrGate extends AbstractCircuitGate {
 
 	@Override
 	protected void updateOutput() {
-		List<GateInput> input = super.getInputs();
-
 		boolean output = false;
-		for (GateInput c : input) {
-			if (c.getInputValue() == true) {
+		for (GateInput c : super.getInputs()) {
+			if (c.getInputValue()) {
 				output = true;
 				break;
 			}
 		}
-
 		super.setOutput(0, output);
 	}
 }
