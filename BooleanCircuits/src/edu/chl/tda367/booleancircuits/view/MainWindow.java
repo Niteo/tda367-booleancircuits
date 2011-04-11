@@ -28,13 +28,14 @@ public class MainWindow extends javax.swing.JFrame implements
 	private MasterController mc;
 	private Toolbar toolbar = new Toolbar();
 	private CenterStage cs = new CenterStage();
-	private ActionController actionController = new ActionController(mc);
+	private ActionController actionController;
 
 	/** Creates new form View */
 	public MainWindow() {
 		ModelManager mm = new ModelManager();
 		mm.addPropertyChangeListener(this);
 		mc = new MasterController(mm);
+		actionController = new ActionController(mc);
 
 		initComponents();
 		initToolbar();
@@ -53,63 +54,67 @@ public class MainWindow extends javax.swing.JFrame implements
 
 	private void initMenu() {
 		// init file menu
-		newWorkspaceMenuItem.addActionListener(actionController);
-		openFileMenuItem.addActionListener(actionController);
-		closeMenuItem.addActionListener(actionController);
-		saveMenuItem.addActionListener(actionController);
-		saveAsMenuItem.addActionListener(actionController);
-		saveAllMenuItem.addActionListener(actionController);
-		exitMenuItem.addActionListener(actionController);
+		newWorkspaceMenuItem.setAction(actionController.getNewWorkspaceAction());
+		openFileMenuItem.setAction(actionController.getOpenWorkspaceAction());
+		closeMenuItem.setAction(actionController.getCloseActiveWorkspaceAction());
+		saveMenuItem.setAction(actionController.getSaveActiveWorkspaceAction());
+		saveAsMenuItem.setAction(actionController.getSaveActiveWorskpaceAsComponentAction());
+		saveAllMenuItem.setAction(actionController.getSaveAllWorkspacesAction());
+		exitMenuItem.setAction(actionController.getCloseAction());
 
 		// init edit menu
-		undoMenuItem.addActionListener(actionController);
-		redoMenuItem.addActionListener(actionController);
-		cutMenuItem.addActionListener(actionController);
-		copyMenuItem.addActionListener(actionController);
-		pasteMenuItem.addActionListener(actionController);
-		deleteMenuItem.addActionListener(actionController);
-		selectMenuItem.addActionListener(actionController);
-		selectAllMenuItem.addActionListener(actionController);
+		undoMenuItem.setAction(actionController.getUndoAction());
+		redoMenuItem.setAction(actionController.getRedoAction());
+		cutMenuItem.setAction(actionController.getCutSelectedComponentsAction());
+		copyMenuItem.setAction(actionController.getCopySelectedComponentsAction());
+		pasteMenuItem.setAction(actionController.getPasteSelectedComponentAction());
+		deleteMenuItem.setAction(actionController.getRemoveSelectedComponentsAction());
+		selectMenuItem.setAction(actionController.getSelectComponentAction());
+		selectAllMenuItem.setAction(actionController.getSelectAllComponentsAction());
 
+		/* TODO setActions for representation and help menu
 		// init representation menu
-		iecStandardRadioButtonMenuItem.addActionListener(actionController);
-		usStandardRadioButtonMenuItem.addActionListener(actionController);
+		iecStandardRadioButtonMenuItem.setAction(actionController);
+		usStandardRadioButtonMenuItem.setAction(actionController);
 
 		// init background menu
-		dotsRadioButtonMenuItem.addActionListener(actionController);
-		squaresRadioButtonMenuItem.addActionListener(actionController);
-		blankRadioButtonMenuItem.addActionListener(actionController);
+		dotsRadioButtonMenuItem.setAction(actionController);
+		squaresRadioButtonMenuItem.setAction(actionController);
+		blankRadioButtonMenuItem.setAction(actionController);
+		*/
 
 		// init insert menu
-		componentMenuItem.addActionListener(actionController);
+		componentMenuItem.setAction(actionController.getAddComponentAction());
 
+		/*
 		// init help menu
-		helpMenuItem.addActionListener(actionController);
-		aboutMenuItem.addActionListener(actionController);
+		helpMenuItem.setAction(actionController);
+		aboutMenuItem.setAction(actionController);
+		*/
 	}
 
 	private void initButtons() {
 
 		toolbar.getToolbarPanel().getCutButton()
-				.addActionListener(actionController);
+				.setAction(actionController.getCutSelectedComponentsAction());
 		toolbar.getToolbarPanel().getCopyButton()
-				.addActionListener(actionController);
+				.setAction(actionController.getCopySelectedComponentsAction());
 		toolbar.getToolbarPanel().getNewWorkspaceButton()
-				.addActionListener(actionController);
+				.setAction(actionController.getNewWorkspaceAction());
 		toolbar.getToolbarPanel().getOpenFileButton()
-				.addActionListener(actionController);
+				.setAction(actionController.getOpenWorkspaceAction());
 		toolbar.getToolbarPanel().getPasteButton()
-				.addActionListener(actionController);
+				.setAction(actionController.getPasteSelectedComponentAction());
 		toolbar.getToolbarPanel().getRedoButton()
-				.addActionListener(actionController);
+				.setAction(actionController.getRedoAction());
 		toolbar.getToolbarPanel().getSaveAsComponentButton()
-				.addActionListener(actionController);
+				.setAction(actionController.getSaveActiveWorskpaceAsComponentAction());
 		toolbar.getToolbarPanel().getSaveAllButton()
-				.addActionListener(actionController);
+				.setAction(actionController.getSaveAllWorkspacesAction());
 		toolbar.getToolbarPanel().getSaveButton()
-				.addActionListener(actionController);
+				.setAction(actionController.getSaveActiveWorkspaceAction());
 		toolbar.getToolbarPanel().getUndoButton()
-				.addActionListener(actionController);
+				.setAction(actionController.getUndoAction());
 	}
 
 	//GEN-BEGIN:initComponents
