@@ -5,7 +5,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 /**
- * A listener class to control action events.
+ * A class to control action events.
  * @author Boel
  *
  */
