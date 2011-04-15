@@ -1,3 +1,4 @@
+package edu.chl.tda367.booleancircuits.test;
 import edu.chl.tda367.booleancircuits.model.components.*;
 
 public class TestApplication {
