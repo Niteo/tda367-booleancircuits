@@ -23,6 +23,8 @@ public abstract class AbstractCircuitGate {
 		}
 	}
 	
+	//TODO: Merge create inputs and create outputs
+	
 	/**
 	 * Creates outputs for this component.
 	 * @param amount the amount of outputs to be created

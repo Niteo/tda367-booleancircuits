@@ -20,6 +20,7 @@ public class ConstantGate extends AbstractCircuitGate {
 	 */
 	public ConstantGate(boolean value) {
 		constant = value;
+		super.createInputs(0);
 		super.createOutputs(1);
 	}
 
