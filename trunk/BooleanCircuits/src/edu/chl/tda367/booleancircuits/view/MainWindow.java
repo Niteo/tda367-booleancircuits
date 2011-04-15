@@ -25,6 +25,7 @@ public class MainWindow extends javax.swing.JFrame implements
 	private Toolbar toolbar = new Toolbar();
 	private CenterStage cs = new CenterStage();
 	private ActionController actionController;
+	private Palette palette = new Palette();
 
 	/** Creates new form View */
 	public MainWindow() {
@@ -42,6 +43,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		toolbar.getToolbarPanel().initIcons();
 
 		horizontalSplitPane.setRightComponent(cs.getPanel());
+		horizontalSplitPane.setLeftComponent(palette.getView());
 		mc.newWorkspace();
 		setTitle("Boolean Circuits");
 	}
@@ -196,7 +198,7 @@ public class MainWindow extends javax.swing.JFrame implements
 				java.awt.event.InputEvent.CTRL_MASK));
 	}
 
-	// GEN-BEGIN:initComponents
+	//GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
@@ -204,6 +206,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		backgroundButtonGroup = new javax.swing.ButtonGroup();
 		verticalSplitPane = new javax.swing.JSplitPane();
 		horizontalSplitPane = new javax.swing.JSplitPane();
+		paletteContainerPanel = new javax.swing.JPanel();
 		menuBar = new javax.swing.JMenuBar();
 		fileMenu = new javax.swing.JMenu();
 		newWorkspaceMenuItem = new javax.swing.JMenuItem();
@@ -240,15 +243,31 @@ public class MainWindow extends javax.swing.JFrame implements
 		helpMenuItem = new javax.swing.JMenuItem();
 		aboutMenuItem = new javax.swing.JMenuItem();
 
-		palette = new Palette();
-
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		verticalSplitPane.setDividerLocation(24);
+		verticalSplitPane.setDividerLocation(30);
 		verticalSplitPane.setDividerSize(0);
 		verticalSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-		horizontalSplitPane.setLeftComponent(palette.getView());
+		horizontalSplitPane.setDividerLocation(120);
+		horizontalSplitPane.setDividerSize(0);
+		horizontalSplitPane.setEnabled(false);
+
+		javax.swing.GroupLayout paletteContainerPanelLayout = new javax.swing.GroupLayout(
+				paletteContainerPanel);
+		paletteContainerPanel.setLayout(paletteContainerPanelLayout);
+		paletteContainerPanelLayout
+				.setHorizontalGroup(paletteContainerPanelLayout
+						.createParallelGroup(
+								javax.swing.GroupLayout.Alignment.LEADING)
+						.addGap(0, 0, Short.MAX_VALUE));
+		paletteContainerPanelLayout
+				.setVerticalGroup(paletteContainerPanelLayout
+						.createParallelGroup(
+								javax.swing.GroupLayout.Alignment.LEADING)
+						.addGap(0, 300, Short.MAX_VALUE));
+
+		horizontalSplitPane.setLeftComponent(paletteContainerPanel);
 
 		verticalSplitPane.setBottomComponent(horizontalSplitPane);
 
@@ -334,7 +353,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 		pack();
 	}// </editor-fold>
-		// GEN-END:initComponents
+	//GEN-END:initComponents
 
 	/**
 	 * @param args
@@ -349,7 +368,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		});
 	}
 
-	// GEN-BEGIN:variables
+	//GEN-BEGIN:variables
 	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
 	private javax.swing.ButtonGroup backgroundButtonGroup;
@@ -376,6 +395,7 @@ public class MainWindow extends javax.swing.JFrame implements
 	private javax.swing.JMenuBar menuBar;
 	private javax.swing.JMenuItem newWorkspaceMenuItem;
 	private javax.swing.JMenuItem openFileMenuItem;
+	private javax.swing.JPanel paletteContainerPanel;
 	private javax.swing.JMenuItem pasteMenuItem;
 	private javax.swing.JMenuItem redoMenuItem;
 	private javax.swing.ButtonGroup representationButtonGroup;
@@ -390,7 +410,6 @@ public class MainWindow extends javax.swing.JFrame implements
 	private javax.swing.JRadioButtonMenuItem usStandardRadioButtonMenuItem;
 	private javax.swing.JSplitPane verticalSplitPane;
 	private javax.swing.JMenu viewMenu;
-	private Palette palette;
 
 	// End of variables declaration//GEN-END:variables
 
