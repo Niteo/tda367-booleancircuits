@@ -10,6 +10,7 @@ import java.util.*;
 public abstract class AbstractCircuitGate {
 	private List<GateInput> inputs;
 	private Boolean[] outputs;
+	private boolean isInTiercalculation;
 	
 	/**
 	 * Creates inputs for this component.
@@ -28,6 +29,9 @@ public abstract class AbstractCircuitGate {
 	 */
 	protected void createOutputs(int amount){
 		outputs = new Boolean[amount];
+		for(Boolean o : outputs){
+			o = false;
+		}
 	}
 	
 	/**
@@ -86,6 +90,28 @@ public abstract class AbstractCircuitGate {
 	 */
 	public void update(){
 		updateOutput();
+	}
+	
+	/**
+	 * Calculates the component's tier.
+	 * @return the tier of the component
+	 */
+	public int getComponentTier(){
+		if(!isInTiercalculation){
+			return 0;
+		} else {
+			isInTiercalculation = true;
+			
+			int tier = 1;
+			for(GateInput gp : inputs){
+				if(gp.getInputComponent() != null){
+					tier += gp.getInputComponent().getComponentTier();
+				}
+			}
+			
+			isInTiercalculation = false;
+			return tier;
+		}
 	}
 	
 	/**
