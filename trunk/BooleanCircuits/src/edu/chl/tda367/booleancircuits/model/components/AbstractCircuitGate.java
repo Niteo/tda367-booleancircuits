@@ -97,7 +97,7 @@ public abstract class AbstractCircuitGate {
 	 * @return the tier of the component
 	 */
 	public int getComponentTier(){
-		if(!isInTiercalculation){
+		if(isInTiercalculation){
 			return 0;
 		} else {
 			isInTiercalculation = true;
