@@ -4,12 +4,10 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
-public class TabPanel {
+public class TabPanel extends JPanel{
 
 	private JButton closeButton = new JButton();
 	private JLabel titleLabel = new JLabel();
-	private JPanel panel = new JPanel();
-	private ImageIcon closeIcon = new ImageIcon("resources/icons/cross-icon.png");
 
 	/**
 	 * Returns an instance of TabPanel.
@@ -17,10 +15,9 @@ public class TabPanel {
 	 */
 	public TabPanel(String title) {
 		closeButton.setPreferredSize((new Dimension(20, 20)));
-		closeButton.setIcon(closeIcon);
 		titleLabel.setText(title);
-		panel.add(titleLabel);
-		panel.add(closeButton);
+		add(titleLabel);
+		add(closeButton);
 	}
 	
 	/**
@@ -30,13 +27,13 @@ public class TabPanel {
 	public void setTabPanelTitle(String title){
 		titleLabel.setText(title);
 	}
-
+	
 	/**
-	 * Returns the tab panel.
-	 * @return panel
+	 * Returns the close button
+	 * @return JButton
 	 */
-	public JPanel getTabPanel() {
-		return panel;
+	public JButton getCloseButton() {
+		return closeButton;
 	}
 
 }

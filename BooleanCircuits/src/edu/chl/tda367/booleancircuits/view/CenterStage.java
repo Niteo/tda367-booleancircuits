@@ -51,5 +51,13 @@ public class CenterStage {
 	public JPanel getPanel() {
 		return centerStagePanel;
 	}
+	
+	/**
+	 * Returns the tab.
+	 * @return Tab
+	 */
+	public Tab getTab() {
+		return tab;
+	}
 
 }
