@@ -4,7 +4,6 @@ import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 
-
 /**
  * Model for managing and updating circuit components.
  */
@@ -23,7 +22,9 @@ public final class Model {
 
 	/**
 	 * Adds a component to the model.
-	 * @param the new component to add
+	 * 
+	 * @param the
+	 *            new component to add
 	 */
 	public void addComponent(AbstractCircuitGate component) {
 		componentList.add(component);
@@ -32,7 +33,8 @@ public final class Model {
 
 	/**
 	 * Returns a list of selected components
-	 * @return a list of selected components 
+	 * 
+	 * @return a list of selected components
 	 */
 	public List<AbstractCircuitGate> getSelectedComponents() {
 		return selectedComponentList;
@@ -45,16 +47,18 @@ public final class Model {
 		selectedComponentList.clear();
 		selectedComponentList.addAll(componentList);
 	}
-	
+
 	/**
 	 * Selects the first found component at the specified coordinate
-	 * @param coordinate the coordinate for the component
+	 * 
+	 * @param coordinate
+	 *            the coordinate for the component
 	 */
 	public void selectComponent(Coordinate coordinate) {
 		// TODO: Add logic here
 		throw new UnsupportedOperationException();
 	}
-	
+
 	/**
 	 * Removes the components that are selected
 	 */
@@ -65,9 +69,22 @@ public final class Model {
 		selectedComponentList.clear();
 	}
 
-	
-	private void updateComponents(){
-		throw new UnsupportedOperationException();
-		// TODO: Add code here!
+	private void updateComponents() {
+		List<List<AbstractCircuitGate>> groupList = new LinkedList<List<AbstractCircuitGate>>();
+
+		int loopCount = 1;
+		boolean endOfLoop = true;
+		do{
+			List<AbstractCircuitGate> tempList = new LinkedList<AbstractCircuitGate>();
+			endOfLoop = true;
+			for (AbstractCircuitGate i : componentList) {
+				if (i.getComponentTier() == loopCount) {
+					tempList.add(i);
+					endOfLoop = false; 
+				}
+			}
+		} while (!endOfLoop);
+		//TODO: skriv klart uppdateringsalgoritmen: testa föregående, 
+
 	}
 }
