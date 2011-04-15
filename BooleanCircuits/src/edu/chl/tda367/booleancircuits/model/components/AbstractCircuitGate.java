@@ -104,7 +104,7 @@ public abstract class AbstractCircuitGate {
 		} else {
 			isInTiercalculation = true;
 			
-			int maxTier = 1;
+			int maxTier = 0;
 			for(GateInput gp : inputs){
 				if(gp.getInputComponent() != null){
 					int tmpTier = gp.getInputComponent().getComponentTier();
