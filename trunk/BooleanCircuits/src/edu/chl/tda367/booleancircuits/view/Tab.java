@@ -3,6 +3,8 @@ package edu.chl.tda367.booleancircuits.view;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Panel;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -26,7 +28,7 @@ public final class Tab {
 	public void addTab(String name, Canvas canvas) {
 		this.canvas = canvas;
 		tabbedPane.addTab(name, canvas.getCanvas());
-		tabbedPane.setTabComponentAt(tabbedPane.getTabCount()-1 ,new TabPanel(name).getTabPanel());
+		tabbedPane.setTabComponentAt(tabbedPane.getTabCount()-1 , new TabPanel(name));
 	}
 
 	/**
@@ -36,4 +38,5 @@ public final class Tab {
 	public JTabbedPane getTabbedPane() {
 		return tabbedPane;
 	}
+	
 }

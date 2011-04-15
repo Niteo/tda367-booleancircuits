@@ -6,8 +6,11 @@
 
 package edu.chl.tda367.booleancircuits.view;
 
+import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.LinkedList;
+import java.util.List;
 
 import edu.chl.tda367.booleancircuits.controller.ActionController;
 import edu.chl.tda367.booleancircuits.controller.MasterController;
@@ -196,6 +199,18 @@ public class MainWindow extends javax.swing.JFrame implements
 		selectAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_A,
 				java.awt.event.InputEvent.CTRL_MASK));
+	}
+	
+	private void updateTabs(){
+		List<TabPanel> tabPanelList = new LinkedList<TabPanel>();
+		for(int i=0;i<cs.getTab().getTabbedPane().getTabCount()-1;i++){
+			tabPanelList.add((TabPanel) cs.getTab().getTabbedPane().getTabComponentAt(i));
+		}
+		
+		for(TabPanel t:tabPanelList){
+			t.getCloseButton().setAction(actionController.getCloseWorkspace());
+		}
+
 	}
 
 	//GEN-BEGIN:initComponents
@@ -417,6 +432,7 @@ public class MainWindow extends javax.swing.JFrame implements
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getSource() instanceof ModelManager) {
 			cs.update((ModelManager) evt.getSource());
+			updateTabs();
 		}
 
 	}
