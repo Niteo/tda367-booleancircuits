@@ -104,15 +104,18 @@ public abstract class AbstractCircuitGate {
 		} else {
 			isInTiercalculation = true;
 			
-			int tier = 1;
+			int maxTier = 1;
 			for(GateInput gp : inputs){
 				if(gp.getInputComponent() != null){
-					tier += gp.getInputComponent().getComponentTier();
+					int tmpTier = gp.getInputComponent().getComponentTier();
+					if(tmpTier > maxTier){
+						maxTier = tmpTier;
+					}
 				}
 			}
 			
 			isInTiercalculation = false;
-			return tier;
+			return maxTier;
 		}
 	}
 	
