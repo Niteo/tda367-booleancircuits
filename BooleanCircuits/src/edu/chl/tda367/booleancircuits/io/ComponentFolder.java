@@ -1,8 +1,17 @@
 package edu.chl.tda367.booleancircuits.io;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.ConstantGate;
+import edu.chl.tda367.booleancircuits.model.components.NandGate;
+import edu.chl.tda367.booleancircuits.model.components.NorGate;
+import edu.chl.tda367.booleancircuits.model.components.NotGate;
+import edu.chl.tda367.booleancircuits.model.components.OrGate;
+import edu.chl.tda367.booleancircuits.model.components.XnorGate;
+import edu.chl.tda367.booleancircuits.model.components.XorGate;
 
 /**
  * This class creates a file in which there are a number of logical components
@@ -14,7 +23,7 @@ import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 public class ComponentFolder {
 
 	private List<AbstractCircuitGate> componentList;
-	private final String name;
+	private String name;
 
 	/**
 	 * Creates a File from pathName Creates a list of components which lies in
@@ -22,9 +31,16 @@ public class ComponentFolder {
 	 * 
 	 * @param pathName
 	 */
+	public ComponentFolder() {
+		componentList = new ArrayList<AbstractCircuitGate>();
+		name = "Standard Gates";
+		initStandardGates();
+	}
+
 	public ComponentFolder(List<AbstractCircuitGate> componentList, String name) {
 		this.name = name;
 		this.componentList = componentList;
+		initStandardGates();
 	}
 
 	public String getName() {
@@ -41,6 +57,19 @@ public class ComponentFolder {
 		// TODO: implementation, not sure if it's going to singel out a
 		// component by it's index. But for now, let it be.
 		return componentList.get(index);
+	}
+
+	private void initStandardGates() {
+		componentList.add(new AndGate(2));
+		componentList.add(new ConstantGate(true));
+		componentList.add(new ConstantGate(false));
+		componentList.add(new NandGate(2));
+		componentList.add(new NorGate(2));
+		componentList.add(new NotGate());
+		componentList.add(new OrGate(2));
+		componentList.add(new XnorGate(2));
+		componentList.add(new XorGate(2));
+
 	}
 
 	/**
