@@ -26,6 +26,7 @@ public final class Tab {
 	public void addTab(String name, Canvas canvas) {
 		this.canvas = canvas;
 		tabbedPane.addTab(name, canvas.getCanvas());
+		tabbedPane.setTabComponentAt(tabbedPane.getTabCount()-1 ,new TabPanel(name).getTabPanel());
 	}
 
 	/**
