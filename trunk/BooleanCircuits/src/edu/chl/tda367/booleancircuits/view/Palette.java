@@ -10,6 +10,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import edu.chl.tda367.booleancircuits.io.ComponentFolder;
+import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 
 public final class Palette {
 
@@ -22,9 +23,8 @@ public final class Palette {
 	// Testkonstruktor
 	public Palette() {
 		// Test
-		folderTestList = new ArrayList<String>();
-		folderTestList.add("hej");
-		folderTestList.add("hej");
+		folderList = new ArrayList<ComponentFolder>();
+		folderList.add(new ComponentFolder());
 
 		initPaletteTree();
 		scrollPane = new JScrollPane(componentTree);
@@ -42,9 +42,10 @@ public final class Palette {
 		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(
 				"I will be invisible");
 
-		for (String s : folderTestList) {
-			DefaultMutableTreeNode temp = new DefaultMutableTreeNode(s);
-			// initComponentNodes(temp, componentFolder);
+		for (ComponentFolder folder : folderList) {
+			DefaultMutableTreeNode temp = new DefaultMutableTreeNode(
+					folder.getName());
+			initComponentNodes(temp, folder);
 			rootNode.add(temp);
 		}
 		// Test
@@ -64,22 +65,26 @@ public final class Palette {
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) componentTree
 						.getLastSelectedPathComponent();
 				if (node.isLeaf()) {
-					System.out.println("isLeaf maddafacka");
+					System.out.println(node.getUserObject());
 				}
 			}
 		};
 		componentTree.addTreeSelectionListener(tsl);
 
-		/*
-		 * paletteView.add(componentTree, BorderLayout.CENTER);
-		 * componentTree.setPreferredSize(new java.awt.Dimension(326, 300));
-		 * paletteView.revalidate();
-		 */
 	}
 
+	/**
+	 * inserts component in to param folder.
+	 * 
+	 * @param folderNodeList
+	 * @param componentFolder
+	 */
 	private void initComponentNodes(DefaultMutableTreeNode folderNodeList,
 			ComponentFolder componentFolder) {
 		// TODO:
+		for (AbstractCircuitGate acg : componentFolder.getAllComponents()) {
+			folderNodeList.add(new DefaultMutableTreeNode(acg));
+		}
 
 	}
 
