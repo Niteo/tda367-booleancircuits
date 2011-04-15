@@ -1,3 +1,4 @@
+package edu.chl.tda367.booleancircuits.test;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
