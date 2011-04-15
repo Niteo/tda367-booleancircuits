@@ -23,27 +23,6 @@ public final class Palette {
 		folderTestList = new ArrayList<String>();
 		folderTestList.add("hej");
 		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
-		folderTestList.add("hej");
 
 		initPaletteTree();
 		scrollPane = new JScrollPane(componentTree);
