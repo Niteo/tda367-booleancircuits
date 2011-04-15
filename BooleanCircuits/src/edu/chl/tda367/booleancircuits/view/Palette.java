@@ -7,7 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import edu.chl.tda367.booleancircuits.utilities.ComponentFolder;
+import edu.chl.tda367.booleancircuits.io.ComponentFolder;
 
 public final class Palette {
 

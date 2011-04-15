@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.utilities;
+package edu.chl.tda367.booleancircuits.io;
 
 import java.util.List;
 
