@@ -19,7 +19,7 @@ import edu.chl.tda367.booleancircuits.controller.MasterController;
 import edu.chl.tda367.booleancircuits.model.ModelManager;
 
 /**
- * 
+ * The Main window
  * @author Boel
  */
 public class MainWindow extends javax.swing.JFrame implements
@@ -41,6 +41,10 @@ public class MainWindow extends javax.swing.JFrame implements
 		initToolbar();
 		initMenu();
 		initButtons();
+		initMenuItemText();
+		initShortcuts();
+		toolbar.getToolbarPanel().initIcons();
+
 		horizontalSplitPane.setRightComponent(cs.getPanel());
 		mc.newWorkspace();
 		setTitle("Boolean Circuits");
@@ -54,23 +58,32 @@ public class MainWindow extends javax.swing.JFrame implements
 
 	private void initMenu() {
 		// init file menu
-		newWorkspaceMenuItem.setAction(actionController.getNewWorkspaceAction());
+		newWorkspaceMenuItem
+				.setAction(actionController.getNewWorkspaceAction());
 		openFileMenuItem.setAction(actionController.getOpenWorkspaceAction());
-		closeMenuItem.setAction(actionController.getCloseActiveWorkspaceAction());
+		closeMenuItem.setAction(actionController
+				.getCloseActiveWorkspaceAction());
 		saveMenuItem.setAction(actionController.getSaveActiveWorkspaceAction());
-		saveAsMenuItem.setAction(actionController.getSaveActiveWorskpaceAsComponentAction());
-		saveAllMenuItem.setAction(actionController.getSaveAllWorkspacesAction());
-		exitMenuItem.setAction(actionController.getCloseAction());
+		saveAsMenuItem.setAction(actionController
+				.getSaveActiveWorskpaceAsComponentAction());
+		saveAllMenuItem
+				.setAction(actionController.getSaveAllWorkspacesAction());
+		exitMenuItem.setAction(actionController.getExitAction());
 
 		// init edit menu
 		undoMenuItem.setAction(actionController.getUndoAction());
 		redoMenuItem.setAction(actionController.getRedoAction());
-		cutMenuItem.setAction(actionController.getCutSelectedComponentsAction());
-		copyMenuItem.setAction(actionController.getCopySelectedComponentsAction());
-		pasteMenuItem.setAction(actionController.getPasteSelectedComponentAction());
-		deleteMenuItem.setAction(actionController.getRemoveSelectedComponentsAction());
+		cutMenuItem
+				.setAction(actionController.getCutSelectedComponentsAction());
+		copyMenuItem.setAction(actionController
+				.getCopySelectedComponentsAction());
+		pasteMenuItem.setAction(actionController
+				.getPasteSelectedComponentAction());
+		deleteMenuItem.setAction(actionController
+				.getRemoveSelectedComponentsAction());
 		selectMenuItem.setAction(actionController.getSelectComponentAction());
-		selectAllMenuItem.setAction(actionController.getSelectAllComponentsAction());
+		selectAllMenuItem.setAction(actionController
+				.getSelectAllComponentsAction());
 
 		/* TODO setActions for representation and help menu
 		// init representation menu
@@ -81,7 +94,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		dotsRadioButtonMenuItem.setAction(actionController);
 		squaresRadioButtonMenuItem.setAction(actionController);
 		blankRadioButtonMenuItem.setAction(actionController);
-		*/
+		 */
 
 		// init insert menu
 		componentMenuItem.setAction(actionController.getAddComponentAction());
@@ -90,7 +103,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		// init help menu
 		helpMenuItem.setAction(actionController);
 		aboutMenuItem.setAction(actionController);
-		*/
+		 */
 	}
 
 	private void initButtons() {
@@ -107,14 +120,84 @@ public class MainWindow extends javax.swing.JFrame implements
 				.setAction(actionController.getPasteSelectedComponentAction());
 		toolbar.getToolbarPanel().getRedoButton()
 				.setAction(actionController.getRedoAction());
-		toolbar.getToolbarPanel().getSaveAsComponentButton()
-				.setAction(actionController.getSaveActiveWorskpaceAsComponentAction());
+		toolbar.getToolbarPanel()
+				.getSaveAsComponentButton()
+				.setAction(
+						actionController
+								.getSaveActiveWorskpaceAsComponentAction());
 		toolbar.getToolbarPanel().getSaveAllButton()
 				.setAction(actionController.getSaveAllWorkspacesAction());
 		toolbar.getToolbarPanel().getSaveButton()
 				.setAction(actionController.getSaveActiveWorkspaceAction());
 		toolbar.getToolbarPanel().getUndoButton()
 				.setAction(actionController.getUndoAction());
+	}
+
+	private void initMenuItemText() {
+		// File menu
+		newWorkspaceMenuItem.setText("New Workspace");
+		openFileMenuItem.setText("Open File...");
+		closeMenuItem.setText("Close");
+		saveMenuItem.setText("Save");
+		saveAsMenuItem.setText("Save As...");
+		saveAllMenuItem.setText("Save All");
+		exitMenuItem.setText("Exit");
+
+		//Edit menu
+		undoMenuItem.setText("Undo");
+		redoMenuItem.setText("Redo");
+		cutMenuItem.setText("Cut");
+		copyMenuItem.setText("Copy");
+		pasteMenuItem.setText("Paste");
+		deleteMenuItem.setText("Delete");
+		selectMenuItem.setText("Select");
+		selectAllMenuItem.setText("Select All");
+
+		//View menu
+		representationMenu.setText("Representation");
+		iecStandardRadioButtonMenuItem.setText("IEC Standard");
+		usStandardRadioButtonMenuItem.setText("US Standard");
+
+		backgroundMenu.setText("Background");
+		blankRadioButtonMenuItem.setText("Blank");
+		dotsRadioButtonMenuItem.setText("Dots");
+		squaresRadioButtonMenuItem.setText("Squares");
+
+		//Insert menu
+		componentMenuItem.setText("Component...");
+
+		//Help menu
+		helpMenuItem.setText("Help");
+		aboutMenuItem.setText("About");
+	}
+
+	private void initShortcuts() {
+		closeMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_W,
+				java.awt.event.InputEvent.CTRL_MASK));
+		saveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_S,
+				java.awt.event.InputEvent.CTRL_MASK));
+		undoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_Z,
+				java.awt.event.InputEvent.CTRL_MASK));
+		redoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_Y,
+				java.awt.event.InputEvent.CTRL_MASK));
+		cutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_X,
+				java.awt.event.InputEvent.CTRL_MASK));
+		copyMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_C,
+				java.awt.event.InputEvent.CTRL_MASK));
+		pasteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_V,
+				java.awt.event.InputEvent.CTRL_MASK));
+		deleteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_DELETE, 0));
+		selectAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_A,
+				java.awt.event.InputEvent.CTRL_MASK));
 	}
 
 	//GEN-BEGIN:initComponents
@@ -187,119 +270,54 @@ public class MainWindow extends javax.swing.JFrame implements
 		verticalSplitPane.setBottomComponent(horizontalSplitPane);
 
 		fileMenu.setText("File");
-
-		newWorkspaceMenuItem.setText("New Workspace");
 		fileMenu.add(newWorkspaceMenuItem);
-
-		openFileMenuItem.setText("Open File...");
 		fileMenu.add(openFileMenuItem);
 		fileMenu.add(fileSeparator1);
-
-		closeMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_W,
-				java.awt.event.InputEvent.CTRL_MASK));
-		closeMenuItem.setText("Close");
 		fileMenu.add(closeMenuItem);
 		fileMenu.add(fileSeparator2);
-
-		saveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_S,
-				java.awt.event.InputEvent.CTRL_MASK));
-		saveMenuItem.setText("Save");
 		fileMenu.add(saveMenuItem);
-
-		saveAsMenuItem.setText("Save As...");
 		fileMenu.add(saveAsMenuItem);
-
-		saveAllMenuItem.setText("Save All");
 		fileMenu.add(saveAllMenuItem);
 		fileMenu.add(fileSeparator3);
-
-		exitMenuItem.setText("Exit");
 		fileMenu.add(exitMenuItem);
 
 		menuBar.add(fileMenu);
 
 		editMenu.setText("Edit");
-
-		undoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_Z,
-				java.awt.event.InputEvent.CTRL_MASK));
-		undoMenuItem.setText("Undo");
 		editMenu.add(undoMenuItem);
-
-		redoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_Y,
-				java.awt.event.InputEvent.CTRL_MASK));
-		redoMenuItem.setText("Redo");
 		editMenu.add(redoMenuItem);
 		editMenu.add(editSeparator1);
-
-		cutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_X,
-				java.awt.event.InputEvent.CTRL_MASK));
-		cutMenuItem.setText("Cut");
 		editMenu.add(cutMenuItem);
-
-		copyMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_C,
-				java.awt.event.InputEvent.CTRL_MASK));
-		copyMenuItem.setText("Copy");
 		editMenu.add(copyMenuItem);
-
-		pasteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_V,
-				java.awt.event.InputEvent.CTRL_MASK));
-		pasteMenuItem.setText("Paste");
 		editMenu.add(pasteMenuItem);
-
-		deleteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_DELETE, 0));
-		deleteMenuItem.setText("Delete");
 		editMenu.add(deleteMenuItem);
-
-		selectMenuItem.setText("Select");
 		editMenu.add(selectMenuItem);
-
-		selectAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_A,
-				java.awt.event.InputEvent.CTRL_MASK));
-		selectAllMenuItem.setText("Select All");
 		editMenu.add(selectAllMenuItem);
 
 		menuBar.add(editMenu);
 
 		viewMenu.setText("View");
 
-		representationMenu.setText("Representation");
-
 		representationButtonGroup.add(iecStandardRadioButtonMenuItem);
 		iecStandardRadioButtonMenuItem.setSelected(true);
-		iecStandardRadioButtonMenuItem.setText("IEC Standard");
 		representationMenu.add(iecStandardRadioButtonMenuItem);
 
 		representationButtonGroup.add(usStandardRadioButtonMenuItem);
 		usStandardRadioButtonMenuItem.setSelected(true);
-		usStandardRadioButtonMenuItem.setText("US Standard");
 		representationMenu.add(usStandardRadioButtonMenuItem);
 
 		viewMenu.add(representationMenu);
 
-		backgroundMenu.setText("Background");
-
 		backgroundButtonGroup.add(blankRadioButtonMenuItem);
 		blankRadioButtonMenuItem.setSelected(true);
-		blankRadioButtonMenuItem.setText("Blank");
 		backgroundMenu.add(blankRadioButtonMenuItem);
 
 		backgroundButtonGroup.add(dotsRadioButtonMenuItem);
 		dotsRadioButtonMenuItem.setSelected(true);
-		dotsRadioButtonMenuItem.setText("Dots");
 		backgroundMenu.add(dotsRadioButtonMenuItem);
 
 		backgroundButtonGroup.add(squaresRadioButtonMenuItem);
 		squaresRadioButtonMenuItem.setSelected(true);
-		squaresRadioButtonMenuItem.setText("Squares");
 		backgroundMenu.add(squaresRadioButtonMenuItem);
 
 		viewMenu.add(backgroundMenu);
@@ -307,18 +325,12 @@ public class MainWindow extends javax.swing.JFrame implements
 		menuBar.add(viewMenu);
 
 		insertMenu.setText("Insert");
-
-		componentMenuItem.setText("Component...");
 		insertMenu.add(componentMenuItem);
 
 		menuBar.add(insertMenu);
 
 		helpMenu.setText("Help");
-
-		helpMenuItem.setText("Help");
 		helpMenu.add(helpMenuItem);
-
-		aboutMenuItem.setText("About");
 		helpMenu.add(aboutMenuItem);
 
 		menuBar.add(helpMenu);
