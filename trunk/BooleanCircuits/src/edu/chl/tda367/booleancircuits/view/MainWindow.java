@@ -6,13 +6,8 @@
 
 package edu.chl.tda367.booleancircuits.view;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
-import javax.swing.Action;
-import javax.swing.JPanel;
 
 import edu.chl.tda367.booleancircuits.controller.ActionController;
 import edu.chl.tda367.booleancircuits.controller.MasterController;
@@ -20,6 +15,7 @@ import edu.chl.tda367.booleancircuits.model.ModelManager;
 
 /**
  * The Main window
+ * 
  * @author Boel
  */
 public class MainWindow extends javax.swing.JFrame implements
@@ -85,24 +81,24 @@ public class MainWindow extends javax.swing.JFrame implements
 		selectAllMenuItem.setAction(actionController
 				.getSelectAllComponentsAction());
 
-		/* TODO setActions for representation and help menu
-		// init representation menu
-		iecStandardRadioButtonMenuItem.setAction(actionController);
-		usStandardRadioButtonMenuItem.setAction(actionController);
-
-		// init background menu
-		dotsRadioButtonMenuItem.setAction(actionController);
-		squaresRadioButtonMenuItem.setAction(actionController);
-		blankRadioButtonMenuItem.setAction(actionController);
+		/*
+		 * TODO setActions for representation and help menu // init
+		 * representation menu
+		 * iecStandardRadioButtonMenuItem.setAction(actionController);
+		 * usStandardRadioButtonMenuItem.setAction(actionController);
+		 * 
+		 * // init background menu
+		 * dotsRadioButtonMenuItem.setAction(actionController);
+		 * squaresRadioButtonMenuItem.setAction(actionController);
+		 * blankRadioButtonMenuItem.setAction(actionController);
 		 */
 
 		// init insert menu
 		componentMenuItem.setAction(actionController.getAddComponentAction());
 
 		/*
-		// init help menu
-		helpMenuItem.setAction(actionController);
-		aboutMenuItem.setAction(actionController);
+		 * // init help menu helpMenuItem.setAction(actionController);
+		 * aboutMenuItem.setAction(actionController);
 		 */
 	}
 
@@ -143,7 +139,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		saveAllMenuItem.setText("Save All");
 		exitMenuItem.setText("Exit");
 
-		//Edit menu
+		// Edit menu
 		undoMenuItem.setText("Undo");
 		redoMenuItem.setText("Redo");
 		cutMenuItem.setText("Cut");
@@ -153,7 +149,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		selectMenuItem.setText("Select");
 		selectAllMenuItem.setText("Select All");
 
-		//View menu
+		// View menu
 		representationMenu.setText("Representation");
 		iecStandardRadioButtonMenuItem.setText("IEC Standard");
 		usStandardRadioButtonMenuItem.setText("US Standard");
@@ -163,10 +159,10 @@ public class MainWindow extends javax.swing.JFrame implements
 		dotsRadioButtonMenuItem.setText("Dots");
 		squaresRadioButtonMenuItem.setText("Squares");
 
-		//Insert menu
+		// Insert menu
 		componentMenuItem.setText("Component...");
 
-		//Help menu
+		// Help menu
 		helpMenuItem.setText("Help");
 		aboutMenuItem.setText("About");
 	}
@@ -200,7 +196,7 @@ public class MainWindow extends javax.swing.JFrame implements
 				java.awt.event.InputEvent.CTRL_MASK));
 	}
 
-	//GEN-BEGIN:initComponents
+	// GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
@@ -208,7 +204,6 @@ public class MainWindow extends javax.swing.JFrame implements
 		backgroundButtonGroup = new javax.swing.ButtonGroup();
 		verticalSplitPane = new javax.swing.JSplitPane();
 		horizontalSplitPane = new javax.swing.JSplitPane();
-		paletteContainerPanel = new javax.swing.JPanel();
 		menuBar = new javax.swing.JMenuBar();
 		fileMenu = new javax.swing.JMenu();
 		newWorkspaceMenuItem = new javax.swing.JMenuItem();
@@ -245,27 +240,15 @@ public class MainWindow extends javax.swing.JFrame implements
 		helpMenuItem = new javax.swing.JMenuItem();
 		aboutMenuItem = new javax.swing.JMenuItem();
 
+		palette = new Palette();
+
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		verticalSplitPane.setDividerLocation(24);
 		verticalSplitPane.setDividerSize(0);
 		verticalSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-		javax.swing.GroupLayout paletteContainerPanelLayout = new javax.swing.GroupLayout(
-				paletteContainerPanel);
-		paletteContainerPanel.setLayout(paletteContainerPanelLayout);
-		paletteContainerPanelLayout
-				.setHorizontalGroup(paletteContainerPanelLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGap(0, 0, Short.MAX_VALUE));
-		paletteContainerPanelLayout
-				.setVerticalGroup(paletteContainerPanelLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGap(0, 300, Short.MAX_VALUE));
-
-		horizontalSplitPane.setLeftComponent(paletteContainerPanel);
+		horizontalSplitPane.setLeftComponent(palette.getView());
 
 		verticalSplitPane.setBottomComponent(horizontalSplitPane);
 
@@ -351,7 +334,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 		pack();
 	}// </editor-fold>
-	//GEN-END:initComponents
+		// GEN-END:initComponents
 
 	/**
 	 * @param args
@@ -359,13 +342,14 @@ public class MainWindow extends javax.swing.JFrame implements
 	 */
 	public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				new MainWindow().setVisible(true);
 			}
 		});
 	}
 
-	//GEN-BEGIN:variables
+	// GEN-BEGIN:variables
 	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
 	private javax.swing.ButtonGroup backgroundButtonGroup;
@@ -392,7 +376,6 @@ public class MainWindow extends javax.swing.JFrame implements
 	private javax.swing.JMenuBar menuBar;
 	private javax.swing.JMenuItem newWorkspaceMenuItem;
 	private javax.swing.JMenuItem openFileMenuItem;
-	private javax.swing.JPanel paletteContainerPanel;
 	private javax.swing.JMenuItem pasteMenuItem;
 	private javax.swing.JMenuItem redoMenuItem;
 	private javax.swing.ButtonGroup representationButtonGroup;
@@ -407,6 +390,7 @@ public class MainWindow extends javax.swing.JFrame implements
 	private javax.swing.JRadioButtonMenuItem usStandardRadioButtonMenuItem;
 	private javax.swing.JSplitPane verticalSplitPane;
 	private javax.swing.JMenu viewMenu;
+	private Palette palette;
 
 	// End of variables declaration//GEN-END:variables
 
