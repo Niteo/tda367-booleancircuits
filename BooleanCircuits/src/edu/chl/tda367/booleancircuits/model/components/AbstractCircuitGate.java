@@ -115,7 +115,7 @@ public abstract class AbstractCircuitGate {
 			}
 			
 			isInTiercalculation = false;
-			return maxTier;
+			return maxTier + 1;
 		}
 	}
 	
