@@ -203,7 +203,7 @@ public class MainWindow extends javax.swing.JFrame implements
 	
 	private void updateTabs(){
 		List<TabPanel> tabPanelList = new LinkedList<TabPanel>();
-		for(int i=0;i<cs.getTab().getTabbedPane().getTabCount()-1;i++){
+		for(int i=0;i<cs.getTab().getTabbedPane().getTabCount();i++){
 			tabPanelList.add((TabPanel) cs.getTab().getTabbedPane().getTabComponentAt(i));
 		}
 		
