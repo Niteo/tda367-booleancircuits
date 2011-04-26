@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="11.1">
+  <help_text>
+View
+
+</help_text>
   <zoom_level>10</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>420</x>
-      <y>140</y>
-      <w>120</w>
-      <h>40</h>
+      <x>450</x>
+      <y>410</y>
+      <w>430</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>ModelManager
-</panel_attributes>
+--
++newWorkspace()
++addWorkspace(Model workspace)
++closeActiveWorkspace()
++getActiveWorkspace(): Model
++getWorkspaces():List&lt;Model&gt; 
++addPropertyChangeListener(PropertyChangeListener listener)
++removePropertyChangeListener(PropertyChangeListener listener)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>420</x>
-      <y>50</y>
-      <w>120</w>
-      <h>50</h>
+      <x>450</x>
+      <y>120</y>
+      <w>420</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>MasterController</panel_attributes>
     <additional_attributes/>
@@ -27,19 +38,19 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>440</x>
-      <y>70</y>
+      <x>560</x>
+      <y>220</y>
       <w>50</w>
-      <h>90</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;70;30;30</additional_attributes>
+    <additional_attributes>30;190;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>220</x>
-      <y>60</y>
+      <x>210</x>
+      <y>230</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -49,19 +60,19 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>290</x>
-      <y>50</y>
-      <w>150</w>
-      <h>50</h>
+      <x>280</x>
+      <y>120</y>
+      <w>190</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;130;30</additional_attributes>
+    <additional_attributes>30;130;170;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>200</x>
-      <y>120</y>
+      <x>730</x>
+      <y>10</y>
       <w>140</w>
       <h>40</h>
     </coordinates>
@@ -73,75 +84,84 @@ UndoRedo
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>310</x>
-      <y>60</y>
-      <w>130</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;80;110;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>430</x>
-      <y>320</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Model</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>440</x>
-      <y>150</y>
-      <w>60</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>40;170;30;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>290</x>
-      <y>310</y>
-      <w>160</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;40;140;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>210</x>
-      <y>210</y>
-      <w>110</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Interface&gt;&gt;
-IObservable</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>290</x>
-      <y>130</y>
-      <w>150</w>
+      <x>740</x>
+      <y>20</y>
+      <w>50</w>
       <h>120</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>30;100;130;30</additional_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;100</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>230</x>
-      <y>280</y>
+      <x>450</x>
+      <y>580</y>
+      <w>350</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Model
+--
++addComponent(AbstractCircuitGate component)
++getSelectedComponents():List&lt;AbstractCircuitGate&gt; 
++selectAllComponents()
++selectComponent(Coordinate coordinate)
++removeSelectedComponent()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>560</x>
+      <y>530</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;50;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>190</x>
+      <y>530</y>
+      <w>50</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;250;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>10</x>
+      <y>430</y>
+      <w>430</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+IObservable
+--
++addPropertyChangeListener(PropertyChangeListener listener)
++removePropertyChangeListener(PropertyChangeListener listener)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>210</x>
+      <y>380</y>
+      <w>260</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>30;50;40;30;240;40</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>80</x>
+      <y>530</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -151,86 +171,111 @@ IObservable</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>330</x>
-      <y>150</y>
-      <w>130</w>
-      <h>150</h>
+      <x>220</x>
+      <y>510</y>
+      <w>250</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;130;110;30</additional_attributes>
+    <additional_attributes>30;30;230;40</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>190</x>
-      <y>340</y>
-      <w>130</w>
-      <h>40</h>
+      <x>20</x>
+      <y>780</y>
+      <w>480</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>/AbstractCircuitGate/
+--
+#createInputs(int amount)
+#createOutputs(int amount)
+#setOutput(int index, boolean value)
+#getInputs():List&lt;GateInput&gt;
++connectInput(int inputPort, AbstractCircuitGate component, int outputPort)
++getOutputValue(int index)
++getNoOfInputs():int
++getNoOfOutputs():int
++update()
++getComponentTier():int
+/+updateOutput()/
+
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>640</x>
-      <y>190</y>
-      <w>100</w>
-      <h>30</h>
+      <x>1050</x>
+      <y>500</y>
+      <w>170</w>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>MainWindow</panel_attributes>
+    <panel_attributes>MainWindow
+--
++main(String args[])
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>510</x>
-      <y>50</y>
-      <w>190</w>
-      <h>160</h>
+      <x>840</x>
+      <y>200</y>
+      <w>280</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;170;140</additional_attributes>
+    <additional_attributes>30;30;260;300</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>570</x>
-      <y>290</y>
-      <w>90</w>
-      <h>30</h>
+      <x>920</x>
+      <y>610</y>
+      <w>260</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>CenterStage</panel_attributes>
+    <panel_attributes>CenterStage
+--
++update(ModelManager modelManager) 
++getPanel():JPanel
++getTab():Tab</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>670</x>
-      <y>290</y>
-      <w>100</w>
-      <h>30</h>
+      <x>1420</x>
+      <y>610</y>
+      <w>160</w>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>Palette</panel_attributes>
+    <panel_attributes>Palette
+--
++getView():JScrollPane  </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>780</x>
-      <y>290</y>
-      <w>70</w>
-      <h>30</h>
+      <x>1190</x>
+      <y>610</y>
+      <w>220</w>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>Toolbar</panel_attributes>
+    <panel_attributes>Toolbar
+--
++getToolbarPanel():ToolbarPanel
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>670</x>
-      <y>0</y>
+      <x>1310</x>
+      <y>450</y>
       <w>160</w>
       <h>60</h>
     </coordinates>
@@ -241,21 +286,21 @@ PropertyChangeListener</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>690</x>
-      <y>30</y>
-      <w>60</w>
-      <h>180</h>
+      <x>1090</x>
+      <y>450</y>
+      <w>240</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>30;30;40;160</additional_attributes>
+    <additional_attributes>220;30;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>740</x>
-      <y>140</y>
-      <w>140</w>
-      <h>30</h>
+      <x>890</x>
+      <y>110</y>
+      <w>230</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>ActionController</panel_attributes>
     <additional_attributes/>
@@ -263,353 +308,468 @@ PropertyChangeListener</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>710</x>
-      <y>140</y>
-      <w>130</w>
-      <h>90</h>
+      <x>910</x>
+      <y>210</y>
+      <w>220</w>
+      <h>310</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>110;30;30;70</additional_attributes>
+    <additional_attributes>30;30;200;290</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>560</x>
-      <y>190</y>
-      <w>110</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;100;90;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>660</x>
-      <y>190</y>
+      <x>1050</x>
+      <y>520</y>
       <w>60</w>
-      <h>120</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>40;100;30;30</additional_attributes>
+    <additional_attributes>30;90;40;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>690</x>
-      <y>190</y>
+      <x>1190</x>
+      <y>510</y>
+      <w>320</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>300;100;300;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1120</x>
+      <y>520</y>
+      <w>140</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>120;90;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>850</x>
+      <y>400</y>
+      <w>220</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>30;30;200;110</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>740</x>
+      <y>520</y>
+      <w>350</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>30;60;330;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>620</x>
+      <y>1130</y>
       <w>120</w>
-      <h>120</h>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>100;100;30;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>510</x>
-      <y>130</y>
-      <w>150</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>30;30;130;70</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>500</x>
-      <y>180</y>
-      <w>160</w>
-      <h>160</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>30;140;140;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>40</x>
-      <y>350</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>AndGate</panel_attributes>
+    <panel_attributes>AndGate
+--
++updateOutput()
++toString: String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>40</x>
-      <y>390</y>
-      <w>100</w>
-      <h>30</h>
+      <x>20</x>
+      <y>1050</y>
+      <w>130</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>OrGate</panel_attributes>
+    <panel_attributes>OrGate
+--
++updateOutput()
++toString: String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>40</x>
-      <y>430</y>
-      <w>100</w>
-      <h>30</h>
+      <x>20</x>
+      <y>1130</y>
+      <w>130</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>NotGate</panel_attributes>
+    <panel_attributes>NotGate
+--
++updateOutput()
++toString: String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>180</x>
-      <y>450</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>NandGate</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>290</x>
-      <y>450</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>NorGate</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>400</x>
-      <y>410</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>XorGate</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>400</x>
-      <y>370</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>NxorGate</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>110</x>
-      <y>330</y>
-      <w>100</w>
+      <y>1050</y>
+      <w>120</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>80;30;30;40</additional_attributes>
+    <panel_attributes>NandGate
+--
++updateOutput()
++toString: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>180</x>
+      <y>1130</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>NorGate
+--
++updateOutput()
++toString: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>320</x>
+      <y>1050</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>XorGate
+--
++updateOutput()
++toString: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>460</x>
+      <y>1050</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>NxorGate
+--
++updateOutput()
++toString: String</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>110</x>
-      <y>350</y>
-      <w>100</w>
-      <h>80</h>
+      <x>470</x>
+      <y>940</y>
+      <w>170</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>80;30;30;60</additional_attributes>
+    <additional_attributes>30;30;150;30;150;220</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>110</x>
-      <y>350</y>
-      <w>130</w>
-      <h>110</h>
+      <x>20</x>
+      <y>970</y>
+      <w>50</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>110;30;30;90</additional_attributes>
+    <additional_attributes>30;30;30;80</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>120</x>
+      <y>970</y>
+      <w>70</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50;30;50;30;50;170;30;170</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>200</x>
-      <y>350</y>
+      <y>970</y>
       <w>50</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;100</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>230</x>
-      <y>350</y>
-      <w>130</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;110;100</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>260</x>
-      <y>350</y>
-      <w>160</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;140;80</additional_attributes>
+    <additional_attributes>30;30;30;80</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>290</x>
-      <y>340</y>
-      <w>130</w>
-      <h>70</h>
+      <x>270</x>
+      <y>970</y>
+      <w>60</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;110;50</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>570</x>
-      <y>360</y>
-      <w>80</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Tab</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>570</x>
-      <y>430</y>
-      <w>70</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Canvas</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>780</x>
-      <y>400</y>
-      <w>90</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>ToolbarPanel</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>40;30;40;190;30;190</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>580</x>
-      <y>290</y>
-      <w>60</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;70;40;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>570</x>
-      <y>360</y>
+      <x>310</x>
+      <y>970</y>
       <w>50</w>
-      <h>90</h>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;70;30;30</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;80</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>790</x>
-      <y>290</y>
+      <x>460</x>
+      <y>970</y>
       <w>50</w>
-      <h>130</h>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;110;30;30</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;80</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>0</x>
-      <y>60</y>
-      <w>120</w>
-      <h>30</h>
+      <x>920</x>
+      <y>710</y>
+      <w>260</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>ComponentFolder</panel_attributes>
+    <panel_attributes>Tab
+--
++addTab(String name, Canvas canvas)
++getTabbedPane():JTabbedPane
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>90</x>
-      <y>50</y>
+      <x>920</x>
+      <y>800</y>
       <w>150</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;130;30</additional_attributes>
+    <panel_attributes>Canvas
+--
++getCanvas():JPanel</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>50</x>
-      <y>260</y>
-      <w>100</w>
-      <h>30</h>
+      <x>1190</x>
+      <y>710</y>
+      <w>220</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>ConstantGate</panel_attributes>
+    <panel_attributes>ToolbarPanel
+--
++setTabPanelTitle(String title)
++getCloseButton():JButton
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>70</x>
-      <y>260</y>
-      <w>170</w>
+      <x>950</x>
+      <y>660</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;50;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>950</x>
+      <y>740</y>
+      <w>50</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;60;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1200</x>
+      <y>630</y>
+      <w>50</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>150;80;30;30</additional_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;80;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>50</x>
-      <y>200</y>
-      <w>100</w>
-      <h>30</h>
+      <x>20</x>
+      <y>70</y>
+      <w>310</w>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>GateInput</panel_attributes>
+    <panel_attributes>ComponentFolder
+--
++getName():String
++getComponent(int index):AbstractCircuitGate 
++initStandardGates() 
++getAllComponents(): List&lt;AbstractCircuitGate&gt;
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>110</x>
-      <y>200</y>
-      <w>150</w>
-      <h>160</h>
+      <x>200</x>
+      <y>140</y>
+      <w>50</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;130;140</additional_attributes>
+    <additional_attributes>30;30;30;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>460</x>
+      <y>1130</y>
+      <w>120</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>GateInput
+--
++updateOutput()
++toString: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>470</x>
+      <y>960</y>
+      <w>160</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>110;190;140;190;140;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>400</x>
+      <y>970</y>
+      <w>70</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50;30;50;190;30;190</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>320</x>
+      <y>1130</y>
+      <w>110</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>ConstantGate
+--
+/#updateOutput/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>910</x>
+      <y>400</y>
+      <w>680</w>
+      <h>520</h>
+    </coordinates>
+    <panel_attributes>View
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>0</x>
+      <y>740</y>
+      <w>770</w>
+      <h>520</h>
+    </coordinates>
+    <panel_attributes>Components</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>10</x>
+      <y>600</y>
+      <w>180</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Coordinate
+--
++getX():int
++getY():int
++clone():Coordinate
+//Behöver kopplas i diagrammet</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>0</x>
+      <y>370</y>
+      <w>900</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>Model</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>390</x>
+      <y>40</y>
+      <w>750</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Controller</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>0</x>
+      <y>40</y>
+      <w>380</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>IO</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
