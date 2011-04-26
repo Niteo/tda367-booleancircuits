@@ -64,6 +64,7 @@ public final class Palette {
 				// TODO Auto-generated method stub
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) componentTree
 						.getLastSelectedPathComponent();
+
 				if (node.isLeaf()) {
 					System.out.println(node.getUserObject());
 				}
