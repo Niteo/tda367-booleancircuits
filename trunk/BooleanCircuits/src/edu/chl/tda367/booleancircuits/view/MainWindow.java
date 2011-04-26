@@ -77,6 +77,8 @@ public class MainWindow extends javax.swing.JFrame implements
 		horizontalSplitPane.setLeftComponent(palette.getView());
 		mc.newWorkspace();
 		setTitle("Boolean Circuits");
+		
+		cs.getTab().getTabbedPane().setSelectedIndex(0);
 	}
 
 	private void initToolbar() {

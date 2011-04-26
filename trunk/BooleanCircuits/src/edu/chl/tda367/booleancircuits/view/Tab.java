@@ -2,6 +2,8 @@ package edu.chl.tda367.booleancircuits.view;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Panel;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,8 @@ public final class Tab {
 	 */
 	public void addTab(String name, Canvas canvas) {
 		this.canvas = canvas;
-		tabbedPane.addTab(name, canvas.getCanvas());
+		JScrollPane scrollPane = new JScrollPane(canvas.getCanvas());
+		tabbedPane.addTab(name, scrollPane);
 		tabbedPane.setTabComponentAt(tabbedPane.getTabCount()-1 , new TabPanel(name));
 	}
 
