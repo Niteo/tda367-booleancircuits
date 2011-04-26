@@ -157,15 +157,6 @@ public class ActionController {
 			mc.selectComponent(null);
 		}
 	};
-	
-	private Action closeWorkspace = new AbstractAction("",new ImageIcon("resources/icons/cross-icon.png")) {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			//TODO: add a closeWorkspace(int i) in master contoller
-		}
-		
-	};
 
 	/**
 	 * Returns the newWorkspace action
@@ -293,14 +284,6 @@ public class ActionController {
 	 */
 	public Action getSelectComponentAction() {
 		return selectComponentAction;
-	}
-	
-	/**
-	 * Returns the closeWorkspace action.
-	 * @return Action
-	 */
-	public Action getCloseWorkspace(){
-		return closeWorkspace;
 	}
 
 }
