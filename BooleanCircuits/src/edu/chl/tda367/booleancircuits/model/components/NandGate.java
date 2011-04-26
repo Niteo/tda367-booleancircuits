@@ -16,8 +16,7 @@ public final class NandGate extends AbstractCircuitGate {
 	 *            number of inputs of the gate
 	 */
 	public NandGate(int inputs){
-		super.createInputs(inputs);
-		super.createOutputs(1);
+		super.createIO(inputs, 1);
 	}
 	
 	@Override

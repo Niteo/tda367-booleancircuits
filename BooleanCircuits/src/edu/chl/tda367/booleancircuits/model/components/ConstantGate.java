@@ -20,13 +20,17 @@ public class ConstantGate extends AbstractCircuitGate {
 	 */
 	public ConstantGate(boolean value) {
 		constant = value;
-		super.createInputs(0);
-		super.createOutputs(1);
+		super.createIO(0, 1);
 	}
 
 	@Override
 	protected void updateOutput() {
 		super.setOutput(0, constant);
+	}
+	
+	@Override
+	public String toString(){
+		return "Constant " + constant;
 	}
 
 }

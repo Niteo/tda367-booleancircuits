@@ -14,8 +14,7 @@ public final class XnorGate extends AbstractCircuitGate {
 	 * @param inputs amount of inputs for the gate
 	 */
 	public XnorGate(int inputs){
-		super.createInputs(inputs);
-		super.createOutputs(1);
+		super.createIO(inputs, 1);
 	}
 
 	@Override
