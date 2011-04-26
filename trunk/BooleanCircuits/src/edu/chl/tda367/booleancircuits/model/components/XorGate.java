@@ -11,8 +11,7 @@ public final class XorGate extends AbstractCircuitGate {
 	 * @param inputs number of inputs of the gate
 	 */
 	public XorGate(int inputs){
-		super.createOutputs(1);
-		super.createInputs(inputs);
+		super.createIO(inputs, 1);
 	}
 
 	@Override

@@ -72,6 +72,7 @@ public final class Model {
 	private void updateComponents() {
 		List<List<AbstractCircuitGate>> groupList = new LinkedList<List<AbstractCircuitGate>>();
 
+		// Sort our components in groups of update tiers.
 		int loopCount = 1;
 		boolean endOfLoop = true;
 		do{
@@ -84,7 +85,16 @@ public final class Model {
 				}
 			}
 		} while (!endOfLoop);
-		//TODO: skriv klart uppdateringsalgoritmen: testa föregående, 
 
+		// Update each tier individually
+		for(List<AbstractCircuitGate> l : groupList){
+			for(AbstractCircuitGate g : l){
+				g.update(); // Temporär, fungerar EJ med återkoppling.
+				// TODO: -Skapa nya komponenter av samma typ för varje i listan
+				//       -Koppla kopiorna på samma komponenter som originalen
+				//		 -Uppdatera kopiorna
+				//		 -Sätt de gamla komponenterna till kopiorna. gammal = ny.
+			}
+		}
 	}
 }

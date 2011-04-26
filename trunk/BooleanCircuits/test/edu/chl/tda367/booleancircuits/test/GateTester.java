@@ -4,8 +4,8 @@ import java.util.List;
 import edu.chl.tda367.booleancircuits.model.components.*;
 
 
-public final class ComponentTester {
-	private ComponentTester(){
+public final class GateTester {
+	private GateTester(){
 	}
 	
 	public static boolean testComponent(AbstractCircuitGate component,

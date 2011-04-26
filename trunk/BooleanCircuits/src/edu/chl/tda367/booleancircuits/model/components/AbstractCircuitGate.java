@@ -13,26 +13,26 @@ public abstract class AbstractCircuitGate {
 	private boolean isInTiercalculation;
 	
 	/**
-	 * Creates inputs for this component.
-	 * @param amount the amount of inputs to be created
+	 * Creates I/O for this component.
+	 * @param in the amount of inputs to be created
+	 * @param out the amount of outputs to be created
 	 */
-	protected void createInputs(int amount){
-		inputs = new ArrayList<GateInput>();
-		for(int i = 0; i < amount; i++){
-			inputs.add(new GateInput());
-		}
+	protected void createIO(int in, int out){
+		createOutputs(out);
+		createInputs(in);
 	}
 	
-	//TODO: Merge create inputs and create outputs
-	
-	/**
-	 * Creates outputs for this component.
-	 * @param amount the amount of outputs to be created
-	 */
-	protected void createOutputs(int amount){
+	private void createOutputs(int amount){
 		outputs = new Boolean[amount];
 		for(Boolean o : outputs){
 			o = false;
+		}
+	}
+	
+	private void createInputs(int amount){
+		inputs = new ArrayList<GateInput>();
+		for(int i = 0; i < amount; i++){
+			inputs.add(new GateInput());
 		}
 	}
 	
@@ -113,7 +113,6 @@ public abstract class AbstractCircuitGate {
 					}
 				}
 			}
-			
 			isInTiercalculation = false;
 			return maxTier + 1;
 		}

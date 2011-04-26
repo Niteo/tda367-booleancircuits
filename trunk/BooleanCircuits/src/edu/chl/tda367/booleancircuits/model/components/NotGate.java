@@ -9,8 +9,7 @@ import java.util.List;
  */
 public final class NotGate extends AbstractCircuitGate {
 	public NotGate() {
-		super.createInputs(1);
-		super.createOutputs(1);
+		super.createIO(1, 1);
 	}
 
 	/**
