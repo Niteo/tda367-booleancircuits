@@ -31,4 +31,9 @@ public final class XnorGate extends AbstractCircuitGate {
 
 		super.setOutput(0, nPositives != 1);
 	}
+	
+	@Override
+	public String toString(){
+		return "XNOR";
+	}
 }

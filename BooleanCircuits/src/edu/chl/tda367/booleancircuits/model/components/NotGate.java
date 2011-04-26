@@ -21,4 +21,9 @@ public final class NotGate extends AbstractCircuitGate {
 		List<GateInput> input = super.getInputs();
 		super.setOutput(0, !input.get(0).getInputValue());
 	}
+	
+	@Override
+	public String toString(){
+		return "NOT";
+	}
 }

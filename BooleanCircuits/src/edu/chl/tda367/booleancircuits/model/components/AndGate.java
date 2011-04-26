@@ -35,4 +35,10 @@ public final class AndGate extends AbstractCircuitGate {
 		}
 
 	}
+	
+	
+	@Override
+	public String toString(){
+		return "AND";
+	}
 }
