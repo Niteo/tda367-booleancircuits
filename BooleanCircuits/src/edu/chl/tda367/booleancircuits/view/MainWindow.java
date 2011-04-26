@@ -46,6 +46,7 @@ public class MainWindow extends javax.swing.JFrame implements
 				if (button ==((TabPanel) cs.getTab().getTabbedPane().getTabComponentAt(i)).getCloseButton()) {
 					cs.getTab().getTabbedPane().removeTabAt(i);
 					mc.closeWorkspace(i);
+					return;
 				}
 			}
 		}
