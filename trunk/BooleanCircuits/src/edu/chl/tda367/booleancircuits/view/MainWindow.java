@@ -17,6 +17,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JTabbedPane;
 
 import edu.chl.tda367.booleancircuits.controller.ActionController;
 import edu.chl.tda367.booleancircuits.controller.MasterController;
@@ -67,6 +68,8 @@ public class MainWindow extends javax.swing.JFrame implements
 		initMenuItemText();
 		initShortcuts();
 		toolbar.getToolbarPanel().initIcons();
+		
+		cs.getTab().getTabbedPane().setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
 		horizontalSplitPane.setRightComponent(cs.getPanel());
 		horizontalSplitPane.setLeftComponent(palette.getView());
