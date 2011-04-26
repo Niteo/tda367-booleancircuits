@@ -57,6 +57,7 @@ public final class ModelManager implements IObservable {
 	 */
 	public void closeAllWorkspaces() {
 		modelList.removeAll(modelList);
+		firePropertyChanged();
 	}
 
 	/**

@@ -42,9 +42,10 @@ public class MainWindow extends javax.swing.JFrame implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int tabCount = cs.getTab().getTabbedPane().getTabCount();
-			JButton button = (JButton)e.getSource();
+			JButton button = (JButton) e.getSource();
 			for (int i = 0; i < tabCount; i++) {
-				if (button ==((TabPanel) cs.getTab().getTabbedPane().getTabComponentAt(i)).getCloseButton()) {
+				if (button == ((TabPanel) cs.getTab().getTabbedPane()
+						.getTabComponentAt(i)).getCloseButton()) {
 					cs.getTab().getTabbedPane().removeTabAt(i);
 					mc.closeWorkspace(i);
 					return;
@@ -68,8 +69,9 @@ public class MainWindow extends javax.swing.JFrame implements
 		initMenuItemText();
 		initShortcuts();
 		toolbar.getToolbarPanel().initIcons();
-		
-		cs.getTab().getTabbedPane().setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+
+		cs.getTab().getTabbedPane()
+				.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
 		horizontalSplitPane.setRightComponent(cs.getPanel());
 		horizontalSplitPane.setLeftComponent(palette.getView());
@@ -90,6 +92,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		openFileMenuItem.setAction(actionController.getOpenWorkspaceAction());
 		closeMenuItem.setAction(actionController
 				.getCloseActiveWorkspaceAction());
+		closeAllMenuItem.setAction(actionController.getCloseAllWorkspacesAction());
 		saveMenuItem.setAction(actionController.getSaveActiveWorkspaceAction());
 		saveAsMenuItem.setAction(actionController
 				.getSaveActiveWorskpaceAsComponentAction());
@@ -165,6 +168,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		newWorkspaceMenuItem.setText("New Workspace");
 		openFileMenuItem.setText("Open File...");
 		closeMenuItem.setText("Close");
+		closeAllMenuItem.setText("Close all");
 		saveMenuItem.setText("Save");
 		saveAsMenuItem.setText("Save As...");
 		saveAllMenuItem.setText("Save All");
@@ -240,7 +244,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 	}
 
-	// GEN-BEGIN:initComponents
+	//GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
@@ -255,6 +259,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		openFileMenuItem = new javax.swing.JMenuItem();
 		fileSeparator1 = new javax.swing.JSeparator();
 		closeMenuItem = new javax.swing.JMenuItem();
+		closeAllMenuItem = new javax.swing.JMenuItem();
 		fileSeparator2 = new javax.swing.JSeparator();
 		saveMenuItem = new javax.swing.JMenuItem();
 		saveAsMenuItem = new javax.swing.JMenuItem();
@@ -318,6 +323,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		fileMenu.add(openFileMenuItem);
 		fileMenu.add(fileSeparator1);
 		fileMenu.add(closeMenuItem);
+		fileMenu.add(closeAllMenuItem);
 		fileMenu.add(fileSeparator2);
 		fileMenu.add(saveMenuItem);
 		fileMenu.add(saveAsMenuItem);
@@ -395,7 +401,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 		pack();
 	}// </editor-fold>
-		// GEN-END:initComponents
+	//GEN-END:initComponents
 
 	/**
 	 * @param args
@@ -410,12 +416,13 @@ public class MainWindow extends javax.swing.JFrame implements
 		});
 	}
 
-	// GEN-BEGIN:variables
+	//GEN-BEGIN:variables
 	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
 	private javax.swing.ButtonGroup backgroundButtonGroup;
 	private javax.swing.JMenu backgroundMenu;
 	private javax.swing.JRadioButtonMenuItem blankRadioButtonMenuItem;
+	private javax.swing.JMenuItem closeAllMenuItem;
 	private javax.swing.JMenuItem closeMenuItem;
 	private javax.swing.JMenuItem componentMenuItem;
 	private javax.swing.JMenuItem copyMenuItem;
