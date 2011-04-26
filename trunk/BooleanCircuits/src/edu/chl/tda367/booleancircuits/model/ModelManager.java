@@ -5,75 +5,108 @@ import java.util.*;
 
 /**
  * A class which manages Models as workspaces.
+ * 
  * @author Kaufmann
  */
 public final class ModelManager implements IObservable {
-	
+
 	private List<Model> modelList;
 	private Model activeWorkspace;
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	
+
 	/**
 	 * Creates an instance of ModelManager.
 	 */
-	public ModelManager(){
+	public ModelManager() {
 		modelList = new ArrayList<Model>();
 		activeWorkspace = null;
 	}
-	
+
 	/**
 	 * Creates a new workspace and makes it active.
 	 */
-	public void newWorkspace(){
+	public void newWorkspace() {
 		addWorkspace(new Model());
 		firePropertyChanged();
 	}
-	
+
 	/**
 	 * Adds a new workspace and makes it active.
-	 * @param workspace the workspace to be added
+	 * 
+	 * @param workspace
+	 *            the workspace to be added
 	 */
-	public void addWorkspace(Model workspace){
+	public void addWorkspace(Model workspace) {
 		modelList.add(workspace);
-		activeWorkspace = modelList.get(modelList.size()-1);
+		activeWorkspace = modelList.get(modelList.size() - 1);
 	}
-	
+
 	/**
 	 * Closes the active workspace.
 	 */
-	public void closeActiveWorkspace(){
-		if(activeWorkspace == null){
+	public void closeActiveWorkspace() {
+		if (activeWorkspace == null) {
 			throw new NullPointerException();
 		} else {
 			modelList.remove(activeWorkspace);
 		}
 	}
-	
+
+	/**
+	 * Closes all workspaces.
+	 */
+	public void closeAllWorkspaces() {
+		modelList.removeAll(modelList);
+	}
+
+	/**
+	 * Closes a specific workspace.
+	 * 
+	 * @param i
+	 *            int index of the workspace
+	 */
+	public void closeWorkspace(int i) {
+		modelList.remove(i);
+	}
+
+	/**
+	 * Sets the currently active workspace.
+	 * 
+	 * @param i
+	 *            int index of the workspace
+	 */
+	public void setActiveWorkspace(int i) {
+		activeWorkspace = modelList.get(i);
+	}
+
 	/**
 	 * Returns the active workspace.
+	 * 
 	 * @return the active workspace to return.
 	 */
-	public Model getActiveWorkspace(){
+	public Model getActiveWorkspace() {
 		return activeWorkspace;
 	}
-	
+
 	/**
 	 * Returns all workspaces.
+	 * 
 	 * @return list of all workspaces.
 	 */
-	public List<Model> getWorkspaces(){
+	public List<Model> getWorkspaces() {
 		return modelList;
 	}
-	
-	public void addPropertyChangeListener(PropertyChangeListener listener){
+
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
-	
-	public void removePropertyChangeListener(PropertyChangeListener listener){
+
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		pcs.removePropertyChangeListener(listener);
 	}
-	
-	private void firePropertyChanged(){
-		pcs.firePropertyChange(new PropertyChangeEvent(this, "ModelManager", 0, 1));
+
+	private void firePropertyChanged() {
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "ModelManager", 0,
+				1));
 	}
 }
