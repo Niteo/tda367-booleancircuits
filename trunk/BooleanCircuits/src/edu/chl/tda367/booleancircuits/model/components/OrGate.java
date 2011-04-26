@@ -32,4 +32,9 @@ public class OrGate extends AbstractCircuitGate {
 		}
 		super.setOutput(0, output);
 	}
+	
+	@Override
+	public String toString(){
+		return "OR";
+	}
 }

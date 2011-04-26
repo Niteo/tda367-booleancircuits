@@ -25,5 +25,10 @@ public final class NandGate extends AbstractCircuitGate {
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	public String toString(){
+		return "NAND";
+	}
 
 }
