@@ -40,7 +40,6 @@ public class ComponentFolder {
 	public ComponentFolder(List<AbstractCircuitGate> componentList, String name) {
 		this.name = name;
 		this.componentList = componentList;
-		initStandardGates();
 	}
 
 	public String getName() {
@@ -59,6 +58,7 @@ public class ComponentFolder {
 		return componentList.get(index);
 	}
 
+	// Temporary until we have a save function
 	private void initStandardGates() {
 		componentList.add(new AndGate(2));
 		componentList.add(new ConstantGate(true));
