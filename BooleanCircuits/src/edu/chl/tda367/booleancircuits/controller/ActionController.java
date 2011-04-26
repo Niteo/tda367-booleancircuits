@@ -163,7 +163,6 @@ public class ActionController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//TODO: add a closeWorkspace(int i) in master contoller
-			System.out.println("works!");
 		}
 		
 	};

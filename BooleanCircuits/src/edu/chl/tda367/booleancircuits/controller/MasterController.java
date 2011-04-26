@@ -37,6 +37,21 @@ public final class MasterController {
 	}
 	
 	/**
+	 * Closes all workspaces.
+	 */
+	public void closeAllWorkspaces(){
+		mm.closeAllWorkspaces();
+	}
+	
+	/**
+	 * Closes a specific workspace selected by int.
+	 * @param i int number of the workspace
+	 */
+	public void closeWorkspace(int i){
+		mm.closeWorkspace(i);
+	}
+	
+	/**
 	 * Creates a new blank workspace.
 	 */
 	public void newWorkspace(){
@@ -70,6 +85,14 @@ public final class MasterController {
 	 */
 	public void saveAllWorkspaces(){
 		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * Sets the currently active workspace.
+	 * @param i int index of the workspace
+	 */
+	public void setActiveWorkspace(int i){
+		mm.setActiveWorkspace(i);
 	}
 	
 	/* ##########################

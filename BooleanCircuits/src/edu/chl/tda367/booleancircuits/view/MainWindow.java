@@ -7,10 +7,16 @@
 package edu.chl.tda367.booleancircuits.view;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 import edu.chl.tda367.booleancircuits.controller.ActionController;
 import edu.chl.tda367.booleancircuits.controller.MasterController;
@@ -29,6 +35,22 @@ public class MainWindow extends javax.swing.JFrame implements
 	private CenterStage cs = new CenterStage();
 	private ActionController actionController;
 	private Palette palette = new Palette();
+	private Action closeWorkspace = new AbstractAction("", new ImageIcon(
+			"resources/icons/cross-icon.png")) {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int tabCount = cs.getTab().getTabbedPane().getTabCount();
+			JButton button = (JButton)e.getSource();
+			for (int i = 0; i < tabCount; i++) {
+				if (button ==((TabPanel) cs.getTab().getTabbedPane().getTabComponentAt(i)).getCloseButton()) {
+					cs.getTab().getTabbedPane().removeTabAt(i);
+					mc.closeWorkspace(i);
+				}
+			}
+		}
+
+	};
 
 	/** Creates new form View */
 	public MainWindow() {
@@ -200,20 +222,21 @@ public class MainWindow extends javax.swing.JFrame implements
 				java.awt.event.KeyEvent.VK_A,
 				java.awt.event.InputEvent.CTRL_MASK));
 	}
-	
-	private void updateTabs(){
+
+	private void updateTabs() {
 		List<TabPanel> tabPanelList = new LinkedList<TabPanel>();
-		for(int i=0;i<cs.getTab().getTabbedPane().getTabCount();i++){
-			tabPanelList.add((TabPanel) cs.getTab().getTabbedPane().getTabComponentAt(i));
+		for (int i = 0; i < cs.getTab().getTabbedPane().getTabCount(); i++) {
+			tabPanelList.add((TabPanel) cs.getTab().getTabbedPane()
+					.getTabComponentAt(i));
 		}
-		
-		for(TabPanel t:tabPanelList){
-			t.getCloseButton().setAction(actionController.getCloseWorkspace());
+
+		for (TabPanel t : tabPanelList) {
+			t.getCloseButton().setAction(closeWorkspace);
 		}
 
 	}
 
-	//GEN-BEGIN:initComponents
+	// GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
@@ -368,7 +391,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 		pack();
 	}// </editor-fold>
-	//GEN-END:initComponents
+		// GEN-END:initComponents
 
 	/**
 	 * @param args
@@ -383,7 +406,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		});
 	}
 
-	//GEN-BEGIN:variables
+	// GEN-BEGIN:variables
 	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
 	private javax.swing.ButtonGroup backgroundButtonGroup;
