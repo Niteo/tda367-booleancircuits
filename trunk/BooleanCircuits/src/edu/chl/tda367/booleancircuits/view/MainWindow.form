@@ -21,6 +21,8 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="closeMenuItem">
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="closeAllMenuItem">
+            </MenuItem>
             <MenuItem class="javax.swing.JSeparator" name="fileSeparator2">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="saveMenuItem">

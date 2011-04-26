@@ -41,6 +41,14 @@ public class ActionController {
 		}
 	};
 
+	private Action closeAllWorkspacesAction = new AbstractAction() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			mc.closeAllWorkspaces();
+		}
+	};
+
 	private Action openWorkspaceAction = new AbstractAction() {
 
 		@Override
@@ -159,7 +167,8 @@ public class ActionController {
 	};
 
 	/**
-	 * Returns the newWorkspace action
+	 * Returns the newWorkspace action.
+	 * 
 	 * @return Action
 	 */
 	public Action getNewWorkspaceAction() {
@@ -167,7 +176,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the closeActiveWorkspace action
+	 * Returns the closeActiveWorkspace action.
+	 * 
 	 * @return Action
 	 */
 	public Action getCloseActiveWorkspaceAction() {
@@ -175,7 +185,17 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the openWorkspace action
+	 * Returns the closeAllWorkspaces action.
+	 * 
+	 * @return Action
+	 */
+	public Action getCloseAllWorkspacesAction() {
+		return closeAllWorkspacesAction;
+	}
+
+	/**
+	 * Returns the openWorkspace action.
+	 * 
 	 * @return Action
 	 */
 	public Action getOpenWorkspaceAction() {
@@ -183,7 +203,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the saveActiveWorkspace action
+	 * Returns the saveActiveWorkspace action.
+	 * 
 	 * @return Action
 	 */
 	public Action getSaveActiveWorkspaceAction() {
@@ -191,7 +212,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the saveActiveWorkspaceAsComponent action
+	 * Returns the saveActiveWorkspaceAsComponent action.
+	 * 
 	 * @return Action
 	 */
 	public Action getSaveActiveWorskpaceAsComponentAction() {
@@ -199,7 +221,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the saveAllWorkspaces action
+	 * Returns the saveAllWorkspaces action.
+	 * 
 	 * @return Action
 	 */
 	public Action getSaveAllWorkspacesAction() {
@@ -207,7 +230,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the CopySelectedComponents action
+	 * Returns the CopySelectedComponents action.
+	 * 
 	 * @return Action
 	 */
 	public Action getCopySelectedComponentsAction() {
@@ -215,7 +239,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the cutSelectedComponents action
+	 * Returns the cutSelectedComponents action.
+	 * 
 	 * @return Action
 	 */
 	public Action getCutSelectedComponentsAction() {
@@ -223,7 +248,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the pasteSelectedComponent action
+	 * Returns the pasteSelectedComponent action.
+	 * 
 	 * @return Action
 	 */
 	public Action getPasteSelectedComponentAction() {
@@ -231,7 +257,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the undo action
+	 * Returns the undo action.
+	 * 
 	 * @return Action
 	 */
 	public Action getUndoAction() {
@@ -239,7 +266,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the redo action
+	 * Returns the redo action.
+	 * 
 	 * @return Action
 	 */
 	public Action getRedoAction() {
@@ -247,7 +275,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the exit action
+	 * Returns the exit action.
+	 * 
 	 * @return Action
 	 */
 	public Action getExitAction() {
@@ -255,7 +284,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the addComponent action
+	 * Returns the addComponent action.
+	 * 
 	 * @return Action
 	 */
 	public Action getAddComponentAction() {
@@ -263,7 +293,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the removeSelectedComponents action
+	 * Returns the removeSelectedComponents action.
+	 * 
 	 * @return Action
 	 */
 	public Action getRemoveSelectedComponentsAction() {
@@ -271,7 +302,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the selectAllComponents action
+	 * Returns the selectAllComponents action.
+	 * 
 	 * @return Action
 	 */
 	public Action getSelectAllComponentsAction() {
@@ -279,7 +311,8 @@ public class ActionController {
 	}
 
 	/**
-	 * Returns the selectComponent action
+	 * Returns the selectComponent action.
+	 * 
 	 * @return Action
 	 */
 	public Action getSelectComponentAction() {
