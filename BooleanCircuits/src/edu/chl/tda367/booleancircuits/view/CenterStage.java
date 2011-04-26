@@ -22,6 +22,7 @@ public class CenterStage {
 	/** Returns an instance of Canvas. */
 	public CenterStage() {
 		centerStagePanel.add(tabbedPane);
+		centerStagePanel.setLayout(new GridLayout(1,1));
 	}
 
 	private void newTab(String s) {
