@@ -2,8 +2,12 @@ package edu.chl.tda367.booleancircuits.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
+import javax.swing.event.MouseInputAdapter;
 
 import edu.chl.tda367.booleancircuits.model.Model;
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
@@ -18,8 +22,18 @@ public class Canvas {
 
 	private JPanel panel;
 	private Model model;
+	private MouseAdapter mouseAdapter;
 
 	public Canvas() {
+
+		mouseAdapter = new MouseInputAdapter() {
+			public Point mouseLocation;
+
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				mouseLocation = evt.getPoint();
+			}
+		};
 
 		panel = new JPanel() {
 			@Override
@@ -39,6 +53,7 @@ public class Canvas {
 			}
 		};
 		panel.setBackground(Color.WHITE);
+		panel.addMouseListener(mouseAdapter);
 	}
 
 	/**
@@ -50,6 +65,11 @@ public class Canvas {
 		return panel;
 	}
 
+	/**
+	 * sets the model which the canvas is currently representing
+	 * 
+	 * @param model
+	 */
 	public void setModel(Model model) {
 		this.model = model;
 	}
