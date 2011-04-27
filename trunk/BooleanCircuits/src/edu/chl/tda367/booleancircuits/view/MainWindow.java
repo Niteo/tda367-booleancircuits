@@ -33,7 +33,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 	private MasterController mc;
 	private Toolbar toolbar = new Toolbar();
-	private CenterStage cs = new CenterStage();
+	private CenterStage cs;
 	private ActionController actionController;
 	private Palette palette = new Palette();
 	private Action closeWorkspace = new AbstractAction("", new ImageIcon(
@@ -46,7 +46,6 @@ public class MainWindow extends javax.swing.JFrame implements
 			for (int i = 0; i < tabCount; i++) {
 				if (button == ((TabPanel) cs.getTab().getTabbedPane()
 						.getTabComponentAt(i)).getCloseButton()) {
-					cs.getTab().getTabbedPane().removeTabAt(i);
 					mc.closeWorkspace(i);
 					return;
 				}
@@ -61,6 +60,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		mm.addPropertyChangeListener(this);
 		mc = new MasterController(mm);
 		actionController = new ActionController(mc);
+		cs = new CenterStage(closeWorkspace);
 
 		initComponents();
 		initToolbar();
@@ -228,19 +228,6 @@ public class MainWindow extends javax.swing.JFrame implements
 		selectAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_A,
 				java.awt.event.InputEvent.CTRL_MASK));
-	}
-
-	private void updateTabs() {
-		List<TabPanel> tabPanelList = new LinkedList<TabPanel>();
-		for (int i = 0; i < cs.getTab().getTabbedPane().getTabCount(); i++) {
-			tabPanelList.add((TabPanel) cs.getTab().getTabbedPane()
-					.getTabComponentAt(i));
-		}
-
-		for (TabPanel t : tabPanelList) {
-			t.getCloseButton().setAction(closeWorkspace);
-		}
-
 	}
 
 	private void initTabbedPane() {
@@ -472,7 +459,6 @@ public class MainWindow extends javax.swing.JFrame implements
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getSource() instanceof ModelManager) {
 			cs.update((ModelManager) evt.getSource());
-			updateTabs();
 		}
 
 	}
