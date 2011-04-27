@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * A class to control action events.
@@ -11,7 +14,7 @@ import javax.swing.ImageIcon;
  * @author Boel
  * 
  */
-public class ActionController {
+public class ActionController implements ChangeListener {
 
 	private MasterController mc;
 
@@ -317,6 +320,19 @@ public class ActionController {
 	 */
 	public Action getSelectComponentAction() {
 		return selectComponentAction;
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
+		int selectedIndex = tabbedPane.getSelectedIndex();
+
+		if (selectedIndex < 0) {
+			return;
+		} else {
+			mc.setActiveWorkspace(selectedIndex);
+		}
+
 	}
 
 }

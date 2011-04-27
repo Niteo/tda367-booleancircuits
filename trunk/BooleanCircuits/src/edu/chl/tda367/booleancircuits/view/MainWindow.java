@@ -70,15 +70,11 @@ public class MainWindow extends javax.swing.JFrame implements
 		initShortcuts();
 		toolbar.getToolbarPanel().initIcons();
 
-		cs.getTab().getTabbedPane()
-				.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-
 		horizontalSplitPane.setRightComponent(cs.getPanel());
 		horizontalSplitPane.setLeftComponent(palette.getView());
 		mc.newWorkspace();
+		initTabbedPane();
 		setTitle("Boolean Circuits");
-		
-		cs.getTab().getTabbedPane().setSelectedIndex(0);
 	}
 
 	private void initToolbar() {
@@ -94,7 +90,8 @@ public class MainWindow extends javax.swing.JFrame implements
 		openFileMenuItem.setAction(actionController.getOpenWorkspaceAction());
 		closeMenuItem.setAction(actionController
 				.getCloseActiveWorkspaceAction());
-		closeAllMenuItem.setAction(actionController.getCloseAllWorkspacesAction());
+		closeAllMenuItem.setAction(actionController
+				.getCloseAllWorkspacesAction());
 		saveMenuItem.setAction(actionController.getSaveActiveWorkspaceAction());
 		saveAsMenuItem.setAction(actionController
 				.getSaveActiveWorskpaceAsComponentAction());
@@ -246,7 +243,14 @@ public class MainWindow extends javax.swing.JFrame implements
 
 	}
 
-	//GEN-BEGIN:initComponents
+	private void initTabbedPane() {
+		cs.getTab().getTabbedPane()
+				.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		cs.getTab().getTabbedPane().setSelectedIndex(0);
+		cs.getTab().getTabbedPane().addChangeListener(actionController);
+	}
+
+	// GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
@@ -403,7 +407,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 		pack();
 	}// </editor-fold>
-	//GEN-END:initComponents
+		// GEN-END:initComponents
 
 	/**
 	 * @param args
@@ -418,7 +422,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		});
 	}
 
-	//GEN-BEGIN:variables
+	// GEN-BEGIN:variables
 	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
 	private javax.swing.ButtonGroup backgroundButtonGroup;
