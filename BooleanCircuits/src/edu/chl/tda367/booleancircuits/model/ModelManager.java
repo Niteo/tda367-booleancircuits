@@ -12,7 +12,7 @@ public final class ModelManager implements IObservable {
 
 	private List<Model> modelList;
 	private int selectedIndex;
-	private static int workspaceCount=1;
+	private static int workspaceCount = 1;
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	/**
@@ -27,9 +27,7 @@ public final class ModelManager implements IObservable {
 	 * Creates a new workspace and makes it active.
 	 */
 	public void newWorkspace() {
-		addWorkspace(new Model("Untitled "+workspaceCount));
-		workspaceCount++;
-		_setActiveWorkspace(modelList.size() - 1);
+		addWorkspace(new Model("Untitled " + workspaceCount));
 	}
 
 	/**
@@ -40,7 +38,8 @@ public final class ModelManager implements IObservable {
 	 */
 	public void addWorkspace(Model workspace) {
 		modelList.add(workspace);
-		selectedIndex = modelList.size() - 1;
+		_setActiveWorkspace(modelList.size() - 1);
+		workspaceCount++;
 	}
 
 	/**
@@ -50,8 +49,7 @@ public final class ModelManager implements IObservable {
 		if (selectedIndex == -1) {
 			throw new IllegalArgumentException();
 		} else {
-			modelList.remove(selectedIndex);
-			firePropertyChanged();
+			removeModel(selectedIndex);
 		}
 	}
 
@@ -71,6 +69,7 @@ public final class ModelManager implements IObservable {
 	 */
 	public void closeWorkspace(int i) {
 		modelList.remove(i);
+
 		firePropertyChanged();
 	}
 
@@ -127,5 +126,20 @@ public final class ModelManager implements IObservable {
 	private void _setActiveWorkspace(int i) {
 		selectedIndex = i;
 		firePropertyChanged();
+	}
+
+	private void removeModel(int i) {
+		if (i < 0 || i >= modelList.size()) {
+			throw new IllegalArgumentException(
+					"Index can't be less than zero or bigger than modelList");
+		} else {
+			modelList.remove(i);
+			if(modelList.size()==0){
+				selectedIndex=-1;
+			}
+			else if(selectedIndex>=modelList.size()){
+				selectedIndex=modelList.size()-1;
+			}
+		}
 	}
 }
