@@ -1,11 +1,9 @@
 package edu.chl.tda367.booleancircuits.view;
 
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
-import javax.swing.*;
-
-import edu.chl.tda367.booleancircuits.model.ModelManager;
+import javax.swing.JPanel;
 
 /**
  * A class where the components are drawn.
@@ -15,14 +13,26 @@ import edu.chl.tda367.booleancircuits.model.ModelManager;
  */
 public class Canvas {
 
-	private JPanel panel = new JPanel() {
-		@Override
-		public void paint(Graphics g) {
-			// TODO implement paint
-		}
-	};
+	private int x;
+	private int y;
 
+	private JPanel panel;
 
+	public Canvas() {
+
+		panel = new JPanel() {
+			@Override
+			public void paint(Graphics g) {
+				// TODO implement paint
+				g.setColor(Color.BLACK);
+				g.drawRect(x, y, 60, 50);
+				g.drawString("Yo", x, y);
+			}
+		};
+
+		panel.setBackground(Color.WHITE);
+
+	}
 
 	/**
 	 * Returns the canvas.
@@ -33,4 +43,18 @@ public class Canvas {
 		return panel;
 	}
 
+	/**
+	 * updates canvas.
+	 * 
+	 * @param x
+	 *            , X-coordinate for mouse location
+	 * @param y
+	 *            , Y-coordinate for mouse location
+	 */
+	public void update(int x, int y) {
+		this.x = x;
+		this.y = y;
+
+		panel.repaint();
+	}
 }
