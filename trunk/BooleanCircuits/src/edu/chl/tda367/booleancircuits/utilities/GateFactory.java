@@ -5,7 +5,11 @@ import edu.chl.tda367.booleancircuits.model.components.*;
 public final class GateFactory {
 
 	public static enum Components {
-		AND, NOT, NAND, OR, NOR, CONSTANTGATE, XOR, XNOR
+		AND, NAND, OR, NOR, XOR, XNOR
+	}
+
+	public static enum PredefinedComponents {
+		NOT, CONSTANTGATE
 	}
 
 	private GateFactory() {
@@ -35,27 +39,37 @@ public final class GateFactory {
 		return newComponent;
 	}
 
-	public static AbstractCircuitGate getNewComponent(Components component) {
-
+	public static AbstractCircuitGate getNewComponent(
+			PredefinedComponents component) {
 		switch (component) {
-		case AND:
-			return new AndGate(2);
 		case NOT:
 			return new NotGate();
-		case NAND:
-			return new NandGate(2);
-		case OR:
-			return new OrGate(2);
-		case NOR:
-			return new NorGate(2);
 		case CONSTANTGATE:
 			return new ConstantGate(false);
-		case XOR:
-			return new XorGate(2);
-		case XNOR:
-			return new XnorGate(2);
 		default:
-			System.out.println("It's not a component!");
+			System.out.println("That's not a component!");
+
+		}
+		return null;
+	}
+
+	public static AbstractCircuitGate getNewComponent(Components component,
+			int noOfInputs) {
+		switch (component) {
+		case AND:
+			return new AndGate(noOfInputs);
+		case NAND:
+			return new NandGate(noOfInputs);
+		case OR:
+			return new OrGate(noOfInputs);
+		case NOR:
+			return new NorGate(noOfInputs);
+		case XOR:
+			return new XorGate(noOfInputs);
+		case XNOR:
+			return new XnorGate(noOfInputs);
+		default:
+			System.out.println("That's not a component!");
 
 		}
 
