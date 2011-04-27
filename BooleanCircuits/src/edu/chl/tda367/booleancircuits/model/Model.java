@@ -41,6 +41,21 @@ public final class Model {
 	 */
 	public List<AbstractCircuitGate> getSelectedComponents() {
 		return selectedComponentList;
+	/*	for(int i = 0; i<=selectedComponentList.size();i++){
+			List<AbstractCircuitGate> selectedList = new ArrayList<AbstractCircuitGate>();
+			selectedList = ((List<AbstractCircuitGate>) selectedComponentList).
+			
+		}
+		return null;*/
+		//TODO: clone selectedComponentList
+	}
+	/**
+	 * Returns a reference to the list of components
+	 * @return a reference to the list of components
+	 */
+	public List<AbstractCircuitGate> getComponents() {
+		return componentList;
+		//TODO: clone componentList
 	}
 
 	/**
