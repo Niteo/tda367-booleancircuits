@@ -41,14 +41,7 @@ public final class AndGate extends AbstractCircuitGate {
 	}
 
 	@Override
-	public AndGate clone() {
-		AndGate gate = new AndGate(this.getNoOfInputs());
-		gate.setOutput(0, this.getOutputValue(0));
-		int port = 0;
-		for(GateInput gi : this.getInputs()){
-			gate.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
-		}
-		
-		return gate;
+	protected AbstractCircuitGate emptyGateClone() {
+		return new AndGate(getNoOfInputs());
 	}
 }

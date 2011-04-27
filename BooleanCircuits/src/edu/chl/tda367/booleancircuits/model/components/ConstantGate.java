@@ -32,11 +32,9 @@ public class ConstantGate extends AbstractCircuitGate {
 	public String toString(){
 		return "Constant " + (constant ? 1 : 0);
 	}
-
+	
 	@Override
-	public AbstractCircuitGate clone() {
-		// TODO Auto-generated method stub
-		return null;
+	protected AbstractCircuitGate emptyGateClone() {
+		return new ConstantGate(constant);
 	}
-
 }

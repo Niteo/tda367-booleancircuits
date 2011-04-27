@@ -31,17 +31,9 @@ public final class NorGate extends AbstractCircuitGate {
 	public String toString(){
 		return "NOR";
 	}
-
+	
 	@Override
-	public AbstractCircuitGate clone() {
-		NorGate gate = new NorGate(this.getNoOfInputs());
-		gate.setOutput(0, this.getOutputValue(0));
-		int port = 0;
-		for(GateInput gi : this.getInputs()){
-			gate.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
-		}
-		
-		return gate;
+	protected AbstractCircuitGate emptyGateClone() {
+		return new NorGate(getNoOfInputs());
 	}
-
 }
