@@ -2,6 +2,7 @@ package edu.chl.tda367.booleancircuits.model.components;
 
 import java.util.*;
 import edu.chl.tda367.booleancircuits.model.*;
+import edu.chl.tda367.booleancircuits.utilities.GateFactory;
 
 /**
  * Abstract class representing an abstract circuit component.
@@ -165,7 +166,28 @@ public abstract class AbstractCircuitGate {
 	/**
 	 * Returns a copy of the gate.
 	 */
-	public abstract AbstractCircuitGate clone();
+	public AbstractCircuitGate clone(){
+		AbstractCircuitGate c = emptyGateClone();
+		
+		for(int i = 0; i < this.outputs.length; i++){
+			c.setOutput(i, outputs[i]);	
+		}
+		
+		int port = 0;
+		for(GateInput gi : this.getInputs()){
+			c.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
+		}
+		
+		c.coordinate = coordinate.clone();
+		
+		return c;
+	}
+	
+	/**
+	 * Template-method for returning a gate of the used type.
+	 * @return a gate of the used type
+	 */
+	protected abstract AbstractCircuitGate emptyGateClone();
 	
 	/**
 	 * Returns the name of the gate.

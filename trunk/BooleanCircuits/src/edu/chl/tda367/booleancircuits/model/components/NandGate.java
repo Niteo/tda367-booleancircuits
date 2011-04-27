@@ -37,16 +37,9 @@ public final class NandGate extends AbstractCircuitGate {
 	public String toString(){
 		return "NAND";
 	}
-
+	
 	@Override
-	public AbstractCircuitGate clone() {
-		NandGate gate = new NandGate(this.getNoOfInputs());
-		gate.setOutput(0, this.getOutputValue(0));
-		int port = 0;
-		for(GateInput gi : this.getInputs()){
-			gate.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
-		}
-		
-		return gate;
+	protected AbstractCircuitGate emptyGateClone() {
+		return new NandGate(getNoOfInputs());
 	}
 }
