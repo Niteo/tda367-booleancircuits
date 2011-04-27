@@ -24,8 +24,8 @@ public abstract class AbstractCircuitGate {
 	
 	private void createOutputs(int amount){
 		outputs = new Boolean[amount];
-		for(Boolean o : outputs){
-			o = false;
+		for(int i = 0; i < outputs.length; i++){
+			outputs[i] = false;
 		}
 	}
 	
@@ -43,6 +43,16 @@ public abstract class AbstractCircuitGate {
 	 */
 	protected void setOutput(int index, boolean value){
 		outputs[index] = value;
+	}
+	
+	/**
+	 * Overwrites gate with another one, copying all properties.
+	 * @param gate the gate to override with
+	 */
+	public void overwriteGate(AbstractCircuitGate gate){
+		this.inputs = gate.inputs;
+		this.isInTiercalculation = gate.isInTiercalculation;
+		this.outputs = gate.outputs;
 	}
 	
 	/**
@@ -122,4 +132,14 @@ public abstract class AbstractCircuitGate {
 	 * Template-method for updating outputs of the component.
 	 */
 	protected abstract void updateOutput();
+	
+	/**
+	 * Returns a copy of the gate.
+	 */
+	public abstract AbstractCircuitGate clone();
+	
+	/**
+	 * Returns the name of the gate.
+	 */
+	public abstract String toString();
 }
