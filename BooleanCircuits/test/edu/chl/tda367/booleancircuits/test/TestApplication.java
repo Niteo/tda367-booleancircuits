@@ -2,6 +2,7 @@ package edu.chl.tda367.booleancircuits.test;
 import edu.chl.tda367.booleancircuits.model.Model;
 import edu.chl.tda367.booleancircuits.model.components.*;
 import edu.chl.tda367.booleancircuits.utilities.GateFactory;
+import edu.chl.tda367.booleancircuits.utilities.GateFactory.Components;
 
 
 public class TestApplication {
@@ -11,7 +12,7 @@ public class TestApplication {
 		
 		AbstractCircuitGate not = new NotGate();
 		
-		System.out.println(GateFactoryTester.testGetnewComponent(not));
+		System.out.println(GateFactoryTester.testGetnewComponent(Components.AND));
 		
 		
 	}
