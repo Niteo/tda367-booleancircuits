@@ -26,6 +26,14 @@ public final class GateInput {
 	}
 	
 	/**
+	 * Returns the port connected to.
+	 * @return the connected port
+	 */
+	public int getInputPort(){
+		return inputComponentPort;
+	}
+	
+	/**
 	 * Connects a gate to a port.
 	 * @param component the gate to connect
 	 * @param port the port to connect to

@@ -35,4 +35,16 @@ public final class XnorGate extends AbstractCircuitGate {
 	public String toString(){
 		return "XNOR";
 	}
+
+	@Override
+	public AbstractCircuitGate clone() {
+		XnorGate gate = new XnorGate(this.getNoOfInputs());
+		gate.setOutput(0, this.getOutputValue(0));
+		int port = 0;
+		for(GateInput gi : this.getInputs()){
+			gate.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
+		}
+		
+		return gate;
+	}
 }

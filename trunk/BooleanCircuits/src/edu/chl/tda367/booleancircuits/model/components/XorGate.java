@@ -31,4 +31,16 @@ public final class XorGate extends AbstractCircuitGate {
 	public String toString(){
 		return "XOR";
 	}
+
+	@Override
+	public AbstractCircuitGate clone() {
+		XorGate gate = new XorGate(this.getNoOfInputs());
+		gate.setOutput(0, this.getOutputValue(0));
+		int port = 0;
+		for(GateInput gi : this.getInputs()){
+			gate.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
+		}
+		
+		return gate;
+	}
 }

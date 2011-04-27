@@ -25,4 +25,14 @@ public final class NotGate extends AbstractCircuitGate {
 	public String toString(){
 		return "NOT";
 	}
+
+	@Override
+	public AbstractCircuitGate clone() {
+		NotGate gate = new NotGate();
+		gate.setOutput(0, this.getOutputValue(0));
+		gate.connectInput(0,
+				getInputs().get(0).getInputComponent(),
+				getInputs().get(0).getInputPort());
+		return gate;
+	}
 }

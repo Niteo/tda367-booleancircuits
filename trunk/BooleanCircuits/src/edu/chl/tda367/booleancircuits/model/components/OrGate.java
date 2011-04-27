@@ -36,4 +36,16 @@ public class OrGate extends AbstractCircuitGate {
 	public String toString(){
 		return "OR";
 	}
+
+	@Override
+	public AbstractCircuitGate clone() {
+		OrGate gate = new OrGate(this.getNoOfInputs());
+		gate.setOutput(0, this.getOutputValue(0));
+		int port = 0;
+		for(GateInput gi : this.getInputs()){
+			gate.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
+		}
+		
+		return gate;
+	}
 }

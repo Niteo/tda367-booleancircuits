@@ -9,15 +9,18 @@ import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
  */
 public final class Model {
 
+	private String name;
 	private final List<AbstractCircuitGate> componentList;
 	private final List<AbstractCircuitGate> selectedComponentList;
 
 	/**
 	 * Returns an instance of Model
+	 * @param name the name of the model
 	 */
-	public Model() {
+	public Model(String name) {
 		componentList = new ArrayList<AbstractCircuitGate>();
 		selectedComponentList = new ArrayList<AbstractCircuitGate>();
+		this.name = name;
 	}
 
 	/**
@@ -88,13 +91,24 @@ public final class Model {
 
 		// Update each tier individually
 		for(List<AbstractCircuitGate> l : groupList){
+			List<AbstractCircuitGate> cloneList = new ArrayList<AbstractCircuitGate>();
 			for(AbstractCircuitGate g : l){
-				g.update(); // Temporär, fungerar EJ med återkoppling.
-				// TODO: -Skapa nya komponenter av samma typ för varje i listan
-				//       -Koppla kopiorna på samma komponenter som originalen
-				//		 -Uppdatera kopiorna
-				//		 -Sätt de gamla komponenterna till kopiorna. gammal = ny.
+				AbstractCircuitGate temp = g.clone();
+				temp.update();
+				cloneList.add(temp);
+			}
+			
+			for(int i = 0; i < cloneList.size(); i++){
+				l.get(i).overwriteGate(cloneList.get(i));
 			}
 		}
+	}
+	
+	/**
+	 * Returns the name of the workspace
+	 */
+	@Override
+	public String toString(){
+		return name;
 	}
 }
