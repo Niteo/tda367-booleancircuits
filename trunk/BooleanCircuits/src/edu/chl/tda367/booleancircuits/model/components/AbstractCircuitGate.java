@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.model.components;
 
 import java.util.*;
+import edu.chl.tda367.booleancircuits.model.*;
 
 /**
  * Abstract class representing an abstract circuit component.
@@ -11,6 +12,7 @@ public abstract class AbstractCircuitGate {
 	private List<GateInput> inputs;
 	private Boolean[] outputs;
 	private boolean isInTiercalculation;
+	private Coordinate coordinate;
 	
 	/**
 	 * Creates I/O for this component.
@@ -126,6 +128,33 @@ public abstract class AbstractCircuitGate {
 			isInTiercalculation = false;
 			return maxTier + 1;
 		}
+	}
+	
+	/**
+	 * Gets the position of the gate
+	 * @return a reference to the position of the gate
+	 */
+	public Coordinate getPosition(){
+		return this.coordinate;
+	}
+	
+	/**
+	 * Sets the position of the gate
+	 * @param coordinates of the gate
+	 */
+	public void setPosition(Coordinate coordinate){
+		this.coordinate.x = coordinate.x;
+		this.coordinate.y = coordinate.y;
+	}
+	
+	/**
+	 * updates the position of the gate
+	 * @param deltaX: the difference in the x-axis between the current position and the old position
+	 * @param deltaY: the difference in the y-axis between the current position and the old position
+	 */
+	public void move(int deltaX, int deltaY){
+		this.coordinate.x += deltaX;
+		this.coordinate.y += deltaY;
 	}
 	
 	/**
