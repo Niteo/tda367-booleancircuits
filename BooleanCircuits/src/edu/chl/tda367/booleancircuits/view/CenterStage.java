@@ -39,7 +39,9 @@ public class CenterStage {
 		for (Model model : modelManager.getWorkspaces()) {
 			newTab(model.toString());
 		}
-		tabbedPane.setSelectedIndex(selected);
+		if(modelManager.getWorkspaces().size()>0){
+			tabbedPane.setSelectedIndex(selected);
+		}
 		tabbedPane.repaint();
 		tabbedPane.revalidate();
 	}
