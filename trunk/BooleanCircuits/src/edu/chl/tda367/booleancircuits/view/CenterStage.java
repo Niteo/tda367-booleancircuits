@@ -1,7 +1,9 @@
 package edu.chl.tda367.booleancircuits.view;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.GridLayout;
+
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 import edu.chl.tda367.booleancircuits.model.Model;
 import edu.chl.tda367.booleancircuits.model.ModelManager;
@@ -22,24 +24,25 @@ public class CenterStage {
 	/** Returns an instance of Canvas. */
 	public CenterStage() {
 		centerStagePanel.add(tabbedPane);
-		centerStagePanel.setLayout(new GridLayout(1,1));
+		centerStagePanel.setLayout(new GridLayout(1, 1));
 	}
 
-	private void newTab(String s) {
-		tab.addTab(s, new Canvas());
+	private void newTab(String s, Model model) {
+		tab.addTab(s, new Canvas(model));
 	}
 
 	/**
 	 * Updates the view by repainting the workspace.
+	 * 
 	 * @param modelManager
 	 */
 	public void update(ModelManager modelManager) {
 		int selected = modelManager.getActiveWorkspaceIndex();
 		tabbedPane.removeAll();
 		for (Model model : modelManager.getWorkspaces()) {
-			newTab(model.toString());
+			newTab(model.toString(), model);
 		}
-		if(modelManager.getWorkspaces().size()>0){
+		if (modelManager.getWorkspaces().size() > 0) {
 			tabbedPane.setSelectedIndex(selected);
 		}
 		tabbedPane.repaint();
@@ -54,9 +57,10 @@ public class CenterStage {
 	public JPanel getPanel() {
 		return centerStagePanel;
 	}
-	
+
 	/**
 	 * Returns the tab.
+	 * 
 	 * @return Tab
 	 */
 	public Tab getTab() {

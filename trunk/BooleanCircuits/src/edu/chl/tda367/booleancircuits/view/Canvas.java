@@ -5,33 +5,30 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import edu.chl.tda367.booleancircuits.model.Model;
+
 /**
  * A class where the components are drawn.
  * 
- * @author Boel
+ * @author Boel, Anton
  * 
  */
 public class Canvas {
 
-	private int x;
-	private int y;
-
 	private JPanel panel;
+	private Model model;
 
-	public Canvas() {
+	public Canvas(Model model) {
 
 		panel = new JPanel() {
 			@Override
 			public void paint(Graphics g) {
 				// TODO implement paint
-				g.setColor(Color.BLACK);
-				g.drawRect(x, y, 60, 50);
-				g.drawString("Yo", x, y);
 			}
 		};
-
 		panel.setBackground(Color.WHITE);
 
+		this.model = model;
 	}
 
 	/**
@@ -41,20 +38,5 @@ public class Canvas {
 	 */
 	public JPanel getCanvas() {
 		return panel;
-	}
-
-	/**
-	 * updates canvas.
-	 * 
-	 * @param x
-	 *            , X-coordinate for mouse location
-	 * @param y
-	 *            , Y-coordinate for mouse location
-	 */
-	public void update(int x, int y) {
-		this.x = x;
-		this.y = y;
-
-		panel.repaint();
 	}
 }
