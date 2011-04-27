@@ -28,9 +28,8 @@ public final class ModelManager implements IObservable {
 	 */
 	public void newWorkspace() {
 		addWorkspace(new Model("Untitled "+workspaceCount));
-		_setActiveWorkspace(modelList.size() - 1);
-		firePropertyChanged();
 		workspaceCount++;
+		_setActiveWorkspace(modelList.size() - 1);
 	}
 
 	/**
@@ -52,6 +51,7 @@ public final class ModelManager implements IObservable {
 			throw new IllegalArgumentException();
 		} else {
 			modelList.remove(selectedIndex);
+			firePropertyChanged();
 		}
 	}
 
@@ -71,6 +71,7 @@ public final class ModelManager implements IObservable {
 	 */
 	public void closeWorkspace(int i) {
 		modelList.remove(i);
+		firePropertyChanged();
 	}
 
 	/**
@@ -80,7 +81,7 @@ public final class ModelManager implements IObservable {
 	 *            int index of the workspace
 	 */
 	public void setActiveWorkspace(int i) {
-		selectedIndex = i;
+		_setActiveWorkspace(i);
 	}
 
 	/**
@@ -125,5 +126,6 @@ public final class ModelManager implements IObservable {
 
 	private void _setActiveWorkspace(int i) {
 		selectedIndex = i;
+		firePropertyChanged();
 	}
 }

@@ -10,7 +10,6 @@ import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 public final class Model {
 
 	private String name;
-	private int id;
 	private final List<AbstractCircuitGate> componentList;
 	private final List<AbstractCircuitGate> selectedComponentList;
 
@@ -20,11 +19,10 @@ public final class Model {
 	 * @param name
 	 *            the name of the model
 	 */
-	public Model(String name, int id) {
+	public Model(String name) {
 		componentList = new ArrayList<AbstractCircuitGate>();
 		selectedComponentList = new ArrayList<AbstractCircuitGate>();
 		this.name = name;
-		this.id = id;
 	}
 
 	/**
