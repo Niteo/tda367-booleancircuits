@@ -3,12 +3,12 @@ package edu.chl.tda367.booleancircuits.model;
 import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.utilities.GateFactory;
 
 /**
  * Model for managing and updating circuit components.
  */
 public final class Model {
-
 	private String name;
 	private final List<AbstractCircuitGate> componentList;
 	private final List<AbstractCircuitGate> selectedComponentList;
@@ -28,12 +28,13 @@ public final class Model {
 	/**
 	 * Adds a component to the model.
 	 * 
-	 * @param the
-	 *            new component to add
+	 * @param component the new component to add
+	 * @param 
 	 */
-	public void addComponent(AbstractCircuitGate component) {
-		componentList.add(component);
-		// TODO: Add a copy instead of the reference(!!)
+	public void addComponent(AbstractCircuitGate component, Coordinate coord) {
+		AbstractCircuitGate c = GateFactory.getNewComponent(component);
+		c.setPosition(coord);
+		componentList.add(c);
 	}
 
 	/**
@@ -42,26 +43,28 @@ public final class Model {
 	 * @return a list of selected components
 	 */
 	public List<AbstractCircuitGate> getSelectedComponents() {
-		return selectedComponentList;
-		/*
-		 * for(int i = 0; i<=selectedComponentList.size();i++){
-		 * List<AbstractCircuitGate> selectedList = new
-		 * ArrayList<AbstractCircuitGate>(); selectedList =
-		 * ((List<AbstractCircuitGate>) selectedComponentList).
-		 * 
-		 * } return null;
-		 */
-		// TODO: clone selectedComponentList
+		List<AbstractCircuitGate> retList =
+			new ArrayList<AbstractCircuitGate>();
+		for(AbstractCircuitGate cg : selectedComponentList){
+			retList.add(cg.clone());
+		}
+		
+		return retList;
 	}
 
 	/**
-	 * Returns a reference to the list of components
+	 * Returns a list of components
 	 * 
-	 * @return a reference to the list of components
+	 * @return a list of components
 	 */
 	public List<AbstractCircuitGate> getComponents() {
-		return componentList;
-		// TODO: clone componentList
+		List<AbstractCircuitGate> retList =
+			new ArrayList<AbstractCircuitGate>();
+		for(AbstractCircuitGate cg : componentList){
+			retList.add(cg.clone());
+		}
+		
+		return retList;
 	}
 
 	/**
