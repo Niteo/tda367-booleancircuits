@@ -11,7 +11,8 @@ import java.util.*;
 public final class ModelManager implements IObservable {
 
 	private List<Model> modelList;
-	private Model activeWorkspace;
+	private int selectedIndex;
+	private static int workspaceCount=1;
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	/**
@@ -19,15 +20,17 @@ public final class ModelManager implements IObservable {
 	 */
 	public ModelManager() {
 		modelList = new ArrayList<Model>();
-		activeWorkspace = null;
+		selectedIndex = -1;
 	}
 
 	/**
 	 * Creates a new workspace and makes it active.
 	 */
 	public void newWorkspace() {
-		addWorkspace(new Model());
+		addWorkspace(new Model("Untitled "+workspaceCount));
+		_setActiveWorkspace(modelList.size() - 1);
 		firePropertyChanged();
+		workspaceCount++;
 	}
 
 	/**
@@ -38,17 +41,17 @@ public final class ModelManager implements IObservable {
 	 */
 	public void addWorkspace(Model workspace) {
 		modelList.add(workspace);
-		activeWorkspace = modelList.get(modelList.size() - 1);
+		selectedIndex = modelList.size() - 1;
 	}
 
 	/**
 	 * Closes the active workspace.
 	 */
 	public void closeActiveWorkspace() {
-		if (activeWorkspace == null) {
-			throw new NullPointerException();
+		if (selectedIndex == -1) {
+			throw new IllegalArgumentException();
 		} else {
-			modelList.remove(activeWorkspace);
+			modelList.remove(selectedIndex);
 		}
 	}
 
@@ -77,16 +80,25 @@ public final class ModelManager implements IObservable {
 	 *            int index of the workspace
 	 */
 	public void setActiveWorkspace(int i) {
-		activeWorkspace = modelList.get(i);
+		selectedIndex = i;
 	}
 
 	/**
-	 * Returns the active workspace.
+	 * Returns the index of the active workspace.
 	 * 
-	 * @return the active workspace to return.
+	 * @return int index of the workspace
 	 */
-	public Model getActiveWorkspace() {
-		return activeWorkspace;
+	public int getActiveWorkspaceIndex() {
+		return selectedIndex;
+	}
+
+	/**
+	 * Returns the active workspace model.
+	 * 
+	 * @return Model the active workspace to return.
+	 */
+	public Model getActiveWorkspaceModel() {
+		return modelList.get(selectedIndex);
 	}
 
 	/**
@@ -109,5 +121,9 @@ public final class ModelManager implements IObservable {
 	private void firePropertyChanged() {
 		pcs.firePropertyChange(new PropertyChangeEvent(this, "ModelManager", 0,
 				1));
+	}
+
+	private void _setActiveWorkspace(int i) {
+		selectedIndex = i;
 	}
 }

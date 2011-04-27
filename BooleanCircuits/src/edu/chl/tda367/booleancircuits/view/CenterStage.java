@@ -34,7 +34,7 @@ public class CenterStage {
 	 * @param modelManager
 	 */
 	public void update(ModelManager modelManager) {
-		int selected = tabbedPane.getSelectedIndex();
+		int selected = modelManager.getActiveWorkspaceIndex();
 		tabbedPane.removeAll();
 		for (Model model : modelManager.getWorkspaces()) {
 			newTab(model.toString());
