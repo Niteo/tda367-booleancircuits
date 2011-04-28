@@ -1,5 +1,7 @@
 package edu.chl.tda367.booleancircuits.view;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public final class Palette {
 	// Just for Test
 	private List<String> folderTestList;
 	private JTree componentTree;
+	private AbstractCircuitGate selectedComponent;
 
 	// Testkonstruktor
 	public Palette() {
@@ -66,16 +69,29 @@ public final class Palette {
 						.getLastSelectedPathComponent();
 
 				if (node.isLeaf()) {
+					// System.out.println(node.getUserObject());
+				}
+			}
+		};
+
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				DefaultMutableTreeNode node = (DefaultMutableTreeNode) componentTree
+						.getLastSelectedPathComponent();
+				if (evt.getClickCount() == 2) {
+					if (!node.isLeaf())
+						selectedComponent = null;
 					System.out.println(node.getUserObject());
 				}
 			}
 		};
 		componentTree.addTreeSelectionListener(tsl);
-
+		componentTree.addMouseListener(mouseAdapter);
 	}
 
 	/**
-	 * inserts component in to param folder.
+	 * inserts component in to folder.
 	 * 
 	 * @param folderNodeList
 	 * @param componentFolder
@@ -89,7 +105,22 @@ public final class Palette {
 
 	}
 
+	/**
+	 * Returns the scrollpane containing the panel and all visual objects of the
+	 * palette.
+	 * 
+	 * @return
+	 */
 	public JScrollPane getView() {
 		return scrollPane;
+	}
+
+	/**
+	 * Returns the component currently selected in the palette.
+	 * 
+	 * @return
+	 */
+	public AbstractCircuitGate getSelectedComponent() {
+		return selectedComponent;
 	}
 }

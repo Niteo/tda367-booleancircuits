@@ -2,13 +2,15 @@ package edu.chl.tda367.booleancircuits.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputAdapter;
 
+import edu.chl.tda367.booleancircuits.model.IObservable;
 import edu.chl.tda367.booleancircuits.model.Model;
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 
@@ -18,20 +20,32 @@ import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
  * @author Boel, Anton
  * 
  */
-public class Canvas {
+public class Canvas implements IObservable {
+
+	public static enum CanvasAction {
+		DRAG, PLACE
+	}
 
 	private JPanel panel;
 	private Model model;
 	private MouseAdapter mouseAdapter;
+	private CanvasEvent canvasEvent;
+	private PropertyChangeSupport propertyChangeSupport;
 
 	public Canvas() {
 
+		propertyChangeSupport = new PropertyChangeSupport(this);
+
 		mouseAdapter = new MouseInputAdapter() {
-			public Point mouseLocation;
 
 			@Override
 			public void mouseClicked(MouseEvent evt) {
-				mouseLocation = evt.getPoint();
+				if (evt.getClickCount() == 2) {
+					propertyChangeSupport
+							.firePropertyChange("Apa", true, false);
+					canvasEvent = new CanvasEvent(evt.getPoint(),
+							CanvasAction.PLACE);
+				}
 			}
 		};
 
@@ -43,11 +57,11 @@ public class Canvas {
 				if (model != null) {
 					for (AbstractCircuitGate circuitGate : model
 							.getComponents()) {
-						g.drawRect(circuitGate.getPosition().getX(),
-								circuitGate.getPosition().getY(), 80, 70);
-						g.drawString(circuitGate.toString(),
-								circuitGate.getPosition().getX(),
-								circuitGate.getPosition().getY());
+						g.drawRect((int) circuitGate.getPosition().getX(),
+								(int) circuitGate.getPosition().getY(), 80, 70);
+						g.drawString(circuitGate.toString(), (int) circuitGate
+								.getPosition().getX(), (int) circuitGate
+								.getPosition().getY());
 					}
 				}
 			}
@@ -65,6 +79,10 @@ public class Canvas {
 		return panel;
 	}
 
+	public CanvasEvent getLastAction() {
+		return canvasEvent;
+	}
+
 	/**
 	 * sets the model which the canvas is currently representing
 	 * 
@@ -72,5 +90,16 @@ public class Canvas {
 	 */
 	public void setModel(Model model) {
 		this.model = model;
+	}
+
+	@Override
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		propertyChangeSupport.addPropertyChangeListener(listener);
+
+	}
+
+	@Override
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		propertyChangeSupport.addPropertyChangeListener(listener);
 	}
 }
