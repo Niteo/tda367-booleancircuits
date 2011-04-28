@@ -466,7 +466,8 @@ public class MainWindow extends javax.swing.JFrame implements
 			cs.update((ModelManager) evt.getSource());
 		} else if (evt.getSource() instanceof Canvas) {
 			CanvasEvent canvasEvt = cs.getCanvas().getLastAction();
-			if (canvasEvt.getAction() == CanvasAction.PLACE) {
+			if (canvasEvt.getAction() == CanvasAction.PLACE
+					&& palette.getSelectedComponent() != null) {
 				mc.addComponent(palette.getSelectedComponent(),
 						canvasEvt.getPoint());
 			}
