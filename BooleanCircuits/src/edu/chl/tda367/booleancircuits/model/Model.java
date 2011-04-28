@@ -33,9 +33,11 @@ public final class Model {
 	 * @param 
 	 */
 	public void addComponent(AbstractCircuitGate component, Point position) {
-		AbstractCircuitGate c = GateFactory.getNewComponent(component);
+		//AbstractCircuitGate c = GateFactory.getNewComponent(component);
+		AbstractCircuitGate c = component.clone();
 		c.setPosition(position);
 		componentList.add(c);
+		//TODO: FIX updatecomponents
 		updateComponents();
 	}
 
