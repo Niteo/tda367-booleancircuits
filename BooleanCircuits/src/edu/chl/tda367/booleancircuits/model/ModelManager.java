@@ -139,6 +139,7 @@ public final class ModelManager implements IObservable {
 	 */
 	public void addComponent(AbstractCircuitGate component, Point position){
 		getActiveWorkspaceModel().addComponent(component, position);
+		firePropertyChanged();
 	}
 
 	/**
@@ -146,12 +147,14 @@ public final class ModelManager implements IObservable {
 	 */
 	public void removeSelectedComponents(){
 		getActiveWorkspaceModel().removeSelectedComponents();
+		firePropertyChanged();
 	}
 	/**
 	 * Selects all components in the active workspace.
 	 */
 	public void selectAllComponents(){
 		getActiveWorkspaceModel().selectAllComponents();
+		firePropertyChanged();
 	}
 	/**
 	 * Selects the first occurance of a component at the given coordinate
@@ -160,6 +163,7 @@ public final class ModelManager implements IObservable {
 	 */
 	public void selectComponent(Point position){
 		getActiveWorkspaceModel().selectComponent(position);
+		firePropertyChanged();
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
