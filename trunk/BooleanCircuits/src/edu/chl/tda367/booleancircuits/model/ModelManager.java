@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.beans.*;
 import java.util.*;
 
+import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+
 /**
  * A class which manages Models as workspaces.
  * 
@@ -125,6 +127,39 @@ public final class ModelManager implements IObservable {
 	}
 	public void paste(Point position){
 		//TODO: cut method 
+	}
+	
+	//Component methods
+	
+	/**
+	 * Adds a CircuitComponent in the palette to the
+	 * specified coordinate in the active workspace.
+	 * @param component the component to add
+	 * @param coord the coordinate to add to
+	 */
+	public void addComponent(AbstractCircuitGate component, Point position){
+		getActiveWorkspaceModel().addComponent(component, position);
+	}
+
+	/**
+	 * Removes the currently selected component(s) in the active workspace.
+	 */
+	public void removeSelectedComponents(){
+		getActiveWorkspaceModel().removeSelectedComponents();
+	}
+	/**
+	 * Selects all components in the active workspace.
+	 */
+	public void selectAllComponents(){
+		getActiveWorkspaceModel().selectAllComponents();
+	}
+	/**
+	 * Selects the first occurance of a component at the given coordinate
+	 * in the active workspace
+	 * @param coord the coordinate to select from
+	 */
+	public void selectComponent(Point position){
+		getActiveWorkspaceModel().selectComponent(position);
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
