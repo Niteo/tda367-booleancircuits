@@ -49,10 +49,9 @@ public class CenterStage {
 	 * 
 	 * @param modelManager
 	 */
-	public void update(ModelManager modelManager) {
+	public synchronized void update(ModelManager modelManager) {
 		List<Model> modelList = modelManager.getWorkspaces();
-		System.out.println(modelList);
-		System.out.println(tabIdList);
+		System.out.println("Updating");
 		for (int i = 0; i < modelList.size(); i++) {
 			if (!tabIdList.contains(modelList.get(i))) {
 				tabIdList.add(modelList.get(i));
@@ -67,23 +66,21 @@ public class CenterStage {
 			}
 		}
 
-		System.out.println("REMOVE " + removeList);
-		for (Integer i : removeList) {
-			tabIdList.remove((int) i);
-			tabbedPane.remove(i);
+		if (modelList.isEmpty()) {
+			tabIdList.clear();
+			tabbedPane.removeAll();
+			
+		} else {
+			for (Integer i : removeList) {
+				tabIdList.remove((int) i);
+				tabbedPane.remove((int) i);
+			}
 		}
 
 		if (modelManager.getActiveWorkspaceIndex() >= 1) {
 			tabbedPane.setSelectedIndex(modelManager.getActiveWorkspaceIndex());
 		}
 
-		/*
-		 * int selected = modelManager.getActiveWorkspaceIndex();
-		 * tabbedPane.removeAll(); for (Model model :
-		 * modelManager.getWorkspaces()) { newTab(model.toString(), model); } if
-		 * (modelManager.getWorkspaces().size() > 0) {
-		 * tabbedPane.setSelectedIndex(selected); }
-		 */
 		tabbedPane.repaint();
 		tabbedPane.revalidate();
 	}

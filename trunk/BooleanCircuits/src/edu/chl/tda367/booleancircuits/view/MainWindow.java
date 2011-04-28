@@ -456,7 +456,7 @@ public class MainWindow extends javax.swing.JFrame implements
 	// End of variables declaration//GEN-END:variables
 
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public synchronized void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getSource() instanceof ModelManager) {
 			cs.update((ModelManager) evt.getSource());
 		}

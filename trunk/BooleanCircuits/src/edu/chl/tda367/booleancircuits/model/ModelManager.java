@@ -47,9 +47,10 @@ public final class ModelManager implements IObservable {
 	 */
 	public void closeActiveWorkspace() {
 		if (selectedIndex == -1) {
-			throw new IllegalArgumentException();
+			return;
 		} else {
 			removeModel(selectedIndex);
+			firePropertyChanged();
 		}
 	}
 
@@ -58,7 +59,7 @@ public final class ModelManager implements IObservable {
 	 */
 	public void closeAllWorkspaces() {
 		modelList.removeAll(modelList);
-		firePropertyChanged();
+		_setActiveWorkspace(-1);
 	}
 
 	/**
@@ -68,8 +69,7 @@ public final class ModelManager implements IObservable {
 	 *            int index of the workspace
 	 */
 	public void closeWorkspace(int i) {
-		modelList.remove(i);
-
+		removeModel(i);
 		firePropertyChanged();
 	}
 
@@ -130,8 +130,7 @@ public final class ModelManager implements IObservable {
 
 	private void removeModel(int i) {
 		if (i < 0 || i >= modelList.size()) {
-			throw new IllegalArgumentException(
-					"Index can't be less than zero or bigger than modelList");
+			return;
 		} else {
 			modelList.remove(i);
 			if(modelList.size()==0){
