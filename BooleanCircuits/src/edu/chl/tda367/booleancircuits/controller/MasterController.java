@@ -1,5 +1,7 @@
 package edu.chl.tda367.booleancircuits.controller;
 
+import java.awt.Point;
+
 import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 
@@ -113,8 +115,8 @@ public final class MasterController {
 	 * @param component the component to add
 	 * @param coord the coordinate to add to
 	 */
-	public void addComponent(AbstractCircuitGate component, Coordinate coord){
-		mm.getActiveWorkspaceModel().addComponent(component, coord);
+	public void addComponent(AbstractCircuitGate component, Point position){
+		mm.getActiveWorkspaceModel().addComponent(component, position);
 	}
 
 	/**
@@ -134,8 +136,8 @@ public final class MasterController {
 	 * in the active workspace
 	 * @param coord the coordinate to select from
 	 */
-	public void selectComponent(Coordinate coord){
-		mm.getActiveWorkspaceModel().selectComponent(coord);
+	public void selectComponent(Point position){
+		mm.getActiveWorkspaceModel().selectComponent(position);
 	}
 	
 	/* ##########################
@@ -158,7 +160,7 @@ public final class MasterController {
 	 * Pastes the selected components to the active workspace from the clipboard.
 	 * @param coord the coordinate to paste to
 	 */
-	public void pasteSelectedComponent(Coordinate coord){
-		throw new UnsupportedOperationException();
+	public void pasteSelectedComponent(Point position){
+		mm.paste(position);
 	}
 }

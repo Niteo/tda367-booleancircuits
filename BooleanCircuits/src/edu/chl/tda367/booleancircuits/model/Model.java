@@ -1,5 +1,6 @@
 package edu.chl.tda367.booleancircuits.model;
 
+import java.awt.Point;
 import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
@@ -31,9 +32,9 @@ public final class Model {
 	 * @param component the new component to add
 	 * @param 
 	 */
-	public void addComponent(AbstractCircuitGate component, Coordinate coord) {
+	public void addComponent(AbstractCircuitGate component, Point position) {
 		AbstractCircuitGate c = GateFactory.getNewComponent(component);
-		c.setPosition(coord);
+		c.setPosition(position);
 		componentList.add(c);
 		updateComponents();
 	}
@@ -82,7 +83,7 @@ public final class Model {
 	 * @param coordinate
 	 *            the coordinate for the component
 	 */
-	public void selectComponent(Coordinate coordinate) {
+	public void selectComponent(Point position) {
 		// TODO: Change component size!!!
 		// TODO: THE ABOVE. VEVWY IMPORTANT!!
 		// TODO: I PROMIZ!!!!
@@ -91,11 +92,11 @@ public final class Model {
 		// TODO: THE VARIABLES ABOVE... FIIIIIIIX!
 		for(AbstractCircuitGate acg : componentList){
 			// Check X
-			if(coordinate.getX() >= acg.getPosition().getX() - sizeX * 0.5f &&
-					coordinate.getX() <= acg.getPosition().getX() + sizeX * 0.5f){
+			if(position.getX() >= acg.getPosition().getX() - sizeX * 0.5f &&
+					position.getX() <= acg.getPosition().getX() + sizeX * 0.5f){
 				// Check Y
-				if(coordinate.getY() >= acg.getPosition().getY() - sizeY * 0.5f &&
-						coordinate.getY() <= acg.getPosition().getY() + sizeY * 0.5f){
+				if(position.getY() >= acg.getPosition().getY() - sizeY * 0.5f &&
+						position.getY() <= acg.getPosition().getY() + sizeY * 0.5f){
 					// Component was selected
 					if(selectedComponentList.contains(acg)){
 						selectedComponentList.remove(acg);

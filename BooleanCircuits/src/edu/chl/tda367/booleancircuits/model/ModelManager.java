@@ -1,5 +1,6 @@
 package edu.chl.tda367.booleancircuits.model;
 
+import java.awt.Point;
 import java.beans.*;
 import java.util.*;
 
@@ -107,6 +108,23 @@ public final class ModelManager implements IObservable {
 	 */
 	public List<Model> getWorkspaces() {
 		return modelList;
+	}
+	
+	public void undo(){
+		//TODO: undo method
+	}
+	public void redo(){
+		//TODO: re-do method
+	}
+	
+	public void copy(){
+		//TODO: copy method
+	}
+	public void cut(){
+		//TODO: cut method
+	}
+	public void paste(Point position){
+		//TODO: cut method 
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {

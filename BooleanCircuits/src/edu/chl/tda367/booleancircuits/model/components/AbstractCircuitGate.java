@@ -1,5 +1,6 @@
 package edu.chl.tda367.booleancircuits.model.components;
 
+import java.awt.Point;
 import java.util.*;
 import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.utilities.GateFactory;
@@ -13,7 +14,7 @@ public abstract class AbstractCircuitGate {
 	private List<GateInput> inputs;
 	private Boolean[] outputs;
 	private boolean isInTiercalculation;
-	private Coordinate coordinate;
+	private Point position;
 	
 	private void createOutputs(int amount){
 		outputs = new Boolean[amount];
@@ -138,16 +139,16 @@ public abstract class AbstractCircuitGate {
 	 * Gets the position of the gate
 	 * @return a reference to the position of the gate
 	 */
-	public Coordinate getPosition(){
-		return this.coordinate;
+	public Point getPosition(){
+		return this.position;
 	}
 	
 	/**
 	 * Sets the position of the gate
 	 * @param coordinates of the gate
 	 */
-	public void setPosition(Coordinate coordinate){
-		this.coordinate = coordinate.clone();
+	public void setPosition(Point position){
+		this.position = position;
 	}
 	
 	/**
@@ -156,8 +157,8 @@ public abstract class AbstractCircuitGate {
 	 * @param deltaY: the difference in the y-axis between the current position and the old position
 	 */
 	public void move(int deltaX, int deltaY){
-		this.coordinate = new Coordinate(this.coordinate.getX() + deltaX,
-				this.coordinate.getY() + deltaY);
+		this.position = new Point(this.position.x + deltaX,
+				this.position.y + deltaY);
 	}
 	
 
@@ -176,7 +177,7 @@ public abstract class AbstractCircuitGate {
 			c.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
 		}
 		
-		c.coordinate = coordinate.clone();
+		c.position = position;
 		
 		return c;
 	}
