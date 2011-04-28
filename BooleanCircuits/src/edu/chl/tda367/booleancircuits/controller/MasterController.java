@@ -116,20 +116,20 @@ public final class MasterController {
 	 * @param coord the coordinate to add to
 	 */
 	public void addComponent(AbstractCircuitGate component, Point position){
-		mm.getActiveWorkspaceModel().addComponent(component, position);
+		mm.addComponent(component, position);
 	}
 
 	/**
 	 * Removes the currently selected component(s) in the active workspace.
 	 */
 	public void removeSelectedComponents(){
-		mm.getActiveWorkspaceModel().removeSelectedComponents();
+		mm.removeSelectedComponents();
 	}
 	/**
 	 * Selects all components in the active workspace.
 	 */
 	public void selectAllComponents(){
-		mm.getActiveWorkspaceModel().selectAllComponents();
+		mm.selectAllComponents();
 	}
 	/**
 	 * Selects the first occurance of a component at the given coordinate
@@ -137,7 +137,7 @@ public final class MasterController {
 	 * @param coord the coordinate to select from
 	 */
 	public void selectComponent(Point position){
-		mm.getActiveWorkspaceModel().selectComponent(position);
+		mm.selectComponent(position);
 	}
 	
 	/* ##########################
