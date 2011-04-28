@@ -50,7 +50,10 @@ public class CenterStage {
 	 * @param modelManager
 	 */
 	public synchronized void update(ModelManager modelManager) {
-		canvas.setModel(modelManager.getActiveWorkspaceModel());
+		if(modelManager.getActiveWorkspaceIndex() >=0){
+			canvas.setModel(modelManager.getActiveWorkspaceModel());
+		}
+
 		List<Model> modelList = modelManager.getWorkspaces();
 
 		for (int i = 0; i < modelList.size(); i++) {
