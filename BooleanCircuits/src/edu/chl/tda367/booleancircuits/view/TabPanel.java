@@ -18,6 +18,7 @@ public class TabPanel extends JPanel{
 		titleLabel.setText(title);
 		add(titleLabel);
 		add(closeButton);
+		setOpaque(false);
 	}
 	
 	/**
