@@ -16,9 +16,9 @@ public final class GateFactory {
 	}
 
 	/**
-	 * gets an instance of the component
+	 * Gets an new instance of the component type specified.
 	 * 
-	 * @param: the new component
+	 * @param: component the new component
 	 * @return: returns a new instance of the component
 	 */
 	public static AbstractCircuitGate getNewComponent(
@@ -39,6 +39,12 @@ public final class GateFactory {
 		return newComponent;
 	}
 
+	/**
+	 * Gets an instance of the component
+	 * 
+	 * @param: component the new component
+	 * @return: a new instance of the component
+	 */
 	public static AbstractCircuitGate getNewComponent(
 			PredefinedComponents component) {
 		switch (component) {
@@ -53,6 +59,13 @@ public final class GateFactory {
 		return null;
 	}
 
+	/**
+	 * Gets an instance of the component with the specified amount of inputs
+	 * 
+	 * @param: component the new component
+	 * @param: noOfInputs the amount of inputs on the component
+	 * @return: a new instance of the component
+	 */
 	public static AbstractCircuitGate getNewComponent(Components component,
 			int noOfInputs) {
 		switch (component) {
