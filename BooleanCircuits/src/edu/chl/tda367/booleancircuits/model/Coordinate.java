@@ -5,8 +5,8 @@ package edu.chl.tda367.booleancircuits.model;
  * @author Kaufmann
  */
 public class Coordinate {
-	public int x;
-	public int y;
+	private int x;
+	private int y;
 	
 	/**
 	 * Constructor for Coordinate.

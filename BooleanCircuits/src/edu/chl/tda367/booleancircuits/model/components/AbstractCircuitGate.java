@@ -15,16 +15,6 @@ public abstract class AbstractCircuitGate {
 	private boolean isInTiercalculation;
 	private Coordinate coordinate;
 	
-	/**
-	 * Creates I/O for this component.
-	 * @param in the amount of inputs to be created
-	 * @param out the amount of outputs to be created
-	 */
-	protected void createIO(int in, int out){
-		createOutputs(out);
-		createInputs(in);
-	}
-	
 	private void createOutputs(int amount){
 		outputs = new Boolean[amount];
 		for(int i = 0; i < outputs.length; i++){
@@ -39,6 +29,16 @@ public abstract class AbstractCircuitGate {
 		}
 	}
 	
+	
+	/**
+	 * Retrieves the inputs of the component
+	 * @return inputs of the component
+	 */
+	protected List<GateInput> getInputs(){
+		return inputs;
+	}
+	
+	
 	/**
 	 * Sets a specific output to a given value
 	 * @param index specifies which output to set
@@ -46,6 +46,17 @@ public abstract class AbstractCircuitGate {
 	 */
 	protected void setOutput(int index, boolean value){
 		outputs[index] = value;
+	}
+	
+
+	/**
+	 * Creates I/O for this component.
+	 * @param in the amount of inputs to be created
+	 * @param out the amount of outputs to be created
+	 */
+	protected void createIO(int in, int out){
+		createOutputs(out);
+		createInputs(in);
 	}
 	
 	/**
@@ -56,14 +67,6 @@ public abstract class AbstractCircuitGate {
 		this.inputs = gate.inputs;
 		this.isInTiercalculation = gate.isInTiercalculation;
 		this.outputs = gate.outputs;
-	}
-	
-	/**
-	 * Retrieves the inputs of the component
-	 * @return inputs of the component
-	 */
-	protected List<GateInput> getInputs(){
-		return inputs;
 	}
 	
 	/**
@@ -144,8 +147,7 @@ public abstract class AbstractCircuitGate {
 	 * @param coordinates of the gate
 	 */
 	public void setPosition(Coordinate coordinate){
-		this.coordinate.x = coordinate.x;
-		this.coordinate.y = coordinate.y;
+		this.coordinate = coordinate.clone();
 	}
 	
 	/**
@@ -154,15 +156,11 @@ public abstract class AbstractCircuitGate {
 	 * @param deltaY: the difference in the y-axis between the current position and the old position
 	 */
 	public void move(int deltaX, int deltaY){
-		this.coordinate.x += deltaX;
-		this.coordinate.y += deltaY;
+		this.coordinate = new Coordinate(this.coordinate.getX() + deltaX,
+				this.coordinate.getY() + deltaY);
 	}
 	
-	/**
-	 * Template-method for updating outputs of the component.
-	 */
-	protected abstract void updateOutput();
-	
+
 	/**
 	 * Returns a copy of the gate.
 	 */
@@ -182,6 +180,11 @@ public abstract class AbstractCircuitGate {
 		
 		return c;
 	}
+	
+	/**
+	 * Template-method for updating outputs of the component.
+	 */
+	protected abstract void updateOutput();
 	
 	/**
 	 * Template-method for returning a gate of the used type.

@@ -35,6 +35,7 @@ public final class Model {
 		AbstractCircuitGate c = GateFactory.getNewComponent(component);
 		c.setPosition(coord);
 		componentList.add(c);
+		updateComponents();
 	}
 
 	/**
@@ -82,18 +83,39 @@ public final class Model {
 	 *            the coordinate for the component
 	 */
 	public void selectComponent(Coordinate coordinate) {
-		// TODO: Add logic here
-		throw new UnsupportedOperationException();
+		// TODO: Change component size!!!
+		// TODO: THE ABOVE. VEVWY IMPORTANT!!
+		// TODO: I PROMIZ!!!!
+		// TODO: :(
+		int sizeX = 20, sizeY = 20;
+		// TODO: THE VARIABLES ABOVE... FIIIIIIIX!
+		for(AbstractCircuitGate acg : componentList){
+			// Check X
+			if(coordinate.getX() >= acg.getPosition().getX() - sizeX * 0.5f &&
+					coordinate.getX() <= acg.getPosition().getX() + sizeX * 0.5f){
+				// Check Y
+				if(coordinate.getY() >= acg.getPosition().getY() - sizeY * 0.5f &&
+						coordinate.getY() <= acg.getPosition().getY() + sizeY * 0.5f){
+					// Component was selected
+					if(selectedComponentList.contains(acg)){
+						selectedComponentList.remove(acg);
+					} else {
+						selectedComponentList.add(acg);
+					}					
+				}	
+			}
+		}
 	}
 
 	/**
 	 * Removes the components that are selected
 	 */
-	public void removeSelectedComponent() {
+	public void removeSelectedComponents() {
 		for (AbstractCircuitGate i : selectedComponentList) {
 			componentList.remove(i);
 		}
 		selectedComponentList.clear();
+		updateComponents();
 	}
 
 	private void updateComponents() {
