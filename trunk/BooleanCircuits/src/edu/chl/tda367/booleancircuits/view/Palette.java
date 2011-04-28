@@ -1,7 +1,5 @@
 package edu.chl.tda367.booleancircuits.view;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,25 +67,13 @@ public final class Palette {
 						.getLastSelectedPathComponent();
 
 				if (node.isLeaf()) {
-					// System.out.println(node.getUserObject());
+					selectedComponent = ((AbstractCircuitGate) node
+							.getUserObject()).clone();
 				}
 			}
 		};
 
-		MouseAdapter mouseAdapter = new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt) {
-				DefaultMutableTreeNode node = (DefaultMutableTreeNode) componentTree
-						.getLastSelectedPathComponent();
-				if (evt.getClickCount() == 2) {
-					if (!node.isLeaf())
-						selectedComponent = null;
-					System.out.println(node.getUserObject());
-				}
-			}
-		};
 		componentTree.addTreeSelectionListener(tsl);
-		componentTree.addMouseListener(mouseAdapter);
 	}
 
 	/**
