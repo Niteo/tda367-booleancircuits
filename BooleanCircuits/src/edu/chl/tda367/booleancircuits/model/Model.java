@@ -38,7 +38,7 @@ public final class Model {
 		c.setPosition(position);
 		componentList.add(c);
 		//TODO: FIX updatecomponents
-		updateComponents();
+		//updateComponents();
 	}
 
 	/**
