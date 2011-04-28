@@ -26,16 +26,19 @@ public class CenterStage {
 	private Tab tab = new Tab();
 	private JTabbedPane tabbedPane = tab.getTabbedPane();
 	private Action closeWorkspace;
+	private Canvas canvas;
 
 	/** Returns an instance of Canvas. */
 	public CenterStage(Action closeWorkspace) {
 		centerStagePanel.add(tabbedPane);
 		centerStagePanel.setLayout(new GridLayout(1, 1));
 		this.closeWorkspace = closeWorkspace;
+
+		canvas = new Canvas();
 	}
 
 	private void newTab(String s) {
-		tab.addTab(s, new Canvas());
+		tab.addTab(s, canvas);
 		TabPanel tabPanel = (TabPanel) tab.getTabbedPane().getTabComponentAt(
 				tab.getTabbedPane().getTabCount() - 1);
 		tabPanel.getCloseButton().setAction(closeWorkspace);
@@ -67,7 +70,7 @@ public class CenterStage {
 		System.out.println("REMOVE " + removeList);
 		for (Integer i : removeList) {
 			tabIdList.remove((int) i);
-			tabbedPane.remove((int) i);
+			tabbedPane.remove(i);
 		}
 
 		if (modelManager.getActiveWorkspaceIndex() >= 1) {
@@ -86,12 +89,21 @@ public class CenterStage {
 	}
 
 	/**
-	 * Returns the panel of the canvas.
+	 * Returns the panel of the centerStage.
 	 * 
 	 * @return canvas JPanel
 	 */
 	public JPanel getPanel() {
 		return centerStagePanel;
+	}
+
+	/**
+	 * Returns the canvas.
+	 * 
+	 * @return Canvas
+	 */
+	public Canvas getCanvas() {
+		return canvas;
 	}
 
 	/**
