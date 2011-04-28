@@ -43,11 +43,11 @@ public class Canvas {
 				if (model != null) {
 					for (AbstractCircuitGate circuitGate : model
 							.getComponents()) {
-						g.drawRect(circuitGate.getPosition().x,
-								circuitGate.getPosition().y, 80, 70);
+						g.drawRect(circuitGate.getPosition().getX(),
+								circuitGate.getPosition().getY(), 80, 70);
 						g.drawString(circuitGate.toString(),
-								circuitGate.getPosition().x,
-								circuitGate.getPosition().y);
+								circuitGate.getPosition().getX(),
+								circuitGate.getPosition().getY());
 					}
 				}
 			}
