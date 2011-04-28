@@ -41,10 +41,10 @@ public class Canvas implements IObservable {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				if (evt.getClickCount() == 2) {
-					propertyChangeSupport
-							.firePropertyChange("Apa", true, false);
 					canvasEvent = new CanvasEvent(evt.getPoint(),
 							CanvasAction.PLACE);
+					propertyChangeSupport
+					.firePropertyChange("Apa", true, false);
 				}
 			}
 		};
