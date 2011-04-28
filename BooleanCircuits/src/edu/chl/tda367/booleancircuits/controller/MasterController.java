@@ -95,6 +95,14 @@ public final class MasterController {
 		mm.setActiveWorkspace(i);
 	}
 	
+	public void undo(){
+		throw new UnsupportedOperationException();
+	}
+	
+	public void redo(){
+		throw new UnsupportedOperationException();
+	}
+	
 	/* ##########################
 	 * #       COMPONENTS       #
 	 * ##########################
@@ -106,20 +114,20 @@ public final class MasterController {
 	 * @param coord the coordinate to add to
 	 */
 	public void addComponent(AbstractCircuitGate component, Coordinate coord){
-		throw new UnsupportedOperationException();
+		mm.getActiveWorkspaceModel().addComponent(component, coord);
 	}
 
 	/**
 	 * Removes the currently selected component(s) in the active workspace.
 	 */
 	public void removeSelectedComponents(){
-		throw new UnsupportedOperationException();
+		mm.getActiveWorkspaceModel().removeSelectedComponents();
 	}
 	/**
 	 * Selects all components in the active workspace.
 	 */
 	public void selectAllComponents(){
-		throw new UnsupportedOperationException();
+		mm.getActiveWorkspaceModel().selectAllComponents();
 	}
 	/**
 	 * Selects the first occurance of a component at the given coordinate
@@ -127,7 +135,7 @@ public final class MasterController {
 	 * @param coord the coordinate to select from
 	 */
 	public void selectComponent(Coordinate coord){
-		throw new UnsupportedOperationException();
+		mm.getActiveWorkspaceModel().selectComponent(coord);
 	}
 	
 	/* ##########################
