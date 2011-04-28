@@ -6,12 +6,9 @@
 
 package edu.chl.tda367.booleancircuits.view;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -22,6 +19,7 @@ import javax.swing.JTabbedPane;
 import edu.chl.tda367.booleancircuits.controller.ActionController;
 import edu.chl.tda367.booleancircuits.controller.MasterController;
 import edu.chl.tda367.booleancircuits.model.ModelManager;
+import edu.chl.tda367.booleancircuits.view.Canvas.CanvasAction;
 
 /**
  * The Main window
@@ -51,7 +49,6 @@ public class MainWindow extends javax.swing.JFrame implements
 				}
 			}
 		}
-
 	};
 
 	/** Creates new form View */
@@ -75,6 +72,8 @@ public class MainWindow extends javax.swing.JFrame implements
 		mc.newWorkspace();
 		initTabbedPane();
 		setTitle("Boolean Circuits");
+
+		cs.getCanvas().addPropertyChangeListener(this);
 	}
 
 	private void initToolbar() {
@@ -465,6 +464,12 @@ public class MainWindow extends javax.swing.JFrame implements
 	public synchronized void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getSource() instanceof ModelManager) {
 			cs.update((ModelManager) evt.getSource());
+		} else if (evt.getSource() instanceof Canvas) {
+			CanvasEvent canvasEvt = cs.getCanvas().getLastAction();
+			if (canvasEvt.getAction() == CanvasAction.PLACE) {
+				mc.addComponent(palette.getSelectedComponent(),
+						canvasEvt.getPoint());
+			}
 		}
 
 	}
