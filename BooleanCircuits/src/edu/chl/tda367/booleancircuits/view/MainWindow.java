@@ -228,6 +228,12 @@ public class MainWindow extends javax.swing.JFrame implements
 		selectAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_A,
 				java.awt.event.InputEvent.CTRL_MASK));
+		newWorkspaceMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_N,
+				java.awt.event.InputEvent.CTRL_MASK));
+		openFileMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_O,
+				java.awt.event.InputEvent.CTRL_MASK));
 	}
 
 	private void initTabbedPane() {
