@@ -27,24 +27,41 @@ View
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>460</x>
-      <y>110</y>
-      <w>420</w>
-      <h>130</h>
+      <x>410</x>
+      <y>70</y>
+      <w>470</w>
+      <h>250</h>
     </coordinates>
-    <panel_attributes>MasterController</panel_attributes>
+    <panel_attributes>MasterController
+--
++mm:ModelManager
+--
++closeActiveWorkspace()
++closeAllWorkspaces()
++closeWorkspace(int i)
++newWorkspace()
++openWorkspace(String path)
++saveActiveWorkspace()
++saveActiveWorskpaceAsComponent(String path)
++saveAllWorkspaces()
++setActiveWorkspace(int i)
++addComponent(AbstractCircuitGate component, Coordinate coord)
++removeSelectedComponents()
++selectAllComponents()
++selectComponent(Coordinate coord)
++copySelectedComponents()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>570</x>
-      <y>210</y>
+      <y>320</y>
       <w>50</w>
-      <h>210</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;190;30;30</additional_attributes>
+    <additional_attributes>30;80;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -62,11 +79,11 @@ View
     <coordinates>
       <x>290</x>
       <y>110</y>
-      <w>190</w>
+      <w>140</w>
       <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;130;170;30</additional_attributes>
+    <additional_attributes>30;130;120;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -87,10 +104,10 @@ UndoRedo
       <x>750</x>
       <y>10</y>
       <w>50</w>
-      <h>120</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;100</additional_attributes>
+    <additional_attributes>30;30;30;60</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -126,10 +143,10 @@ UndoRedo
       <x>200</x>
       <y>520</y>
       <w>50</w>
-      <h>270</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;250;30;30</additional_attributes>
+    <additional_attributes>30;240;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -183,11 +200,13 @@ IObservable
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>30</x>
-      <y>770</y>
-      <w>480</w>
-      <h>220</h>
+      <y>760</y>
+      <w>490</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>/AbstractCircuitGate/
+--
+-coordinate: Coordinate
 --
 #createInputs(int amount)
 #createOutputs(int amount)
@@ -197,9 +216,13 @@ IObservable
 +getOutputValue(int index)
 +getNoOfInputs():int
 +getNoOfOutputs():int
++getPosition():Coordinate
++setPosition()
++move()
 +update()
 +getComponentTier():int
 /+updateOutput()/
++clone()
 
 </panel_attributes>
     <additional_attributes/>
@@ -374,7 +397,7 @@ PropertyChangeListener</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>530</x>
+      <x>550</x>
       <y>1010</y>
       <w>140</w>
       <h>90</h>
@@ -391,9 +414,9 @@ PropertyChangeListener</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>20</x>
-      <y>1020</y>
+      <y>1090</y>
       <w>150</w>
-      <h>100</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>OrGate
 --
@@ -407,7 +430,7 @@ PropertyChangeListener</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>20</x>
-      <y>1140</y>
+      <y>1200</y>
       <w>150</w>
       <h>90</h>
     </coordinates>
@@ -423,9 +446,9 @@ AbstractCircuitGate</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>190</x>
-      <y>1020</y>
+      <y>1090</y>
       <w>130</w>
-      <h>100</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>NandGate
 --
@@ -439,7 +462,7 @@ AbstractCircuitGate</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>190</x>
-      <y>1140</y>
+      <y>1200</y>
       <w>150</w>
       <h>90</h>
     </coordinates>
@@ -455,7 +478,7 @@ AbstractCircuitGate</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>360</x>
-      <y>1020</y>
+      <y>1090</y>
       <w>140</w>
       <h>90</h>
     </coordinates>
@@ -470,8 +493,8 @@ AbstractCircuitGate</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>500</x>
-      <y>1140</y>
+      <x>550</x>
+      <y>1130</y>
       <w>150</w>
       <h>90</h>
     </coordinates>
@@ -486,19 +509,19 @@ AbstractCircuitGate</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>480</x>
-      <y>930</y>
-      <w>70</w>
-      <h>110</h>
+      <x>490</x>
+      <y>1000</y>
+      <w>80</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;90;50;90</additional_attributes>
+    <additional_attributes>30;30;60;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>30</x>
-      <y>960</y>
+      <y>1030</y>
       <w>50</w>
       <h>80</h>
     </coordinates>
@@ -509,18 +532,18 @@ AbstractCircuitGate</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>140</x>
-      <y>960</y>
+      <y>1030</y>
       <w>60</w>
-      <h>220</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>40;30;40;30;40;200;30;200</additional_attributes>
+    <additional_attributes>40;30;40;190;30;190</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>210</x>
-      <y>960</y>
+      <y>1030</y>
       <w>50</w>
       <h>80</h>
     </coordinates>
@@ -531,18 +554,18 @@ AbstractCircuitGate</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>320</x>
-      <y>960</y>
+      <y>1030</y>
       <w>50</w>
-      <h>230</h>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;210</additional_attributes>
+    <additional_attributes>30;30;30;200</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>350</x>
-      <y>960</y>
+      <y>1030</y>
       <w>50</w>
       <h>80</h>
     </coordinates>
@@ -552,13 +575,13 @@ AbstractCircuitGate</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>470</x>
-      <y>960</y>
-      <w>80</w>
-      <h>200</h>
+      <x>480</x>
+      <y>1030</y>
+      <w>90</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;180;60;180</additional_attributes>
+    <additional_attributes>30;30;30;150;70;150</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -667,7 +690,7 @@ AbstractCircuitGate</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>530</x>
+      <x>550</x>
       <y>900</y>
       <w>120</w>
       <h>70</h>
@@ -681,19 +704,19 @@ AbstractCircuitGate</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>480</x>
+      <x>490</x>
       <y>900</y>
-      <w>70</w>
-      <h>50</h>
+      <w>80</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>50;30;30;30</additional_attributes>
+    <additional_attributes>60;30;30;40</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>350</x>
-      <y>1140</y>
+      <y>1200</y>
       <w>140</w>
       <h>90</h>
     </coordinates>
@@ -721,9 +744,9 @@ AbstractCircuitGate</panel_attributes>
     <type>com.umlet.element.Package</type>
     <coordinates>
       <x>0</x>
-      <y>740</y>
+      <y>730</y>
       <w>770</w>
-      <h>520</h>
+      <h>580</h>
     </coordinates>
     <panel_attributes>Components</panel_attributes>
     <additional_attributes/>
@@ -761,7 +784,7 @@ AbstractCircuitGate</panel_attributes>
       <x>400</x>
       <y>30</y>
       <w>750</w>
-      <h>230</h>
+      <h>320</h>
     </coordinates>
     <panel_attributes>Controller</panel_attributes>
     <additional_attributes/>
@@ -814,12 +837,12 @@ int noOfInputs)
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>280</x>
-      <y>960</y>
-      <w>70</w>
-      <h>200</h>
+      <x>300</x>
+      <y>1030</y>
+      <w>50</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>50;30;50;180;30;180</additional_attributes>
+    <additional_attributes>30;30;30;170</additional_attributes>
   </element>
 </diagram>
