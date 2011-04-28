@@ -30,7 +30,7 @@ public class ConstantGate extends AbstractCircuitGate {
 	
 	@Override
 	public String toString(){
-		return "Constant " + (constant ? 1 : 0);
+		return ""+(constant ? 1 : 0);
 	}
 	
 	@Override
