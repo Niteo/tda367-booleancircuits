@@ -50,8 +50,9 @@ public class CenterStage {
 	 * @param modelManager
 	 */
 	public synchronized void update(ModelManager modelManager) {
+		canvas.setModel(modelManager.getActiveWorkspaceModel());
 		List<Model> modelList = modelManager.getWorkspaces();
-		System.out.println("Updating");
+
 		for (int i = 0; i < modelList.size(); i++) {
 			if (!tabIdList.contains(modelList.get(i))) {
 				tabIdList.add(modelList.get(i));
@@ -69,7 +70,7 @@ public class CenterStage {
 		if (modelList.isEmpty()) {
 			tabIdList.clear();
 			tabbedPane.removeAll();
-			
+
 		} else {
 			for (Integer i : removeList) {
 				tabIdList.remove((int) i);
