@@ -46,7 +46,7 @@ public final class ModelManager implements IObservable {
 	 * Closes the active workspace.
 	 */
 	public void closeActiveWorkspace() {
-		if (selectedIndex == -1) {
+		if (selectedIndex < 0 || selectedIndex >= modelList.size()) {
 			return;
 		} else {
 			removeModel(selectedIndex);
@@ -70,7 +70,6 @@ public final class ModelManager implements IObservable {
 	 */
 	public void closeWorkspace(int i) {
 		removeModel(i);
-		firePropertyChanged();
 	}
 
 	/**
@@ -139,6 +138,7 @@ public final class ModelManager implements IObservable {
 			else if(selectedIndex>=modelList.size()){
 				selectedIndex=modelList.size()-1;
 			}
+			firePropertyChanged();
 		}
 	}
 }
