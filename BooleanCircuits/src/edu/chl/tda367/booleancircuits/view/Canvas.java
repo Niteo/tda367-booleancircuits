@@ -33,7 +33,6 @@ public class Canvas implements IObservable {
 	private PropertyChangeSupport propertyChangeSupport;
 
 	public Canvas() {
-
 		propertyChangeSupport = new PropertyChangeSupport(this);
 
 		mouseAdapter = new MouseInputAdapter() {
@@ -53,7 +52,9 @@ public class Canvas implements IObservable {
 			@Override
 			public void paint(Graphics g) {
 				// TODO implement paint
+				super.paint(g);
 				g.setColor(Color.black);
+				
 				if (model != null) {
 					for (AbstractCircuitGate circuitGate : model
 							.getComponents()) {
