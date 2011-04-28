@@ -14,7 +14,7 @@ public abstract class AbstractCircuitGate {
 	private List<GateInput> inputs;
 	private Boolean[] outputs;
 	private boolean isInTiercalculation;
-	private Point position;
+	private Point position = new Point();
 	
 	private void createOutputs(int amount){
 		outputs = new Boolean[amount];
