@@ -56,8 +56,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="deleteMenuItem">
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="selectMenuItem">
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="selectAllMenuItem">
             </MenuItem>
           </SubComponents>

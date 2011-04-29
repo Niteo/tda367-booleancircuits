@@ -42,7 +42,8 @@ public class MainWindow extends javax.swing.JFrame implements
 			int tabCount = cs.getTabManager().getTabCount();
 			JButton button = (JButton) e.getSource();
 			for (int i = 0; i < tabCount; i++) {
-				if (button == cs.getTabManager().getTabPanel(i).getCloseButton()) {
+				if (button == cs.getTabManager().getTabPanel(i)
+						.getCloseButton()) {
 					mc.closeWorkspace(i);
 					return;
 				}
@@ -106,7 +107,6 @@ public class MainWindow extends javax.swing.JFrame implements
 				.getPasteSelectedComponentAction());
 		deleteMenuItem.setAction(actionController
 				.getRemoveSelectedComponentsAction());
-		selectMenuItem.setAction(actionController.getSelectComponentAction());
 		selectAllMenuItem.setAction(actionController
 				.getSelectAllComponentsAction());
 
@@ -176,7 +176,6 @@ public class MainWindow extends javax.swing.JFrame implements
 		copyMenuItem.setText("Copy");
 		pasteMenuItem.setText("Paste");
 		deleteMenuItem.setText("Delete");
-		selectMenuItem.setText("Select");
 		selectAllMenuItem.setText("Select All");
 
 		// View menu
@@ -236,7 +235,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		cs.getTabManager().getTabbedPane().addChangeListener(actionController);
 	}
 
-	// GEN-BEGIN:initComponents
+	//GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
@@ -266,7 +265,6 @@ public class MainWindow extends javax.swing.JFrame implements
 		copyMenuItem = new javax.swing.JMenuItem();
 		pasteMenuItem = new javax.swing.JMenuItem();
 		deleteMenuItem = new javax.swing.JMenuItem();
-		selectMenuItem = new javax.swing.JMenuItem();
 		selectAllMenuItem = new javax.swing.JMenuItem();
 		viewMenu = new javax.swing.JMenu();
 		representationMenu = new javax.swing.JMenu();
@@ -333,7 +331,6 @@ public class MainWindow extends javax.swing.JFrame implements
 		editMenu.add(copyMenuItem);
 		editMenu.add(pasteMenuItem);
 		editMenu.add(deleteMenuItem);
-		editMenu.add(selectMenuItem);
 		editMenu.add(selectAllMenuItem);
 
 		menuBar.add(editMenu);
@@ -393,7 +390,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 		pack();
 	}// </editor-fold>
-		// GEN-END:initComponents
+	//GEN-END:initComponents
 
 	/**
 	 * @param args
@@ -408,7 +405,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		});
 	}
 
-	// GEN-BEGIN:variables
+	//GEN-BEGIN:variables
 	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
 	private javax.swing.ButtonGroup backgroundButtonGroup;
@@ -445,7 +442,6 @@ public class MainWindow extends javax.swing.JFrame implements
 	private javax.swing.JMenuItem saveAsMenuItem;
 	private javax.swing.JMenuItem saveMenuItem;
 	private javax.swing.JMenuItem selectAllMenuItem;
-	private javax.swing.JMenuItem selectMenuItem;
 	private javax.swing.JRadioButtonMenuItem squaresRadioButtonMenuItem;
 	private javax.swing.JMenuItem undoMenuItem;
 	private javax.swing.JRadioButtonMenuItem usStandardRadioButtonMenuItem;
@@ -464,6 +460,9 @@ public class MainWindow extends javax.swing.JFrame implements
 					&& palette.getSelectedComponent() != null) {
 				mc.addComponent(palette.getSelectedComponent(),
 						canvasEvt.getPoint());
+			}
+			else if(canvasEvt.getAction() == CanvasAction.SELECT){
+				mc.selectComponent(canvasEvt.getPoint());
 			}
 		}
 
