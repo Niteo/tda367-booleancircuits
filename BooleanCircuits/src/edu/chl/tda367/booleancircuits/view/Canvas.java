@@ -23,13 +23,12 @@ import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 public class Canvas implements IObservable {
 
 	public static enum CanvasAction {
-		DRAG, PLACE
+		DRAG, PLACE, SELECT
 	}
 
 	private JPanel panel;
 	private Model model;
 	private MouseAdapter mouseAdapter;
-	private CanvasEvent canvasEvent;
 	private PropertyChangeSupport propertyChangeSupport;
 
 	public Canvas() {
@@ -39,11 +38,16 @@ public class Canvas implements IObservable {
 
 			@Override
 			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount() == 2) {
-					canvasEvent = new CanvasEvent(evt.getPoint(),
-							CanvasAction.PLACE);
-					propertyChangeSupport
-					.firePropertyChange("Apa", null, canvasEvent);
+				if(evt.getClickCount() == 1){
+					propertyChangeSupport.firePropertyChange("Apa",
+							null,
+							new CanvasEvent(evt.getPoint(),
+									CanvasAction.SELECT));
+				} else if (evt.getClickCount() == 2) {
+					propertyChangeSupport.firePropertyChange("Apa",
+							null,
+							new CanvasEvent(evt.getPoint(),
+									CanvasAction.PLACE));
 				}
 			}
 		};
@@ -51,13 +55,13 @@ public class Canvas implements IObservable {
 		panel = new JPanel() {
 			@Override
 			public void paint(Graphics g) {
-				// TODO implement paint
 				super.paint(g);
-				g.setColor(Color.black);
-				
 				if (model != null) {
 					for (AbstractCircuitGate circuitGate : model
 							.getComponents()) {
+						
+						
+						
 						g.drawRect((int) circuitGate.getPosition().getX(),
 								(int) circuitGate.getPosition().getY(), 80, 70);
 						g.drawString(circuitGate.toString(), (int) circuitGate
@@ -78,10 +82,6 @@ public class Canvas implements IObservable {
 	 */
 	public JPanel getCanvas() {
 		return panel;
-	}
-
-	public CanvasEvent getLastAction() {
-		return canvasEvent;
 	}
 
 	/**
