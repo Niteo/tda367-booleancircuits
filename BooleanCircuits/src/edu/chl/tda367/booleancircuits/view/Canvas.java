@@ -2,6 +2,7 @@ package edu.chl.tda367.booleancircuits.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
@@ -13,6 +14,7 @@ import javax.swing.event.MouseInputAdapter;
 import edu.chl.tda367.booleancircuits.model.IObservable;
 import edu.chl.tda367.booleancircuits.model.Model;
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.view.draw.IDraw;
 
 /**
  * A class where the components are drawn.
@@ -30,12 +32,17 @@ public class Canvas implements IObservable {
 	private Model model;
 	private MouseAdapter mouseAdapter;
 	private PropertyChangeSupport propertyChangeSupport;
+	private static IDraw drawer;
+	private int posX, posY;
+	private int zoomFactor;
 
 	public Canvas() {
+		posX = 0;
+		posY = 0;
+		zoomFactor = 0;
+		//TODO: drawer = new ();
 		propertyChangeSupport = new PropertyChangeSupport(this);
-
 		mouseAdapter = new MouseInputAdapter() {
-
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				if(evt.getClickCount() == 1){
@@ -51,22 +58,24 @@ public class Canvas implements IObservable {
 				}
 			}
 		};
-
 		panel = new JPanel() {
 			@Override
 			public void paint(Graphics g) {
 				super.paint(g);
+				// Draw background
+				drawer.drawBackground(g);
+				// Draw components
 				if (model != null) {
 					for (AbstractCircuitGate circuitGate : model
 							.getComponents()) {
-						
-						
-						
-						g.drawRect((int) circuitGate.getPosition().getX(),
-								(int) circuitGate.getPosition().getY(), 80, 70);
-						g.drawString(circuitGate.toString(), (int) circuitGate
-								.getPosition().getX(), (int) circuitGate
-								.getPosition().getY());
+						// Set color
+						if(model.isASelectedComponent(circuitGate)){
+							g.setColor(Color.BLUE);
+						} else {
+							g.setColor(Color.BLACK);
+						}
+						// Draw component
+						drawer.drawGate(g, circuitGate);
 					}
 				}
 			}
@@ -85,9 +94,9 @@ public class Canvas implements IObservable {
 	}
 
 	/**
-	 * sets the model which the canvas is currently representing
+	 * Sets the model which the canvas is currently representing
 	 * 
-	 * @param model
+	 * @param model the model to set
 	 */
 	public void setModel(Model model) {
 		this.model = model;

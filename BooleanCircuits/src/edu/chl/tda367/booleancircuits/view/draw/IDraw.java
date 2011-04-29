@@ -2,6 +2,8 @@ package edu.chl.tda367.booleancircuits.view.draw;
 
 import java.awt.Graphics;
 
+import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+
 /**
  * A drawing interface.
  * 
@@ -20,7 +22,7 @@ public interface IDraw {
 	 * Draws a gate.
 	 * @param g graphics
 	 */
-	public void drawGate(Graphics g);
+	public void drawGate(Graphics g, AbstractCircuitGate gate);
 	
 	/**
 	 * Sets the background
