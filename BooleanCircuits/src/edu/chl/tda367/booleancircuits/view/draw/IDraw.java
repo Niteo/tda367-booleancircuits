@@ -14,19 +14,32 @@ public interface IDraw {
 
 	/**
 	 * Draws a background.
-	 * @param g graphics
+	 * 
+	 * @param g
+	 *            graphics
 	 */
-	public void drawBackground(Graphics g);
+	public void drawBackground(Graphics g, int offsetX, int offsetY);
 
 	/**
 	 * Draws a gate.
-	 * @param g graphics
+	 * 
+	 * @param g
+	 *            graphics object to draw with
+	 * @param gate
+	 *            the gate to draw
+	 * @param offsetX
+	 *            offset on X-axis
+	 * @param offsetY
+	 *            offset on Y-axis
 	 */
-	public void drawGate(Graphics g, AbstractCircuitGate gate);
-	
+	public void drawGate(Graphics g, AbstractCircuitGate gate, int offsetX,
+			int offsetY);
+
 	/**
 	 * Sets the background
-	 * @param background IBackground
+	 * 
+	 * @param background
+	 *            IBackground
 	 */
 	public void setBackground(IBackground background);
 }
