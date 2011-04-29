@@ -160,15 +160,6 @@ public class ActionController implements ChangeListener {
 		}
 	};
 
-	private Action selectComponentAction = new AbstractAction() {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO get the coords of the selected component
-			mc.selectComponent(null);
-		}
-	};
-
 	/**
 	 * Returns the newWorkspace action.
 	 * 
@@ -311,15 +302,6 @@ public class ActionController implements ChangeListener {
 	 */
 	public Action getSelectAllComponentsAction() {
 		return selectAllComponentsAction;
-	}
-
-	/**
-	 * Returns the selectComponent action.
-	 * 
-	 * @return Action
-	 */
-	public Action getSelectComponentAction() {
-		return selectComponentAction;
 	}
 
 	@Override
