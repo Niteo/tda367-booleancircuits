@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.utilities.GateFactory;
+
 
 /**
  * Model for managing and updating circuit components.
@@ -29,8 +29,9 @@ public final class Model {
 	/**
 	 * Adds a component to the model.
 	 * 
-	 * @param component the new component to add
-	 * @param 
+	 * @param component
+	 *            the new component to add
+	 * @param
 	 */
 	public void addComponent(AbstractCircuitGate component, Point position) {
 		AbstractCircuitGate c = component.clone();
@@ -40,32 +41,16 @@ public final class Model {
 	}
 
 	/**
-	 * Returns a list of selected components
-	 * 
-	 * @return a list of selected components
-	 */
-	public List<AbstractCircuitGate> getSelectedComponents() {
-		List<AbstractCircuitGate> retList =
-			new ArrayList<AbstractCircuitGate>();
-		for(AbstractCircuitGate cg : selectedComponentList){
-			retList.add(cg.clone());
-		}
-		
-		return retList;
-	}
-
-	/**
 	 * Returns a list of components
 	 * 
 	 * @return a list of components
 	 */
 	public List<AbstractCircuitGate> getComponents() {
-		List<AbstractCircuitGate> retList =
-			new ArrayList<AbstractCircuitGate>();
-		for(AbstractCircuitGate cg : componentList){
+		List<AbstractCircuitGate> retList = new ArrayList<AbstractCircuitGate>();
+		for (AbstractCircuitGate cg : componentList) {
 			retList.add(cg.clone());
 		}
-		
+
 		return retList;
 	}
 
@@ -90,20 +75,22 @@ public final class Model {
 		// TODO: :(
 		int sizeX = 20, sizeY = 20;
 		// TODO: THE VARIABLES ABOVE... FIIIIIIIX!
-		for(AbstractCircuitGate acg : componentList){
+		for (AbstractCircuitGate acg : componentList) {
 			// Check X
-			if(position.getX() >= acg.getPosition().getX() - sizeX * 0.5f &&
-					position.getX() <= acg.getPosition().getX() + sizeX * 0.5f){
+			if (position.getX() >= acg.getPosition().getX() - sizeX * 0.5f
+					&& position.getX() <= acg.getPosition().getX() + sizeX
+							* 0.5f) {
 				// Check Y
-				if(position.getY() >= acg.getPosition().getY() - sizeY * 0.5f &&
-						position.getY() <= acg.getPosition().getY() + sizeY * 0.5f){
+				if (position.getY() >= acg.getPosition().getY() - sizeY * 0.5f
+						&& position.getY() <= acg.getPosition().getY() + sizeY
+								* 0.5f) {
 					// Component was selected
-					if(selectedComponentList.contains(acg)){
+					if (selectedComponentList.contains(acg)) {
 						selectedComponentList.remove(acg);
 					} else {
 						selectedComponentList.add(acg);
-					}					
-				}	
+					}
+				}
 			}
 		}
 	}
@@ -117,6 +104,20 @@ public final class Model {
 		}
 		selectedComponentList.clear();
 		updateComponents();
+	}
+
+	/**
+	 * returns whether a component is selected or not
+	 * @param component
+	 * @return boolean: true if the given component is selected, in other case false.
+	 */
+	public boolean isASelectedComponent(AbstractCircuitGate component) {
+		for (int i = 0; i < selectedComponentList.size(); i++) {
+			if (selectedComponentList.contains(component)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void updateComponents() {
