@@ -39,11 +39,10 @@ public class MainWindow extends javax.swing.JFrame implements
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int tabCount = cs.getTab().getTabbedPane().getTabCount();
+			int tabCount = cs.getTabManager().getTabCount();
 			JButton button = (JButton) e.getSource();
 			for (int i = 0; i < tabCount; i++) {
-				if (button == ((TabPanel) cs.getTab().getTabbedPane()
-						.getTabComponentAt(i)).getCloseButton()) {
+				if (button == cs.getTabManager().getTabPanel(i).getCloseButton()) {
 					mc.closeWorkspace(i);
 					return;
 				}
@@ -57,7 +56,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		mm.addPropertyChangeListener(this);
 		mc = new MasterController(mm);
 		actionController = new ActionController(mc);
-		cs = new CenterStage(closeWorkspace);
+		cs = new CenterStage(closeWorkspace, this);
 
 		initComponents();
 		initToolbar();
@@ -72,8 +71,6 @@ public class MainWindow extends javax.swing.JFrame implements
 		mc.newWorkspace();
 		initTabbedPane();
 		setTitle("Boolean Circuits");
-
-		cs.getCanvas().addPropertyChangeListener(this);
 	}
 
 	private void initToolbar() {
@@ -236,10 +233,7 @@ public class MainWindow extends javax.swing.JFrame implements
 	}
 
 	private void initTabbedPane() {
-		cs.getTab().getTabbedPane()
-				.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		cs.getTab().getTabbedPane().setSelectedIndex(0);
-		cs.getTab().getTabbedPane().addChangeListener(actionController);
+		cs.getTabManager().getTabbedPane().addChangeListener(actionController);
 	}
 
 	// GEN-BEGIN:initComponents
@@ -465,7 +459,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		if (evt.getSource() instanceof ModelManager) {
 			cs.update((ModelManager) evt.getSource());
 		} else if (evt.getSource() instanceof Canvas) {
-			CanvasEvent canvasEvt = cs.getCanvas().getLastAction();
+			CanvasEvent canvasEvt = (CanvasEvent) evt.getNewValue();
 			if (canvasEvt.getAction() == CanvasAction.PLACE
 					&& palette.getSelectedComponent() != null) {
 				mc.addComponent(palette.getSelectedComponent(),

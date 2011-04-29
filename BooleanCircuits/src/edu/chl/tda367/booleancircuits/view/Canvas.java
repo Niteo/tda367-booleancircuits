@@ -43,7 +43,7 @@ public class Canvas implements IObservable {
 					canvasEvent = new CanvasEvent(evt.getPoint(),
 							CanvasAction.PLACE);
 					propertyChangeSupport
-					.firePropertyChange("Apa", true, false);
+					.firePropertyChange("Apa", null, canvasEvent);
 				}
 			}
 		};
