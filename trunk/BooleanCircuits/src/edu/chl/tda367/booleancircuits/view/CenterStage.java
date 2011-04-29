@@ -23,24 +23,24 @@ public class CenterStage {
 
 	private JPanel centerStagePanel = new JPanel();
 	private List<Model> tabIdList = new LinkedList<Model>();
-	private TabManager tab = new TabManager();
-	private JTabbedPane tabbedPane = tab.getTabbedPane();
+	private TabManager tabManager = new TabManager();
 	private Action closeWorkspace;
-	private Canvas canvas;
+	private MainWindow mainWindow;
 
 	/** Returns an instance of Canvas. */
-	public CenterStage(Action closeWorkspace) {
-		centerStagePanel.add(tabbedPane);
+	public CenterStage(Action closeWorkspace, MainWindow mainWindow) {
+		centerStagePanel.add(tabManager.getTabbedPane());
 		centerStagePanel.setLayout(new GridLayout(1, 1));
 		this.closeWorkspace = closeWorkspace;
-
-		canvas = new Canvas();
+		this.mainWindow = mainWindow;
 	}
 
-	private void newTab(String s) {
-		tab.addTab(s, canvas);
-		TabPanel tabPanel = (TabPanel) tab.getTabbedPane().getTabComponentAt(
-				tab.getTabbedPane().getTabCount() - 1);
+	private void newTab(String s, Model m) {
+		Canvas canvas=new Canvas();
+		canvas.setModel(m);
+		canvas.addPropertyChangeListener(mainWindow);
+		tabManager.addTab(s, canvas);
+		TabPanel tabPanel = tabManager.getLastTabPanel();
 		tabPanel.getCloseButton().setAction(closeWorkspace);
 	}
 
@@ -50,16 +50,13 @@ public class CenterStage {
 	 * @param modelManager
 	 */
 	public synchronized void update(ModelManager modelManager) {
-		if(modelManager.getActiveWorkspaceIndex() >=0){
-			canvas.setModel(modelManager.getActiveWorkspaceModel());
-		}
 
 		List<Model> modelList = modelManager.getWorkspaces();
 
 		for (int i = 0; i < modelList.size(); i++) {
 			if (!tabIdList.contains(modelList.get(i))) {
 				tabIdList.add(modelList.get(i));
-				newTab(modelList.get(i).toString());
+				newTab(modelList.get(i).toString(), modelManager.getActiveWorkspaceModel());
 			}
 		}
 
@@ -72,21 +69,20 @@ public class CenterStage {
 
 		if (modelList.isEmpty()) {
 			tabIdList.clear();
-			tabbedPane.removeAll();
+			tabManager.removeAllTabs();
 
 		} else {
 			for (Integer i : removeList) {
 				tabIdList.remove((int) i);
-				tabbedPane.remove((int) i);
+				tabManager.removeTab((int) i);
 			}
 		}
 
 		if (modelManager.getActiveWorkspaceIndex() >= 1) {
-			tabbedPane.setSelectedIndex(modelManager.getActiveWorkspaceIndex());
+			tabManager.setSelectedTabIndex(modelManager.getActiveWorkspaceIndex());
 		}
 
-		tabbedPane.repaint();
-		tabbedPane.revalidate();
+		tabManager.updateTabbedPane();
 	}
 
 	/**
@@ -99,21 +95,12 @@ public class CenterStage {
 	}
 
 	/**
-	 * Returns the canvas.
+	 * Returns the tabManager.
 	 * 
-	 * @return Canvas
+	 * @return TabManager
 	 */
-	public Canvas getCanvas() {
-		return canvas;
-	}
-
-	/**
-	 * Returns the tab.
-	 * 
-	 * @return Tab
-	 */
-	public TabManager getTab() {
-		return tab;
+	public TabManager getTabManager() {
+		return tabManager;
 	}
 
 }
