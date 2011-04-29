@@ -14,6 +14,7 @@ import javax.swing.event.MouseInputAdapter;
 import edu.chl.tda367.booleancircuits.model.IObservable;
 import edu.chl.tda367.booleancircuits.model.Model;
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.view.draw.Draw;
 import edu.chl.tda367.booleancircuits.view.draw.IDraw;
 
 /**
@@ -40,20 +41,22 @@ public class Canvas implements IObservable {
 		posX = 0;
 		posY = 0;
 		zoomFactor = 0;
-		//TODO: drawer = new ();
+		drawer = new Draw();
 		propertyChangeSupport = new PropertyChangeSupport(this);
 		mouseAdapter = new MouseInputAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
+				Point pointClicked = new Point(evt.getX() + posX, evt.getY() + posY);
+				
 				if(evt.getClickCount() == 1){
 					propertyChangeSupport.firePropertyChange("Apa",
 							null,
-							new CanvasEvent(evt.getPoint(),
+							new CanvasEvent(pointClicked,
 									CanvasAction.SELECT));
 				} else if (evt.getClickCount() == 2) {
 					propertyChangeSupport.firePropertyChange("Apa",
 							null,
-							new CanvasEvent(evt.getPoint(),
+							new CanvasEvent(pointClicked,
 									CanvasAction.PLACE));
 				}
 			}
@@ -63,7 +66,7 @@ public class Canvas implements IObservable {
 			public void paint(Graphics g) {
 				super.paint(g);
 				// Draw background
-				drawer.drawBackground(g);
+				drawer.drawBackground(g, posX, posY);
 				// Draw components
 				if (model != null) {
 					for (AbstractCircuitGate circuitGate : model
@@ -75,7 +78,7 @@ public class Canvas implements IObservable {
 							g.setColor(Color.BLACK);
 						}
 						// Draw component
-						drawer.drawGate(g, circuitGate);
+						drawer.drawGate(g, circuitGate, posX, posY);
 					}
 				}
 			}
