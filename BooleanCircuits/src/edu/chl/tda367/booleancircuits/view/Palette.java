@@ -49,12 +49,7 @@ public final class Palette {
 			initComponentNodes(temp, folder);
 			rootNode.add(temp);
 		}
-		// Test
-		DefaultMutableTreeNode hipHop = new DefaultMutableTreeNode("HipHop");
-		DefaultMutableTreeNode artist = new DefaultMutableTreeNode("Q-tip");
-		hipHop.add(artist);
 
-		rootNode.add(hipHop);
 
 		componentTree = new JTree(rootNode);
 		componentTree.setRootVisible(false);
