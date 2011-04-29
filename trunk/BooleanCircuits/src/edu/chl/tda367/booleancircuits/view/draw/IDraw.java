@@ -22,4 +22,9 @@ public interface IDraw {
 	 */
 	public void drawGate(Graphics g);
 	
+	/**
+	 * Sets the background
+	 * @param background IBackground
+	 */
+	public void setBackground(IBackground background);
 }
