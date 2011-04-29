@@ -185,8 +185,8 @@ public class MainWindow extends javax.swing.JFrame implements
 
 		backgroundMenu.setText("Background");
 		blankRadioButtonMenuItem.setText("Blank");
-		dotsRadioButtonMenuItem.setText("Dots");
-		squaresRadioButtonMenuItem.setText("Squares");
+		dotsRadioButtonMenuItem.setText("Dotted");
+		squaresRadioButtonMenuItem.setText("Squared");
 
 		// Insert menu
 		componentMenuItem.setText("Component...");
