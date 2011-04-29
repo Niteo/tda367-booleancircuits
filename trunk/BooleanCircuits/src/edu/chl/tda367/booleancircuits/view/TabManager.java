@@ -17,7 +17,7 @@ import javax.swing.border.LineBorder;
  * @author Boel
  * 
  */
-public final class Tab {
+public final class TabManager {
 
 	private JTabbedPane tabbedPane = new JTabbedPane();
 	private Canvas canvas;

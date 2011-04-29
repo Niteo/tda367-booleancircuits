@@ -23,7 +23,7 @@ public class CenterStage {
 
 	private JPanel centerStagePanel = new JPanel();
 	private List<Model> tabIdList = new LinkedList<Model>();
-	private Tab tab = new Tab();
+	private TabManager tab = new TabManager();
 	private JTabbedPane tabbedPane = tab.getTabbedPane();
 	private Action closeWorkspace;
 	private Canvas canvas;
@@ -112,7 +112,7 @@ public class CenterStage {
 	 * 
 	 * @return Tab
 	 */
-	public Tab getTab() {
+	public TabManager getTab() {
 		return tab;
 	}
 
