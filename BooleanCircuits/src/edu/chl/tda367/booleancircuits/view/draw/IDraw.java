@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.view.draw;
 
 import java.awt.Graphics;
+import java.awt.Point;
 
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 
@@ -17,8 +18,10 @@ public interface IDraw {
 	 * 
 	 * @param g
 	 *            graphics
+	 * @param offset
+	 *            Point offset values
 	 */
-	public void drawBackground(Graphics g, int offsetX, int offsetY);
+	public void drawBackground(Graphics g, Point offset);
 
 	/**
 	 * Draws a gate.
@@ -27,13 +30,10 @@ public interface IDraw {
 	 *            graphics object to draw with
 	 * @param gate
 	 *            the gate to draw
-	 * @param offsetX
-	 *            offset on X-axis
-	 * @param offsetY
-	 *            offset on Y-axis
+	 * @param offset
+	 *            Point offset values
 	 */
-	public void drawGate(Graphics g, AbstractCircuitGate gate, int offsetX,
-			int offsetY);
+	public void drawGate(Graphics g, AbstractCircuitGate gate, Point offset);
 
 	/**
 	 * Sets the background

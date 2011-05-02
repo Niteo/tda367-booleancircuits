@@ -66,7 +66,7 @@ public class Canvas implements IObservable {
 			public void paint(Graphics g) {
 				super.paint(g);
 				// Draw background
-				drawer.drawBackground(g, posX, posY);
+				drawer.drawBackground(g, new Point(posX, posY));
 				// Draw components
 				if (model != null) {
 					for (AbstractCircuitGate circuitGate : model
@@ -78,7 +78,7 @@ public class Canvas implements IObservable {
 							g.setColor(Color.BLACK);
 						}
 						// Draw component
-						drawer.drawGate(g, circuitGate, posX, posY);
+						drawer.drawGate(g, circuitGate, new Point(posX, posY));
 					}
 				}
 			}
