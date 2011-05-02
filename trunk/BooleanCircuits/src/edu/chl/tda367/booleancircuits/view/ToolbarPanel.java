@@ -166,11 +166,6 @@ public class ToolbarPanel extends javax.swing.JPanel {
 		add(saveAsComponentButton);
 
 		cutButton.setPreferredSize(new java.awt.Dimension(20, 20));
-		cutButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				cutButtonActionPerformed(evt);
-			}
-		});
 		add(cutButton);
 
 		copyButton.setPreferredSize(new java.awt.Dimension(20, 20));
@@ -186,10 +181,6 @@ public class ToolbarPanel extends javax.swing.JPanel {
 		add(redoButton);
 	}// </editor-fold>
 	//GEN-END:initComponents
-
-	private void cutButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
 
 	//GEN-BEGIN:variables
 	// Variables declaration - do not modify
