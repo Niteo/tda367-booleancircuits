@@ -11,6 +11,8 @@ import javax.swing.JTabbedPane;
 
 import edu.chl.tda367.booleancircuits.model.Model;
 import edu.chl.tda367.booleancircuits.model.ModelManager;
+import edu.chl.tda367.booleancircuits.view.draw.DottedBackground;
+import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 
 /**
  * A class that represents a workspace with a panel and potentially several
@@ -36,7 +38,7 @@ public class CenterStage {
 	}
 
 	private void newTab(String s, Model m) {
-		Canvas canvas=new Canvas();
+		Canvas canvas = new Canvas();
 		canvas.setModel(m);
 		canvas.addPropertyChangeListener(mainWindow);
 		tabManager.addTab(s, canvas);
@@ -56,7 +58,8 @@ public class CenterStage {
 		for (int i = 0; i < modelList.size(); i++) {
 			if (!tabIdList.contains(modelList.get(i))) {
 				tabIdList.add(modelList.get(i));
-				newTab(modelList.get(i).toString(), modelManager.getActiveWorkspaceModel());
+				newTab(modelList.get(i).toString(),
+						modelManager.getActiveWorkspaceModel());
 			}
 		}
 
@@ -79,7 +82,8 @@ public class CenterStage {
 		}
 
 		if (modelManager.getActiveWorkspaceIndex() >= 1) {
-			tabManager.setSelectedTabIndex(modelManager.getActiveWorkspaceIndex());
+			tabManager.setSelectedTabIndex(modelManager
+					.getActiveWorkspaceIndex());
 		}
 
 		tabManager.updateTabbedPane();
@@ -101,6 +105,16 @@ public class CenterStage {
 	 */
 	public TabManager getTabManager() {
 		return tabManager;
+	}
+
+	/**
+	 * Sets the background of the canvas.
+	 * 
+	 * @param background
+	 *            IBackground
+	 */
+	public void setBackground(IBackground background) {
+		Canvas.setBackground(background);
 	}
 
 }
