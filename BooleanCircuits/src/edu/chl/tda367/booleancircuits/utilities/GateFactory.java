@@ -22,20 +22,20 @@ public final class GateFactory {
 	 * @return: returns a new instance of the component
 	 */
 	public static AbstractCircuitGate getNewComponent(
-			AbstractCircuitGate component) {
-		AbstractCircuitGate newComponent = null;
-		try {
-			newComponent = component.getClass().newInstance();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// TODO: Check if ret == null? Maybe? :)
-
+		AbstractCircuitGate component) {
+			AbstractCircuitGate newComponent = null;
+			try {
+				newComponent = component.getClass().newInstance();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+			// TODO: Check if ret == null? Maybe? :)
+	
 		return newComponent;
 	}
 
