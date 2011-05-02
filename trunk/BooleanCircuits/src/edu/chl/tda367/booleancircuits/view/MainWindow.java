@@ -23,7 +23,7 @@ import edu.chl.tda367.booleancircuits.model.ModelManager;
 import edu.chl.tda367.booleancircuits.view.Canvas.CanvasAction;
 import edu.chl.tda367.booleancircuits.view.draw.BlankBackground;
 import edu.chl.tda367.booleancircuits.view.draw.DottedBackground;
-import edu.chl.tda367.booleancircuits.view.draw.SquaredBackground;
+import edu.chl.tda367.booleancircuits.view.draw.GridBackground;
 
 /**
  * The Main window
@@ -38,24 +38,21 @@ public class MainWindow extends javax.swing.JFrame implements
 	private CenterStage cs;
 	private ActionController actionController;
 	private Palette palette = new Palette();
-	
-	
-	private ActionListener listener = new ActionListener(){
+
+	private ActionListener listener = new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource()==dotsRadioButtonMenuItem){
+			if (e.getSource() == dotsRadioButtonMenuItem) {
 				cs.setBackground(new DottedBackground());
-			}
-			else if(e.getSource()==squaresRadioButtonMenuItem){
-				cs.setBackground(new SquaredBackground());
-			}
-			else if(e.getSource()==blankRadioButtonMenuItem){
+			} else if (e.getSource() == gridRadioButtonMenuItem) {
+				cs.setBackground(new GridBackground());
+			} else if (e.getSource() == blankRadioButtonMenuItem) {
 				cs.setBackground(new BlankBackground());
 			}
-			
+
 		}
-		
+
 	};
 
 	private Action closeWorkspace = new AbstractAction("", new ImageIcon(
@@ -83,8 +80,8 @@ public class MainWindow extends javax.swing.JFrame implements
 		actionController = new ActionController(mc);
 		cs = new CenterStage(closeWorkspace, this);
 
-		cs.setBackground(new SquaredBackground());
-		
+		cs.setBackground(new GridBackground());
+
 		initComponents();
 		initToolbar();
 		initMenu();
@@ -143,13 +140,12 @@ public class MainWindow extends javax.swing.JFrame implements
 		 * usStandardRadioButtonMenuItem.setAction(actionController);
 		 * 
 		 */
-		
-		 // init background menu
-		 dotsRadioButtonMenuItem.addActionListener(listener);
-		 squaresRadioButtonMenuItem.addActionListener(listener);
-		 blankRadioButtonMenuItem.addActionListener(listener);
-		 squaresRadioButtonMenuItem.setSelected(true);
 
+		// init background menu
+		dotsRadioButtonMenuItem.addActionListener(listener);
+		gridRadioButtonMenuItem.addActionListener(listener);
+		blankRadioButtonMenuItem.addActionListener(listener);
+		gridRadioButtonMenuItem.setSelected(true);
 
 		// init insert menu
 		componentMenuItem.setAction(actionController.getAddComponentAction());
@@ -215,7 +211,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		backgroundMenu.setText("Background");
 		blankRadioButtonMenuItem.setText("Blank");
 		dotsRadioButtonMenuItem.setText("Dotted");
-		squaresRadioButtonMenuItem.setText("Squared");
+		gridRadioButtonMenuItem.setText("Grid");
 
 		// Insert menu
 		componentMenuItem.setText("Component...");
@@ -264,7 +260,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		cs.getTabManager().getTabbedPane().addChangeListener(actionController);
 	}
 
-	// GEN-BEGIN:initComponents
+	//GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
@@ -302,7 +298,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		backgroundMenu = new javax.swing.JMenu();
 		blankRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
 		dotsRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-		squaresRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+		gridRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
 		insertMenu = new javax.swing.JMenu();
 		componentMenuItem = new javax.swing.JMenuItem();
 		helpMenu = new javax.swing.JMenu();
@@ -384,9 +380,9 @@ public class MainWindow extends javax.swing.JFrame implements
 		dotsRadioButtonMenuItem.setSelected(true);
 		backgroundMenu.add(dotsRadioButtonMenuItem);
 
-		backgroundButtonGroup.add(squaresRadioButtonMenuItem);
-		squaresRadioButtonMenuItem.setSelected(true);
-		backgroundMenu.add(squaresRadioButtonMenuItem);
+		backgroundButtonGroup.add(gridRadioButtonMenuItem);
+		gridRadioButtonMenuItem.setSelected(true);
+		backgroundMenu.add(gridRadioButtonMenuItem);
 
 		viewMenu.add(backgroundMenu);
 
@@ -419,7 +415,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 		pack();
 	}// </editor-fold>
-		// GEN-END:initComponents
+	//GEN-END:initComponents
 
 	/**
 	 * @param args
@@ -434,7 +430,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		});
 	}
 
-	// GEN-BEGIN:variables
+	//GEN-BEGIN:variables
 	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
 	private javax.swing.ButtonGroup backgroundButtonGroup;
@@ -454,6 +450,7 @@ public class MainWindow extends javax.swing.JFrame implements
 	private javax.swing.JSeparator fileSeparator1;
 	private javax.swing.JSeparator fileSeparator2;
 	private javax.swing.JSeparator fileSeparator3;
+	private javax.swing.JRadioButtonMenuItem gridRadioButtonMenuItem;
 	private javax.swing.JMenu helpMenu;
 	private javax.swing.JMenuItem helpMenuItem;
 	private javax.swing.JSplitPane horizontalSplitPane;
@@ -471,7 +468,6 @@ public class MainWindow extends javax.swing.JFrame implements
 	private javax.swing.JMenuItem saveAsMenuItem;
 	private javax.swing.JMenuItem saveMenuItem;
 	private javax.swing.JMenuItem selectAllMenuItem;
-	private javax.swing.JRadioButtonMenuItem squaresRadioButtonMenuItem;
 	private javax.swing.JMenuItem undoMenuItem;
 	private javax.swing.JRadioButtonMenuItem usStandardRadioButtonMenuItem;
 	private javax.swing.JSplitPane verticalSplitPane;

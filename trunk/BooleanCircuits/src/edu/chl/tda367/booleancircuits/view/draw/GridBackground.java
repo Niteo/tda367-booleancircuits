@@ -13,7 +13,7 @@ import edu.chl.tda367.booleancircuits.utilities.Constants;
  * @author Boel
  * 
  */
-public class SquaredBackground implements IBackground {
+public class GridBackground implements IBackground {
 
 	@Override
 	public void draw(Graphics g, Point offset, Dimension canvasSize) {

@@ -115,6 +115,7 @@ public class CenterStage {
 	 */
 	public void setBackground(IBackground background) {
 		Canvas.setBackground(background);
+		tabManager.updateTabbedPane();
 	}
 
 }
