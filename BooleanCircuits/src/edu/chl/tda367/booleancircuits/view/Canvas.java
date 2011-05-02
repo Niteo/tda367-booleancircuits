@@ -15,6 +15,7 @@ import edu.chl.tda367.booleancircuits.model.IObservable;
 import edu.chl.tda367.booleancircuits.model.Model;
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.view.draw.Draw;
+import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 import edu.chl.tda367.booleancircuits.view.draw.IDraw;
 
 /**
@@ -33,7 +34,7 @@ public class Canvas implements IObservable {
 	private Model model;
 	private MouseAdapter mouseAdapter;
 	private PropertyChangeSupport propertyChangeSupport;
-	private static IDraw drawer;
+	private static IDraw drawer = new Draw();
 	private int posX, posY;
 	private int zoomFactor;
 
@@ -41,23 +42,19 @@ public class Canvas implements IObservable {
 		posX = 0;
 		posY = 0;
 		zoomFactor = 0;
-		drawer = new Draw();
 		propertyChangeSupport = new PropertyChangeSupport(this);
 		mouseAdapter = new MouseInputAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
-				Point pointClicked = new Point(evt.getX() + posX, evt.getY() + posY);
-				
-				if(evt.getClickCount() == 1){
-					propertyChangeSupport.firePropertyChange("Apa",
-							null,
-							new CanvasEvent(pointClicked,
-									CanvasAction.SELECT));
+				Point pointClicked = new Point(evt.getX() + posX, evt.getY()
+						+ posY);
+
+				if (evt.getClickCount() == 1) {
+					propertyChangeSupport.firePropertyChange("Apa", null,
+							new CanvasEvent(pointClicked, CanvasAction.SELECT));
 				} else if (evt.getClickCount() == 2) {
-					propertyChangeSupport.firePropertyChange("Apa",
-							null,
-							new CanvasEvent(pointClicked,
-									CanvasAction.PLACE));
+					propertyChangeSupport.firePropertyChange("Apa", null,
+							new CanvasEvent(pointClicked, CanvasAction.PLACE));
 				}
 			}
 		};
@@ -66,13 +63,13 @@ public class Canvas implements IObservable {
 			public void paint(Graphics g) {
 				super.paint(g);
 				// Draw background
-				drawer.drawBackground(g, new Point(posX, posY));
+				drawer.drawBackground(g, new Point(posX, posY), panel.getSize());
 				// Draw components
 				if (model != null) {
 					for (AbstractCircuitGate circuitGate : model
 							.getComponents()) {
 						// Set color
-						if(model.isASelectedComponent(circuitGate)){
+						if (model.isASelectedComponent(circuitGate)) {
 							g.setColor(Color.BLUE);
 						} else {
 							g.setColor(Color.BLACK);
@@ -99,10 +96,21 @@ public class Canvas implements IObservable {
 	/**
 	 * Sets the model which the canvas is currently representing
 	 * 
-	 * @param model the model to set
+	 * @param model
+	 *            the model to set
 	 */
 	public void setModel(Model model) {
 		this.model = model;
+	}
+
+	/**
+	 * Sets the background of the canvas.
+	 * 
+	 * @param background
+	 *            IBackground
+	 */
+	public static void setBackground(IBackground background) {
+		drawer.setBackground(background);
 	}
 
 	@Override

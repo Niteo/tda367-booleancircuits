@@ -1,5 +1,6 @@
 package edu.chl.tda367.booleancircuits.view.draw;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -20,8 +21,10 @@ public interface IDraw {
 	 *            graphics
 	 * @param offset
 	 *            Point offset values
+	 * @param canvasSize
+	 *            Dimension of the canvas
 	 */
-	public void drawBackground(Graphics g, Point offset);
+	public void drawBackground(Graphics g, Point offset, Dimension canvasSize);
 
 	/**
 	 * Draws a gate.

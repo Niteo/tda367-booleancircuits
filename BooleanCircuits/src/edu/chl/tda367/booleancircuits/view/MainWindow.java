@@ -7,6 +7,7 @@
 package edu.chl.tda367.booleancircuits.view;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -20,6 +21,9 @@ import edu.chl.tda367.booleancircuits.controller.ActionController;
 import edu.chl.tda367.booleancircuits.controller.MasterController;
 import edu.chl.tda367.booleancircuits.model.ModelManager;
 import edu.chl.tda367.booleancircuits.view.Canvas.CanvasAction;
+import edu.chl.tda367.booleancircuits.view.draw.BlankBackground;
+import edu.chl.tda367.booleancircuits.view.draw.DottedBackground;
+import edu.chl.tda367.booleancircuits.view.draw.SquaredBackground;
 
 /**
  * The Main window
@@ -34,6 +38,26 @@ public class MainWindow extends javax.swing.JFrame implements
 	private CenterStage cs;
 	private ActionController actionController;
 	private Palette palette = new Palette();
+	
+	
+	private ActionListener listener = new ActionListener(){
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource()==dotsRadioButtonMenuItem){
+				cs.setBackground(new DottedBackground());
+			}
+			else if(e.getSource()==squaresRadioButtonMenuItem){
+				cs.setBackground(new SquaredBackground());
+			}
+			else if(e.getSource()==blankRadioButtonMenuItem){
+				cs.setBackground(new BlankBackground());
+			}
+			
+		}
+		
+	};
+
 	private Action closeWorkspace = new AbstractAction("", new ImageIcon(
 			"resources/icons/cross-icon.png")) {
 
@@ -59,6 +83,8 @@ public class MainWindow extends javax.swing.JFrame implements
 		actionController = new ActionController(mc);
 		cs = new CenterStage(closeWorkspace, this);
 
+		cs.setBackground(new SquaredBackground());
+		
 		initComponents();
 		initToolbar();
 		initMenu();
@@ -116,11 +142,14 @@ public class MainWindow extends javax.swing.JFrame implements
 		 * iecStandardRadioButtonMenuItem.setAction(actionController);
 		 * usStandardRadioButtonMenuItem.setAction(actionController);
 		 * 
-		 * // init background menu
-		 * dotsRadioButtonMenuItem.setAction(actionController);
-		 * squaresRadioButtonMenuItem.setAction(actionController);
-		 * blankRadioButtonMenuItem.setAction(actionController);
 		 */
+		
+		 // init background menu
+		 dotsRadioButtonMenuItem.addActionListener(listener);
+		 squaresRadioButtonMenuItem.addActionListener(listener);
+		 blankRadioButtonMenuItem.addActionListener(listener);
+		 squaresRadioButtonMenuItem.setSelected(true);
+
 
 		// init insert menu
 		componentMenuItem.setAction(actionController.getAddComponentAction());
@@ -235,7 +264,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		cs.getTabManager().getTabbedPane().addChangeListener(actionController);
 	}
 
-	//GEN-BEGIN:initComponents
+	// GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
@@ -390,7 +419,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 		pack();
 	}// </editor-fold>
-	//GEN-END:initComponents
+		// GEN-END:initComponents
 
 	/**
 	 * @param args
@@ -405,7 +434,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		});
 	}
 
-	//GEN-BEGIN:variables
+	// GEN-BEGIN:variables
 	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
 	private javax.swing.ButtonGroup backgroundButtonGroup;
@@ -460,8 +489,7 @@ public class MainWindow extends javax.swing.JFrame implements
 					&& palette.getSelectedComponent() != null) {
 				mc.addComponent(palette.getSelectedComponent(),
 						canvasEvt.getPoint());
-			}
-			else if(canvasEvt.getAction() == CanvasAction.SELECT){
+			} else if (canvasEvt.getAction() == CanvasAction.SELECT) {
 				mc.selectComponent(canvasEvt.getPoint());
 			}
 		}
