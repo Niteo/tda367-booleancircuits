@@ -44,6 +44,7 @@ public class CenterStage {
 		tabManager.addTab(s, canvas);
 		TabPanel tabPanel = tabManager.getLastTabPanel();
 		tabPanel.getCloseButton().setAction(closeWorkspace);
+		tabPanel.getCloseButton().setToolTipText("Close");
 	}
 
 	/**
