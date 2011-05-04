@@ -109,7 +109,10 @@ public class Draw implements IDraw {
 		}
 		symbol= "&";
 		drawIEC(gate, g, offset);
-		//TODO:circle 
+		g.setColor(Color.white);
+		g.fillOval(gate.getPosition().x-offset.x+Constants.componentSize/2, gate.getPosition().y-offset.y-5, 16, 16);
+		g.setColor(color);
+		g.drawOval(gate.getPosition().x-offset.x+Constants.componentSize/2, gate.getPosition().y-offset.y-5, 16, 16);
 	}
 	private void drawOrGate(AbstractCircuitGate gate, Graphics g, Point offset) {
 		// TODO Auto-generated method stub
@@ -124,7 +127,8 @@ public class Draw implements IDraw {
 		if (isUsStandard) {
 
 		}
-		symbol = ">1";
+		
+		symbol = ">=1";
 		drawIEC(gate, g, offset);
 	}
 
@@ -145,18 +149,22 @@ public class Draw implements IDraw {
 		}
 		symbol= "=1";
 		drawIEC(gate, g, offset);
-		//TODO:circle 
-		//g.drawOval(x, y, 5, 5);
-
+		g.setColor(Color.white);
+		g.fillOval(gate.getPosition().x-offset.x+Constants.componentSize/2, gate.getPosition().y-offset.y-5, 16, 16);
+		g.setColor(color);
+		g.drawOval(gate.getPosition().x-offset.x+Constants.componentSize/2, gate.getPosition().y-offset.y-5, 16, 16);
 	}
 	private void drawNotGate(AbstractCircuitGate gate, Graphics g, Point offset) {
 		
 		if (isUsStandard) {
 			// TODO US not-gate
 		}
-		symbol = "=1";
+		symbol = "1";
 		drawIEC(gate, g, offset);
-		//TODO:circle 
+		g.setColor(Color.white);
+		g.fillOval(gate.getPosition().x-offset.x+Constants.componentSize/2, gate.getPosition().y-offset.y-5, 16, 16);
+		g.setColor(color);
+		g.drawOval(gate.getPosition().x-offset.x+Constants.componentSize/2, gate.getPosition().y-offset.y-5, 16, 16);
 
 	}
 	private void drawConstantGate(AbstractCircuitGate gate, Graphics g,
