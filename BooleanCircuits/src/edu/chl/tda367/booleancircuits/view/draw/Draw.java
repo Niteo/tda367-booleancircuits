@@ -29,42 +29,51 @@ public class Draw implements IDraw {
 
 	@Override
 	public void drawGate(Graphics g, AbstractCircuitGate gate, Point offset) {
-		g.setColor(Color.WHITE);
-		g.fillRect(
-				(gate.getPosition().x + offset.x - Constants.componentSize / 2),
-				(gate.getPosition().y + offset.y - Constants.componentSize / 2),
-				Constants.componentSize, Constants.componentSize);
-		g.setColor(Color.black);
-		g.drawRect(
-				(gate.getPosition().x + offset.x - Constants.componentSize / 2),
-				(gate.getPosition().y + offset.y - Constants.componentSize / 2),
-				Constants.componentSize, Constants.componentSize);
-		Font font = new Font("Verdana", Font.BOLD, 12);
 
-		g.drawString("&", gate.getPosition().x, gate.getPosition().y);
-
-		if (false) {
+		if (isUsStandard) {
 			g.setColor(Color.WHITE);
-			g.fillRect(
-					(gate.getPosition().x + offset.x - Constants.componentSize / 2),
-					(gate.getPosition().y + offset.y - Constants.componentSize / 2),
-					Constants.componentSize / 2, Constants.componentSize);
+			g
+					.fillRect(
+							(gate.getPosition().x + offset.x - Constants.componentSize / 2),
+							(gate.getPosition().y + offset.y - Constants.componentSize / 2),
+							Constants.componentSize / 2,
+							Constants.componentSize);
 
 			g.setColor(Color.black);
-			g.drawRect(
-					(gate.getPosition().x + offset.x - Constants.componentSize / 2),
-					(gate.getPosition().y + offset.y - Constants.componentSize / 2),
-					Constants.componentSize / 2, Constants.componentSize);
+			g
+					.drawRect(
+							(gate.getPosition().x + (offset.x) - Constants.componentSize / 2),
+							(gate.getPosition().y + (offset.y) - Constants.componentSize / 2),
+							Constants.componentSize / 2,
+							Constants.componentSize);
 			g.setColor(Color.WHITE);
-			g.fillOval(gate.getPosition().x - Constants.componentSize / 2,
-					gate.getPosition().y - Constants.componentSize / 2,
-					Constants.componentSize, Constants.componentSize);
+			g.fillOval(gate.getPosition().x - Constants.componentSize / 2, gate
+					.getPosition().y
+					- Constants.componentSize / 2, Constants.componentSize,
+					Constants.componentSize);
 		}
-
+		g.setColor(Color.WHITE);
+		g
+				.fillRect(
+						(gate.getPosition().x - offset.x - Constants.componentSize / 2),
+						(gate.getPosition().y - offset.y - Constants.componentSize / 2),
+						Constants.componentSize, Constants.componentSize);
+		g.setColor(Color.black);
+		g
+				.drawRect(
+						(gate.getPosition().x - offset.x - Constants.componentSize / 2),
+						(gate.getPosition().y - offset.y - Constants.componentSize / 2),
+						Constants.componentSize, Constants.componentSize);
+		g.drawString("&", gate.getPosition().x-offset.x, gate.getPosition().y-offset.y);
 	}
 
-	public void drawAndGate(Graphics g, AbstractCircuitGate gate, Point offset) {
+	/*public void drawAndGate(Graphics g, Compo gate, Point offset) {
 
-	}
-
+		//Font font = new Font("Verdana", Font.BOLD, 12);
+		if()){
+		g.drawString(gate.toString(), gate.getPosition().x, gate.getPosition().y);
+		}
+	}*/
+	
+	
 }
