@@ -122,7 +122,7 @@ public class CenterStage {
 	 * Sets the representation to US standard. False is international.
 	 * 
 	 * @param bool
-	 *            Booelan
+	 *            Boolean
 	 */
 	public void setUSStandard(boolean bool) {
 		Canvas.setUSStandard(bool);
