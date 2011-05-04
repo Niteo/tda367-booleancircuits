@@ -27,11 +27,10 @@ import edu.chl.tda367.booleancircuits.view.draw.IDraw;
  * 
  */
 public class Canvas implements IObservable {
-
 	public static enum CanvasAction {
 		DRAG, PLACE, SELECT
 	}
-
+	
 	private JPanel panel;
 	private Model model;
 	private MouseAdapter mouseAdapter;
@@ -39,6 +38,7 @@ public class Canvas implements IObservable {
 	private static IDraw drawer = new Draw();
 	private int posX, posY;
 	private int zoomFactor;
+	private Point oldDragPosition;
 
 	public Canvas(Model canvasModel) {
 		posX = 0;
@@ -47,6 +47,12 @@ public class Canvas implements IObservable {
 		model = canvasModel;
 		propertyChangeSupport = new PropertyChangeSupport(this);
 		mouseAdapter = new MouseInputAdapter() {
+			
+			@Override
+			public void mouseDragged(MouseEvent evt) {
+				oldDragPosition = evt.getPoint();
+			}
+			
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				Point pointClicked = new Point(evt.getX() + posX, evt.getY()
@@ -63,9 +69,7 @@ public class Canvas implements IObservable {
 										CanvasAction.PLACE));
 					}
 				} else if (evt.getButton() == MouseEvent.BUTTON3) { // RMB
-					// TODO: FIX
-					JOptionPane.showMessageDialog(null,
-							"DUNNO WHAT TO DO LOLZ... BYUE! :(");
+					// TODO: ADd stuff
 				}
 			}
 		};
@@ -94,6 +98,8 @@ public class Canvas implements IObservable {
 		panel.setBackground(Color.WHITE);
 		panel.addMouseListener(mouseAdapter);
 	}
+	
+	//public void 
 
 	/**
 	 * Returns the canvas.
@@ -102,6 +108,10 @@ public class Canvas implements IObservable {
 	 */
 	public JPanel getCanvas() {
 		return panel;
+	}
+	
+	public void setUSStandard(boolean bool){
+		
 	}
 
 	/**
