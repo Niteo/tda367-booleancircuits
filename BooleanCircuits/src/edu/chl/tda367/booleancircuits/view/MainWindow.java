@@ -34,7 +34,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		PropertyChangeListener {
 
 	private MasterController mc;
-	private Toolbar toolbar = new Toolbar();
+	private ToolbarPanel toolbar = new ToolbarPanel();
 	private CenterStage cs;
 	private ActionController actionController;
 	private Palette palette = new Palette();
@@ -88,7 +88,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		initButtons();
 		initMenuItemText();
 		initShortcuts();
-		toolbar.getToolbarPanel().initIcons();
+		toolbar.initIcons();
 
 		horizontalSplitPane.setRightComponent(cs.getPanel());
 		horizontalSplitPane.setLeftComponent(palette.getView());
@@ -98,7 +98,7 @@ public class MainWindow extends javax.swing.JFrame implements
 	}
 
 	private void initToolbar() {
-		verticalSplitPane.setTopComponent(toolbar.getToolbarPanel());
+		verticalSplitPane.setTopComponent(toolbar);
 		verticalSplitPane.setEnabled(false);
 		verticalSplitPane.setDividerSize(0);
 	}
@@ -138,7 +138,6 @@ public class MainWindow extends javax.swing.JFrame implements
 		 * representation menu
 		 * iecStandardRadioButtonMenuItem.setAction(actionController);
 		 * usStandardRadioButtonMenuItem.setAction(actionController);
-		 * 
 		 */
 
 		// init background menu
@@ -148,7 +147,8 @@ public class MainWindow extends javax.swing.JFrame implements
 		gridRadioButtonMenuItem.setSelected(true);
 
 		// init insert menu
-		componentMenuItem.setAction(actionController.getInsertComponentAction());
+		componentMenuItem
+				.setAction(actionController.getInsertComponentAction());
 
 		/*
 		 * // init help menu helpMenuItem.setAction(actionController);
@@ -159,42 +159,41 @@ public class MainWindow extends javax.swing.JFrame implements
 	private void initButtons() {
 
 		// Set actions
-		toolbar.getToolbarPanel().getCutButton()
-				.setAction(actionController.getCutSelectedComponentsAction());
-		toolbar.getToolbarPanel().getCopyButton()
-				.setAction(actionController.getCopySelectedComponentsAction());
-		toolbar.getToolbarPanel().getNewWorkspaceButton()
-				.setAction(actionController.getNewWorkspaceAction());
-		toolbar.getToolbarPanel().getOpenFileButton()
-				.setAction(actionController.getOpenWorkspaceAction());
-		toolbar.getToolbarPanel().getPasteButton()
-				.setAction(actionController.getPasteSelectedComponentAction());
-		toolbar.getToolbarPanel().getRedoButton()
-				.setAction(actionController.getRedoAction());
-		toolbar.getToolbarPanel()
-				.getSaveAsComponentButton()
-				.setAction(
-						actionController
-								.getSaveActiveWorskpaceAsComponentAction());
-		toolbar.getToolbarPanel().getSaveAllButton()
+		toolbar.getCutButton().setAction(
+				actionController.getCutSelectedComponentsAction());
+		toolbar.getCopyButton().setAction(
+				actionController.getCopySelectedComponentsAction());
+		toolbar.getNewWorkspaceButton().setAction(
+				actionController.getNewWorkspaceAction());
+		toolbar.getOpenFileButton().setAction(
+				actionController.getOpenWorkspaceAction());
+		toolbar.getPasteButton().setAction(
+				actionController.getPasteSelectedComponentAction());
+		toolbar.getRedoButton().setAction(actionController.getRedoAction());
+		toolbar.getSaveAsComponentButton().setAction(
+				actionController.getSaveActiveWorskpaceAsComponentAction());
+		toolbar.getSaveAllButton()
 				.setAction(actionController.getSaveAllWorkspacesAction());
-		toolbar.getToolbarPanel().getSaveButton()
+		toolbar.getSaveButton()
 				.setAction(actionController.getSaveActiveWorkspaceAction());
-		toolbar.getToolbarPanel().getUndoButton()
+		toolbar.getUndoButton()
 				.setAction(actionController.getUndoAction());
-		
+
 		// Tooltips
-		toolbar.getToolbarPanel().getCutButton().setToolTipText("Cut");
-		toolbar.getToolbarPanel().getCopyButton().setToolTipText("Copy");
-		toolbar.getToolbarPanel().getNewWorkspaceButton().setToolTipText("New Workspace");
-		toolbar.getToolbarPanel().getOpenFileButton().setToolTipText("Open File");
-		toolbar.getToolbarPanel().getPasteButton().setToolTipText("Paste");
-		toolbar.getToolbarPanel().getRedoButton().setToolTipText("Redo");
-		toolbar.getToolbarPanel().getSaveAsComponentButton().setToolTipText("Save As Component");
-		toolbar.getToolbarPanel().getSaveAllButton().setToolTipText("Save All");
-		toolbar.getToolbarPanel().getSaveButton().setToolTipText("Save");
-		toolbar.getToolbarPanel().getUndoButton().setToolTipText("Undo");
-		
+		toolbar.getCutButton().setToolTipText("Cut");
+		toolbar.getCopyButton().setToolTipText("Copy");
+		toolbar.getNewWorkspaceButton()
+				.setToolTipText("New Workspace");
+		toolbar.getOpenFileButton()
+				.setToolTipText("Open File");
+		toolbar.getPasteButton().setToolTipText("Paste");
+		toolbar.getRedoButton().setToolTipText("Redo");
+		toolbar.getSaveAsComponentButton()
+				.setToolTipText("Save As Component");
+		toolbar.getSaveAllButton().setToolTipText("Save All");
+		toolbar.getSaveButton().setToolTipText("Save");
+		toolbar.getUndoButton().setToolTipText("Undo");
+
 	}
 
 	private void initMenuItemText() {
@@ -274,7 +273,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		cs.getTabManager().getTabbedPane().addChangeListener(actionController);
 	}
 
-	//GEN-BEGIN:initComponents
+	// GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
@@ -429,7 +428,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 		pack();
 	}// </editor-fold>
-	//GEN-END:initComponents
+		// GEN-END:initComponents
 
 	/**
 	 * @param args
@@ -444,7 +443,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		});
 	}
 
-	//GEN-BEGIN:variables
+	// GEN-BEGIN:variables
 	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
 	private javax.swing.ButtonGroup backgroundButtonGroup;
