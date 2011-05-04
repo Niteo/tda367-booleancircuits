@@ -118,4 +118,15 @@ public class CenterStage {
 		tabManager.updateTabbedPane();
 	}
 
+	/**
+	 * Sets the representation to US standard. False is international.
+	 * 
+	 * @param bool
+	 *            Booelan
+	 */
+	public void setUSStandard(boolean bool) {
+		Canvas.setUSStandard(bool);
+		tabManager.updateTabbedPane();
+	}
+
 }

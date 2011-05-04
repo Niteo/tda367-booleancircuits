@@ -49,6 +49,10 @@ public class MainWindow extends javax.swing.JFrame implements
 				cs.setBackground(new GridBackground());
 			} else if (e.getSource() == blankRadioButtonMenuItem) {
 				cs.setBackground(new BlankBackground());
+			} else if (e.getSource() == iecStandardRadioButtonMenuItem) {
+				cs.setUSStandard(false);
+			} else if (e.getSource() == usStandardRadioButtonMenuItem) {
+				cs.setUSStandard(true);
 			}
 
 		}
@@ -133,12 +137,10 @@ public class MainWindow extends javax.swing.JFrame implements
 		selectAllMenuItem.setAction(actionController
 				.getSelectAllComponentsAction());
 
-		/*
-		 * TODO setActions for representation and help menu // init
-		 * representation menu
-		 * iecStandardRadioButtonMenuItem.setAction(actionController);
-		 * usStandardRadioButtonMenuItem.setAction(actionController);
-		 */
+		// init representation menu
+		iecStandardRadioButtonMenuItem.addActionListener(listener);
+		usStandardRadioButtonMenuItem.addActionListener(listener);
+		iecStandardRadioButtonMenuItem.setSelected(true);
 
 		// init background menu
 		dotsRadioButtonMenuItem.addActionListener(listener);
