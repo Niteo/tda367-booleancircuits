@@ -13,6 +13,7 @@ import javax.swing.event.MouseInputAdapter;
 
 import edu.chl.tda367.booleancircuits.model.IObservable;
 import edu.chl.tda367.booleancircuits.model.Model;
+import edu.chl.tda367.booleancircuits.model.ModelManager;
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.view.draw.Draw;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
@@ -38,23 +39,28 @@ public class Canvas implements IObservable {
 	private int posX, posY;
 	private int zoomFactor;
 
-	public Canvas() {
+	public Canvas(Model canvasModel) {
 		posX = 0;
 		posY = 0;
 		zoomFactor = 0;
+		model = canvasModel;
 		propertyChangeSupport = new PropertyChangeSupport(this);
 		mouseAdapter = new MouseInputAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				Point pointClicked = new Point(evt.getX() + posX, evt.getY()
 						+ posY);
-
-				if (evt.getClickCount() == 1) {
-					propertyChangeSupport.firePropertyChange("Apa", null,
-							new CanvasEvent(pointClicked, CanvasAction.SELECT));
-				} else if (evt.getClickCount() == 2) {
-					propertyChangeSupport.firePropertyChange("Apa", null,
-							new CanvasEvent(pointClicked, CanvasAction.PLACE));
+				
+				if(evt.getButton() == MouseEvent.BUTTON1){ // LMB
+					if (evt.getClickCount() == 1) {
+						propertyChangeSupport.firePropertyChange("Apa", null,
+								new CanvasEvent(pointClicked, CanvasAction.SELECT));
+					} else if (evt.getClickCount() == 2) {
+						propertyChangeSupport.firePropertyChange("Apa", null,
+								new CanvasEvent(pointClicked, CanvasAction.PLACE));
+					}
+				} else if (evt.getButton() == MouseEvent.BUTTON2) { //RMB	
+					
 				}
 			}
 		};
@@ -91,16 +97,6 @@ public class Canvas implements IObservable {
 	 */
 	public JPanel getCanvas() {
 		return panel;
-	}
-
-	/**
-	 * Sets the model which the canvas is currently representing
-	 * 
-	 * @param model
-	 *            the model to set
-	 */
-	public void setModel(Model model) {
-		this.model = model;
 	}
 
 	/**
