@@ -135,12 +135,12 @@ public class ActionController implements ChangeListener {
 		}
 	};
 
-	private Action addComponentAction = new AbstractAction() {
+	private Action insertComponentAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO get coords and component
-			mc.addComponent(null, null);
+			// TODO implement me!
+			
 		}
 	};
 
@@ -282,8 +282,8 @@ public class ActionController implements ChangeListener {
 	 * 
 	 * @return Action
 	 */
-	public Action getAddComponentAction() {
-		return addComponentAction;
+	public Action getInsertComponentAction() {
+		return insertComponentAction;
 	}
 
 	/**

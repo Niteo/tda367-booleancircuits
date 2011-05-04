@@ -148,7 +148,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		gridRadioButtonMenuItem.setSelected(true);
 
 		// init insert menu
-		componentMenuItem.setAction(actionController.getAddComponentAction());
+		componentMenuItem.setAction(actionController.getInsertComponentAction());
 
 		/*
 		 * // init help menu helpMenuItem.setAction(actionController);
