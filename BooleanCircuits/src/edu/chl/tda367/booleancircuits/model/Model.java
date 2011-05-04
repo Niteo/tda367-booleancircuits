@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.utilities.Constants;
 
 
 /**
@@ -61,37 +62,47 @@ public final class Model {
 		selectedComponentList.clear();
 		selectedComponentList.addAll(componentList);
 	}
+	
+	/**
+	 * Get component
+	 * 
+	 * @param position
+	 *            the coordinate for the component
+	 * @return the gate found. Null if no gate was found
+	 */
+	public AbstractCircuitGate getComponent(Point position) {
+		int size = Constants.componentSize;
+		for (AbstractCircuitGate acg : componentList) {
+			// Check X
+			if (position.getX() >= acg.getPosition().getX() - size * 0.5f
+					&& position.getX() <= acg.getPosition().getX() + size
+							* 0.5f) {
+				// Check Y
+				if (position.getY() >= acg.getPosition().getY() - size * 0.5f
+						&& position.getY() <= acg.getPosition().getY() + size
+								* 0.5f) {
+					// Component found
+					return acg;
+				}
+			}
+		}
+		
+		return null;
+	}
 
 	/**
 	 * Selects the first found component at the specified coordinate
 	 * 
-	 * @param coordinate
+	 * @param position
 	 *            the coordinate for the component
 	 */
 	public void selectComponent(Point position) {
-		// TODO: Change component size!!!
-		// TODO: THE ABOVE. VEVWY IMPORTANT!!
-		// TODO: I PROMIZ!!!!
-		// TODO: :(
-		int sizeX = 20, sizeY = 20;
-		// TODO: THE VARIABLES ABOVE... FIIIIIIIX!
-		for (AbstractCircuitGate acg : componentList) {
-			// Check X
-			if (position.getX() >= acg.getPosition().getX() - sizeX * 0.5f
-					&& position.getX() <= acg.getPosition().getX() + sizeX
-							* 0.5f) {
-				// Check Y
-				if (position.getY() >= acg.getPosition().getY() - sizeY * 0.5f
-						&& position.getY() <= acg.getPosition().getY() + sizeY
-								* 0.5f) {
-					// Component was selected
-					if (selectedComponentList.contains(acg)) {
-						selectedComponentList.remove(acg);
-					} else {
-						selectedComponentList.add(acg);
-					}
-				}
-			}
+		AbstractCircuitGate acg = this.getComponent(position);
+		
+		if (selectedComponentList.contains(acg)) {
+			selectedComponentList.remove(acg);
+		} else {
+			selectedComponentList.add(acg);
 		}
 	}
 
