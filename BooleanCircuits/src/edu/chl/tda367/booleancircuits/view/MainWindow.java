@@ -6,6 +6,7 @@
 
 package edu.chl.tda367.booleancircuits.view;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -99,6 +100,7 @@ public class MainWindow extends javax.swing.JFrame implements
 		mc.newWorkspace();
 		initTabbedPane();
 		setTitle("Boolean Circuits");
+		setIconImage(new ImageIcon("resources/icons/frameIcon.png").getImage());
 	}
 
 	private void initToolbar() {

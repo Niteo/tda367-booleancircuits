@@ -1,10 +1,12 @@
 package edu.chl.tda367.booleancircuits.view;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.KeyStroke;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -29,7 +31,7 @@ public final class Palette {
 
 		initPaletteTree();
 		scrollPane = new JScrollPane(componentTree);
-
+		componentTree.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK), "none");
 	}
 
 	public Palette(List<ComponentFolder> folderList) {

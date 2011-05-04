@@ -81,6 +81,7 @@ public class Canvas implements IObservable {
 					}
 				} else if (evt.getButton() == MouseEvent.BUTTON3) { // RMB
 					// TODO: ADd stuff
+					
 				}
 			}
 		};
@@ -95,7 +96,7 @@ public class Canvas implements IObservable {
 					for (AbstractCircuitGate circuitGate : model
 							.getComponents()) {
 						// Set color
-						if (model.isASelectedComponent(circuitGate)) {
+						if (model.isSelectedComponent(circuitGate)) {
 							g.setColor(Color.BLUE);
 						} else {
 							g.setColor(Color.BLACK);
@@ -104,14 +105,15 @@ public class Canvas implements IObservable {
 						drawer.drawGate(g, circuitGate, new Point(posX, posY));
 					}
 				}
+				//Draw position
+				g.setColor(Color.BLACK);
+				g.drawString("[" + posX + ", " + posY + "]", 5, 15);
 			}
 		};
 		panel.setBackground(Color.WHITE);
 		panel.addMouseListener(mouseAdapter);
 		panel.addMouseMotionListener(mouseAdapter);
 	}
-	
-	//public void 
 
 	/**
 	 * Returns the canvas.
