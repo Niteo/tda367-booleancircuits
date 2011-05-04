@@ -38,8 +38,7 @@ public class CenterStage {
 	}
 
 	private void newTab(String s, Model m) {
-		Canvas canvas = new Canvas();
-		canvas.setModel(m);
+		Canvas canvas = new Canvas(m);
 		canvas.addPropertyChangeListener(mainWindow);
 		tabManager.addTab(s, canvas);
 		TabPanel tabPanel = tabManager.getLastTabPanel();
