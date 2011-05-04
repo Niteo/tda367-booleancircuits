@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputAdapter;
 
@@ -50,17 +51,21 @@ public class Canvas implements IObservable {
 			public void mouseClicked(MouseEvent evt) {
 				Point pointClicked = new Point(evt.getX() + posX, evt.getY()
 						+ posY);
-				
-				if(evt.getButton() == MouseEvent.BUTTON1){ // LMB
+
+				if (evt.getButton() == MouseEvent.BUTTON1) { // LMB
 					if (evt.getClickCount() == 1) {
 						propertyChangeSupport.firePropertyChange("Apa", null,
-								new CanvasEvent(pointClicked, CanvasAction.SELECT));
+								new CanvasEvent(pointClicked,
+										CanvasAction.SELECT));
 					} else if (evt.getClickCount() == 2) {
 						propertyChangeSupport.firePropertyChange("Apa", null,
-								new CanvasEvent(pointClicked, CanvasAction.PLACE));
+								new CanvasEvent(pointClicked,
+										CanvasAction.PLACE));
 					}
-				} else if (evt.getButton() == MouseEvent.BUTTON2) { //RMB	
-					
+				} else if (evt.getButton() == MouseEvent.BUTTON3) { // RMB
+					// TODO: FIX
+					JOptionPane.showMessageDialog(null,
+							"DUNNO WHAT TO DO LOLZ... BYUE! :(");
 				}
 			}
 		};
