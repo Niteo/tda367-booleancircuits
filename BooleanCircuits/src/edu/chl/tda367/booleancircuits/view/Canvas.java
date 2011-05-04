@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.view;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -39,7 +40,7 @@ public class Canvas implements IObservable {
 	private int posX, posY;
 	private int zoomFactor;
 	private Point oldDragPosition;
-
+	
 	public Canvas(Model canvasModel) {
 		posX = 0;
 		posY = 0;
@@ -53,9 +54,14 @@ public class Canvas implements IObservable {
 				if(oldDragPosition != null){
 					int dx = (int)(evt.getPoint().getX() - oldDragPosition.getX());
 					int dy = (int)(evt.getPoint().getY() - oldDragPosition.getY());
-					panCanvas(dx, dy);
+					panCanvas(-dx, -dy);
 				}
 				oldDragPosition = evt.getPoint();
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent evt){
+				oldDragPosition = null;
 			}
 			
 			@Override
@@ -102,6 +108,7 @@ public class Canvas implements IObservable {
 		};
 		panel.setBackground(Color.WHITE);
 		panel.addMouseListener(mouseAdapter);
+		panel.addMouseMotionListener(mouseAdapter);
 	}
 	
 	//public void 
@@ -147,5 +154,6 @@ public class Canvas implements IObservable {
 	private void panCanvas(int dx, int dy){
 		posX += dx;
 		posY += dy;
+		panel.repaint();
 	}
 }
