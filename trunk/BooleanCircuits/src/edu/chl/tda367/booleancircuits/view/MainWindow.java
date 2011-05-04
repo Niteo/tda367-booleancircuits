@@ -158,6 +158,7 @@ public class MainWindow extends javax.swing.JFrame implements
 
 	private void initButtons() {
 
+		// Set actions
 		toolbar.getToolbarPanel().getCutButton()
 				.setAction(actionController.getCutSelectedComponentsAction());
 		toolbar.getToolbarPanel().getCopyButton()
@@ -181,6 +182,19 @@ public class MainWindow extends javax.swing.JFrame implements
 				.setAction(actionController.getSaveActiveWorkspaceAction());
 		toolbar.getToolbarPanel().getUndoButton()
 				.setAction(actionController.getUndoAction());
+		
+		// Tooltips
+		toolbar.getToolbarPanel().getCutButton().setToolTipText("Cut");
+		toolbar.getToolbarPanel().getCopyButton().setToolTipText("Copy");
+		toolbar.getToolbarPanel().getNewWorkspaceButton().setToolTipText("New Workspace");
+		toolbar.getToolbarPanel().getOpenFileButton().setToolTipText("Open File");
+		toolbar.getToolbarPanel().getPasteButton().setToolTipText("Paste");
+		toolbar.getToolbarPanel().getRedoButton().setToolTipText("Redo");
+		toolbar.getToolbarPanel().getSaveAsComponentButton().setToolTipText("Save As Component");
+		toolbar.getToolbarPanel().getSaveAllButton().setToolTipText("Save All");
+		toolbar.getToolbarPanel().getSaveButton().setToolTipText("Save");
+		toolbar.getToolbarPanel().getUndoButton().setToolTipText("Undo");
+		
 	}
 
 	private void initMenuItemText() {
