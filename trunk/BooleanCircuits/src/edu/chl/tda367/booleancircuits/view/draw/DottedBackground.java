@@ -16,13 +16,11 @@ public class DottedBackground implements IBackground {
 
 	@Override
 	public void draw(Graphics g, Point offset, Dimension canvasSize) {
-
-		int radius= (int)(Constants.canvasDotDiameter*0.5);
-		for (int x = 0; x < canvasSize.width
-				* Constants.canvasBackgroundLineDistance; x += Constants.canvasBackgroundLineDistance) {
-			for (int y = 0; y < canvasSize.height
-					* Constants.canvasBackgroundLineDistance; y += Constants.canvasBackgroundLineDistance) {
-				g.drawRect((x-radius) + (int)offset.getX() * -1, y-radius  + (int)offset.getY() * -1, Constants.canvasDotDiameter,
+		int radius= (int)(Constants.canvasDotDiameter * 0.5);
+		for (int x = 0; x < canvasSize.width + Constants.canvasBackgroundLineDistance; x += Constants.canvasBackgroundLineDistance) {
+			for (int y = 0; y < canvasSize.height + Constants.canvasBackgroundLineDistance; y += Constants.canvasBackgroundLineDistance) {
+				g.drawRect((x-radius) + ((int)offset.getX() % Constants.canvasBackgroundLineDistance)  * -1,
+						y-radius  + ((int)offset.getY() % Constants.canvasBackgroundLineDistance) * -1, Constants.canvasDotDiameter,
 						Constants.canvasDotDiameter);
 			}
 		}

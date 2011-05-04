@@ -47,12 +47,12 @@ public final class Model {
 	 * @return a list of components
 	 */
 	public List<AbstractCircuitGate> getComponents() {
-		List<AbstractCircuitGate> retList = new ArrayList<AbstractCircuitGate>();
-		for (AbstractCircuitGate cg : componentList) {
-			retList.add(cg.clone());
-		}
-
-		return retList;
+		//List<AbstractCircuitGate> retList = new ArrayList<AbstractCircuitGate>();
+		//for (AbstractCircuitGate cg : componentList) {
+		//	retList.add(cg.clone());
+		//}
+		return componentList;
+		//return retList;
 	}
 
 	/**
@@ -122,13 +122,12 @@ public final class Model {
 	 * @param component
 	 * @return boolean: true if the given component is selected, in other case false.
 	 */
-	public boolean isASelectedComponent(AbstractCircuitGate component) {
-		for (int i = 0; i < selectedComponentList.size(); i++) {
-			if (selectedComponentList.contains(component)) {
-				return true;
-			}
+	public boolean isSelectedComponent(AbstractCircuitGate component) {
+		if (selectedComponentList.contains(component)) {
+			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	private void updateComponents() {

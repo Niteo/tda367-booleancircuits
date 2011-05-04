@@ -19,11 +19,11 @@ public class GridBackground implements IBackground {
 	public void draw(Graphics g, Point offset, Dimension canvasSize) {
 		g.setColor(Color.LIGHT_GRAY);
 		for (int x = 0; x < canvasSize.width
-				* Constants.canvasBackgroundLineDistance; x += Constants.canvasBackgroundLineDistance) {
+				+ Constants.canvasBackgroundLineDistance; x += Constants.canvasBackgroundLineDistance) {
 			int xp = x + ((int)offset.getX() % Constants.canvasBackgroundLineDistance) * -1;
 			g.drawLine(xp, 0, xp, canvasSize.height);
 		}
-		for(int y=0;y<canvasSize.height* Constants.canvasBackgroundLineDistance; y+=Constants.canvasBackgroundLineDistance){
+		for(int y=0;y<canvasSize.height + Constants.canvasBackgroundLineDistance; y+=Constants.canvasBackgroundLineDistance){
 			int yp = y + ((int)offset.getY() % Constants.canvasBackgroundLineDistance) * -1;
 			g.drawLine(0, yp, canvasSize.width, yp);
 		}
