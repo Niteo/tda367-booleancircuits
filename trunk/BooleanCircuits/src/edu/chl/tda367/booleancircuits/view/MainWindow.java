@@ -172,24 +172,20 @@ public class MainWindow extends javax.swing.JFrame implements
 		toolbar.getRedoButton().setAction(actionController.getRedoAction());
 		toolbar.getSaveAsComponentButton().setAction(
 				actionController.getSaveActiveWorskpaceAsComponentAction());
-		toolbar.getSaveAllButton()
-				.setAction(actionController.getSaveAllWorkspacesAction());
-		toolbar.getSaveButton()
-				.setAction(actionController.getSaveActiveWorkspaceAction());
-		toolbar.getUndoButton()
-				.setAction(actionController.getUndoAction());
+		toolbar.getSaveAllButton().setAction(
+				actionController.getSaveAllWorkspacesAction());
+		toolbar.getSaveButton().setAction(
+				actionController.getSaveActiveWorkspaceAction());
+		toolbar.getUndoButton().setAction(actionController.getUndoAction());
 
 		// Tooltips
 		toolbar.getCutButton().setToolTipText("Cut");
 		toolbar.getCopyButton().setToolTipText("Copy");
-		toolbar.getNewWorkspaceButton()
-				.setToolTipText("New Workspace");
-		toolbar.getOpenFileButton()
-				.setToolTipText("Open File");
+		toolbar.getNewWorkspaceButton().setToolTipText("New Workspace");
+		toolbar.getOpenFileButton().setToolTipText("Open File");
 		toolbar.getPasteButton().setToolTipText("Paste");
 		toolbar.getRedoButton().setToolTipText("Redo");
-		toolbar.getSaveAsComponentButton()
-				.setToolTipText("Save As Component");
+		toolbar.getSaveAsComponentButton().setToolTipText("Save As Component");
 		toolbar.getSaveAllButton().setToolTipText("Save All");
 		toolbar.getSaveButton().setToolTipText("Save");
 		toolbar.getUndoButton().setToolTipText("Undo");
