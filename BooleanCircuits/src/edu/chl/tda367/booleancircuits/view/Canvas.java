@@ -50,6 +50,11 @@ public class Canvas implements IObservable {
 			
 			@Override
 			public void mouseDragged(MouseEvent evt) {
+				if(oldDragPosition != null){
+					int dx = (int)(evt.getPoint().getX() - oldDragPosition.getX());
+					int dy = (int)(evt.getPoint().getY() - oldDragPosition.getY());
+					panCanvas(dx, dy);
+				}
 				oldDragPosition = evt.getPoint();
 			}
 			
@@ -110,7 +115,11 @@ public class Canvas implements IObservable {
 		return panel;
 	}
 	
-	public void setUSStandard(boolean bool){
+	/**
+	 * Sets US standard. False is international.
+	 * @param bool 
+	 */
+	public static void setUSStandard(boolean bool){
 		
 	}
 
@@ -133,5 +142,10 @@ public class Canvas implements IObservable {
 	@Override
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		propertyChangeSupport.addPropertyChangeListener(listener);
+	}
+	
+	private void panCanvas(int dx, int dy){
+		posX += dx;
+		posY += dy;
 	}
 }
