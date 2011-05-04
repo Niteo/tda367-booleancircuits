@@ -18,13 +18,14 @@ public class GridBackground implements IBackground {
 	@Override
 	public void draw(Graphics g, Point offset, Dimension canvasSize) {
 		g.setColor(Color.LIGHT_GRAY);
-		//TODO: fix offset!
 		for (int x = 0; x < canvasSize.width
 				* Constants.canvasBackgroundLineDistance; x += Constants.canvasBackgroundLineDistance) {
-			g.drawLine(x, 0, x, canvasSize.height);
+			int xp = x + (int)offset.getX() * -1;
+			g.drawLine(xp, 0, xp, canvasSize.height);
 		}
 		for(int y=0;y<canvasSize.height* Constants.canvasBackgroundLineDistance; y+=Constants.canvasBackgroundLineDistance){
-			g.drawLine(0, y, canvasSize.width, y);
+			int yp = y + (int)offset.getY() * -1;
+			g.drawLine(0, yp, canvasSize.width, yp);
 		}
 	}
 
