@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.controller;
+package edu.chl.tda367.booleancircuits.controller.implementation;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
@@ -8,13 +8,15 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import edu.chl.tda367.booleancircuits.controller.IActionController;
+
 /**
  * A class to control action events.
  * 
  * @author Boel
  * 
  */
-public class ActionController implements ChangeListener {
+public class ActionController implements ChangeListener, IActionController {
 
 	private MasterController mc;
 
@@ -160,151 +162,70 @@ public class ActionController implements ChangeListener {
 		}
 	};
 
-	/**
-	 * Returns the newWorkspace action.
-	 * 
-	 * @return Action
-	 */
 	public Action getNewWorkspaceAction() {
 		return newWorkspaceAction;
 	}
 
-	/**
-	 * Returns the closeActiveWorkspace action.
-	 * 
-	 * @return Action
-	 */
 	public Action getCloseActiveWorkspaceAction() {
 		return closeActiveWorkspaceAction;
 	}
 
-	/**
-	 * Returns the closeAllWorkspaces action.
-	 * 
-	 * @return Action
-	 */
 	public Action getCloseAllWorkspacesAction() {
 		return closeAllWorkspacesAction;
 	}
 
-	/**
-	 * Returns the openWorkspace action.
-	 * 
-	 * @return Action
-	 */
 	public Action getOpenWorkspaceAction() {
 		return openWorkspaceAction;
 	}
 
-	/**
-	 * Returns the saveActiveWorkspace action.
-	 * 
-	 * @return Action
-	 */
 	public Action getSaveActiveWorkspaceAction() {
 		return saveActiveWorkspaceAction;
 	}
 
-	/**
-	 * Returns the saveActiveWorkspaceAsComponent action.
-	 * 
-	 * @return Action
-	 */
 	public Action getSaveActiveWorskpaceAsComponentAction() {
 		return saveActiveWorskpaceAsComponentAction;
 	}
 
-	/**
-	 * Returns the saveAllWorkspaces action.
-	 * 
-	 * @return Action
-	 */
 	public Action getSaveAllWorkspacesAction() {
 		return saveAllWorkspacesAction;
 	}
 
-	/**
-	 * Returns the CopySelectedComponents action.
-	 * 
-	 * @return Action
-	 */
 	public Action getCopySelectedComponentsAction() {
 		return copySelectedComponentsAction;
 	}
 
-	/**
-	 * Returns the cutSelectedComponents action.
-	 * 
-	 * @return Action
-	 */
 	public Action getCutSelectedComponentsAction() {
 		return cutSelectedComponentsAction;
 	}
 
-	/**
-	 * Returns the pasteSelectedComponent action.
-	 * 
-	 * @return Action
-	 */
 	public Action getPasteSelectedComponentAction() {
 		return pasteSelectedComponentAction;
 	}
 
-	/**
-	 * Returns the undo action.
-	 * 
-	 * @return Action
-	 */
 	public Action getUndoAction() {
 		return undoAction;
 	}
 
-	/**
-	 * Returns the redo action.
-	 * 
-	 * @return Action
-	 */
 	public Action getRedoAction() {
 		return redoAction;
 	}
 
-	/**
-	 * Returns the exit action.
-	 * 
-	 * @return Action
-	 */
 	public Action getExitAction() {
 		return exitAction;
 	}
 
-	/**
-	 * Returns the addComponent action.
-	 * 
-	 * @return Action
-	 */
 	public Action getInsertComponentAction() {
 		return insertComponentAction;
 	}
 
-	/**
-	 * Returns the removeSelectedComponents action.
-	 * 
-	 * @return Action
-	 */
 	public Action getRemoveSelectedComponentsAction() {
 		return removeSelectedComponentsAction;
 	}
 
-	/**
-	 * Returns the selectAllComponents action.
-	 * 
-	 * @return Action
-	 */
 	public Action getSelectAllComponentsAction() {
 		return selectAllComponentsAction;
 	}
 
-	@Override
 	public void stateChanged(ChangeEvent e) {
 		JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
 		int selectedIndex = tabbedPane.getSelectedIndex();
