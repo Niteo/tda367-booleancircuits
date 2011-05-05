@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import edu.chl.tda367.booleancircuits.model.IModel;
+import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.implementation.Model;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.view.ICenterStage;
@@ -25,7 +26,7 @@ import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 public class CenterStage implements ICenterStage {
 
 	private JPanel centerStagePanel = new JPanel();
-	private List<IModel> tabIdList = new LinkedList<IModel>();
+	private List<Model> tabIdList = new LinkedList<Model>();
 	private TabManager tabManager = new TabManager();
 	private Action closeWorkspace;
 	private MainWindow mainWindow;
@@ -38,8 +39,8 @@ public class CenterStage implements ICenterStage {
 		this.mainWindow = mainWindow;
 	}
 
-	private void newTab(String s, IModel m) {
-		Canvas canvas = new Canvas(m);
+	private void newTab(String s, IModel m, ISelectionModel sm) {
+		Canvas canvas = new Canvas(m, sm);
 		canvas.addPropertyChangeListener(mainWindow);
 		tabManager.addTab(s, canvas);
 		TabPanel tabPanel = tabManager.getLastTabPanel();
@@ -55,7 +56,8 @@ public class CenterStage implements ICenterStage {
 			if (!tabIdList.contains(modelList.get(i))) {
 				tabIdList.add(modelList.get(i));
 				newTab(modelList.get(i).toString(),
-						modelManager.getActiveWorkspaceModel());
+						modelManager.getActiveWorkspaceModel(),
+						modelManager.get);
 			}
 		}
 
