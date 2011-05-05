@@ -3,6 +3,7 @@ package edu.chl.tda367.booleancircuits.view.implementation;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -92,7 +93,7 @@ public class Canvas implements IObservable {
 					if(gate == null){
 						jpm.add(new JMenuItem("LOLFAG. NO COMPONENTS THERE! >:"));
 					} else {
-						jpm.add(new CanvasPopup(gate.getNoOfInputs()));
+						jpm = new CanvasPopup(gate.getNoOfInputs());
 					}
 					
 					jpm.show(evt.getComponent(),
@@ -105,26 +106,27 @@ public class Canvas implements IObservable {
 		panel = new JPanel() {
 			@Override
 			public void paint(Graphics g) {
-				super.paint(g);
+				Graphics2D g2d = (Graphics2D)g;
+				super.paint(g2d);
 				// Draw background
-				drawer.drawBackground(g, new Point(posX, posY), panel.getSize());
+				drawer.drawBackground(g2d, new Point(posX, posY), panel.getSize());
 				// Draw components
 				if (model != null) {
 					for (AbstractCircuitGate circuitGate : model
 							.getComponents()) {
 						// Set color
 						if (selectModel.isSelectedComponent(circuitGate)) { // TODO: <----FIX THIS SHIT
-							g.setColor(Color.BLUE);
+							g2d.setColor(Color.BLUE);
 						} else {
-							g.setColor(Color.BLACK);
+							g2d.setColor(Color.BLACK);
 						}
 						// Draw component
-						drawer.drawGate(g, circuitGate, new Point(posX, posY));
+						drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
 					}
 				}
 				//Draw position
-				g.setColor(Color.BLACK);
-				g.drawString("[" + posX + ", " + posY + "]", 5, 15);
+				g2d.setColor(Color.BLACK);
+				g2d.drawString("[" + posX + ", " + posY + "]", 5, 15);
 			}
 		};
 		panel.setBackground(Color.WHITE);
