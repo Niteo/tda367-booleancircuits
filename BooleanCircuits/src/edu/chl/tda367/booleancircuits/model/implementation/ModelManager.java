@@ -124,7 +124,7 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void selectAllComponents() {
-		getActiveSelectionModel().selectAllComponents(
+		_getActiveSelectionModel().selectAllComponents(
 				modelList.get(selectedIndex).getComponents());
 	}
 
