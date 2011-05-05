@@ -26,11 +26,8 @@ public class Draw implements IDraw {
 		background.draw(g, offset, canvasSize);
 	}
 
-	/*
-	 * sets the standard to the US standard
-	 */
-	public void setUsStandard() {
-		isUsStandard = true;
+	public void setUsStandard(boolean standard) {
+		isUsStandard = standard ;
 	}
 
 	@Override
@@ -61,20 +58,21 @@ public class Draw implements IDraw {
 
 		g.setColor(Color.WHITE);
 		g
-				.fillRect(
+				.fill3DRect(
 						(gate.getPosition().x - offset.x - Constants.componentSize / 2),
 						(gate.getPosition().y - offset.y - Constants.componentSize / 2),
-						Constants.componentSize, Constants.componentSize);
+						Constants.componentSize, Constants.componentSize,true);
 		g.setColor(color);
 
 		g
-				.drawRect(
+				.draw3DRect(
 						(gate.getPosition().x - offset.x - Constants.componentSize / 2),
 						(gate.getPosition().y - offset.y - Constants.componentSize / 2),
-						Constants.componentSize, Constants.componentSize);
-		g.drawString(symbol, gate.getPosition().x - offset.x, gate
+						Constants.componentSize, Constants.componentSize,true);
+		g.setFont(new Font("Verdana",Font.BOLD,18));
+		g.drawString(symbol, gate.getPosition().x - offset.x- Constants.componentSize / 4, gate
 				.getPosition().y
-				- offset.y);
+				- offset.y+ Constants.componentSize / 4);
 	}
 
 	private void drawAndGate(AbstractCircuitGate gate, Graphics g, Point offset) {
@@ -82,23 +80,23 @@ public class Draw implements IDraw {
 		if (isUsStandard) {
 			g.setColor(Color.WHITE);
 			g
-					.fillRect(
-							(gate.getPosition().x + offset.x - Constants.componentSize / 2),
-							(gate.getPosition().y + offset.y - Constants.componentSize / 2),
+					.fill3DRect(
+							(gate.getPosition().x - offset.x - Constants.componentSize / 2),
+							(gate.getPosition().y - offset.y - Constants.componentSize / 2),
 							Constants.componentSize / 2,
-							Constants.componentSize);
+							Constants.componentSize,true);
 
 			g.setColor(color);
 			g
-					.drawRect(
-							(gate.getPosition().x + (offset.x) - Constants.componentSize / 2),
-							(gate.getPosition().y + (offset.y) - Constants.componentSize / 2),
+					.draw3DRect(
+							(gate.getPosition().x - (offset.x) - Constants.componentSize / 2),
+							(gate.getPosition().y - (offset.y) - Constants.componentSize / 2),
 							Constants.componentSize / 2,
-							Constants.componentSize);
+							Constants.componentSize,true);
 			g.setColor(Color.WHITE);
-			g.fillOval(gate.getPosition().x - Constants.componentSize / 2, gate
+			g.fillOval(gate.getPosition().x - Constants.componentSize / 2- (offset.x), gate
 					.getPosition().y
-					- Constants.componentSize / 2, Constants.componentSize,
+					- Constants.componentSize / 2- (offset.y), Constants.componentSize,
 					Constants.componentSize);
 			g.setColor(color);
 			g.drawArc(gate.getPosition().x - (offset.x)
@@ -116,23 +114,23 @@ public class Draw implements IDraw {
 		if (isUsStandard) {
 			g.setColor(Color.WHITE);
 			g
-					.fillRect(
-							(gate.getPosition().x + offset.x - Constants.componentSize / 2),
-							(gate.getPosition().y + offset.y - Constants.componentSize / 2),
+					.fill3DRect(
+							(gate.getPosition().x - offset.x - Constants.componentSize / 2),
+							(gate.getPosition().y - offset.y - Constants.componentSize / 2),
 							Constants.componentSize / 2,
-							Constants.componentSize);
+							Constants.componentSize,true);
 
 			g.setColor(color);
 			g
-					.drawRect(
-							(gate.getPosition().x + (offset.x) - Constants.componentSize / 2),
-							(gate.getPosition().y + (offset.y) - Constants.componentSize / 2),
+					.draw3DRect(
+							(gate.getPosition().x - (offset.x) - Constants.componentSize / 2),
+							(gate.getPosition().y - (offset.y) - Constants.componentSize / 2),
 							Constants.componentSize / 2,
-							Constants.componentSize);
+							Constants.componentSize,true);
 			g.setColor(Color.WHITE);
-			g.fillOval(gate.getPosition().x - Constants.componentSize / 2, gate
+			g.fillOval(gate.getPosition().x -(offset.x)- Constants.componentSize / 2, gate
 					.getPosition().y
-					- Constants.componentSize / 2, Constants.componentSize,
+					- Constants.componentSize / 2-(offset.y), Constants.componentSize,
 					Constants.componentSize);
 			g.setColor(color);
 			g.drawArc(gate.getPosition().x - (offset.x)
@@ -140,13 +138,13 @@ public class Draw implements IDraw {
 					- (offset.y) - Constants.componentSize / 2,
 					Constants.componentSize, Constants.componentSize, -90, 180);
 			g.setColor(Color.white);
-			g.fillOval(gate.getPosition().x - offset.x
-					+ Constants.componentSize / 2, gate.getPosition().y
+			g.fillOval(gate.getPosition().x - offset.x+Constants.componentSize / 2
+					, gate.getPosition().y
 					- offset.y - 5, Constants.componentCircleRadius,
 					Constants.componentCircleRadius);
 			g.setColor(color);
-			g.drawOval(gate.getPosition().x - offset.x
-					+ Constants.componentSize / 2, gate.getPosition().y
+			g.drawOval(gate.getPosition().x - offset.x+Constants.componentSize / 2
+					, gate.getPosition().y
 					- offset.y - 5, 10, 10);
 
 		} else {

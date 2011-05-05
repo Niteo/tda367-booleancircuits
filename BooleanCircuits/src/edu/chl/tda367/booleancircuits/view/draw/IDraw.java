@@ -50,6 +50,6 @@ public interface IDraw {
 	/**
 	 * sets the standard to the US standard
 	 */
-	public void setUsStandard();
+	public void setUsStandard(boolean standard);
 	
 }

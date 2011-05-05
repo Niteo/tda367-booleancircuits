@@ -140,10 +140,10 @@ public class Canvas implements IObservable {
 	
 	/**
 	 * Sets US standard. False is international.
-	 * @param bool 
+	 * @param standard if true, the standard is set to the US standard. 
 	 */
-	public static void setUSStandard(boolean bool){
-		drawer.setUsStandard();
+	public static void setUSStandard(boolean standard){
+		drawer.setUsStandard(standard);
 	}
 
 	/**
