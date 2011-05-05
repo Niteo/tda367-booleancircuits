@@ -87,7 +87,7 @@ public class Canvas implements IObservable {
 					}
 				} else if (evt.getButton() == MouseEvent.BUTTON3) { // RMB
 					
-					AbstractCircuitGate gate = model.getComponent(evt.getPoint());
+					AbstractCircuitGate gate = model.getComponent(pointClicked);
 					JPopupMenu jpm = new JPopupMenu();
 					
 					if(gate == null){
