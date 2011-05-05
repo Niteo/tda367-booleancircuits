@@ -146,7 +146,7 @@ public class Canvas implements IObservable {
 	 * @param bool 
 	 */
 	public static void setUSStandard(boolean bool){
-		drawer.setUsStandard();
+		drawer.setUsStandard(bool);
 	}
 
 	/**
