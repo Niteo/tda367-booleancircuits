@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.view.draw;
+package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,6 +8,7 @@ import java.awt.Point;
 
 import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 import edu.chl.tda367.booleancircuits.utilities.Constants;
+import edu.chl.tda367.booleancircuits.view.draw.*;
 
 public class Draw implements IDraw {
 	private IBackground background;
@@ -183,8 +184,9 @@ public class Draw implements IDraw {
 	}
 
 	/*
-	 * Font font = new Font("Verdana", Font.BOLD, 12); if()){
+	 * Font font = new Font("Verdana", Font.BOLD, 12);
+	 *  
 	 * g.drawString(gate.toString(), gate.getPosition().x,
-	 * gate.getPosition().y); }
+	 * gate.getPosition().y); 
 	 */
 }
