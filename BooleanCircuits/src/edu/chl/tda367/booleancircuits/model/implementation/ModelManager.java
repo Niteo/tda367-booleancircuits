@@ -126,13 +126,14 @@ public final class ModelManager implements IObservable, IModelManager {
 	public void selectAllComponents() {
 		_getActiveSelectionModel().selectAllComponents(
 				modelList.get(selectedIndex).getComponents());
+		firePropertyChanged();
 	}
 
 	@Override
 	public void selectComponent(Point position) {
 		_getActiveSelectionModel().selectComponent(
 				modelList.get(selectedIndex).getComponent(position));
-
+		firePropertyChanged();
 	}
 
 	@Override
