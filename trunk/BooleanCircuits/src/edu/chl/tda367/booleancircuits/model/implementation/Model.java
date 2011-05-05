@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.model;
+package edu.chl.tda367.booleancircuits.model.implementation;
 
 import java.awt.Point;
 import java.util.*;
@@ -27,13 +27,7 @@ public final class Model {
 		this.name = name;
 	}
 
-	/**
-	 * Adds a component to the model.
-	 * 
-	 * @param component
-	 *            the new component to add
-	 * @param
-	 */
+
 	public void addComponent(AbstractCircuitGate component, Point position) {
 		AbstractCircuitGate c = component.clone();
 		c.setPosition(position);
@@ -41,11 +35,7 @@ public final class Model {
 		updateComponents();
 	}
 
-	/**
-	 * Returns a list of components
-	 * 
-	 * @return a list of components
-	 */
+
 	public List<AbstractCircuitGate> getComponents() {
 		//List<AbstractCircuitGate> retList = new ArrayList<AbstractCircuitGate>();
 		//for (AbstractCircuitGate cg : componentList) {
@@ -55,21 +45,12 @@ public final class Model {
 		//return retList;
 	}
 
-	/**
-	 * Selects all components in the model.
-	 */
 	public void selectAllComponents() {
 		selectedComponentList.clear();
 		selectedComponentList.addAll(componentList);
 	}
 	
-	/**
-	 * Get component
-	 * 
-	 * @param position
-	 *            the coordinate for the component
-	 * @return the gate found. Null if no gate was found
-	 */
+
 	public AbstractCircuitGate getComponent(Point position) {
 		int size = Constants.componentSize;
 		for (AbstractCircuitGate acg : componentList) {
@@ -90,12 +71,6 @@ public final class Model {
 		return null;
 	}
 
-	/**
-	 * Selects the first found component at the specified coordinate
-	 * 
-	 * @param position
-	 *            the coordinate for the component
-	 */
 	public void selectComponent(Point position) {
 		AbstractCircuitGate acg = this.getComponent(position);
 		
@@ -106,9 +81,7 @@ public final class Model {
 		}
 	}
 
-	/**
-	 * Removes the components that are selected
-	 */
+
 	public void removeSelectedComponents() {
 		for (AbstractCircuitGate i : selectedComponentList) {
 			componentList.remove(i);
@@ -117,11 +90,7 @@ public final class Model {
 		updateComponents();
 	}
 
-	/**
-	 * returns whether a component is selected or not
-	 * @param component
-	 * @return boolean: true if the given component is selected, in other case false.
-	 */
+
 	public boolean isSelectedComponent(AbstractCircuitGate component) {
 		if (selectedComponentList.contains(component)) {
 			return true;
@@ -163,9 +132,7 @@ public final class Model {
 		}
 	}
 
-	/**
-	 * Returns the name of the workspace
-	 */
+
 	@Override
 	public String toString() {
 		return name;
