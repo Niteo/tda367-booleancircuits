@@ -26,7 +26,7 @@ import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 public class CenterStage implements ICenterStage {
 
 	private JPanel centerStagePanel = new JPanel();
-	private List<Model> tabIdList = new LinkedList<Model>();
+	private List<IModel> tabIdList = new LinkedList<IModel>();
 	private TabManager tabManager = new TabManager();
 	private Action closeWorkspace;
 	private MainWindow mainWindow;
@@ -57,7 +57,7 @@ public class CenterStage implements ICenterStage {
 				tabIdList.add(modelList.get(i));
 				newTab(modelList.get(i).toString(),
 						modelManager.getActiveWorkspaceModel(),
-						modelManager.get);
+						modelManager.getActiveSelectionModel());
 			}
 		}
 
