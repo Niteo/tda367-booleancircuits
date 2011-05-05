@@ -70,7 +70,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		return modelList.get(selectedIndex);
 	}
 
-	public Collection<Model> getWorkspaces() {
+	public ArrayList<Model> getWorkspaces() {
 		return modelList;
 	}
 	
