@@ -16,6 +16,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.event.MouseInputAdapter;
 
 import edu.chl.tda367.booleancircuits.model.IModel;
+import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.Model;
 import edu.chl.tda367.booleancircuits.utilities.IObservable;
@@ -36,6 +37,7 @@ public class Canvas implements IObservable {
 	
 	private JPanel panel;
 	private IModel model;
+	private ISelectionModel selectModel;
 	private MouseAdapter mouseAdapter;
 	private PropertyChangeSupport propertyChangeSupport;
 	private static IDraw drawer = new Draw();
@@ -43,11 +45,12 @@ public class Canvas implements IObservable {
 	private int zoomFactor;
 	private Point oldDragPosition;
 	
-	public Canvas(IModel canvasModel) {
+	public Canvas(IModel canvasModel, ISelectionModel selectionModel) {
 		posX = 0;
 		posY = 0;
 		zoomFactor = 0;
 		model = canvasModel;
+		selectModel = selectionModel;
 		propertyChangeSupport = new PropertyChangeSupport(this);
 		mouseAdapter = new MouseInputAdapter() {
 			
@@ -83,13 +86,13 @@ public class Canvas implements IObservable {
 					}
 				} else if (evt.getButton() == MouseEvent.BUTTON3) { // RMB
 					
-					AbstractCircuitGate banan = model.getComponent(evt.getPoint());
+					AbstractCircuitGate gate = model.getComponent(evt.getPoint());
 					JPopupMenu jpm = new JPopupMenu();
 					
-					if(banan == null){
+					if(gate == null){
 						jpm.add(new JMenuItem("LOLFAG. NO COMPONENTS THERE! >:"));
 					} else {
-						jpm.add(new JMenuItem(banan.toString()));
+						jpm.add(new CanvasPopup(gate.getNoOfInputs()));
 					}
 					
 					jpm.show(evt.getComponent(),
@@ -110,7 +113,7 @@ public class Canvas implements IObservable {
 					for (AbstractCircuitGate circuitGate : model
 							.getComponents()) {
 						// Set color
-						if (true) { // TODO: <----FIX THIS SHIT
+						if (selectModel.isSelectedComponent(circuitGate)) { // TODO: <----FIX THIS SHIT
 							g.setColor(Color.BLUE);
 						} else {
 							g.setColor(Color.BLACK);
@@ -140,10 +143,10 @@ public class Canvas implements IObservable {
 	
 	/**
 	 * Sets US standard. False is international.
-	 * @param standard if true, the standard is set to the US standard. 
+	 * @param bool 
 	 */
-	public static void setUSStandard(boolean standard){
-		drawer.setUsStandard(standard);
+	public static void setUSStandard(boolean bool){
+		drawer.setUsStandard();
 	}
 
 	/**
