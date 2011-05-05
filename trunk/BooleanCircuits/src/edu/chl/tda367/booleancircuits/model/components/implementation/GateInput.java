@@ -1,5 +1,7 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+
 /**
  * Represents input-ports in a gate.
  * @author Kaufmann

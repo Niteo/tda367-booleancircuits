@@ -1,53 +1,44 @@
-package edu.chl.tda367.booleancircuits.model;
+package edu.chl.tda367.booleancircuits.model.implementation;
 
 import java.awt.Point;
-import java.beans.*;
-import java.util.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.IModelManager;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.implementation.*;
+import edu.chl.tda367.booleancircuits.utilities.IObservable;
 
 /**
  * A class which manages Models as workspaces.
  * 
  * @author Kaufmann
  */
-public final class ModelManager implements IObservable {
+public final class ModelManager implements IObservable, IModelManager {
 
 	private List<Model> modelList;
 	private int selectedIndex;
 	private static int workspaceCount = 1;
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-	/**
-	 * Creates an instance of ModelManager.
-	 */
 	public ModelManager() {
 		modelList = new ArrayList<Model>();
 		selectedIndex = -1;
 	}
 
-	/**
-	 * Creates a new workspace and makes it active.
-	 */
 	public void newWorkspace() {
 		addWorkspace(new Model("Untitled " + workspaceCount));
 	}
 
-	/**
-	 * Adds a new workspace and makes it active.
-	 * 
-	 * @param workspace
-	 *            the workspace to be added
-	 */
 	public void addWorkspace(Model workspace) {
 		modelList.add(workspace);
 		_setActiveWorkspace(modelList.size() - 1);
 		workspaceCount++;
 	}
 
-	/**
-	 * Closes the active workspace.
-	 */
 	public void closeActiveWorkspace() {
 		if (selectedIndex < 0 || selectedIndex >= modelList.size()) {
 			return;
@@ -57,110 +48,46 @@ public final class ModelManager implements IObservable {
 		}
 	}
 
-	/**
-	 * Closes all workspaces.
-	 */
 	public void closeAllWorkspaces() {
 		modelList.removeAll(modelList);
 		_setActiveWorkspace(-1);
 	}
 
-	/**
-	 * Closes a specific workspace.
-	 * 
-	 * @param i
-	 *            int index of the workspace
-	 */
 	public void closeWorkspace(int i) {
 		removeModel(i);
 	}
 
-	/**
-	 * Sets the currently active workspace.
-	 * 
-	 * @param i
-	 *            int index of the workspace
-	 */
 	public void setActiveWorkspace(int i) {
 		_setActiveWorkspace(i);
 	}
 
-	/**
-	 * Returns the index of the active workspace.
-	 * 
-	 * @return int index of the workspace
-	 */
 	public int getActiveWorkspaceIndex() {
 		return selectedIndex;
 	}
 
-	/**
-	 * Returns the active workspace model.
-	 * 
-	 * @return Model the active workspace to return.
-	 */
 	public Model getActiveWorkspaceModel() {
 		return modelList.get(selectedIndex);
 	}
 
-	/**
-	 * Returns all workspaces.
-	 * 
-	 * @return list of all workspaces.
-	 */
 	public List<Model> getWorkspaces() {
 		return modelList;
 	}
 	
-	public void undo(){
-		//TODO: undo method
-	}
-	public void redo(){
-		//TODO: re-do method
-	}
-	
-	public void copy(){
-		//TODO: copy method
-	}
-	public void cut(){
-		//TODO: cut method
-	}
-	public void paste(Point position){
-		//TODO: cut method 
-	}
-	
-	//Component methods
-	
-	/**
-	 * Adds a CircuitComponent in the palette to the
-	 * specified coordinate in the active workspace.
-	 * @param component the component to add
-	 * @param coord the coordinate to add to
-	 */
 	public void addComponent(AbstractCircuitGate component, Point position){
 		getActiveWorkspaceModel().addComponent(component, position);
 		firePropertyChanged();
 	}
 
-	/**
-	 * Removes the currently selected component(s) in the active workspace.
-	 */
 	public void removeSelectedComponents(){
 		getActiveWorkspaceModel().removeSelectedComponents();
 		firePropertyChanged();
 	}
-	/**
-	 * Selects all components in the active workspace.
-	 */
+	
 	public void selectAllComponents(){
 		getActiveWorkspaceModel().selectAllComponents();
 		firePropertyChanged();
 	}
-	/**
-	 * Selects the first occurance of a component at the given coordinate
-	 * in the active workspace
-	 * @param coord the coordinate to select from
-	 */
+	
 	public void selectComponent(Point position){
 		getActiveWorkspaceModel().selectComponent(position);
 		firePropertyChanged();

@@ -1,11 +1,10 @@
-package edu.chl.tda367.booleancircuits.model.components;
+package edu.chl.tda367.booleancircuits.model;
 
 import java.awt.Point;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.utilities.Constants;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 public interface IModel {
 

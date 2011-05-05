@@ -1,7 +1,7 @@
 package edu.chl.tda367.booleancircuits.controller;
 
 import java.awt.Point;
-import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
  * Controller for ModelManager.

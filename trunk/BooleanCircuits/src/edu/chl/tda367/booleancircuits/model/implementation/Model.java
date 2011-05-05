@@ -3,14 +3,14 @@ package edu.chl.tda367.booleancircuits.model.implementation;
 import java.awt.Point;
 import java.util.*;
 
-import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.IModel;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.utilities.Constants;
-
 
 /**
  * Model for managing and updating circuit components.
  */
-public final class Model {
+public final class Model implements IModel{
 	private String name;
 	private final List<AbstractCircuitGate> componentList;
 	private final List<AbstractCircuitGate> selectedComponentList;
@@ -37,12 +37,7 @@ public final class Model {
 
 
 	public List<AbstractCircuitGate> getComponents() {
-		//List<AbstractCircuitGate> retList = new ArrayList<AbstractCircuitGate>();
-		//for (AbstractCircuitGate cg : componentList) {
-		//	retList.add(cg.clone());
-		//}
 		return componentList;
-		//return retList;
 	}
 
 	public void selectAllComponents() {
