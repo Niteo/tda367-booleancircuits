@@ -16,7 +16,6 @@ import javax.swing.event.MouseInputAdapter;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.Model;
 import edu.chl.tda367.booleancircuits.utilities.IObservable;
-import edu.chl.tda367.booleancircuits.view.draw.Draw;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 import edu.chl.tda367.booleancircuits.view.draw.IDraw;
 
