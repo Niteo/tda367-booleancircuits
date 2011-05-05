@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.model;
+package edu.chl.tda367.booleancircuits.utilities;
 
 import java.beans.PropertyChangeListener;
 
