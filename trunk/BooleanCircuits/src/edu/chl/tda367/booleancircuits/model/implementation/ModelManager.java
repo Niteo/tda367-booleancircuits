@@ -78,18 +78,8 @@ public final class ModelManager implements IObservable, IModelManager {
 		firePropertyChanged();
 	}
 
-	public void removeSelectedComponents(){
-		getActiveWorkspaceModel().removeSelectedComponents();
-		firePropertyChanged();
-	}
-	
-	public void selectAllComponents(){
-		getActiveWorkspaceModel().selectAllComponents();
-		firePropertyChanged();
-	}
-	
-	public void selectComponent(Point position){
-		getActiveWorkspaceModel().selectComponent(position);
+	public void removeComponents(List<AbstractCircuitGate> list){
+		getActiveWorkspaceModel().removeComponents(list);
 		firePropertyChanged();
 	}
 

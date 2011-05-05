@@ -74,15 +74,15 @@ public final class MasterController implements IMasterController {
 	}
 
 	public void removeSelectedComponents(){
-		mm.removeSelectedComponents();
+		throw new UnsupportedOperationException();
 	}
 	
 	public void selectAllComponents(){
-		mm.selectAllComponents();
+		throw new UnsupportedOperationException();
 	}
 	
 	public void selectComponent(Point position){
-		mm.selectComponent(position);
+		throw new UnsupportedOperationException();
 	}
 	
 	public void copySelectedComponents(){
