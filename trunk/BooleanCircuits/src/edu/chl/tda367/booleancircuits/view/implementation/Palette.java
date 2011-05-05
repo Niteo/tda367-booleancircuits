@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.view;
+package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -12,26 +12,25 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import edu.chl.tda367.booleancircuits.io.ComponentFolder;
-import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.view.IPalette;
 
-public final class Palette {
+public final class Palette implements IPalette {
 
 	private JScrollPane scrollPane;
 	private List<ComponentFolder> folderList;
-	// Just for Test
-	private List<String> folderTestList;
 	private JTree componentTree;
 	private AbstractCircuitGate selectedComponent;
 
-	// Testkonstruktor
 	public Palette() {
-		// Test
 		folderList = new ArrayList<ComponentFolder>();
 		folderList.add(new ComponentFolder());
 
 		initPaletteTree();
 		scrollPane = new JScrollPane(componentTree);
-		componentTree.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK), "none");
+		componentTree.getInputMap().put(
+				KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK),
+				"none");
 	}
 
 	public Palette(List<ComponentFolder> folderList) {
@@ -52,14 +51,12 @@ public final class Palette {
 			rootNode.add(temp);
 		}
 
-
 		componentTree = new JTree(rootNode);
 		componentTree.setRootVisible(false);
 
 		TreeSelectionListener tsl = new TreeSelectionListener() {
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
-				// TODO Auto-generated method stub
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) componentTree
 						.getLastSelectedPathComponent();
 
@@ -88,21 +85,10 @@ public final class Palette {
 
 	}
 
-	/**
-	 * Returns the scrollpane containing the panel and all visual objects of the
-	 * palette.
-	 * 
-	 * @return
-	 */
 	public JScrollPane getView() {
 		return scrollPane;
 	}
 
-	/**
-	 * Returns the component currently selected in the palette.
-	 * 
-	 * @return
-	 */
 	public AbstractCircuitGate getSelectedComponent() {
 		return selectedComponent;
 	}

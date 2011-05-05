@@ -6,7 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import edu.chl.tda367.booleancircuits.model.components.*;
+import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 import edu.chl.tda367.booleancircuits.utilities.Constants;
 
 public class Draw implements IDraw {

@@ -1,16 +1,26 @@
-package edu.chl.tda367.booleancircuits.view;
+package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Dimension;
 
 import javax.swing.*;
 
-public class TabPanel extends JPanel{
+import edu.chl.tda367.booleancircuits.view.ITabPanel;
+
+/**
+ * A graphical class containing a button and a label.
+ * 
+ * @author Boel
+ * 
+ */
+
+public class TabPanel extends JPanel implements ITabPanel {
 
 	private JButton closeButton = new JButton();
 	private JLabel titleLabel = new JLabel();
 
 	/**
 	 * Returns an instance of TabPanel.
+	 * 
 	 * @param title
 	 */
 	public TabPanel(String title) {
@@ -20,19 +30,11 @@ public class TabPanel extends JPanel{
 		add(closeButton);
 		setOpaque(false);
 	}
-	
-	/**
-	 * Sets the title of the tab panel.
-	 * @param title
-	 */
-	public void setTabPanelTitle(String title){
+
+	public void setTabPanelTitle(String title) {
 		titleLabel.setText(title);
 	}
-	
-	/**
-	 * Returns the close button
-	 * @return JButton
-	 */
+
 	public JButton getCloseButton() {
 		return closeButton;
 	}

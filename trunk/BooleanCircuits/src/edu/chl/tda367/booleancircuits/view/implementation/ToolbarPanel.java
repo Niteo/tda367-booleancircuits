@@ -4,114 +4,64 @@
  * Created on __DATE__, __TIME__
  */
 
-package edu.chl.tda367.booleancircuits.view;
+package edu.chl.tda367.booleancircuits.view.implementation;
 
 import javax.swing.*;
 
+import edu.chl.tda367.booleancircuits.view.IToolbarPanel;
+
 /**
+ * A tool bar containing several buttons.
  * 
  * @author Boel
  */
-public class ToolbarPanel extends javax.swing.JPanel {
+public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 
 	/** Creates new form ToolbarPanel */
 	public ToolbarPanel() {
 		initComponents();
 	}
 
-	/**
-	 * Returns the cut button
-	 * 
-	 * @return JButton
-	 */
 	public JButton getCutButton() {
 		return cutButton;
 	}
 
-	/**
-	 * Returns the copy button
-	 * 
-	 * @return JButton
-	 */
 	public JButton getCopyButton() {
 		return copyButton;
 	}
 
-	/**
-	 * Returns the new works space button
-	 * 
-	 * @return JButton
-	 */
 	public JButton getNewWorkspaceButton() {
 		return newWorkspaceButton;
 	}
 
-	/**
-	 * Returns the open file button
-	 * 
-	 * @return JButton
-	 */
 	public JButton getOpenFileButton() {
 		return openFileButton;
 	}
 
-	/**
-	 * Returns the paste button
-	 * 
-	 * @return JButton
-	 */
 	public JButton getPasteButton() {
 		return pasteButton;
 	}
 
-	/**
-	 * Returns the redo button
-	 * 
-	 * @return JButton
-	 */
 	public JButton getRedoButton() {
 		return redoButton;
 	}
 
-	/**
-	 * Returns the save all button
-	 * 
-	 * @return JButton
-	 */
 	public JButton getSaveAllButton() {
 		return saveAllButton;
 	}
 
-	/**
-	 * Returns the save as component button
-	 * 
-	 * @return JButton
-	 */
 	public JButton getSaveAsComponentButton() {
 		return saveAsComponentButton;
 	}
 
-	/**
-	 * Returns the save button
-	 * 
-	 * @return JButton
-	 */
 	public JButton getSaveButton() {
 		return saveButton;
 	}
 
-	/**
-	 * Returns the undo button
-	 * 
-	 * @return JButton
-	 */
 	public JButton getUndoButton() {
 		return undoButton;
 	}
 
-	/**
-	 * Sets all the toolbar icons.
-	 */
 	public void initIcons() {
 		newWorkspaceButton.setIcon(new ImageIcon(
 				"Resources/Icons/New-Document-icon.png"));
