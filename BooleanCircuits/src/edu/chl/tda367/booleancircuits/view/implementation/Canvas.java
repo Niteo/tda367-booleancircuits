@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.event.MouseInputAdapter;
 
+import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.Model;
 import edu.chl.tda367.booleancircuits.utilities.IObservable;
@@ -34,7 +35,7 @@ public class Canvas implements IObservable {
 	}
 	
 	private JPanel panel;
-	private Model model;
+	private IModel model;
 	private MouseAdapter mouseAdapter;
 	private PropertyChangeSupport propertyChangeSupport;
 	private static IDraw drawer = new Draw();
@@ -42,7 +43,7 @@ public class Canvas implements IObservable {
 	private int zoomFactor;
 	private Point oldDragPosition;
 	
-	public Canvas(Model canvasModel) {
+	public Canvas(IModel canvasModel) {
 		posX = 0;
 		posY = 0;
 		zoomFactor = 0;
