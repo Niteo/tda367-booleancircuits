@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 
 import edu.chl.tda367.booleancircuits.model.components.implementation.*;
@@ -22,7 +23,7 @@ public class Draw implements IDraw {
 	}
 
 	@Override
-	public void drawBackground(Graphics g, Point offset, Dimension canvasSize) {
+	public void drawBackground(Graphics2D g, Point offset, Dimension canvasSize) {
 		background.draw(g, offset, canvasSize);
 	}
 
@@ -30,8 +31,9 @@ public class Draw implements IDraw {
 		isUsStandard = standard ;
 	}
 
+
 	@Override
-	public void drawGate(Graphics g, AbstractCircuitGate gate, Point offset) {
+	public void drawGate(Graphics2D g, AbstractCircuitGate gate, Point offset) {
 		color = g.getColor();
 
 		if (gate instanceof AndGate) {
@@ -53,7 +55,6 @@ public class Draw implements IDraw {
 		}
 
 	}
-
 	private void drawIEC(AbstractCircuitGate gate, Graphics g, Point offset) {
 
 		g.setColor(Color.WHITE);
@@ -69,7 +70,7 @@ public class Draw implements IDraw {
 						(gate.getPosition().x - offset.x - Constants.componentSize / 2),
 						(gate.getPosition().y - offset.y - Constants.componentSize / 2),
 						Constants.componentSize, Constants.componentSize,true);
-		g.setFont(new Font("Verdana",Font.BOLD,18));
+		g.setFont(new Font("Sans serif",Font.BOLD,16));
 		g.drawString(symbol, gate.getPosition().x - offset.x- Constants.componentSize / 4, gate
 				.getPosition().y
 				- offset.y+ Constants.componentSize / 4);
@@ -178,7 +179,7 @@ public class Draw implements IDraw {
 
 		} else {
 
-			symbol = ">=1";
+			symbol = "\u2265"+"1";
 			drawIEC(gate, g, offset);
 		}
 	}
@@ -242,10 +243,7 @@ public class Draw implements IDraw {
 
 		}
 	}
-	/*
-	 * Font font = new Font("Verdana", Font.BOLD, 12);
-	 * 
-	 * g.drawString(gate.toString(), gate.getPosition().x,
-	 * gate.getPosition().y);
-	 */
+
+
+
 }
