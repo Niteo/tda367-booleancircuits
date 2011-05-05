@@ -25,7 +25,7 @@ public interface IModelManager {
 	 * @param workspace
 	 *            the workspace to be added
 	 */
-	public void addWorkspace(Model workspace);
+	public void addWorkspace(IModel workspace);
 
 	/**
 	 * Closes the active workspace.
@@ -65,14 +65,14 @@ public interface IModelManager {
 	 * 
 	 * @return Model the active workspace to return.
 	 */
-	public Model getActiveWorkspaceModel();
+	public IModel getActiveWorkspaceModel();
 
 	/**
 	 * Returns all workspaces.
 	 * 
 	 * @return list of all workspaces.
 	 */
-	public Collection<Model> getWorkspaces();
+	public Collection<IModel> getWorkspaces();
 	
 	/**
 	 * Adds a CircuitComponent in the palette to the
@@ -87,4 +87,27 @@ public interface IModelManager {
 	 * @param list collection of components to remove
 	 */
 	public void removeComponents(Collection<AbstractCircuitGate> list);
+	
+	/**
+	 * Selects all components in the collection.
+	 * 
+	 */
+	public void selectAllComponents();
+
+	/**
+	 * Selects the component at the given point in the active workspace.
+	 * 
+	 * @param position Point
+	 *            The point of the component
+	 */
+	public void selectComponent(Point position);
+
+	/**
+	 * Determinates if a component is currently selected.
+	 * 
+	 * @param g
+	 *            AbstractCircuitGate
+	 * @return boolean
+	 */
+	public boolean isSelectedComponent(AbstractCircuitGate g);
 }

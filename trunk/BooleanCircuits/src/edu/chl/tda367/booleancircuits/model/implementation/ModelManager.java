@@ -6,11 +6,11 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
+import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.IModelManager;
+import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.model.implementation.*;
 import edu.chl.tda367.booleancircuits.utilities.IObservable;
 
 /**
@@ -20,13 +20,15 @@ import edu.chl.tda367.booleancircuits.utilities.IObservable;
  */
 public final class ModelManager implements IObservable, IModelManager {
 
-	private ArrayList<Model> modelList;
+	private ArrayList<IModel> modelList;
 	private int selectedIndex;
 	private static int workspaceCount = 1;
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private ArrayList<ISelectionModel> selectionModelList;
 
 	public ModelManager() {
-		modelList = new ArrayList<Model>();
+		modelList = new ArrayList<IModel>();
+		selectionModelList = new ArrayList<ISelectionModel>();
 		selectedIndex = -1;
 	}
 
@@ -34,8 +36,9 @@ public final class ModelManager implements IObservable, IModelManager {
 		addWorkspace(new Model("Untitled " + workspaceCount));
 	}
 
-	public void addWorkspace(Model workspace) {
+	public void addWorkspace(IModel workspace) {
 		modelList.add(workspace);
+		selectionModelList.add(new SelectionModel());
 		_setActiveWorkspace(modelList.size() - 1);
 		workspaceCount++;
 	}
@@ -51,6 +54,7 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	public void closeAllWorkspaces() {
 		modelList.removeAll(modelList);
+		selectionModelList.removeAll(selectionModelList);
 		_setActiveWorkspace(-1);
 	}
 
@@ -66,20 +70,20 @@ public final class ModelManager implements IObservable, IModelManager {
 		return selectedIndex;
 	}
 
-	public Model getActiveWorkspaceModel() {
+	public IModel getActiveWorkspaceModel() {
 		return modelList.get(selectedIndex);
 	}
 
-	public ArrayList<Model> getWorkspaces() {
+	public ArrayList<IModel> getWorkspaces() {
 		return modelList;
 	}
-	
-	public void addComponent(AbstractCircuitGate component, Point position){
+
+	public void addComponent(AbstractCircuitGate component, Point position) {
 		getActiveWorkspaceModel().addComponent(component, position);
 		firePropertyChanged();
 	}
 
-	public void removeComponents(Collection<AbstractCircuitGate> list){
+	public void removeComponents(Collection<AbstractCircuitGate> list) {
 		getActiveWorkspaceModel().removeComponents(list);
 		firePropertyChanged();
 	}
@@ -107,13 +111,31 @@ public final class ModelManager implements IObservable, IModelManager {
 			return;
 		} else {
 			modelList.remove(i);
-			if(modelList.size()==0){
-				selectedIndex=-1;
-			}
-			else if(selectedIndex>=modelList.size()){
-				selectedIndex=modelList.size()-1;
+			selectionModelList.remove(i);
+			if (modelList.size() == 0) {
+				selectedIndex = -1;
+			} else if (selectedIndex >= modelList.size()) {
+				selectedIndex = modelList.size() - 1;
 			}
 			firePropertyChanged();
 		}
+	}
+
+	@Override
+	public void selectAllComponents() {
+		selectionModelList.get(selectedIndex).selectAllComponents(
+				modelList.get(selectedIndex).getComponents());
+	}
+
+	@Override
+	public void selectComponent(Point position) {
+		selectionModelList.get(selectedIndex).selectComponent(
+				modelList.get(selectedIndex).getComponent(position));
+
+	}
+
+	@Override
+	public boolean isSelectedComponent(AbstractCircuitGate g) {
+		return selectionModelList.get(selectedIndex).isSelectedComponent(g);
 	}
 }
