@@ -11,6 +11,7 @@ import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 public final class MasterController implements IMasterController {
 	
 	private ModelManager mm = null;
+	private AbstractCircuitGate connectComponent = null;
 	
 	/**
 	 * Returns an instance of a MasterController
