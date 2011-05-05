@@ -3,15 +3,7 @@ package edu.chl.tda367.booleancircuits.io;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.AndGate;
-import edu.chl.tda367.booleancircuits.model.components.ConstantGate;
-import edu.chl.tda367.booleancircuits.model.components.NandGate;
-import edu.chl.tda367.booleancircuits.model.components.NorGate;
-import edu.chl.tda367.booleancircuits.model.components.NotGate;
-import edu.chl.tda367.booleancircuits.model.components.OrGate;
-import edu.chl.tda367.booleancircuits.model.components.XnorGate;
-import edu.chl.tda367.booleancircuits.model.components.XorGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 
 /**
  * This class creates a file in which there are a number of logical components

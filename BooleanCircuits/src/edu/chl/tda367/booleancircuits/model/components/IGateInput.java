@@ -8,7 +8,7 @@ public interface IGateInput {
 	 * Returns the gate connected to the port.
 	 * @return the connected gate
 	 */
-	public AbstractCircuitGate ;
+	public AbstractCircuitGate getInputComponent();
 	
 	/**
 	 * Returns the port connected to.

@@ -4,7 +4,8 @@ import java.awt.Point;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.model.*;
-import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 
 
 public final class MasterController implements IMasterController {
@@ -93,6 +94,6 @@ public final class MasterController implements IMasterController {
 	}
 	
 	public void pasteSelectedComponent(Point position){
-		mm.paste(position);
+		throw new UnsupportedOperationException();
 	}
 }

@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
+
 public interface IAbstractCircuitGate {
 
 
