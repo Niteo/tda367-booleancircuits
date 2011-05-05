@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.model.components;
+package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 import edu.chl.tda367.booleancircuits.model.components.*;
 

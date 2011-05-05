@@ -1,8 +1,9 @@
-package edu.chl.tda367.booleancircuits.model.components;
+package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 import java.awt.Point;
 import java.util.*;
 import edu.chl.tda367.booleancircuits.model.*;
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.utilities.GateFactory;
 
 /**
@@ -10,7 +11,7 @@ import edu.chl.tda367.booleancircuits.utilities.GateFactory;
  * @author Kaufmann
  *
  */
-public abstract class AbstractCircuitGate {
+public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 	private List<GateInput> inputs;
 	private Boolean[] outputs;
 	private boolean isInTiercalculation;
@@ -60,61 +61,38 @@ public abstract class AbstractCircuitGate {
 		createInputs(in);
 	}
 	
-	/**
-	 * Overwrites gate with another one, copying all properties.
-	 * @param gate the gate to override with
-	 */
+	
 	public void overwriteGate(AbstractCircuitGate gate){
 		this.inputs = gate.inputs;
 		this.isInTiercalculation = gate.isInTiercalculation;
 		this.outputs = gate.outputs;
 	}
 	
-	/**
-	 * Connects a specific input of this component with a specific output of another component.
-	 * @param inputPort the input port of this component to connect
-	 * @param component the component to connect this component to
-	 * @param outputPort the output port to connect to
-	 */
+
 	public void connectInput(int inputPort, AbstractCircuitGate component, int outputPort){
 		inputs.get(inputPort).setInputComponent(component, outputPort);
 	}
-	/**
-	 * Retrieves the value of a specific port on this component
-	 * @param index the port to retrieve from
-	 * @return
-	 */
+
 	public boolean getOutputValue(int index){
 		return outputs[index];
 	}
 	
-	/**
-	 * Gets the number of inputs
-	 * @return number of inputs
-	 */
+	
 	public int getNoOfInputs(){
 		return inputs.size();
 	}
 	
-	/**
-	 * Gets the number of outputs
-	 * @return number of outputs
-	 */
+	
 	public int getNoOfOutputs(){
 		return outputs.length;
 	}
 	
-	/**
-	 * Updates this components output based on its input.
-	 */
+	
 	public void update(){
 		updateOutput();
 	}
 	
-	/**
-	 * Calculates the component's tier.
-	 * @return the tier of the component
-	 */
+	
 	public int getComponentTier(){
 		if(isInTiercalculation){
 			return 0;
@@ -135,36 +113,24 @@ public abstract class AbstractCircuitGate {
 		}
 	}
 	
-	/**
-	 * Gets the position of the gate
-	 * @return a reference to the position of the gate
-	 */
+	
 	public Point getPosition(){
 		return this.position;
 	}
 	
-	/**
-	 * Sets the position of the gate
-	 * @param coordinates of the gate
-	 */
+	
 	public void setPosition(Point position){
 		this.position = position;
 	}
 	
-	/**
-	 * updates the position of the gate
-	 * @param deltaX: the difference in the x-axis between the current position and the old position
-	 * @param deltaY: the difference in the y-axis between the current position and the old position
-	 */
+
 	public void move(int deltaX, int deltaY){
 		this.position = new Point(this.position.x + deltaX,
 				this.position.y + deltaY);
 	}
 	
 
-	/**
-	 * Returns a copy of the gate.
-	 */
+	
 	public AbstractCircuitGate clone(){
 		AbstractCircuitGate c = emptyGateClone();
 		
@@ -183,7 +149,7 @@ public abstract class AbstractCircuitGate {
 	}
 	
 	/**
-	 * Template-method for updating outputs of the component.
+	 * updates the output of the gate.
 	 */
 	protected abstract void updateOutput();
 	
@@ -193,8 +159,6 @@ public abstract class AbstractCircuitGate {
 	 */
 	protected abstract AbstractCircuitGate emptyGateClone();
 	
-	/**
-	 * Returns the name of the gate.
-	 */
+	
 	public abstract String toString();
 }

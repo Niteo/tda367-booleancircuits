@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.model.components;
+package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 /**
  * Class to represent a XOR gate.
