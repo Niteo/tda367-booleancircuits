@@ -46,7 +46,7 @@ bg=green</panel_attributes>
       <h>21</h>
     </coordinates>
     <panel_attributes>Save current workspace
-bg=green</panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -69,7 +69,7 @@ bg=green</panel_attributes>
       <h>28</h>
     </coordinates>
     <panel_attributes>Analyse function table
-bg=green</panel_attributes>
+bg=red</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -162,7 +162,7 @@ bg=green</panel_attributes>
       <h>21</h>
     </coordinates>
     <panel_attributes>Move
-bg=green</panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -186,7 +186,7 @@ bg=green</panel_attributes>
       <h>21</h>
     </coordinates>
     <panel_attributes>Clockpulse
-bg=green</panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -234,7 +234,7 @@ bg=yellow</panel_attributes>
       <h>21</h>
     </coordinates>
     <panel_attributes>Undo
-bg=yellow</panel_attributes>
+bg=red</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -246,7 +246,7 @@ bg=yellow</panel_attributes>
       <h>21</h>
     </coordinates>
     <panel_attributes>Redo
-bg=yellow</panel_attributes>
+bg=red</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -378,7 +378,7 @@ bg=yellow</panel_attributes>
       <h>21</h>
     </coordinates>
     <panel_attributes>Select all
-bg=yellow</panel_attributes>
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -414,7 +414,7 @@ bg=yellow</panel_attributes>
       <h>21</h>
     </coordinates>
     <panel_attributes>Save as component
-bg=yellow</panel_attributes>
+bg=red</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -531,7 +531,8 @@ bg=green</panel_attributes>
       <h>21</h>
     </coordinates>
     <panel_attributes>Close all workspaces
-bg=yellow</panel_attributes>
+bg=green
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -696,7 +697,7 @@ bg=red</panel_attributes>
       <w>84</w>
       <h>21</h>
     </coordinates>
-    <panel_attributes>Deselect
+    <panel_attributes>Deselect component
 bg=green</panel_attributes>
     <additional_attributes/>
   </element>
