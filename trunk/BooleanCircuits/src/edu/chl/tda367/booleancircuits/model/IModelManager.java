@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.model;
 
 import java.awt.Point;
+import java.util.Collection;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
@@ -71,7 +72,7 @@ public interface IModelManager {
 	 * 
 	 * @return list of all workspaces.
 	 */
-	public List<Model> getWorkspaces();
+	public Collection<Model> getWorkspaces();
 	
 	/**
 	 * Adds a CircuitComponent in the palette to the
@@ -85,5 +86,5 @@ public interface IModelManager {
 	 * Removes the components in the provided collection
 	 * @param list collection of components to remove
 	 */
-	public void removeComponents(List<AbstractCircuitGate> list);
+	public void removeComponents(Collection<AbstractCircuitGate> list);
 }

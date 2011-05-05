@@ -12,7 +12,7 @@ import edu.chl.tda367.booleancircuits.utilities.Constants;
  */
 public final class Model implements IModel{
 	private String name;
-	private final List<AbstractCircuitGate> componentList;
+	private final Collection<AbstractCircuitGate> componentList;
 
 	/**
 	 * Returns an instance of Model
@@ -32,7 +32,7 @@ public final class Model implements IModel{
 		updateComponents();
 	}
 
-	public List<AbstractCircuitGate> getComponents() {
+	public Collection<AbstractCircuitGate> getComponents() {
 		return componentList;
 	}
 
@@ -56,7 +56,7 @@ public final class Model implements IModel{
 		return null;
 	}
 
-	public void removeComponents(List<AbstractCircuitGate> list) {
+	public void removeComponents(Collection<AbstractCircuitGate> list) {
 		for (AbstractCircuitGate i : list) {
 			componentList.remove(i);
 		}

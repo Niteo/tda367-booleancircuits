@@ -5,6 +5,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.IModelManager;
@@ -19,7 +20,7 @@ import edu.chl.tda367.booleancircuits.utilities.IObservable;
  */
 public final class ModelManager implements IObservable, IModelManager {
 
-	private List<Model> modelList;
+	private ArrayList<Model> modelList;
 	private int selectedIndex;
 	private static int workspaceCount = 1;
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
@@ -69,7 +70,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		return modelList.get(selectedIndex);
 	}
 
-	public List<Model> getWorkspaces() {
+	public Collection<Model> getWorkspaces() {
 		return modelList;
 	}
 	
@@ -78,7 +79,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		firePropertyChanged();
 	}
 
-	public void removeComponents(List<AbstractCircuitGate> list){
+	public void removeComponents(Collection<AbstractCircuitGate> list){
 		getActiveWorkspaceModel().removeComponents(list);
 		firePropertyChanged();
 	}

@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.model;
 
 import java.awt.Point;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface IModel {
 	 * 
 	 * @return a list of components
 	 */
-	public List<AbstractCircuitGate> getComponents();
+	public Collection<AbstractCircuitGate> getComponents();
 
 	
 	/**
@@ -37,7 +38,7 @@ public interface IModel {
 	/**
 	 * Removes the specified components in the collection
 	 */
-	public void removeComponents(List<AbstractCircuitGate> list) ;
+	public void removeComponents(Collection<AbstractCircuitGate> list) ;
 
 	/**
 	 * Returns the name of the workspace
