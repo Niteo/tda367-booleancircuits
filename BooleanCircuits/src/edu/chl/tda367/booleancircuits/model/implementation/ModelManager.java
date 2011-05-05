@@ -83,8 +83,9 @@ public final class ModelManager implements IObservable, IModelManager {
 		firePropertyChanged();
 	}
 
-	public void removeComponents(Collection<AbstractCircuitGate> list) {
-		getActiveWorkspaceModel().removeComponents(list);
+	public void removeSelectedComponents() {
+		getActiveWorkspaceModel().removeComponents(
+				selectionModelList.get(selectedIndex).getSelectedComponents());
 		firePropertyChanged();
 	}
 
@@ -123,19 +124,28 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void selectAllComponents() {
-		selectionModelList.get(selectedIndex).selectAllComponents(
+		getActiveSelectionModel().selectAllComponents(
 				modelList.get(selectedIndex).getComponents());
 	}
 
 	@Override
 	public void selectComponent(Point position) {
-		selectionModelList.get(selectedIndex).selectComponent(
+		_getActiveSelectionModel().selectComponent(
 				modelList.get(selectedIndex).getComponent(position));
 
 	}
 
 	@Override
 	public boolean isSelectedComponent(AbstractCircuitGate g) {
-		return selectionModelList.get(selectedIndex).isSelectedComponent(g);
+		return _getActiveSelectionModel().isSelectedComponent(g);
+	}
+
+	@Override
+	public ISelectionModel getActiveSelectionModel() {
+		return _getActiveSelectionModel();
+	}
+	
+	private ISelectionModel _getActiveSelectionModel(){
+		return selectionModelList.get(selectedIndex);
 	}
 }

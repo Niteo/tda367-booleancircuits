@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.model;
 
 import java.util.Collection;
+import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
@@ -41,4 +42,10 @@ public interface ISelectionModel {
 	 * Removes all elements that are unused.
 	 */
 	public void removeUnusedElements();
+	
+	/**
+	 * Returns a list of the selected components.
+	 * @return List
+	 */
+	public List<AbstractCircuitGate> getSelectedComponents();
 }

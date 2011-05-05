@@ -47,4 +47,9 @@ public class SelectionModel implements ISelectionModel {
 		selectedComponentList.remove(null);
 	}
 
+	@Override
+	public List<AbstractCircuitGate> getSelectedComponents() {
+		return selectedComponentList;
+	}
+
 }

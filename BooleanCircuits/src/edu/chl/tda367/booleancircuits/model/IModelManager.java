@@ -2,10 +2,7 @@ package edu.chl.tda367.booleancircuits.model;
 
 import java.awt.Point;
 import java.util.Collection;
-import java.util.List;
-
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.model.implementation.Model;
 
 /**
  * A class which manages Models as workspaces.
@@ -68,26 +65,35 @@ public interface IModelManager {
 	public IModel getActiveWorkspaceModel();
 
 	/**
+	 * returns the active selection model.
+	 * 
+	 * @return ISelectionModel the active selection model
+	 */
+	public ISelectionModel getActiveSelectionModel();
+
+	/**
 	 * Returns all workspaces.
 	 * 
 	 * @return list of all workspaces.
 	 */
 	public Collection<IModel> getWorkspaces();
-	
+
 	/**
-	 * Adds a CircuitComponent in the palette to the
-	 * specified coordinate in the active workspace.
-	 * @param component the component to add
-	 * @param coord the coordinate to add to
+	 * Adds a CircuitComponent in the palette to the specified coordinate in the
+	 * active workspace.
+	 * 
+	 * @param component
+	 *            the component to add
+	 * @param coord
+	 *            the coordinate to add to
 	 */
 	public void addComponent(AbstractCircuitGate component, Point position);
-	
+
 	/**
-	 * Removes the components in the provided collection
-	 * @param list collection of components to remove
+	 * Removes the selected components.
 	 */
-	public void removeComponents(Collection<AbstractCircuitGate> list);
-	
+	public void removeSelectedComponents();
+
 	/**
 	 * Selects all components in the collection.
 	 * 
@@ -97,8 +103,8 @@ public interface IModelManager {
 	/**
 	 * Selects the component at the given point in the active workspace.
 	 * 
-	 * @param position Point
-	 *            The point of the component
+	 * @param position
+	 *            Point The point of the component
 	 */
 	public void selectComponent(Point position);
 
