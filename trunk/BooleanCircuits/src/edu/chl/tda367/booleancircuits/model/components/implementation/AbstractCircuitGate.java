@@ -36,7 +36,7 @@ public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 	 * Retrieves the inputs of the component
 	 * @return inputs of the component
 	 */
-	protected List<GateInput> getInputs(){
+	public List<GateInput> getInputs(){
 		return inputs;
 	}
 	
