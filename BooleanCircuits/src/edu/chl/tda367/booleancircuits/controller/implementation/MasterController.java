@@ -75,7 +75,7 @@ public final class MasterController implements IMasterController {
 	}
 
 	public void removeSelectedComponents(){
-		throw new UnsupportedOperationException();
+		mm.removeSelectedComponents();
 	}
 	
 	public void selectAllComponents(){
