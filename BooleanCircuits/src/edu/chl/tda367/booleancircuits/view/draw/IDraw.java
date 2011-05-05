@@ -2,6 +2,7 @@ package edu.chl.tda367.booleancircuits.view.draw;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
@@ -24,19 +25,19 @@ public interface IDraw {
 	 * @param canvasSize
 	 *            Dimension of the canvas
 	 */
-	public void drawBackground(Graphics g, Point offset, Dimension canvasSize);
+	public void drawBackground(Graphics2D g, Point offset, Dimension canvasSize);
 
 	/**
 	 * Draws a gate.
 	 * 
 	 * @param g
-	 *            graphics object to draw with
+	 *            Graphics2D object to draw with
 	 * @param gate
 	 *            the gate to draw
 	 * @param offset
 	 *            Point offset values
 	 */
-	public void drawGate(Graphics g, AbstractCircuitGate gate, Point offset);
+	public void drawGate(Graphics2D g, AbstractCircuitGate gate, Point offset);
 
 	/**
 	 * Sets the background
