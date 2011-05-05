@@ -1,6 +1,5 @@
 package edu.chl.tda367.booleancircuits.model;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public interface IObservable {

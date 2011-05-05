@@ -15,6 +15,7 @@ public class Draw implements IDraw {
 	private String symbol;
 	private Color color;
 
+
 	@Override
 	public void setBackground(IBackground background) {
 		this.background = background;
@@ -25,6 +26,9 @@ public class Draw implements IDraw {
 		background.draw(g, offset, canvasSize);
 	}
 
+	/*
+	 * sets the standard to the US standard
+	 */
 	public void setUsStandard() {
 		isUsStandard = true;
 	}
@@ -52,8 +56,8 @@ public class Draw implements IDraw {
 		}
 
 	}
-	
-	public void drawIEC(AbstractCircuitGate gate,Graphics g,Point offset){
+
+	private void drawIEC(AbstractCircuitGate gate,Graphics g,Point offset){
 		
 		g.setColor(Color.WHITE);
 		g
@@ -74,7 +78,7 @@ public class Draw implements IDraw {
 	}
 
 	
-	public void drawAndGate(AbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawAndGate(AbstractCircuitGate gate, Graphics g, Point offset) {
 
 		if (isUsStandard) {
 			g.setColor(Color.WHITE);
