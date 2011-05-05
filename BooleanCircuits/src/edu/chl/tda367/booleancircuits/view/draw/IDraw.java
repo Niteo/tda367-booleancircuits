@@ -45,4 +45,11 @@ public interface IDraw {
 	 *            IBackground
 	 */
 	public void setBackground(IBackground background);
+	
+
+	/**
+	 * sets the standard to the US standard
+	 */
+	public void setUsStandard();
+	
 }
