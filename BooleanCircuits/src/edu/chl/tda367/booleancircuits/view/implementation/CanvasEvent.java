@@ -1,8 +1,8 @@
-package edu.chl.tda367.booleancircuits.view;
+package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Point;
 
-import edu.chl.tda367.booleancircuits.view.Canvas.CanvasAction;
+import edu.chl.tda367.booleancircuits.view.implementation.Canvas.CanvasAction;
 
 public class CanvasEvent {
 

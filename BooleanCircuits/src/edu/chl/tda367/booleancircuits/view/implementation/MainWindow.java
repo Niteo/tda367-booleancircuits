@@ -4,9 +4,8 @@
  * Created on __DATE__, __TIME__
  */
 
-package edu.chl.tda367.booleancircuits.view;
+package edu.chl.tda367.booleancircuits.view.implementation;
 
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -16,12 +15,10 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JTabbedPane;
-
-import edu.chl.tda367.booleancircuits.controller.ActionController;
-import edu.chl.tda367.booleancircuits.controller.MasterController;
-import edu.chl.tda367.booleancircuits.model.ModelManager;
-import edu.chl.tda367.booleancircuits.view.Canvas.CanvasAction;
+import edu.chl.tda367.booleancircuits.controller.implementation.ActionController;
+import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
+import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
+import edu.chl.tda367.booleancircuits.view.implementation.Canvas.CanvasAction;
 import edu.chl.tda367.booleancircuits.view.draw.BlankBackground;
 import edu.chl.tda367.booleancircuits.view.draw.DottedBackground;
 import edu.chl.tda367.booleancircuits.view.draw.GridBackground;

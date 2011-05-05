@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import edu.chl.tda367.booleancircuits.model.components.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
  * A drawing interface.
