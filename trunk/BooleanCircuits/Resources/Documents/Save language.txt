@@ -1,0 +1,9 @@
+BooleanCircuits - SaveLanguage(example): 
+
+add:
+CMD: TYPE:  #INPUTS:  #OUTPUTS:	POSX: POSY:
+ADD  AND       2          1      50    30 	
+
+connect:
+CMD:  FROMCPT#: OUTPUT#: TOCPT#: INPUT#:
+CNCT        1	     1	   2	   1
