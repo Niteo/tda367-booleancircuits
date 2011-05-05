@@ -9,8 +9,10 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.event.MouseInputAdapter;
 
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
@@ -79,11 +81,23 @@ public class Canvas implements IObservable {
 										CanvasAction.PLACE));
 					}
 				} else if (evt.getButton() == MouseEvent.BUTTON3) { // RMB
-					// TODO: ADd stuff
 					
+					AbstractCircuitGate banan = model.getComponent(evt.getPoint());
+					JPopupMenu jpm = new JPopupMenu();
+					
+					if(banan == null){
+						jpm.add(new JMenuItem("LOLFAG. NO COMPONENTS THERE! >:"));
+					} else {
+						jpm.add(new JMenuItem(banan.toString()));
+					}
+					
+					jpm.show(evt.getComponent(),
+							(int)evt.getPoint().getX(),
+							(int)evt.getPoint().getY());
 				}
 			}
 		};
+		
 		panel = new JPanel() {
 			@Override
 			public void paint(Graphics g) {
