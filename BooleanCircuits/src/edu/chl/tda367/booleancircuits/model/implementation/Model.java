@@ -13,7 +13,6 @@ import edu.chl.tda367.booleancircuits.utilities.Constants;
 public final class Model implements IModel{
 	private String name;
 	private final List<AbstractCircuitGate> componentList;
-	private final List<AbstractCircuitGate> selectedComponentList;
 
 	/**
 	 * Returns an instance of Model
@@ -23,10 +22,8 @@ public final class Model implements IModel{
 	 */
 	public Model(String name) {
 		componentList = new ArrayList<AbstractCircuitGate>();
-		selectedComponentList = new ArrayList<AbstractCircuitGate>();
 		this.name = name;
 	}
-
 
 	public void addComponent(AbstractCircuitGate component, Point position) {
 		AbstractCircuitGate c = component.clone();
@@ -35,16 +32,9 @@ public final class Model implements IModel{
 		updateComponents();
 	}
 
-
 	public List<AbstractCircuitGate> getComponents() {
 		return componentList;
 	}
-
-	public void selectAllComponents() {
-		selectedComponentList.clear();
-		selectedComponentList.addAll(componentList);
-	}
-	
 
 	public AbstractCircuitGate getComponent(Point position) {
 		int size = Constants.componentSize;
@@ -66,32 +56,11 @@ public final class Model implements IModel{
 		return null;
 	}
 
-	public void selectComponent(Point position) {
-		AbstractCircuitGate acg = this.getComponent(position);
-		
-		if (selectedComponentList.contains(acg)) {
-			selectedComponentList.remove(acg);
-		} else {
-			selectedComponentList.add(acg);
-		}
-	}
-
-
-	public void removeSelectedComponents() {
-		for (AbstractCircuitGate i : selectedComponentList) {
+	public void removeComponents(List<AbstractCircuitGate> list) {
+		for (AbstractCircuitGate i : list) {
 			componentList.remove(i);
 		}
-		selectedComponentList.clear();
 		updateComponents();
-	}
-
-
-	public boolean isSelectedComponent(AbstractCircuitGate component) {
-		if (selectedComponentList.contains(component)) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	private void updateComponents() {
@@ -126,7 +95,6 @@ public final class Model implements IModel{
 			}
 		}
 	}
-
 
 	@Override
 	public String toString() {

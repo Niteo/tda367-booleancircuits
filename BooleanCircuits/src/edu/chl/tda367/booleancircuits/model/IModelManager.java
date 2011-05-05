@@ -80,21 +80,10 @@ public interface IModelManager {
 	 * @param coord the coordinate to add to
 	 */
 	public void addComponent(AbstractCircuitGate component, Point position);
-
-	/**
-	 * Removes the currently selected component(s) in the active workspace.
-	 */
-	public void removeSelectedComponents();
 	
 	/**
-	 * Selects all components in the active workspace.
+	 * Removes the components in the provided collection
+	 * @param list collection of components to remove
 	 */
-	public void selectAllComponents();
-	
-	/**
-	 * Selects the first occurance of a component at the given coordinate
-	 * in the active workspace
-	 * @param coord the coordinate to select from
-	 */
-	public void selectComponent(Point position);
+	public void removeComponents(List<AbstractCircuitGate> list);
 }

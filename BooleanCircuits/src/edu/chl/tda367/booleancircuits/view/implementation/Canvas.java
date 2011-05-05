@@ -95,7 +95,7 @@ public class Canvas implements IObservable {
 					for (AbstractCircuitGate circuitGate : model
 							.getComponents()) {
 						// Set color
-						if (model.isSelectedComponent(circuitGate)) {
+						if (true) { // TODO: <----FIX THIS SHIT
 							g.setColor(Color.BLUE);
 						} else {
 							g.setColor(Color.BLACK);
