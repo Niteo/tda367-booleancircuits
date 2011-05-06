@@ -9,13 +9,13 @@ import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 public interface IModel {
-
 	/**
 	 * Adds a component to the model.
 	 * 
 	 * @param component
 	 *            the new component to add
-	 * @param
+	 * @param position
+	 * 			  position to add component at
 	 */
 	public void addComponent(IAbstractCircuitGate component, Point position);
 
