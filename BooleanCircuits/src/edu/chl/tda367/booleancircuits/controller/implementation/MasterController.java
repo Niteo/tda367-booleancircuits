@@ -7,7 +7,6 @@ import edu.chl.tda367.booleancircuits.io.IFileManager;
 import edu.chl.tda367.booleancircuits.io.implementation.FileManager;
 import edu.chl.tda367.booleancircuits.model.IModelManager;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 
 public final class MasterController implements IMasterController {
@@ -144,6 +143,7 @@ public final class MasterController implements IMasterController {
 		} else {
 			mm.connectComponents(connectComponent,
 					g, connectPort, port);
+			connectComponent = null;
 		}
 		
 	}

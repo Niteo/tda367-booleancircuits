@@ -41,7 +41,7 @@ public class Canvas {
 	private int posX, posY;
 	private int zoomFactor;
 	private Point oldDragPosition;
-	private boolean input;
+	private boolean connectMode;
 	private MasterController mc;
 	private CanvasPopup menu;
 	private ActionListener listener = new ActionListener() {
@@ -53,8 +53,8 @@ public class Canvas {
 			if (menu.isRemoveButton(menuItem)) {
 				mc.removeComponent(rightClickedGate);
 			} else {
-				//TODO: FIX ME!
-				//menu.getPortIndex(menuItem)
+				mc.connectComponent(rightClickedGate, menu.getPortIndex(menuItem));
+				connectMode = !connectMode;
 			}
 		}
 
@@ -110,7 +110,7 @@ public class Canvas {
 			if (evt.getButton() == MouseEvent.BUTTON1) { // LMB
 				if (evt.getClickCount() == 1) {
 					mc.selectComponent(pointClicked);
-					input = true;
+					connectMode = false;
 				} else if (evt.getClickCount() == 2) {
 					mc.addComponent(pointClicked);
 				}
@@ -123,8 +123,8 @@ public class Canvas {
 					jpm.add(new JMenuItem("<No components>"));
 				} else {
 					jpm = menu;
-					menu.updateMenu(input ? rightClickedGate.getNoOfInputs()
-							: rightClickedGate.getNoOfOutputs(), input);
+					menu.updateMenu(connectMode ? rightClickedGate.getNoOfOutputs()
+							: rightClickedGate.getNoOfInputs(), !connectMode);
 				}
 
 				jpm.show(evt.getComponent(), (int) evt.getPoint().getX(),
@@ -136,7 +136,6 @@ public class Canvas {
 	public Canvas(IModel canvasModel, ISelectionModel selectionModel,
 			MasterController masterController) {
 		mc = masterController;
-		input = true;
 		posX = 0;
 		posY = 0;
 		zoomFactor = 0;
