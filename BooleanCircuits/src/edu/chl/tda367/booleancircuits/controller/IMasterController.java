@@ -1,6 +1,8 @@
 package edu.chl.tda367.booleancircuits.controller;
 
 import java.awt.Point;
+
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
@@ -69,10 +71,9 @@ public interface IMasterController {
 	/**
 	 * Adds a CircuitComponent in the palette to the
 	 * specified coordinate in the active workspace.
-	 * @param component the component to add
 	 * @param coord the coordinate to add to
 	 */
-	public void addComponent(AbstractCircuitGate component, Point position);
+	public void addComponent(Point position);
 
 	/**
 	 * Removes the currently selected component(s) in the active workspace.
@@ -105,5 +106,12 @@ public interface IMasterController {
 	 * Pastes the selected components to the active workspace from the clipboard.
 	 * @param coord the coordinate to paste to
 	 */
-	public void pasteSelectedComponent(Point position);
+	public void pasteSelectedComponents(Point position);
+	
+	/**
+	 * Sets the component chosen in the palette.
+	 * @param g AbstractCircuitGate
+	 */
+	public void setChosenComponent(IAbstractCircuitGate g);
+	
 }

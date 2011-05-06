@@ -2,6 +2,8 @@ package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 import java.util.List;
 
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+
 /**
  * Represents a OR-gate
  * 
@@ -23,7 +25,7 @@ public class OrGate extends AbstractCircuitGate {
 	@Override
 	protected void updateOutput() {
 		boolean output = false;
-		for (GateInput c : super.getInputs()) {
+		for (IGateInput c : super.getInputs()) {
 			if (c.getInputValue()) {
 				output = true;
 				break;

@@ -11,6 +11,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.implementation.ComponentFolder;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.view.IPalette;
@@ -20,9 +21,10 @@ public final class Palette implements IPalette {
 	private JScrollPane scrollPane;
 	private List<ComponentFolder> folderList;
 	private JTree componentTree;
-	private AbstractCircuitGate selectedComponent;
+	private IMasterController mc;
 
-	public Palette() {
+	public Palette(IMasterController masterController) {
+		mc = masterController;
 		folderList = new ArrayList<ComponentFolder>();
 		folderList.add(new ComponentFolder());
 
@@ -61,8 +63,8 @@ public final class Palette implements IPalette {
 						.getLastSelectedPathComponent();
 
 				if (node.isLeaf()) {
-					selectedComponent = ((AbstractCircuitGate) node
-							.getUserObject()).clone();
+					mc.setChosenComponent(((AbstractCircuitGate) node
+							.getUserObject()).clone());
 				}
 			}
 		};
@@ -89,7 +91,4 @@ public final class Palette implements IPalette {
 		return scrollPane;
 	}
 
-	public AbstractCircuitGate getSelectedComponent() {
-		return selectedComponent;
-	}
 }

@@ -3,15 +3,19 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 import java.awt.Point;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
+import edu.chl.tda367.booleancircuits.io.IFileManager;
 import edu.chl.tda367.booleancircuits.io.implementation.FileManager;
+import edu.chl.tda367.booleancircuits.model.IModelManager;
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 
 public final class MasterController implements IMasterController {
 
-	private ModelManager mm = null;
-	private AbstractCircuitGate connectComponent = null;
-	private FileManager fileManager;
+	private IModelManager mm = null;
+	private IAbstractCircuitGate connectComponent = null;
+	private IFileManager fileManager;
+	private IAbstractCircuitGate chosenGate;
 
 	/**
 	 * Returns an instance of a MasterController
@@ -87,8 +91,8 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void addComponent(AbstractCircuitGate component, Point position) {
-		mm.addComponent(component, position);
+	public void addComponent(Point position) {
+		mm.addComponent(chosenGate, position);
 	}
 
 	@Override
@@ -117,7 +121,12 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void pasteSelectedComponent(Point position) {
+	public void pasteSelectedComponents(Point position) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setChosenComponent(IAbstractCircuitGate g) {
+		chosenGate = g.clone();
 	}
 }

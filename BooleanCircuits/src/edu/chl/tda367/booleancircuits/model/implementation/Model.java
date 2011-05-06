@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.IModel;
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.utilities.Constants;
 
@@ -12,7 +13,7 @@ import edu.chl.tda367.booleancircuits.utilities.Constants;
  */
 public final class Model implements IModel{
 	private String name;
-	private final Collection<AbstractCircuitGate> componentList;
+	private final Collection<IAbstractCircuitGate> componentList;
 
 	/**
 	 * Returns an instance of Model
@@ -21,24 +22,24 @@ public final class Model implements IModel{
 	 *            the name of the model
 	 */
 	public Model(String name) {
-		componentList = new ArrayList<AbstractCircuitGate>();
+		componentList = new ArrayList<IAbstractCircuitGate>();
 		this.name = name;
 	}
 
-	public void addComponent(AbstractCircuitGate component, Point position) {
+	public void addComponent(IAbstractCircuitGate component, Point position) {
 		AbstractCircuitGate c = component.clone();
 		c.setPosition(position);
 		componentList.add(c);
 		updateComponents();
 	}
 
-	public Collection<AbstractCircuitGate> getComponents() {
+	public Collection<IAbstractCircuitGate> getComponents() {
 		return componentList;
 	}
 
-	public AbstractCircuitGate getComponent(Point position) {
+	public IAbstractCircuitGate getComponent(Point position) {
 		int size = Constants.componentSize;
-		for (AbstractCircuitGate acg : componentList) {
+		for (IAbstractCircuitGate acg : componentList) {
 			// Check X
 			if (position.getX() >= acg.getPosition().getX() - size * 0.5f
 					&& position.getX() <= acg.getPosition().getX() + size
@@ -56,8 +57,8 @@ public final class Model implements IModel{
 		return null;
 	}
 
-	public void removeComponents(Collection<AbstractCircuitGate> list) {
-		for (AbstractCircuitGate i : list) {
+	public void removeComponents(Collection<IAbstractCircuitGate> list) {
+		for (IAbstractCircuitGate i : list) {
 			componentList.remove(i);
 		}
 		updateComponents();
@@ -70,9 +71,9 @@ public final class Model implements IModel{
 		int loopCount = 1;
 		boolean endOfLoop = true;
 		do {
-			List<AbstractCircuitGate> tempList = new LinkedList<AbstractCircuitGate>();
+			List<IAbstractCircuitGate> tempList = new LinkedList<IAbstractCircuitGate>();
 			endOfLoop = true;
-			for (AbstractCircuitGate i : componentList) {
+			for (IAbstractCircuitGate i : componentList) {
 				if (i.getComponentTier() == loopCount) {
 					tempList.add(i);
 					endOfLoop = false;

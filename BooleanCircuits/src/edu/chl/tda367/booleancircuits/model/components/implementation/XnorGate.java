@@ -20,7 +20,7 @@ public final class XnorGate extends AbstractCircuitGate {
 	@Override
 	protected void updateOutput() {
 		int nPositives = 0;
-		for (GateInput c : super.getInputs()) {
+		for (IGateInput c : super.getInputs()) {
 			if (c.getInputValue()) {
 				if(++nPositives > 1){
 					break;

@@ -14,8 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.event.MouseInputAdapter;
 
+import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.utilities.IObservable;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
@@ -28,30 +30,27 @@ import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
  * @author Boel, Anton
  * 
  */
-public class Canvas implements IObservable {
-	public static enum CanvasAction {
-		DRAG, PLACE, SELECT
-	}
+public class Canvas {
 
 	private JPanel panel;
 	private IModel model;
 	private ISelectionModel selectModel;
 	private MouseAdapter mouseAdapter;
-	private PropertyChangeSupport propertyChangeSupport;
 	private static IDraw drawer = new Draw();
 	private int posX, posY;
 	private int zoomFactor;
 	private Point oldDragPosition;
 	private boolean input;
+	private MasterController mc;
 
-	public Canvas(IModel canvasModel, ISelectionModel selectionModel) {
+	public Canvas(IModel canvasModel, ISelectionModel selectionModel, MasterController masterController) {
+		mc = masterController;
 		input = true;
 		posX = 0;
 		posY = 0;
 		zoomFactor = 0;
 		model = canvasModel;
 		selectModel = selectionModel;
-		propertyChangeSupport = new PropertyChangeSupport(this);
 		mouseAdapter = new MouseInputAdapter() {
 
 			@Override
@@ -78,18 +77,14 @@ public class Canvas implements IObservable {
 
 				if (evt.getButton() == MouseEvent.BUTTON1) { // LMB
 					if (evt.getClickCount() == 1) {
-						propertyChangeSupport.firePropertyChange("Apa", null,
-								new CanvasEvent(pointClicked,
-										CanvasAction.SELECT));
+						mc.selectComponent(pointClicked);
 						input = true;
 					} else if (evt.getClickCount() == 2) {
-						propertyChangeSupport.firePropertyChange("Apa", null,
-								new CanvasEvent(pointClicked,
-										CanvasAction.PLACE));
+						mc.addComponent(pointClicked);
 					}
 				} else if (evt.getButton() == MouseEvent.BUTTON3) { // RMB
 
-					AbstractCircuitGate gate = model.getComponent(pointClicked);
+					IAbstractCircuitGate gate = model.getComponent(pointClicked);
 					JPopupMenu jpm = new JPopupMenu();
 
 					if (gate == null) {
@@ -119,7 +114,7 @@ public class Canvas implements IObservable {
 						panel.getSize());
 				// Draw components
 				if (model != null) {
-					for (AbstractCircuitGate circuitGate : model
+					for (IAbstractCircuitGate circuitGate : model
 							.getComponents()) {
 						// Set color
 						if (selectModel.isSelectedComponent(circuitGate)) { // TODO:
@@ -170,17 +165,6 @@ public class Canvas implements IObservable {
 	 */
 	public static void setBackground(IBackground background) {
 		drawer.setBackground(background);
-	}
-
-	@Override
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		propertyChangeSupport.addPropertyChangeListener(listener);
-
-	}
-
-	@Override
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		propertyChangeSupport.addPropertyChangeListener(listener);
 	}
 
 	private void panCanvas(int dx, int dy) {

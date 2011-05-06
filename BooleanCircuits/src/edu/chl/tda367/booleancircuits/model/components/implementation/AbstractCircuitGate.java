@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.*;
 import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.utilities.GateFactory;
 
 /**
@@ -12,7 +13,7 @@ import edu.chl.tda367.booleancircuits.utilities.GateFactory;
  *
  */
 public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
-	private List<GateInput> inputs;
+	private List<IGateInput> inputs;
 	private Boolean[] outputs;
 	private boolean isInTiercalculation;
 	private Point position = new Point();
@@ -25,18 +26,13 @@ public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 	}
 	
 	private void createInputs(int amount){
-		inputs = new ArrayList<GateInput>();
+		inputs = new ArrayList<IGateInput>();
 		for(int i = 0; i < amount; i++){
 			inputs.add(new GateInput());
 		}
 	}
 	
-	
-	/**
-	 * Retrieves the inputs of the component
-	 * @return inputs of the component
-	 */
-	public List<GateInput> getInputs(){
+	public List<IGateInput> getInputs(){
 		return inputs;
 	}
 	
@@ -69,7 +65,7 @@ public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 	}
 	
 
-	public void connectInput(int inputPort, AbstractCircuitGate component, int outputPort){
+	public void connectInput(int inputPort, IAbstractCircuitGate component, int outputPort){
 		inputs.get(inputPort).setInputComponent(component, outputPort);
 	}
 
@@ -100,7 +96,7 @@ public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 			isInTiercalculation = true;
 			
 			int maxTier = 0;
-			for(GateInput gp : inputs){
+			for(IGateInput gp : inputs){
 				if(gp.getInputComponent() != null){
 					int tmpTier = gp.getInputComponent().getComponentTier();
 					if(tmpTier > maxTier){
@@ -139,7 +135,7 @@ public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 		}
 		
 		int port = 0;
-		for(GateInput gi : this.getInputs()){
+		for(IGateInput gi : this.getInputs()){
 			c.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
 		}
 		

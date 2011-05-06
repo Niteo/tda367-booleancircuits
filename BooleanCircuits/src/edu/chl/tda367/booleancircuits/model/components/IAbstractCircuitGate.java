@@ -8,6 +8,12 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCi
 
 public interface IAbstractCircuitGate {
 
+	
+	/**
+	 * Retrieves the inputs of the component
+	 * @return inputs of the component
+	 */
+	public List<IGateInput> getInputs();
 
 	/**
 	 * Overwrites gate with another one, copying all properties.
@@ -21,7 +27,7 @@ public interface IAbstractCircuitGate {
 	 * @param component the component to connect this component to
 	 * @param outputPort the output port to connect to
 	 */
-	public void connectInput(int inputPort, AbstractCircuitGate component, int outputPort);
+	public void connectInput(int inputPort, IAbstractCircuitGate component, int outputPort);
 	
 	/**
 	 * Retrieves the value of a specific port on this component

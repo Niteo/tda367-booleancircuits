@@ -13,8 +13,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import edu.chl.tda367.booleancircuits.io.IFileManager;
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.GateInput;
 import edu.chl.tda367.booleancircuits.model.implementation.Model;
 import edu.chl.tda367.booleancircuits.utilities.GateFactory;
 
@@ -27,14 +28,14 @@ public final class FileManager implements IFileManager {
 	 * @param name
 	 */
 	@Override
-	public void saveFile(Collection<AbstractCircuitGate> components, String name) {
+	public void saveFile(Collection<IAbstractCircuitGate> components, String name) {
 		System.out.println("yo, savin!");
 		try {
 			PrintWriter saveFile = new PrintWriter(new BufferedWriter(
 					new FileWriter(name)));
-			List<AbstractCircuitGate> tempList = new ArrayList<AbstractCircuitGate>();
+			List<IAbstractCircuitGate> tempList = new ArrayList<IAbstractCircuitGate>();
 			// Print all gates
-			for (AbstractCircuitGate gate : components) {
+			for (IAbstractCircuitGate gate : components) {
 				String txt = "ADD";
 				tempList.add(gate);
 				txt += " " + gate.toString() + " " + gate.getNoOfInputs() + " "
@@ -44,10 +45,10 @@ public final class FileManager implements IFileManager {
 				saveFile.println(txt);
 			}
 			// Print all connections
-			for (AbstractCircuitGate gate : components) {
-				List<GateInput> gateInputs = gate.getInputs();
+			for (IAbstractCircuitGate gate : components) {
+				List<IGateInput> gateInputs = gate.getInputs();
 
-				for (GateInput input : gateInputs) {
+				for (IGateInput input : gateInputs) {
 					String txt = "CNCT";
 
 					txt += " " + tempList.indexOf(gate) + " "

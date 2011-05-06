@@ -1,5 +1,7 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+
 /**
  * Class to represent a XOR gate.
  * @author Kaufmann
@@ -17,7 +19,7 @@ public final class XorGate extends AbstractCircuitGate {
 	@Override
 	protected void updateOutput() {
 		int nPositives = 0;
-		for (GateInput c : super.getInputs()) {
+		for (IGateInput c : super.getInputs()) {
 			if (c.getInputValue()) {
 				if(++nPositives > 1)
 					break;

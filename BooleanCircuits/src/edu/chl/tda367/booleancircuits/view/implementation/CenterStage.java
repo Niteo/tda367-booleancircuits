@@ -9,6 +9,7 @@ import javax.swing.Action;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.implementation.Model;
@@ -30,9 +31,11 @@ public class CenterStage implements ICenterStage {
 	private TabManager tabManager = new TabManager();
 	private Action closeWorkspace;
 	private MainWindow mainWindow;
+	private MasterController mc;
 
 	/** Returns an instance of Canvas. */
-	public CenterStage(Action closeWorkspace, MainWindow mainWindow) {
+	public CenterStage(Action closeWorkspace, MainWindow mainWindow, MasterController masterController) {
+		mc = masterController;
 		centerStagePanel.add(tabManager.getTabbedPane());
 		centerStagePanel.setLayout(new GridLayout(1, 1));
 		this.closeWorkspace = closeWorkspace;
@@ -40,8 +43,7 @@ public class CenterStage implements ICenterStage {
 	}
 
 	private void newTab(String s, IModel m, ISelectionModel sm) {
-		Canvas canvas = new Canvas(m, sm);
-		canvas.addPropertyChangeListener(mainWindow);
+		Canvas canvas = new Canvas(m, sm, mc);
 		tabManager.addTab(s, canvas);
 		TabPanel tabPanel = tabManager.getLastTabPanel();
 		tabPanel.getCloseButton().setAction(closeWorkspace);

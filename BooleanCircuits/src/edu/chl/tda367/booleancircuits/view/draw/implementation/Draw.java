@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 import edu.chl.tda367.booleancircuits.utilities.Constants;
 import edu.chl.tda367.booleancircuits.view.draw.*;
@@ -33,7 +34,7 @@ public class Draw implements IDraw {
 
 
 	@Override
-	public void drawGate(Graphics2D g, AbstractCircuitGate gate, Point offset) {
+	public void drawGate(Graphics2D g, IAbstractCircuitGate gate, Point offset) {
 		color = g.getColor();
 
 		if (gate instanceof AndGate) {
@@ -55,7 +56,7 @@ public class Draw implements IDraw {
 		}
 
 	}
-	private void drawIEC(AbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawIEC(IAbstractCircuitGate gate, Graphics g, Point offset) {
 
 		g.setColor(Color.WHITE);
 		g
@@ -76,7 +77,7 @@ public class Draw implements IDraw {
 				- offset.y+ Constants.componentSize / 4);
 	}
 
-	private void drawAndGate(AbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawAndGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
 
 		if (isUsStandard) {
 			g.setColor(Color.WHITE);
@@ -110,7 +111,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawNandGate(AbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawNandGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
 
 		if (isUsStandard) {
 			g.setColor(Color.WHITE);
@@ -163,7 +164,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawOrGate(AbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawOrGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
 		// TODO Auto-generated method stub
 		if (isUsStandard) {
 
@@ -173,7 +174,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawNorGate(AbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawNorGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
 		// TODO Auto-generated method stub
 		if (isUsStandard) {
 
@@ -184,7 +185,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawXorGate(AbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawXorGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
 		// TODO Auto-generated method stub
 		if (isUsStandard) {
 
@@ -195,7 +196,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawXnorGate(AbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawXnorGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
 		// TODO US Xnor
 		if (isUsStandard) {
 
@@ -213,7 +214,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawNotGate(AbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawNotGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
 
 		if (isUsStandard) {
 			// TODO US not-gate
@@ -232,7 +233,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawConstantGate(AbstractCircuitGate gate, Graphics g,
+	private void drawConstantGate(IAbstractCircuitGate gate, Graphics g,
 			Point offset) {
 		// TODO US
 		if (isUsStandard) {
