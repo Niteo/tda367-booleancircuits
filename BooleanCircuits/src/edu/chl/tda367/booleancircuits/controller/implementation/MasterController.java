@@ -3,98 +3,121 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 import java.awt.Point;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
-import edu.chl.tda367.booleancircuits.model.*;
+import edu.chl.tda367.booleancircuits.io.implementation.FileManager;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 
-
 public final class MasterController implements IMasterController {
-	
+
 	private ModelManager mm = null;
 	private AbstractCircuitGate connectComponent = null;
-	
+	private FileManager fileManager;
+
 	/**
 	 * Returns an instance of a MasterController
-	 * @param mm the ModelManager to control
-	 * @throws NullPOinterException if mm is null
+	 * 
+	 * @param mm
+	 *            the ModelManager to control
+	 * @throws NullPOinterException
+	 *             if mm is null
 	 */
-	public MasterController(ModelManager mm){
-		if(mm == null){
+	public MasterController(ModelManager mm) {
+		if (mm == null) {
 			throw new NullPointerException("mm must not be null!");
 		} else {
 			this.mm = mm;
+			fileManager = new FileManager();
 		}
 	}
-	
-	public void closeActiveWorkspace(){
+
+	@Override
+	public void closeActiveWorkspace() {
 		mm.closeActiveWorkspace();
 	}
-	
-	public void closeAllWorkspaces(){
+
+	@Override
+	public void closeAllWorkspaces() {
 		mm.closeAllWorkspaces();
 	}
-	
-	public void closeWorkspace(int i){
+
+	@Override
+	public void closeWorkspace(int i) {
 		mm.closeWorkspace(i);
 	}
-	
-	public void newWorkspace(){
+
+	@Override
+	public void newWorkspace() {
 		mm.newWorkspace();
 	}
-	
-	public void openWorkspace(String path){
+
+	@Override
+	public void openWorkspace(String path) {
+		fileManager.openFile(path);
+	}
+
+	@Override
+	public void saveActiveWorkspace() {
+		fileManager.saveFile(mm.getActiveWorkspaceModel().getComponents(),
+				"Penis hello!");
+	}
+
+	@Override
+	public void saveActiveWorskpaceAsComponent(String path) {
 		throw new UnsupportedOperationException();
 	}
-	
-	public void saveActiveWorkspace(){
+
+	@Override
+	public void saveAllWorkspaces() {
 		throw new UnsupportedOperationException();
 	}
-	
-	public void saveActiveWorskpaceAsComponent(String path){
-		throw new UnsupportedOperationException();
-	}
-	
-	public void saveAllWorkspaces(){
-		throw new UnsupportedOperationException();
-	}
-	
-	public void setActiveWorkspace(int i){
+
+	@Override
+	public void setActiveWorkspace(int i) {
 		mm.setActiveWorkspace(i);
 	}
-	
-	public void undo(){
+
+	@Override
+	public void undo() {
 		throw new UnsupportedOperationException();
 	}
-	
-	public void redo(){
+
+	@Override
+	public void redo() {
 		throw new UnsupportedOperationException();
 	}
-	
-	public void addComponent(AbstractCircuitGate component, Point position){
+
+	@Override
+	public void addComponent(AbstractCircuitGate component, Point position) {
 		mm.addComponent(component, position);
 	}
 
-	public void removeSelectedComponents(){
+	@Override
+	public void removeSelectedComponents() {
 		mm.removeSelectedComponents();
 	}
-	
-	public void selectAllComponents(){
+
+	@Override
+	public void selectAllComponents() {
 		mm.selectAllComponents();
 	}
-	
-	public void selectComponent(Point position){
+
+	@Override
+	public void selectComponent(Point position) {
 		mm.selectComponent(position);
 	}
-	
-	public void copySelectedComponents(){
+
+	@Override
+	public void copySelectedComponents() {
 		throw new UnsupportedOperationException();
 	}
-	
-	public void cutSelectedComponents(){
+
+	@Override
+	public void cutSelectedComponents() {
 		throw new UnsupportedOperationException();
 	}
-	
-	public void pasteSelectedComponent(Point position){
+
+	@Override
+	public void pasteSelectedComponent(Point position) {
 		throw new UnsupportedOperationException();
 	}
 }

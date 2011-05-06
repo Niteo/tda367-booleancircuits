@@ -1,9 +1,9 @@
 package edu.chl.tda367.booleancircuits.io;
 
-import java.io.File;
-import java.util.List;
+import java.util.Collection;
 
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.implementation.Model;
 
 public interface IFileManager {
 
@@ -15,7 +15,7 @@ public interface IFileManager {
 	 * @param name
 	 *            name of the save file
 	 */
-	public void saveFile(List<AbstractCircuitGate> components, String name);
+	public void saveFile(Collection<AbstractCircuitGate> components, String name);
 
 	/**
 	 * Creates a circuit from a previously saved .txt file
@@ -23,5 +23,5 @@ public interface IFileManager {
 	 * @param file
 	 *            txt. file representing a previously saved model
 	 */
-	public void openFile(File file);
+	public Model openFile(String path);
 }
