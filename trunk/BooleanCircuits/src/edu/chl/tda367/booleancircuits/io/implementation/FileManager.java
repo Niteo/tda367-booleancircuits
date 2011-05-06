@@ -8,12 +8,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
 import edu.chl.tda367.booleancircuits.io.IFileManager;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.GateInput;
+import edu.chl.tda367.booleancircuits.model.implementation.Model;
 import edu.chl.tda367.booleancircuits.utilities.GateFactory;
 
 public final class FileManager implements IFileManager {
@@ -25,15 +27,17 @@ public final class FileManager implements IFileManager {
 	 * @param name
 	 */
 	@Override
-	public void saveFile(List<AbstractCircuitGate> components, String name) {
-
+	public void saveFile(Collection<AbstractCircuitGate> components, String name) {
+		System.out.println("yo, savin!");
 		try {
 			PrintWriter saveFile = new PrintWriter(new BufferedWriter(
 					new FileWriter(name)));
+			List<AbstractCircuitGate> tempList = new ArrayList<AbstractCircuitGate>();
 			// Print all gates
 			for (AbstractCircuitGate gate : components) {
 				String txt = "ADD";
-				txt += gate.toString() + " " + gate.getNoOfInputs() + " "
+				tempList.add(gate);
+				txt += " " + gate.toString() + " " + gate.getNoOfInputs() + " "
 						+ gate.getNoOfOutputs() + " " + gate.getPosition().x
 						+ " " + gate.getPosition().y;
 				txt.toUpperCase();
@@ -46,10 +50,10 @@ public final class FileManager implements IFileManager {
 				for (GateInput input : gateInputs) {
 					String txt = "CNCT";
 
-					txt += " " + components.indexOf(gate) + " "
+					txt += " " + tempList.indexOf(gate) + " "
 							+ gateInputs.indexOf(input) + " "
-							+ components.indexOf(input.getInputComponent())
-							+ " " + input.getInputPort();
+							+ tempList.indexOf(input.getInputComponent()) + " "
+							+ input.getInputPort();
 					saveFile.println(txt);
 				}
 			}
@@ -65,7 +69,9 @@ public final class FileManager implements IFileManager {
 	 * Opens a saved circuit by reading a saved .txt file.
 	 */
 	@Override
-	public void openFile(File file) {
+	public Model openFile(String path) {
+		File file = new File(path);
+		Model model = new Model(file.toString());
 		List<AbstractCircuitGate> components = new ArrayList<AbstractCircuitGate>();
 
 		try {
@@ -83,6 +89,7 @@ public final class FileManager implements IFileManager {
 							.getNewComponent(name, noOfInputs);
 					component.setPosition(position);
 					components.add(component);
+					model.addComponent(component, component.getPosition());
 					sc.nextLine();
 				} else {
 					break;
@@ -106,11 +113,11 @@ public final class FileManager implements IFileManager {
 					break;
 				}
 			}
+			return model;
 
 		} catch (FileNotFoundException e) {
 			System.out.println("Specified file does not exist");
-			e.printStackTrace();
+			return null;
 		}
-
 	}
 }
