@@ -117,7 +117,7 @@ public interface IModelManager {
 	 *            Point The point of the component
 	 */
 	public void selectComponent(Point position);
-
+	
 	/**
 	 * Determinates if a component is currently selected.
 	 * 
@@ -126,4 +126,14 @@ public interface IModelManager {
 	 * @return boolean
 	 */
 	public boolean isSelectedComponent(AbstractCircuitGate g);
+	
+	/**
+	 * Connects to components in the active model.
+	 * @param componentIn the component who's input is to be connected
+	 * @param componentOut the component who's output is to be connected
+	 * @param portIn the port of the input to be used
+	 * @param portOut the port of the output to be used
+	 */
+	public void connectComponents(IAbstractCircuitGate componentIn,
+			IAbstractCircuitGate componentOut, int portIn, int portOut);
 }

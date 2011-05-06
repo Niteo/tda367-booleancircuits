@@ -162,4 +162,10 @@ public final class ModelManager implements IObservable, IModelManager {
 	private ISelectionModel _getActiveSelectionModel(){
 		return selectionModelList.get(selectedIndex);
 	}
+
+	@Override
+	public void connectComponents(IAbstractCircuitGate componentIn,
+			IAbstractCircuitGate componentOut, int portIn, int portOut) {
+		componentIn.connectInput(portIn, componentOut, portOut);
+	}
 }

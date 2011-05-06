@@ -14,6 +14,7 @@ public final class MasterController implements IMasterController {
 
 	private IModelManager mm = null;
 	private IAbstractCircuitGate connectComponent = null;
+	private int connectPort = -1;
 	private IFileManager fileManager;
 	private IAbstractCircuitGate chosenGate;
 
@@ -133,5 +134,17 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void removeComponent(IAbstractCircuitGate g) {
 		mm.removeComponent(g);
+	}
+
+	@Override
+	public void connectComponent(IAbstractCircuitGate g, int port) {
+		if(connectComponent == null){
+			connectComponent = g;
+			connectPort = port;
+		} else {
+			mm.connectComponents(connectComponent,
+					g, connectPort, port);
+		}
+		
 	}
 }

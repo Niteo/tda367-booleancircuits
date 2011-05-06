@@ -138,4 +138,14 @@ public interface IMasterController {
 	 */
 	public void setChosenComponent(IAbstractCircuitGate g);
 
+	/**
+	 * Connects component with another component. First call specifies input
+	 * component, second specifiec output.
+	 * 
+	 * @param g
+	 *            component to connect
+	 * @param port
+	 *            port to connect
+	 */
+	public void connectComponent(IAbstractCircuitGate g, int port);
 }
