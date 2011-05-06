@@ -20,29 +20,39 @@ public interface IModel {
 	public void addComponent(IAbstractCircuitGate component, Point position);
 
 	/**
-	 * Returns a list of components
+	 * Returns a list of components.
 	 * 
 	 * @return a list of components
 	 */
 	public Collection<IAbstractCircuitGate> getComponents();
 
-	
 	/**
-	 * Get component
+	 * Get component.
 	 * 
 	 * @param position
 	 *            the coordinate for the component
 	 * @return the gate found. Null if no gate was found
 	 */
-	public IAbstractCircuitGate getComponent(Point position) ;
+	public IAbstractCircuitGate getComponent(Point position);
 
 	/**
-	 * Removes the specified components in the collection
+	 * Removes the specified components in the collection.
+	 * 
+	 * @param list
+	 *            Collection
 	 */
-	public void removeComponents(Collection<IAbstractCircuitGate> list) ;
+	public void removeComponents(Collection<IAbstractCircuitGate> list);
 
 	/**
-	 * Returns the name of the workspace
-	 */	
-	public String toString() ;
+	 * Removes the specified component.
+	 * 
+	 * @param g
+	 *            IAbstractCircuitGate
+	 */
+	public void removeComponent(IAbstractCircuitGate g);
+
+	/**
+	 * Returns the name of the workspace.
+	 */
+	public String toString();
 }

@@ -72,7 +72,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	public IModel getActiveWorkspaceModel() {
-		return modelList.get(selectedIndex);
+		return _getActiveWorkspaceModel();
 	}
 
 	public ArrayList<IModel> getWorkspaces() {
@@ -87,6 +87,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	public void removeSelectedComponents() {
 		getActiveWorkspaceModel().removeComponents(
 				selectionModelList.get(selectedIndex).getSelectedComponents());
+		_getActiveSelectionModel().removeUnusedElements();
 		firePropertyChanged();
 	}
 
@@ -145,6 +146,17 @@ public final class ModelManager implements IObservable, IModelManager {
 	@Override
 	public ISelectionModel getActiveSelectionModel() {
 		return _getActiveSelectionModel();
+	}
+
+	@Override
+	public void removeComponent(IAbstractCircuitGate g) {
+		getActiveWorkspaceModel().removeComponent(g);
+		_getActiveSelectionModel().removeUnusedElements();
+		firePropertyChanged();
+	}
+	
+	private IModel _getActiveWorkspaceModel(){
+		return modelList.get(selectedIndex);
 	}
 	
 	private ISelectionModel _getActiveSelectionModel(){

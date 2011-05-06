@@ -129,4 +129,9 @@ public final class MasterController implements IMasterController {
 	public void setChosenComponent(IAbstractCircuitGate g) {
 		chosenGate = g.clone();
 	}
+
+	@Override
+	public void removeComponent(IAbstractCircuitGate g) {
+		mm.removeComponent(g);
+	}
 }
