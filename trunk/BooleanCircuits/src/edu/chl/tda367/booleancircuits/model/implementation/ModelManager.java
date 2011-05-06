@@ -10,6 +10,7 @@ import java.util.Collection;
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.IModelManager;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.utilities.IObservable;
 
@@ -78,7 +79,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		return modelList;
 	}
 
-	public void addComponent(AbstractCircuitGate component, Point position) {
+	public void addComponent(IAbstractCircuitGate component, Point position) {
 		getActiveWorkspaceModel().addComponent(component, position);
 		firePropertyChanged();
 	}

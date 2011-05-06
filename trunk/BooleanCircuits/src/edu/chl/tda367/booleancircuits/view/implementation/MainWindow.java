@@ -21,7 +21,6 @@ import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.BlankBackground;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.DottedBackground;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.GridBackground;
-import edu.chl.tda367.booleancircuits.view.implementation.Canvas.CanvasAction;
 
 /**
  * The Main window
@@ -35,7 +34,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 	private ToolbarPanel toolbar = new ToolbarPanel();
 	private CenterStage cs;
 	private ActionController actionController;
-	private Palette palette = new Palette();
+	private Palette palette;
 
 	private ActionListener listener = new ActionListener() {
 
@@ -80,7 +79,8 @@ public final class MainWindow extends javax.swing.JFrame implements
 		mm.addPropertyChangeListener(this);
 		mc = new MasterController(mm);
 		actionController = new ActionController(mc);
-		cs = new CenterStage(closeWorkspace, this);
+		cs = new CenterStage(closeWorkspace, this, mc);
+		palette = new Palette(mc);
 
 		cs.setBackground(new GridBackground());
 
@@ -489,17 +489,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 	public synchronized void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getSource() instanceof ModelManager) {
 			cs.update((ModelManager) evt.getSource());
-		} else if (evt.getSource() instanceof Canvas) {
-			CanvasEvent canvasEvt = (CanvasEvent) evt.getNewValue();
-			if (canvasEvt.getAction() == CanvasAction.PLACE
-					&& palette.getSelectedComponent() != null) {
-				mc.addComponent(palette.getSelectedComponent(),
-						canvasEvt.getPoint());
-			} else if (canvasEvt.getAction() == CanvasAction.SELECT) {
-				mc.selectComponent(canvasEvt.getPoint());
-			}
 		}
-
 	}
 
 }

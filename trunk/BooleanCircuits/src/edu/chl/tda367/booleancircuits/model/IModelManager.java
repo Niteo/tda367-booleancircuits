@@ -2,6 +2,8 @@ package edu.chl.tda367.booleancircuits.model;
 
 import java.awt.Point;
 import java.util.Collection;
+
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
@@ -87,7 +89,7 @@ public interface IModelManager {
 	 * @param coord
 	 *            the coordinate to add to
 	 */
-	public void addComponent(AbstractCircuitGate component, Point position);
+	public void addComponent(IAbstractCircuitGate component, Point position);
 
 	/**
 	 * Removes the selected components.

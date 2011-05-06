@@ -20,11 +20,4 @@ public interface IPalette {
 	 */
 	public JScrollPane getView();
 
-	/**
-	 * Returns the component currently selected in the palette.
-	 * 
-	 * @return AbstractCircuitGate
-	 */
-	public AbstractCircuitGate getSelectedComponent();
-
 }

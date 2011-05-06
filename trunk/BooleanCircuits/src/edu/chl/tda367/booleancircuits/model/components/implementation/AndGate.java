@@ -2,6 +2,8 @@ package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 import java.util.List;
 
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+
 /**
  * Represents an AND-gate Creates input and outputs and updates the output
  * 
@@ -24,9 +26,9 @@ public final class AndGate extends AbstractCircuitGate {
 	 */
 	@Override
 	protected void updateOutput() {
-		List<GateInput> input = super.getInputs();
+		List<IGateInput> input = super.getInputs();
 
-		for (GateInput i : input) {
+		for (IGateInput i : input) {
 			if (i.getInputValue() == false) {
 				super.setOutput(0, false);
 			}

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 public interface IModel {
@@ -16,14 +17,14 @@ public interface IModel {
 	 *            the new component to add
 	 * @param
 	 */
-	public void addComponent(AbstractCircuitGate component, Point position);
+	public void addComponent(IAbstractCircuitGate component, Point position);
 
 	/**
 	 * Returns a list of components
 	 * 
 	 * @return a list of components
 	 */
-	public Collection<AbstractCircuitGate> getComponents();
+	public Collection<IAbstractCircuitGate> getComponents();
 
 	
 	/**
@@ -33,12 +34,12 @@ public interface IModel {
 	 *            the coordinate for the component
 	 * @return the gate found. Null if no gate was found
 	 */
-	public AbstractCircuitGate getComponent(Point position) ;
+	public IAbstractCircuitGate getComponent(Point position) ;
 
 	/**
 	 * Removes the specified components in the collection
 	 */
-	public void removeComponents(Collection<AbstractCircuitGate> list) ;
+	public void removeComponents(Collection<IAbstractCircuitGate> list) ;
 
 	/**
 	 * Returns the name of the workspace

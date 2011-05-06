@@ -1,5 +1,6 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
@@ -8,7 +9,7 @@ import edu.chl.tda367.booleancircuits.model.components.IGateInput;
  *
  */
 public final class GateInput implements IGateInput {
-	private AbstractCircuitGate inputComponent;
+	private IAbstractCircuitGate inputComponent;
 	private int inputComponentPort;
 	
 	/**
@@ -19,7 +20,7 @@ public final class GateInput implements IGateInput {
 		inputComponentPort = 0;
 	}
 
-	public AbstractCircuitGate getInputComponent(){
+	public IAbstractCircuitGate getInputComponent(){
 		return inputComponent;
 	}
 
@@ -27,7 +28,7 @@ public final class GateInput implements IGateInput {
 		return inputComponentPort;
 	}
 	
-	public void setInputComponent(AbstractCircuitGate component, int port){
+	public void setInputComponent(IAbstractCircuitGate component, int port){
 		this.inputComponent = component;
 	}
 	

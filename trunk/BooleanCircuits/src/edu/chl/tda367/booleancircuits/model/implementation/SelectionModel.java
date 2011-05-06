@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
@@ -15,26 +16,26 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCi
  */
 public class SelectionModel implements ISelectionModel {
 
-	private final List<AbstractCircuitGate> selectedComponentList;
+	private final List<IAbstractCircuitGate> selectedComponentList;
 
 	public SelectionModel() {
-		selectedComponentList = new LinkedList<AbstractCircuitGate>();
+		selectedComponentList = new LinkedList<IAbstractCircuitGate>();
 	}
 
 	@Override
-	public void selectAllComponents(Collection<AbstractCircuitGate> c) {
-		for (AbstractCircuitGate gate : c) {
+	public void selectAllComponents(Collection<IAbstractCircuitGate> c) {
+		for (IAbstractCircuitGate gate : c) {
 			selectedComponentList.add(gate);
 		}
 	}
 
 	@Override
-	public void selectComponent(AbstractCircuitGate g) {
+	public void selectComponent(IAbstractCircuitGate g) {
 		selectedComponentList.add(g);
 	}
 
 	@Override
-	public boolean isSelectedComponent(AbstractCircuitGate g) {
+	public boolean isSelectedComponent(IAbstractCircuitGate g) {
 		if (selectedComponentList.contains(g)) {
 			return true;
 		} else {
@@ -48,7 +49,7 @@ public class SelectionModel implements ISelectionModel {
 	}
 
 	@Override
-	public List<AbstractCircuitGate> getSelectedComponents() {
+	public List<IAbstractCircuitGate> getSelectedComponents() {
 		return selectedComponentList;
 	}
 
