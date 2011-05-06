@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.view.implementation;
+package edu.chl.tda367.booleancircuits.view.draw.implementation;
 
 import java.awt.Color;
 import java.awt.Dimension;

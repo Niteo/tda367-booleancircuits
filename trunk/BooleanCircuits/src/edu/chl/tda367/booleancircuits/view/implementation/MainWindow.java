@@ -18,6 +18,9 @@ import javax.swing.JButton;
 import edu.chl.tda367.booleancircuits.controller.implementation.ActionController;
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
+import edu.chl.tda367.booleancircuits.view.draw.implementation.BlankBackground;
+import edu.chl.tda367.booleancircuits.view.draw.implementation.DottedBackground;
+import edu.chl.tda367.booleancircuits.view.draw.implementation.GridBackground;
 import edu.chl.tda367.booleancircuits.view.implementation.Canvas.CanvasAction;
 
 /**
