@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.io;
+package edu.chl.tda367.booleancircuits.io.implementation;
 
 import java.awt.Point;
 import java.io.BufferedWriter;
@@ -11,11 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import edu.chl.tda367.booleancircuits.io.IFileManager;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.GateInput;
 import edu.chl.tda367.booleancircuits.utilities.GateFactory;
 
-public class FileManager {
+public final class FileManager implements IFileManager {
 
 	/**
 	 * Saves a circuit in form of a .txt file.
@@ -23,7 +24,8 @@ public class FileManager {
 	 * @param components
 	 * @param name
 	 */
-	public void saveCircuit(List<AbstractCircuitGate> components, String name) {
+	@Override
+	public void saveFile(List<AbstractCircuitGate> components, String name) {
 
 		try {
 			PrintWriter saveFile = new PrintWriter(new BufferedWriter(
@@ -44,10 +46,10 @@ public class FileManager {
 				for (GateInput input : gateInputs) {
 					String txt = "CNCT";
 
-					txt += " " + components.indexOf(input.getInputComponent())
-							+ " " + input.getInputPort() + " "
-							+ components.indexOf(gate) + " "
-							+ gateInputs.indexOf(input);
+					txt += " " + components.indexOf(gate) + " "
+							+ gateInputs.indexOf(input) + " "
+							+ components.indexOf(input.getInputComponent())
+							+ " " + input.getInputPort();
 					saveFile.println(txt);
 				}
 			}
@@ -62,6 +64,7 @@ public class FileManager {
 	/**
 	 * Opens a saved circuit by reading a saved .txt file.
 	 */
+	@Override
 	public void openFile(File file) {
 		List<AbstractCircuitGate> components = new ArrayList<AbstractCircuitGate>();
 
@@ -81,6 +84,24 @@ public class FileManager {
 					component.setPosition(position);
 					components.add(component);
 					sc.nextLine();
+				} else {
+					break;
+				}
+			}
+			// Connecting gates
+			while (sc.hasNext()) {
+				if (sc.hasNext("CNCT")) {
+					sc.next();
+					/*
+					 * AbstractCircuitGate toCpt = components.get(sc.nextInt());
+					 * int inputNo = sc.nextInt(); AbstractCircuitGate fromCpt =
+					 * components.get(sc.nextInt()); int output = sc.nextInt();
+					 */
+					components.get(sc.nextInt()).connectInput(sc.nextInt(),
+							components.get(sc.nextInt()), sc.nextInt());
+
+					sc.nextLine();
+
 				} else {
 					break;
 				}

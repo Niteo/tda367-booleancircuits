@@ -11,7 +11,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import edu.chl.tda367.booleancircuits.io.ComponentFolder;
+import edu.chl.tda367.booleancircuits.io.implementation.ComponentFolder;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.view.IPalette;
 
