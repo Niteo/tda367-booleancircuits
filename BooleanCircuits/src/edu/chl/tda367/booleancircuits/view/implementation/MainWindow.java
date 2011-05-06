@@ -19,16 +19,13 @@ import edu.chl.tda367.booleancircuits.controller.implementation.ActionController
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.view.implementation.Canvas.CanvasAction;
-import edu.chl.tda367.booleancircuits.view.draw.BlankBackground;
-import edu.chl.tda367.booleancircuits.view.draw.DottedBackground;
-import edu.chl.tda367.booleancircuits.view.draw.GridBackground;
 
 /**
  * The Main window
  * 
  * @author Boel
  */
-public class MainWindow extends javax.swing.JFrame implements
+public final class MainWindow extends javax.swing.JFrame implements
 		PropertyChangeListener {
 
 	private MasterController mc;
