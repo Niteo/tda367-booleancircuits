@@ -115,8 +115,10 @@ public interface IModelManager {
 	 * 
 	 * @param position
 	 *            Point The point of the component
+	 * @param multiSelect
+	 * 			  boolean if false, all selected components will be deselected
 	 */
-	public void selectComponent(Point position);
+	public void selectComponent(Point position, boolean multiSelect);
 	
 	/**
 	 * Determinates if a component is currently selected.

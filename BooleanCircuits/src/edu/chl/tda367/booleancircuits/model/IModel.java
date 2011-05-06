@@ -55,4 +55,9 @@ public interface IModel {
 	 * Returns the name of the workspace.
 	 */
 	public String toString();
+	
+	/**
+	 * Updates the model's component's boolean values. 
+	 */
+	public void updateComponents();
 }

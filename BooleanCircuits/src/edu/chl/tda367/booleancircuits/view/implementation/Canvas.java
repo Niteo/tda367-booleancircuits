@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -14,6 +15,7 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.UIManager;
 import javax.swing.event.MouseInputAdapter;
 
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
@@ -82,6 +84,7 @@ public class Canvas {
 			}
 			// Draw position
 			g2d.setColor(Color.BLACK);
+			g2d.setFont(UIManager.getFont("TabbedPane.font"));
 			g2d.drawString("[" + posX + ", " + posY + "]", 5, 15);
 		}
 	};
@@ -108,11 +111,15 @@ public class Canvas {
 			Point pointClicked = new Point(evt.getX() + posX, evt.getY() + posY);
 
 			if (evt.getButton() == MouseEvent.BUTTON1) { // LMB
+				connectMode = false;
+				mc.connectComponent(null, -1);
+				
 				if (evt.getClickCount() == 1) {
-					mc.selectComponent(pointClicked);
-					connectMode = false;
+					mc.selectComponent(pointClicked, evt.isControlDown());
 				} else if (evt.getClickCount() == 2) {
-					mc.addComponent(pointClicked);
+					if(model.getComponent(pointClicked) == null){
+						mc.addComponent(pointClicked);
+					}
 				}
 			} else if (evt.getButton() == MouseEvent.BUTTON3) { // RMB
 
@@ -120,7 +127,9 @@ public class Canvas {
 				JPopupMenu jpm = new JPopupMenu();
 
 				if (rightClickedGate == null) {
-					jpm.add(new JMenuItem("<No components>"));
+					JMenuItem tmpItem = new JMenuItem("<No component>");
+					tmpItem.setEnabled(false);
+					jpm.add(tmpItem);
 				} else {
 					jpm = menu;
 					menu.updateMenu(connectMode ? rightClickedGate.getNoOfOutputs()

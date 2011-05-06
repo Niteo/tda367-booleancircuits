@@ -14,7 +14,7 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCi
  * @author Boel
  * 
  */
-public class SelectionModel implements ISelectionModel {
+public final class SelectionModel implements ISelectionModel {
 
 	private final List<IAbstractCircuitGate> selectedComponentList;
 
@@ -23,19 +23,32 @@ public class SelectionModel implements ISelectionModel {
 	}
 
 	@Override
-	public void selectAllComponents(Collection<IAbstractCircuitGate> c) {
+	public void selectComponents(Collection<IAbstractCircuitGate> c) {
 		for (IAbstractCircuitGate gate : c) {
 			selectedComponentList.add(gate);
 		}
 	}
 
 	@Override
-	public void selectComponent(IAbstractCircuitGate g) {
-		selectedComponentList.add(g);
+	public void selectComponent(IAbstractCircuitGate g, boolean multiSelect) {
+		if(multiSelect){
+			if(_isSelected(g)){
+				selectedComponentList.remove(g);
+			} else {
+				selectedComponentList.add(g);
+			}
+		} else {
+			selectedComponentList.clear();
+			selectedComponentList.add(g);
+		}
 	}
 
 	@Override
 	public boolean isSelectedComponent(IAbstractCircuitGate g) {
+		return _isSelected(g);
+	}
+	
+	private boolean _isSelected(IAbstractCircuitGate g){
 		if (selectedComponentList.contains(g)) {
 			return true;
 		} else {

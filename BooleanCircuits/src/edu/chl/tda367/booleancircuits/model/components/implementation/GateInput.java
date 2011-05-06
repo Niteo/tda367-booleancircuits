@@ -33,6 +33,10 @@ public final class GateInput implements IGateInput {
 	}
 	
 	public boolean getInputValue(){
-		return inputComponent.getOutputValue(inputComponentPort);
+		if(inputComponent == null){
+			return false;
+		} else {
+			return inputComponent.getOutputValue(inputComponentPort);
+		}
 	}
 }

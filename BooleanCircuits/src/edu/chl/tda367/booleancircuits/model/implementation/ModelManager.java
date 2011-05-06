@@ -88,6 +88,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		getActiveWorkspaceModel().removeComponents(
 				selectionModelList.get(selectedIndex).getSelectedComponents());
 		_getActiveSelectionModel().removeUnusedElements();
+		getActiveWorkspaceModel().updateComponents();
 		firePropertyChanged();
 	}
 
@@ -126,15 +127,15 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void selectAllComponents() {
-		_getActiveSelectionModel().selectAllComponents(
+		_getActiveSelectionModel().selectComponents(
 				modelList.get(selectedIndex).getComponents());
 		firePropertyChanged();
 	}
 
 	@Override
-	public void selectComponent(Point position) {
+	public void selectComponent(Point position, boolean multiSelect) {
 		_getActiveSelectionModel().selectComponent(
-				modelList.get(selectedIndex).getComponent(position));
+				modelList.get(selectedIndex).getComponent(position), multiSelect);
 		firePropertyChanged();
 	}
 
@@ -152,6 +153,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	public void removeComponent(IAbstractCircuitGate g) {
 		getActiveWorkspaceModel().removeComponent(g);
 		_getActiveSelectionModel().removeUnusedElements();
+		getActiveWorkspaceModel().updateComponents();
 		firePropertyChanged();
 	}
 	
@@ -167,6 +169,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	public void connectComponents(IAbstractCircuitGate componentIn,
 			IAbstractCircuitGate componentOut, int portIn, int portOut) {
 		componentIn.connectInput(portIn, componentOut, portOut);
+		getActiveWorkspaceModel().updateComponents();
 		firePropertyChanged();
 	}
 }

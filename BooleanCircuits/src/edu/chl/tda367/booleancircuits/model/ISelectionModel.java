@@ -20,15 +20,17 @@ public interface ISelectionModel {
 	 * @param c
 	 *            Collection
 	 */
-	public void selectAllComponents(Collection<IAbstractCircuitGate> c);
+	public void selectComponents(Collection<IAbstractCircuitGate> c);
 
 	/**
 	 * Selects the given component in the active workspace.
 	 * 
 	 * @param g
 	 *            IAbstractCircuitGate the gate to select
+	 * @param multiSelect
+	 * 			  boolean if false, all selected components will be deselected
 	 */
-	public void selectComponent(IAbstractCircuitGate g);
+	public void selectComponent(IAbstractCircuitGate g, boolean multiSelect);
 
 	/**
 	 * Determinates if a component is currently selected.

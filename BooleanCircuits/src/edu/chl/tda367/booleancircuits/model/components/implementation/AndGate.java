@@ -31,6 +31,7 @@ public final class AndGate extends AbstractCircuitGate {
 		for (IGateInput i : input) {
 			if (i.getInputValue() == false) {
 				super.setOutput(0, false);
+				return;
 			}
 			super.setOutput(0, true);
 		}
