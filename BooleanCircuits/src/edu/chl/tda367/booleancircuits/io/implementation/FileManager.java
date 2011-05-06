@@ -28,12 +28,14 @@ public final class FileManager implements IFileManager {
 	 * @param name
 	 */
 	@Override
-	public void saveFile(Collection<IAbstractCircuitGate> components, String name) {
-		System.out.println("yo, savin!");
+	public void saveFile(Collection<IAbstractCircuitGate> components,
+			String name) {
+		System.out.println("savning: " + name);
 		try {
 			PrintWriter saveFile = new PrintWriter(new BufferedWriter(
 					new FileWriter(name)));
 			List<IAbstractCircuitGate> tempList = new ArrayList<IAbstractCircuitGate>();
+			saveFile.println(name);
 			// Print all gates
 			for (IAbstractCircuitGate gate : components) {
 				String txt = "ADD";
@@ -71,12 +73,14 @@ public final class FileManager implements IFileManager {
 	 */
 	@Override
 	public Model openFile(String path) {
+		System.out.println("opening: " + path);
 		File file = new File(path);
-		Model model = new Model(file.toString());
 		List<AbstractCircuitGate> components = new ArrayList<AbstractCircuitGate>();
 
 		try {
 			Scanner sc = new Scanner(file);
+			Model model = new Model(sc.next());
+			sc.nextLine();
 			// Create gates
 			while (sc.hasNext()) {
 				if (sc.hasNext("ADD")) {
@@ -100,14 +104,15 @@ public final class FileManager implements IFileManager {
 			while (sc.hasNext()) {
 				if (sc.hasNext("CNCT")) {
 					sc.next();
-					/*
-					 * AbstractCircuitGate toCpt = components.get(sc.nextInt());
-					 * int inputNo = sc.nextInt(); AbstractCircuitGate fromCpt =
-					 * components.get(sc.nextInt()); int output = sc.nextInt();
-					 */
-					components.get(sc.nextInt()).connectInput(sc.nextInt(),
-							components.get(sc.nextInt()), sc.nextInt());
 
+					AbstractCircuitGate toCpt = components.get(sc.nextInt());
+					int inputNo = sc.nextInt();
+					int fromCptNo = sc.nextInt();
+					if (fromCptNo > 0) {
+						AbstractCircuitGate fromCpt = components.get(fromCptNo);
+						int output = sc.nextInt();
+						toCpt.connectInput(inputNo, fromCpt, output);
+					}
 					sc.nextLine();
 
 				} else {
