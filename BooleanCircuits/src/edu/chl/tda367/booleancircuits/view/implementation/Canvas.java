@@ -20,6 +20,7 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCi
 import edu.chl.tda367.booleancircuits.utilities.IObservable;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 import edu.chl.tda367.booleancircuits.view.draw.IDraw;
+import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
 
 /**
  * A class where the components are drawn.
