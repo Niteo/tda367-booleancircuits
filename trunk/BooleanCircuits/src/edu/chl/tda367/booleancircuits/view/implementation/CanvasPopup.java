@@ -51,7 +51,9 @@ public final class CanvasPopup extends JPopupMenu {
 		connect.removeAll();
 
 		for (int i = 1; i <= ports; i++) {
-			connect.add(new JMenuItem("" + i));
+			JMenuItem temp = new JMenuItem("" + i);
+			temp.addActionListener(listener);
+			connect.add(temp);
 		}
 
 		connect.setEnabled(ports > 0);
@@ -69,8 +71,8 @@ public final class CanvasPopup extends JPopupMenu {
 	}
 	
 	public int getPortIndex(JMenuItem item){
-		for(int i=0; i<connect.getComponentCount();i++){
-			if(item==connect.getComponent(i)){
+		for(int i=0; i<connect.getItemCount();i++){
+			if(item==connect.getItem(i)){
 				return i;
 			}
 		}

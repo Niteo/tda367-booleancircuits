@@ -167,5 +167,6 @@ public final class ModelManager implements IObservable, IModelManager {
 	public void connectComponents(IAbstractCircuitGate componentIn,
 			IAbstractCircuitGate componentOut, int portIn, int portOut) {
 		componentIn.connectInput(portIn, componentOut, portOut);
+		firePropertyChanged();
 	}
 }
