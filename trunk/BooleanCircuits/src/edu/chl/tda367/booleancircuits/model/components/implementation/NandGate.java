@@ -30,6 +30,7 @@ public final class NandGate extends AbstractCircuitGate {
 		for (IGateInput i : input) {
 			if (i.getInputValue() == false) {
 				super.setOutput(0, true);
+				return;
 			}
 			super.setOutput(0, false);
 		}

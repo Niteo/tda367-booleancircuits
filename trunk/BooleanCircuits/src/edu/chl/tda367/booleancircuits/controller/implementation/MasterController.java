@@ -92,7 +92,9 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void addComponent(Point position) {
-		mm.addComponent(chosenGate, position);
+		if(chosenGate != null){
+			mm.addComponent(chosenGate, position);
+		}
 	}
 
 	@Override
@@ -106,8 +108,8 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void selectComponent(Point position) {
-		mm.selectComponent(position);
+	public void selectComponent(Point position, boolean multiSelect) {
+		mm.selectComponent(position, multiSelect);
 	}
 
 	@Override
@@ -137,7 +139,11 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void connectComponent(IAbstractCircuitGate g, int port) {
-		if(connectComponent == null){
+		if(g == null){
+			connectComponent = null;
+			return;
+		}
+		else if(connectComponent == null){
 			connectComponent = g;
 			connectPort = port;
 		} else {

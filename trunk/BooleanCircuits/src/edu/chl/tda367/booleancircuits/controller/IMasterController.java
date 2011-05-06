@@ -108,8 +108,10 @@ public interface IMasterController {
 	 * 
 	 * @param coord
 	 *            the coordinate to select from
+	 * @param multiSelect
+	 * 			  boolean if false, all selected components will be deselected
 	 */
-	public void selectComponent(Point position);
+	public void selectComponent(Point position, boolean multiSelect);
 
 	/**
 	 * Copies the selected components in the active workspace to clipboard.
@@ -143,7 +145,7 @@ public interface IMasterController {
 	 * component, second specifiec output.
 	 * 
 	 * @param g
-	 *            component to connect
+	 *            component to connect. Enter null to clear component memory.
 	 * @param port
 	 *            port to connect
 	 */

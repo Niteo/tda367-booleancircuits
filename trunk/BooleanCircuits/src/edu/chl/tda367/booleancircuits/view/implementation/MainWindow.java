@@ -72,6 +72,14 @@ public final class MainWindow extends javax.swing.JFrame implements
 			}
 		}
 	};
+	
+
+	@Override
+	public synchronized void propertyChange(PropertyChangeEvent evt) {
+		if (evt.getSource() instanceof ModelManager) {
+			cs.update((ModelManager) evt.getSource());
+		}
+	}
 
 	/** Creates new form View */
 	public MainWindow() {
@@ -484,12 +492,5 @@ public final class MainWindow extends javax.swing.JFrame implements
 	private javax.swing.JMenu viewMenu;
 
 	// End of variables declaration//GEN-END:variables
-
-	@Override
-	public synchronized void propertyChange(PropertyChangeEvent evt) {
-		if (evt.getSource() instanceof ModelManager) {
-			cs.update((ModelManager) evt.getSource());
-		}
-	}
 
 }

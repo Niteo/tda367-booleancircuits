@@ -30,7 +30,6 @@ public final class Model implements IModel{
 		AbstractCircuitGate c = component.clone();
 		c.setPosition(position);
 		componentList.add(c);
-		updateComponents();
 	}
 
 	public Collection<IAbstractCircuitGate> getComponents() {
@@ -61,11 +60,10 @@ public final class Model implements IModel{
 		for (IAbstractCircuitGate i : list) {
 			_removeComponent(i);
 		}
-		updateComponents();
 	}
 
-	private void updateComponents() {
-		List<List<AbstractCircuitGate>> groupList = new LinkedList<List<AbstractCircuitGate>>();
+	public void updateComponents() {
+		List<List<IAbstractCircuitGate>> groupList = new LinkedList<List<IAbstractCircuitGate>>();
 
 		// Sort our components in groups of update tiers.
 		int loopCount = 1;
@@ -79,13 +77,14 @@ public final class Model implements IModel{
 					endOfLoop = false;
 				}
 			}
+			groupList.add(tempList);
 			loopCount++;
 		} while (!endOfLoop);
 
 		// Update each tier individually
-		for (List<AbstractCircuitGate> l : groupList) {
+		for (List<IAbstractCircuitGate> l : groupList) {
 			List<AbstractCircuitGate> cloneList = new ArrayList<AbstractCircuitGate>();
-			for (AbstractCircuitGate g : l) {
+			for (IAbstractCircuitGate g : l) {
 				AbstractCircuitGate temp = g.clone();
 				temp.update();
 				cloneList.add(temp);

@@ -56,16 +56,28 @@ public class Draw implements IDraw {
 		}
 
 		int nInputs = gate.getInputs().size();
+		int loopCount = 0;
 		for (IGateInput i : gate.getInputs()) {
 			if (i.getInputComponent() != null) {
-				int yOffset = i.getInputPort()*Constants.componentSize/nInputs;
+				if(i.getInputValue()){
+					g.setColor(Color.green);
+				} else {
+					g.setColor(Color.red);
+				}
+				
+				int y1Offset = loopCount*Constants.componentSize/(nInputs) + Constants.componentSize/(nInputs*2);
 				int x1 = (int) (gate.getPosition().x - offset.x - Constants.componentSize*0.5);
+				int y1 = (int) (gate.getPosition().y - offset.y + y1Offset - Constants.componentSize*0.5);
+				
+				int y2Offset = (Constants.componentSize/(i.getInputComponent().getNoOfOutputs()* 2)) * (i.getInputPort()+i.getInputComponent().getNoOfOutputs());
 				int x2 = (int) (i.getInputComponent().getPosition().x - offset.x + Constants.componentSize*0.5);
-				int y1 = (int) (gate.getPosition().y - offset.y+ yOffset - Constants.componentSize*0.5);
-				int y2 = i.getInputComponent().getPosition().y - offset.y;
-				g.drawLine(x1, y1, x2, y2);
-
+				int y2 = (int) (i.getInputComponent().getPosition().y - offset.y - Constants.componentSize*0.5 + y2Offset);
+				
+				int []xPoints = {x1, x1 + (x2-x1)/2, x1 + (x2-x1)/2, x2};
+				int []yPoints = {y1, y1, y2, y2};
+				g.drawPolyline(xPoints, yPoints, 4);
 			}
+			loopCount++;
 		}
 
 	}
