@@ -15,12 +15,19 @@ import javax.swing.JPopupMenu;
 public final class CanvasPopup extends JPopupMenu {
 	private JMenuItem remove = new JMenuItem("Remove gate");
 	private JMenu connect = new JMenu();
+	private ActionListener listener;
 
 	/**
 	 * Creates a pop-up menu.
+	 * 
+	 * @param l
+	 *            ActionListener
 	 */
-	public CanvasPopup() {
+	public CanvasPopup(ActionListener l) {
 		super();
+		listener = l;
+
+		remove.addActionListener(listener);
 
 		add(connect);
 		add(remove);
@@ -46,7 +53,27 @@ public final class CanvasPopup extends JPopupMenu {
 		for (int i = 1; i <= ports; i++) {
 			connect.add(new JMenuItem("" + i));
 		}
-		
+
 		connect.setEnabled(ports > 0);
+	}
+
+	/**
+	 * Returns true if the JMenuItem is a remove button.
+	 * 
+	 * @param item
+	 *            JMenuItem
+	 * @return boolean
+	 */
+	public boolean isRemoveButton(JMenuItem item) {
+		return remove == item;
+	}
+	
+	public int getPortIndex(JMenuItem item){
+		for(int i=0; i<connect.getComponentCount();i++){
+			if(item==connect.getComponent(i)){
+				return i;
+			}
+		}
+		throw new IllegalArgumentException("Component does not match menu");
 	}
 }

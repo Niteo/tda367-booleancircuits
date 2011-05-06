@@ -97,6 +97,14 @@ public interface IModelManager {
 	public void removeSelectedComponents();
 
 	/**
+	 * Removes the given component if it exists in the active model.
+	 * 
+	 * @param g
+	 *            IAbstractCircuitGate
+	 */
+	public void removeComponent(IAbstractCircuitGate g);
+
+	/**
 	 * Selects all components in the collection.
 	 * 
 	 */

@@ -36,19 +36,26 @@ public class Canvas {
 
 	private IModel model;
 	private ISelectionModel selectModel;
+	private IAbstractCircuitGate rightClickedGate = null;
 	private static IDraw drawer = new Draw();
 	private int posX, posY;
 	private int zoomFactor;
 	private Point oldDragPosition;
 	private boolean input;
 	private MasterController mc;
-	private CanvasPopup menu = new CanvasPopup();
+	private CanvasPopup menu;
 	private ActionListener listener = new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			JMenuItem menuItem = (JMenuItem) e.getSource();
 
+			if (menu.isRemoveButton(menuItem)) {
+				mc.removeComponent(rightClickedGate);
+			} else {
+				//TODO: FIX ME!
+				//menu.getPortIndex(menuItem)
+			}
 		}
 
 	};
@@ -109,16 +116,15 @@ public class Canvas {
 				}
 			} else if (evt.getButton() == MouseEvent.BUTTON3) { // RMB
 
-				IAbstractCircuitGate gate = model.getComponent(pointClicked);
+				rightClickedGate = model.getComponent(pointClicked);
 				JPopupMenu jpm = new JPopupMenu();
-				
-				if (gate == null) {
+
+				if (rightClickedGate == null) {
 					jpm.add(new JMenuItem("<No components>"));
 				} else {
 					jpm = menu;
-					menu.updateMenu(
-							input ? gate.getNoOfInputs() : gate
-									.getNoOfOutputs(), input);
+					menu.updateMenu(input ? rightClickedGate.getNoOfInputs()
+							: rightClickedGate.getNoOfOutputs(), input);
 				}
 
 				jpm.show(evt.getComponent(), (int) evt.getPoint().getX(),
@@ -136,6 +142,7 @@ public class Canvas {
 		zoomFactor = 0;
 		model = canvasModel;
 		selectModel = selectionModel;
+		menu = new CanvasPopup(listener);
 
 		panel.setBackground(Color.WHITE);
 		panel.addMouseListener(mouseAdapter);

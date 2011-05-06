@@ -59,7 +59,7 @@ public final class Model implements IModel{
 
 	public void removeComponents(Collection<IAbstractCircuitGate> list) {
 		for (IAbstractCircuitGate i : list) {
-			componentList.remove(i);
+			_removeComponent(i);
 		}
 		updateComponents();
 	}
@@ -100,5 +100,15 @@ public final class Model implements IModel{
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public void removeComponent(IAbstractCircuitGate g) {
+		_removeComponent(g);
+		updateComponents();
+	}
+	
+	private void _removeComponent(IAbstractCircuitGate g) {
+		componentList.remove(g);
 	}
 }
