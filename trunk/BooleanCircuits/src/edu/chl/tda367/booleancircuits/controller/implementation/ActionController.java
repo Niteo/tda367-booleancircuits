@@ -1,9 +1,10 @@
 package edu.chl.tda367.booleancircuits.controller.implementation;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -58,8 +59,14 @@ public class ActionController implements ChangeListener, IActionController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO add correct path
-			mc.openWorkspace("");
+			JFileChooser fc = new JFileChooser();
+			int ret = fc.showOpenDialog(null);
+
+			System.out.println(ret + " " + JFileChooser.APPROVE_OPTION);
+			if (ret == JFileChooser.APPROVE_OPTION) {
+				System.out.println(fc.getSelectedFile().getPath());
+				mc.openWorkspace(fc.getSelectedFile());
+			}
 		}
 	};
 
@@ -67,7 +74,15 @@ public class ActionController implements ChangeListener, IActionController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			mc.saveActiveWorkspace();
+			JFileChooser fc = new JFileChooser();
+			int ret = fc.showSaveDialog(null);
+
+			System.out.println(ret + " " + JFileChooser.APPROVE_OPTION);
+
+			if (ret == JFileChooser.APPROVE_OPTION) {
+				System.out.println(fc.getSelectedFile().getPath());
+				mc.saveActiveWorkspace(fc.getSelectedFile());
+			}
 		}
 	};
 
@@ -142,7 +157,7 @@ public class ActionController implements ChangeListener, IActionController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO implement me!
-			
+
 		}
 	};
 
@@ -162,70 +177,87 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
+	@Override
 	public Action getNewWorkspaceAction() {
 		return newWorkspaceAction;
 	}
 
+	@Override
 	public Action getCloseActiveWorkspaceAction() {
 		return closeActiveWorkspaceAction;
 	}
 
+	@Override
 	public Action getCloseAllWorkspacesAction() {
 		return closeAllWorkspacesAction;
 	}
 
+	@Override
 	public Action getOpenWorkspaceAction() {
 		return openWorkspaceAction;
 	}
 
+	@Override
 	public Action getSaveActiveWorkspaceAction() {
 		return saveActiveWorkspaceAction;
 	}
 
+	@Override
 	public Action getSaveActiveWorskpaceAsComponentAction() {
 		return saveActiveWorskpaceAsComponentAction;
 	}
 
+	@Override
 	public Action getSaveAllWorkspacesAction() {
 		return saveAllWorkspacesAction;
 	}
 
+	@Override
 	public Action getCopySelectedComponentsAction() {
 		return copySelectedComponentsAction;
 	}
 
+	@Override
 	public Action getCutSelectedComponentsAction() {
 		return cutSelectedComponentsAction;
 	}
 
+	@Override
 	public Action getPasteSelectedComponentAction() {
 		return pasteSelectedComponentAction;
 	}
 
+	@Override
 	public Action getUndoAction() {
 		return undoAction;
 	}
 
+	@Override
 	public Action getRedoAction() {
 		return redoAction;
 	}
 
+	@Override
 	public Action getExitAction() {
 		return exitAction;
 	}
 
+	@Override
 	public Action getInsertComponentAction() {
 		return insertComponentAction;
 	}
 
+	@Override
 	public Action getRemoveSelectedComponentsAction() {
 		return removeSelectedComponentsAction;
 	}
 
+	@Override
 	public Action getSelectAllComponentsAction() {
 		return selectAllComponentsAction;
 	}
 
+	@Override
 	public void stateChanged(ChangeEvent e) {
 		JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
 		int selectedIndex = tabbedPane.getSelectedIndex();

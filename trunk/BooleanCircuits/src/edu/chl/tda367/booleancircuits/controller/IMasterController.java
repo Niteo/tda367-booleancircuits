@@ -1,9 +1,9 @@
 package edu.chl.tda367.booleancircuits.controller;
 
 import java.awt.Point;
+import java.io.File;
 
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
  * Controller for ModelManager.
@@ -40,12 +40,12 @@ public interface IMasterController {
 	 * @param path
 	 *            Path to the workspace to open.
 	 */
-	public void openWorkspace(String path);
+	public void openWorkspace(File file);
 
 	/**
 	 * Saves the active workspace.
 	 */
-	public void saveActiveWorkspace();
+	public void saveActiveWorkspace(File file);
 
 	/**
 	 * Saves the active workspace as a component.
@@ -109,7 +109,7 @@ public interface IMasterController {
 	 * @param coord
 	 *            the coordinate to select from
 	 * @param multiSelect
-	 * 			  boolean if false, all selected components will be deselected
+	 *            boolean if false, all selected components will be deselected
 	 */
 	public void selectComponent(Point position, boolean multiSelect);
 
