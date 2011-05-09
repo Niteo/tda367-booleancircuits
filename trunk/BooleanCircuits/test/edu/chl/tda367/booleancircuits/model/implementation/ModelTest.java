@@ -1,19 +1,26 @@
-package edu.chl.tda367.booleancircuits.test;
+package edu.chl.tda367.booleancircuits.model.implementation;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
+
 import org.junit.Test;
+
+import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
 
 public class ModelTest {
 
 	@Test
 	public void testModel() {
-		fail("Not yet implemented");
+
+		Model model = new Model("TestModel");
+		assertTrue(model!=null);
 	}
 
 	@Test
 	public void testAddComponent() {
-		fail("Not yet implemented");
+		Model model = new Model("TestModel");
+		model.addComponent(new NotGate(), new Point(5,5));
 	}
 
 	@Test
