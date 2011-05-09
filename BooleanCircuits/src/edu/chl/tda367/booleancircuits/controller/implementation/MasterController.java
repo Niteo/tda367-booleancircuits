@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.controller.implementation;
 
 import java.awt.Point;
+import java.io.File;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.IFileManager;
@@ -55,14 +56,14 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void openWorkspace(String path) {
-		fileManager.openFile(path);
+	public void openWorkspace(File file) {
+		mm.addWorkspace(fileManager.openFile(file));
 	}
 
 	@Override
-	public void saveActiveWorkspace() {
-		fileManager.saveFile(mm.getActiveWorkspaceModel().getComponents(),
-				"Penis hello!");
+	public void saveActiveWorkspace(File file) {
+		fileManager
+				.saveFile(mm.getActiveWorkspaceModel().getComponents(), file);
 	}
 
 	@Override
@@ -92,7 +93,7 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void addComponent(Point position) {
-		if(chosenGate != null){
+		if (chosenGate != null) {
 			mm.addComponent(chosenGate, position);
 		}
 	}
@@ -139,18 +140,16 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void connectComponent(IAbstractCircuitGate g, int port) {
-		if(g == null){
+		if (g == null) {
 			connectComponent = null;
 			return;
-		}
-		else if(connectComponent == null){
+		} else if (connectComponent == null) {
 			connectComponent = g;
 			connectPort = port;
 		} else {
-			mm.connectComponents(connectComponent,
-					g, connectPort, port);
+			mm.connectComponents(connectComponent, g, connectPort, port);
 			connectComponent = null;
 		}
-		
+
 	}
 }
