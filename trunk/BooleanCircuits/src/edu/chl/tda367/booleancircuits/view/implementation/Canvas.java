@@ -44,6 +44,7 @@ public class Canvas {
 	private int zoomFactor;
 	private Point oldDragPosition;
 	private boolean connectMode;
+	private boolean draggingMode;
 	private MasterController mc;
 	private CanvasPopup menu;
 	private ActionListener listener = new ActionListener() {
@@ -90,13 +91,28 @@ public class Canvas {
 	};
 
 	private MouseAdapter mouseAdapter = new MouseInputAdapter() {
-
+		
 		@Override
 		public void mouseDragged(MouseEvent evt) {
 			if (oldDragPosition != null) {
 				int dx = (int) (evt.getPoint().getX() - oldDragPosition.getX());
 				int dy = (int) (evt.getPoint().getY() - oldDragPosition.getY());
-				panCanvas(-dx, -dy);
+				
+				if(draggingMode){
+					for(IAbstractCircuitGate selected : selectModel.getSelectedComponents()){
+						selected.move(dx, dy);
+					}
+					panel.repaint();
+				} else {
+					IAbstractCircuitGate gate = model.getComponent(new Point(evt.getX() + posX, evt.getY() + posY));
+					if(gate != null){
+						if(selectModel.isSelectedComponent(gate)){
+							draggingMode = true;
+						}
+					} else {
+						panCanvas(-dx, -dy);
+					}
+				}
 			}
 			oldDragPosition = evt.getPoint();
 		}
@@ -104,6 +120,7 @@ public class Canvas {
 		@Override
 		public void mouseReleased(MouseEvent evt) {
 			oldDragPosition = null;
+			draggingMode = false;
 		}
 
 		@Override
