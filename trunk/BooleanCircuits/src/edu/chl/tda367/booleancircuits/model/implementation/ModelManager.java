@@ -9,6 +9,7 @@ import java.util.Collection;
 
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.IModelManager;
+import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
@@ -21,23 +22,23 @@ import edu.chl.tda367.booleancircuits.utilities.IObservable;
  */
 public final class ModelManager implements IObservable, IModelManager {
 
-	private ArrayList<IModel> modelList;
+	private ArrayList<IModelWrapper> modelList;
 	private int selectedIndex;
 	private static int workspaceCount = 1;
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private ArrayList<ISelectionModel> selectionModelList;
 
 	public ModelManager() {
-		modelList = new ArrayList<IModel>();
+		modelList = new ArrayList<IModelWrapper>();
 		selectionModelList = new ArrayList<ISelectionModel>();
 		selectedIndex = -1;
 	}
 
 	public void newWorkspace() {
-		addWorkspace(new Model("Untitled " + workspaceCount));
+		addWorkspace(new ModelWrapper());
 	}
 
-	public void addWorkspace(IModel workspace) {
+	public void addWorkspace(IModelWrapper workspace) {
 		modelList.add(workspace);
 		selectionModelList.add(new SelectionModel());
 		_setActiveWorkspace(modelList.size() - 1);
@@ -71,11 +72,11 @@ public final class ModelManager implements IObservable, IModelManager {
 		return selectedIndex;
 	}
 
-	public IModel getActiveWorkspaceModel() {
+	public IModelWrapper getActiveWorkspaceModel() {
 		return _getActiveWorkspaceModel();
 	}
 
-	public ArrayList<IModel> getWorkspaces() {
+	public ArrayList<IModelWrapper> getWorkspaces() {
 		return modelList;
 	}
 
@@ -157,7 +158,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		firePropertyChanged();
 	}
 	
-	private IModel _getActiveWorkspaceModel(){
+	private IModelWrapper _getActiveWorkspaceModel(){
 		return modelList.get(selectedIndex);
 	}
 	
@@ -170,6 +171,11 @@ public final class ModelManager implements IObservable, IModelManager {
 			IAbstractCircuitGate componentOut, int portIn, int portOut) {
 		componentIn.connectInput(portIn, componentOut, portOut);
 		getActiveWorkspaceModel().updateComponents();
+		firePropertyChanged();
+	}
+
+	@Override
+	public void manualPropertyChanged() {
 		firePropertyChanged();
 	}
 }

@@ -30,6 +30,15 @@ public class ActionController implements ChangeListener, IActionController {
 		mc = masterController;
 	}
 
+	private Action saveAsAction = new AbstractAction() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			mc.saveActiveWorkspace(true);
+		}
+
+	};
+	
 	private Action newWorkspaceAction = new AbstractAction() {
 
 		@Override
@@ -56,17 +65,9 @@ public class ActionController implements ChangeListener, IActionController {
 	};
 
 	private Action openWorkspaceAction = new AbstractAction() {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser fc = new JFileChooser();
-			int ret = fc.showOpenDialog(null);
-
-			System.out.println(ret + " " + JFileChooser.APPROVE_OPTION);
-			if (ret == JFileChooser.APPROVE_OPTION) {
-				System.out.println(fc.getSelectedFile().getPath());
-				mc.openWorkspace(fc.getSelectedFile());
-			}
+			mc.openWorkspace();
 		}
 	};
 
@@ -74,24 +75,7 @@ public class ActionController implements ChangeListener, IActionController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser fc = new JFileChooser();
-			int ret = fc.showSaveDialog(null);
-
-			System.out.println(ret + " " + JFileChooser.APPROVE_OPTION);
-
-			if (ret == JFileChooser.APPROVE_OPTION) {
-				System.out.println(fc.getSelectedFile().getPath());
-				mc.saveActiveWorkspace(fc.getSelectedFile());
-			}
-		}
-	};
-
-	private Action saveActiveWorskpaceAsComponentAction = new AbstractAction() {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO add correct path
-			mc.saveActiveWorskpaceAsComponent("");
+			mc.saveActiveWorkspace(false);
 		}
 	};
 
@@ -203,11 +187,6 @@ public class ActionController implements ChangeListener, IActionController {
 	}
 
 	@Override
-	public Action getSaveActiveWorskpaceAsComponentAction() {
-		return saveActiveWorskpaceAsComponentAction;
-	}
-
-	@Override
 	public Action getSaveAllWorkspacesAction() {
 		return saveAllWorkspacesAction;
 	}
@@ -268,6 +247,11 @@ public class ActionController implements ChangeListener, IActionController {
 			mc.setActiveWorkspace(selectedIndex);
 		}
 
+	}
+
+	@Override
+	public Action getSaveAsAction() {
+		return saveAsAction;
 	}
 
 }

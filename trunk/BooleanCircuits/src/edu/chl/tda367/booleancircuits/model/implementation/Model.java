@@ -12,7 +12,6 @@ import edu.chl.tda367.booleancircuits.utilities.Constants;
  * Model for managing and updating circuit components.
  */
 public final class Model implements IModel{
-	private String name;
 	private final Collection<IAbstractCircuitGate> componentList;
 
 	/**
@@ -21,9 +20,8 @@ public final class Model implements IModel{
 	 * @param name
 	 *            the name of the model
 	 */
-	public Model(String name) {
+	public Model() {
 		componentList = new ArrayList<IAbstractCircuitGate>();
-		this.name = name;
 	}
 
 	public void addComponent(IAbstractCircuitGate component, Point position) {
@@ -94,11 +92,6 @@ public final class Model implements IModel{
 				l.get(i).overwriteGate(cloneList.get(i));
 			}
 		}
-	}
-
-	@Override
-	public String toString() {
-		return name;
 	}
 
 	@Override

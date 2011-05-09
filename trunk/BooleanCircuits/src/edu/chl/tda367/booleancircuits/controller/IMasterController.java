@@ -40,17 +40,15 @@ public interface IMasterController {
 	 * @param path
 	 *            Path to the workspace to open.
 	 */
-	public void openWorkspace(File file);
+	public void openWorkspace();
 
 	/**
 	 * Saves the active workspace.
+	 * 
+	 * @param saveAs
+	 *            forces use of save dialog
 	 */
-	public void saveActiveWorkspace(File file);
-
-	/**
-	 * Saves the active workspace as a component.
-	 */
-	public void saveActiveWorskpaceAsComponent(String path);
+	public void saveActiveWorkspace(boolean saveAs);
 
 	/**
 	 * Saves all workspaces.

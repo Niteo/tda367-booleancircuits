@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.Model;
+import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 
 public interface IFileManager {
 
@@ -24,5 +25,5 @@ public interface IFileManager {
 	 * @param file
 	 *            txt. file representing a previously saved model
 	 */
-	public Model openFile(File file);
+	public ModelWrapper openFile(File file);
 }

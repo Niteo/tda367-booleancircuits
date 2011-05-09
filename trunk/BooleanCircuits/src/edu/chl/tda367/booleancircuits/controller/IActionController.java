@@ -46,19 +46,19 @@ public interface IActionController {
 	public Action getSaveActiveWorkspaceAction();
 
 	/**
-	 * Returns the saveActiveWorkspaceAsComponent action.
-	 * 
-	 * @return Action
-	 */
-	public Action getSaveActiveWorskpaceAsComponentAction();
-
-	/**
 	 * Returns the saveAllWorkspaces action.
 	 * 
 	 * @return Action
 	 */
 	public Action getSaveAllWorkspacesAction();
 
+	/**
+	 * Returns the saveAs action.
+	 * 
+	 * @return Action
+	 */
+	public Action getSaveAsAction();
+	
 	/**
 	 * Returns the CopySelectedComponents action.
 	 * 
