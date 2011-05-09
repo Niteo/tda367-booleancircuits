@@ -43,7 +43,8 @@ public class ModelTest {
 		model.addComponent(not, new Point(14,14));
 		model.addComponent(nand, new Point(20,20));
 		
-		//AssertTrue(model.getComponents());
+		assertTrue(model.getComponents().size()==3);
+		//TODO: is this sufficient?
 		
 		
 	}

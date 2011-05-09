@@ -59,22 +59,29 @@ public class Draw implements IDraw {
 		int loopCount = 0;
 		for (IGateInput i : gate.getInputs()) {
 			if (i.getInputComponent() != null) {
-				if(i.getInputValue()){
+				if (i.getInputValue()) {
 					g.setColor(Color.green);
 				} else {
 					g.setColor(Color.red);
 				}
-				
-				int y1Offset = loopCount*Constants.componentSize/(nInputs) + Constants.componentSize/(nInputs*2);
-				int x1 = (int) (gate.getPosition().x - offset.x - Constants.componentSize*0.5);
-				int y1 = (int) (gate.getPosition().y - offset.y + y1Offset - Constants.componentSize*0.5);
-				
-				int y2Offset = (Constants.componentSize/(i.getInputComponent().getNoOfOutputs()* 2)) * (i.getInputPort()+i.getInputComponent().getNoOfOutputs());
-				int x2 = (int) (i.getInputComponent().getPosition().x - offset.x + Constants.componentSize*0.5);
-				int y2 = (int) (i.getInputComponent().getPosition().y - offset.y - Constants.componentSize*0.5 + y2Offset);
-				
-				int []xPoints = {x1, x1 + (x2-x1)/2, x1 + (x2-x1)/2, x2};
-				int []yPoints = {y1, y1, y2, y2};
+
+				int y1Offset = loopCount * Constants.componentSize / (nInputs)
+						+ Constants.componentSize / (nInputs * 2);
+				int x1 = (int) (gate.getPosition().x - offset.x - Constants.componentSize * 0.5);
+				int y1 = (int) (gate.getPosition().y - offset.y + y1Offset - Constants.componentSize * 0.5);
+
+				int y2Offset = (Constants.componentSize / (i
+						.getInputComponent().getNoOfOutputs() * 2))
+						* (i.getInputPort() + i.getInputComponent()
+								.getNoOfOutputs());
+				int x2 = (int) (i.getInputComponent().getPosition().x
+						- offset.x + Constants.componentSize * 0.5);
+				int y2 = (int) (i.getInputComponent().getPosition().y
+						- offset.y - Constants.componentSize * 0.5 + y2Offset);
+
+				int[] xPoints = { x1, x1 + (x2 - x1) / 2, x1 + (x2 - x1) / 2,
+						x2 };
+				int[] yPoints = { y1, y1, y2, y2 };
 				g.drawPolyline(xPoints, yPoints, 4);
 			}
 			loopCount++;
@@ -82,39 +89,25 @@ public class Draw implements IDraw {
 
 	}
 
-	private void drawIEC(IAbstractCircuitGate gate, Graphics g, Point offset) {
-
-		g.setColor(Color.WHITE);
-		g.fill3DRect(
-				(gate.getPosition().x - offset.x - Constants.componentSize / 2),
-				(gate.getPosition().y - offset.y - Constants.componentSize / 2),
-				Constants.componentSize, Constants.componentSize, true);
-		g.setColor(color);
-
-		g.draw3DRect(
-				(gate.getPosition().x - offset.x - Constants.componentSize / 2),
-				(gate.getPosition().y - offset.y - Constants.componentSize / 2),
-				Constants.componentSize, Constants.componentSize, true);
-		g.setFont(new Font("Sans serif", Font.BOLD, 16));
-		g.drawString(symbol, gate.getPosition().x - offset.x
-				- Constants.componentSize / 4, gate.getPosition().y - offset.y
-				+ Constants.componentSize / 4);
-	}
-
-	private void drawAndGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawAndGate(IAbstractCircuitGate gate, Graphics2D g,
+			Point offset) {
 
 		if (isUsStandard) {
 			g.setColor(Color.WHITE);
-			g.fill3DRect(
-					(gate.getPosition().x - offset.x - Constants.componentSize / 2),
-					(gate.getPosition().y - offset.y - Constants.componentSize / 2),
-					Constants.componentSize / 2, Constants.componentSize, true);
+			g
+					.fill3DRect(
+							(gate.getPosition().x - offset.x - Constants.componentSize / 2),
+							(gate.getPosition().y - offset.y - Constants.componentSize / 2),
+							Constants.componentSize / 2,
+							Constants.componentSize, true);
 
 			g.setColor(color);
-			g.draw3DRect(
-					(gate.getPosition().x - (offset.x) - Constants.componentSize / 2),
-					(gate.getPosition().y - (offset.y) - Constants.componentSize / 2),
-					Constants.componentSize / 2, Constants.componentSize, true);
+			g
+					.draw3DRect(
+							(gate.getPosition().x - (offset.x) - Constants.componentSize / 2),
+							(gate.getPosition().y - (offset.y) - Constants.componentSize / 2),
+							Constants.componentSize / 2,
+							Constants.componentSize, true);
 			g.setColor(Color.WHITE);
 			g.fillOval(gate.getPosition().x - Constants.componentSize / 2
 					- (offset.x), gate.getPosition().y
@@ -127,7 +120,7 @@ public class Draw implements IDraw {
 					Constants.componentSize, Constants.componentSize, -90, 180);
 		} else {
 			symbol = "&";
-			drawIEC(gate, g, offset);
+			drawRectangle(gate, g, offset);
 		}
 	}
 
@@ -136,16 +129,20 @@ public class Draw implements IDraw {
 
 		if (isUsStandard) {
 			g.setColor(Color.WHITE);
-			g.fill3DRect(
-					(gate.getPosition().x - offset.x - Constants.componentSize / 2),
-					(gate.getPosition().y - offset.y - Constants.componentSize / 2),
-					Constants.componentSize / 2, Constants.componentSize, true);
+			g
+					.fill3DRect(
+							(gate.getPosition().x - offset.x - Constants.componentSize / 2),
+							(gate.getPosition().y - offset.y - Constants.componentSize / 2),
+							Constants.componentSize / 2,
+							Constants.componentSize, true);
 
 			g.setColor(color);
-			g.draw3DRect(
-					(gate.getPosition().x - (offset.x) - Constants.componentSize / 2),
-					(gate.getPosition().y - (offset.y) - Constants.componentSize / 2),
-					Constants.componentSize / 2, Constants.componentSize, true);
+			g
+					.draw3DRect(
+							(gate.getPosition().x - (offset.x) - Constants.componentSize / 2),
+							(gate.getPosition().y - (offset.y) - Constants.componentSize / 2),
+							Constants.componentSize / 2,
+							Constants.componentSize, true);
 			g.setColor(Color.WHITE);
 			g.fillOval(gate.getPosition().x - (offset.x)
 					- Constants.componentSize / 2, gate.getPosition().y
@@ -156,111 +153,164 @@ public class Draw implements IDraw {
 					- Constants.componentSize / 2, gate.getPosition().y
 					- (offset.y) - Constants.componentSize / 2,
 					Constants.componentSize, Constants.componentSize, -90, 180);
-			g.setColor(Color.white);
-			g.fillOval(gate.getPosition().x - offset.x
-					+ Constants.componentSize / 2, gate.getPosition().y
-					- offset.y - 5, Constants.componentCircleRadius,
-					Constants.componentCircleRadius);
-			g.setColor(color);
-			g.drawOval(gate.getPosition().x - offset.x
-					+ Constants.componentSize / 2, gate.getPosition().y
-					- offset.y - 5, 10, 10);
-
+			drawCircle(gate, g, offset);
 		} else {
 
 			symbol = "&";
-			drawIEC(gate, g, offset);
-			g.setColor(Color.white);
-			g.fillOval(gate.getPosition().x - offset.x
-					+ Constants.componentSize / 2, gate.getPosition().y
-					- offset.y - 5, 16, 16);
-			g.setColor(color);
-			g.drawOval(gate.getPosition().x - offset.x
-					+ Constants.componentSize / 2, gate.getPosition().y
-					- offset.y - 5, 16, 16);
+			drawCircle(gate, g, offset);
 		}
 	}
 
-	private void drawOrGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawOrGate(IAbstractCircuitGate gate, Graphics2D g,
+			Point offset) {
 		// TODO Auto-generated method stub
 		if (isUsStandard) {
 
 		} else {
 			symbol = ">1";
-			drawIEC(gate, g, offset);
+			drawRectangle(gate, g, offset);
 		}
 	}
 
-	private void drawNorGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawNorGate(IAbstractCircuitGate gate, Graphics2D g,
+			Point offset) {
 		// TODO Auto-generated method stub
 		if (isUsStandard) {
 
 		} else {
 
 			symbol = "\u2265" + "1";
-			drawIEC(gate, g, offset);
+			drawRectangle(gate, g, offset);
 		}
 	}
 
-	private void drawXorGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawXorGate(IAbstractCircuitGate gate, Graphics2D g,
+			Point offset) {
 		// TODO Auto-generated method stub
 		if (isUsStandard) {
 
 		} else {
 			symbol = "=1";
-			drawIEC(gate, g, offset);
+			drawRectangle(gate, g, offset);
 
 		}
 	}
 
-	private void drawXnorGate(IAbstractCircuitGate gate, Graphics g,
+	private void drawXnorGate(IAbstractCircuitGate gate, Graphics2D g,
 			Point offset) {
 		// TODO US Xnor
 		if (isUsStandard) {
 
 		} else {
 			symbol = "=1";
-			drawIEC(gate, g, offset);
-			g.setColor(Color.white);
-			g.fillOval(gate.getPosition().x - offset.x
-					+ Constants.componentSize / 2, gate.getPosition().y
-					- offset.y - 5, 16, 16);
-			g.setColor(color);
-			g.drawOval(gate.getPosition().x - offset.x
-					+ Constants.componentSize / 2, gate.getPosition().y
-					- offset.y - 5, 16, 16);
+			drawRectangle(gate, g, offset);
+			drawCircle(gate, g, offset);
 		}
 	}
 
-	private void drawNotGate(IAbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawNotGate(IAbstractCircuitGate gate, Graphics2D g,
+			Point offset) {
 
 		if (isUsStandard) {
-			// TODO US not-gate
+			g.setColor(color);
+			/*
+			 * int[] x = { gate.getPosition().x - (offset.x) -
+			 * Constants.componentSize / 2, gate.getPosition().x - (offset.x) -
+			 * Constants.componentSize / 2, gate.getPosition().x - (offset.x) -
+			 * Constants.componentSize / 2, gate.getPosition().x - offset.x +
+			 * Constants.componentSize / 2, gate.getPosition().x - offset.x +
+			 * Constants.componentSize / 2, gate.getPosition().x - (offset.x) +
+			 * Constants.componentSize / 2 };
+			 * 
+			 * int[] y = { gate.getPosition().y - (offset.y) -
+			 * Constants.componentSize / 2, gate.getPosition().y - (offset.y) +
+			 * Constants.componentSize / 2, gate.getPosition().y - (offset.y) -
+			 * Constants.componentSize / 2 , gate.getPosition().y - (offset.y) -
+			 * 5, gate.getPosition().y - offset.y - 5, gate.getPosition().y -
+			 * (offset.y) + Constants.componentSize / 2 };
+			 * 
+			 * g.drawPolygon(x, y, 3);
+			 * 
+			 * g.fillPolygon(x, y, 3);
+			 */
+			g.setColor(Color.WHITE);
+			g.fillRect(gate.getPosition().x - (offset.x)
+					- Constants.componentSize / 2, gate.getPosition().y
+					- (offset.y) - Constants.componentSize / 2,
+					Constants.componentSize, Constants.componentSize
+);
+			g.setColor(color);
+			g.drawLine(gate.getPosition().x - (offset.x)
+					- Constants.componentSize / 2, gate.getPosition().y
+					- (offset.y) - Constants.componentSize / 2, gate
+					.getPosition().x
+					- (offset.x) - Constants.componentSize / 2, gate
+					.getPosition().y
+					- (offset.y) + Constants.componentSize / 2);
+
+			g.drawLine(gate.getPosition().x - (offset.x)
+					- Constants.componentSize / 2, gate.getPosition().y
+					- (offset.y) - Constants.componentSize / 2, gate
+					.getPosition().x
+					- offset.x + Constants.componentSize / 2, gate
+					.getPosition().y
+					- (offset.y));
+			g.drawLine(gate.getPosition().x - (offset.x)
+					- Constants.componentSize / 2, gate.getPosition().y
+					- (offset.y) + Constants.componentSize / 2, gate
+					.getPosition().x
+					- offset.x + Constants.componentSize / 2, gate
+					.getPosition().y
+					- (offset.y));
+			drawCircle(gate, g, offset);
+
 		} else {
 			symbol = "1";
-			drawIEC(gate, g, offset);
-			g.setColor(Color.white);
-			g.fillOval(gate.getPosition().x - offset.x
-					+ Constants.componentSize / 2, gate.getPosition().y
-					- offset.y - 5, 16, 16);
-			g.setColor(color);
-			g.drawOval(gate.getPosition().x - offset.x
-					+ Constants.componentSize / 2, gate.getPosition().y
-					- offset.y - 5, 16, 16);
+			drawRectangle(gate, g, offset);
+			drawCircle(gate, g, offset);
 
 		}
 	}
 
-	private void drawConstantGate(IAbstractCircuitGate gate, Graphics g,
+	private void drawConstantGate(IAbstractCircuitGate gate, Graphics2D g,
 			Point offset) {
-		// TODO US
-		if (isUsStandard) {
 
-		} else {
-			symbol = gate.toString();
-			drawIEC(gate, g, offset);
+		symbol = gate.toString();
+		drawRectangle(gate, g, offset);
 
-		}
+	}
+
+	private void drawRectangle(IAbstractCircuitGate gate, Graphics2D g,
+			Point offset) {
+
+		g.setColor(Color.WHITE);
+		g
+				.fill3DRect(
+						(gate.getPosition().x - offset.x - Constants.componentSize / 2),
+						(gate.getPosition().y - offset.y - Constants.componentSize / 2),
+						Constants.componentSize, Constants.componentSize, true);
+		g.setColor(color);
+
+		g
+				.draw3DRect(
+						(gate.getPosition().x - offset.x - Constants.componentSize / 2),
+						(gate.getPosition().y - offset.y - Constants.componentSize / 2),
+						Constants.componentSize, Constants.componentSize, true);
+		g.setFont(new Font("Sans serif", Font.BOLD, 16));
+		g.drawString(symbol, gate.getPosition().x - offset.x
+				- Constants.componentSize / 4, gate.getPosition().y - offset.y
+				+ Constants.componentSize / 4);
+	}
+
+	private void drawCircle(IAbstractCircuitGate gate, Graphics g, Point offset) {
+		g.setColor(Color.white);
+		g.fillOval(gate.getPosition().x - offset.x + Constants.componentSize
+				/ 2, gate.getPosition().y - offset.y - 5,
+				Constants.componentCircleRadius,
+				Constants.componentCircleRadius);
+		g.setColor(color);
+		g.drawOval(gate.getPosition().x - offset.x + Constants.componentSize
+				/ 2, gate.getPosition().y - offset.y - 5, 10, 10);
 	}
 
 }
