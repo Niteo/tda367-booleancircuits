@@ -110,7 +110,7 @@ public class Canvas {
 		public void mouseClicked(MouseEvent evt) {
 			Point pointClicked = new Point(evt.getX() + posX, evt.getY() + posY);
 
-			if (evt.getButton() == MouseEvent.BUTTON1) { // LMB
+			if (evt.getButton() == MouseEvent.BUTTON1) { // LeftMouseButton
 				connectMode = false;
 				mc.connectComponent(null, -1);
 				
@@ -121,7 +121,7 @@ public class Canvas {
 						mc.addComponent(pointClicked);
 					}
 				}
-			} else if (evt.getButton() == MouseEvent.BUTTON3) { // RMB
+			} else if (evt.getButton() == MouseEvent.BUTTON3) { // RightMouseButton
 
 				rightClickedGate = model.getComponent(pointClicked);
 				JPopupMenu jpm = new JPopupMenu();
