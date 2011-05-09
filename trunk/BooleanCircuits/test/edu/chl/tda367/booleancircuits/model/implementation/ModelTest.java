@@ -6,26 +6,46 @@ import java.awt.Point;
 
 import org.junit.Test;
 
-import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 
 public class ModelTest {
 
 	@Test
 	public void testModel() {
 
-		Model model = new Model("TestModel");
-		assertTrue(model!=null);
+		Model model = new Model();
+		assertTrue(model != null);
 	}
 
 	@Test
 	public void testAddComponent() {
-		Model model = new Model("TestModel");
-		model.addComponent(new NotGate(), new Point(5,5));
+		
+		
+
+		Model model = new Model();
+		
+		Point position = new Point(5,5);
+		model.addComponent(new NotGate(), position );
+		assertTrue(model.getComponent(position) instanceof NotGate );
+		
+
 	}
 
 	@Test
 	public void testGetComponents() {
-		fail("Not yet implemented");
+		AndGate and = new AndGate(2);
+		NotGate not = new NotGate();
+		NandGate nand = new NandGate(2);
+		
+		Model model = new Model();
+		
+		model.addComponent(and, new Point(10,10));
+		model.addComponent(not, new Point(14,14));
+		model.addComponent(nand, new Point(20,20));
+		
+		//AssertTrue(model.getComponents());
+		
+		
 	}
 
 	@Test
