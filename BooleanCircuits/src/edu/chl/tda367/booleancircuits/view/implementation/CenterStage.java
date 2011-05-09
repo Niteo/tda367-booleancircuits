@@ -11,6 +11,7 @@ import javax.swing.JTabbedPane;
 
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.IModel;
+import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.implementation.Model;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
@@ -51,9 +52,7 @@ public class CenterStage implements ICenterStage {
 	}
 
 	public synchronized void update(ModelManager modelManager) {
-
-		List<IModel> modelList = modelManager.getWorkspaces();
-
+		List<IModelWrapper> modelList = modelManager.getWorkspaces();
 		for (int i = 0; i < modelList.size(); i++) {
 			if (!tabIdList.contains(modelList.get(i))) {
 				tabIdList.add(modelList.get(i));
@@ -62,7 +61,7 @@ public class CenterStage implements ICenterStage {
 						modelManager.getActiveSelectionModel());
 			}
 		}
-
+		
 		List<Integer> removeList = new ArrayList<Integer>();
 		for (int i = 0; i < tabIdList.size(); i++) {
 			if (!modelList.contains(tabIdList.get(i))) {
@@ -84,6 +83,11 @@ public class CenterStage implements ICenterStage {
 		if (modelManager.getActiveWorkspaceIndex() >= 1) {
 			tabManager.setSelectedTabIndex(modelManager
 					.getActiveWorkspaceIndex());
+		}
+		
+		for(int i = 0; i < tabManager.getTabCount(); i++){
+			((TabPanel)tabManager.getTabbedPane().
+					getTabComponentAt(i)).setTabPanelTitle(modelManager.getWorkspaces().get(i).toString());
 		}
 
 		tabManager.updateTabbedPane();

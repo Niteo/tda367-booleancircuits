@@ -15,6 +15,7 @@ import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.Model;
+import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 import edu.chl.tda367.booleancircuits.utilities.GateFactory;
 
 public final class FileManager implements IFileManager {
@@ -27,7 +28,6 @@ public final class FileManager implements IFileManager {
 	 */
 	@Override
 	public void saveFile(Collection<IAbstractCircuitGate> components, File file) {
-		System.out.println("saving: " + file.getName());
 		try {
 			PrintWriter saveFile = new PrintWriter(file);
 			List<IAbstractCircuitGate> tempList = new ArrayList<IAbstractCircuitGate>();
@@ -59,7 +59,6 @@ public final class FileManager implements IFileManager {
 
 			saveFile.close();
 		} catch (IOException e) {
-			System.out.println("maddafacka you!");
 			e.printStackTrace();
 		}
 	}
@@ -68,13 +67,12 @@ public final class FileManager implements IFileManager {
 	 * Opens a saved circuit by reading a saved .txt file.
 	 */
 	@Override
-	public Model openFile(File file) {
-		// System.out.println("opening: " + path);
+	public ModelWrapper openFile(File file) {
 		List<AbstractCircuitGate> components = new ArrayList<AbstractCircuitGate>();
 
 		try {
 			Scanner sc = new Scanner(file);
-			Model model = new Model(file.getName());
+			ModelWrapper model = new ModelWrapper(file);
 			// Create gates
 			while (sc.hasNext()) {
 				if (sc.hasNext("ADD")) {

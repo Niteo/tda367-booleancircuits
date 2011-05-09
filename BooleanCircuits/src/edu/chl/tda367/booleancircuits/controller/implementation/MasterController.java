@@ -2,11 +2,15 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 
 import java.awt.Point;
 import java.io.File;
+import java.util.Collection;
+
+import javax.swing.JFileChooser;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.IFileManager;
 import edu.chl.tda367.booleancircuits.io.implementation.FileManager;
 import edu.chl.tda367.booleancircuits.model.IModelManager;
+import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 
@@ -56,24 +60,51 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void openWorkspace(File file) {
-		mm.addWorkspace(fileManager.openFile(file));
+	public void openWorkspace() {
+		JFileChooser fc = new JFileChooser();
+		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			IModelWrapper workspace = fileManager.openFile(fc.getSelectedFile());
+			workspace.setChangedFalse();
+			mm.addWorkspace(workspace);
+		}
 	}
 
 	@Override
-	public void saveActiveWorkspace(File file) {
-		fileManager
-				.saveFile(mm.getActiveWorkspaceModel().getComponents(), file);
-	}
-
-	@Override
-	public void saveActiveWorskpaceAsComponent(String path) {
-		throw new UnsupportedOperationException();
+	public void saveActiveWorkspace(boolean saveAs) {
+		if(saveAs){
+			_saveWorkspaceAs(mm.getActiveWorkspaceModel());
+		} else {
+			_saveWorkspace(mm.getActiveWorkspaceModel());
+		}
 	}
 
 	@Override
 	public void saveAllWorkspaces() {
-		throw new UnsupportedOperationException();
+		for(IModelWrapper imw : mm.getWorkspaces()){
+			_saveWorkspace(imw);
+		}
+	}
+	
+	private void _saveWorkspace(IModelWrapper imw){
+		if(imw.getFile() != null){
+			fileManager.saveFile(imw.getComponents(),
+					imw.getFile());
+			imw.setChangedFalse();
+			mm.manualPropertyChanged();
+		} else {
+			_saveWorkspaceAs(imw);
+		}
+	}
+	
+	private void _saveWorkspaceAs(IModelWrapper imw){
+		JFileChooser fc = new JFileChooser();
+		if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+			fileManager.saveFile(imw.getComponents(),
+					fc.getSelectedFile());
+			imw.setFile(fc.getSelectedFile());
+			imw.setChangedFalse();
+			mm.manualPropertyChanged();
+		}
 	}
 
 	@Override
@@ -150,6 +181,5 @@ public final class MasterController implements IMasterController {
 			mm.connectComponents(connectComponent, g, connectPort, port);
 			connectComponent = null;
 		}
-
 	}
 }

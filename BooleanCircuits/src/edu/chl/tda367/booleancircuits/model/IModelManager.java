@@ -24,7 +24,7 @@ public interface IModelManager {
 	 * @param workspace
 	 *            the workspace to be added
 	 */
-	public void addWorkspace(IModel workspace);
+	public void addWorkspace(IModelWrapper workspace);
 
 	/**
 	 * Closes the active workspace.
@@ -64,7 +64,7 @@ public interface IModelManager {
 	 * 
 	 * @return Model the active workspace to return.
 	 */
-	public IModel getActiveWorkspaceModel();
+	public IModelWrapper getActiveWorkspaceModel();
 
 	/**
 	 * returns the active selection model.
@@ -78,7 +78,7 @@ public interface IModelManager {
 	 * 
 	 * @return list of all workspaces.
 	 */
-	public Collection<IModel> getWorkspaces();
+	public Collection<IModelWrapper> getWorkspaces();
 
 	/**
 	 * Adds a CircuitComponent in the palette to the specified coordinate in the
@@ -138,4 +138,9 @@ public interface IModelManager {
 	 */
 	public void connectComponents(IAbstractCircuitGate componentIn,
 			IAbstractCircuitGate componentOut, int portIn, int portOut);
+	
+	/**
+	 * Fires a property changed event manually!
+	 */
+	public void manualPropertyChanged();
 }

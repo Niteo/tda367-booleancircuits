@@ -125,7 +125,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 				.getCloseAllWorkspacesAction());
 		saveMenuItem.setAction(actionController.getSaveActiveWorkspaceAction());
 		saveAsMenuItem.setAction(actionController
-				.getSaveActiveWorskpaceAsComponentAction());
+				.getSaveAsAction());
 		saveAllMenuItem
 				.setAction(actionController.getSaveAllWorkspacesAction());
 		exitMenuItem.setAction(actionController.getExitAction());
@@ -180,7 +180,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 				actionController.getPasteSelectedComponentAction());
 		toolbar.getRedoButton().setAction(actionController.getRedoAction());
 		toolbar.getSaveAsComponentButton().setAction(
-				actionController.getSaveActiveWorskpaceAsComponentAction());
+				actionController.getSaveAsAction());
 		toolbar.getSaveAllButton().setAction(
 				actionController.getSaveAllWorkspacesAction());
 		toolbar.getSaveButton().setAction(
