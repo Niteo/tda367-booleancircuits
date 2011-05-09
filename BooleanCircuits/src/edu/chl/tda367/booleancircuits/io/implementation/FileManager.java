@@ -1,10 +1,8 @@
 package edu.chl.tda367.booleancircuits.io.implementation;
 
 import java.awt.Point;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -28,14 +26,11 @@ public final class FileManager implements IFileManager {
 	 * @param name
 	 */
 	@Override
-	public void saveFile(Collection<IAbstractCircuitGate> components,
-			String name) {
-		System.out.println("savning: " + name);
+	public void saveFile(Collection<IAbstractCircuitGate> components, File file) {
+		System.out.println("saving: " + file.getName());
 		try {
-			PrintWriter saveFile = new PrintWriter(new BufferedWriter(
-					new FileWriter(name)));
+			PrintWriter saveFile = new PrintWriter(file);
 			List<IAbstractCircuitGate> tempList = new ArrayList<IAbstractCircuitGate>();
-			saveFile.println(name);
 			// Print all gates
 			for (IAbstractCircuitGate gate : components) {
 				String txt = "ADD";
@@ -51,13 +46,14 @@ public final class FileManager implements IFileManager {
 				List<IGateInput> gateInputs = gate.getInputs();
 
 				for (IGateInput input : gateInputs) {
-					String txt = "CNCT";
-
-					txt += " " + tempList.indexOf(gate) + " "
-							+ gateInputs.indexOf(input) + " "
-							+ tempList.indexOf(input.getInputComponent()) + " "
-							+ input.getInputPort();
-					saveFile.println(txt);
+					if (input.getInputComponent() != null) {
+						String txt = "CNCT";
+						txt += " " + tempList.indexOf(gate) + " "
+								+ gateInputs.indexOf(input) + " "
+								+ tempList.indexOf(input.getInputComponent())
+								+ " " + input.getInputPort();
+						saveFile.println(txt);
+					}
 				}
 			}
 
@@ -72,15 +68,13 @@ public final class FileManager implements IFileManager {
 	 * Opens a saved circuit by reading a saved .txt file.
 	 */
 	@Override
-	public Model openFile(String path) {
-		System.out.println("opening: " + path);
-		File file = new File(path);
+	public Model openFile(File file) {
+		// System.out.println("opening: " + path);
 		List<AbstractCircuitGate> components = new ArrayList<AbstractCircuitGate>();
 
 		try {
 			Scanner sc = new Scanner(file);
-			Model model = new Model(sc.next());
-			sc.nextLine();
+			Model model = new Model(file.getName());
 			// Create gates
 			while (sc.hasNext()) {
 				if (sc.hasNext("ADD")) {
@@ -96,29 +90,37 @@ public final class FileManager implements IFileManager {
 					components.add(component);
 					model.addComponent(component, component.getPosition());
 					sc.nextLine();
-				} else {
-					break;
-				}
-			}
-			// Connecting gates
-			while (sc.hasNext()) {
-				if (sc.hasNext("CNCT")) {
+				} else if (sc.hasNext("CNCT")) {
 					sc.next();
 
 					AbstractCircuitGate toCpt = components.get(sc.nextInt());
 					int inputNo = sc.nextInt();
 					int fromCptNo = sc.nextInt();
-					if (fromCptNo > 0) {
+					if (fromCptNo >= 0) {
 						AbstractCircuitGate fromCpt = components.get(fromCptNo);
 						int output = sc.nextInt();
 						toCpt.connectInput(inputNo, fromCpt, output);
+						System.out.println("jasega");
 					}
 					sc.nextLine();
 
 				} else {
-					break;
+					sc.nextLine();
 				}
 			}
+			/*
+			 * // Connecting gates while (sc.hasNext()) { if
+			 * (sc.hasNext("CNCT")) { sc.next();
+			 * 
+			 * AbstractCircuitGate toCpt = components.get(sc.nextInt()); int
+			 * inputNo = sc.nextInt(); int fromCptNo = sc.nextInt(); if
+			 * (fromCptNo >= 0) { AbstractCircuitGate fromCpt =
+			 * components.get(fromCptNo); int output = sc.nextInt();
+			 * toCpt.connectInput(inputNo, fromCpt, output);
+			 * System.out.println("jasega"); } sc.nextLine();
+			 * 
+			 * } else { sc.nextLine(); } }
+			 */
 			return model;
 
 		} catch (FileNotFoundException e) {
