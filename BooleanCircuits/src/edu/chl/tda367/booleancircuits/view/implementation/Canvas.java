@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Color;
+import java.awt.Event;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -125,7 +126,7 @@ public class Canvas {
 
 		@Override
 		public void mouseClicked(MouseEvent evt) {
-			Point pointClicked = new Point(evt.getX() + posX, evt.getY() + posY);
+			final Point pointClicked = new Point(evt.getX() + posX, evt.getY() + posY);
 
 			if (evt.getButton() == MouseEvent.BUTTON1) { // LeftMouseButton
 				connectMode = false;
@@ -144,8 +145,15 @@ public class Canvas {
 				JPopupMenu jpm = new JPopupMenu();
 
 				if (rightClickedGate == null) {
-					JMenuItem tmpItem = new JMenuItem("<No component>");
-					tmpItem.setEnabled(false);
+					JMenuItem tmpItem = new JMenuItem("Add component");
+					tmpItem.addActionListener(new ActionListener(){
+
+						@Override
+						public void actionPerformed(ActionEvent arg0) {
+							mc.addComponent(pointClicked);
+						}
+						
+					});
 					jpm.add(tmpItem);
 				} else {
 					jpm = menu;
