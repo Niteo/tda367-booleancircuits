@@ -13,19 +13,25 @@ public final class ModelWrapper implements IModelWrapper{
 	private IModel model;
 	private File file;
 	private boolean hasChanged;
+	private static int nWrappers = 0;
+	private int wrapperId;
 	
 	public ModelWrapper(){
 		model = new Model();
+		wrapperId = ++nWrappers;
 	}
 	
 	public ModelWrapper(File file){
 		model = new Model();
 		this.file = file;
+		wrapperId = ++nWrappers;
 	}
 	
 	public ModelWrapper(File file, Model model){
 		this.model = model;
 		this.file = file;
+		wrapperId = ++nWrappers;
+		// TODO: nWrappers, duplicerad kod?
 	}
 	
 	@Override
@@ -82,7 +88,7 @@ public final class ModelWrapper implements IModelWrapper{
 		if(file != null){
 			retString += file.getName();
 		} else {
-			retString += "<Untitled>";
+			retString += "Untitled " + wrapperId;
 		}
 		
 		return retString;
