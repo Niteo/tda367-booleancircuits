@@ -46,7 +46,6 @@ public class Canvas {
 	private int connectBufferPort = 0;
 	private int posX, posY;
 	private Point oldDragPosition;
-	private Point mousePosition;
 	private boolean connectingInput;
 	private boolean connectingOutput;
 	private boolean draggingMode;
