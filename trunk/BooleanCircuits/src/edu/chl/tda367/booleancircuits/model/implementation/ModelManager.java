@@ -14,8 +14,8 @@ import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.utilities.Constants;
 import edu.chl.tda367.booleancircuits.utilities.IObservable;
+import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
 /**
  * A class which manages Models as workspaces.

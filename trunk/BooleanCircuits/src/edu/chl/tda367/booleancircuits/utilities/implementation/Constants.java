@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.utilities;
+package edu.chl.tda367.booleancircuits.utilities.implementation;
 
 public class Constants {
 	public static final int canvasBackgroundLineDistance = 32;
