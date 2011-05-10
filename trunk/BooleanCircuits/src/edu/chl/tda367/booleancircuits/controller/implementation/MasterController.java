@@ -13,6 +13,8 @@ import edu.chl.tda367.booleancircuits.model.IModelManager;
 import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
+import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
+import edu.chl.tda367.booleancircuits.utilities.implementation.ClipboardManager;
 
 public final class MasterController implements IMasterController {
 
@@ -21,13 +23,14 @@ public final class MasterController implements IMasterController {
 	private int connectPort = -1;
 	private IFileManager fileManager;
 	private IAbstractCircuitGate chosenGate;
+	private IClipboardManager clipboardManager = new ClipboardManager();
 
 	/**
 	 * Returns an instance of a MasterController
 	 * 
 	 * @param mm
 	 *            the ModelManager to control
-	 * @throws NullPOinterException
+	 * @throws NullPointerException
 	 *             if mm is null
 	 */
 	public MasterController(ModelManager mm) {
@@ -125,7 +128,7 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void addComponent(Point position) {
 		if (chosenGate != null) {
-			mm.addComponent(chosenGate, position);
+			mm.addComponent(chosenGate.clone(), position);
 		}
 	}
 
@@ -146,17 +149,20 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void copySelectedComponents() {
-		throw new UnsupportedOperationException();
+		clipboardManager.copy(mm.getActiveSelectionModel().getSelectedComponents());
+		System.out.println("Copy");
 	}
 
 	@Override
 	public void cutSelectedComponents() {
+		
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void pasteSelectedComponents(Point position) {
-		throw new UnsupportedOperationException();
+		mm.addComponents(clipboardManager.paste(), position);
+		System.out.println("Paste");
 	}
 
 	@Override

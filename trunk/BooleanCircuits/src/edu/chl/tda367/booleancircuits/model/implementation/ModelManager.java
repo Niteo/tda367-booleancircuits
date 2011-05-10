@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.IModelManager;
@@ -13,6 +14,7 @@ import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.utilities.Constants;
 import edu.chl.tda367.booleancircuits.utilities.IObservable;
 
 /**
@@ -81,7 +83,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	public void addComponent(IAbstractCircuitGate component, Point position) {
-		getActiveWorkspaceModel().addComponent(component, position);
+		_addComponent(component, position);
 		firePropertyChanged();
 	}
 
@@ -177,5 +179,18 @@ public final class ModelManager implements IObservable, IModelManager {
 	@Override
 	public void manualPropertyChanged() {
 		firePropertyChanged();
+	}
+
+	@Override
+	public void addComponents(List<IAbstractCircuitGate> component,
+			Point position) {
+		for(int i=0; i<component.size();i++){
+			_addComponent(component.get(i), position);
+		}
+		firePropertyChanged();
+	}
+	
+	private void _addComponent(IAbstractCircuitGate component, Point position) {
+		getActiveWorkspaceModel().addComponent(component.clone(), position);
 	}
 }

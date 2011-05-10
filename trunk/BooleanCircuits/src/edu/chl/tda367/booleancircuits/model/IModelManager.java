@@ -2,6 +2,7 @@ package edu.chl.tda367.booleancircuits.model;
 
 import java.awt.Point;
 import java.util.Collection;
+import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
@@ -86,10 +87,22 @@ public interface IModelManager {
 	 * 
 	 * @param component
 	 *            the component to add
-	 * @param coord
-	 *            the coordinate to add to
+	 * @param position
+	 *            the position to add to
 	 */
 	public void addComponent(IAbstractCircuitGate component, Point position);
+
+	/**
+	 * Adds a list of components starting at the specified coordinate in the
+	 * active workspace.
+	 * 
+	 * @param component
+	 *            List the components to add
+	 * @param position
+	 *            Point the start position
+	 */
+	public void addComponents(List<IAbstractCircuitGate> component,
+			Point position);
 
 	/**
 	 * Removes the selected components.
@@ -116,10 +129,10 @@ public interface IModelManager {
 	 * @param position
 	 *            Point The point of the component
 	 * @param multiSelect
-	 * 			  boolean if false, all selected components will be deselected
+	 *            boolean if false, all selected components will be deselected
 	 */
 	public void selectComponent(Point position, boolean multiSelect);
-	
+
 	/**
 	 * Determinates if a component is currently selected.
 	 * 
@@ -128,17 +141,22 @@ public interface IModelManager {
 	 * @return boolean
 	 */
 	public boolean isSelectedComponent(AbstractCircuitGate g);
-	
+
 	/**
 	 * Connects to components in the active model.
-	 * @param componentIn the component who's input is to be connected
-	 * @param componentOut the component who's output is to be connected
-	 * @param portIn the port of the input to be used
-	 * @param portOut the port of the output to be used
+	 * 
+	 * @param componentIn
+	 *            the component who's input is to be connected
+	 * @param componentOut
+	 *            the component who's output is to be connected
+	 * @param portIn
+	 *            the port of the input to be used
+	 * @param portOut
+	 *            the port of the output to be used
 	 */
 	public void connectComponents(IAbstractCircuitGate componentIn,
 			IAbstractCircuitGate componentOut, int portIn, int portOut);
-	
+
 	/**
 	 * Fires a property changed event manually!
 	 */
