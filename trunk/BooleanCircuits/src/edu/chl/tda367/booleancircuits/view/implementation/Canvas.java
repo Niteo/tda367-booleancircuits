@@ -40,11 +40,14 @@ public class Canvas {
 	private IModel model;
 	private ISelectionModel selectModel;
 	private IAbstractCircuitGate rightClickedGate = null;
+	private IAbstractCircuitGate connectBufferGate = null;
+	private int connectBufferPort = 0;
 	private static IDraw drawer = new Draw();
 	private int posX, posY;
 	private int zoomFactor;
 	private Point oldDragPosition;
-	private boolean connectMode;
+	private boolean connectingInput;
+	private boolean connectingOutput;
 	private boolean draggingMode;
 	private MasterController mc;
 	private CanvasPopup menu;
@@ -56,9 +59,22 @@ public class Canvas {
 
 			if (menu.isRemoveButton(menuItem)) {
 				mc.removeComponent(rightClickedGate);
-			} else {
-				mc.connectComponent(rightClickedGate, menu.getPortIndex(menuItem));
-				connectMode = !connectMode;
+			} else if(menu.isInputItem(menuItem)){
+				mc.connectComponent(rightClickedGate, menu.getInputIndex(menuItem));
+				if(connectingOutput) {
+					mc.connectComponent(connectBufferGate, connectBufferPort);
+					resetConnecting();
+				} else {
+					connectingInput = true;
+				}
+			} else if(menu.isOutputItem(menuItem)){
+				if(connectingInput) {
+					mc.connectComponent(rightClickedGate, menu.getInputIndex(menuItem));
+					resetConnecting();
+				} else {
+					connectingOutput = true;
+					connectBufferGate = rightClickedGate;
+				}
 			}
 		}
 
@@ -129,7 +145,8 @@ public class Canvas {
 			final Point pointClicked = new Point(evt.getX() + posX, evt.getY() + posY);
 
 			if (evt.getButton() == MouseEvent.BUTTON1) { // LeftMouseButton
-				connectMode = false;
+				connectingInput = false;
+				connectingOutput = false;
 				mc.connectComponent(null, -1);
 				
 				if (evt.getClickCount() == 1) {
@@ -157,8 +174,9 @@ public class Canvas {
 					jpm.add(tmpItem);
 				} else {
 					jpm = menu;
-					menu.updateMenu(connectMode ? rightClickedGate.getNoOfOutputs()
-							: rightClickedGate.getNoOfInputs(), !connectMode);
+					menu.updateMenu(rightClickedGate.getNoOfInputs(),
+							rightClickedGate.getNoOfOutputs(),
+							!connectingInput, !connectingOutput);
 				}
 
 				jpm.show(evt.getComponent(), (int) evt.getPoint().getX(),
@@ -214,5 +232,11 @@ public class Canvas {
 		posX += dx;
 		posY += dy;
 		panel.repaint();
+	}
+	
+	private void resetConnecting(){
+		connectBufferGate = null;
+		connectingInput = false;
+		connectingOutput = false;
 	}
 }
