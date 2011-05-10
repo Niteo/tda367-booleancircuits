@@ -14,7 +14,6 @@ import edu.chl.tda367.booleancircuits.io.IFileManager;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.model.implementation.Model;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 import edu.chl.tda367.booleancircuits.utilities.GateFactory;
 
@@ -86,7 +85,6 @@ public final class FileManager implements IFileManager {
 							.getNewComponent(name, noOfInputs);
 					component.setPosition(position);
 					components.add(component);
-					model.addComponent(component, component.getPosition());
 					sc.nextLine();
 				} else if (sc.hasNext("CNCT")) {
 					sc.next();
@@ -98,7 +96,7 @@ public final class FileManager implements IFileManager {
 						AbstractCircuitGate fromCpt = components.get(fromCptNo);
 						int output = sc.nextInt();
 						toCpt.connectInput(inputNo, fromCpt, output);
-						System.out.println("jasega");
+
 					}
 					sc.nextLine();
 
@@ -106,19 +104,10 @@ public final class FileManager implements IFileManager {
 					sc.nextLine();
 				}
 			}
-			/*
-			 * // Connecting gates while (sc.hasNext()) { if
-			 * (sc.hasNext("CNCT")) { sc.next();
-			 * 
-			 * AbstractCircuitGate toCpt = components.get(sc.nextInt()); int
-			 * inputNo = sc.nextInt(); int fromCptNo = sc.nextInt(); if
-			 * (fromCptNo >= 0) { AbstractCircuitGate fromCpt =
-			 * components.get(fromCptNo); int output = sc.nextInt();
-			 * toCpt.connectInput(inputNo, fromCpt, output);
-			 * System.out.println("jasega"); } sc.nextLine();
-			 * 
-			 * } else { sc.nextLine(); } }
-			 */
+			for (AbstractCircuitGate component : components) {
+				model.addComponent(component, component.getPosition());
+			}
+
 			return model;
 
 		} catch (FileNotFoundException e) {
