@@ -30,9 +30,6 @@ public final class Palette implements IPalette {
 
 		initPaletteTree();
 		scrollPane = new JScrollPane(componentTree);
-		componentTree.getInputMap().put(
-				KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK),
-				"none");
 	}
 
 	public Palette(List<ComponentFolder> folderList) {
@@ -70,6 +67,19 @@ public final class Palette implements IPalette {
 		};
 
 		componentTree.addTreeSelectionListener(tsl);
+		
+		componentTree.getInputMap().put(
+				KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK),
+				"none");
+		componentTree.getInputMap().put(
+				KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK),
+				"none");
+		componentTree.getInputMap().put(
+				KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK),
+				"none");
+		componentTree.getInputMap().put(
+				KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_MASK),
+				"none");
 	}
 
 	/**

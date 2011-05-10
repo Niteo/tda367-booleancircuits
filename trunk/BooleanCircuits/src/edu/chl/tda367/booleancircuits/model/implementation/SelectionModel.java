@@ -27,6 +27,7 @@ public final class SelectionModel implements ISelectionModel {
 		for (IAbstractCircuitGate gate : c) {
 			selectedComponentList.add(gate);
 		}
+		_removeUnusedElements();
 	}
 
 	@Override
@@ -41,6 +42,7 @@ public final class SelectionModel implements ISelectionModel {
 			selectedComponentList.clear();
 			selectedComponentList.add(g);
 		}
+		_removeUnusedElements();
 	}
 
 	@Override
@@ -58,12 +60,16 @@ public final class SelectionModel implements ISelectionModel {
 
 	@Override
 	public void removeUnusedElements() {
-		selectedComponentList.remove(null);
+		_removeUnusedElements();
 	}
 
 	@Override
 	public List<IAbstractCircuitGate> getSelectedComponents() {
 		return selectedComponentList;
+	}
+	
+	private void _removeUnusedElements(){
+		selectedComponentList.remove(null);
 	}
 
 }
