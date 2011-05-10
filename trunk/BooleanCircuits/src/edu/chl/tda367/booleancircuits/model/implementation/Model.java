@@ -25,9 +25,9 @@ public final class Model implements IModel{
 	}
 
 	public void addComponent(IAbstractCircuitGate component, Point position) {
-		AbstractCircuitGate c = component.clone();
-		c.setPosition(position);
-		componentList.add(c);
+		//AbstractCircuitGate c = component.clone();
+		//c.setPosition(position);
+		componentList.add(component);
 	}
 
 	public Collection<IAbstractCircuitGate> getComponents() {
