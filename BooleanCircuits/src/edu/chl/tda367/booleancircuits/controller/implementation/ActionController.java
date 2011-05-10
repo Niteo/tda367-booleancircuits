@@ -108,8 +108,7 @@ public class ActionController implements ChangeListener, IActionController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO add correct coordinates
-			mc.pasteSelectedComponents(new Point(0,0));
+			mc.pasteSelectedComponents();
 		}
 	};
 

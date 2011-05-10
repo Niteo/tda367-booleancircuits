@@ -182,10 +182,12 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void addComponents(List<IAbstractCircuitGate> component,
-			Point position) {
+	public void addComponents(List<IAbstractCircuitGate> component) {
 		for(int i=0; i<component.size();i++){
-			_addComponent(component.get(i), position);
+			Point tempPos = new Point(component.get(i).getPosition());
+			tempPos.x-=Constants.componentSize;
+			tempPos.y-=Constants.componentSize;
+			_addComponent(component.get(i), tempPos);
 		}
 		firePropertyChanged();
 	}
