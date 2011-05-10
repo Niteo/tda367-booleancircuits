@@ -14,7 +14,8 @@ import javax.swing.JPopupMenu;
  */
 public final class CanvasPopup extends JPopupMenu {
 	private JMenuItem remove = new JMenuItem("Remove gate");
-	private JMenu connect = new JMenu();
+	private JMenu inputMenu = new JMenu();
+	private JMenu outputMenu = new JMenu();
 	private ActionListener listener;
 
 	/**
@@ -29,34 +30,71 @@ public final class CanvasPopup extends JPopupMenu {
 
 		remove.addActionListener(listener);
 
-		add(connect);
+		add(inputMenu);
+		add(outputMenu);
 		add(remove);
 	}
 
 	/**
-	 * Updates the pop-up menu with either inputs or outputs.
+	 * Updates the menu to show items based on input parameters.
 	 * 
-	 * @param ports
-	 *            int number of inputs or outputs
-	 * @param isInput
-	 *            boolean true if the menu is an input menu, false if output
-	 *            menu
+	 * @param inputs
+	 *            amount of inputs in the input menu
+	 * @param outputs
+	 *            amount of outputs in the output menu
+	 * @param showInput
+	 *            if true, menu shows inputs
+	 * @param showOutput
+	 *            if true, menu shows inputs
 	 */
-	public void updateMenu(int ports, boolean isInput) {
-		if (isInput) {
-			connect.setText("Connect input...");
-		} else {
-			connect.setText("Connect output...");
-		}
-		connect.removeAll();
+	public void updateMenu(int inputs, int outputs, boolean showInput,
+			boolean showOutput) {
+		inputMenu.removeAll();
+		outputMenu.removeAll();
 
-		for (int i = 1; i <= ports; i++) {
+		if (showInput && showOutput) {
+			changeIOMenu("Connect input...", "Connect output...");
+		} else if (showOutput) {
+			changeIOMenu(null, "To output...");
+		} else if (showInput) {
+			changeIOMenu("To input...", null);
+		}
+
+		// Add inputs
+		for (int i = 1; i <= inputs; i++) {
 			JMenuItem temp = new JMenuItem("" + i);
 			temp.addActionListener(listener);
-			connect.add(temp);
+			inputMenu.add(temp);
 		}
+		// Add outputs
+		for (int i = 1; i <= outputs; i++) {
+			JMenuItem temp = new JMenuItem("" + i);
+			temp.addActionListener(listener);
+			outputMenu.add(temp);
+		}
+		
+		enableIOMenu(inputs > 0, outputs > 0);
+	}
+	
+	private void enableIOMenu(boolean inputEnabled, boolean outputEnabled){
+		inputMenu.setEnabled(inputEnabled);
+		outputMenu.setEnabled(outputEnabled);
+	}
 
-		connect.setEnabled(ports > 0);
+	private void changeIOMenu(String input, String output) {
+		if(input == null){
+			inputMenu.setVisible(false);
+		} else {
+			inputMenu.setText(input);
+			inputMenu.setVisible(true);
+		}
+		
+		if(output == null){
+			outputMenu.setVisible(false);
+		} else {
+			outputMenu.setText(output);
+			outputMenu.setVisible(true);
+		}
 	}
 
 	/**
@@ -69,13 +107,54 @@ public final class CanvasPopup extends JPopupMenu {
 	public boolean isRemoveButton(JMenuItem item) {
 		return remove == item;
 	}
-	
-	public int getPortIndex(JMenuItem item){
-		for(int i=0; i<connect.getItemCount();i++){
-			if(item==connect.getItem(i)){
+
+	/**
+	 * Returns the index of the input button.
+	 * 
+	 * @param item
+	 * @return the index of the input button. Returns -1 if button is not an input button
+	 */
+	public int getInputIndex(JMenuItem item) {
+		for (int i = 0; i < inputMenu.getItemCount(); i++) {
+			if (item == inputMenu.getItem(i)) {
 				return i;
 			}
 		}
-		throw new IllegalArgumentException("Component does not match menu");
+
+		return -1;
+	}
+
+	/**
+	 * Returns the index of the output button.
+	 * 
+	 * @param item
+	 * @return the index of the output button. Returns -1 if button is not an output button
+	 */
+	public int getOutputIndex(JMenuItem item) {
+		for (int i = 0; i < outputMenu.getItemCount(); i++) {
+			if (item == outputMenu.getItem(i)) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+	
+	/**
+	 * Checks if item is an output button.
+	 * @param item the item to check
+	 * @return true if item is output button
+	 */
+	public boolean isOutputItem(JMenuItem item){
+		return getOutputIndex(item) != -1;
+	}
+	
+	/**
+	 * Checks if item is an input button.
+	 * @param item the item to check
+	 * @return true if item is input button
+	 */
+	public boolean isInputItem(JMenuItem item){
+		return getInputIndex(item) != -1;
 	}
 }
