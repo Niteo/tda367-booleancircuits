@@ -3,6 +3,7 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 import java.awt.Point;
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 
@@ -159,8 +160,9 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void pasteSelectedComponents(Point position) {
-		mm.addComponents(clipboardManager.paste(), position);
+	public void pasteSelectedComponents() {
+		List<IAbstractCircuitGate> tempList = clipboardManager.paste();
+		mm.addComponents(tempList);
 	}
 
 	@Override

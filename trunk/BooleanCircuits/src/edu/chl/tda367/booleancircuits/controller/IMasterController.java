@@ -124,11 +124,8 @@ public interface IMasterController {
 	/**
 	 * Pastes the selected components to the active workspace from the
 	 * clipboard.
-	 * 
-	 * @param coord
-	 *            the coordinate to paste to
 	 */
-	public void pasteSelectedComponents(Point position);
+	public void pasteSelectedComponents();
 
 	/**
 	 * Sets the component chosen in the palette.
