@@ -49,10 +49,6 @@ public class ModelTest {
 		
 	}
 
-	@Test
-	public void testSelectAllComponents() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testGetComponent() {

@@ -6,7 +6,7 @@ import java.util.*;
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.utilities.Constants;
+import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
 /**
  * Model for managing and updating circuit components.
