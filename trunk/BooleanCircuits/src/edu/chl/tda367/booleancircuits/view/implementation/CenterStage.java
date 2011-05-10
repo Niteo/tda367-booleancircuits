@@ -35,7 +35,8 @@ public class CenterStage implements ICenterStage {
 	private MasterController mc;
 
 	/** Returns an instance of Canvas. */
-	public CenterStage(Action closeWorkspace, MainWindow mainWindow, MasterController masterController) {
+	public CenterStage(Action closeWorkspace, MainWindow mainWindow,
+			MasterController masterController) {
 		mc = masterController;
 		centerStagePanel.add(tabManager.getTabbedPane());
 		centerStagePanel.setLayout(new GridLayout(1, 1));
@@ -61,7 +62,7 @@ public class CenterStage implements ICenterStage {
 						modelManager.getActiveSelectionModel());
 			}
 		}
-		
+
 		List<Integer> removeList = new ArrayList<Integer>();
 		for (int i = 0; i < tabIdList.size(); i++) {
 			if (!modelList.contains(tabIdList.get(i))) {
@@ -84,12 +85,14 @@ public class CenterStage implements ICenterStage {
 			tabManager.setSelectedTabIndex(modelManager
 					.getActiveWorkspaceIndex());
 		}
-		
-		for(int i = 0; i < tabManager.getTabCount(); i++){
-			((TabPanel)tabManager.getTabbedPane().
-					getTabComponentAt(i)).setTabPanelTitle(modelManager.getWorkspaces().get(i).toString());
+		if (modelManager.getWorkspaces().size() < 1) {
+			for (int i = 0; i < tabManager.getTabCount(); i++) {
+
+				((TabPanel) tabManager.getTabbedPane().getTabComponentAt(i))
+						.setTabPanelTitle(modelManager.getWorkspaces().get(i)
+								.toString());
+			}
 		}
-		// TODO: FIX EXCEPTION! :D
 
 		tabManager.updateTabbedPane();
 	}
