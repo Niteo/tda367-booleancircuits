@@ -105,6 +105,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 		mc.newWorkspace();
 		initTabbedPane();
 		setTitle("Boolean Circuits");
+		setVisible(true);
 		setIconImage(new ImageIcon("resources/icons/frameIcon.png").getImage());
 	}
 
@@ -435,18 +436,6 @@ public final class MainWindow extends javax.swing.JFrame implements
 	}// </editor-fold>
 		// GEN-END:initComponents
 
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
-	public static void main(String args[]) {
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				new MainWindow().setVisible(true);
-			}
-		});
-	}
 
 	// GEN-BEGIN:variables
 	// Variables declaration - do not modify
