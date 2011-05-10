@@ -149,20 +149,18 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void copySelectedComponents() {
-		clipboardManager.copy(mm.getActiveSelectionModel().getSelectedComponents());
-		System.out.println("Copy");
+		_copySelectedComponents();
 	}
 
 	@Override
 	public void cutSelectedComponents() {
-		
-		throw new UnsupportedOperationException();
+		_copySelectedComponents();
+		mm.removeSelectedComponents();
 	}
 
 	@Override
 	public void pasteSelectedComponents(Point position) {
 		mm.addComponents(clipboardManager.paste(), position);
-		System.out.println("Paste");
 	}
 
 	@Override
@@ -187,5 +185,9 @@ public final class MasterController implements IMasterController {
 			mm.connectComponents(connectComponent, g, connectPort, port);
 			connectComponent = null;
 		}
+	}
+	
+	private void _copySelectedComponents() {
+		clipboardManager.copy(mm.getActiveSelectionModel().getSelectedComponents());
 	}
 }
