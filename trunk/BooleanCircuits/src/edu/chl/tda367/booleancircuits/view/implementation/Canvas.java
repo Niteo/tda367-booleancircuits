@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -37,15 +38,15 @@ import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
  */
 public class Canvas {
 
+	private static IDraw drawer = new Draw();
 	private IModel model;
 	private ISelectionModel selectModel;
 	private IAbstractCircuitGate rightClickedGate = null;
 	private IAbstractCircuitGate connectBufferGate = null;
 	private int connectBufferPort = 0;
-	private static IDraw drawer = new Draw();
 	private int posX, posY;
-	private int zoomFactor;
 	private Point oldDragPosition;
+	private Point mousePosition;
 	private boolean connectingInput;
 	private boolean connectingOutput;
 	private boolean draggingMode;
@@ -83,8 +84,8 @@ public class Canvas {
 	private JPanel panel = new JPanel() {
 		@Override
 		public void paint(Graphics g) {
+			super.paint(g);
 			Graphics2D g2d = (Graphics2D) g;
-			super.paint(g2d);
 			// Draw background
 			drawer.drawBackground(g2d, new Point(posX, posY), panel.getSize());
 			// Draw components
@@ -100,18 +101,20 @@ public class Canvas {
 					drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
 				}
 			}
+			
 			// Draw position
 			g2d.setColor(Color.BLACK);
 			g2d.setFont(UIManager.getFont("TabbedPane.font"));
 			g2d.drawString("[" + posX + ", " + posY + "]", 5, 15);
 		}
 	};
+	
+	
 
 	private MouseAdapter mouseAdapter = new MouseInputAdapter() {
-		
 		@Override
 		public void mouseDragged(MouseEvent evt) {
-			if (oldDragPosition != null) {
+			if (oldDragPosition != null && !evt.isControlDown()) {
 				int dx = (int) (evt.getPoint().getX() - oldDragPosition.getX());
 				int dy = (int) (evt.getPoint().getY() - oldDragPosition.getY());
 				
@@ -190,7 +193,6 @@ public class Canvas {
 		mc = masterController;
 		posX = 0;
 		posY = 0;
-		zoomFactor = 0;
 		model = canvasModel;
 		selectModel = selectionModel;
 		menu = new CanvasPopup(listener);
