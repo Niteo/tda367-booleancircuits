@@ -19,15 +19,12 @@ public class ModelTest {
 
 	@Test
 	public void testAddComponent() {
-		
-		
 
 		Model model = new Model();
-		
-		Point position = new Point(5,5);
-		model.addComponent(new NotGate(), position );
-		assertTrue(model.getComponent(position) instanceof NotGate );
-		
+
+		Point position = new Point(5, 5);
+		model.addComponent(new NotGate(), position);
+		assertTrue(model.getComponent(position) instanceof NotGate);
 
 	}
 
@@ -36,58 +33,39 @@ public class ModelTest {
 		AndGate and = new AndGate(2);
 		NotGate not = new NotGate();
 		NandGate nand = new NandGate(2);
-		
-		Model model = new Model();
-		
-		model.addComponent(and, new Point(10,10));
-		model.addComponent(not, new Point(14,14));
-		model.addComponent(nand, new Point(20,20));
-		
-		assertTrue(model.getComponents().size()==3);
-		//TODO: is this sufficient?
-		
-		
-	}
 
+		Model model = new Model();
+
+		model.addComponent(and, new Point(10, 10));
+		model.addComponent(not, new Point(14, 14));
+		model.addComponent(nand, new Point(20, 20));
+
+		if (model.getComponents() != null) {
+			model.getComponents().contains(new AndGate(2));
+			model.getComponents().contains(new NotGate());
+			model.getComponents().contains(new NandGate(2));
+		} else {
+			fail("get no components");
+		}
+
+	}
 
 	@Test
 	public void testGetComponent() {
-		fail("Not yet implemented");
+		AndGate and = new AndGate(2);
+		NotGate not = new NotGate();
+		NandGate nand = new NandGate(2);
+		Model model = new Model();
+		model.addComponent(and, new Point(10, 10));
+		model.addComponent(not, new Point(14, 14));
+		model.addComponent(nand, new Point(20, 20));
+
+		assertTrue(model.getComponent(new Point(10, 10)).equals(and)
+				&& model.getComponent(new Point(10, 10)).equals(not)
+				&& model.getComponent(new Point(10, 10)).equals(nand));
+	
 	}
 
-	@Test
-	public void testSelectComponent() {
-		fail("Not yet implemented");
-	}
 
-	@Test
-	public void testRemoveSelectedComponents() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsSelectedComponent() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testHashCode() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testEquals() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testClone() {
-		fail("Not yet implemented");
-	}
 
 }
