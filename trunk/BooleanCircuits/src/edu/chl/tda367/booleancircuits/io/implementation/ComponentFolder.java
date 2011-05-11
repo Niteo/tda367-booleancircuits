@@ -6,6 +6,7 @@ import java.util.List;
 import edu.chl.tda367.booleancircuits.io.IComponentFolder;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
@@ -48,6 +49,7 @@ public class ComponentFolder implements IComponentFolder {
 	}
 
 	private void initStandardGates() {
+		componentList.add(new Clock());
 		componentList.add(new AndGate(2));
 		componentList.add(new ConstantGate(true));
 		componentList.add(new ConstantGate(false));
@@ -57,7 +59,6 @@ public class ComponentFolder implements IComponentFolder {
 		componentList.add(new OrGate(2));
 		componentList.add(new XnorGate(2));
 		componentList.add(new XorGate(2));
-
 	}
 
 	/**

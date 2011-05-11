@@ -204,15 +204,22 @@ public final class ModelManager implements IObservable, IModelManager {
 	
 	@Override
 	public void clockActiveModel() {
-		_getActiveWorkspaceModel().clock();
+		if(modelList.size() > 0){
+			_getActiveWorkspaceModel().clock();
+		}
 	}
 	
 	private void _addComponent(IAbstractCircuitGate component, Point position) {
 		getActiveWorkspaceModel().addComponent(component, position);
+		getActiveWorkspaceModel().updateComponents();
 	}
 	
 	private IModelWrapper _getActiveWorkspaceModel() {
-		return modelList.get(selectedIndex);
+		if(modelList.size() > 0){
+			return modelList.get(selectedIndex);
+		} else {
+			return null;
+		}
 	}
 
 	private ISelectionModel _getActiveSelectionModel() {

@@ -1,19 +1,20 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 public class Clock extends AbstractCircuitGate{
-	private boolean value;
+	private boolean constant;
 	
 	public Clock(){
 		super.createIO(0, 1);
+		System.out.println("NEW ASSCLOCKI");
 	}
 	
 	@Override
 	protected void updateOutput() {
-		super.setOutput(0, value);
+		super.setOutput(0, constant);
 	}
 	
 	public void toggleClock(){
-		value = !value;
+		this.constant = true;
 	}
 
 	@Override
