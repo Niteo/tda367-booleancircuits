@@ -43,6 +43,10 @@ public class ClipboardManager implements IClipboardManager {
 
 	@Override
 	public List<IAbstractCircuitGate> paste() {
-		return clipboardList;
+		List<IAbstractCircuitGate> tempList = new ArrayList<IAbstractCircuitGate>();
+		for(int i=0;i<clipboardList.size();i++){
+			tempList.add(clipboardList.get(i).clone());
+		}
+		return tempList;
 	}
 }
