@@ -108,4 +108,9 @@ public final class ModelWrapper implements IModelWrapper{
 	public void setFile(File file){
 		this.file = file;
 	}
+
+	@Override
+	public void clock() {
+		model.clock();
+	}
 }

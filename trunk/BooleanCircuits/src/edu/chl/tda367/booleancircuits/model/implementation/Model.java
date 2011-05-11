@@ -6,6 +6,7 @@ import java.util.*;
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
 /**
@@ -25,7 +26,6 @@ public final class Model implements IModel{
 	}
 
 	public void addComponent(IAbstractCircuitGate component, Point position) {
-		//AbstractCircuitGate c = component.clone();
 		component.setPosition(position);
 		componentList.add(component);
 	}
@@ -55,9 +55,24 @@ public final class Model implements IModel{
 	}
 
 	public void removeComponents(Collection<IAbstractCircuitGate> list) {
-		for (IAbstractCircuitGate i : list) {
-			_removeComponent(i);
+		for (IAbstractCircuitGate gate : list) {
+			_removeComponent(gate);
 		}
+	}
+	
+	public void clock(){
+		for(IAbstractCircuitGate gate : componentList){
+			if(gate instanceof Clock){
+				((Clock) gate).toggleClock();
+			}
+		}
+		updateComponents();
+		for(IAbstractCircuitGate gate : componentList){
+			if(gate instanceof Clock){
+				((Clock) gate).toggleClock();
+			}
+		}
+		updateComponents();
 	}
 
 	public void updateComponents() {
