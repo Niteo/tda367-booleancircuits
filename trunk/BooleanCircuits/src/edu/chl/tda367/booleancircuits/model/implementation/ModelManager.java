@@ -207,6 +207,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		if(modelList.size() > 0){
 			_getActiveWorkspaceModel().clock();
 		}
+		firePropertyChanged();
 	}
 	
 	private void _addComponent(IAbstractCircuitGate component, Point position) {
