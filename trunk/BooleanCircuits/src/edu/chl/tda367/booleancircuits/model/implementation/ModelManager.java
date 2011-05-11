@@ -209,12 +209,14 @@ public final class ModelManager implements IObservable, IModelManager {
 			Point p = component.get(i).getPosition();
 			if (p.x > maxX) {
 				maxX = p.x;
-			} else if (p.x < minX) {
+			}
+			if (p.x < minX) {
 				minX = p.x;
 			}
 			if (p.y > maxY) {
 				maxY = p.y;
-			} else if (p.y < minY) {
+			}
+			if (p.y < minY) {
 				minY = p.y;
 			}
 		}
