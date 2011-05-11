@@ -3,7 +3,6 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.Timer;
@@ -218,7 +217,11 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void importWorkspace(File file) {
-		modelManager.addComponents(fileManager.importFile(file));
+	public void importWorkspace() {
+		JFileChooser fc = new JFileChooser();
+		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			modelManager.addComponents(fileManager.importFile(fc
+					.getSelectedFile()));
+		}
 	}
 }

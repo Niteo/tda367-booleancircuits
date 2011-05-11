@@ -1,7 +1,6 @@
 package edu.chl.tda367.booleancircuits.controller;
 
 import java.awt.Point;
-import java.io.File;
 
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 
@@ -60,7 +59,7 @@ public interface IMasterController {
 	 * 
 	 * @param file
 	 */
-	public void importWorkspace(File file);
+	public void importWorkspace();
 
 	/**
 	 * Sets the currently active workspace.
