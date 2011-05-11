@@ -9,97 +9,98 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 
 /**
  * Abstract class representing an abstract circuit component.
+ * 
  * @author Kaufmann
- *
+ * 
  */
 public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 	private List<IGateInput> inputs;
 	private Boolean[] outputs;
 	private boolean isInTiercalculation;
+	private boolean isInConnectToCalculation;
 	private Point position = new Point();
-	
-	private void createOutputs(int amount){
+
+	private void createOutputs(int amount) {
 		outputs = new Boolean[amount];
-		for(int i = 0; i < outputs.length; i++){
+		for (int i = 0; i < outputs.length; i++) {
 			outputs[i] = false;
 		}
 	}
-	
-	private void createInputs(int amount){
+
+	private void createInputs(int amount) {
 		inputs = new ArrayList<IGateInput>();
-		for(int i = 0; i < amount; i++){
+		for (int i = 0; i < amount; i++) {
 			inputs.add(new GateInput());
 		}
 	}
-	
-	public List<IGateInput> getInputs(){
+
+	public List<IGateInput> getInputs() {
 		return inputs;
 	}
-	
-	
+
 	/**
 	 * Sets a specific output to a given value
-	 * @param index specifies which output to set
-	 * @param value the value to set the output to
+	 * 
+	 * @param index
+	 *            specifies which output to set
+	 * @param value
+	 *            the value to set the output to
 	 */
-	protected void setOutput(int index, boolean value){
+	protected void setOutput(int index, boolean value) {
 		outputs[index] = value;
 	}
-	
 
 	/**
 	 * Creates I/O for this component.
-	 * @param in the amount of inputs to be created
-	 * @param out the amount of outputs to be created
+	 * 
+	 * @param in
+	 *            the amount of inputs to be created
+	 * @param out
+	 *            the amount of outputs to be created
 	 */
-	protected void createIO(int in, int out){
+	protected void createIO(int in, int out) {
 		createOutputs(out);
 		createInputs(in);
 	}
-	
-	
-	public void overwriteGate(AbstractCircuitGate gate){
+
+	public void overwriteGate(AbstractCircuitGate gate) {
 		this.inputs = gate.inputs;
 		this.isInTiercalculation = gate.isInTiercalculation;
 		this.outputs = gate.outputs;
 	}
-	
 
-	public void connectInput(int inputPort, IAbstractCircuitGate component, int outputPort){
+	public void connectInput(int inputPort, IAbstractCircuitGate component,
+			int outputPort) {
 		inputs.get(inputPort).setInputComponent(component, outputPort);
 	}
 
-	public boolean getOutputValue(int index){
+	public boolean getOutputValue(int index) {
 		return outputs[index];
 	}
-	
-	
-	public int getNoOfInputs(){
+
+	public int getNoOfInputs() {
 		return inputs.size();
 	}
-	
-	
-	public int getNoOfOutputs(){
+
+	public int getNoOfOutputs() {
 		return outputs.length;
 	}
-	
-	
-	public void update(){
+
+	public void update() {
 		updateOutput();
 	}
-	
-	
-	public int getComponentTier(){
-		if(isInTiercalculation){
+
+	public int getComponentTier() {
+		if (isInTiercalculation) {
 			return 0;
 		} else {
 			isInTiercalculation = true;
-			
+
 			int maxTier = 0;
-			for(IGateInput gp : inputs){
-				if(gp.getInputComponent() != null){
+			for (IGateInput gp : inputs) {
+				if (gp.getInputComponent() != null) {
 					int tmpTier = gp.getInputComponent().getComponentTier();
-					if(tmpTier > maxTier){
+					if (tmpTier > maxTier) {
 						maxTier = tmpTier;
 					}
 				}
@@ -108,53 +109,85 @@ public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 			return maxTier + 1;
 		}
 	}
+
+	@Override
+	public Collection<IAbstractCircuitGate> getRecoupledTo() {
+		Collection<IAbstractCircuitGate> col = new ArrayList<IAbstractCircuitGate>();
+		
+		for(IGateInput input : inputs){
+			IAbstractCircuitGate inputGate = input.getInputComponent();
+			if(inputGate != null){
+				if(inputGate.connectsTo(this)){
+					col.add(inputGate);
+				}
+			}
+		}
+		
+		return col;
+	}
 	
-	
-	public Point getPosition(){
+	public boolean connectsTo(IAbstractCircuitGate gate){
+		boolean ret = false;
+		if(isInConnectToCalculation){
+			return false;
+		} else {
+			isInConnectToCalculation = true;
+		}
+		for(IGateInput input : inputs){
+			IAbstractCircuitGate inputGate = input.getInputComponent();
+			if(inputGate != null){
+				if(inputGate == gate || inputGate.connectsTo(gate)){
+					ret = true;
+					break;
+				}
+			}
+		}
+		
+		isInConnectToCalculation = false;
+		return ret;
+	}
+
+	public Point getPosition() {
 		return this.position;
 	}
-	
-	
-	public void setPosition(Point position){
+
+	public void setPosition(Point position) {
 		this.position = position;
 	}
-	
 
-	public void move(int deltaX, int deltaY){
-		this.position = new Point(this.position.x + deltaX,
-				this.position.y + deltaY);
+	public void move(int deltaX, int deltaY) {
+		this.position = new Point(this.position.x + deltaX, this.position.y
+				+ deltaY);
 	}
-	
 
-	
-	public AbstractCircuitGate clone(){
+	public AbstractCircuitGate clone() {
 		AbstractCircuitGate c = emptyGateClone();
-		
-		for(int i = 0; i < this.outputs.length; i++){
-			c.setOutput(i, outputs[i]);	
+
+		for (int i = 0; i < this.outputs.length; i++) {
+			c.setOutput(i, outputs[i]);
 		}
-		
+
 		int port = 0;
-		for(IGateInput gi : this.getInputs()){
+		for (IGateInput gi : this.getInputs()) {
 			c.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
 		}
-		
+
 		c.position = position;
-		
+
 		return c;
 	}
-	
+
 	/**
 	 * updates the output of the gate.
 	 */
 	protected abstract void updateOutput();
-	
+
 	/**
 	 * Template-method for returning a gate of the used type.
+	 * 
 	 * @return a gate of the used type
 	 */
 	protected abstract AbstractCircuitGate emptyGateClone();
-	
-	
+
 	public abstract String toString();
 }

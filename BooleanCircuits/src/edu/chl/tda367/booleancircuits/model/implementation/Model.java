@@ -12,7 +12,7 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 /**
  * Model for managing and updating circuit components.
  */
-public final class Model implements IModel{
+public final class Model implements IModel {
 	private final Collection<IAbstractCircuitGate> componentList;
 
 	/**
@@ -50,7 +50,7 @@ public final class Model implements IModel{
 				}
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -59,34 +59,55 @@ public final class Model implements IModel{
 			_removeComponent(gate);
 		}
 	}
-	
-	public void clock(){
-		for(IAbstractCircuitGate gate : componentList){
-			if(gate instanceof Clock){
-				((Clock)gate).toggleClock();
+
+	public void clock() {
+		for (IAbstractCircuitGate gate : componentList) {
+			if (gate instanceof Clock) {
+				((Clock) gate).toggleClock();
 			}
 		}
 		updateComponents();
 	}
 
 	public void updateComponents() {
-		List<List<IAbstractCircuitGate>> groupList = new LinkedList<List<IAbstractCircuitGate>>();
+		List<List<IAbstractCircuitGate>> groupList = new ArrayList<List<IAbstractCircuitGate>>();
 
-		// Sort our components in groups of update tiers.
-		int loopCount = 1;
-		boolean endOfLoop = true;
-		do {
-			List<IAbstractCircuitGate> tempList = new LinkedList<IAbstractCircuitGate>();
-			endOfLoop = true;
-			for (IAbstractCircuitGate i : componentList) {
-				if (i.getComponentTier() == loopCount) {
-					tempList.add(i);
-					endOfLoop = false;
+		// Prepare tiers
+		int maxTier = 0;
+		for (IAbstractCircuitGate iGate : componentList) {
+			int tier = iGate.getComponentTier();
+			if (tier > maxTier) {
+				// Add a list per each tier jump made
+				for (int i = maxTier; i < tier; i++) {
+					groupList.add(new LinkedList<IAbstractCircuitGate>());
 				}
+				maxTier = tier;
 			}
-			groupList.add(tempList);
-			loopCount++;
-		} while (!endOfLoop);
+		}
+
+		// Sort components into tiers
+		for (IAbstractCircuitGate iGate : componentList) {
+			Collection<IAbstractCircuitGate> recouples = iGate.getRecoupledTo();
+			if (recouples.size() > 0) {
+				int recouplesMaxTier = iGate.getComponentTier();
+				for (IAbstractCircuitGate reGate : recouples) {
+					int tier = reGate.getComponentTier();
+					if(tier > recouplesMaxTier){
+						recouplesMaxTier = tier;
+					}
+				}
+				if(!groupList.get(recouplesMaxTier - 1).contains(iGate)){
+					groupList.get(recouplesMaxTier - 1).add(iGate);
+				}
+				for(IAbstractCircuitGate addGate : recouples){
+					if(!groupList.get(recouplesMaxTier - 1).contains(addGate)){
+						groupList.get(recouplesMaxTier - 1).add(addGate);
+					}
+				}
+			} else {
+				groupList.get(iGate.getComponentTier() - 1).add(iGate);
+			}
+		}
 
 		// Update each tier individually
 		for (List<IAbstractCircuitGate> l : groupList) {
@@ -96,7 +117,6 @@ public final class Model implements IModel{
 				temp.update();
 				cloneList.add(temp);
 			}
-
 			for (int i = 0; i < cloneList.size(); i++) {
 				l.get(i).overwriteGate(cloneList.get(i));
 			}
@@ -108,7 +128,7 @@ public final class Model implements IModel{
 		_removeComponent(g);
 		updateComponents();
 	}
-	
+
 	private void _removeComponent(IAbstractCircuitGate g) {
 		componentList.remove(g);
 	}
