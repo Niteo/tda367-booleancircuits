@@ -42,7 +42,7 @@ public final class GateFactory {
 			e.printStackTrace();
 		}
 
-		// TODO: Check if ret == null? Maybe? :)
+		// TODO: Remove or create a functional one.
 
 		return newComponent;
 	}
@@ -118,6 +118,8 @@ public final class GateFactory {
 		} else if (name.equals("1")) {
 			return new ConstantGate(true);
 		} else if (name.equals("0")) {
+			return new ConstantGate(false);
+		} else if (name.equals("CLOCK")) {
 			return new ConstantGate(false);
 		} else {
 			System.out.println("Not a component!");

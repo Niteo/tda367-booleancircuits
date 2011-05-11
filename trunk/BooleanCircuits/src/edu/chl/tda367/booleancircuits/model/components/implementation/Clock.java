@@ -25,6 +25,6 @@ public class Clock extends AbstractCircuitGate{
 	
 	@Override
 	public String toString() {
-		return "Clock";
+		return "CLOCK";
 	}
 }
