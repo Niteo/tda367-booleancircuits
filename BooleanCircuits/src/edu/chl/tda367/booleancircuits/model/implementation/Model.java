@@ -63,13 +63,7 @@ public final class Model implements IModel{
 	public void clock(){
 		for(IAbstractCircuitGate gate : componentList){
 			if(gate instanceof Clock){
-				((Clock) gate).toggleClock();
-			}
-		}
-		updateComponents();
-		for(IAbstractCircuitGate gate : componentList){
-			if(gate instanceof Clock){
-				((Clock) gate).toggleClock();
+				((Clock)gate).toggleClock();
 			}
 		}
 		updateComponents();
