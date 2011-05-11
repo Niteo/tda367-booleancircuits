@@ -15,7 +15,7 @@ import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
-import edu.chl.tda367.booleancircuits.utilities.GateFactory;
+import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 
 public final class FileManager implements IFileManager {
 

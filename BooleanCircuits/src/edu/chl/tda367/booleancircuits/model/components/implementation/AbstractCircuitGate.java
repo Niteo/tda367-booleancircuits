@@ -5,7 +5,7 @@ import java.util.*;
 import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
-import edu.chl.tda367.booleancircuits.utilities.GateFactory;
+import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 
 /**
  * Abstract class representing an abstract circuit component.

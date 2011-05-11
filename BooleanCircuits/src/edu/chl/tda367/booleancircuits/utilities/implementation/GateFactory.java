@@ -1,4 +1,4 @@
-package edu.chl.tda367.booleancircuits.utilities;
+package edu.chl.tda367.booleancircuits.utilities.implementation;
 
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;

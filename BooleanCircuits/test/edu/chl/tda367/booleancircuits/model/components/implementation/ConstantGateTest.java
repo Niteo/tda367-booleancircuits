@@ -7,9 +7,10 @@ import org.junit.Test;
 public class ConstantGateTest {
 	@Test
 	public void testConstantGate() {
-		ConstantGate falseConstantgate = new ConstantGate(false);
-		ConstantGate trueConstantgate = new ConstantGate(true);
+		ConstantGate falseConstantGate = new ConstantGate(false);
+		ConstantGate trueConstantGate = new ConstantGate(true);
 		
+		assertTrue(falseConstantGate!=null && trueConstantGate!=null);
 	}
 
 	@Test
