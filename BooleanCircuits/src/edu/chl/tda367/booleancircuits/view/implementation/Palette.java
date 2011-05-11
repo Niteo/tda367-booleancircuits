@@ -13,7 +13,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.implementation.ComponentFolder;
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
+import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
 import edu.chl.tda367.booleancircuits.view.IPalette;
 
 public final class Palette implements IPalette {
@@ -25,9 +28,14 @@ public final class Palette implements IPalette {
 
 	public Palette(IMasterController masterController) {
 		mc = masterController;
+		ArrayList<IAbstractCircuitGate> al = new ArrayList<IAbstractCircuitGate>();
+		al.add(new ConstantGate(false));
+		al.add(new ConstantGate(true));
+		al.add(new Clock());
+		ComponentFolder cf = new ComponentFolder(al,"Special");
 		folderList = new ArrayList<ComponentFolder>();
 		folderList.add(new ComponentFolder());
-
+		folderList.add(cf);
 		initPaletteTree();
 		scrollPane = new JScrollPane(componentTree);
 	}
@@ -68,6 +76,7 @@ public final class Palette implements IPalette {
 
 		componentTree.addTreeSelectionListener(tsl);
 		componentTree.expandRow(0);
+		componentTree.expandRow(8);
 		
 		componentTree.getInputMap().put(
 				KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK),
@@ -92,7 +101,7 @@ public final class Palette implements IPalette {
 	private void initComponentNodes(DefaultMutableTreeNode folderNodeList,
 			ComponentFolder componentFolder) {
 		// TODO:
-		for (AbstractCircuitGate acg : componentFolder.getAllComponents()) {
+		for (IAbstractCircuitGate acg : componentFolder.getAllComponents()) {
 			folderNodeList.add(new DefaultMutableTreeNode(acg));
 		}
 

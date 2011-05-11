@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.io.IComponentFolder;
+import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
@@ -24,16 +25,16 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.XorGate;
 
 public class ComponentFolder implements IComponentFolder {
 
-	private List<AbstractCircuitGate> componentList;
+	private List<IAbstractCircuitGate> componentList;
 	private String name;
 
 	public ComponentFolder() {
-		componentList = new ArrayList<AbstractCircuitGate>();
-		name = "Standard Gates";
+		componentList = new ArrayList<IAbstractCircuitGate>();
+		name = "Logic Gates";
 		initStandardGates();
 	}
 
-	public ComponentFolder(List<AbstractCircuitGate> componentList, String name) {
+	public ComponentFolder(List<IAbstractCircuitGate> componentList, String name) {
 		this.name = name;
 		this.componentList = componentList;
 	}
@@ -49,10 +50,7 @@ public class ComponentFolder implements IComponentFolder {
 	}
 
 	private void initStandardGates() {
-		componentList.add(new Clock());
 		componentList.add(new AndGate(2));
-		componentList.add(new ConstantGate(true));
-		componentList.add(new ConstantGate(false));
 		componentList.add(new NandGate(2));
 		componentList.add(new NorGate(2));
 		componentList.add(new NotGate());
@@ -68,7 +66,7 @@ public class ComponentFolder implements IComponentFolder {
 	 * @return
 	 */
 	@Override
-	public List<AbstractCircuitGate> getAllComponents() {
+	public List<IAbstractCircuitGate> getAllComponents() {
 		return componentList;
 	}
 
