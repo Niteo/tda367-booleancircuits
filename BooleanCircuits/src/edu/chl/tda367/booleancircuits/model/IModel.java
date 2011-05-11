@@ -9,6 +9,12 @@ import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 public interface IModel {
+	
+	/**
+	 * Clocks all clocks in the model.
+	 */
+	public void clock();
+	
 	/**
 	 * Adds a component to the model.
 	 * 
