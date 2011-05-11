@@ -237,5 +237,6 @@ public final class ModelManager implements IObservable, IModelManager {
 			temp.y += move.y;
 			_addComponent(gate, temp);
 		}
+		firePropertyChanged();
 	}
 }

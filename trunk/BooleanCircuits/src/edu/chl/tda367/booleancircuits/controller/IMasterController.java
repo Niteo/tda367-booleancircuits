@@ -82,18 +82,6 @@ public interface IMasterController {
 	 *            the coordinate to add to
 	 */
 	public void addComponent(Point position);
-	
-	/**
-	 * Adds a list of components to the active workspace. Positions are relative
-	 * to the first given position.
-	 * 
-	 * @param component
-	 *            List the components to add
-	 * @param position
-	 *            Point the point the first component should be added to
-	 */
-	public void addComponents(List<IAbstractCircuitGate> component,
-			Point position);
 
 	/**
 	 * Removes the currently selected component(s) in the active workspace.
@@ -139,6 +127,15 @@ public interface IMasterController {
 	 * clipboard.
 	 */
 	public void pasteSelectedComponents();
+
+	/**
+	 * Pastes the selected components to the active workspace from the
+	 * clipboard.
+	 * 
+	 * @param position
+	 *            Point position in the active model
+	 */
+	public void pasteSelectedComponents(Point position);
 
 	/**
 	 * Sets the component chosen in the palette.
