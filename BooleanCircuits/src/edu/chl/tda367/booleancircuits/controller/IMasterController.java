@@ -155,4 +155,9 @@ public interface IMasterController {
 	 *            port to connect
 	 */
 	public void connectComponent(IAbstractCircuitGate g, int port);
+
+	/**
+	 * Toggles the clock timer.
+	 */
+	public void toggleClockTimer();
 }
