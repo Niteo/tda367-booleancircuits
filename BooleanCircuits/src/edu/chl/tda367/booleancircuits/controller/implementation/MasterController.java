@@ -192,4 +192,10 @@ public final class MasterController implements IMasterController {
 	private void _copySelectedComponents() {
 		clipboardManager.copy(mm.getActiveSelectionModel().getSelectedComponents());
 	}
+
+	@Override
+	public void addComponents(List<IAbstractCircuitGate> component,
+			Point position) {
+		mm.addComponents(component, position);
+	}
 }

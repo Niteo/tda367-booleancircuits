@@ -102,6 +102,18 @@ public interface IModelManager {
 	public void addComponents(List<IAbstractCircuitGate> component);
 
 	/**
+	 * Adds a list of components to the active workspace. Positions are relative
+	 * to the first given position.
+	 * 
+	 * @param component
+	 *            List the components to add
+	 * @param position
+	 *            Point the point the first component should be added to
+	 */
+	public void addComponents(List<IAbstractCircuitGate> component,
+			Point position);
+
+	/**
 	 * Removes the selected components.
 	 */
 	public void removeSelectedComponents();

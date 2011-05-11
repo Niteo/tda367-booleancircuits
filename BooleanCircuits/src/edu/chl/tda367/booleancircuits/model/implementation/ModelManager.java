@@ -138,7 +138,8 @@ public final class ModelManager implements IObservable, IModelManager {
 	@Override
 	public void selectComponent(Point position, boolean multiSelect) {
 		_getActiveSelectionModel().selectComponent(
-				modelList.get(selectedIndex).getComponent(position), multiSelect);
+				modelList.get(selectedIndex).getComponent(position),
+				multiSelect);
 		firePropertyChanged();
 	}
 
@@ -159,12 +160,12 @@ public final class ModelManager implements IObservable, IModelManager {
 		getActiveWorkspaceModel().updateComponents();
 		firePropertyChanged();
 	}
-	
-	private IModelWrapper _getActiveWorkspaceModel(){
+
+	private IModelWrapper _getActiveWorkspaceModel() {
 		return modelList.get(selectedIndex);
 	}
-	
-	private ISelectionModel _getActiveSelectionModel(){
+
+	private ISelectionModel _getActiveSelectionModel() {
 		return selectionModelList.get(selectedIndex);
 	}
 
@@ -183,16 +184,58 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void addComponents(List<IAbstractCircuitGate> component) {
-		for(int i=0; i<component.size();i++){
+		for (int i = 0; i < component.size(); i++) {
 			Point tempPos = new Point(component.get(i).getPosition());
-			tempPos.x-=Constants.componentSize;
-			tempPos.y-=Constants.componentSize;
+			tempPos.x -= Constants.componentSize;
+			tempPos.y -= Constants.componentSize;
 			_addComponent(component.get(i), tempPos);
 		}
 		firePropertyChanged();
 	}
-	
+
 	private void _addComponent(IAbstractCircuitGate component, Point position) {
 		getActiveWorkspaceModel().addComponent(component.clone(), position);
+	}
+
+	@Override
+	public void addComponents(List<IAbstractCircuitGate> component,
+			Point position) {
+		int minX = Integer.MAX_VALUE;
+		int maxX = Integer.MIN_VALUE;
+		int minY = Integer.MAX_VALUE;
+		int maxY = Integer.MIN_VALUE;
+
+		for (int i = 0; i < component.size(); i++) {
+			Point p = component.get(i).getPosition();
+			if (p.x > maxX) {
+				maxX = p.x;
+			} else if (p.x < minX) {
+				minX = p.x;
+			}
+			if (p.y > maxY) {
+				maxY = p.y;
+			} else if (p.y < minY) {
+				minY = p.y;
+			}
+		}
+
+		int deltaX = (int) (maxX - minX * 0.5);
+		int deltaY = (int) (maxY - minY * 0.5);
+
+		int moveX;
+		int moveY;
+
+		moveX = position.x - deltaX;
+		moveY = position.y - deltaY;
+
+		Point move = new Point(moveX, moveY);
+
+		for (int i = 0; i < component.size(); i++) {
+			IAbstractCircuitGate gate = component.get(i);
+			Point temp = new Point(gate.getPosition());
+			temp.x += move.x;
+			temp.y += move.y;
+			_addComponent(gate, temp);
+		}
 	}
 }
