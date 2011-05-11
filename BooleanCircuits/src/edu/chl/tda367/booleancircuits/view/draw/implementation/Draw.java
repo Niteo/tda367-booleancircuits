@@ -36,6 +36,7 @@ public class Draw implements IDraw {
 	@Override
 	public void drawGate(Graphics2D g, IAbstractCircuitGate gate, Point offset) {
 		color = g.getColor();
+		
 
 		if (gate instanceof AndGate) {
 			drawAndGate(gate, g, offset);
@@ -91,7 +92,7 @@ public class Draw implements IDraw {
 
 	private void drawAndGate(IAbstractCircuitGate gate, Graphics2D g,
 			Point offset) {
-
+	
 		if (isUsStandard) {
 			g.setColor(Color.WHITE);
 			g
@@ -257,7 +258,7 @@ public class Draw implements IDraw {
 
 	private void drawRectangle(IAbstractCircuitGate gate, Graphics2D g,
 			Point offset) {
-		g.setFont(new Font("Sans serif", Font.BOLD, 16));
+		
 		g.setColor(Color.WHITE);
 		g
 				.fill3DRect(
@@ -271,7 +272,7 @@ public class Draw implements IDraw {
 						(gate.getPosition().x - offset.x - Constants.componentSize / 2),
 						(gate.getPosition().y - offset.y - Constants.componentSize / 2),
 						Constants.componentSize, Constants.componentSize, true);
-		
+		g.setFont(new Font("Sans Serif",Font.BOLD,18));
 		g.drawString(symbol, gate.getPosition().x - offset.x
 				- Constants.componentSize / 4, gate.getPosition().y - offset.y
 				+ Constants.componentSize / 4);
