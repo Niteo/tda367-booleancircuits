@@ -161,9 +161,15 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void pasteSelectedComponents() {
-		List<IAbstractCircuitGate> tempList = clipboardManager.paste();
-		mm.addComponents(tempList);
+		mm.addComponents(clipboardManager.paste());
 	}
+	
+
+	@Override
+	public void pasteSelectedComponents(Point position) {
+		mm.addComponents(clipboardManager.paste(), position);
+	}
+
 
 	@Override
 	public void setChosenComponent(IAbstractCircuitGate g) {
@@ -191,11 +197,5 @@ public final class MasterController implements IMasterController {
 	
 	private void _copySelectedComponents() {
 		clipboardManager.copy(mm.getActiveSelectionModel().getSelectedComponents());
-	}
-
-	@Override
-	public void addComponents(List<IAbstractCircuitGate> component,
-			Point position) {
-		mm.addComponents(component, position);
 	}
 }
