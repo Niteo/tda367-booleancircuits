@@ -5,7 +5,6 @@ public class Clock extends AbstractCircuitGate{
 	
 	public Clock(){
 		super.createIO(0, 1);
-		System.out.println("NEW ASSCLOCKI");
 	}
 	
 	@Override
@@ -14,12 +13,14 @@ public class Clock extends AbstractCircuitGate{
 	}
 	
 	public void toggleClock(){
-		this.constant = true;
+		constant = !constant;
 	}
 
 	@Override
 	protected AbstractCircuitGate emptyGateClone() {
-		return new Clock();
+		Clock c = new Clock();
+		c.constant = this.constant;
+		return c;
 	}
 	
 	@Override
