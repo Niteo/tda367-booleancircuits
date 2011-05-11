@@ -16,6 +16,7 @@ import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 import edu.chl.tda367.booleancircuits.utilities.implementation.ClipboardManager;
+import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
 public final class MasterController implements IMasterController {
 
@@ -41,7 +42,7 @@ public final class MasterController implements IMasterController {
 		} else {
 			modelManager = mm;
 			fileManager = new FileManager();
-			clockTimer = new Timer(500, new ActionListener() {
+			clockTimer = new Timer(Constants.clockFrequency, new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
