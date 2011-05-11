@@ -2,6 +2,7 @@ package edu.chl.tda367.booleancircuits.controller;
 
 import java.awt.Point;
 import java.io.File;
+import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 
@@ -81,6 +82,18 @@ public interface IMasterController {
 	 *            the coordinate to add to
 	 */
 	public void addComponent(Point position);
+	
+	/**
+	 * Adds a list of components to the active workspace. Positions are relative
+	 * to the first given position.
+	 * 
+	 * @param component
+	 *            List the components to add
+	 * @param position
+	 *            Point the point the first component should be added to
+	 */
+	public void addComponents(List<IAbstractCircuitGate> component,
+			Point position);
 
 	/**
 	 * Removes the currently selected component(s) in the active workspace.
