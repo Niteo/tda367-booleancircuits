@@ -118,6 +118,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 		// init file menu
 		newWorkspaceMenuItem
 				.setAction(actionController.getNewWorkspaceAction());
+		importToWorkspaceMenuItem.setAction(actionController.getImportWorkspaceAction());
 		openFileMenuItem.setAction(actionController.getOpenWorkspaceAction());
 		closeMenuItem.setAction(actionController
 				.getCloseActiveWorkspaceAction());
@@ -208,6 +209,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 	private void initMenuItemText() {
 		// File menu
 		newWorkspaceMenuItem.setText("New Workspace");
+		importToWorkspaceMenuItem.setText("Import to Workspace...");
 		openFileMenuItem.setText("Open File...");
 		closeMenuItem.setText("Close");
 		closeAllMenuItem.setText("Close all");
@@ -313,6 +315,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 		viewMenu = new javax.swing.JMenu();
 		representationMenu = new javax.swing.JMenu();
 		iecStandardRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+		importToWorkspaceMenuItem = new javax.swing.JMenuItem();
 		usStandardRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
 		backgroundMenu = new javax.swing.JMenu();
 		blankRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
@@ -352,6 +355,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 
 		fileMenu.setText("File");
 		fileMenu.add(newWorkspaceMenuItem);
+		fileMenu.add(importToWorkspaceMenuItem);
 		fileMenu.add(openFileMenuItem);
 		fileMenu.add(fileSeparator1);
 		fileMenu.add(closeMenuItem);
@@ -453,6 +457,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 	private javax.swing.JMenuItem helpMenuItem;
 	private javax.swing.JSplitPane horizontalSplitPane;
 	private javax.swing.JRadioButtonMenuItem iecStandardRadioButtonMenuItem;
+	private javax.swing.JMenuItem importToWorkspaceMenuItem;
 	private javax.swing.JMenuBar menuBar;
 	private javax.swing.JMenuItem newWorkspaceMenuItem;
 	private javax.swing.JMenuItem openFileMenuItem;
