@@ -167,7 +167,12 @@ public interface IModelManager {
 			IAbstractCircuitGate componentOut, int portIn, int portOut);
 
 	/**
-	 * Fires a property changed event manually!
+	 * Fires a property changed event manually.
 	 */
 	public void manualPropertyChanged();
+
+	/**
+	 * Clocks the active model with a clock pulse.
+	 */
+	public void clockActiveModel();
 }

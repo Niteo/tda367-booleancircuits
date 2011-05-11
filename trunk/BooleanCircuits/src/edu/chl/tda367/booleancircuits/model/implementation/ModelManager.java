@@ -103,30 +103,6 @@ public final class ModelManager implements IObservable, IModelManager {
 		pcs.removePropertyChangeListener(listener);
 	}
 
-	private void firePropertyChanged() {
-		pcs.firePropertyChange(new PropertyChangeEvent(this, "ModelManager", 0,
-				1));
-	}
-
-	private void _setActiveWorkspace(int i) {
-		selectedIndex = i;
-		firePropertyChanged();
-	}
-
-	private void removeModel(int i) {
-		if (i < 0 || i >= modelList.size()) {
-			return;
-		} else {
-			modelList.remove(i);
-			selectionModelList.remove(i);
-			if (modelList.size() == 0) {
-				selectedIndex = -1;
-			} else if (selectedIndex >= modelList.size()) {
-				selectedIndex = modelList.size() - 1;
-			}
-			firePropertyChanged();
-		}
-	}
 
 	@Override
 	public void selectAllComponents() {
@@ -161,13 +137,6 @@ public final class ModelManager implements IObservable, IModelManager {
 		firePropertyChanged();
 	}
 
-	private IModelWrapper _getActiveWorkspaceModel() {
-		return modelList.get(selectedIndex);
-	}
-
-	private ISelectionModel _getActiveSelectionModel() {
-		return selectionModelList.get(selectedIndex);
-	}
 
 	@Override
 	public void connectComponents(IAbstractCircuitGate componentIn,
@@ -191,10 +160,6 @@ public final class ModelManager implements IObservable, IModelManager {
 			_addComponent(component.get(i), tempPos);
 		}
 		firePropertyChanged();
-	}
-
-	private void _addComponent(IAbstractCircuitGate component, Point position) {
-		getActiveWorkspaceModel().addComponent(component.clone(), position);
 	}
 
 	@Override
@@ -221,24 +186,62 @@ public final class ModelManager implements IObservable, IModelManager {
 			}
 		}
 
-		int deltaX = (int) (maxX - minX * 0.5);
-		int deltaY = (int) (maxY - minY * 0.5);
+		int deltaX =(maxX - minX)/2 +minX;
+		int deltaY =(maxY - minY)/2 +minY;
 
-		int moveX;
-		int moveY;
-
-		moveX = position.x - deltaX;
-		moveY = position.y - deltaY;
-
-		Point move = new Point(moveX, moveY);
+		int moveX = (position.x - deltaX);
+		int moveY = (position.y - deltaY);
 
 		for (int i = 0; i < component.size(); i++) {
 			IAbstractCircuitGate gate = component.get(i);
 			Point temp = new Point(gate.getPosition());
-			temp.x += move.x;
-			temp.y += move.y;
+			temp.x += moveX;
+			temp.y += moveY;
 			_addComponent(gate, temp);
 		}
 		firePropertyChanged();
+	}
+	
+	@Override
+	public void clockActiveModel() {
+		_getActiveWorkspaceModel().clock();
+	}
+	
+	private void _addComponent(IAbstractCircuitGate component, Point position) {
+		getActiveWorkspaceModel().addComponent(component.clone(), position);
+	}
+	
+	private IModelWrapper _getActiveWorkspaceModel() {
+		return modelList.get(selectedIndex);
+	}
+
+	private ISelectionModel _getActiveSelectionModel() {
+		return selectionModelList.get(selectedIndex);
+	}
+	
+
+	private void firePropertyChanged() {
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "ModelManager", 0,
+				1));
+	}
+
+	private void _setActiveWorkspace(int i) {
+		selectedIndex = i;
+		firePropertyChanged();
+	}
+
+	private void removeModel(int i) {
+		if (i < 0 || i >= modelList.size()) {
+			return;
+		} else {
+			modelList.remove(i);
+			selectionModelList.remove(i);
+			if (modelList.size() == 0) {
+				selectedIndex = -1;
+			} else if (selectedIndex >= modelList.size()) {
+				selectedIndex = modelList.size() - 1;
+			}
+			firePropertyChanged();
+		}
 	}
 }
