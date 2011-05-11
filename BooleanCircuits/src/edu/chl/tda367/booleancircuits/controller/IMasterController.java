@@ -2,7 +2,6 @@ package edu.chl.tda367.booleancircuits.controller;
 
 import java.awt.Point;
 import java.io.File;
-import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
 
@@ -55,6 +54,13 @@ public interface IMasterController {
 	 * Saves all workspaces.
 	 */
 	public void saveAllWorkspaces();
+
+	/**
+	 * Imports workspace into active workspace
+	 * 
+	 * @param file
+	 */
+	public void importWorkspace(File file);
 
 	/**
 	 * Sets the currently active workspace.
