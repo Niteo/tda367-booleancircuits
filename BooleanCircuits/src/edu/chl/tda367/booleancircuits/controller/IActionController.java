@@ -58,7 +58,7 @@ public interface IActionController {
 	 * @return Action
 	 */
 	public Action getSaveAsAction();
-	
+
 	/**
 	 * Returns the CopySelectedComponents action.
 	 * 
@@ -121,4 +121,25 @@ public interface IActionController {
 	 * @return Action
 	 */
 	public Action getSelectAllComponentsAction();
+
+	/**
+	 * Returns the startClock action.
+	 * 
+	 * @return Action
+	 */
+	public Action getStartClockAction();
+
+	/**
+	 * Returns the pauseClock action.
+	 * 
+	 * @return Action
+	 */
+	public Action getPauseClockAction();
+
+	/**
+	 * Returns the importWorkspace action.
+	 * 
+	 * @return Action
+	 */
+	public Action getImportWorkspaceAction();
 }

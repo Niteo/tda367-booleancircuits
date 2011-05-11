@@ -208,7 +208,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 	
 	private void _addComponent(IAbstractCircuitGate component, Point position) {
-		getActiveWorkspaceModel().addComponent(component.clone(), position);
+		getActiveWorkspaceModel().addComponent(component, position);
 	}
 	
 	private IModelWrapper _getActiveWorkspaceModel() {

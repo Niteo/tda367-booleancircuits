@@ -42,6 +42,10 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 		return pasteButton;
 	}
 
+	public JButton getPauseClockButton() {
+		return pauseClockButton;
+	}
+
 	public JButton getRedoButton() {
 		return redoButton;
 	}
@@ -58,6 +62,10 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 		return saveButton;
 	}
 
+	public JButton getStartClockButton() {
+		return startClockButton;
+	}
+
 	public JButton getUndoButton() {
 		return undoButton;
 	}
@@ -71,9 +79,13 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 				.setIcon(new ImageIcon("Resources/Icons/save-all-icon.png"));
 		saveAsComponentButton.setIcon(new ImageIcon(
 				"Resources/Icons/save-component.png"));
+		startClockButton.setIcon(new ImageIcon(
+				"Resources/Icons/clock-play-icon.png"));
 		cutButton.setIcon(new ImageIcon("Resources/Icons/cut-icon.png"));
 		copyButton.setIcon(new ImageIcon("Resources/Icons/copy-icon.png"));
 		pasteButton.setIcon(new ImageIcon("Resources/Icons/paste-icon.png"));
+		pauseClockButton.setIcon(new ImageIcon(
+				"Resources/Icons/clock-pause-icon.png"));
 		undoButton.setIcon(new ImageIcon("Resources/Icons/Undo-icon.png"));
 		redoButton.setIcon(new ImageIcon("Resources/Icons/Redo-icon.png"));
 	}
@@ -97,8 +109,10 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 		pasteButton = new javax.swing.JButton();
 		undoButton = new javax.swing.JButton();
 		redoButton = new javax.swing.JButton();
+		startClockButton = new JButton();
+		pauseClockButton = new JButton();
 
-		setPreferredSize(new java.awt.Dimension(220, 24));
+		setPreferredSize(new java.awt.Dimension(260, 24));
 		setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
 		newWorkspaceButton.setPreferredSize(new java.awt.Dimension(20, 20));
@@ -107,14 +121,16 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 		openFileButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(openFileButton);
 
+		saveAsComponentButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		add(saveAsComponentButton);
+
 		saveButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(saveButton);
 
 		saveAllButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(saveAllButton);
-
-		saveAsComponentButton.setPreferredSize(new java.awt.Dimension(20, 20));
-		add(saveAsComponentButton);
+		
+		add(new JSeparator());
 
 		cutButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(cutButton);
@@ -124,12 +140,22 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 
 		pasteButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(pasteButton);
+		
+		add(new JSeparator());
 
 		undoButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(undoButton);
 
 		redoButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(redoButton);
+		
+		add(new JSeparator());
+
+		pauseClockButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		add(pauseClockButton);
+
+		startClockButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		add(startClockButton);
 	}// </editor-fold>
 		// GEN-END:initComponents
 
@@ -145,6 +171,8 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 	private javax.swing.JButton saveAsComponentButton;
 	private javax.swing.JButton saveButton;
 	private javax.swing.JButton undoButton;
+	private javax.swing.JButton pauseClockButton;
+	private javax.swing.JButton startClockButton;
 	// End of variables declaration//GEN-END:variables
 
 }
