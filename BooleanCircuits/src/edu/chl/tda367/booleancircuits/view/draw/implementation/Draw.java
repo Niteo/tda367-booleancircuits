@@ -272,7 +272,7 @@ public class Draw implements IDraw {
 						(gate.getPosition().x - offset.x - Constants.componentSize / 2),
 						(gate.getPosition().y - offset.y - Constants.componentSize / 2),
 						Constants.componentSize, Constants.componentSize, true);
-		g.setFont(new Font("Sans Serif",Font.BOLD,18));
+		g.setFont(new Font("Arial",Font.BOLD,18));
 		g.drawString(symbol, gate.getPosition().x - offset.x
 				- Constants.componentSize / 4, gate.getPosition().y - offset.y
 				+ Constants.componentSize / 4);
