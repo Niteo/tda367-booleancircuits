@@ -89,15 +89,19 @@ public class Canvas {
 			drawer.drawBackground(g2d, new Point(posX, posY), panel.getSize());
 			// Draw components
 			if (model != null) {
+				// Draw non-selected
+				g2d.setColor(Color.BLACK);
 				for (IAbstractCircuitGate circuitGate : model.getComponents()) {
-					// Set color
-					if (selectModel.isSelectedComponent(circuitGate)) {
-						g2d.setColor(Color.BLUE);
-					} else {
-						g2d.setColor(Color.BLACK);
+					if (!selectModel.isSelectedComponent(circuitGate)) {
+						drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
 					}
-					// Draw component
-					drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
+				}
+				// Draw selected
+				g2d.setColor(Color.BLUE);
+				for (IAbstractCircuitGate circuitGate : model.getComponents()) {
+					if (selectModel.isSelectedComponent(circuitGate)) {
+						drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
+					}
 				}
 			}
 			
@@ -164,16 +168,34 @@ public class Canvas {
 				JPopupMenu jpm = new JPopupMenu();
 
 				if (rightClickedGate == null) {
-					JMenuItem tmpItem = new JMenuItem("Add component");
-					tmpItem.addActionListener(new ActionListener(){
+					final JMenuItem addItem = new JMenuItem("Add component");
+					final JMenuItem cutItem = new JMenuItem("Cut selected");
+					final JMenuItem copyItem = new JMenuItem("Copy selected");
+					final JMenuItem pasteItem = new JMenuItem("Paste");
+					ActionListener menuListener = new ActionListener(){
 
 						@Override
 						public void actionPerformed(ActionEvent arg0) {
-							mc.addComponent(pointClicked);
+							if(arg0.getSource() == addItem){
+								mc.addComponent(pointClicked);
+							} else if(arg0.getSource() == cutItem){
+								mc.cutSelectedComponents();
+							} else if(arg0.getSource() == copyItem){
+								mc.copySelectedComponents();
+							} else if(arg0.getSource() == pasteItem){
+								mc.pasteSelectedComponents(pointClicked);
+							}
 						}
 						
-					});
-					jpm.add(tmpItem);
+					};
+					addItem.addActionListener(menuListener);
+					cutItem.addActionListener(menuListener);
+					copyItem.addActionListener(menuListener);
+					pasteItem.addActionListener(menuListener);
+					jpm.add(addItem);
+					jpm.add(copyItem);
+					jpm.add(cutItem);
+					jpm.add(pasteItem);
 				} else {
 					jpm = menu;
 					menu.updateMenu(rightClickedGate.getNoOfInputs(),
