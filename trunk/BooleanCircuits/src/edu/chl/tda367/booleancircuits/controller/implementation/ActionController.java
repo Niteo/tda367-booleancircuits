@@ -160,6 +160,35 @@ public class ActionController implements ChangeListener, IActionController {
 			mc.selectAllComponents();
 		}
 	};
+	
+	private final Action pauseClockAction = new AbstractAction(){
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			pauseClockAction.setEnabled(false);
+			startClockAction.setEnabled(true);
+			mc.toggleClockTimer();
+		}
+		
+	};
+	
+	private final Action startClockAction = new AbstractAction() {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			pauseClockAction.setEnabled(true);
+			startClockAction.setEnabled(false);
+			mc.toggleClockTimer();
+		}
+	};
+	
+	private final Action importWorkspace = new AbstractAction() {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			mc.importWorkspace();
+		}
+	};
 
 	@Override
 	public Action getNewWorkspaceAction() {
@@ -235,6 +264,8 @@ public class ActionController implements ChangeListener, IActionController {
 	public Action getSelectAllComponentsAction() {
 		return selectAllComponentsAction;
 	}
+	
+	
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
@@ -252,6 +283,21 @@ public class ActionController implements ChangeListener, IActionController {
 	@Override
 	public Action getSaveAsAction() {
 		return saveAsAction;
+	}
+
+	@Override
+	public Action getStartClockAction() {
+		return startClockAction;
+	}
+
+	@Override
+	public Action getPauseClockAction() {
+		return pauseClockAction;
+	}
+
+	@Override
+	public Action getImportWorkspaceAction() {
+		return importWorkspace;
 	}
 
 }

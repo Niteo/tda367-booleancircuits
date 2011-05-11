@@ -72,7 +72,6 @@ public final class MainWindow extends javax.swing.JFrame implements
 			}
 		}
 	};
-	
 
 	@Override
 	public synchronized void propertyChange(PropertyChangeEvent evt) {
@@ -125,8 +124,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 		closeAllMenuItem.setAction(actionController
 				.getCloseAllWorkspacesAction());
 		saveMenuItem.setAction(actionController.getSaveActiveWorkspaceAction());
-		saveAsMenuItem.setAction(actionController
-				.getSaveAsAction());
+		saveAsMenuItem.setAction(actionController.getSaveAsAction());
 		saveAllMenuItem
 				.setAction(actionController.getSaveAllWorkspacesAction());
 		exitMenuItem.setAction(actionController.getExitAction());
@@ -156,10 +154,6 @@ public final class MainWindow extends javax.swing.JFrame implements
 		blankRadioButtonMenuItem.addActionListener(listener);
 		gridRadioButtonMenuItem.setSelected(true);
 
-		// init insert menu
-		componentMenuItem
-				.setAction(actionController.getInsertComponentAction());
-
 		/*
 		 * // init help menu helpMenuItem.setAction(actionController);
 		 * aboutMenuItem.setAction(actionController);
@@ -179,14 +173,23 @@ public final class MainWindow extends javax.swing.JFrame implements
 				actionController.getOpenWorkspaceAction());
 		toolbar.getPasteButton().setAction(
 				actionController.getPasteSelectedComponentAction());
+		toolbar.getPauseClockButton().setAction(
+				actionController.getPauseClockAction());
 		toolbar.getRedoButton().setAction(actionController.getRedoAction());
 		toolbar.getSaveAsComponentButton().setAction(
-				actionController.getSaveAsAction());
+				actionController.getImportWorkspaceAction());
 		toolbar.getSaveAllButton().setAction(
 				actionController.getSaveAllWorkspacesAction());
 		toolbar.getSaveButton().setAction(
 				actionController.getSaveActiveWorkspaceAction());
+		toolbar.getStartClockButton().setAction(
+				actionController.getStartClockAction());
 		toolbar.getUndoButton().setAction(actionController.getUndoAction());
+
+		// Disable unimplemented and clockpulse toggle
+		actionController.getPauseClockAction().setEnabled(false);
+		toolbar.getRedoButton().setEnabled(false);
+		toolbar.getUndoButton().setEnabled(false);
 
 		// Tooltips
 		toolbar.getCutButton().setToolTipText("Cut");
@@ -195,7 +198,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 		toolbar.getOpenFileButton().setToolTipText("Open File");
 		toolbar.getPasteButton().setToolTipText("Paste");
 		toolbar.getRedoButton().setToolTipText("Redo");
-		toolbar.getSaveAsComponentButton().setToolTipText("Save As Component");
+		toolbar.getSaveAsComponentButton().setToolTipText("Import to Workspace");
 		toolbar.getSaveAllButton().setToolTipText("Save All");
 		toolbar.getSaveButton().setToolTipText("Save");
 		toolbar.getUndoButton().setToolTipText("Undo");
@@ -231,9 +234,6 @@ public final class MainWindow extends javax.swing.JFrame implements
 		blankRadioButtonMenuItem.setText("Blank");
 		dotsRadioButtonMenuItem.setText("Dotted");
 		gridRadioButtonMenuItem.setText("Grid");
-
-		// Insert menu
-		componentMenuItem.setText("Component...");
 
 		// Help menu
 		helpMenuItem.setText("Help");
@@ -318,8 +318,6 @@ public final class MainWindow extends javax.swing.JFrame implements
 		blankRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
 		dotsRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
 		gridRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-		insertMenu = new javax.swing.JMenu();
-		componentMenuItem = new javax.swing.JMenuItem();
 		helpMenu = new javax.swing.JMenu();
 		helpMenuItem = new javax.swing.JMenuItem();
 		aboutMenuItem = new javax.swing.JMenuItem();
@@ -407,11 +405,6 @@ public final class MainWindow extends javax.swing.JFrame implements
 
 		menuBar.add(viewMenu);
 
-		insertMenu.setText("Insert");
-		insertMenu.add(componentMenuItem);
-
-		menuBar.add(insertMenu);
-
 		helpMenu.setText("Help");
 		helpMenu.add(helpMenuItem);
 		helpMenu.add(aboutMenuItem);
@@ -436,7 +429,6 @@ public final class MainWindow extends javax.swing.JFrame implements
 	}// </editor-fold>
 		// GEN-END:initComponents
 
-
 	// GEN-BEGIN:variables
 	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
@@ -445,7 +437,6 @@ public final class MainWindow extends javax.swing.JFrame implements
 	private javax.swing.JRadioButtonMenuItem blankRadioButtonMenuItem;
 	private javax.swing.JMenuItem closeAllMenuItem;
 	private javax.swing.JMenuItem closeMenuItem;
-	private javax.swing.JMenuItem componentMenuItem;
 	private javax.swing.JMenuItem copyMenuItem;
 	private javax.swing.JMenuItem cutMenuItem;
 	private javax.swing.JMenuItem deleteMenuItem;
@@ -462,7 +453,6 @@ public final class MainWindow extends javax.swing.JFrame implements
 	private javax.swing.JMenuItem helpMenuItem;
 	private javax.swing.JSplitPane horizontalSplitPane;
 	private javax.swing.JRadioButtonMenuItem iecStandardRadioButtonMenuItem;
-	private javax.swing.JMenu insertMenu;
 	private javax.swing.JMenuBar menuBar;
 	private javax.swing.JMenuItem newWorkspaceMenuItem;
 	private javax.swing.JMenuItem openFileMenuItem;
