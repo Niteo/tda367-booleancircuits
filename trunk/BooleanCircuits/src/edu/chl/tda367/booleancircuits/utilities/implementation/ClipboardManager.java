@@ -45,5 +45,4 @@ public class ClipboardManager implements IClipboardManager {
 	public List<IAbstractCircuitGate> paste() {
 		return clipboardList;
 	}
-
 }

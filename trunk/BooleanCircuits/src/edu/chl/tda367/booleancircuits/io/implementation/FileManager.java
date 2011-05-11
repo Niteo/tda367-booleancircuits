@@ -67,11 +67,29 @@ public final class FileManager implements IFileManager {
 	 */
 	@Override
 	public ModelWrapper openFile(File file) {
-		List<AbstractCircuitGate> components = new ArrayList<AbstractCircuitGate>();
+
+		ModelWrapper model = new ModelWrapper(file);
+		List<IAbstractCircuitGate> components = readFile(file);
+
+		for (IAbstractCircuitGate component : components) {
+			model.addComponent(component, component.getPosition());
+		}
+
+		return model;
+
+	}
+
+	@Override
+	public List<IAbstractCircuitGate> importFile(File file) {
+		return readFile(file);
+	}
+
+	private List<IAbstractCircuitGate> readFile(File file) {
+
+		List<IAbstractCircuitGate> components = new ArrayList<IAbstractCircuitGate>();
 
 		try {
 			Scanner sc = new Scanner(file);
-			ModelWrapper model = new ModelWrapper(file);
 			// Create gates
 			while (sc.hasNext()) {
 				if (sc.hasNext("ADD")) {
@@ -89,11 +107,12 @@ public final class FileManager implements IFileManager {
 				} else if (sc.hasNext("CNCT")) {
 					sc.next();
 
-					AbstractCircuitGate toCpt = components.get(sc.nextInt());
+					IAbstractCircuitGate toCpt = components.get(sc.nextInt());
 					int inputNo = sc.nextInt();
 					int fromCptNo = sc.nextInt();
 					if (fromCptNo >= 0) {
-						AbstractCircuitGate fromCpt = components.get(fromCptNo);
+						IAbstractCircuitGate fromCpt = components
+								.get(fromCptNo);
 						int output = sc.nextInt();
 						toCpt.connectInput(inputNo, fromCpt, output);
 
@@ -104,11 +123,8 @@ public final class FileManager implements IFileManager {
 					sc.nextLine();
 				}
 			}
-			for (AbstractCircuitGate component : components) {
-				model.addComponent(component, component.getPosition());
-			}
 
-			return model;
+			return components;
 
 		} catch (FileNotFoundException e) {
 			System.out.println("Specified file does not exist");

@@ -4,8 +4,6 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Collection;
-import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.Timer;
@@ -44,13 +42,13 @@ public final class MasterController implements IMasterController {
 		} else {
 			modelManager = mm;
 			fileManager = new FileManager();
-			clockTimer = new Timer(500, new ActionListener(){
+			clockTimer = new Timer(500, new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					modelManager.clockActiveModel();
 				}
-				
+
 			});
 		}
 	}
@@ -79,7 +77,8 @@ public final class MasterController implements IMasterController {
 	public void openWorkspace() {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			IModelWrapper workspace = fileManager.openFile(fc.getSelectedFile());
+			IModelWrapper workspace = fileManager
+					.openFile(fc.getSelectedFile());
 			workspace.setChangedFalse();
 			modelManager.addWorkspace(workspace);
 		}
@@ -87,7 +86,7 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void saveActiveWorkspace(boolean saveAs) {
-		if(saveAs){
+		if (saveAs) {
 			_saveWorkspaceAs(modelManager.getActiveWorkspaceModel());
 		} else {
 			_saveWorkspace(modelManager.getActiveWorkspaceModel());
@@ -96,27 +95,25 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void saveAllWorkspaces() {
-		for(IModelWrapper imw : modelManager.getWorkspaces()){
+		for (IModelWrapper imw : modelManager.getWorkspaces()) {
 			_saveWorkspace(imw);
 		}
 	}
-	
-	private void _saveWorkspace(IModelWrapper imw){
-		if(imw.getFile() != null){
-			fileManager.saveFile(imw.getComponents(),
-					imw.getFile());
+
+	private void _saveWorkspace(IModelWrapper imw) {
+		if (imw.getFile() != null) {
+			fileManager.saveFile(imw.getComponents(), imw.getFile());
 			imw.setChangedFalse();
 			modelManager.manualPropertyChanged();
 		} else {
 			_saveWorkspaceAs(imw);
 		}
 	}
-	
-	private void _saveWorkspaceAs(IModelWrapper imw){
+
+	private void _saveWorkspaceAs(IModelWrapper imw) {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-			fileManager.saveFile(imw.getComponents(),
-					fc.getSelectedFile());
+			fileManager.saveFile(imw.getComponents(), fc.getSelectedFile());
 			imw.setFile(fc.getSelectedFile());
 			imw.setChangedFalse();
 			modelManager.manualPropertyChanged();
@@ -175,13 +172,11 @@ public final class MasterController implements IMasterController {
 	public void pasteSelectedComponents() {
 		modelManager.addComponents(clipboardManager.paste());
 	}
-	
 
 	@Override
 	public void pasteSelectedComponents(Point position) {
 		modelManager.addComponents(clipboardManager.paste(), position);
 	}
-
 
 	@Override
 	public void setChosenComponent(IAbstractCircuitGate g) {
@@ -202,21 +197,28 @@ public final class MasterController implements IMasterController {
 			connectComponent = g;
 			connectPort = port;
 		} else {
-			modelManager.connectComponents(connectComponent, g, connectPort, port);
+			modelManager.connectComponents(connectComponent, g, connectPort,
+					port);
 			connectComponent = null;
 		}
 	}
-	
+
 	@Override
 	public void toggleClockTimer() {
-		if(clockTimer.isRunning()){
+		if (clockTimer.isRunning()) {
 			clockTimer.stop();
-		} else{
+		} else {
 			clockTimer.start();
 		}
 	}
-	
+
 	private void _copySelectedComponents() {
-		clipboardManager.copy(modelManager.getActiveSelectionModel().getSelectedComponents());
+		clipboardManager.copy(modelManager.getActiveSelectionModel()
+				.getSelectedComponents());
+	}
+
+	@Override
+	public void importWorkspace(File file) {
+		modelManager.addComponents(fileManager.importFile(file));
 	}
 }

@@ -2,9 +2,9 @@ package edu.chl.tda367.booleancircuits.io;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.model.implementation.Model;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 
 public interface IFileManager {
@@ -26,4 +26,13 @@ public interface IFileManager {
 	 *            txt. file representing a previously saved model
 	 */
 	public ModelWrapper openFile(File file);
+
+	/**
+	 * Imports all the components in one workspace into another active
+	 * workspace.
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public List<IAbstractCircuitGate> importFile(File file);
 }
