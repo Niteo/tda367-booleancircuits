@@ -67,6 +67,7 @@ public final class Palette implements IPalette {
 		};
 
 		componentTree.addTreeSelectionListener(tsl);
+		componentTree.expandRow(0);
 		
 		componentTree.getInputMap().put(
 				KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK),
