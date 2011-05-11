@@ -2,6 +2,7 @@ package edu.chl.tda367.booleancircuits.utilities.implementation;
 
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
@@ -120,7 +121,7 @@ public final class GateFactory {
 		} else if (name.equals("0")) {
 			return new ConstantGate(false);
 		} else if (name.equals("CLOCK")) {
-			return new ConstantGate(false);
+			return new Clock();
 		} else {
 			System.out.println("Not a component!");
 			return null;
