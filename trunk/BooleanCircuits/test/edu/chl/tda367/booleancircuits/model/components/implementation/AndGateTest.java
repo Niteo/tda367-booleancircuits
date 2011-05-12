@@ -59,6 +59,25 @@ public class AndGateTest {
 		and.createIO(1, 1);
 		assertTrue(and.getNoOfInputs() == 1 && and.getNoOfOutputs() == 1);
 	}
+	
+	@Test
+	public void testGetRecoupledTo() {
+		AndGate and = new AndGate(2);
+		AndGate testGate = new AndGate(2);
+		assertTrue(and.getRecoupledTo().size()==0);
+		
+		and.connectInput(0, testGate, 0);
+		testGate.connectInput(1, and, 1);
+		assertTrue(and.getRecoupledTo().size()==1);
+	}
+	
+	public void testEmptyGateClone(){
+		AndGate and = new AndGate(2);
+		IAbstractCircuitGate testGate = and.emptyGateClone();
+		
+		assertTrue(testGate instanceof AndGate);
+		assertTrue(testGate.getNoOfInputs()==and.getNoOfInputs());
+	}
 
 	@Test
 	public void testOverwriteGate() {
@@ -85,6 +104,14 @@ public class AndGateTest {
 		and.connectInput(0, test, 0);
 
 		assertEquals(test, and.getInputs().get(0).getInputComponent());
+	}
+	
+	@Test
+	public void testConnectsTo(){
+		AndGate and = new AndGate(2);
+		AndGate testGate = new AndGate(2);
+		and.connectInput(0, testGate, 0);
+		assertTrue(and.connectsTo(testGate));
 	}
 
 	@Test
