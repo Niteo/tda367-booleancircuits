@@ -42,14 +42,15 @@ public final class MasterController implements IMasterController {
 		} else {
 			modelManager = mm;
 			fileManager = new FileManager();
-			clockTimer = new Timer(Constants.clockFrequency, new ActionListener() {
+			clockTimer = new Timer(Constants.clockFrequency,
+					new ActionListener() {
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					modelManager.clockActiveModel();
-				}
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							modelManager.clockActiveModel();
+						}
 
-			});
+					});
 		}
 	}
 
@@ -176,6 +177,8 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void pasteSelectedComponents(Point position) {
 		modelManager.addComponents(clipboardManager.paste(), position);
+		modelManager.getActiveSelectionModel().selectComponents(
+				clipboardManager.getLastPastedComponents());
 	}
 
 	@Override
