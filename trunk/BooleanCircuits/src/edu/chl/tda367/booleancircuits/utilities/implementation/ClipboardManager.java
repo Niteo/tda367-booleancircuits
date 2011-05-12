@@ -13,6 +13,7 @@ public class ClipboardManager implements IClipboardManager {
 
 	private List<IAbstractCircuitGate> clipboardList;
 	private Map<IAbstractCircuitGate, IAbstractCircuitGate> componentsMap = new HashMap<IAbstractCircuitGate, IAbstractCircuitGate>();
+	private List<IAbstractCircuitGate> lastPastedComponents;
 
 	@Override
 	public void copy(List<IAbstractCircuitGate> originalList) {
@@ -21,6 +22,7 @@ public class ClipboardManager implements IClipboardManager {
 
 	@Override
 	public List<IAbstractCircuitGate> paste() {
+
 		return duplicateList(clipboardList);
 	}
 
@@ -46,6 +48,13 @@ public class ClipboardManager implements IClipboardManager {
 			}
 			dupList.add(componentsMap.get(gate));
 		}
+		lastPastedComponents = dupList;
 		return dupList;
+	}
+
+	@Override
+	public List<IAbstractCircuitGate> getLastPastedComponents() {
+
+		return lastPastedComponents;
 	}
 }
