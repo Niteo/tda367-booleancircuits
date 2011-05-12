@@ -6,7 +6,6 @@ import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
  * A class that manages what components are selected.
@@ -24,6 +23,7 @@ public final class SelectionModel implements ISelectionModel {
 
 	@Override
 	public void selectComponents(Collection<IAbstractCircuitGate> c) {
+		selectedComponentList.clear();
 		for (IAbstractCircuitGate gate : c) {
 			selectedComponentList.add(gate);
 		}
@@ -32,8 +32,8 @@ public final class SelectionModel implements ISelectionModel {
 
 	@Override
 	public void selectComponent(IAbstractCircuitGate g, boolean multiSelect) {
-		if(multiSelect){
-			if(_isSelected(g)){
+		if (multiSelect) {
+			if (_isSelected(g)) {
 				selectedComponentList.remove(g);
 			} else {
 				selectedComponentList.add(g);
@@ -49,8 +49,8 @@ public final class SelectionModel implements ISelectionModel {
 	public boolean isSelectedComponent(IAbstractCircuitGate g) {
 		return _isSelected(g);
 	}
-	
-	private boolean _isSelected(IAbstractCircuitGate g){
+
+	private boolean _isSelected(IAbstractCircuitGate g) {
 		if (selectedComponentList.contains(g)) {
 			return true;
 		} else {
@@ -67,8 +67,8 @@ public final class SelectionModel implements ISelectionModel {
 	public List<IAbstractCircuitGate> getSelectedComponents() {
 		return selectedComponentList;
 	}
-	
-	private void _removeUnusedElements(){
+
+	private void _removeUnusedElements() {
 		selectedComponentList.remove(null);
 	}
 
