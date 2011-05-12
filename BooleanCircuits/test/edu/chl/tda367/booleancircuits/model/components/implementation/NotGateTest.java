@@ -9,7 +9,7 @@ public class NotGateTest {
 	@Test
 	public void testNotGate() {
 		NotGate not = new NotGate();
-		assertTrue(not != null && not.getNoOfInputs() == 1);
+	
 	}
 
 	@Test
