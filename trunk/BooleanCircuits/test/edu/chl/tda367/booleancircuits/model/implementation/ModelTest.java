@@ -14,7 +14,7 @@ public class ModelTest {
 	public void testModel() {
 
 		Model model = new Model();
-		assertTrue(model != null);
+
 	}
 
 	@Test
@@ -36,18 +36,20 @@ public class ModelTest {
 
 		Model model = new Model();
 
+		assertTrue(model.getComponents() != null);
+		assertTrue(model.getComponents().size() == 0);
+
 		model.addComponent(and, new Point(10, 10));
+		assertTrue(model.getComponents().size() == 1);
+		assertTrue(model.getComponents().contains(and));
+
 		model.addComponent(not, new Point(14, 14));
 		model.addComponent(nand, new Point(20, 20));
 
-		if (model.getComponents() != null) {
-			model.getComponents().contains(new AndGate(2));
-			model.getComponents().contains(new NotGate());
-			model.getComponents().contains(new NandGate(2));
-		} else {
-			fail("get no components");
-		}
-
+		assertTrue(model.getComponents().size() == 3);
+		
+		assertTrue(model.getComponents().contains(not));
+		assertTrue(model.getComponents().contains(nand));
 	}
 
 	@Test
@@ -63,9 +65,7 @@ public class ModelTest {
 		assertTrue(model.getComponent(new Point(10, 10)).equals(and)
 				&& model.getComponent(new Point(10, 10)).equals(not)
 				&& model.getComponent(new Point(10, 10)).equals(nand));
-	
+
 	}
-
-
 
 }

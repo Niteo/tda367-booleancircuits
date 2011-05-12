@@ -9,8 +9,6 @@ public class ConstantGateTest {
 	public void testConstantGate() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
 		ConstantGate trueConstantGate = new ConstantGate(true);
-		
-		assertTrue(falseConstantGate!=null && trueConstantGate!=null);
 	}
 
 	@Test
