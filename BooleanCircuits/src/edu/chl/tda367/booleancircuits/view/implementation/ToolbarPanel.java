@@ -151,11 +151,11 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 		
 		add(new JSeparator());
 
-		pauseClockButton.setPreferredSize(new java.awt.Dimension(20, 20));
-		add(pauseClockButton);
-
 		startClockButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(startClockButton);
+		
+		pauseClockButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		add(pauseClockButton);
 	}// </editor-fold>
 		// GEN-END:initComponents
 
