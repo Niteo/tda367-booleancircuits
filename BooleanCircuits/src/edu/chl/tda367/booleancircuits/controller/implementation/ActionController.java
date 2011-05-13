@@ -5,12 +5,16 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import edu.chl.tda367.booleancircuits.controller.IActionController;
+import edu.chl.tda367.booleancircuits.view.implementation.AboutBox;
 
 /**
  * A class to control action events.
@@ -31,7 +35,7 @@ public class ActionController implements ChangeListener, IActionController {
 		mc = masterController;
 	}
 
-	private Action saveAsAction = new AbstractAction() {
+	private final Action saveAsAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -39,8 +43,8 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 
 	};
-	
-	private Action newWorkspaceAction = new AbstractAction() {
+
+	private final Action newWorkspaceAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -49,7 +53,7 @@ public class ActionController implements ChangeListener, IActionController {
 
 	};
 
-	private Action closeActiveWorkspaceAction = new AbstractAction() {
+	private final Action closeActiveWorkspaceAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -57,7 +61,7 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private Action closeAllWorkspacesAction = new AbstractAction() {
+	private final Action closeAllWorkspacesAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -65,14 +69,14 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private Action openWorkspaceAction = new AbstractAction() {
+	private final Action openWorkspaceAction = new AbstractAction() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.openWorkspace();
 		}
 	};
 
-	private Action saveActiveWorkspaceAction = new AbstractAction() {
+	private final Action saveActiveWorkspaceAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -80,7 +84,7 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private Action saveAllWorkspacesAction = new AbstractAction() {
+	private final Action saveAllWorkspacesAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -88,7 +92,7 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private Action copySelectedComponentsAction = new AbstractAction() {
+	private final Action copySelectedComponentsAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -96,7 +100,7 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private Action cutSelectedComponentsAction = new AbstractAction() {
+	private final Action cutSelectedComponentsAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -104,7 +108,7 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private Action pasteSelectedComponentAction = new AbstractAction() {
+	private final Action pasteSelectedComponentAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -112,7 +116,7 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private Action undoAction = new AbstractAction() {
+	private final Action undoAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -120,7 +124,7 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private Action redoAction = new AbstractAction() {
+	private final Action redoAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -128,7 +132,7 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private Action exitAction = new AbstractAction() {
+	private final Action exitAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -136,16 +140,7 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private Action insertComponentAction = new AbstractAction() {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO implement me!
-
-		}
-	};
-
-	private Action removeSelectedComponentsAction = new AbstractAction() {
+	private final Action removeSelectedComponentsAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -153,15 +148,15 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private Action selectAllComponentsAction = new AbstractAction() {
+	private final Action selectAllComponentsAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.selectAllComponents();
 		}
 	};
-	
-	private final Action pauseClockAction = new AbstractAction(){
+
+	private final Action pauseClockAction = new AbstractAction() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -169,11 +164,11 @@ public class ActionController implements ChangeListener, IActionController {
 			startClockAction.setEnabled(true);
 			mc.toggleClockTimer();
 		}
-		
+
 	};
-	
+
 	private final Action startClockAction = new AbstractAction() {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			pauseClockAction.setEnabled(true);
@@ -181,12 +176,31 @@ public class ActionController implements ChangeListener, IActionController {
 			mc.toggleClockTimer();
 		}
 	};
-	
-	private final Action importWorkspace = new AbstractAction() {
-		
+
+	private final Action importWorkspaceAction = new AbstractAction() {
+
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			mc.importWorkspace();
+		}
+	};
+
+	private final Action showAboutBoxAction = new AbstractAction() {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			String infoText = "<html>Boolean Circuits<br><br>Version: 1.0 <br><br>This software is developed by Robert Kaufmann, Anton Lin, Boel Nelson and Jennifer Panditha at Chalmers university of technology.</html>";
+			Icon logo = new ImageIcon("resources/icons/cross-icon.png");
+			new AboutBox(infoText, logo);
+		}
+	};
+
+	private final Action showHelpAction = new AbstractAction() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+
 		}
 	};
 
@@ -251,11 +265,6 @@ public class ActionController implements ChangeListener, IActionController {
 	}
 
 	@Override
-	public Action getInsertComponentAction() {
-		return insertComponentAction;
-	}
-
-	@Override
 	public Action getRemoveSelectedComponentsAction() {
 		return removeSelectedComponentsAction;
 	}
@@ -264,8 +273,6 @@ public class ActionController implements ChangeListener, IActionController {
 	public Action getSelectAllComponentsAction() {
 		return selectAllComponentsAction;
 	}
-	
-	
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
@@ -297,7 +304,17 @@ public class ActionController implements ChangeListener, IActionController {
 
 	@Override
 	public Action getImportWorkspaceAction() {
-		return importWorkspace;
+		return importWorkspaceAction;
+	}
+
+	@Override
+	public Action getShowAboutBoxAction() {
+		return showAboutBoxAction;
+	}
+
+	@Override
+	public Action getShowHelpAction() {
+		return showHelpAction;
 	}
 
 }
