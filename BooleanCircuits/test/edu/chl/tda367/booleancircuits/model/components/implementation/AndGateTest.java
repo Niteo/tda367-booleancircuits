@@ -52,13 +52,6 @@ public class AndGateTest {
 		and.setOutput(0, true);
 		assertEquals(true, and.getOutputValue(0));
 	}
-
-	@Test
-	public void testCreateIO() {
-		AndGate and = new AndGate(2);
-		and.createIO(1, 1);
-		assertTrue(and.getNoOfInputs() == 1 && and.getNoOfOutputs() == 1);
-	}
 	
 	@Test
 	public void testGetRecoupledTo() {
@@ -82,18 +75,16 @@ public class AndGateTest {
 	@Test
 	public void testOverwriteGate() {
 		AndGate and = new AndGate(1);
-		and.createIO(1, 1);
 		and.setOutput(0, true);
 
 		AndGate test = new AndGate(2);
-		test.createIO(2, 2);
 		test.setOutput(0, false);
 
 		and.overwriteGate(test);
 
 		assertTrue(and.getInputs().equals(test.getInputs())
-				&& and.getOutputValue(0) == test.getOutputValue(0)
-				&& and.getNoOfInputs() == 2 && and.getNoOfOutputs() == 2);
+				&& and.getOutputValue(0) == test.getOutputValue(0));
+	
 	}
 
 	@Test
