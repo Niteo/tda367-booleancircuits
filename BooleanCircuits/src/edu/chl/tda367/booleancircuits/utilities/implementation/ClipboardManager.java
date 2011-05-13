@@ -9,6 +9,13 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 
+/**
+ * handles copying and pasting components
+ * 
+ * @author antonlin
+ * 
+ */
+
 public class ClipboardManager implements IClipboardManager {
 
 	private List<ICircuitGate> clipboardList;

@@ -3,8 +3,13 @@ package edu.chl.tda367.booleancircuits.io;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
+/**
+ * this interface describes a folder containing components
+ * 
+ * @author antonlin
+ * 
+ */
 public interface IComponentFolder {
 
 	/**
