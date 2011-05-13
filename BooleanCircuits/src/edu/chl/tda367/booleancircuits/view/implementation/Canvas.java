@@ -49,8 +49,9 @@ public class Canvas {
 	private boolean connectingInput;
 	private boolean connectingOutput;
 	private boolean draggingMode;
-	private MasterController mc;
+	private MasterController _masterController;
 	private CanvasPopup menu;
+	private Point drawSelect;
 	private ActionListener listener = new ActionListener() {
 
 		@Override
@@ -58,23 +59,32 @@ public class Canvas {
 			JMenuItem menuItem = (JMenuItem) e.getSource();
 
 			if (menu.isRemoveButton(menuItem)) {
-				mc.removeComponent(rightClickedGate);
-			} else if(menu.isInputItem(menuItem)){
-				mc.connectComponent(rightClickedGate, menu.getInputIndex(menuItem));
-				if(connectingOutput) {
-					mc.connectComponent(connectBufferGate, connectBufferPort);
+				_masterController.removeComponent(rightClickedGate);
+			} else if (menu.isInputItem(menuItem)) {
+				_masterController.connectComponent(rightClickedGate,
+						menu.getInputIndex(menuItem));
+				if (connectingOutput) {
+					_masterController.connectComponent(connectBufferGate,
+							connectBufferPort);
 					resetConnecting();
 				} else {
 					connectingInput = true;
 				}
-			} else if(menu.isOutputItem(menuItem)){
-				if(connectingInput) {
-					mc.connectComponent(rightClickedGate, menu.getInputIndex(menuItem));
+			} else if (menu.isOutputItem(menuItem)) {
+				if (connectingInput) {
+					_masterController.connectComponent(rightClickedGate,
+							menu.getInputIndex(menuItem));
 					resetConnecting();
 				} else {
 					connectingOutput = true;
 					connectBufferGate = rightClickedGate;
 				}
+			} else if (menu.isCopyButton(menuItem)) {
+				selectModel.selectComponent(rightClickedGate, false);
+				_masterController.copySelectedComponents();
+			} else if (menu.isCutButton(menuItem)) {
+				selectModel.selectComponent(rightClickedGate, false);
+				_masterController.cutSelectedComponents();
 			}
 		}
 
@@ -87,6 +97,7 @@ public class Canvas {
 			Graphics2D g2d = (Graphics2D) g;
 			// Draw background
 			drawer.drawBackground(g2d, new Point(posX, posY), panel.getSize());
+			
 			// Draw components
 			if (model != null) {
 				// Draw non-selected
@@ -105,33 +116,64 @@ public class Canvas {
 				}
 			}
 			
+
+			// Draw select
+			if(drawSelect != null){
+				Point mousePos = panel.getMousePosition();
+				if(mousePos != null){
+					g.setColor(new Color(100, 100, 240, 140));
+					g2d.fillRect(drawSelect.x, drawSelect.y,
+							panel.getMousePosition().x - drawSelect.x,
+							panel.getMousePosition().y - drawSelect.y);
+					g.setColor(new Color(20, 20, 240, 180));
+					
+					int []xArray = {drawSelect.x, mousePos.x, mousePos.x, drawSelect.x};
+					int []yArray = {drawSelect.y, drawSelect.y, mousePos.y, mousePos.y};
+					g2d.drawPolygon(xArray, yArray, 4);
+				}
+			}
+
 			// Draw position
 			g2d.setColor(Color.BLACK);
 			g2d.setFont(UIManager.getFont("TabbedPane.font"));
 			g2d.drawString("[" + posX + ", " + posY + "]", 5, 15);
 		}
 	};
-	
-	
 
 	private MouseAdapter mouseAdapter = new MouseInputAdapter() {
 		@Override
 		public void mouseDragged(MouseEvent evt) {
-			if (oldDragPosition != null && !evt.isControlDown()) {
+			Point dragPosition = new Point(evt.getX() + posX, evt.getY() + posY);
+			if (oldDragPosition != null) {
 				int dx = (int) (evt.getPoint().getX() - oldDragPosition.getX());
 				int dy = (int) (evt.getPoint().getY() - oldDragPosition.getY());
-				
-				if(draggingMode){
-					for(ICircuitGate selected : selectModel.getSelectedComponents()){
+
+				if(evt.isControlDown()){
+					if(drawSelect == null){
+						drawSelect = evt.getPoint();
+					}
+					panel.repaint();
+				}
+				else if (draggingMode) {
+					// If not a selected component, select it.
+					ICircuitGate clickedComponent = model
+							.getComponent(dragPosition);
+					if (clickedComponent != null) {
+						if (!selectModel.isSelectedComponent(clickedComponent)) {
+							selectModel
+									.selectComponent(clickedComponent, false);
+						}
+					}
+					// Move all selected components.
+					for (ICircuitGate selected : selectModel
+							.getSelectedComponents()) {
 						selected.move(dx, dy);
 					}
 					panel.repaint();
 				} else {
-					ICircuitGate gate = model.getComponent(new Point(evt.getX() + posX, evt.getY() + posY));
-					if(gate != null){
-						if(selectModel.isSelectedComponent(gate)){
-							draggingMode = true;
-						}
+					ICircuitGate gate = model.getComponent(dragPosition);
+					if (gate != null) {
+						draggingMode = true;
 					} else {
 						panCanvas(-dx, -dy);
 					}
@@ -143,75 +185,26 @@ public class Canvas {
 		@Override
 		public void mouseReleased(MouseEvent evt) {
 			oldDragPosition = null;
+			final Point releasePoint = evt.getPoint();
 			draggingMode = false;
+			if(drawSelect != null){
+				_masterController.selectComponents(
+						new Point(drawSelect.x + posX, drawSelect.y + posY), 
+						new Point(releasePoint.x + posX, releasePoint.y + posY));
+				drawSelect = null;
+				panel.repaint();
+			}
 		}
 
 		@Override
 		public void mouseClicked(MouseEvent evt) {
-			final Point pointClicked = new Point(evt.getX() + posX, evt.getY() + posY);
-
-			if (evt.getButton() == MouseEvent.BUTTON1) { // LeftMouseButton
-				connectingInput = false;
-				connectingOutput = false;
-				mc.connectComponent(null, -1);
-				
-				if (evt.getClickCount() == 1) {
-					mc.selectComponent(pointClicked, evt.isControlDown());
-				} else if (evt.getClickCount() == 2) {
-					if(model.getComponent(pointClicked) == null){
-						mc.addComponent(pointClicked);
-					}
-				}
-			} else if (evt.getButton() == MouseEvent.BUTTON3) { // RightMouseButton
-
-				rightClickedGate = model.getComponent(pointClicked);
-				JPopupMenu jpm = new JPopupMenu();
-
-				if (rightClickedGate == null) {
-					final JMenuItem addItem = new JMenuItem("Add component");
-					final JMenuItem cutItem = new JMenuItem("Cut selected");
-					final JMenuItem copyItem = new JMenuItem("Copy selected");
-					final JMenuItem pasteItem = new JMenuItem("Paste");
-					ActionListener menuListener = new ActionListener(){
-
-						@Override
-						public void actionPerformed(ActionEvent arg0) {
-							if(arg0.getSource() == addItem){
-								mc.addComponent(pointClicked);
-							} else if(arg0.getSource() == cutItem){
-								mc.cutSelectedComponents();
-							} else if(arg0.getSource() == copyItem){
-								mc.copySelectedComponents();
-							} else if(arg0.getSource() == pasteItem){
-								mc.pasteSelectedComponents(pointClicked);
-							}
-						}
-						
-					};
-					addItem.addActionListener(menuListener);
-					cutItem.addActionListener(menuListener);
-					copyItem.addActionListener(menuListener);
-					pasteItem.addActionListener(menuListener);
-					jpm.add(addItem);
-					jpm.add(copyItem);
-					jpm.add(cutItem);
-					jpm.add(pasteItem);
-				} else {
-					jpm = menu;
-					menu.updateMenu(rightClickedGate.getNoOfInputs(),
-							rightClickedGate.getNoOfOutputs(),
-							!connectingInput, !connectingOutput);
-				}
-
-				jpm.show(evt.getComponent(), (int) evt.getPoint().getX(),
-						(int) evt.getPoint().getY());
-			}
+			mouseClickedActions(evt);
 		}
 	};
 
 	public Canvas(IModel canvasModel, ISelectionModel selectionModel,
 			MasterController masterController) {
-		mc = masterController;
+		_masterController = masterController;
 		posX = 0;
 		posY = 0;
 		model = canvasModel;
@@ -256,10 +249,72 @@ public class Canvas {
 		posY += dy;
 		panel.repaint();
 	}
-	
-	private void resetConnecting(){
+
+	private void resetConnecting() {
 		connectBufferGate = null;
 		connectingInput = false;
 		connectingOutput = false;
+		_masterController.connectComponent(null, -1);
+	}
+
+	private void mouseClickedActions(MouseEvent evt) {
+		final Point pointClicked = new Point(evt.getX() + posX, evt.getY()
+				+ posY);
+		if (evt.getButton() == MouseEvent.BUTTON1) { // LeftMouseButton
+			resetConnecting();
+
+			if (evt.getClickCount() == 1) {
+				_masterController.selectComponent(pointClicked,
+						evt.isControlDown());
+			} else if (evt.getClickCount() == 2) {
+				if (model.getComponent(pointClicked) == null) {
+					_masterController.addComponent(pointClicked);
+				}
+			}
+		} else if (evt.getButton() == MouseEvent.BUTTON3) { // RightMouseButton
+
+			rightClickedGate = model.getComponent(pointClicked);
+			JPopupMenu jpm = new JPopupMenu();
+
+			if (rightClickedGate == null) {
+				final JMenuItem addItem = new JMenuItem("Add component");
+				final JMenuItem copyItem = new JMenuItem("Copy selected");
+				final JMenuItem cutItem = new JMenuItem("Cut selected");
+				final JMenuItem pasteItem = new JMenuItem("Paste");
+				ActionListener menuListener = new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						if (arg0.getSource() == addItem) {
+							_masterController.addComponent(pointClicked);
+						} else if (arg0.getSource() == cutItem) {
+							_masterController.cutSelectedComponents();
+						} else if (arg0.getSource() == copyItem) {
+							_masterController.copySelectedComponents();
+						} else if (arg0.getSource() == pasteItem) {
+							_masterController
+									.pasteSelectedComponents(pointClicked);
+						}
+					}
+
+				};
+				addItem.addActionListener(menuListener);
+				cutItem.addActionListener(menuListener);
+				copyItem.addActionListener(menuListener);
+				pasteItem.addActionListener(menuListener);
+				jpm.add(addItem);
+				jpm.addSeparator();
+				jpm.add(copyItem);
+				jpm.add(cutItem);
+				jpm.add(pasteItem);
+			} else {
+				jpm = menu;
+				menu.updateMenu(rightClickedGate.getNoOfInputs(),
+						rightClickedGate.getNoOfOutputs(), !connectingInput,
+						!connectingOutput);
+			}
+
+			jpm.show(evt.getComponent(), (int) evt.getPoint().getX(), (int) evt
+					.getPoint().getY());
+		}
 	}
 }

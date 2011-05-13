@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 /**
  * Popup menu for canvas
@@ -14,6 +16,8 @@ import javax.swing.JPopupMenu;
  */
 public final class CanvasPopup extends JPopupMenu {
 	private JMenuItem remove = new JMenuItem("Remove gate");
+	private JMenuItem copy = new JMenuItem("Copy gate");
+	private JMenuItem cut = new JMenuItem("Cut gate");
 	private JMenu inputMenu = new JMenu();
 	private JMenu outputMenu = new JMenu();
 	private ActionListener listener;
@@ -24,14 +28,20 @@ public final class CanvasPopup extends JPopupMenu {
 	 * @param l
 	 *            ActionListener
 	 */
-	public CanvasPopup(ActionListener l) {
+	public CanvasPopup(ActionListener listener) {
 		super();
-		listener = l;
-
+		
+		this.listener = listener;
 		remove.addActionListener(listener);
+		copy.addActionListener(listener);
+		cut.addActionListener(listener);
 
-		add(inputMenu);
 		add(outputMenu);
+		add(inputMenu);
+		addSeparator();
+		add(copy);
+		add(cut);
+		addSeparator();
 		add(remove);
 	}
 
@@ -106,6 +116,28 @@ public final class CanvasPopup extends JPopupMenu {
 	 */
 	public boolean isRemoveButton(JMenuItem item) {
 		return remove == item;
+	}
+	
+	/**
+	 * Returns true if the JMenuItem is a copy button.
+	 * 
+	 * @param item
+	 *            JMenuItem
+	 * @return boolean
+	 */
+	public boolean isCopyButton(JMenuItem item) {
+		return copy == item;
+	}
+	
+	/**
+	 * Returns true if the JMenuItem is a remove button.
+	 * 
+	 * @param item
+	 *            JMenuItem
+	 * @return boolean
+	 */
+	public boolean isCutButton(JMenuItem item) {
+		return cut == item;
 	}
 
 	/**
