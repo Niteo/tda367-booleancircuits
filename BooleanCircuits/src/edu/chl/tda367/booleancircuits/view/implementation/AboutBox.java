@@ -1,6 +1,7 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +20,6 @@ public class AboutBox extends JDialog{
 		public void actionPerformed(ActionEvent e) {
 			dispose();
 		}
-		
 	};
 	
 	/**
@@ -31,7 +31,7 @@ public class AboutBox extends JDialog{
 		setAlwaysOnTop(true);
 		setVisible(true);
 		setTitle("About");
-		setSize(new Dimension(400, 200));
+		setSize(new Dimension(600, 400));
 		setResizable(false);
 		setInfoText(s);
 		setPic(i);
@@ -40,20 +40,19 @@ public class AboutBox extends JDialog{
 		okButton.addActionListener(listener);
 		
 		add(horizontalPane);
-		horizontalPane.setDividerLocation(100);
+		horizontalPane.setDividerLocation(150);
 		horizontalPane.setRightComponent(verticalPane);
 		horizontalPane.setLeftComponent(picLabel);
 		horizontalPane.setEnabled(false);
 		horizontalPane.setDividerSize(0);
 		
-		verticalPane.setDividerLocation(140);
+		verticalPane.setDividerLocation(340);
 		verticalPane.setTopComponent(infoLabel);
 		verticalPane.setBottomComponent(okButton);
 		verticalPane.setEnabled(false);
 		verticalPane.setDividerSize(0);
 		
 		setModal(true);
-		
 	}
 	
 	private void setInfoText(String info){
@@ -63,5 +62,4 @@ public class AboutBox extends JDialog{
 	private void setPic(Icon i){
 		picLabel.setIcon(i);
 	}
-
 }

@@ -56,7 +56,7 @@ public class Draw implements IDraw {
 		} else if (gate instanceof Clock){
 			drawClock(gate, g, offset);
 		}
-
+		
 		for (int i = 0; i < gate.getNoOfOutputs(); i++) {
 			if (gate.getOutputValue(i)) {
 				g.setColor(Constants.connectionHigh);
@@ -70,9 +70,15 @@ public class Draw implements IDraw {
 					/ 2
 					+ (Constants.componentSize / (gate.getNoOfOutputs() * 2))
 					* (i + gate.getNoOfOutputs());
-			g.drawLine(x, y, x + 10, y);
+			g.fillRect(x-3, y-3, 3, 6);
 		}
 
+		g.setColor(color);
+	}
+	
+	@Override
+	public void drawGateConnections(Graphics2D g, ICircuitGate gate, Point offset){
+		g.setColor(color);
 		int nInputs = gate.getInputs().size();
 		int loopCount = 0;
 		for (IGateInput i : gate.getInputs()) {
@@ -104,7 +110,6 @@ public class Draw implements IDraw {
 			}
 			loopCount++;
 		}
-
 		g.setColor(color);
 	}
 	

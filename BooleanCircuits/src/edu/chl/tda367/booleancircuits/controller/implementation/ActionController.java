@@ -16,6 +16,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import edu.chl.tda367.booleancircuits.controller.IActionController;
+import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 import edu.chl.tda367.booleancircuits.view.implementation.AboutBox;
 
 /**
@@ -191,9 +192,8 @@ public class ActionController implements ChangeListener, IActionController {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			String infoText = "<html>Boolean Circuits<br><br>Version: 1.0 <br><br>This software is developed by Robert Kaufmann, Anton Lin, Boel Nelson and Jennifer Panditha at Chalmers university of technology.</html>";
 			Icon logo = new ImageIcon("resources/icons/cross-icon.png");
-			new AboutBox(infoText, logo);
+			new AboutBox(Constants.creditsText, logo);
 		}
 	};
 
@@ -202,9 +202,11 @@ public class ActionController implements ChangeListener, IActionController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				Runtime.getRuntime().exec("manual.pdf");
+				// TODO: WONT WORK PLEASE FIX :)
+				Runtime.getRuntime().exec("E:/manual.pdf");
 			} catch (IOException e1) {
 				JOptionPane.showMessageDialog(null, "Couldn't find the file manual.pdf!");
+				System.out.println(e1.getMessage());
 			}
 		}
 	};

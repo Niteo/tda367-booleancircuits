@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collections;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -36,7 +37,6 @@ public class Canvas {
 	private ISelectionModel selectModel;
 	private ICircuitGate rightClickedGate = null;
 	private ICircuitGate connectBufferGate = null;
-	private ICircuitGate dragClickComponent = null;
 	private int connectBufferPort = 0;
 	private int posX, posY;
 	private Point oldDragPosition;
@@ -81,7 +81,6 @@ public class Canvas {
 				_masterController.cutSelectedComponents();
 			}
 		}
-
 	};
 
 	private JPanel panel = new JPanel() {
@@ -107,6 +106,10 @@ public class Canvas {
 					if (selectModel.isSelectedComponent(circuitGate)) {
 						drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
 					}
+				}
+				// Draw connections
+				for (ICircuitGate circuitGate : model.getComponents()) {
+						drawer.drawGateConnections(g2d, circuitGate, new Point(posX, posY));
 				}
 			}
 
@@ -147,43 +150,32 @@ public class Canvas {
 					if (drawSelect == null) {
 						drawSelect = evt.getPoint();
 					}
-					panel.repaint();
 				} else if (draggingMode) {
-					if (dragClickComponent == null) {
-						ICircuitGate clickedComponent = model
-								.getComponent(dragPosition);
-						
-						if(clickedComponent != null){
-							if(!selectModel.isSelectedComponent(clickedComponent)){
-								selectModel.selectComponent(clickedComponent, false);
-								dragClickComponent = clickedComponent;
-							}
-						}
-					}
-					
 					// Move all selected components.
 					for (ICircuitGate selected : selectModel
 							.getSelectedComponents()) {
 						selected.move(dx, dy);
 					}
-					panel.repaint();
 				} else {
 					ICircuitGate gate = model.getComponent(dragPosition);
 					if (gate != null) {
 						draggingMode = true;
+						if(!selectModel.isSelectedComponent(gate)){
+							selectModel.selectComponent(gate, false);
+						}
 					} else {
 						panCanvas(-dx, -dy);
 					}
 				}
 			}
 			oldDragPosition = evt.getPoint();
+			panel.repaint();
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent evt) {
-			dragClickComponent = null;
-			oldDragPosition = null;
 			final Point releasePoint = evt.getPoint();
+			oldDragPosition = null;
 			draggingMode = false;
 			if (drawSelect != null) {
 				_masterController.selectComponents(new Point(drawSelect.x
@@ -245,7 +237,6 @@ public class Canvas {
 	private void panCanvas(int dx, int dy) {
 		posX += dx;
 		posY += dy;
-		panel.repaint();
 	}
 
 	private void resetConnecting() {
