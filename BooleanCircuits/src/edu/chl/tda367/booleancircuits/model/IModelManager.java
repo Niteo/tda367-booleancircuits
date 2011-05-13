@@ -110,8 +110,7 @@ public interface IModelManager {
 	 * @param position
 	 *            Point the point the first component should be added to
 	 */
-	public void addComponents(List<ICircuitGate> component,
-			Point position);
+	public void addComponents(List<ICircuitGate> component, Point position);
 
 	/**
 	 * Removes the selected components.
@@ -141,6 +140,15 @@ public interface IModelManager {
 	 *            boolean if false, all selected components will be deselected
 	 */
 	public void selectComponent(Point position, boolean multiSelect);
+
+	/**
+	 * Selects all the components in the square area, defined by two points
+	 * 
+	 * @param positionStart
+	 * @param positionEnd
+	 * @param multiSelect
+	 */
+	public void selectComponents(Point pos1, Point pos2);
 
 	/**
 	 * Determinates if a component is currently selected.

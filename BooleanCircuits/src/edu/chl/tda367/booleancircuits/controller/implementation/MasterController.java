@@ -228,4 +228,10 @@ public final class MasterController implements IMasterController {
 					.getSelectedFile()));
 		}
 	}
+
+	@Override
+	public void selectComponents(Point pos1, Point pos2) {
+		modelManager.selectComponents(pos1, pos2);
+
+	}
 }
