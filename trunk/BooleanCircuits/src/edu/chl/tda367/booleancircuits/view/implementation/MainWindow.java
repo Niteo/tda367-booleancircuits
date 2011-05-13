@@ -11,10 +11,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.*;
 import edu.chl.tda367.booleancircuits.controller.implementation.ActionController;
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
@@ -143,6 +140,10 @@ public final class MainWindow extends javax.swing.JFrame implements
 				.getRemoveSelectedComponentsAction());
 		selectAllMenuItem.setAction(actionController
 				.getSelectAllComponentsAction());
+		
+		// init clock pulse menu
+		startClockMenuItem.setAction(actionController.getStartClockAction());
+		pauseClockMenuItem.setAction(actionController.getPauseClockAction());
 
 		// init representation menu
 		iecStandardRadioButtonMenuItem.addActionListener(listener);
@@ -187,7 +188,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 				actionController.getStartClockAction());
 		toolbar.getUndoButton().setAction(actionController.getUndoAction());
 
-		// Disable unimplemented and clockpulse toggle
+		// Disable unimplemented and clock pulse toggle
 		actionController.getPauseClockAction().setEnabled(false);
 		toolbar.getRedoButton().setEnabled(false);
 		toolbar.getUndoButton().setEnabled(false);
@@ -226,6 +227,10 @@ public final class MainWindow extends javax.swing.JFrame implements
 		pasteMenuItem.setText("Paste");
 		deleteMenuItem.setText("Delete");
 		selectAllMenuItem.setText("Select All");
+		
+		//Clock pulse menu
+		startClockMenuItem.setText("Start");
+		pauseClockMenuItem.setText("Pause");
 
 		// View menu
 		representationMenu.setText("Representation");
@@ -285,51 +290,54 @@ public final class MainWindow extends javax.swing.JFrame implements
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
-		representationButtonGroup = new javax.swing.ButtonGroup();
-		backgroundButtonGroup = new javax.swing.ButtonGroup();
-		verticalSplitPane = new javax.swing.JSplitPane();
-		horizontalSplitPane = new javax.swing.JSplitPane();
-		paletteContainerPanel = new javax.swing.JPanel();
-		menuBar = new javax.swing.JMenuBar();
-		fileMenu = new javax.swing.JMenu();
-		newWorkspaceMenuItem = new javax.swing.JMenuItem();
-		openFileMenuItem = new javax.swing.JMenuItem();
-		fileSeparator1 = new javax.swing.JSeparator();
-		closeMenuItem = new javax.swing.JMenuItem();
-		closeAllMenuItem = new javax.swing.JMenuItem();
-		fileSeparator2 = new javax.swing.JSeparator();
-		saveMenuItem = new javax.swing.JMenuItem();
-		saveAsMenuItem = new javax.swing.JMenuItem();
-		saveAllMenuItem = new javax.swing.JMenuItem();
-		fileSeparator3 = new javax.swing.JSeparator();
-		exitMenuItem = new javax.swing.JMenuItem();
-		editMenu = new javax.swing.JMenu();
-		undoMenuItem = new javax.swing.JMenuItem();
-		redoMenuItem = new javax.swing.JMenuItem();
-		editSeparator1 = new javax.swing.JSeparator();
-		cutMenuItem = new javax.swing.JMenuItem();
-		copyMenuItem = new javax.swing.JMenuItem();
-		pasteMenuItem = new javax.swing.JMenuItem();
-		deleteMenuItem = new javax.swing.JMenuItem();
-		selectAllMenuItem = new javax.swing.JMenuItem();
-		viewMenu = new javax.swing.JMenu();
-		representationMenu = new javax.swing.JMenu();
-		iecStandardRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-		importToWorkspaceMenuItem = new javax.swing.JMenuItem();
-		usStandardRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+		representationButtonGroup = new ButtonGroup();
+		backgroundButtonGroup = new ButtonGroup();
+		verticalSplitPane = new JSplitPane();
+		horizontalSplitPane = new JSplitPane();
+		paletteContainerPanel = new JPanel();
+		menuBar = new JMenuBar();
+		fileMenu = new JMenu();
+		newWorkspaceMenuItem = new JMenuItem();
+		openFileMenuItem = new JMenuItem();
+		fileSeparator1 = new JSeparator();
+		closeMenuItem = new JMenuItem();
+		closeAllMenuItem = new JMenuItem();
+		fileSeparator2 = new JSeparator();
+		saveMenuItem = new JMenuItem();
+		saveAsMenuItem = new JMenuItem();
+		saveAllMenuItem = new JMenuItem();
+		fileSeparator3 = new JSeparator();
+		exitMenuItem = new JMenuItem();
+		editMenu = new JMenu();
+		undoMenuItem = new JMenuItem();
+		redoMenuItem = new JMenuItem();
+		editSeparator1 = new JSeparator();
+		cutMenuItem = new JMenuItem();
+		copyMenuItem = new JMenuItem();
+		pasteMenuItem = new JMenuItem();
+		deleteMenuItem = new JMenuItem();
+		selectAllMenuItem = new JMenuItem();
+		viewMenu = new JMenu();
+		representationMenu = new JMenu();
+		iecStandardRadioButtonMenuItem = new JRadioButtonMenuItem();
+		importToWorkspaceMenuItem = new JMenuItem();
+		usStandardRadioButtonMenuItem = new JRadioButtonMenuItem();
 		backgroundMenu = new javax.swing.JMenu();
-		blankRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-		dotsRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-		gridRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-		helpMenu = new javax.swing.JMenu();
-		helpMenuItem = new javax.swing.JMenuItem();
-		aboutMenuItem = new javax.swing.JMenuItem();
+		blankRadioButtonMenuItem = new JRadioButtonMenuItem();
+		dotsRadioButtonMenuItem = new JRadioButtonMenuItem();
+		gridRadioButtonMenuItem = new JRadioButtonMenuItem();
+		helpMenu = new JMenu();
+		helpMenuItem = new JMenuItem();
+		aboutMenuItem = new JMenuItem();
+		clockpulseMenu = new JMenu();
+		startClockMenuItem = new JMenuItem();
+		pauseClockMenuItem = new JMenuItem();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		verticalSplitPane.setDividerLocation(30);
 		verticalSplitPane.setDividerSize(0);
-		verticalSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+		verticalSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
 		horizontalSplitPane.setDividerLocation(120);
 		horizontalSplitPane.setDividerSize(0);
@@ -380,6 +388,12 @@ public final class MainWindow extends javax.swing.JFrame implements
 		editMenu.add(selectAllMenuItem);
 
 		menuBar.add(editMenu);
+		
+		clockpulseMenu.setText("Clock-signal");
+		menuBar.add(clockpulseMenu);
+		
+		clockpulseMenu.add(startClockMenuItem);
+		clockpulseMenu.add(pauseClockMenuItem);
 
 		viewMenu.setText("View");
 
@@ -435,45 +449,48 @@ public final class MainWindow extends javax.swing.JFrame implements
 
 	// GEN-BEGIN:variables
 	// Variables declaration - do not modify
-	private javax.swing.JMenuItem aboutMenuItem;
-	private javax.swing.ButtonGroup backgroundButtonGroup;
-	private javax.swing.JMenu backgroundMenu;
-	private javax.swing.JRadioButtonMenuItem blankRadioButtonMenuItem;
-	private javax.swing.JMenuItem closeAllMenuItem;
-	private javax.swing.JMenuItem closeMenuItem;
-	private javax.swing.JMenuItem copyMenuItem;
-	private javax.swing.JMenuItem cutMenuItem;
-	private javax.swing.JMenuItem deleteMenuItem;
-	private javax.swing.JRadioButtonMenuItem dotsRadioButtonMenuItem;
-	private javax.swing.JMenu editMenu;
-	private javax.swing.JSeparator editSeparator1;
-	private javax.swing.JMenuItem exitMenuItem;
-	private javax.swing.JMenu fileMenu;
-	private javax.swing.JSeparator fileSeparator1;
-	private javax.swing.JSeparator fileSeparator2;
-	private javax.swing.JSeparator fileSeparator3;
-	private javax.swing.JRadioButtonMenuItem gridRadioButtonMenuItem;
-	private javax.swing.JMenu helpMenu;
-	private javax.swing.JMenuItem helpMenuItem;
-	private javax.swing.JSplitPane horizontalSplitPane;
-	private javax.swing.JRadioButtonMenuItem iecStandardRadioButtonMenuItem;
-	private javax.swing.JMenuItem importToWorkspaceMenuItem;
-	private javax.swing.JMenuBar menuBar;
-	private javax.swing.JMenuItem newWorkspaceMenuItem;
-	private javax.swing.JMenuItem openFileMenuItem;
-	private javax.swing.JPanel paletteContainerPanel;
-	private javax.swing.JMenuItem pasteMenuItem;
-	private javax.swing.JMenuItem redoMenuItem;
-	private javax.swing.ButtonGroup representationButtonGroup;
-	private javax.swing.JMenu representationMenu;
-	private javax.swing.JMenuItem saveAllMenuItem;
-	private javax.swing.JMenuItem saveAsMenuItem;
-	private javax.swing.JMenuItem saveMenuItem;
-	private javax.swing.JMenuItem selectAllMenuItem;
-	private javax.swing.JMenuItem undoMenuItem;
-	private javax.swing.JRadioButtonMenuItem usStandardRadioButtonMenuItem;
-	private javax.swing.JSplitPane verticalSplitPane;
-	private javax.swing.JMenu viewMenu;
+	private JMenuItem aboutMenuItem;
+	private ButtonGroup backgroundButtonGroup;
+	private JMenu backgroundMenu;
+	private JRadioButtonMenuItem blankRadioButtonMenuItem;
+	private JMenu clockpulseMenu;
+	private JMenuItem closeAllMenuItem;
+	private JMenuItem closeMenuItem;
+	private JMenuItem copyMenuItem;
+	private JMenuItem cutMenuItem;
+	private JMenuItem deleteMenuItem;
+	private JRadioButtonMenuItem dotsRadioButtonMenuItem;
+	private JMenu editMenu;
+	private JSeparator editSeparator1;
+	private JMenuItem exitMenuItem;
+	private JMenu fileMenu;
+	private JSeparator fileSeparator1;
+	private JSeparator fileSeparator2;
+	private JSeparator fileSeparator3;
+	private JRadioButtonMenuItem gridRadioButtonMenuItem;
+	private JMenu helpMenu;
+	private JMenuItem helpMenuItem;
+	private JSplitPane horizontalSplitPane;
+	private JRadioButtonMenuItem iecStandardRadioButtonMenuItem;
+	private JMenuItem importToWorkspaceMenuItem;
+	private JMenuBar menuBar;
+	private JMenuItem newWorkspaceMenuItem;
+	private JMenuItem openFileMenuItem;
+	private JPanel paletteContainerPanel;
+	private JMenuItem pasteMenuItem;
+	private JMenuItem pauseClockMenuItem;
+	private JMenuItem redoMenuItem;
+	private ButtonGroup representationButtonGroup;
+	private JMenu representationMenu;
+	private JMenuItem saveAllMenuItem;
+	private JMenuItem saveAsMenuItem;
+	private JMenuItem saveMenuItem;
+	private JMenuItem selectAllMenuItem;
+	private JMenuItem startClockMenuItem;
+	private JMenuItem undoMenuItem;
+	private JRadioButtonMenuItem usStandardRadioButtonMenuItem;
+	private JSplitPane verticalSplitPane;
+	private JMenu viewMenu;
 
 	// End of variables declaration//GEN-END:variables
 
