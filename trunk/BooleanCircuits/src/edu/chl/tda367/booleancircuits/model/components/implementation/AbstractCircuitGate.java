@@ -21,13 +21,13 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	private Point position = new Point();
 
 	public AbstractCircuitGate(int inPorts, int outPorts){
-		createOutputs(inPorts);
-		createInputs(outPorts);	
+		createOutputs(outPorts);
+		createInputs(inPorts);	
 	}
 	
 	private void createOutputs(int amount) {
 		outputs = new Boolean[amount];
-		for (int i = 0; i < outputs.length; i++) {
+		for (int i = 0; i < amount; i++) {
 			outputs[i] = false;
 		}
 	}
