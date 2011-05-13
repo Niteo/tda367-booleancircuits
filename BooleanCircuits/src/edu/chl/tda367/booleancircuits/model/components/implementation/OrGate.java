@@ -19,7 +19,7 @@ public class OrGate extends AbstractCircuitGate {
 	 *            number of inputs of the gate
 	 */
 	public OrGate(int inputs) {
-		super.createIO(inputs, 1);
+		super(inputs, 1);
 	}
 
 	@Override

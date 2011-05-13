@@ -13,7 +13,7 @@ public final class NorGate extends AbstractCircuitGate {
 	 *            the amount of inputs for the gate
 	 */
 	public NorGate(int inputs) {
-		super.createIO(inputs, 1);
+		super(inputs, 1);
 	}
 
 	@Override

@@ -36,6 +36,7 @@ public class Canvas {
 	private ISelectionModel selectModel;
 	private ICircuitGate rightClickedGate = null;
 	private ICircuitGate connectBufferGate = null;
+	private ICircuitGate dragClickComponent = null;
 	private int connectBufferPort = 0;
 	private int posX, posY;
 	private Point oldDragPosition;
@@ -148,15 +149,16 @@ public class Canvas {
 					}
 					panel.repaint();
 				} else if (draggingMode) {
-					// If not a selected component, select it.
-					ICircuitGate clickedComponent = model
-							.getComponent(dragPosition);
-					if (clickedComponent != null) {
-						if (!selectModel.isSelectedComponent(clickedComponent)) {
-							selectModel
-									.selectComponent(clickedComponent, false);
+					if (dragClickComponent == null) {
+						ICircuitGate clickedComponent = model
+								.getComponent(dragPosition);
+						
+						if(clickedComponent != null){
+							dragClickComponent = clickedComponent;
+							selectModel.selectComponent(dragClickComponent, false);
 						}
 					}
+					
 					// Move all selected components.
 					for (ICircuitGate selected : selectModel
 							.getSelectedComponents()) {
@@ -177,6 +179,7 @@ public class Canvas {
 
 		@Override
 		public void mouseReleased(MouseEvent evt) {
+			dragClickComponent = null;
 			oldDragPosition = null;
 			final Point releasePoint = evt.getPoint();
 			draggingMode = false;

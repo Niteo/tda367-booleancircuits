@@ -4,7 +4,7 @@ public class Clock extends AbstractCircuitGate{
 	private boolean constant;
 	
 	public Clock(){
-		super.createIO(0, 1);
+		super(0, 1);
 	}
 	
 	@Override
