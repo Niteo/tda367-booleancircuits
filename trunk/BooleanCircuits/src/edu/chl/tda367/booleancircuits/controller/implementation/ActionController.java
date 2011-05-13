@@ -2,6 +2,7 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -9,6 +10,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -199,8 +201,11 @@ public class ActionController implements ChangeListener, IActionController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-
+			try {
+				Runtime.getRuntime().exec("manual.pdf");
+			} catch (IOException e1) {
+				JOptionPane.showMessageDialog(null, "Couldn't find the file manual.pdf!");
+			}
 		}
 	};
 
