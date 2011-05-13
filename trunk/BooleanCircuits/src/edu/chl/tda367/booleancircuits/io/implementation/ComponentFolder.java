@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.io.IComponentFolder;
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
@@ -25,16 +25,16 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.XorGate;
 
 public class ComponentFolder implements IComponentFolder {
 
-	private List<IAbstractCircuitGate> componentList;
+	private List<ICircuitGate> componentList;
 	private String name;
 
 	public ComponentFolder() {
-		componentList = new ArrayList<IAbstractCircuitGate>();
+		componentList = new ArrayList<ICircuitGate>();
 		name = "Logic Gates";
 		initStandardGates();
 	}
 
-	public ComponentFolder(List<IAbstractCircuitGate> componentList, String name) {
+	public ComponentFolder(List<ICircuitGate> componentList, String name) {
 		this.name = name;
 		this.componentList = componentList;
 	}
@@ -66,7 +66,7 @@ public class ComponentFolder implements IComponentFolder {
 	 * @return
 	 */
 	@Override
-	public List<IAbstractCircuitGate> getAllComponents() {
+	public List<ICircuitGate> getAllComponents() {
 		return componentList;
 	}
 

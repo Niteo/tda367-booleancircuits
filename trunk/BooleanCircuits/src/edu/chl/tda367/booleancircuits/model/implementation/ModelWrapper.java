@@ -6,7 +6,7 @@ import java.util.Collection;
 
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.IModelWrapper;
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 public final class ModelWrapper implements IModelWrapper{
 	
@@ -35,29 +35,29 @@ public final class ModelWrapper implements IModelWrapper{
 	}
 	
 	@Override
-	public void addComponent(IAbstractCircuitGate component, Point position) {
+	public void addComponent(ICircuitGate component, Point position) {
 		model.addComponent(component, position);
 		hasChanged = true;
 	}
 
 	@Override
-	public Collection<IAbstractCircuitGate> getComponents() {
+	public Collection<ICircuitGate> getComponents() {
 		return model.getComponents();
 	}
 
 	@Override
-	public IAbstractCircuitGate getComponent(Point position) {
+	public ICircuitGate getComponent(Point position) {
 		return model.getComponent(position);
 	}
 
 	@Override
-	public void removeComponents(Collection<IAbstractCircuitGate> list) {
+	public void removeComponents(Collection<ICircuitGate> list) {
 		model.removeComponents(list);
 		hasChanged = true;
 	}
 
 	@Override
-	public void removeComponent(IAbstractCircuitGate g) {
+	public void removeComponent(ICircuitGate g) {
 		model.removeComponent(g);	
 		hasChanged = true;
 	}

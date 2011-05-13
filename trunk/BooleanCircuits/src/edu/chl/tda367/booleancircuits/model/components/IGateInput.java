@@ -8,7 +8,7 @@ public interface IGateInput {
 	 * Returns the gate connected to the port.
 	 * @return the connected gate
 	 */
-	public IAbstractCircuitGate getInputComponent();
+	public ICircuitGate getInputComponent();
 	
 	/**
 	 * Returns the port connected to.
@@ -21,7 +21,7 @@ public interface IGateInput {
 	 * @param component the gate to connect
 	 * @param port the port to connect to
 	 */
-	public void setInputComponent(IAbstractCircuitGate component, int port);
+	public void setInputComponent(ICircuitGate component, int port);
 	
 	/**
 	 * Returns the output of the connected component.

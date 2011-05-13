@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 
 public interface IFileManager {
@@ -17,7 +17,7 @@ public interface IFileManager {
 	 * @param name
 	 *            name of the save file
 	 */
-	public void saveFile(Collection<IAbstractCircuitGate> components, File file);
+	public void saveFile(Collection<ICircuitGate> components, File file);
 
 	/**
 	 * Creates a circuit from a previously saved .txt file
@@ -34,5 +34,5 @@ public interface IFileManager {
 	 * @param file
 	 * @return
 	 */
-	public List<IAbstractCircuitGate> importFile(File file);
+	public List<ICircuitGate> importFile(File file);
 }

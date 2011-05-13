@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 public class AndGateTest {
 
@@ -73,7 +73,7 @@ public class AndGateTest {
 	
 	public void testEmptyGateClone(){
 		AndGate and = new AndGate(2);
-		IAbstractCircuitGate testGate = and.emptyGateClone();
+		ICircuitGate testGate = and.emptyGateClone();
 		
 		assertTrue(testGate instanceof AndGate);
 		assertTrue(testGate.getNoOfInputs()==and.getNoOfInputs());
@@ -148,7 +148,7 @@ public class AndGateTest {
 	@Test
 	public void testClone() {
 		AndGate and = new AndGate(2);
-		IAbstractCircuitGate clone = and.clone();
+		ICircuitGate clone = and.clone();
 		assertTrue(clone instanceof AndGate);
 		assertTrue(clone.getPosition().x == and.getPosition().x
 				&& clone.getPosition().y == and.getPosition().y);

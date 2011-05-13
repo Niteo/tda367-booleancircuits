@@ -2,7 +2,7 @@ package edu.chl.tda367.booleancircuits.controller;
 
 import java.awt.Point;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * Controller for ModelManager.
@@ -99,7 +99,7 @@ public interface IMasterController {
 	 * @param g
 	 *            IAbstractCircuitGate
 	 */
-	public void removeComponent(IAbstractCircuitGate g);
+	public void removeComponent(ICircuitGate g);
 
 	/**
 	 * Selects all components in the active workspace.
@@ -148,7 +148,7 @@ public interface IMasterController {
 	 * @param g
 	 *            AbstractCircuitGate
 	 */
-	public void setChosenComponent(IAbstractCircuitGate g);
+	public void setChosenComponent(ICircuitGate g);
 
 	/**
 	 * Connects component with another component. First call specifies input
@@ -159,7 +159,7 @@ public interface IMasterController {
 	 * @param port
 	 *            port to connect
 	 */
-	public void connectComponent(IAbstractCircuitGate g, int port);
+	public void connectComponent(ICircuitGate g, int port);
 
 	/**
 	 * Toggles the clock timer.

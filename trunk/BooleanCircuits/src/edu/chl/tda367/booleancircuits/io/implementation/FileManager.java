@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import edu.chl.tda367.booleancircuits.io.IFileManager;
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
@@ -26,12 +26,12 @@ public final class FileManager implements IFileManager {
 	 * @param name
 	 */
 	@Override
-	public void saveFile(Collection<IAbstractCircuitGate> components, File file) {
+	public void saveFile(Collection<ICircuitGate> components, File file) {
 		try {
 			PrintWriter saveFile = new PrintWriter(file);
-			List<IAbstractCircuitGate> tempList = new ArrayList<IAbstractCircuitGate>();
+			List<ICircuitGate> tempList = new ArrayList<ICircuitGate>();
 			// Print all gates
-			for (IAbstractCircuitGate gate : components) {
+			for (ICircuitGate gate : components) {
 				String txt = "ADD";
 				tempList.add(gate);
 				txt += " " + gate.toString() + " " + gate.getNoOfInputs() + " "
@@ -41,7 +41,7 @@ public final class FileManager implements IFileManager {
 				saveFile.println(txt);
 			}
 			// Print all connections
-			for (IAbstractCircuitGate gate : components) {
+			for (ICircuitGate gate : components) {
 				List<IGateInput> gateInputs = gate.getInputs();
 
 				for (IGateInput input : gateInputs) {
@@ -69,9 +69,9 @@ public final class FileManager implements IFileManager {
 	public ModelWrapper openFile(File file) {
 
 		ModelWrapper model = new ModelWrapper(file);
-		List<IAbstractCircuitGate> components = readFile(file);
+		List<ICircuitGate> components = readFile(file);
 
-		for (IAbstractCircuitGate component : components) {
+		for (ICircuitGate component : components) {
 			model.addComponent(component, component.getPosition());
 		}
 
@@ -80,13 +80,13 @@ public final class FileManager implements IFileManager {
 	}
 
 	@Override
-	public List<IAbstractCircuitGate> importFile(File file) {
+	public List<ICircuitGate> importFile(File file) {
 		return readFile(file);
 	}
 
-	private List<IAbstractCircuitGate> readFile(File file) {
+	private List<ICircuitGate> readFile(File file) {
 
-		List<IAbstractCircuitGate> components = new ArrayList<IAbstractCircuitGate>();
+		List<ICircuitGate> components = new ArrayList<ICircuitGate>();
 
 		try {
 			Scanner sc = new Scanner(file);
@@ -107,11 +107,11 @@ public final class FileManager implements IFileManager {
 				} else if (sc.hasNext("CNCT")) {
 					sc.next();
 
-					IAbstractCircuitGate toCpt = components.get(sc.nextInt());
+					ICircuitGate toCpt = components.get(sc.nextInt());
 					int inputNo = sc.nextInt();
 					int fromCptNo = sc.nextInt();
 					if (fromCptNo >= 0) {
-						IAbstractCircuitGate fromCpt = components
+						ICircuitGate fromCpt = components
 								.get(fromCptNo);
 						int output = sc.nextInt();
 						toCpt.connectInput(inputNo, fromCpt, output);

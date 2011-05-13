@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * A class that manages what components are selected.
@@ -15,23 +15,23 @@ import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
  */
 public final class SelectionModel implements ISelectionModel {
 
-	private final List<IAbstractCircuitGate> selectedComponentList;
+	private final List<ICircuitGate> selectedComponentList;
 
 	public SelectionModel() {
-		selectedComponentList = new LinkedList<IAbstractCircuitGate>();
+		selectedComponentList = new LinkedList<ICircuitGate>();
 	}
 
 	@Override
-	public void selectComponents(Collection<IAbstractCircuitGate> c) {
+	public void selectComponents(Collection<ICircuitGate> c) {
 		selectedComponentList.clear();
-		for (IAbstractCircuitGate gate : c) {
+		for (ICircuitGate gate : c) {
 			selectedComponentList.add(gate);
 		}
 		_removeUnusedElements();
 	}
 
 	@Override
-	public void selectComponent(IAbstractCircuitGate g, boolean multiSelect) {
+	public void selectComponent(ICircuitGate g, boolean multiSelect) {
 		if (multiSelect) {
 			if (_isSelected(g)) {
 				selectedComponentList.remove(g);
@@ -46,11 +46,11 @@ public final class SelectionModel implements ISelectionModel {
 	}
 
 	@Override
-	public boolean isSelectedComponent(IAbstractCircuitGate g) {
+	public boolean isSelectedComponent(ICircuitGate g) {
 		return _isSelected(g);
 	}
 
-	private boolean _isSelected(IAbstractCircuitGate g) {
+	private boolean _isSelected(ICircuitGate g) {
 		if (selectedComponentList.contains(g)) {
 			return true;
 		} else {
@@ -64,7 +64,7 @@ public final class SelectionModel implements ISelectionModel {
 	}
 
 	@Override
-	public List<IAbstractCircuitGate> getSelectedComponents() {
+	public List<ICircuitGate> getSelectedComponents() {
 		return selectedComponentList;
 	}
 

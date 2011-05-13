@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.util.Collection;
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
@@ -90,7 +90,7 @@ public interface IModelManager {
 	 * @param position
 	 *            the position to add to
 	 */
-	public void addComponent(IAbstractCircuitGate component, Point position);
+	public void addComponent(ICircuitGate component, Point position);
 
 	/**
 	 * Adds a list of components to the active workspace. Position is relative
@@ -99,7 +99,7 @@ public interface IModelManager {
 	 * @param component
 	 *            List the components to add
 	 */
-	public void addComponents(List<IAbstractCircuitGate> component);
+	public void addComponents(List<ICircuitGate> component);
 
 	/**
 	 * Adds a list of components to the active workspace. Positions are relative
@@ -110,7 +110,7 @@ public interface IModelManager {
 	 * @param position
 	 *            Point the point the first component should be added to
 	 */
-	public void addComponents(List<IAbstractCircuitGate> component,
+	public void addComponents(List<ICircuitGate> component,
 			Point position);
 
 	/**
@@ -124,7 +124,7 @@ public interface IModelManager {
 	 * @param g
 	 *            IAbstractCircuitGate
 	 */
-	public void removeComponent(IAbstractCircuitGate g);
+	public void removeComponent(ICircuitGate g);
 
 	/**
 	 * Selects all components in the collection.
@@ -163,8 +163,8 @@ public interface IModelManager {
 	 * @param portOut
 	 *            the port of the output to be used
 	 */
-	public void connectComponents(IAbstractCircuitGate componentIn,
-			IAbstractCircuitGate componentOut, int portIn, int portOut);
+	public void connectComponents(ICircuitGate componentIn,
+			ICircuitGate componentOut, int portIn, int portOut);
 
 	/**
 	 * Fires a property changed event manually.

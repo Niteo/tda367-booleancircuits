@@ -5,36 +5,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 
 public class ClipboardManager implements IClipboardManager {
 
-	private List<IAbstractCircuitGate> clipboardList;
-	private Map<IAbstractCircuitGate, IAbstractCircuitGate> componentsMap = new HashMap<IAbstractCircuitGate, IAbstractCircuitGate>();
-	private List<IAbstractCircuitGate> lastPastedComponents;
+	private List<ICircuitGate> clipboardList;
+	private Map<ICircuitGate, ICircuitGate> componentsMap = new HashMap<ICircuitGate, ICircuitGate>();
+	private List<ICircuitGate> lastPastedComponents;
 
 	@Override
-	public void copy(List<IAbstractCircuitGate> originalList) {
+	public void copy(List<ICircuitGate> originalList) {
 		clipboardList = duplicateList(originalList);
 	}
 
 	@Override
-	public List<IAbstractCircuitGate> paste() {
+	public List<ICircuitGate> paste() {
 
 		return duplicateList(clipboardList);
 	}
 
-	private List<IAbstractCircuitGate> duplicateList(
-			List<IAbstractCircuitGate> list) {
+	private List<ICircuitGate> duplicateList(
+			List<ICircuitGate> list) {
 
-		List<IAbstractCircuitGate> dupList = new ArrayList<IAbstractCircuitGate>();
-		for (IAbstractCircuitGate gate : list) {
+		List<ICircuitGate> dupList = new ArrayList<ICircuitGate>();
+		for (ICircuitGate gate : list) {
 			componentsMap.put(gate, gate.clone());
 		}
 
-		for (IAbstractCircuitGate gate : list) {
+		for (ICircuitGate gate : list) {
 			for (IGateInput input : gate.getInputs()) {
 				if (!list.contains(input.getInputComponent())) {
 					componentsMap.get(gate).connectInput(
@@ -53,7 +53,7 @@ public class ClipboardManager implements IClipboardManager {
 	}
 
 	@Override
-	public List<IAbstractCircuitGate> getLastPastedComponents() {
+	public List<ICircuitGate> getLastPastedComponents() {
 
 		return lastPastedComponents;
 	}

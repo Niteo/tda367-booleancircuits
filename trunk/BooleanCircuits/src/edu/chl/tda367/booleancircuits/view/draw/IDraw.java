@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
@@ -38,7 +38,7 @@ public interface IDraw {
 	 * @param offset
 	 *            Point offset values
 	 */
-	public void drawGate(Graphics2D g, IAbstractCircuitGate gate, Point offset);
+	public void drawGate(Graphics2D g, ICircuitGate gate, Point offset);
 
 	/**
 	 * Sets the background

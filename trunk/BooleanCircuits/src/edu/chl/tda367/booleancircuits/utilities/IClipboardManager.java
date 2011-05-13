@@ -2,7 +2,7 @@ package edu.chl.tda367.booleancircuits.utilities;
 
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * An interface that represents a clipboard manager.
@@ -18,20 +18,20 @@ public interface IClipboardManager {
 	 * @param gate
 	 *            IAbstractCircuitGate
 	 */
-	public void copy(List<IAbstractCircuitGate> gate);
+	public void copy(List<ICircuitGate> gate);
 
 	/**
 	 * Returns a list of objects to be pasted.
 	 * 
 	 * @return IAbstractCircuitGate
 	 */
-	public List<IAbstractCircuitGate> paste();
+	public List<ICircuitGate> paste();
 
 	/**
 	 * Returns a list of components that were last pasted
 	 * 
 	 * @return IAbstractCircuitGate
 	 */
-	public List<IAbstractCircuitGate> getLastPastedComponents();
+	public List<ICircuitGate> getLastPastedComponents();
 
 }

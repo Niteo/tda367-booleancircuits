@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.implementation.Model;
 
@@ -37,7 +37,7 @@ public class ConstantGateTest {
 	@Test
 	public void testEmptyGateClone() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
-		IAbstractCircuitGate emptyGate = falseConstantGate.emptyGateClone();
+		ICircuitGate emptyGate = falseConstantGate.emptyGateClone();
 		
 		//assertTrue(falseConstantGate instanceof emptyGate.);
 	}
@@ -89,17 +89,17 @@ public class ConstantGateTest {
 		ConstantGate trueConstantGate = new ConstantGate(true);
 		
 		
-		IAbstractCircuitGate newComponent = new AbstractCircuitGate(){
+		ICircuitGate newComponent = new AbstractCircuitGate(){
 
 			@Override
 			public void connectInput(int inputPort,
-					IAbstractCircuitGate component, int outputPort) {
+					ICircuitGate component, int outputPort) {
 				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
-			public boolean connectsTo(IAbstractCircuitGate gate) {
+			public boolean connectsTo(ICircuitGate gate) {
 				return false;
 			}
 
@@ -137,7 +137,7 @@ public class ConstantGateTest {
 			}
 
 			@Override
-			public Collection<IAbstractCircuitGate> getRecoupledTo() {
+			public Collection<ICircuitGate> getRecoupledTo() {
 				
 				return null;
 			}
@@ -254,12 +254,12 @@ public class ConstantGateTest {
 		ConstantGate falseConstantGate = new ConstantGate(false);
 		ConstantGate trueConstantGate = new ConstantGate(true);
 		
-		IAbstractCircuitGate falseClone = falseConstantGate.clone();
+		ICircuitGate falseClone = falseConstantGate.clone();
 		assertTrue(falseClone instanceof ConstantGate);
 		assertTrue(falseClone.getNoOfInputs()==falseConstantGate.getNoOfInputs());
 		assertTrue(falseClone.getNoOfOutputs()==falseConstantGate.getNoOfOutputs());
 		
-		IAbstractCircuitGate trueClone = trueConstantGate.clone();
+		ICircuitGate trueClone = trueConstantGate.clone();
 		assertTrue(trueClone instanceof ConstantGate);
 		assertTrue(trueClone.getNoOfInputs()==trueConstantGate.getNoOfInputs());
 		assertTrue(trueClone.getNoOfOutputs()==trueConstantGate.getNoOfOutputs());

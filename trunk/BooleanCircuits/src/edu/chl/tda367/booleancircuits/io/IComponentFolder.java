@@ -2,7 +2,7 @@ package edu.chl.tda367.booleancircuits.io;
 
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 public interface IComponentFolder {
@@ -19,6 +19,6 @@ public interface IComponentFolder {
 	 * 
 	 * @return list of AbstractCircuitGate
 	 */
-	public List<IAbstractCircuitGate> getAllComponents();
+	public List<ICircuitGate> getAllComponents();
 
 }

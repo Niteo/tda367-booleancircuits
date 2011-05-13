@@ -13,7 +13,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.implementation.ComponentFolder;
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
@@ -28,7 +28,7 @@ public final class Palette implements IPalette {
 
 	public Palette(IMasterController masterController) {
 		mc = masterController;
-		ArrayList<IAbstractCircuitGate> al = new ArrayList<IAbstractCircuitGate>();
+		ArrayList<ICircuitGate> al = new ArrayList<ICircuitGate>();
 		al.add(new ConstantGate(false));
 		al.add(new ConstantGate(true));
 		al.add(new Clock());
@@ -101,7 +101,7 @@ public final class Palette implements IPalette {
 	private void initComponentNodes(DefaultMutableTreeNode folderNodeList,
 			ComponentFolder componentFolder) {
 		// TODO:
-		for (IAbstractCircuitGate acg : componentFolder.getAllComponents()) {
+		for (ICircuitGate acg : componentFolder.getAllComponents()) {
 			folderNodeList.add(new DefaultMutableTreeNode(acg));
 		}
 
