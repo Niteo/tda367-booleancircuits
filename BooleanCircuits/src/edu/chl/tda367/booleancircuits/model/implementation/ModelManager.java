@@ -263,15 +263,13 @@ public final class ModelManager implements IObservable, IModelManager {
 	@Override
 	public void selectComponents(Point pos1, Point pos2) {
 		List<ICircuitGate> selectedComponents = new ArrayList<ICircuitGate>();
-		Point start = new Point(Math.min(pos1.x, pos2.x), Math.min(pos1.y,
-				pos2.y));
-		Point end = new Point(Math.max(pos1.x, pos2.x),
-				Math.max(pos1.y, pos2.y));
 
 		for (ICircuitGate gate : this.getActiveWorkspaceModel().getComponents()) {
 			Point gatePosition = gate.getPosition();
-			if (gatePosition.x >= start.x && gatePosition.x <= end.x
-					&& gatePosition.y >= start.y && gatePosition.y <= end.y) {
+			if (gatePosition.x >= Math.min(pos1.x, pos2.x)
+					&& gatePosition.x <= Math.max(pos1.x, pos2.x)
+					&& gatePosition.y >= Math.min(pos1.y, pos2.y)
+					&& gatePosition.y <= Math.max(pos1.y, pos2.y)) {
 				selectedComponents.add(gate);
 			}
 		}
