@@ -24,8 +24,7 @@ import edu.chl.tda367.booleancircuits.view.draw.implementation.GridBackground;
  * 
  * @author Boel
  */
-public final class MainWindow extends JFrame implements
-		PropertyChangeListener {
+public final class MainWindow extends JFrame implements PropertyChangeListener {
 
 	private MasterController mc;
 	private ToolbarPanel toolbar = new ToolbarPanel();
@@ -200,11 +199,13 @@ public final class MainWindow extends JFrame implements
 		toolbar.getNewWorkspaceButton().setToolTipText("New Workspace");
 		toolbar.getOpenFileButton().setToolTipText("Open File");
 		toolbar.getPasteButton().setToolTipText("Paste");
+		toolbar.getPauseClockButton().setToolTipText("Pause Clock Signal");
 		toolbar.getRedoButton().setToolTipText("Redo");
 		toolbar.getSaveAsComponentButton()
 				.setToolTipText("Import to Workspace");
 		toolbar.getSaveAllButton().setToolTipText("Save All");
 		toolbar.getSaveButton().setToolTipText("Save");
+		toolbar.getStartClockButton().setToolTipText("Start Clock Signal");
 		toolbar.getUndoButton().setToolTipText("Undo");
 
 	}
@@ -345,18 +346,16 @@ public final class MainWindow extends JFrame implements
 		horizontalSplitPane.setDividerSize(0);
 		horizontalSplitPane.setEnabled(false);
 
-		javax.swing.GroupLayout paletteContainerPanelLayout = new javax.swing.GroupLayout(
+		GroupLayout paletteContainerPanelLayout = new GroupLayout(
 				paletteContainerPanel);
 		paletteContainerPanel.setLayout(paletteContainerPanelLayout);
 		paletteContainerPanelLayout
 				.setHorizontalGroup(paletteContainerPanelLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGap(0, 0, Short.MAX_VALUE));
 		paletteContainerPanelLayout
 				.setVerticalGroup(paletteContainerPanelLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGap(0, 300, Short.MAX_VALUE));
 
 		horizontalSplitPane.setLeftComponent(paletteContainerPanel);
@@ -433,17 +432,14 @@ public final class MainWindow extends JFrame implements
 
 		setJMenuBar(menuBar);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
+		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				verticalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 589,
-				Short.MAX_VALUE));
+				GroupLayout.Alignment.LEADING).addComponent(verticalSplitPane,
+				GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE));
 		layout.setVerticalGroup(layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				verticalSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 327,
-				Short.MAX_VALUE));
+				GroupLayout.Alignment.LEADING).addComponent(verticalSplitPane,
+				GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE));
 
 		pack();
 	}// </editor-fold>
