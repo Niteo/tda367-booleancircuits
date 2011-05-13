@@ -14,17 +14,17 @@ public class NandGateTest {
 	public void testNandGate() {
 		new NandGate(2);
 	}
-	
+
 	@Test
 	public void testGetNoOfInputs() {
 		NandGate nand = new NandGate(2);
-		assertTrue(nand.getNoOfInputs()==2);
+		assertTrue(nand.getNoOfInputs() == 2);
 	}
 
 	@Test
 	public void testGetNoOfOutputs() {
 		NandGate nand = new NandGate(2);
-		assertTrue(nand.getNoOfOutputs()==1);
+		assertTrue(nand.getNoOfOutputs() == 1);
 	}
 
 	@Test
@@ -50,9 +50,9 @@ public class NandGateTest {
 	public void testEmptyGateClone() {
 		NandGate nand = new NandGate(2);
 		ICircuitGate testGate = nand.emptyGateClone();
-		
+
 		assertTrue(testGate instanceof NandGate);
-		assertTrue(testGate.getNoOfInputs()==nand.getNoOfInputs());
+		assertTrue(testGate.getNoOfInputs() == nand.getNoOfInputs());
 	}
 
 	@Test
@@ -61,27 +61,17 @@ public class NandGateTest {
 	}
 
 	@Test
-	public void testCreateIO() {
-		NandGate nand = new NandGate(3);
-		nand.createIO(1, 1);
-		assertTrue(nand.getNoOfInputs() == 1 && nand.getNoOfOutputs() == 1);
-	}
-
-	@Test
 	public void testOverwriteGate() {
 		NandGate nand = new NandGate(1);
-		nand.createIO(1, 1);
 		nand.setOutput(0, true);
 
 		NandGate test = new NandGate(2);
-		test.createIO(2, 2);
 		test.setOutput(0, false);
 
 		nand.overwriteGate(test);
 
 		assertTrue(nand.getInputs().equals(test.getInputs())
-				&& nand.getOutputValue(0) == test.getOutputValue(0)
-				&& nand.getNoOfInputs() == 2 && nand.getNoOfOutputs() == 2);
+				&& nand.getOutputValue(0) == test.getOutputValue(0));
 	}
 
 	@Test
@@ -111,11 +101,11 @@ public class NandGateTest {
 	public void testGetRecoupledTo() {
 		NandGate nand = new NandGate(2);
 		NandGate testGate = new NandGate(2);
-		assertTrue(nand.getRecoupledTo().size()==0);
-		
+		assertTrue(nand.getRecoupledTo().size() == 0);
+
 		nand.connectInput(0, testGate, 0);
 		testGate.connectInput(1, nand, 1);
-		assertTrue(nand.getRecoupledTo().size()==1);
+		assertTrue(nand.getRecoupledTo().size() == 1);
 	}
 
 	@Test
@@ -133,10 +123,10 @@ public class NandGateTest {
 		assertTrue(clone instanceof NandGate);
 		assertTrue(clone.getPosition().x == nand.getPosition().x
 				&& clone.getPosition().y == nand.getPosition().y);
-		assertTrue(clone.getNoOfInputs()== nand.getNoOfInputs());
-		assertTrue(clone.getNoOfOutputs()== nand.getNoOfOutputs());
+		assertTrue(clone.getNoOfInputs() == nand.getNoOfInputs());
+		assertTrue(clone.getNoOfOutputs() == nand.getNoOfOutputs());
 	}
-	
+
 	@Test
 	public void testUpdateOutput() {
 		NandGate nand = new NandGate(2);

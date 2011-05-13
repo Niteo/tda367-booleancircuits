@@ -65,20 +65,6 @@ public class ConstantGateTest {
 	}
 
 	@Test
-	public void testCreateIO() {
-		ConstantGate falseConstantGate = new ConstantGate(false);
-		ConstantGate trueConstantGate = new ConstantGate(true);
-		
-		falseConstantGate.createIO(0, 1);
-		trueConstantGate.createIO(0, 1);
-		
-		assertTrue(falseConstantGate.getNoOfInputs() == 0 && falseConstantGate.getNoOfOutputs() == 1);		
-		assertTrue(trueConstantGate.getNoOfInputs() == 0 && trueConstantGate.getNoOfOutputs() == 1);
-		
-		
-	}
-
-	@Test
 	public void testOverwriteGate() {
 		fail("Not yet implemented");
 	}
@@ -89,7 +75,7 @@ public class ConstantGateTest {
 		ConstantGate trueConstantGate = new ConstantGate(true);
 		
 		
-		ICircuitGate newComponent = new AbstractCircuitGate(){
+		ICircuitGate newComponent = new AbstractCircuitGate(1, 1){
 
 			@Override
 			public void connectInput(int inputPort,
