@@ -102,13 +102,6 @@ public interface IActionController {
 	public Action getExitAction();
 
 	/**
-	 * Returns the addComponent action.
-	 * 
-	 * @return Action
-	 */
-	public Action getInsertComponentAction();
-
-	/**
 	 * Returns the removeSelectedComponents action.
 	 * 
 	 * @return Action
@@ -142,4 +135,17 @@ public interface IActionController {
 	 * @return Action
 	 */
 	public Action getImportWorkspaceAction();
+	
+	/**
+	 * Returns the showAboutBox action
+	 * @return Action
+	 */
+	public Action getShowAboutBoxAction();
+	
+	/**
+	 *  Returns the showHelp action
+	 * @return Action
+	 */
+	public Action getShowHelpAction();
+	
 }

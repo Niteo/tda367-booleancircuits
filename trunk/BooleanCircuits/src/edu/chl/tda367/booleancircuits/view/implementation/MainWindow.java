@@ -24,7 +24,7 @@ import edu.chl.tda367.booleancircuits.view.draw.implementation.GridBackground;
  * 
  * @author Boel
  */
-public final class MainWindow extends javax.swing.JFrame implements
+public final class MainWindow extends JFrame implements
 		PropertyChangeListener {
 
 	private MasterController mc;
@@ -115,7 +115,8 @@ public final class MainWindow extends javax.swing.JFrame implements
 		// init file menu
 		newWorkspaceMenuItem
 				.setAction(actionController.getNewWorkspaceAction());
-		importToWorkspaceMenuItem.setAction(actionController.getImportWorkspaceAction());
+		importToWorkspaceMenuItem.setAction(actionController
+				.getImportWorkspaceAction());
 		openFileMenuItem.setAction(actionController.getOpenWorkspaceAction());
 		closeMenuItem.setAction(actionController
 				.getCloseActiveWorkspaceAction());
@@ -140,7 +141,7 @@ public final class MainWindow extends javax.swing.JFrame implements
 				.getRemoveSelectedComponentsAction());
 		selectAllMenuItem.setAction(actionController
 				.getSelectAllComponentsAction());
-		
+
 		// init clock pulse menu
 		startClockMenuItem.setAction(actionController.getStartClockAction());
 		pauseClockMenuItem.setAction(actionController.getPauseClockAction());
@@ -156,10 +157,10 @@ public final class MainWindow extends javax.swing.JFrame implements
 		blankRadioButtonMenuItem.addActionListener(listener);
 		gridRadioButtonMenuItem.setSelected(true);
 
-		/*
-		 * // init help menu helpMenuItem.setAction(actionController);
-		 * aboutMenuItem.setAction(actionController);
-		 */
+		// init help menu
+		helpMenuItem.setAction(actionController.getShowHelpAction());
+		aboutMenuItem.setAction(actionController.getShowAboutBoxAction());
+
 	}
 
 	private void initButtons() {
@@ -200,7 +201,8 @@ public final class MainWindow extends javax.swing.JFrame implements
 		toolbar.getOpenFileButton().setToolTipText("Open File");
 		toolbar.getPasteButton().setToolTipText("Paste");
 		toolbar.getRedoButton().setToolTipText("Redo");
-		toolbar.getSaveAsComponentButton().setToolTipText("Import to Workspace");
+		toolbar.getSaveAsComponentButton()
+				.setToolTipText("Import to Workspace");
 		toolbar.getSaveAllButton().setToolTipText("Save All");
 		toolbar.getSaveButton().setToolTipText("Save");
 		toolbar.getUndoButton().setToolTipText("Undo");
@@ -227,8 +229,8 @@ public final class MainWindow extends javax.swing.JFrame implements
 		pasteMenuItem.setText("Paste");
 		deleteMenuItem.setText("Delete");
 		selectAllMenuItem.setText("Select All");
-		
-		//Clock pulse menu
+
+		// Clock pulse menu
 		startClockMenuItem.setText("Start");
 		pauseClockMenuItem.setText("Pause");
 
@@ -388,10 +390,10 @@ public final class MainWindow extends javax.swing.JFrame implements
 		editMenu.add(selectAllMenuItem);
 
 		menuBar.add(editMenu);
-		
+
 		clockpulseMenu.setText("Clock-signal");
 		menuBar.add(clockpulseMenu);
-		
+
 		clockpulseMenu.add(startClockMenuItem);
 		clockpulseMenu.add(pauseClockMenuItem);
 
