@@ -154,8 +154,10 @@ public class Canvas {
 								.getComponent(dragPosition);
 						
 						if(clickedComponent != null){
-							dragClickComponent = clickedComponent;
-							selectModel.selectComponent(dragClickComponent, false);
+							if(!selectModel.isSelectedComponent(clickedComponent)){
+								selectModel.selectComponent(clickedComponent, false);
+								dragClickComponent = clickedComponent;
+							}
 						}
 					}
 					
