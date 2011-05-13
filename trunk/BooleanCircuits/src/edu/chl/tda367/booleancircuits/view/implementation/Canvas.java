@@ -1,9 +1,6 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Event;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -11,8 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -24,8 +19,6 @@ import edu.chl.tda367.booleancircuits.controller.implementation.MasterController
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.utilities.IObservable;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 import edu.chl.tda367.booleancircuits.view.draw.IDraw;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
@@ -97,7 +90,7 @@ public class Canvas {
 			Graphics2D g2d = (Graphics2D) g;
 			// Draw background
 			drawer.drawBackground(g2d, new Point(posX, posY), panel.getSize());
-			
+
 			// Draw components
 			if (model != null) {
 				// Draw non-selected
@@ -115,20 +108,21 @@ public class Canvas {
 					}
 				}
 			}
-			
 
 			// Draw select
-			if(drawSelect != null){
+			if (drawSelect != null) {
 				Point mousePos = panel.getMousePosition();
-				if(mousePos != null){
+				if (mousePos != null) {
 					g.setColor(new Color(100, 100, 240, 140));
 					g2d.fillRect(drawSelect.x, drawSelect.y,
 							panel.getMousePosition().x - drawSelect.x,
 							panel.getMousePosition().y - drawSelect.y);
 					g.setColor(new Color(20, 20, 240, 180));
-					
-					int []xArray = {drawSelect.x, mousePos.x, mousePos.x, drawSelect.x};
-					int []yArray = {drawSelect.y, drawSelect.y, mousePos.y, mousePos.y};
+
+					int[] xArray = { drawSelect.x, mousePos.x, mousePos.x,
+							drawSelect.x };
+					int[] yArray = { drawSelect.y, drawSelect.y, mousePos.y,
+							mousePos.y };
 					g2d.drawPolygon(xArray, yArray, 4);
 				}
 			}
@@ -148,13 +142,12 @@ public class Canvas {
 				int dx = (int) (evt.getPoint().getX() - oldDragPosition.getX());
 				int dy = (int) (evt.getPoint().getY() - oldDragPosition.getY());
 
-				if(evt.isControlDown()){
-					if(drawSelect == null){
+				if (evt.isShiftDown()) {
+					if (drawSelect == null) {
 						drawSelect = evt.getPoint();
 					}
 					panel.repaint();
-				}
-				else if (draggingMode) {
+				} else if (draggingMode) {
 					// If not a selected component, select it.
 					ICircuitGate clickedComponent = model
 							.getComponent(dragPosition);
@@ -187,10 +180,10 @@ public class Canvas {
 			oldDragPosition = null;
 			final Point releasePoint = evt.getPoint();
 			draggingMode = false;
-			if(drawSelect != null){
-				_masterController.selectComponents(
-						new Point(drawSelect.x + posX, drawSelect.y + posY), 
-						new Point(releasePoint.x + posX, releasePoint.y + posY));
+			if (drawSelect != null) {
+				_masterController.selectComponents(new Point(drawSelect.x
+						+ posX, drawSelect.y + posY), new Point(releasePoint.x
+						+ posX, releasePoint.y + posY));
 				drawSelect = null;
 				panel.repaint();
 			}
@@ -265,7 +258,7 @@ public class Canvas {
 
 			if (evt.getClickCount() == 1) {
 				_masterController.selectComponent(pointClicked,
-						evt.isControlDown());
+						evt.isShiftDown());
 			} else if (evt.getClickCount() == 2) {
 				if (model.getComponent(pointClicked) == null) {
 					_masterController.addComponent(pointClicked);
