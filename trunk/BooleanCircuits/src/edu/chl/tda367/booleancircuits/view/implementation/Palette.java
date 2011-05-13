@@ -19,23 +19,33 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
 import edu.chl.tda367.booleancircuits.view.IPalette;
 
+/**
+ * this class represents a palette containing folders with components
+ * 
+ * @author antonlin
+ * 
+ */
+
 public final class Palette implements IPalette {
 
 	private JScrollPane scrollPane;
 	private List<ComponentFolder> folderList;
 	private JTree componentTree;
-	private IMasterController mc;
+	private IMasterController masterController;
 
 	public Palette(IMasterController masterController) {
-		mc = masterController;
-		ArrayList<ICircuitGate> al = new ArrayList<ICircuitGate>();
-		al.add(new ConstantGate(false));
-		al.add(new ConstantGate(true));
-		al.add(new Clock());
-		ComponentFolder cf = new ComponentFolder(al,"Special");
+		this.masterController = masterController;
+
+		List<ICircuitGate> specialList = new ArrayList<ICircuitGate>();
+		specialList.add(new ConstantGate(false));
+		specialList.add(new ConstantGate(true));
+		specialList.add(new Clock());
+		ComponentFolder cf = new ComponentFolder(specialList, "Special");
+
 		folderList = new ArrayList<ComponentFolder>();
 		folderList.add(new ComponentFolder());
 		folderList.add(cf);
+
 		initPaletteTree();
 		scrollPane = new JScrollPane(componentTree);
 	}
@@ -68,8 +78,9 @@ public final class Palette implements IPalette {
 						.getLastSelectedPathComponent();
 
 				if (node.isLeaf()) {
-					mc.setChosenComponent(((AbstractCircuitGate) node
-							.getUserObject()).clone());
+					masterController
+							.setChosenComponent(((AbstractCircuitGate) node
+									.getUserObject()).clone());
 				}
 			}
 		};
@@ -77,7 +88,7 @@ public final class Palette implements IPalette {
 		componentTree.addTreeSelectionListener(tsl);
 		componentTree.expandRow(0);
 		componentTree.expandRow(8);
-		
+
 		componentTree.getInputMap().put(
 				KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK),
 				"none");
@@ -107,6 +118,7 @@ public final class Palette implements IPalette {
 
 	}
 
+	@Override
 	public JScrollPane getView() {
 		return scrollPane;
 	}

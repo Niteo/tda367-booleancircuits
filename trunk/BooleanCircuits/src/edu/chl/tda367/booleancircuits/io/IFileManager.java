@@ -7,6 +7,12 @@ import java.util.List;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 
+/**
+ * describes how save files are written and read
+ * 
+ * @author antonlin
+ * 
+ */
 public interface IFileManager {
 
 	/**

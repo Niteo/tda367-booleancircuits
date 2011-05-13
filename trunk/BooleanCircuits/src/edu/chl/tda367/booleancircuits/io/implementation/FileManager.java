@@ -17,6 +17,12 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCi
 import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 
+/**
+ * Writes and reads save files.
+ * 
+ * @author antonlin
+ * 
+ */
 public final class FileManager implements IFileManager {
 
 	/**

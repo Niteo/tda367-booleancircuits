@@ -5,10 +5,7 @@ import java.util.List;
 
 import edu.chl.tda367.booleancircuits.io.IComponentFolder;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
-import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
@@ -17,7 +14,7 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.XnorGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.XorGate;
 
 /**
- * This class creates a file in which there are a number of logical components
+ * This class creates a folder in which there are a number of logical components
  * 
  * @author antonlin
  * 
