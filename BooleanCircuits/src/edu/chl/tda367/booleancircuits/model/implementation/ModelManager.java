@@ -12,7 +12,7 @@ import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.IModelManager;
 import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.utilities.IObservable;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
@@ -82,7 +82,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		return modelList;
 	}
 
-	public void addComponent(IAbstractCircuitGate component, Point position) {
+	public void addComponent(ICircuitGate component, Point position) {
 		_addComponent(component, position);
 		firePropertyChanged();
 	}
@@ -130,7 +130,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void removeComponent(IAbstractCircuitGate g) {
+	public void removeComponent(ICircuitGate g) {
 		getActiveWorkspaceModel().removeComponent(g);
 		_getActiveSelectionModel().removeUnusedElements();
 		getActiveWorkspaceModel().updateComponents();
@@ -139,8 +139,8 @@ public final class ModelManager implements IObservable, IModelManager {
 
 
 	@Override
-	public void connectComponents(IAbstractCircuitGate componentIn,
-			IAbstractCircuitGate componentOut, int portIn, int portOut) {
+	public void connectComponents(ICircuitGate componentIn,
+			ICircuitGate componentOut, int portIn, int portOut) {
 		componentIn.connectInput(portIn, componentOut, portOut);
 		getActiveWorkspaceModel().updateComponents();
 		firePropertyChanged();
@@ -152,7 +152,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void addComponents(List<IAbstractCircuitGate> component) {
+	public void addComponents(List<ICircuitGate> component) {
 		for (int i = 0; i < component.size(); i++) {
 			Point tempPos = new Point(component.get(i).getPosition());
 			tempPos.x -= Constants.componentSize;
@@ -163,7 +163,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void addComponents(List<IAbstractCircuitGate> component,
+	public void addComponents(List<ICircuitGate> component,
 			Point position) {
 		int minX = Integer.MAX_VALUE;
 		int maxX = Integer.MIN_VALUE;
@@ -193,7 +193,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		int moveY = (position.y - deltaY);
 
 		for (int i = 0; i < component.size(); i++) {
-			IAbstractCircuitGate gate = component.get(i);
+			ICircuitGate gate = component.get(i);
 			Point temp = new Point(gate.getPosition());
 			temp.x += moveX;
 			temp.y += moveY;
@@ -210,7 +210,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		firePropertyChanged();
 	}
 	
-	private void _addComponent(IAbstractCircuitGate component, Point position) {
+	private void _addComponent(ICircuitGate component, Point position) {
 		getActiveWorkspaceModel().addComponent(component, position);
 		getActiveWorkspaceModel().updateComponents();
 	}

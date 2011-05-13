@@ -2,7 +2,7 @@ package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * Represents a constant value, determined at creation. This class uses no

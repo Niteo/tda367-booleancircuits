@@ -3,7 +3,7 @@ package edu.chl.tda367.booleancircuits.model.components.implementation;
 import java.awt.Point;
 import java.util.*;
 import edu.chl.tda367.booleancircuits.model.*;
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 
@@ -13,7 +13,7 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
  * @author Kaufmann
  * 
  */
-public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
+public abstract class AbstractCircuitGate implements ICircuitGate {
 	private List<IGateInput> inputs;
 	private Boolean[] outputs;
 	private boolean isInTiercalculation;
@@ -69,7 +69,7 @@ public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 		this.outputs = gate.outputs;
 	}
 
-	public void connectInput(int inputPort, IAbstractCircuitGate component,
+	public void connectInput(int inputPort, ICircuitGate component,
 			int outputPort) {
 		inputs.get(inputPort).setInputComponent(component, outputPort);
 	}
@@ -111,11 +111,11 @@ public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 	}
 
 	@Override
-	public Collection<IAbstractCircuitGate> getRecoupledTo() {
-		Collection<IAbstractCircuitGate> col = new ArrayList<IAbstractCircuitGate>();
+	public Collection<ICircuitGate> getRecoupledTo() {
+		Collection<ICircuitGate> col = new ArrayList<ICircuitGate>();
 		
 		for(IGateInput input : inputs){
-			IAbstractCircuitGate inputGate = input.getInputComponent();
+			ICircuitGate inputGate = input.getInputComponent();
 			if(inputGate != null){
 				if(inputGate.connectsTo(this)){
 					col.add(inputGate);
@@ -126,7 +126,7 @@ public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 		return col;
 	}
 	
-	public boolean connectsTo(IAbstractCircuitGate gate){
+	public boolean connectsTo(ICircuitGate gate){
 		boolean ret = false;
 		if(isInConnectToCalculation){
 			return false;
@@ -134,7 +134,7 @@ public abstract class AbstractCircuitGate implements IAbstractCircuitGate {
 			isInConnectToCalculation = true;
 		}
 		for(IGateInput input : inputs){
-			IAbstractCircuitGate inputGate = input.getInputComponent();
+			ICircuitGate inputGate = input.getInputComponent();
 			if(inputGate != null){
 				if(inputGate == gate || inputGate.connectsTo(gate)){
 					ret = true;

@@ -3,7 +3,7 @@ package edu.chl.tda367.booleancircuits.model;
 import java.util.Collection;
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
@@ -20,7 +20,7 @@ public interface ISelectionModel {
 	 * @param c
 	 *            Collection
 	 */
-	public void selectComponents(Collection<IAbstractCircuitGate> c);
+	public void selectComponents(Collection<ICircuitGate> c);
 
 	/**
 	 * Selects the given component in the active workspace.
@@ -30,7 +30,7 @@ public interface ISelectionModel {
 	 * @param multiSelect
 	 * 			  boolean if false, all selected components will be deselected
 	 */
-	public void selectComponent(IAbstractCircuitGate g, boolean multiSelect);
+	public void selectComponent(ICircuitGate g, boolean multiSelect);
 
 	/**
 	 * Determinates if a component is currently selected.
@@ -39,7 +39,7 @@ public interface ISelectionModel {
 	 *            AbstractCircuitGate
 	 * @return boolean
 	 */
-	public boolean isSelectedComponent(IAbstractCircuitGate g);
+	public boolean isSelectedComponent(ICircuitGate g);
 
 	/**
 	 * Removes all elements that are unused.
@@ -50,5 +50,5 @@ public interface ISelectionModel {
 	 * Returns a list of the selected components.
 	 * @return List
 	 */
-	public List<IAbstractCircuitGate> getSelectedComponents();
+	public List<ICircuitGate> getSelectedComponents();
 }

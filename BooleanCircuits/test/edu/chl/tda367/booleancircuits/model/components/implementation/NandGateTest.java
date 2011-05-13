@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 public class NandGateTest {
 
@@ -49,7 +49,7 @@ public class NandGateTest {
 	@Test
 	public void testEmptyGateClone() {
 		NandGate nand = new NandGate(2);
-		IAbstractCircuitGate testGate = nand.emptyGateClone();
+		ICircuitGate testGate = nand.emptyGateClone();
 		
 		assertTrue(testGate instanceof NandGate);
 		assertTrue(testGate.getNoOfInputs()==nand.getNoOfInputs());
@@ -129,7 +129,7 @@ public class NandGateTest {
 	@Test
 	public void testClone() {
 		NandGate nand = new NandGate(2);
-		IAbstractCircuitGate clone = nand.clone();
+		ICircuitGate clone = nand.clone();
 		assertTrue(clone instanceof NandGate);
 		assertTrue(clone.getPosition().x == nand.getPosition().x
 				&& clone.getPosition().y == nand.getPosition().y);

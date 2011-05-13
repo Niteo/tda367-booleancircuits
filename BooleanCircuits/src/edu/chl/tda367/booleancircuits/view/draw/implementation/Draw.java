@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
@@ -34,7 +34,7 @@ public class Draw implements IDraw {
 	}
 
 	@Override
-	public void drawGate(Graphics2D g, IAbstractCircuitGate gate, Point offset) {
+	public void drawGate(Graphics2D g, ICircuitGate gate, Point offset) {
 		color = g.getColor();
 
 		if (gate instanceof AndGate) {
@@ -108,12 +108,12 @@ public class Draw implements IDraw {
 		g.setColor(color);
 	}
 	
-	private void drawClock(IAbstractCircuitGate gate, Graphics2D g, Point offset){
+	private void drawClock(ICircuitGate gate, Graphics2D g, Point offset){
 		symbol = "C";
 		drawRectangle(gate, g, offset);
 	}
 
-	private void drawAndGate(IAbstractCircuitGate gate, Graphics2D g,
+	private void drawAndGate(ICircuitGate gate, Graphics2D g,
 			Point offset) {
 
 		if (isUsStandard) {
@@ -148,7 +148,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawNandGate(IAbstractCircuitGate gate, Graphics2D g,
+	private void drawNandGate(ICircuitGate gate, Graphics2D g,
 			Point offset) {
 
 		if (isUsStandard) {
@@ -186,7 +186,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawOrGate(IAbstractCircuitGate gate, Graphics2D g,
+	private void drawOrGate(ICircuitGate gate, Graphics2D g,
 			Point offset) {
 
 		if (isUsStandard) {
@@ -222,7 +222,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawNorGate(IAbstractCircuitGate gate, Graphics2D g,
+	private void drawNorGate(ICircuitGate gate, Graphics2D g,
 			Point offset) {
 		
 		if (isUsStandard) {
@@ -261,7 +261,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawXorGate(IAbstractCircuitGate gate, Graphics2D g,
+	private void drawXorGate(ICircuitGate gate, Graphics2D g,
 			Point offset) {
 		
 		if (isUsStandard) {
@@ -303,7 +303,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawXnorGate(IAbstractCircuitGate gate, Graphics2D g,
+	private void drawXnorGate(ICircuitGate gate, Graphics2D g,
 			Point offset) {
 		
 		if (isUsStandard) {
@@ -345,7 +345,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawNotGate(IAbstractCircuitGate gate, Graphics2D g,
+	private void drawNotGate(ICircuitGate gate, Graphics2D g,
 			Point offset) {
 
 		if (isUsStandard) {
@@ -382,7 +382,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawConstantGate(IAbstractCircuitGate gate, Graphics2D g,
+	private void drawConstantGate(ICircuitGate gate, Graphics2D g,
 			Point offset) {
 
 		symbol = gate.toString();
@@ -390,7 +390,7 @@ public class Draw implements IDraw {
 
 	}
 
-	private void drawRectangle(IAbstractCircuitGate gate, Graphics2D g,
+	private void drawRectangle(ICircuitGate gate, Graphics2D g,
 			Point offset) {
 
 		g.setColor(Color.WHITE);
@@ -412,7 +412,7 @@ public class Draw implements IDraw {
 				+ Constants.componentSize / 4);
 	}
 
-	private void drawCircle(IAbstractCircuitGate gate, Graphics g, Point offset) {
+	private void drawCircle(ICircuitGate gate, Graphics g, Point offset) {
 		g.setColor(Color.white);
 		g.fillOval(gate.getPosition().x - offset.x + Constants.componentSize
 				/ 2, gate.getPosition().y - offset.y - 5,

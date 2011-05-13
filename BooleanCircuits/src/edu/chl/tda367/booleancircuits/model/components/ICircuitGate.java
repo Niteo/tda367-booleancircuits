@@ -7,7 +7,7 @@ import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
-public interface IAbstractCircuitGate {
+public interface ICircuitGate {
 
 	/**
 	 * Returns true if gate is connected to the specified gate
@@ -15,14 +15,14 @@ public interface IAbstractCircuitGate {
 	 * @param gate
 	 *            the gate specified
 	 */
-	public boolean connectsTo(IAbstractCircuitGate gate);
+	public boolean connectsTo(ICircuitGate gate);
 
 	/**
 	 * Returns a list of all components this component is recoupled to.
 	 * 
 	 * @return a list of components recoupled to
 	 */
-	public Collection<IAbstractCircuitGate> getRecoupledTo();
+	public Collection<ICircuitGate> getRecoupledTo();
 
 	/**
 	 * Retrieves the inputs of the component
@@ -50,7 +50,7 @@ public interface IAbstractCircuitGate {
 	 * @param outputPort
 	 *            the output port to connect to
 	 */
-	public void connectInput(int inputPort, IAbstractCircuitGate component,
+	public void connectInput(int inputPort, ICircuitGate component,
 			int outputPort);
 
 	/**

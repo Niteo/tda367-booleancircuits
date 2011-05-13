@@ -23,7 +23,7 @@ import javax.swing.event.MouseInputAdapter;
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.utilities.IObservable;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
@@ -41,8 +41,8 @@ public class Canvas {
 	private static IDraw drawer = new Draw();
 	private IModel model;
 	private ISelectionModel selectModel;
-	private IAbstractCircuitGate rightClickedGate = null;
-	private IAbstractCircuitGate connectBufferGate = null;
+	private ICircuitGate rightClickedGate = null;
+	private ICircuitGate connectBufferGate = null;
 	private int connectBufferPort = 0;
 	private int posX, posY;
 	private Point oldDragPosition;
@@ -91,14 +91,14 @@ public class Canvas {
 			if (model != null) {
 				// Draw non-selected
 				g2d.setColor(Color.BLACK);
-				for (IAbstractCircuitGate circuitGate : model.getComponents()) {
+				for (ICircuitGate circuitGate : model.getComponents()) {
 					if (!selectModel.isSelectedComponent(circuitGate)) {
 						drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
 					}
 				}
 				// Draw selected
 				g2d.setColor(Color.BLUE);
-				for (IAbstractCircuitGate circuitGate : model.getComponents()) {
+				for (ICircuitGate circuitGate : model.getComponents()) {
 					if (selectModel.isSelectedComponent(circuitGate)) {
 						drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
 					}
@@ -122,12 +122,12 @@ public class Canvas {
 				int dy = (int) (evt.getPoint().getY() - oldDragPosition.getY());
 				
 				if(draggingMode){
-					for(IAbstractCircuitGate selected : selectModel.getSelectedComponents()){
+					for(ICircuitGate selected : selectModel.getSelectedComponents()){
 						selected.move(dx, dy);
 					}
 					panel.repaint();
 				} else {
-					IAbstractCircuitGate gate = model.getComponent(new Point(evt.getX() + posX, evt.getY() + posY));
+					ICircuitGate gate = model.getComponent(new Point(evt.getX() + posX, evt.getY() + posY));
 					if(gate != null){
 						if(selectModel.isSelectedComponent(gate)){
 							draggingMode = true;

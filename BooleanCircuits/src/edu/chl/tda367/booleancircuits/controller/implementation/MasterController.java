@@ -12,7 +12,7 @@ import edu.chl.tda367.booleancircuits.io.IFileManager;
 import edu.chl.tda367.booleancircuits.io.implementation.FileManager;
 import edu.chl.tda367.booleancircuits.model.IModelManager;
 import edu.chl.tda367.booleancircuits.model.IModelWrapper;
-import edu.chl.tda367.booleancircuits.model.components.IAbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 import edu.chl.tda367.booleancircuits.utilities.implementation.ClipboardManager;
@@ -21,10 +21,10 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 public final class MasterController implements IMasterController {
 
 	private final IModelManager modelManager;
-	private IAbstractCircuitGate connectComponent = null;
+	private ICircuitGate connectComponent = null;
 	private int connectPort = -1;
 	private IFileManager fileManager;
-	private IAbstractCircuitGate chosenGate;
+	private ICircuitGate chosenGate;
 	private IClipboardManager clipboardManager = new ClipboardManager();
 	private Timer clockTimer;
 
@@ -182,17 +182,17 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void setChosenComponent(IAbstractCircuitGate g) {
+	public void setChosenComponent(ICircuitGate g) {
 		chosenGate = g.clone();
 	}
 
 	@Override
-	public void removeComponent(IAbstractCircuitGate g) {
+	public void removeComponent(ICircuitGate g) {
 		modelManager.removeComponent(g);
 	}
 
 	@Override
-	public void connectComponent(IAbstractCircuitGate g, int port) {
+	public void connectComponent(ICircuitGate g, int port) {
 		if (g == null) {
 			connectComponent = null;
 			return;
