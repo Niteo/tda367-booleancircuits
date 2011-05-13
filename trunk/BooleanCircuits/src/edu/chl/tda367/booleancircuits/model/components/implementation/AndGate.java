@@ -18,7 +18,7 @@ public final class AndGate extends AbstractCircuitGate {
 	 *            Number of inputs to the AND-gate
 	 */
 	public AndGate(int inputs) {
-		super.createIO(inputs, 1);
+		super(inputs, 1);
 	}
 
 	/**

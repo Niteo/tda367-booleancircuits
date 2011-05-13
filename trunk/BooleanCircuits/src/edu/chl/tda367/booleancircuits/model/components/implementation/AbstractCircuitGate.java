@@ -20,6 +20,11 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	private boolean isInConnectToCalculation;
 	private Point position = new Point();
 
+	public AbstractCircuitGate(int inPorts, int outPorts){
+		createOutputs(inPorts);
+		createInputs(outPorts);	
+	}
+	
 	private void createOutputs(int amount) {
 		outputs = new Boolean[amount];
 		for (int i = 0; i < outputs.length; i++) {
@@ -48,19 +53,6 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	 */
 	protected void setOutput(int index, boolean value) {
 		outputs[index] = value;
-	}
-
-	/**
-	 * Creates I/O for this component.
-	 * 
-	 * @param in
-	 *            the amount of inputs to be created
-	 * @param out
-	 *            the amount of outputs to be created
-	 */
-	protected void createIO(int in, int out) {
-		createOutputs(out);
-		createInputs(in);
 	}
 
 	public void overwriteGate(AbstractCircuitGate gate) {

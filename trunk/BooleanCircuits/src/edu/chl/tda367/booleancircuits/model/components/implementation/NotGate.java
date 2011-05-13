@@ -11,7 +11,7 @@ import edu.chl.tda367.booleancircuits.model.components.IGateInput;
  */
 public final class NotGate extends AbstractCircuitGate {
 	public NotGate() {
-		super.createIO(1, 1);
+		super(1, 1);
 	}
 
 	/**

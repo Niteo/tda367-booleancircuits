@@ -21,8 +21,8 @@ public class ConstantGate extends AbstractCircuitGate {
 	 *            the boolean value that the gate will output
 	 */
 	public ConstantGate(boolean value) {
+		super(0, 1);
 		constant = value;
-		super.createIO(0, 1);
 	}
 
 	@Override
