@@ -107,6 +107,14 @@ public interface IMasterController {
 	public void selectAllComponents();
 
 	/**
+	 * selects all components in selection square
+	 * 
+	 * @param pos1
+	 * @param pos2
+	 */
+	public void selectComponents(Point pos1, Point pos2);
+
+	/**
 	 * Selects the first occurance of a component at the given coordinate in the
 	 * active workspace
 	 * 
