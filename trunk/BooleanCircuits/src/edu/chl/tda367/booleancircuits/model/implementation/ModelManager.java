@@ -273,10 +273,7 @@ public final class ModelManager implements IObservable, IModelManager {
 			if (gatePosition.x >= start.x && gatePosition.x <= end.x
 					&& gatePosition.y >= start.y && gatePosition.y <= end.y) {
 				selectedComponents.add(gate);
-			} else {
-				System.out.println("Not in select square");
 			}
-
 		}
 		this.getActiveSelectionModel().selectComponents(selectedComponents);
 	}
