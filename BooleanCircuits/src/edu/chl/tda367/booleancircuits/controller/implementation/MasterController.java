@@ -172,6 +172,8 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void pasteSelectedComponents() {
 		modelManager.addComponents(clipboardManager.paste());
+		modelManager.getActiveSelectionModel().selectComponents(
+				clipboardManager.getLastPastedComponents());
 	}
 
 	@Override
