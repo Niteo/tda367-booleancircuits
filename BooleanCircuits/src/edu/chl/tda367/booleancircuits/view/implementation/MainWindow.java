@@ -12,6 +12,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
+
 import edu.chl.tda367.booleancircuits.controller.implementation.ActionController;
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
@@ -385,6 +386,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		editMenu.add(cutMenuItem);
 		editMenu.add(copyMenuItem);
 		editMenu.add(pasteMenuItem);
+		editMenu.add(new JSeparator());
 		editMenu.add(deleteMenuItem);
 		editMenu.add(selectAllMenuItem);
 
