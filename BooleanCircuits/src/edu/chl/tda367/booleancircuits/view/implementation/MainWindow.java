@@ -155,7 +155,9 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 
 		// init edit menu
 		undoMenuItem.setAction(actionController.getUndoAction());
+		undoMenuItem.setEnabled(false);
 		redoMenuItem.setAction(actionController.getRedoAction());
+		redoMenuItem.setEnabled(false);
 		cutMenuItem
 				.setAction(actionController.getCutSelectedComponentsAction());
 		copyMenuItem.setAction(actionController
