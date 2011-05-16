@@ -132,4 +132,9 @@ public final class Model implements IModel {
 	private void _removeComponent(ICircuitGate g) {
 		componentList.remove(g);
 	}
+
+	@Override
+	public void addComponents(Collection<ICircuitGate> components) {
+		componentList.addAll(components);
+	}
 }

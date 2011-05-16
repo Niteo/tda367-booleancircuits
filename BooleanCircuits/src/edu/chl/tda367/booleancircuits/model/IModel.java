@@ -26,6 +26,14 @@ public interface IModel {
 	public void addComponent(ICircuitGate component, Point position);
 
 	/**
+	 * Adds components to the model.
+	 * 
+	 * @param component
+	 *            the components to add
+	 */
+	public void addComponents(Collection<ICircuitGate> components);
+	
+	/**
 	 * Returns a list of components.
 	 * 
 	 * @return a list of components

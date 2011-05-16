@@ -113,4 +113,9 @@ public final class ModelWrapper implements IModelWrapper{
 	public void clock() {
 		model.clock();
 	}
+
+	@Override
+	public void addComponents(Collection<ICircuitGate> components) {
+		model.addComponents(components);
+	}
 }
