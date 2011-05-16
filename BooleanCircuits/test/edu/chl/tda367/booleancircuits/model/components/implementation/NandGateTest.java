@@ -155,18 +155,21 @@ public class NandGateTest {
 	public void testUpdateOutput() {
 		NandGate nand = new NandGate(2);
 		assertFalse(nand.getOutputValue(0));
-		ConstantGate oneGate1 = new ConstantGate(false);
-		ConstantGate oneGate2 = new ConstantGate(false);
+		ConstantGate oneGate1 = new ConstantGate(true);
+		ConstantGate oneGate2 = new ConstantGate(true);
+		
+		nand.update();
+		assertTrue(nand.getOutputValue(0));
 
 		nand.connectInput(0, oneGate1, 0);
 		oneGate1.update();
-		assertFalse(nand.getInputs().get(0).getInputValue());
+		assertTrue(nand.getInputs().get(0).getInputValue());
 		nand.connectInput(1, oneGate2, 0);
 		oneGate2.update();
-		assertFalse(nand.getInputs().get(1).getInputValue());
+		assertTrue(nand.getInputs().get(1).getInputValue());
 
 		nand.update();
-		assertTrue(nand.getOutputValue(0));
+		assertFalse(nand.getOutputValue(0));
 	}
 
 }

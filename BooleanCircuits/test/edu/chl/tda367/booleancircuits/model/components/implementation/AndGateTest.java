@@ -30,8 +30,7 @@ public class AndGateTest {
 
 	@Test
 	public void testToString() {
-		AndGate and = new AndGate(2);
-		assertEquals("AND", and.toString());
+		assertEquals("AND", new AndGate(2).toString());
 	}
 
 	@Test
@@ -162,6 +161,10 @@ public class AndGateTest {
 		and.connectInput(0, oneGate1, 0);
 		oneGate1.update();
 		assertTrue(and.getInputs().get(0).getInputValue());
+		
+		and.update();
+		assertFalse(and.getOutputValue(0));
+		
 		and.connectInput(1, oneGate2, 0);
 		oneGate2.update();
 		assertTrue(and.getInputs().get(1).getInputValue());

@@ -153,16 +153,27 @@ public class NotGateTest {
 
 	@Test
 	public void testUpdateOutput() {
-		NotGate not = new NotGate();
-		assertFalse(not.getOutputValue(0));
-		ConstantGate oneGate1 = new ConstantGate(true);
+		NotGate not1 = new NotGate();
+		NotGate not2 = new NotGate();
+		assertFalse(not1.getOutputValue(0));
+		ConstantGate oneGate = new ConstantGate(true);
+		ConstantGate zeroGate = new ConstantGate(false);
 
-		not.connectInput(0, oneGate1, 0);
-		oneGate1.update();
-		assertTrue(not.getInputs().get(0).getInputValue());
+		// Invert one
+		not1.connectInput(0, oneGate, 0);
+		oneGate.update();
+		assertTrue(not1.getInputs().get(0).getInputValue());
 
-		not.update();
-		assertFalse(not.getOutputValue(0));
+		not1.update();
+		assertFalse(not1.getOutputValue(0));
+
+		// Invert zero
+		not2.connectInput(0, zeroGate, 0);
+		zeroGate.update();
+		assertFalse(not2.getInputs().get(0).getInputValue());
+
+		not2.update();
+		assertTrue(not2.getOutputValue(0));
 	}
 
 }
