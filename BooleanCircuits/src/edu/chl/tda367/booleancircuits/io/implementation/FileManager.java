@@ -43,7 +43,6 @@ public final class FileManager implements IFileManager {
 				txt += " " + gate.toString() + " " + gate.getNoOfInputs() + " "
 						+ gate.getNoOfOutputs() + " " + gate.getPosition().x
 						+ " " + gate.getPosition().y;
-				txt.toUpperCase();
 				saveFile.println(txt);
 			}
 			// Print all connections
