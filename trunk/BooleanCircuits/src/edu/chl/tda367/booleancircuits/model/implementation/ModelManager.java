@@ -80,6 +80,11 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
+	public IModelWrapper getWorkspace(int i) {
+		return modelList.get(i);
+	}
+
+	@Override
 	public IModelWrapper getActiveWorkspaceModel() {
 		return _getActiveWorkspaceModel();
 	}
