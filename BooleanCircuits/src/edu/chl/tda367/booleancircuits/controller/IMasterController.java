@@ -17,16 +17,19 @@ public interface IMasterController {
 
 	/**
 	 * Closes all workspaces.
+	 * 
+	 * @return returns true if all workspaces has been closed successfully
 	 */
-	public void closeAllWorkspaces();
+	public boolean closeAllWorkspaces();
 
 	/**
 	 * Closes a specific workspace selected by int.
 	 * 
 	 * @param i
 	 *            int number of the workspace
+	 * @return returns true if workspace has been closed successfully
 	 */
-	public void closeWorkspace(int i);
+	public boolean closeWorkspace(int i);
 
 	/**
 	 * Creates a new blank workspace.

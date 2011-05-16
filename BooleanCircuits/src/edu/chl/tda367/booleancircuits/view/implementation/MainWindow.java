@@ -8,10 +8,26 @@ package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
+import javax.swing.WindowConstants;
 
 import edu.chl.tda367.booleancircuits.controller.implementation.ActionController;
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
@@ -32,6 +48,14 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 	private CenterStage cs;
 	private ActionController actionController;
 	private Palette palette;
+	private WindowAdapter windowAdapter = new WindowAdapter() {
+		@Override
+		public void windowClosing(WindowEvent arg0) {
+			if (mc.closeAllWorkspaces()) {
+				dispose();
+			}
+		}
+	};
 
 	private ActionListener listener = new ActionListener() {
 
@@ -86,6 +110,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		cs = new CenterStage(closeWorkspace, this, mc);
 		palette = new Palette(mc);
 
+		this.addWindowListener(windowAdapter);
 		cs.setBackground(new GridBackground());
 
 		initComponents();
@@ -337,7 +362,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		startClockMenuItem = new JMenuItem();
 		pauseClockMenuItem = new JMenuItem();
 
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
 		verticalSplitPane.setDividerLocation(30);
 		verticalSplitPane.setDividerSize(0);
