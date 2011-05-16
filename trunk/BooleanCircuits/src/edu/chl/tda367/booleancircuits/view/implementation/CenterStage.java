@@ -85,12 +85,13 @@ public class CenterStage implements ICenterStage {
 			tabManager.setSelectedTabIndex(modelManager
 					.getActiveWorkspaceIndex());
 		}
-		if (modelManager.getWorkspaces().size() < 1) {
+		if (modelManager.getWorkspaces().size() > 0) {
 			for (int i = 0; i < tabManager.getTabCount(); i++) {
-
-				((TabPanel) tabManager.getTabbedPane().getTabComponentAt(i))
-						.setTabPanelTitle(modelManager.getWorkspaces().get(i)
-								.toString());
+				TabPanel panel = tabManager.getTabPanel(i);
+				if (panel != null) {
+					panel.setTabPanelTitle(modelManager.getWorkspaces()
+							.get(i).toString());
+				}
 			}
 		}
 
