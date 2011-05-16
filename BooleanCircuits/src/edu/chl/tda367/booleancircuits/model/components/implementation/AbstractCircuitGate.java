@@ -63,7 +63,7 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 
 	public void connectInput(int inputPort, ICircuitGate component,
 			int outputPort)throws IllegalArgumentException {
-		if(inputPort ==0){
+		if(inputPort > inputs.size()-1){
 			throw new IllegalArgumentException();
 		}else{
 		inputs.get(inputPort).setInputComponent(component, outputPort);
