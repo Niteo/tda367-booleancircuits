@@ -43,6 +43,7 @@ public class Canvas {
 	private boolean connectingInput;
 	private boolean connectingOutput;
 	private boolean draggingMode;
+	private boolean panning;
 	private MasterController _masterController;
 	private CanvasPopup menu;
 	private Point drawSelect;
@@ -158,13 +159,14 @@ public class Canvas {
 					}
 				} else {
 					ICircuitGate gate = model.getComponent(dragPosition);
-					if (gate != null) {
+					if (gate != null && !panning) {
 						draggingMode = true;
 						if(!selectModel.isSelectedComponent(gate)){
 							selectModel.selectComponent(gate, false);
 						}
 					} else {
 						panCanvas(-dx, -dy);
+						panning = true;
 					}
 				}
 			}
@@ -177,6 +179,7 @@ public class Canvas {
 			final Point releasePoint = evt.getPoint();
 			oldDragPosition = null;
 			draggingMode = false;
+			panning = false;
 			if (drawSelect != null) {
 				_masterController.selectComponents(new Point(drawSelect.x
 						+ posX, drawSelect.y + posY), new Point(releasePoint.x
@@ -261,7 +264,6 @@ public class Canvas {
 				}
 			}
 		} else if (evt.getButton() == MouseEvent.BUTTON3) { // RightMouseButton
-
 			rightClickedGate = model.getComponent(pointClicked);
 			JPopupMenu jpm = new JPopupMenu();
 
@@ -300,6 +302,7 @@ public class Canvas {
 				menu.updateMenu(rightClickedGate.getNoOfInputs(),
 						rightClickedGate.getNoOfOutputs(), !connectingInput,
 						!connectingOutput);
+				selectModel.selectComponent(rightClickedGate, false);
 			}
 
 			jpm.show(evt.getComponent(), (int) evt.getPoint().getX(), (int) evt
