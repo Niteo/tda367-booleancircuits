@@ -183,4 +183,9 @@ public interface IModelManager {
 	 * Clocks the active model with a clock pulse.
 	 */
 	public void clockActiveModel();
+
+	/**
+	 * Returns indexed workspace from internal model list.
+	 */
+	public IModelWrapper getWorkspace(int i);
 }

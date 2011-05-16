@@ -173,4 +173,5 @@ public interface IMasterController {
 	 * Toggles the clock timer.
 	 */
 	public void toggleClockTimer();
+
 }

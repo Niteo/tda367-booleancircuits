@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
@@ -61,12 +62,37 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void closeAllWorkspaces() {
-		modelManager.closeAllWorkspaces();
+		// Bug här
+		for (int i = 0; i < modelManager.getWorkspaces().size(); i++) {
+			closeWorkspace(i);
+		}
 	}
 
 	@Override
 	public void closeWorkspace(int i) {
-		modelManager.closeWorkspace(i);
+
+		if (saveMessage(modelManager.getWorkspace(i)) == 2) {
+
+			modelManager.closeWorkspace(i);
+		} else if (saveMessage(modelManager.getWorkspace(i)) == 0) {
+			_saveWorkspace(modelManager.getWorkspace(i));
+			modelManager.closeWorkspace(i);
+		}
+
+	}
+
+	private int saveMessage(IModelWrapper model) {
+		if (model.hasChanged()) {
+			// Custom button text
+			Object[] options = { "Yes", "Cancel", "No" };
+			int answer = JOptionPane.showOptionDialog(null,
+					"Would you like to save changes?", model.toString(),
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+			System.out.println(answer);
+			return answer;
+		}
+		return 2;
 	}
 
 	@Override
