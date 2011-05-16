@@ -62,8 +62,12 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	}
 
 	public void connectInput(int inputPort, ICircuitGate component,
-			int outputPort) {
+			int outputPort)throws IllegalArgumentException {
+		if(inputPort ==0){
+			throw new IllegalArgumentException();
+		}else{
 		inputs.get(inputPort).setInputComponent(component, outputPort);
+		}
 	}
 
 	public boolean getOutputValue(int index) {

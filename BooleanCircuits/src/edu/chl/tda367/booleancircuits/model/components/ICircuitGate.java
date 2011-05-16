@@ -10,12 +10,13 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCi
 public interface ICircuitGate {
 
 	/**
-	 * Returns true if gate is connected to the specified gate
+	 * Returns true if gate is connected to the specified gate 
 	 * 
 	 * @param gate
 	 *            the gate specified
+	 * @throws IllegalArgumentException
 	 */
-	public boolean connectsTo(ICircuitGate gate);
+	public boolean connectsTo(ICircuitGate gate)throws IllegalArgumentException;
 
 	/**
 	 * Returns a list of all components this component is recoupled to.
