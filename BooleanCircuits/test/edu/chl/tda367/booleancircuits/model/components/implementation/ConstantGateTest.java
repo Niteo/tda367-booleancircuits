@@ -11,12 +11,12 @@ import org.junit.Test;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
-
 public class ConstantGateTest {
 	@Test
 	public void testConstantGate() {
-		ConstantGate falseConstantGate = new ConstantGate(false);
-		ConstantGate trueConstantGate = new ConstantGate(true);
+		new ConstantGate(false);
+		new ConstantGate(true);
+
 	}
 
 	@Test
@@ -29,17 +29,16 @@ public class ConstantGateTest {
 
 	}
 
-	@Test
-	public void testUpdateOutput() {
-		fail("Not yet implemented");
-	}
+	
 
 	@Test
 	public void testEmptyGateClone() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
 		ICircuitGate emptyGate = falseConstantGate.emptyGateClone();
-		
-		//assertTrue(falseConstantGate instanceof emptyGate.);
+
+		assertTrue(emptyGate instanceof ConstantGate);
+		assertTrue(emptyGate.getNoOfInputs() == falseConstantGate
+				.getNoOfInputs());
 	}
 
 	@Test
@@ -52,125 +51,36 @@ public class ConstantGateTest {
 	public void testSetOutput() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
 		ConstantGate trueConstantGate = new ConstantGate(true);
-		
+
 		falseConstantGate.setOutput(0, false);
 		trueConstantGate.setOutput(0, true);
-		
-		assertTrue(falseConstantGate.getNoOfOutputs()==1);
-		assertTrue(falseConstantGate.getOutputValue(0)==false);
-		
-		
-		assertTrue(trueConstantGate.getNoOfOutputs()==1);
-		assertTrue(trueConstantGate.getOutputValue(0)==true);
+
+		assertTrue(falseConstantGate.getNoOfOutputs() == 1);
+		assertTrue(falseConstantGate.getOutputValue(0) == false);
+
+		assertTrue(trueConstantGate.getNoOfOutputs() == 1);
+		assertTrue(trueConstantGate.getOutputValue(0) == true);
 	}
 
 	@Test
 	public void testOverwriteGate() {
-		fail("Not yet implemented");
+		ConstantGate falseConstantGate = new ConstantGate(false);
+		ConstantGate test = new ConstantGate(true);
+		falseConstantGate.overwriteGate(test);
+
+		assertTrue(falseConstantGate.getInputs().equals(test.getInputs()));
+		assertTrue(falseConstantGate.getOutputValue(0) == test
+				.getOutputValue(0));
+
 	}
 
-	@Test
-	public void testConnectInput() {
+	@Test(expected = IllegalArgumentException.class)
+	public void testConnectInput() throws IllegalArgumentException {
 		ConstantGate falseConstantGate = new ConstantGate(false);
-		ConstantGate trueConstantGate = new ConstantGate(true);
-		
-		
-		ICircuitGate newComponent = new AbstractCircuitGate(1, 1){
 
-			@Override
-			public void connectInput(int inputPort,
-					ICircuitGate component, int outputPort) {
-				// TODO Auto-generated method stub
-				
-			}
+		falseConstantGate.connectInput(0, new ConstantGate(true), 1);
+		assertTrue(falseConstantGate.getInputs().get(0).getInputValue() == false);
 
-			@Override
-			public boolean connectsTo(ICircuitGate gate) {
-				return false;
-			}
-
-			@Override
-			public int getComponentTier() {
-				return 0;
-			}
-
-			@Override
-			public List<IGateInput> getInputs() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public int getNoOfInputs() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-
-			@Override
-			public int getNoOfOutputs() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-
-			@Override
-			public boolean getOutputValue(int index) {
-				return false;
-			}
-
-			@Override
-			public Point getPosition() {
-				return null;
-			}
-
-			@Override
-			public Collection<ICircuitGate> getRecoupledTo() {
-				
-				return null;
-			}
-
-			@Override
-			public void move(int deltaX, int deltaY) {
-						
-			}
-
-			@Override
-			public void overwriteGate(AbstractCircuitGate gate) {
-							
-			}
-
-			@Override
-			public void setPosition(Point position) {
-				
-			}
-
-			@Override
-			public void update() {
-				
-			}
-
-			@Override
-			protected AbstractCircuitGate emptyGateClone() {
-				return null;
-			}
-
-			@Override
-			public String toString() {
-				return null;
-			}
-
-			@Override
-			protected void updateOutput() {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		};
-		
-	
-		
-		assertTrue(falseConstantGate.getInputs().size()==1);
-	
-		
 	}
 
 	@Test
@@ -179,7 +89,7 @@ public class ConstantGateTest {
 		ConstantGate trueConstantGate = new ConstantGate(true);
 
 		falseConstantGate.setOutput(0, false);
-		trueConstantGate.setOutput(0,true);
+		trueConstantGate.setOutput(0, true);
 
 		assertTrue(falseConstantGate.getOutputValue(0) == false);
 		assertTrue(trueConstantGate.getOutputValue(0) == true);
@@ -188,67 +98,95 @@ public class ConstantGateTest {
 	@Test
 	public void testGetNoOfInputs() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
-		ConstantGate trueConstantGate = new ConstantGate(true);
-
 		assertTrue(falseConstantGate.getNoOfInputs() == 0);
-		assertTrue(trueConstantGate.getNoOfInputs() == 0);
+
 	}
 
 	@Test
 	public void testGetNoOfOutputs() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
-		ConstantGate trueConstantGate = new ConstantGate(true);
-
 		assertTrue(falseConstantGate.getNoOfOutputs() == 1);
-		assertTrue(trueConstantGate.getNoOfOutputs() == 1);
+
 	}
 
 	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+		new ConstantGate(true).update();
 	}
 
 	@Test
 	public void testGetComponentTier() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
 		ConstantGate trueConstantGate = new ConstantGate(true);
-		
+
 		falseConstantGate.setOutput(0, trueConstantGate.getOutputValue(0));
-		
-		assertTrue(falseConstantGate.getComponentTier()==1);
+
+		assertTrue(falseConstantGate.getComponentTier() == 1);
 	}
 
 	@Test
 	public void testGetPosition() {
-		fail("Not yet implemented");
+		ConstantGate falseConstantGate = new ConstantGate(false);
+		assertTrue(falseConstantGate.getPosition().equals(new Point(0,0)));
+		
+		
+	
 	}
 
 	@Test
 	public void testSetPosition() {
-		fail("Not yet implemented");
+		ConstantGate falseConstantGate = new ConstantGate(false);
+		
+		falseConstantGate.setPosition(new Point(10,10));
+		falseConstantGate.getPosition().equals(new Point(10,10));
+		
+		
 	}
 
-	
 	@Test
 	public void testMove() {
-		fail("Not yet implemented");
+		ConstantGate falseConstantGate = new ConstantGate(false);
 		
+		falseConstantGate.setPosition(new Point(10,10));
+		falseConstantGate.move(15,10);
+		assertTrue(falseConstantGate.getPosition().x==25);
+		assertTrue(falseConstantGate.getPosition().y==20);
+		
+
 	}
 
 	@Test
 	public void testClone() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
 		ConstantGate trueConstantGate = new ConstantGate(true);
-		
+
 		ICircuitGate falseClone = falseConstantGate.clone();
 		assertTrue(falseClone instanceof ConstantGate);
-		assertTrue(falseClone.getNoOfInputs()==falseConstantGate.getNoOfInputs());
-		assertTrue(falseClone.getNoOfOutputs()==falseConstantGate.getNoOfOutputs());
-		
+		assertTrue(falseClone.getNoOfInputs() == falseConstantGate
+				.getNoOfInputs());
+		assertTrue(falseClone.getNoOfOutputs() == falseConstantGate
+				.getNoOfOutputs());
+
 		ICircuitGate trueClone = trueConstantGate.clone();
 		assertTrue(trueClone instanceof ConstantGate);
-		assertTrue(trueClone.getNoOfInputs()==trueConstantGate.getNoOfInputs());
-		assertTrue(trueClone.getNoOfOutputs()==trueConstantGate.getNoOfOutputs());
+		assertTrue(trueClone.getNoOfInputs() == trueConstantGate
+				.getNoOfInputs());
+		assertTrue(trueClone.getNoOfOutputs() == trueConstantGate
+				.getNoOfOutputs());
 	}
-
+	@Test
+	public void testUpdateOutput() {
+		
+		ConstantGate falseConstantGate = new ConstantGate(false);
+		ConstantGate trueConstantGate = new ConstantGate(true);
+		
+		falseConstantGate.update();
+		assertFalse(falseConstantGate.getOutputValue(0));
+		assertFalse(trueConstantGate.getOutputValue(0));
+		trueConstantGate.update();
+		assertTrue(trueConstantGate.getOutputValue(0));
+		
+		
+		
+	}
 }
