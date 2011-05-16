@@ -61,24 +61,34 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void closeAllWorkspaces() {
-		// Bug här
-		for (int i = 0; i < modelManager.getWorkspaces().size(); i++) {
-			closeWorkspace(i);
+	public boolean closeAllWorkspaces() {
+		int size = modelManager.getWorkspaces().size();
+		int counter = 0;
+		for (int i = 0; i < size; i++) {
+			if (!closeWorkspace(counter)) {
+				counter++;
+			}
 		}
+		return modelManager.getWorkspaces().size() == 0;
 	}
 
 	@Override
-	public void closeWorkspace(int i) {
+	public boolean closeWorkspace(int i) {
 
-		if (saveMessage(modelManager.getWorkspace(i)) == 2) {
-
-			modelManager.closeWorkspace(i);
-		} else if (saveMessage(modelManager.getWorkspace(i)) == 0) {
-			_saveWorkspace(modelManager.getWorkspace(i));
+		int answer = saveMessage(modelManager.getWorkspace(i));
+		boolean closed = true;
+		if (answer == 0) {
+			if (_saveWorkspace(modelManager.getWorkspace(i))) {
+				modelManager.closeWorkspace(i);
+			} else {
+				closed = false;
+			}
+		} else if (answer == 1) {
+			closed = false;
+		} else {
 			modelManager.closeWorkspace(i);
 		}
-
+		return closed;
 	}
 
 	private int saveMessage(IModelWrapper model) {
@@ -127,24 +137,27 @@ public final class MasterController implements IMasterController {
 		}
 	}
 
-	private void _saveWorkspace(IModelWrapper imw) {
+	private boolean _saveWorkspace(IModelWrapper imw) {
 		if (imw.getFile() != null) {
 			fileManager.saveFile(imw.getComponents(), imw.getFile());
 			imw.setChangedFalse();
 			modelManager.manualPropertyChanged();
+			return true;
 		} else {
-			_saveWorkspaceAs(imw);
+			return _saveWorkspaceAs(imw);
 		}
 	}
 
-	private void _saveWorkspaceAs(IModelWrapper imw) {
+	private boolean _saveWorkspaceAs(IModelWrapper imw) {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 			fileManager.saveFile(imw.getComponents(), fc.getSelectedFile());
 			imw.setFile(fc.getSelectedFile());
 			imw.setChangedFalse();
 			modelManager.manualPropertyChanged();
+			return true;
 		}
+		return false;
 	}
 
 	@Override
