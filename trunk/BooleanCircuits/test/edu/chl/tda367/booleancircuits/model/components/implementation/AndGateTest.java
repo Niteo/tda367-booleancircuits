@@ -43,7 +43,6 @@ public class AndGateTest {
 	@Test
 	public void testGetOutputValue() {
 		AndGate and = new AndGate(2);
-		;
 		assertFalse(and.getOutputValue(0));
 	}
 
