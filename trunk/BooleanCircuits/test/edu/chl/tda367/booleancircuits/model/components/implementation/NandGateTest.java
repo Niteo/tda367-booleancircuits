@@ -2,6 +2,7 @@ package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
 import java.util.List;
 
 import org.junit.Test;
@@ -114,6 +115,29 @@ public class NandGateTest {
 		NandGate testGate = new NandGate(2);
 		nand.connectInput(0, testGate, 0);
 		assertTrue(nand.connectsTo(testGate));
+	}
+
+	@Test
+	public void testGetPosition() {
+		NandGate nand = new NandGate(2);
+		assertTrue(nand.getPosition().x == 0 && nand.getPosition().y == 0);
+	}
+
+	@Test
+	public void testSetPosition() {
+		NandGate nand = new NandGate(2);
+		assertTrue(nand.getPosition().x == 0 && nand.getPosition().y == 0);
+		Point p = new Point(8, 8);
+		nand.setPosition(p);
+		assertTrue(nand.getPosition() == p);
+	}
+
+	@Test
+	public void testMove() {
+		NandGate nand = new NandGate(2);
+		assertTrue(nand.getPosition().x == 0 && nand.getPosition().y == 0);
+		nand.move(7, 8);
+		assertTrue(nand.getPosition().x == 7 && nand.getPosition().y == 8);
 	}
 
 	@Test
