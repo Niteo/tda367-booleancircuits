@@ -157,6 +157,9 @@ public class NorGateTest {
 		assertFalse(nor.getOutputValue(0));
 		ConstantGate oneGate1 = new ConstantGate(true);
 		ConstantGate oneGate2 = new ConstantGate(true);
+		
+		nor.update();
+		assertTrue(nor.getOutputValue(0));
 
 		nor.connectInput(0, oneGate1, 0);
 		oneGate1.update();
