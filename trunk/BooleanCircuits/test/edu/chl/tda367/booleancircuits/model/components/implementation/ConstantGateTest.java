@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
-import edu.chl.tda367.booleancircuits.model.implementation.Model;
+
 
 public class ConstantGateTest {
 	@Test
