@@ -13,7 +13,7 @@ public class ModelTest {
 	@Test
 	public void testModel() {
 
-		Model model = new Model();
+		 new Model();
 
 	}
 
