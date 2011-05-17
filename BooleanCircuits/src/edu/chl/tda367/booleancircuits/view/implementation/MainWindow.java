@@ -222,19 +222,19 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		toolbar.getUndoButton().setEnabled(false);
 
 		// Tooltips
-		toolbar.getCutButton().setToolTipText("Cut");
-		toolbar.getCopyButton().setToolTipText("Copy");
-		toolbar.getNewWorkspaceButton().setToolTipText("New Workspace");
-		toolbar.getOpenFileButton().setToolTipText("Open File");
-		toolbar.getPasteButton().setToolTipText("Paste");
+		toolbar.getCutButton().setToolTipText("Cut (Ctrl+X");
+		toolbar.getCopyButton().setToolTipText("Copy (Ctrl+C)");
+		toolbar.getNewWorkspaceButton().setToolTipText("New Workspace (Ctrl+N)");
+		toolbar.getOpenFileButton().setToolTipText("Open File (Ctrl+O)");
+		toolbar.getPasteButton().setToolTipText("Paste (Ctrl+V)");
 		toolbar.getPauseClockButton().setToolTipText("Pause Clock Signal");
-		toolbar.getRedoButton().setToolTipText("Redo");
+		toolbar.getRedoButton().setToolTipText("Redo (Ctrl+Y)");
 		toolbar.getSaveAsComponentButton()
 				.setToolTipText("Import to Workspace");
 		toolbar.getSaveAllButton().setToolTipText("Save All");
-		toolbar.getSaveButton().setToolTipText("Save");
+		toolbar.getSaveButton().setToolTipText("Save (Ctrl+S)");
 		toolbar.getStartClockButton().setToolTipText("Start Clock Signal");
-		toolbar.getUndoButton().setToolTipText("Undo");
+		toolbar.getUndoButton().setToolTipText("Undo (Ctrl+Z)");
 
 	}
 

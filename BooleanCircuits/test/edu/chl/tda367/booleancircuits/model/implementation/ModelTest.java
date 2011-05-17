@@ -59,12 +59,12 @@ public class ModelTest {
 		NandGate nand = new NandGate(2);
 		Model model = new Model();
 		model.addComponent(and, new Point(10, 10));
-		model.addComponent(not, new Point(14, 14));
-		model.addComponent(nand, new Point(20, 20));
+		model.addComponent(not, new Point(80, 80));
+		model.addComponent(nand, new Point(200, 200));
 
-		assertTrue(model.getComponent(new Point(10, 10)).equals(and)
-				&& model.getComponent(new Point(10, 10)).equals(not)
-				&& model.getComponent(new Point(10, 10)).equals(nand));
+		assertTrue(model.getComponent(new Point(10, 10)) instanceof AndGate);
+		assertTrue(model.getComponent(new Point(80, 80)) instanceof NotGate);
+		assertTrue(model.getComponent(new Point(200, 200)) instanceof NandGate);
 
 	}
 
