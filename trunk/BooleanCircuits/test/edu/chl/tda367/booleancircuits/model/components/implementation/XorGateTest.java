@@ -36,7 +36,7 @@ public class XorGateTest {
 	@Test
 	public void testGetInputs() {
 		XorGate xor = new XorGate(2);
-		assertTrue(xor.getInputs() instanceof List);
+		assertTrue(xor.getInputs().size()==2);
 	}
 
 	@Test

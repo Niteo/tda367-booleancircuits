@@ -29,7 +29,6 @@ public class NotGateTest {
 	@Test
 	public void testGetInputs() {
 		NotGate not = new NotGate();
-		assertTrue(not.getInputs() instanceof List);
 		assertTrue(not.getInputs().size() == 1);
 	}
 
