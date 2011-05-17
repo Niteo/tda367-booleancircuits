@@ -38,7 +38,7 @@ public class XnorGateTest {
 	@Test
 	public void testGetInputs() {
 		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getInputs() instanceof List);
+		assertTrue(xnor.getInputs().size()==2);
 	}
 
 	@Test

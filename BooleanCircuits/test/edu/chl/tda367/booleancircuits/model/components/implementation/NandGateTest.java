@@ -31,7 +31,7 @@ public class NandGateTest {
 	@Test
 	public void testGetInputs() {
 		NandGate nand = new NandGate(2);
-		assertTrue(nand.getInputs() instanceof List);
+		assertTrue(nand.getInputs().size()==2);
 	}
 
 	@Test

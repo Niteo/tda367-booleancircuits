@@ -59,8 +59,8 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void closeAllWorkspaces() {
-		modelList.removeAll(modelList);
-		selectionModelList.removeAll(selectionModelList);
+		modelList.clear();
+		selectionModelList.clear();
 		_setActiveWorkspace(-1);
 	}
 

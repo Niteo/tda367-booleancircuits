@@ -31,17 +31,14 @@ public class CenterStage implements ICenterStage {
 	private List<IModel> tabIdList = new LinkedList<IModel>();
 	private TabManager tabManager = new TabManager();
 	private Action closeWorkspace;
-	private MainWindow mainWindow;
 	private MasterController mc;
 
 	/** Returns an instance of Canvas. */
-	public CenterStage(Action closeWorkspace, MainWindow mainWindow,
-			MasterController masterController) {
+	public CenterStage(Action closeWorkspace, MasterController masterController) {
 		mc = masterController;
 		centerStagePanel.add(tabManager.getTabbedPane());
 		centerStagePanel.setLayout(new GridLayout(1, 1));
 		this.closeWorkspace = closeWorkspace;
-		this.mainWindow = mainWindow;
 	}
 
 	private void newTab(String s, IModel m, ISelectionModel sm) {
@@ -89,8 +86,8 @@ public class CenterStage implements ICenterStage {
 			for (int i = 0; i < tabManager.getTabCount(); i++) {
 				TabPanel panel = tabManager.getTabPanel(i);
 				if (panel != null) {
-					panel.setTabPanelTitle(modelManager.getWorkspaces()
-							.get(i).toString());
+					panel.setTabPanelTitle(modelManager.getWorkspaces().get(i)
+							.toString());
 				}
 			}
 		}

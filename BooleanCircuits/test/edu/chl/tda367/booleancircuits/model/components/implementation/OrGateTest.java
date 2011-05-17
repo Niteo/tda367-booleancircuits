@@ -36,7 +36,7 @@ public class OrGateTest {
 	@Test
 	public void testGetInputs() {
 		OrGate or = new OrGate(2);
-		assertTrue(or.getInputs() instanceof List);
+		assertTrue(or.getInputs().size()==2);
 	}
 
 	@Test

@@ -36,7 +36,7 @@ public class NorGateTest {
 	@Test
 	public void testGetInputs() {
 		NorGate nor = new NorGate(2);
-		assertTrue(nor.getInputs() instanceof List);
+		assertTrue(nor.getInputs().size()==2);
 	}
 
 	@Test

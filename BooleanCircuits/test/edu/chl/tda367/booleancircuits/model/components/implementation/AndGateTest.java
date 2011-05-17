@@ -36,7 +36,7 @@ public class AndGateTest {
 	@Test
 	public void testGetInputs() {
 		AndGate and = new AndGate(2);
-		assertTrue(and.getInputs() instanceof List);
+		assertTrue(and.getInputs().size()==2);
 	}
 
 	@Test

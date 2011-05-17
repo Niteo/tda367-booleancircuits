@@ -107,7 +107,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		mm.addPropertyChangeListener(this);
 		mc = new MasterController(mm);
 		actionController = new ActionController(mc);
-		cs = new CenterStage(closeWorkspace, this, mc);
+		cs = new CenterStage(closeWorkspace, mc);
 		palette = new Palette(mc);
 
 		this.addWindowListener(windowAdapter);

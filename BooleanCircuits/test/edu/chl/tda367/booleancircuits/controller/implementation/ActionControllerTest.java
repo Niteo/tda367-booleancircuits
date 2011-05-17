@@ -2,6 +2,8 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 
 import static org.junit.Assert.*;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 
@@ -18,102 +20,144 @@ public class ActionControllerTest {
 
 	@Test
 	public void testGetNewWorkspaceAction() {
-		assertNotNull(new ActionController(new MasterController(new ModelManager())).getNewWorkspaceAction());
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getNewWorkspaceAction());
+		assertTrue(ac.getNewWorkspaceAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetCloseActiveWorkspaceAction() {
-		assertNotNull(new ActionController(new MasterController(new ModelManager())).getCloseActiveWorkspaceAction());
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getCloseActiveWorkspaceAction());
+		assertTrue(ac.getCloseActiveWorkspaceAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetCloseAllWorkspacesAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getCloseAllWorkspacesAction());
+		assertTrue(ac.getCloseAllWorkspacesAction() instanceof AbstractAction);
+
 	}
 
 	@Test
 	public void testGetOpenWorkspaceAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getOpenWorkspaceAction());
+		assertTrue(ac.getOpenWorkspaceAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetSaveActiveWorkspaceAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getSaveActiveWorkspaceAction());
+		assertTrue(ac.getSaveActiveWorkspaceAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetSaveAllWorkspacesAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getSaveAllWorkspacesAction());
+		assertTrue(ac.getSaveAllWorkspacesAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetCopySelectedComponentsAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getCopySelectedComponentsAction());
+		assertTrue(ac.getCopySelectedComponentsAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetCutSelectedComponentsAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getCutSelectedComponentsAction());
+		assertTrue(ac.getCutSelectedComponentsAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetPasteSelectedComponentAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getPasteSelectedComponentAction());
+		assertTrue(ac.getPasteSelectedComponentAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetUndoAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getUndoAction());
+		assertTrue(ac.getUndoAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetRedoAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getRedoAction());
+		assertTrue(ac.getRedoAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetExitAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getExitAction());
+		assertTrue(ac.getExitAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetRemoveSelectedComponentsAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getRemoveSelectedComponentsAction());
+		assertTrue(ac.getRemoveSelectedComponentsAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetSelectAllComponentsAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getSelectAllComponentsAction());
+		assertTrue(ac.getSelectAllComponentsAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetSaveAsAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getSaveAsAction());
+		assertTrue(ac.getSaveAsAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetStartClockAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getStartClockAction());
+		assertTrue(ac.getStartClockAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetPauseClockAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getPauseClockAction());
+		assertTrue(ac.getPauseClockAction() instanceof AbstractAction);
+
 	}
 
 	@Test
 	public void testGetImportWorkspaceAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getImportWorkspaceAction());
+		assertTrue(ac.getImportWorkspaceAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetShowAboutBoxAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getShowAboutBoxAction());
+		assertTrue(ac.getShowAboutBoxAction() instanceof AbstractAction);
 	}
 
 	@Test
 	public void testGetShowHelpAction() {
-		fail("Not yet implemented");
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getShowHelpAction());
+		assertTrue(ac.getShowHelpAction() instanceof AbstractAction);
 	}
 
 	@Test
