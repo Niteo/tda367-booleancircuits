@@ -28,5 +28,10 @@ public interface IGateInput {
 	 * @return boolean: output
 	 */
 	public boolean getInputValue();
+	
+	/**
+	 * Resets the input so that it is not connected to anything.
+	 */
+	public void reset();
 }
 

@@ -5,6 +5,7 @@ import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
@@ -72,6 +73,14 @@ public final class Model implements IModel {
 	public void updateComponents() {
 		List<List<ICircuitGate>> groupList = new ArrayList<List<ICircuitGate>>();
 
+		for (ICircuitGate iGate : componentList) {
+			for(IGateInput input : iGate.getInputs()){
+				if(!componentList.contains(input.getInputComponent())){
+					input.reset();
+				}
+			}
+		}
+		
 		// Prepare tiers
 		int maxTier = 0;
 		for (ICircuitGate iGate : componentList) {
