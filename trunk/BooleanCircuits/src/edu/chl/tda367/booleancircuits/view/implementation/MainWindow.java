@@ -12,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Locale;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -230,8 +231,8 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		toolbar.getPauseClockButton().setToolTipText("Pause Clock Signal");
 		toolbar.getRedoButton().setToolTipText("Redo (Ctrl+Y)");
 		toolbar.getSaveAsComponentButton()
-				.setToolTipText("Import to Workspace");
-		toolbar.getSaveAllButton().setToolTipText("Save All");
+				.setToolTipText("Import to Workspace (Ctrl+I)");
+		toolbar.getSaveAllButton().setToolTipText("Save All (Ctrl+Shift+S)");
 		toolbar.getSaveButton().setToolTipText("Save (Ctrl+S)");
 		toolbar.getStartClockButton().setToolTipText("Start Clock Signal");
 		toolbar.getUndoButton().setToolTipText("Undo (Ctrl+Z)");
@@ -311,6 +312,13 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		openFileMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_O,
 				java.awt.event.InputEvent.CTRL_MASK));
+		saveAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_S,
+				java.awt.event.InputEvent.CTRL_DOWN_MASK|java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+		importToWorkspaceMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_I,
+				java.awt.event.InputEvent.CTRL_MASK));
+		
 	}
 
 	private void initTabbedPane() {
