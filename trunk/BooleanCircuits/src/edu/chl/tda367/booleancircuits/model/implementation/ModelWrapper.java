@@ -12,7 +12,7 @@ public final class ModelWrapper implements IModelWrapper{
 	
 	private IModel model;
 	private File file;
-	private boolean hasChanged;
+	private boolean isChanged;
 	private static int nWrappers = 0;
 	private int wrapperId;
 	
@@ -37,7 +37,7 @@ public final class ModelWrapper implements IModelWrapper{
 	@Override
 	public void addComponent(ICircuitGate component, Point position) {
 		model.addComponent(component, position);
-		hasChanged = true;
+		isChanged = true;
 	}
 
 	@Override
@@ -53,13 +53,13 @@ public final class ModelWrapper implements IModelWrapper{
 	@Override
 	public void removeComponents(Collection<ICircuitGate> list) {
 		model.removeComponents(list);
-		hasChanged = true;
+		isChanged = true;
 	}
 
 	@Override
 	public void removeComponent(ICircuitGate g) {
 		model.removeComponent(g);	
-		hasChanged = true;
+		isChanged = true;
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public final class ModelWrapper implements IModelWrapper{
 
 	@Override
 	public boolean hasChanged() {
-		return hasChanged;
+		return isChanged;
 	}
 	
 	
@@ -82,7 +82,7 @@ public final class ModelWrapper implements IModelWrapper{
 	@Override
 	public String toString(){
 		String retString = "";
-		if(hasChanged){
+		if(isChanged){
 			retString += "*";
 		}
 		if(file != null){
@@ -100,8 +100,8 @@ public final class ModelWrapper implements IModelWrapper{
 	}
 
 	@Override
-	public void setChangedFalse() {
-		hasChanged = false;
+	public void setChanged(boolean isChanged) {
+		this.isChanged = isChanged;
 	}
 	
 	@Override

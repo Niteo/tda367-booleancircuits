@@ -39,7 +39,7 @@ public class GateInputTest {
 		input2.setInputComponent(new AndGate(2), 2);
 
 		assertTrue(input1.getInputPort() == 0);
-		assertTrue(input2.getInputPort() == 2);
+		assertTrue(input2.getInputPort() == 0);
 
 	}
 
@@ -47,8 +47,9 @@ public class GateInputTest {
 	public void testGetInputValue() {
 		GateInput input1 = new GateInput();
 		GateInput input2 = new GateInput();
-		
-		input2.setInputComponent(new ConstantGate(true), 0);
+		ConstantGate gate = new ConstantGate(true);
+		input2.setInputComponent(gate, 0);
+		gate.update();
 		assertTrue(input1.getInputValue()==false);		
 		assertTrue(input2.getInputValue()==true);
 	}

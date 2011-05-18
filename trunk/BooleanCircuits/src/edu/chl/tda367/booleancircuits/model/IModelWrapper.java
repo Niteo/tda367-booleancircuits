@@ -28,7 +28,7 @@ public interface IModelWrapper extends IModel {
 	/**
 	 * Set model to unchanged.
 	 */
-	public void setChangedFalse();
+	public void setChanged(boolean isChanged);
 
 	/**
 	 * Sets the model's associated file.
