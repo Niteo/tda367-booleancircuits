@@ -102,11 +102,16 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void removeSelectedComponents() {
-		getActiveWorkspaceModel().removeComponents(
-				selectionModelList.get(selectedIndex).getSelectedComponents());
-		getActiveSelectionModel().removeComponents(selectionModelList.get(selectedIndex).getSelectedComponents());
-		getActiveWorkspaceModel().updateComponents();
-		firePropertyChanged();
+		if (selectedIndex >= 0 && selectedIndex < selectionModelList.size()) {
+			getActiveWorkspaceModel().removeComponents(
+					selectionModelList.get(selectedIndex)
+							.getSelectedComponents());
+			getActiveSelectionModel().removeComponents(
+					selectionModelList.get(selectedIndex)
+							.getSelectedComponents());
+			getActiveWorkspaceModel().updateComponents();
+			firePropertyChanged();
+		}
 	}
 
 	@Override
@@ -121,22 +126,29 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void selectAllComponents() {
-		_getActiveSelectionModel().selectComponents(
-				modelList.get(selectedIndex).getComponents());
-		firePropertyChanged();
+		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
+			_getActiveSelectionModel().selectComponents(
+					modelList.get(selectedIndex).getComponents());
+			firePropertyChanged();
+		}
 	}
 
 	@Override
 	public void selectComponent(Point position, boolean multiSelect) {
-		_getActiveSelectionModel().selectComponent(
-				modelList.get(selectedIndex).getComponent(position),
-				multiSelect);
-		firePropertyChanged();
+		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
+			_getActiveSelectionModel().selectComponent(
+					modelList.get(selectedIndex).getComponent(position),
+					multiSelect);
+			firePropertyChanged();
+		}
 	}
 
 	@Override
 	public boolean isSelectedComponent(AbstractCircuitGate g) {
+		if(_getActiveSelectionModel()!=null){
 		return _getActiveSelectionModel().isSelectedComponent(g);
+		}
+		return false;
 	}
 
 	@Override
@@ -237,7 +249,11 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	private ISelectionModel _getActiveSelectionModel() {
-		return selectionModelList.get(selectedIndex);
+		if (selectedIndex >= 0 && selectedIndex < selectionModelList.size()) {
+			return selectionModelList.get(selectedIndex);
+		} else {
+			return null;
+		}
 	}
 
 	private void firePropertyChanged() {
