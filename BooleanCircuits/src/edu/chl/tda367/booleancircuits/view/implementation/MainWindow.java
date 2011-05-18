@@ -238,13 +238,13 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 				.setToolTipText("New Workspace (Ctrl+N)");
 		toolbar.getOpenFileButton().setToolTipText("Open File (Ctrl+O)");
 		toolbar.getPasteButton().setToolTipText("Paste (Ctrl+V)");
-		toolbar.getPauseClockButton().setToolTipText("Pause Clock Signal");
+		toolbar.getPauseClockButton().setToolTipText("Pause Clock Signal (P)");
 		toolbar.getRedoButton().setToolTipText("Redo (Ctrl+Y)");
 		toolbar.getSaveAsComponentButton().setToolTipText(
 				"Import to Workspace (Ctrl+I)");
 		toolbar.getSaveAllButton().setToolTipText("Save All (Ctrl+Shift+S)");
 		toolbar.getSaveButton().setToolTipText("Save (Ctrl+S)");
-		toolbar.getStartClockButton().setToolTipText("Start Clock Signal");
+		toolbar.getStartClockButton().setToolTipText("Start Clock Signal (S)");
 		toolbar.getUndoButton().setToolTipText("Undo (Ctrl+Z)");
 
 	}
@@ -290,6 +290,16 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 	}
 
 	private void initShortcuts() {
+		closeAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_W,
+				java.awt.event.InputEvent.CTRL_DOWN_MASK
+						| java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+		startClockMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_S, 0));
+		pauseClockMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_P, 0));
+		helpMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_F1, 0));
 		closeMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_W,
 				java.awt.event.InputEvent.CTRL_MASK));
