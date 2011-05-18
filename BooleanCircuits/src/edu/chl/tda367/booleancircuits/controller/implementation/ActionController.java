@@ -1,7 +1,9 @@
 package edu.chl.tda367.booleancircuits.controller.implementation;
 
+import java.awt.Desktop;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.AbstractAction;
@@ -201,12 +203,16 @@ public class ActionController implements ChangeListener, IActionController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {
-				// TODO: WONT WORK PLEASE FIX :)
-				Runtime.getRuntime().exec("E:/manual.pdf");
-			} catch (IOException e1) {
-				JOptionPane.showMessageDialog(null, "Couldn't find the file manual.pdf!");
-				System.out.println(e1.getMessage());
+			File file = new File(Constants.manualPath);
+			if(file.exists()){
+				Desktop desk = Desktop.getDesktop();
+				try {
+					desk.open(file);
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(null, "Couldn't open manual.pdf!");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Couldn't find manual.pdf!");
 			}
 		}
 	};
