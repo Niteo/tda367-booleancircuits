@@ -39,4 +39,10 @@ public final class GateInput implements IGateInput {
 			return inputComponent.getOutputValue(inputComponentPort);
 		}
 	}
+
+	@Override
+	public void reset() {
+		inputComponent = null;
+		inputComponentPort = 0;
+	}
 }
