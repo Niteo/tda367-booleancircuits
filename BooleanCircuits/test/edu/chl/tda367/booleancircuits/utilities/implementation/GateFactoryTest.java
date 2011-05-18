@@ -4,26 +4,31 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
+import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory.Components;
+import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory.PredefinedComponents;
+
 public class GateFactoryTest {
 
 	@Test
-	public void testGetNewComponentAbstractCircuitGate() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
 	public void testGetNewComponentPredefinedComponents() {
-		fail("Not yet implemented"); // TODO
+		assertTrue(GateFactory.getNewComponent(PredefinedComponents.NOT) instanceof NotGate);
 	}
 
 	@Test
 	public void testGetNewComponentComponentsInt() {
-		fail("Not yet implemented"); // TODO
+		ICircuitGate and = GateFactory.getNewComponent(Components.AND, 3);
+		assertTrue(and instanceof AndGate);
+		assertTrue(and.getNoOfInputs() == 3);
 	}
 
 	@Test
 	public void testGetNewComponentStringInt() {
-		fail("Not yet implemented"); // TODO
+		ICircuitGate and = GateFactory.getNewComponent("AND", 4);
+		assertTrue(and instanceof AndGate);
+		assertTrue(and.getNoOfInputs() == 4);
 	}
 
 }
