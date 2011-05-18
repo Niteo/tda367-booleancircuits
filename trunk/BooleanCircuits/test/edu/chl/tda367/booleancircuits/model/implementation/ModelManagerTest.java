@@ -5,9 +5,14 @@ import static org.junit.Assert.*;
 import java.awt.Point;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import org.junit.Test;
 
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
 
@@ -168,22 +173,31 @@ public class ModelManagerTest {
 
 	@Test
 	public void testRemoveComponent() {
-		fail("Not yet implemented"); // TODO
+		new ModelManager().removeComponent(new ConstantGate(true));
 	}
 
 	@Test
 	public void testConnectComponents() {
-		fail("Not yet implemented"); // TODO
+		new ModelManager().connectComponents(new AndGate(2), new NandGate(2), 0, 0);
 	}
 
 	@Test
 	public void testManualPropertyChanged() {
-		fail("Not yet implemented"); // TODO
+		new ModelManager().manualPropertyChanged();
 	}
 
 	@Test
-	public void testAddComponents() {
-		fail("Not yet implemented"); // TODO
+	public void testAddComponentsList() {
+		List<ICircuitGate> list = new ArrayList<ICircuitGate>();
+		list.add(new AndGate(2));
+		new ModelManager().addComponents(list);
+	}
+	
+	@Test
+	public void testAddComponentsListPoint() {
+		List<ICircuitGate> list = new ArrayList<ICircuitGate>();
+		list.add(new AndGate(2));
+		new ModelManager().addComponents(list, new Point(0,0));
 	}
 
 }
