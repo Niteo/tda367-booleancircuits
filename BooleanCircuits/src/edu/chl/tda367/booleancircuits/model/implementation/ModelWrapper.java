@@ -22,16 +22,14 @@ public final class ModelWrapper implements IModelWrapper{
 	}
 	
 	public ModelWrapper(File file){
-		model = new Model();
+		this();
 		this.file = file;
-		wrapperId = ++nWrappers;
 	}
 	
 	public ModelWrapper(File file, Model model){
+		this(file);
 		this.model = model;
-		this.file = file;
 		wrapperId = ++nWrappers;
-		// TODO: nWrappers, duplicerad kod?
 	}
 	
 	@Override
@@ -117,5 +115,10 @@ public final class ModelWrapper implements IModelWrapper{
 	@Override
 	public void addComponents(Collection<ICircuitGate> components) {
 		model.addComponents(components);
+	}
+
+	@Override
+	public int getNumberOfComponents() {
+		return model.getNumberOfComponents();
 	}
 }

@@ -11,6 +11,7 @@ import org.junit.Test;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
+import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
@@ -21,6 +22,14 @@ public class ModelTest {
 	@Test
 	public void testModel() {
 		new Model();
+	}
+	
+	@Test
+	public void testGetNumberOfComponents(){
+		Model m = new Model();
+		assertTrue(m.getNumberOfComponents() == 0);
+		m.addComponent(new ConstantGate(true), new Point(0,0));
+		assertTrue(m.getNumberOfComponents() == 1);
 	}
 
 	@Test
