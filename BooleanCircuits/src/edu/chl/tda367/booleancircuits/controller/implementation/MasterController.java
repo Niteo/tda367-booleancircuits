@@ -115,7 +115,7 @@ public final class MasterController implements IMasterController {
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			IModelWrapper workspace = fileManager
 					.openFile(fc.getSelectedFile());
-			workspace.setChangedFalse();
+			workspace.setChanged(false);
 			modelManager.addWorkspace(workspace);
 		}
 	}
@@ -139,7 +139,7 @@ public final class MasterController implements IMasterController {
 	private boolean _saveWorkspace(IModelWrapper imw) {
 		if (imw.getFile() != null) {
 			fileManager.saveFile(imw.getComponents(), imw.getFile());
-			imw.setChangedFalse();
+			imw.setChanged(false);
 			modelManager.manualPropertyChanged();
 			return true;
 		} else {
@@ -152,7 +152,7 @@ public final class MasterController implements IMasterController {
 		if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 			fileManager.saveFile(imw.getComponents(), fc.getSelectedFile());
 			imw.setFile(fc.getSelectedFile());
-			imw.setChangedFalse();
+			imw.setChanged(false);
 			modelManager.manualPropertyChanged();
 			return true;
 		}
