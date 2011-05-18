@@ -247,7 +247,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	private IModelWrapper _getActiveWorkspaceModel() {
-		if (modelList.size() > 0) {
+		if (selectedIndex>=0 && selectedIndex<modelList.size()) {
 			return modelList.get(selectedIndex);
 		} else {
 			return null;

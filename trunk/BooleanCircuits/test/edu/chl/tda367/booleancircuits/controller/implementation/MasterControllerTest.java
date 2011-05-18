@@ -2,117 +2,113 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
+
 import org.junit.Test;
 
+import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 
 public class MasterControllerTest {
 
 	@Test
 	public void testMasterController() {
-		MasterController masterController = new MasterController(
-				new ModelManager());
-		assertTrue(masterController!=null);
+		new MasterController(new ModelManager());
 	}
 
 	@Test
 	public void testCloseActiveWorkspace() {
-		
+		new MasterController(new ModelManager()).closeActiveWorkspace();
 	}
 
 	@Test
 	public void testCloseAllWorkspaces() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).closeAllWorkspaces();
 	}
 
 	@Test
 	public void testCloseWorkspace() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).closeWorkspace(0);
 	}
 
 	@Test
 	public void testNewWorkspace() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).newWorkspace();
 	}
 
 	@Test
 	public void testOpenWorkspace() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).openWorkspace();
 	}
 
 	@Test
 	public void testSaveActiveWorkspace() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).saveActiveWorkspace(false);
 	}
 
 	@Test
 	public void testSaveAllWorkspaces() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).saveAllWorkspaces();
 	}
 
 	@Test
 	public void testSetActiveWorkspace() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public void testUndo() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public void testRedo() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).setActiveWorkspace(0);
 	}
 
 	@Test
 	public void testAddComponent() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).addComponent(new Point(0,0));
 	}
 
 	@Test
 	public void testRemoveSelectedComponents() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).removeSelectedComponents();
 	}
 
 	@Test
 	public void testSelectAllComponents() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).selectAllComponents();
 	}
 
 	@Test
 	public void testSelectComponent() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).selectComponent(new Point(0,0), false);
 	}
 
 	@Test
 	public void testCopySelectedComponents() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).copySelectedComponents();
 	}
 
 	@Test
 	public void testCutSelectedComponents() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).cutSelectedComponents();
 	}
 
 	@Test
 	public void testPasteSelectedComponents() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).pasteSelectedComponents();
+	}
+	
+	@Test
+	public void testPasteSelectedComponentsPoint(){
+		new MasterController(new ModelManager()).pasteSelectedComponents(new Point(0,0));
 	}
 
 	@Test
 	public void testSetChosenComponent() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).setChosenComponent(new AndGate(2));
 	}
 
 	@Test
 	public void testRemoveComponent() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).removeComponent(new AndGate(2));
 	}
 
 	@Test
 	public void testConnectComponent() {
-		fail("Not yet implemented"); // TODO
+		new MasterController(new ModelManager()).connectComponent(new AndGate(2), 0);
 	}
 
 }
