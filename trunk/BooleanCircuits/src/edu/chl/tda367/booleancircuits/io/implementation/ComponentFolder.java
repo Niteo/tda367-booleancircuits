@@ -25,35 +25,19 @@ public class ComponentFolder implements IComponentFolder {
 	private List<ICircuitGate> componentList;
 	private String name;
 
-	public ComponentFolder() {
-		componentList = new ArrayList<ICircuitGate>();
-		name = "Logic Gates";
-		initStandardGates();
-	}
-
 	public ComponentFolder(List<ICircuitGate> componentList, String name) {
 		this.name = name;
 		this.componentList = componentList;
 	}
 
 	/**
-	 * returns name of componentfolder
+	 * Returns name of componentfolder
 	 * 
 	 * @return
 	 */
 	@Override
 	public String getName() {
 		return name;
-	}
-
-	private void initStandardGates() {
-		componentList.add(new AndGate(2));
-		componentList.add(new NandGate(2));
-		componentList.add(new NorGate(2));
-		componentList.add(new NotGate());
-		componentList.add(new OrGate(2));
-		componentList.add(new XnorGate(2));
-		componentList.add(new XorGate(2));
 	}
 
 	/**
