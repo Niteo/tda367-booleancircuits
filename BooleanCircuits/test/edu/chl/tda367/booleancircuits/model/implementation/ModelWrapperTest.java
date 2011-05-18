@@ -50,19 +50,21 @@ public class ModelWrapperTest {
 	}
 
 	@Test
+	public void testHasFile() {
+		ModelWrapper wrapper = new ModelWrapper();
+		File file = new File("file");
+		
+		wrapper.setFile(file);
+		assertNotNull(wrapper.hasFile());
+	}
+	
+	@Test
 	public void testAddComponent() {
 		ModelWrapper wrapper = new ModelWrapper();
 		wrapper.addComponent(new ConstantGate(true), new Point(10, 10));
 
 		assertTrue(wrapper.getComponent(new Point(10, 10)) instanceof ConstantGate);
 
-	}
-	@Test
-	public void testSetChangedFalse() {
-		ModelWrapper wrapper = new ModelWrapper();
-		wrapper.setChanged(true);
-		
-		
 	}
 	
 	@Test
@@ -71,6 +73,16 @@ public class ModelWrapperTest {
 		assertTrue(wrapper.hasChanged()== false);
 		
 	}
+	
+	@Test
+	public void testSetChanged() {
+		ModelWrapper wrapper = new ModelWrapper();
+		wrapper.setChanged(true);
+		assertTrue(wrapper.hasChanged()== true);
+		
+	}
+	
+
 
 	@Test
 	public void testAddComponents() {
@@ -101,6 +113,7 @@ public class ModelWrapperTest {
 
 		wrapper.removeComponents(list);
 		assertTrue(wrapper.getComponents().size() == 0);
+		assertTrue(wrapper.hasChanged()==true);
 	}
 
 	@Test
@@ -114,6 +127,7 @@ public class ModelWrapperTest {
 
 		wrapper.removeComponent(and);
 		assertTrue(wrapper.getComponents().size() == 0);
+		assertTrue(wrapper.hasChanged()==true);
 	}
 
 	@Test
@@ -127,6 +141,7 @@ public class ModelWrapperTest {
 		wrapper.clock();
 		wrapper.updateComponents();
 		assertTrue(clock.getOutputValue(0));
+		assertTrue(wrapper.hasChanged()==true);
 	}
 
 	@Test
@@ -140,6 +155,7 @@ public class ModelWrapperTest {
 		wrapper.clock();
 		clock.update();
 		assertTrue(clock.getOutputValue(0));
+		assertTrue(wrapper.hasChanged()==true);
 	}
 
 	@Test
@@ -147,23 +163,9 @@ public class ModelWrapperTest {
 		ModelWrapper wrapper = new ModelWrapper();
 		
 		assertNull(wrapper.getFile());
+		assertTrue(wrapper.hasChanged()==false);
 		
-		
 	}
-
-
-
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testHasFile() {
-		fail("Not yet implemented");
-	}
-
-	
 
 	@Test
 	public void testSetFile() {
@@ -173,5 +175,22 @@ public class ModelWrapperTest {
 		assertTrue(wrapper.getFile() instanceof File);
 		
 	}
+
+
+	@Test
+	public void testToString() {
+		ModelWrapper wrapper = new ModelWrapper();
+		File file = new File("file");
+		wrapper.setFile(file);
+		assertTrue(wrapper.toString().equals("file"));
+		
+
+		
+	}
+
+
+
+	
+
 
 }
