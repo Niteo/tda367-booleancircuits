@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
 
@@ -35,6 +36,15 @@ public class SelectionModelTest {
 		sm.selectComponent(new AndGate(2), false);
 		assertTrue(sm.getSelectedComponents().size() == 1);
 		assertTrue(sm.getSelectedComponents().get(0) instanceof AndGate);
+	}
+	
+	@Test
+	public void testGetNumberOfComponents(){
+		SelectionModel sm = new SelectionModel();
+		assertTrue(sm.getNumberOfComponents() == 0);
+		
+		sm.selectComponent(new ConstantGate(true), false);
+		assertTrue(sm.getNumberOfComponents() == 1);
 	}
 
 	@Test

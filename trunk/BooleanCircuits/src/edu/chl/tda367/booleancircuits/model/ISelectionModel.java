@@ -14,6 +14,13 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCi
  */
 public interface ISelectionModel {
 
+	
+	/**
+	 * Returns number of components currently selected.
+	 * @return integer representing the amount of components selected
+	 */
+	public int getNumberOfComponents();
+	
 	/**
 	 * Selects all components in the collection.
 	 * 
