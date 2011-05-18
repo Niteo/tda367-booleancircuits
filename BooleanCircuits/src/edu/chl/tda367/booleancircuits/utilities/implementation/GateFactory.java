@@ -1,6 +1,6 @@
 package edu.chl.tda367.booleancircuits.utilities.implementation;
 
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
@@ -30,8 +30,7 @@ public final class GateFactory {
 	 * @param: component the new component
 	 * @return: a new instance of the component
 	 */
-	public static AbstractCircuitGate getNewComponent(
-			PredefinedComponents component) {
+	public static ICircuitGate getNewComponent(PredefinedComponents component) {
 		switch (component) {
 		case NOT:
 			return new NotGate();
@@ -51,7 +50,7 @@ public final class GateFactory {
 	 * @param: noOfInputs the amount of inputs on the component
 	 * @return: a new instance of the component
 	 */
-	public static AbstractCircuitGate getNewComponent(Components component,
+	public static ICircuitGate getNewComponent(Components component,
 			int noOfInputs) {
 		switch (component) {
 		case AND:
@@ -75,8 +74,7 @@ public final class GateFactory {
 
 	}
 
-	public static AbstractCircuitGate getNewComponent(String name,
-			int noOfInputs) {
+	public static ICircuitGate getNewComponent(String name, int noOfInputs) {
 
 		if (name.equals("AND")) {
 			return getNewComponent(Components.AND, noOfInputs);

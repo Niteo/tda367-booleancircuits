@@ -104,7 +104,7 @@ public final class FileManager implements IFileManager {
 					int noOfInputs = sc.nextInt();
 					sc.next();
 					Point position = new Point(sc.nextInt(), sc.nextInt());
-					AbstractCircuitGate component = GateFactory
+					ICircuitGate component = GateFactory
 							.getNewComponent(name, noOfInputs);
 					component.setPosition(position);
 					components.add(component);
