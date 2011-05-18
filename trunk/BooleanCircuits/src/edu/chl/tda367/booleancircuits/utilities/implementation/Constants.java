@@ -12,6 +12,7 @@ public class Constants {
 	public static final Color connectionHigh = Color.red;
 	public static final Color drawSelectFill = new Color(100, 100, 240, 140);
 	public static final Color drawSelectBorder = new Color(20, 20, 240, 180);
+	public static final String manualPath = "manual.pdf";
 	public static final String creditsText = "<html><H1>Boolean Circuits</H1><H3>Version: 1.0</H3>"
 			+ "This software is developed by Robert Kaufmann, Anton Lin, "
 			+ "Boel Nelson and Jennifer Panditha at Chalmers university "
