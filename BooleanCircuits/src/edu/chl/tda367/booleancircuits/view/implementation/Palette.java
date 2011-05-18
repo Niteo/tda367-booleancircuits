@@ -14,9 +14,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.implementation.ComponentFolder;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
-import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 import edu.chl.tda367.booleancircuits.view.IPalette;
 
 /**
@@ -40,11 +38,19 @@ public final class Palette implements IPalette {
 		specialList.add(new ConstantGate(false));
 		specialList.add(new ConstantGate(true));
 		specialList.add(new Clock());
-		ComponentFolder cf = new ComponentFolder(specialList, "Special");
+		
+		List<ICircuitGate> standardList = new ArrayList<ICircuitGate>();
+		standardList.add(new AndGate(2));
+		standardList.add(new NandGate(2));
+		standardList.add(new NorGate(2));
+		standardList.add(new NotGate());
+		standardList.add(new OrGate(2));
+		standardList.add(new XorGate(2));
+		standardList.add(new XnorGate(2));
 
 		folderList = new ArrayList<ComponentFolder>();
-		folderList.add(new ComponentFolder());
-		folderList.add(cf);
+		folderList.add(new ComponentFolder(standardList, "Logic gates"));
+		folderList.add(new ComponentFolder(specialList, "Special"));
 
 		initPaletteTree();
 		scrollPane = new JScrollPane(componentTree);
