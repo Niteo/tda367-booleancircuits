@@ -9,10 +9,10 @@ import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.IModelManager;
 import edu.chl.tda367.booleancircuits.model.IModelWrapper;
+import edu.chl.tda367.booleancircuits.model.IObservable;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.utilities.IObservable;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
 /**
