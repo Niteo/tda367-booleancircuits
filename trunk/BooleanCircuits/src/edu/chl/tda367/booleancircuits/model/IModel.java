@@ -9,19 +9,26 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 public interface IModel {
-	
+
 	/**
 	 * Clocks all clocks in the model.
 	 */
 	public void clock();
-	
+
+	/**
+	 * Returns the amount of components in the model.
+	 * 
+	 * @return integer representing the amount of components
+	 */
+	public int getNumberOfComponents();
+
 	/**
 	 * Adds a component to the model.
 	 * 
 	 * @param component
 	 *            the new component to add
 	 * @param position
-	 * 			  position to add component at
+	 *            position to add component at
 	 */
 	public void addComponent(ICircuitGate component, Point position);
 
@@ -32,7 +39,7 @@ public interface IModel {
 	 *            the components to add
 	 */
 	public void addComponents(Collection<ICircuitGate> components);
-	
+
 	/**
 	 * Returns a list of components.
 	 * 
@@ -69,9 +76,9 @@ public interface IModel {
 	 * Returns the name of the workspace.
 	 */
 	public String toString();
-	
+
 	/**
-	 * Updates the model's component's boolean values. 
+	 * Updates the model's component's boolean values.
 	 */
 	public void updateComponents();
 }

@@ -146,4 +146,9 @@ public final class Model implements IModel {
 	public void addComponents(Collection<ICircuitGate> components) {
 		componentList.addAll(components);
 	}
+
+	@Override
+	public int getNumberOfComponents() {
+		return componentList.size();
+	}
 }
