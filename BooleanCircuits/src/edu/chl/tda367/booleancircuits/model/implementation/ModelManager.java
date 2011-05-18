@@ -104,7 +104,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	public void removeSelectedComponents() {
 		getActiveWorkspaceModel().removeComponents(
 				selectionModelList.get(selectedIndex).getSelectedComponents());
-		_getActiveSelectionModel().removeUnusedElements();
+		getActiveSelectionModel().removeComponents(selectionModelList.get(selectedIndex).getSelectedComponents());
 		getActiveWorkspaceModel().updateComponents();
 		firePropertyChanged();
 	}
@@ -147,7 +147,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	@Override
 	public void removeComponent(ICircuitGate g) {
 		getActiveWorkspaceModel().removeComponent(g);
-		_getActiveSelectionModel().removeUnusedElements();
+		getActiveSelectionModel().removeComponent(g);
 		getActiveWorkspaceModel().updateComponents();
 		firePropertyChanged();
 	}

@@ -28,7 +28,7 @@ public interface ISelectionModel {
 	 * @param g
 	 *            IAbstractCircuitGate the gate to select
 	 * @param multiSelect
-	 * 			  boolean if false, all selected components will be deselected
+	 *            boolean if false, all selected components will be deselected
 	 */
 	public void selectComponent(ICircuitGate g, boolean multiSelect);
 
@@ -42,13 +42,25 @@ public interface ISelectionModel {
 	public boolean isSelectedComponent(ICircuitGate g);
 
 	/**
-	 * Removes all elements that are unused.
-	 */
-	public void removeUnusedElements();
-	
-	/**
 	 * Returns a list of the selected components.
+	 * 
 	 * @return List
 	 */
 	public List<ICircuitGate> getSelectedComponents();
+
+	/**
+	 * Removes a collection of components from the selected list.
+	 * 
+	 * @param c
+	 *            Collection components to remove
+	 */
+	public void removeComponents(Collection<ICircuitGate> c);
+	
+	/**
+	 * Removes a component from the selected list.
+	 * 
+	 * @param g
+	 *            ICircuitGate component to remove
+	 */
+	public void removeComponent(ICircuitGate g);
 }

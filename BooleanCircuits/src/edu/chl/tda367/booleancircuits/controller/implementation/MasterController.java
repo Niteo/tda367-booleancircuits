@@ -99,7 +99,6 @@ public final class MasterController implements IMasterController {
 					"Would you like to save changes?", model.toString(),
 					JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
-			System.out.println(answer);
 			return answer;
 		}
 		return 2;
