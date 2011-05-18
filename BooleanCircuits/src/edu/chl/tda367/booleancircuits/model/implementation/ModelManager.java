@@ -103,13 +103,13 @@ public final class ModelManager implements IObservable, IModelManager {
 	@Override
 	public void removeSelectedComponents() {
 		if (selectedIndex >= 0 && selectedIndex < selectionModelList.size()) {
-			getActiveWorkspaceModel().removeComponents(
+			_getActiveWorkspaceModel().removeComponents(
 					selectionModelList.get(selectedIndex)
 							.getSelectedComponents());
-			getActiveSelectionModel().removeComponents(
+			_getActiveSelectionModel().removeComponents(
 					selectionModelList.get(selectedIndex)
 							.getSelectedComponents());
-			getActiveWorkspaceModel().updateComponents();
+			_getActiveWorkspaceModel().updateComponents();
 			firePropertyChanged();
 		}
 	}
@@ -145,8 +145,8 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public boolean isSelectedComponent(AbstractCircuitGate g) {
-		if(_getActiveSelectionModel()!=null){
-		return _getActiveSelectionModel().isSelectedComponent(g);
+		if (_getActiveSelectionModel() != null) {
+			return _getActiveSelectionModel().isSelectedComponent(g);
 		}
 		return false;
 	}
@@ -158,18 +158,22 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void removeComponent(ICircuitGate g) {
-		getActiveWorkspaceModel().removeComponent(g);
-		getActiveSelectionModel().removeComponent(g);
-		getActiveWorkspaceModel().updateComponents();
-		firePropertyChanged();
+		if (_getActiveWorkspaceModel() != null) {
+			_getActiveWorkspaceModel().removeComponent(g);
+			_getActiveSelectionModel().removeComponent(g);
+			_getActiveWorkspaceModel().updateComponents();
+			firePropertyChanged();
+		}
 	}
 
 	@Override
 	public void connectComponents(ICircuitGate componentIn,
 			ICircuitGate componentOut, int portIn, int portOut) {
-		componentIn.connectInput(portIn, componentOut, portOut);
-		getActiveWorkspaceModel().updateComponents();
-		firePropertyChanged();
+		if (_getActiveWorkspaceModel() != null) {
+			componentIn.connectInput(portIn, componentOut, portOut);
+			_getActiveWorkspaceModel().updateComponents();
+			firePropertyChanged();
+		}
 	}
 
 	@Override
@@ -236,8 +240,10 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	private void _addComponent(ICircuitGate component, Point position) {
-		getActiveWorkspaceModel().addComponent(component, position);
-		getActiveWorkspaceModel().updateComponents();
+		if (_getActiveWorkspaceModel() != null) {
+			_getActiveWorkspaceModel().addComponent(component, position);
+			_getActiveWorkspaceModel().updateComponents();
+		}
 	}
 
 	private IModelWrapper _getActiveWorkspaceModel() {
@@ -285,7 +291,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	public void selectComponents(Point pos1, Point pos2) {
 		List<ICircuitGate> selectedComponents = new ArrayList<ICircuitGate>();
 
-		for (ICircuitGate gate : this.getActiveWorkspaceModel().getComponents()) {
+		for (ICircuitGate gate : _getActiveWorkspaceModel().getComponents()) {
 			Point gatePosition = gate.getPosition();
 			if (gatePosition.x >= Math.min(pos1.x, pos2.x)
 					&& gatePosition.x <= Math.max(pos1.x, pos2.x)
