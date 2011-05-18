@@ -18,9 +18,9 @@ import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 
 public class ClipboardManager implements IClipboardManager {
 
-	private List<ICircuitGate> clipboardList;
+	private List<ICircuitGate> clipboardList = new ArrayList<ICircuitGate>();
 	private Map<ICircuitGate, ICircuitGate> componentsMap = new HashMap<ICircuitGate, ICircuitGate>();
-	private List<ICircuitGate> lastPastedComponents;
+	private List<ICircuitGate> lastPastedComponents = new ArrayList<ICircuitGate>();
 
 	@Override
 	public void copy(List<ICircuitGate> originalList) {
@@ -33,18 +33,17 @@ public class ClipboardManager implements IClipboardManager {
 		return duplicateList(clipboardList);
 	}
 
-	private List<ICircuitGate> duplicateList(
-			List<ICircuitGate> list) {
+	private List<ICircuitGate> duplicateList(List<ICircuitGate> list) {
 
 		List<ICircuitGate> dupList = new ArrayList<ICircuitGate>();
 		for (ICircuitGate gate : list) {
-			if(gate != null){
+			if (gate != null) {
 				componentsMap.put(gate, gate.clone());
 			}
 		}
 
 		for (ICircuitGate gate : list) {
-			if(gate != null){
+			if (gate != null) {
 				for (IGateInput input : gate.getInputs()) {
 					if (!list.contains(input.getInputComponent())) {
 						componentsMap.get(gate).connectInput(
