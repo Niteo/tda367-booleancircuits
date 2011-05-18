@@ -35,7 +35,6 @@ public final class CanvasPopup extends JPopupMenu {
 		remove.addActionListener(listener);
 		copy.addActionListener(listener);
 		cut.addActionListener(listener);
-
 		add(outputMenu);
 		add(inputMenu);
 		addSeparator();
