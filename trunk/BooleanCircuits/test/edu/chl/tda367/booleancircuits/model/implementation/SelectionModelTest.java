@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.Test;
@@ -63,7 +64,32 @@ public class SelectionModelTest {
 	}
 
 	@Test
-	public void testRemoveUnusedElements() {
-		fail("Implement me!");
+	public void testRemoveComponent() {
+		SelectionModel sm = new SelectionModel();
+		AndGate and = new AndGate(2);
+		
+		sm.selectComponent(and, false);
+		assertTrue(sm.isSelectedComponent(and));
+		sm.removeComponent(and);
+		assertFalse(sm.isSelectedComponent(and));
 	}
+
+	@Test
+	public void testRemoveComponents() {
+		SelectionModel sm = new SelectionModel();
+		AndGate and = new AndGate(2);
+		NandGate nand = new NandGate(2);
+		Collection<ICircuitGate> collection = new ArrayList<ICircuitGate>();
+		
+		collection.add(and);
+		collection.add(nand);
+		
+		sm.selectComponents(collection);
+		assertTrue(sm.isSelectedComponent(and));
+		assertTrue(sm.isSelectedComponent(nand));
+		sm.removeComponents(collection);
+		assertFalse(sm.isSelectedComponent(and));
+		assertFalse(sm.isSelectedComponent(nand));
+	}
+
 }

@@ -62,8 +62,8 @@ public final class SelectionModel implements ISelectionModel {
 	}
 
 	@Override
-	public void removeComponents(Collection<ICircuitGate> c) {
-		selectedComponentList.remove(c);
+	public void removeComponents(Collection<ICircuitGate> c){
+		selectedComponentList.removeAll(c);
 	}
 
 	@Override
