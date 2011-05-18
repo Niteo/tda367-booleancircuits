@@ -44,14 +44,14 @@ public final class MasterController implements IMasterController {
 			modelManager = mm;
 			fileManager = new FileManager();
 			clockTimer = new Timer(Constants.clockFrequency,
-				new ActionListener() {
+					new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						modelManager.clockActiveModel();
-					}
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							modelManager.clockActiveModel();
+						}
 
-				});
+					});
 		}
 	}
 
@@ -74,21 +74,24 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public boolean closeWorkspace(int i) {
-
-		int answer = saveMessage(modelManager.getWorkspace(i));
-		boolean closed = true;
-		if (answer == 0) {
-			if (_saveWorkspace(modelManager.getWorkspace(i))) {
-				modelManager.closeWorkspace(i);
-			} else {
+		if (i >= 0 && i < modelManager.getWorkspaces().size()) {
+			int answer = saveMessage(modelManager.getWorkspace(i));
+			boolean closed = true;
+			if (answer == 0) {
+				if (_saveWorkspace(modelManager.getWorkspace(i))) {
+					modelManager.closeWorkspace(i);
+				} else {
+					closed = false;
+				}
+			} else if (answer == 1) {
 				closed = false;
+			} else {
+				modelManager.closeWorkspace(i);
 			}
-		} else if (answer == 1) {
-			closed = false;
+			return closed;
 		} else {
-			modelManager.closeWorkspace(i);
+			return false;
 		}
-		return closed;
 	}
 
 	private int saveMessage(IModelWrapper model) {
@@ -137,13 +140,17 @@ public final class MasterController implements IMasterController {
 	}
 
 	private boolean _saveWorkspace(IModelWrapper imw) {
-		if (imw.getFile() != null) {
-			fileManager.saveFile(imw.getComponents(), imw.getFile());
-			imw.setChanged(false);
-			modelManager.manualPropertyChanged();
-			return true;
+		if (modelManager.getActiveWorkspaceModel() != null) {
+			if (imw.getFile() != null) {
+				fileManager.saveFile(imw.getComponents(), imw.getFile());
+				imw.setChanged(false);
+				modelManager.manualPropertyChanged();
+				return true;
+			} else {
+				return _saveWorkspaceAs(imw);
+			}
 		} else {
-			return _saveWorkspaceAs(imw);
+			return false;
 		}
 	}
 
@@ -155,8 +162,9 @@ public final class MasterController implements IMasterController {
 			imw.setChanged(false);
 			modelManager.manualPropertyChanged();
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -203,14 +211,16 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void cutSelectedComponents() {
-		if(_copySelectedComponents()){
+		if (_copySelectedComponents()) {
 			modelManager.removeSelectedComponents();
 		}
 	}
 
 	@Override
 	public void pasteSelectedComponents() {
-		if(modelManager.getActiveSelectionModel().getNumberOfComponents() != 0){
+		if (modelManager.getActiveSelectionModel() != null
+				&& modelManager.getActiveSelectionModel()
+						.getNumberOfComponents() != 0) {
 			modelManager.addComponents(clipboardManager.paste());
 			modelManager.getActiveSelectionModel().selectComponents(
 					clipboardManager.getLastPastedComponents());
@@ -219,9 +229,13 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void pasteSelectedComponents(Point position) {
-		modelManager.addComponents(clipboardManager.paste(), position);
-		modelManager.getActiveSelectionModel().selectComponents(
-				clipboardManager.getLastPastedComponents());
+		if (modelManager.getActiveSelectionModel() != null
+				&& modelManager.getActiveSelectionModel()
+						.getNumberOfComponents() != 0) {
+			modelManager.addComponents(clipboardManager.paste(), position);
+			modelManager.getActiveSelectionModel().selectComponents(
+					clipboardManager.getLastPastedComponents());
+		}
 	}
 
 	@Override
@@ -259,7 +273,9 @@ public final class MasterController implements IMasterController {
 	}
 
 	private boolean _copySelectedComponents() {
-		if(modelManager.getActiveSelectionModel().getNumberOfComponents() == 0){
+		if (modelManager.getActiveSelectionModel() == null
+				|| modelManager.getActiveSelectionModel()
+						.getNumberOfComponents() == 0) {
 			return false;
 		} else {
 			clipboardManager.copy(modelManager.getActiveSelectionModel()
