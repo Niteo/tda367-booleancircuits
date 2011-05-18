@@ -2,28 +2,44 @@ package edu.chl.tda367.booleancircuits.io.implementation;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
-public class ComponentFolderTest {
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.XnorGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.XorGate;
 
-	@Test
-	public void testComponentFolder() {
-		fail("Not yet implemented"); // TODO
-	}
+public class ComponentFolderTest {
+	List<ICircuitGate> componentList;
+
+
 
 	@Test
 	public void testComponentFolderListOfAbstractCircuitGateString() {
-		fail("Not yet implemented"); // TODO
+		componentList = new ArrayList<ICircuitGate>();
+		new ComponentFolder(componentList, "vippa");
+		
 	}
 
 	@Test
 	public void testGetName() {
-		fail("Not yet implemented"); // TODO
+		ComponentFolder folder = new ComponentFolder(componentList, "vippa");
+		assertTrue(folder.getName().equals("vippa"));
 	}
 
 	@Test
 	public void testGetAllComponents() {
-		fail("Not yet implemented"); // TODO
+		ComponentFolder folder = new ComponentFolder(componentList, "vippa");
+		assertTrue(folder.getAllComponents().size()==0);
+		
+		//TODO:fix this
 	}
 
 }
