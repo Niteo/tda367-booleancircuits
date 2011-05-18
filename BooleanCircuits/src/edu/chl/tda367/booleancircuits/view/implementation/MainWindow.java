@@ -6,6 +6,7 @@
 
 package edu.chl.tda367.booleancircuits.view.implementation;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -18,6 +19,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,6 +35,7 @@ import javax.swing.WindowConstants;
 import edu.chl.tda367.booleancircuits.controller.implementation.ActionController;
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
+import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.BlankBackground;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.DottedBackground;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.GridBackground;
@@ -72,6 +75,11 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 				cs.setUSStandard(false);
 			} else if (e.getSource() == usStandardRadioButtonMenuItem) {
 				cs.setUSStandard(true);
+			}
+
+			else if (e.getSource() == aboutMenuItem) {
+				Icon logo = new ImageIcon("resources/icons/cross-icon.png");
+				new AboutBox(Constants.creditsText, logo);
 			}
 
 		}
@@ -128,6 +136,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		initTabbedPane();
 		setTitle("Boolean Circuits");
 		setVisible(true);
+		setSize(new Dimension(800,500));
 		setIconImage(new ImageIcon("resources/icons/frameIcon.png").getImage());
 	}
 
@@ -187,7 +196,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 
 		// init help menu
 		helpMenuItem.setAction(actionController.getShowHelpAction());
-		aboutMenuItem.setAction(actionController.getShowAboutBoxAction());
+		aboutMenuItem.addActionListener(listener);
 
 	}
 
@@ -225,13 +234,14 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		// Tooltips
 		toolbar.getCutButton().setToolTipText("Cut (Ctrl+X");
 		toolbar.getCopyButton().setToolTipText("Copy (Ctrl+C)");
-		toolbar.getNewWorkspaceButton().setToolTipText("New Workspace (Ctrl+N)");
+		toolbar.getNewWorkspaceButton()
+				.setToolTipText("New Workspace (Ctrl+N)");
 		toolbar.getOpenFileButton().setToolTipText("Open File (Ctrl+O)");
 		toolbar.getPasteButton().setToolTipText("Paste (Ctrl+V)");
 		toolbar.getPauseClockButton().setToolTipText("Pause Clock Signal");
 		toolbar.getRedoButton().setToolTipText("Redo (Ctrl+Y)");
-		toolbar.getSaveAsComponentButton()
-				.setToolTipText("Import to Workspace (Ctrl+I)");
+		toolbar.getSaveAsComponentButton().setToolTipText(
+				"Import to Workspace (Ctrl+I)");
 		toolbar.getSaveAllButton().setToolTipText("Save All (Ctrl+Shift+S)");
 		toolbar.getSaveButton().setToolTipText("Save (Ctrl+S)");
 		toolbar.getStartClockButton().setToolTipText("Start Clock Signal");
@@ -314,11 +324,12 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 				java.awt.event.InputEvent.CTRL_MASK));
 		saveAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_S,
-				java.awt.event.InputEvent.CTRL_DOWN_MASK|java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-		importToWorkspaceMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_I,
-				java.awt.event.InputEvent.CTRL_MASK));
-		
+				java.awt.event.InputEvent.CTRL_DOWN_MASK
+						| java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+		importToWorkspaceMenuItem.setAccelerator(javax.swing.KeyStroke
+				.getKeyStroke(java.awt.event.KeyEvent.VK_I,
+						java.awt.event.InputEvent.CTRL_MASK));
+
 	}
 
 	private void initTabbedPane() {

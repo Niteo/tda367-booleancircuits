@@ -147,13 +147,6 @@ public class ActionControllerTest {
 	}
 
 	@Test
-	public void testGetShowAboutBoxAction() {
-		ActionController ac = new ActionController(new MasterController(new ModelManager()));
-		assertNotNull(ac.getShowAboutBoxAction());
-		assertTrue(ac.getShowAboutBoxAction() instanceof AbstractAction);
-	}
-
-	@Test
 	public void testGetShowHelpAction() {
 		ActionController ac = new ActionController(new MasterController(new ModelManager()));
 		assertNotNull(ac.getShowHelpAction());

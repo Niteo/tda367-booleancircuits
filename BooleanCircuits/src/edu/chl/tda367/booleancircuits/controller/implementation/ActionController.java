@@ -190,15 +190,6 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private final Action showAboutBoxAction = new AbstractAction() {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			Icon logo = new ImageIcon("resources/icons/cross-icon.png");
-			new AboutBox(Constants.creditsText, logo);
-		}
-	};
-
 	private final Action showHelpAction = new AbstractAction() {
 
 		@Override
@@ -318,11 +309,6 @@ public class ActionController implements ChangeListener, IActionController {
 	@Override
 	public Action getImportWorkspaceAction() {
 		return importWorkspaceAction;
-	}
-
-	@Override
-	public Action getShowAboutBoxAction() {
-		return showAboutBoxAction;
 	}
 
 	@Override
