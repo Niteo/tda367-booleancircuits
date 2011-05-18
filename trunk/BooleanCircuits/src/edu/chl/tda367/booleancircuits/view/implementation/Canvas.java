@@ -20,6 +20,7 @@ import edu.chl.tda367.booleancircuits.controller.implementation.MasterController
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 import edu.chl.tda367.booleancircuits.view.draw.IDraw;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
@@ -118,12 +119,20 @@ public class Canvas {
 			if (drawSelect != null) {
 				Point mousePos = panel.getMousePosition();
 				if (mousePos != null) {
-					g.setColor(new Color(100, 100, 240, 140));
-					g2d.fillRect(drawSelect.x, drawSelect.y,
-							panel.getMousePosition().x - drawSelect.x,
-							panel.getMousePosition().y - drawSelect.y);
-					g.setColor(new Color(20, 20, 240, 180));
-
+					g.setColor(Constants.drawSelectFill);
+					
+					int startX = drawSelect.x < mousePos.x ? drawSelect.x : mousePos.x;
+					int sizeX = drawSelect.x < mousePos.x ?
+							mousePos.x - drawSelect.x : drawSelect.x - mousePos.x;
+					int startY = drawSelect.y < mousePos.y ? drawSelect.y : mousePos.y;
+					int sizeY = drawSelect.y < mousePos.y ?
+							mousePos.y - drawSelect.y : drawSelect.y - mousePos.y;
+					
+					g2d.fillRect(startX, startY,
+							sizeX,
+							sizeY);
+				
+					g.setColor(Constants.drawSelectBorder);
 					int[] xArray = { drawSelect.x, mousePos.x, mousePos.x,
 							drawSelect.x };
 					int[] yArray = { drawSelect.y, drawSelect.y, mousePos.y,
