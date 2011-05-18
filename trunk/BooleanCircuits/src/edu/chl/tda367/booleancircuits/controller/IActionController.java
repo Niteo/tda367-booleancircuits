@@ -137,12 +137,6 @@ public interface IActionController {
 	public Action getImportWorkspaceAction();
 	
 	/**
-	 * Returns the showAboutBox action
-	 * @return Action
-	 */
-	public Action getShowAboutBoxAction();
-	
-	/**
 	 *  Returns the showHelp action
 	 * @return Action
 	 */
