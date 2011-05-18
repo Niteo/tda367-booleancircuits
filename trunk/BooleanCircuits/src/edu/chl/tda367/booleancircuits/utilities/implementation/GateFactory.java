@@ -25,30 +25,6 @@ public final class GateFactory {
 	}
 
 	/**
-	 * Gets an new instance of the component type specified.
-	 * 
-	 * @param: component the new component
-	 * @return: returns a new instance of the component
-	 */
-	public static AbstractCircuitGate getNewComponent(
-			AbstractCircuitGate component) {
-		AbstractCircuitGate newComponent = null;
-		try {
-			newComponent = component.getClass().newInstance();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// TODO: Remove or create a functional one.
-
-		return newComponent;
-	}
-
-	/**
 	 * Gets an instance of the component
 	 * 
 	 * @param: component the new component
