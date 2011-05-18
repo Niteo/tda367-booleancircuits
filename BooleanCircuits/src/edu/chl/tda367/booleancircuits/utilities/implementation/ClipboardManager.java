@@ -38,22 +38,26 @@ public class ClipboardManager implements IClipboardManager {
 
 		List<ICircuitGate> dupList = new ArrayList<ICircuitGate>();
 		for (ICircuitGate gate : list) {
-			componentsMap.put(gate, gate.clone());
+			if(gate != null){
+				componentsMap.put(gate, gate.clone());
+			}
 		}
 
 		for (ICircuitGate gate : list) {
-			for (IGateInput input : gate.getInputs()) {
-				if (!list.contains(input.getInputComponent())) {
-					componentsMap.get(gate).connectInput(
-							gate.getInputs().indexOf(input), null, 0);
-				} else {
-					componentsMap.get(gate).connectInput(
-							gate.getInputs().indexOf(input),
-							componentsMap.get(input.getInputComponent()),
-							input.getInputPort());
+			if(gate != null){
+				for (IGateInput input : gate.getInputs()) {
+					if (!list.contains(input.getInputComponent())) {
+						componentsMap.get(gate).connectInput(
+								gate.getInputs().indexOf(input), null, 0);
+					} else {
+						componentsMap.get(gate).connectInput(
+								gate.getInputs().indexOf(input),
+								componentsMap.get(input.getInputComponent()),
+								input.getInputPort());
+					}
 				}
+				dupList.add(componentsMap.get(gate));
 			}
-			dupList.add(componentsMap.get(gate));
 		}
 		lastPastedComponents = dupList;
 		return dupList;

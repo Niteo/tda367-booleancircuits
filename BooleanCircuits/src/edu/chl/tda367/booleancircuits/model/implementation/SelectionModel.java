@@ -70,4 +70,9 @@ public final class SelectionModel implements ISelectionModel {
 	public void removeComponent(ICircuitGate g) {
 		selectedComponentList.remove(g);
 	}
+
+	@Override
+	public int getNumberOfComponents() {
+		return selectedComponentList.size();
+	}
 }

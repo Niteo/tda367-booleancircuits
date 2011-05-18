@@ -44,14 +44,14 @@ public final class MasterController implements IMasterController {
 			modelManager = mm;
 			fileManager = new FileManager();
 			clockTimer = new Timer(Constants.clockFrequency,
-					new ActionListener() {
+				new ActionListener() {
 
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							modelManager.clockActiveModel();
-						}
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						modelManager.clockActiveModel();
+					}
 
-					});
+				});
 		}
 	}
 
@@ -203,15 +203,18 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void cutSelectedComponents() {
-		_copySelectedComponents();
-		modelManager.removeSelectedComponents();
+		if(_copySelectedComponents()){
+			modelManager.removeSelectedComponents();
+		}
 	}
 
 	@Override
 	public void pasteSelectedComponents() {
-		modelManager.addComponents(clipboardManager.paste());
-		modelManager.getActiveSelectionModel().selectComponents(
-				clipboardManager.getLastPastedComponents());
+		if(modelManager.getActiveSelectionModel().getNumberOfComponents() != 0){
+			modelManager.addComponents(clipboardManager.paste());
+			modelManager.getActiveSelectionModel().selectComponents(
+					clipboardManager.getLastPastedComponents());
+		}
 	}
 
 	@Override
@@ -255,9 +258,14 @@ public final class MasterController implements IMasterController {
 		}
 	}
 
-	private void _copySelectedComponents() {
-		clipboardManager.copy(modelManager.getActiveSelectionModel()
-				.getSelectedComponents());
+	private boolean _copySelectedComponents() {
+		if(modelManager.getActiveSelectionModel().getNumberOfComponents() == 0){
+			return false;
+		} else {
+			clipboardManager.copy(modelManager.getActiveSelectionModel()
+					.getSelectedComponents());
+			return true;
+		}
 	}
 
 	@Override
