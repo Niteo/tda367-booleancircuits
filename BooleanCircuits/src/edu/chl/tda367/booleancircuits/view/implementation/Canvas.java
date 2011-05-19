@@ -150,6 +150,10 @@ public class Canvas {
 			g2d.setColor(Color.BLACK);
 			g2d.setFont(UIManager.getFont("TabbedPane.font"));
 			g2d.drawString("[" + posX + ", " + posY + "]", 5, 15);
+			if (model.hasInfiniteRecursion()) {
+				g2d.setColor(Color.RED);
+				g2d.drawString("Infinite recursion!", 5, 35);
+			}
 		}
 	};
 

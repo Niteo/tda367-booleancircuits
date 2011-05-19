@@ -19,6 +19,7 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
  */
 public final class Model implements IModel {
 	private final Collection<ICircuitGate> componentList;
+	private boolean infiniteRecursion = false;
 
 	/**
 	 * Returns an instance of Model
@@ -82,6 +83,7 @@ public final class Model implements IModel {
 	@Override
 	public void updateComponents() {
 		List<List<ICircuitGate>> groupList = new ArrayList<List<ICircuitGate>>();
+		infiniteRecursion = false;
 
 		for (ICircuitGate iGate : componentList) {
 			for (IGateInput input : iGate.getInputs()) {
@@ -129,6 +131,7 @@ public final class Model implements IModel {
 		}
 		// Update each tier individually
 		boolean hasChanged;
+		int loop = 0;
 		do {
 			hasChanged = false;
 			for (List<ICircuitGate> l : groupList) {
@@ -144,6 +147,10 @@ public final class Model implements IModel {
 					l.get(i).overwriteGate(cloneList.get(i));
 				}
 			}
+			if (++loop == 100) {
+				hasChanged = false;
+				infiniteRecursion = true;
+			}
 		} while (hasChanged);
 	}
 
@@ -151,10 +158,6 @@ public final class Model implements IModel {
 	public void removeComponent(ICircuitGate g) {
 		_removeComponent(g);
 		updateComponents();
-	}
-
-	private void _removeComponent(ICircuitGate g) {
-		componentList.remove(g);
 	}
 
 	@Override
@@ -165,5 +168,14 @@ public final class Model implements IModel {
 	@Override
 	public int getNumberOfComponents() {
 		return componentList.size();
+	}
+
+	@Override
+	public boolean hasInfiniteRecursion() {
+		return infiniteRecursion;
+	}
+
+	private void _removeComponent(ICircuitGate g) {
+		componentList.remove(g);
 	}
 }
