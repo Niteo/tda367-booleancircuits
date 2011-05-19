@@ -36,6 +36,7 @@ public class ComponentFolderTest {
 
 	@Test
 	public void testGetAllComponents() {
+		componentList = new ArrayList<ICircuitGate>();
 		ComponentFolder folder = new ComponentFolder(componentList, "vippa");
 		assertTrue(folder.getAllComponents().size()==0);
 		
