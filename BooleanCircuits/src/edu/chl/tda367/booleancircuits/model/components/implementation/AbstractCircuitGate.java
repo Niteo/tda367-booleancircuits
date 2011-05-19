@@ -143,15 +143,14 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 					Collection<IGateInput> gateInputs = gate.getInputs();
 					for (IGateInput input : gateInputs) {
 						ICircuitGate inputGate = input.getInputComponent();
-						if (inputGate != null) {
-							if (inputGate.connectsTo(this)) {
+						if (inputGate != null && inputGate != this) {
+							if (inputGate.connectsTo(this) && !col.contains(inputGate)) {
 								store.add(inputGate);
 							}
 						}
 					}
 				}
 			}
-
 			col.addAll(temp);
 			temp.clear();
 			temp.addAll(store);
