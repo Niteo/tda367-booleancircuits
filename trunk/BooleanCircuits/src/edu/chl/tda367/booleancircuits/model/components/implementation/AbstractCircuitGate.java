@@ -21,7 +21,7 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	private boolean isInConnectToCalculation;
 	private Point position = new Point();
 
-	public AbstractCircuitGate(int inPorts, int outPorts){
+	public AbstractCircuitGate(int inPorts, int outPorts) {
 		createOutputs(outPorts);
 		createInputs(inPorts);
 	}
@@ -66,11 +66,11 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 
 	@Override
 	public void connectInput(int inputPort, ICircuitGate component,
-			int outputPort)throws IllegalArgumentException {
-		if(inputPort > inputs.size()-1){
+			int outputPort) throws IllegalArgumentException {
+		if (inputPort > inputs.size() - 1) {
 			throw new IllegalArgumentException();
-		}else{
-		inputs.get(inputPort).setInputComponent(component, outputPort);
+		} else {
+			inputs.get(inputPort).setInputComponent(component, outputPort);
 		}
 	}
 
@@ -90,8 +90,15 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	}
 
 	@Override
-	public void update() {
+	public boolean update() {
+		boolean[] temp = outputs.clone();
 		updateOutput();
+		for (int i = 0; i < temp.length; i++) {
+			if (temp[i] != outputs[i]) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -119,10 +126,10 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	public Collection<ICircuitGate> getRecoupledTo() {
 		Collection<ICircuitGate> col = new ArrayList<ICircuitGate>();
 
-		for(IGateInput input : inputs){
+		for (IGateInput input : inputs) {
 			ICircuitGate inputGate = input.getInputComponent();
-			if(inputGate != null){
-				if(inputGate.connectsTo(this)){
+			if (inputGate != null) {
+				if (inputGate.connectsTo(this)) {
 					col.add(inputGate);
 				}
 			}
@@ -132,17 +139,17 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	}
 
 	@Override
-	public boolean connectsTo(ICircuitGate gate){
+	public boolean connectsTo(ICircuitGate gate) {
 		boolean ret = false;
-		if(isInConnectToCalculation){
+		if (isInConnectToCalculation) {
 			return false;
 		} else {
 			isInConnectToCalculation = true;
 		}
-		for(IGateInput input : inputs){
+		for (IGateInput input : inputs) {
 			ICircuitGate inputGate = input.getInputComponent();
-			if(inputGate != null){
-				if(inputGate == gate || inputGate.connectsTo(gate)){
+			if (inputGate != null) {
+				if (inputGate == gate || inputGate.connectsTo(gate)) {
 					ret = true;
 					break;
 				}
@@ -188,7 +195,8 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	}
 
 	/**
-	 * updates the output of the gate.
+	 * Updates the output of the gate.
+	 *
 	 */
 	protected abstract void updateOutput();
 

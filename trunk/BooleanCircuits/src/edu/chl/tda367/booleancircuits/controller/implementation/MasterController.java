@@ -58,7 +58,7 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void closeActiveWorkspace() {
-		modelManager.closeActiveWorkspace();
+		closeWorkspace(modelManager.getActiveWorkspaceIndex());
 	}
 
 	@Override
