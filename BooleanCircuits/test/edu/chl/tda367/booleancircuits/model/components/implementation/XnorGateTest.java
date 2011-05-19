@@ -43,7 +43,7 @@ public class XnorGateTest {
 	@Test
 	public void testGetOutputValue() {
 		XnorGate xnor = new XnorGate(2);
-		assertFalse(xnor.getOutputValue(0));
+		assertTrue(xnor.getOutputValue(0));
 	}
 
 	@Test
@@ -155,7 +155,7 @@ public class XnorGateTest {
 	@Test
 	public void testUpdateOutput() {
 		XnorGate xnor = new XnorGate(2);
-		assertFalse(xnor.getOutputValue(0));
+		assertTrue(xnor.getOutputValue(0));
 		ConstantGate oneGate1 = new ConstantGate(true);
 		ConstantGate oneGate2 = new ConstantGate(true);
 

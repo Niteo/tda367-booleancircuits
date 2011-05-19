@@ -43,7 +43,7 @@ public class NorGateTest {
 	@Test
 	public void testGetOutputValue() {
 		NorGate nor = new NorGate(2);
-		assertFalse(nor.getOutputValue(0));
+		assertTrue(nor.getOutputValue(0));
 	}
 
 	@Test
@@ -155,7 +155,7 @@ public class NorGateTest {
 	@Test
 	public void testUpdateOutput() {
 		NorGate nor = new NorGate(2);
-		assertFalse(nor.getOutputValue(0));
+		assertTrue(nor.getOutputValue(0));
 		ConstantGate oneGate1 = new ConstantGate(true);
 		ConstantGate oneGate2 = new ConstantGate(true);
 

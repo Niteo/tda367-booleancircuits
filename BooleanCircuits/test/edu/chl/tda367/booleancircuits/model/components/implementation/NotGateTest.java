@@ -36,7 +36,7 @@ public class NotGateTest {
 	@Test
 	public void testGetOutputValue() {
 		NotGate not = new NotGate();
-		assertFalse(not.getOutputValue(0));
+		assertTrue(not.getOutputValue(0));
 	}
 
 	@Test
@@ -155,7 +155,7 @@ public class NotGateTest {
 	public void testUpdateOutput() {
 		NotGate not1 = new NotGate();
 		NotGate not2 = new NotGate();
-		assertFalse(not1.getOutputValue(0));
+		assertTrue(not1.getOutputValue(0));
 		ConstantGate oneGate = new ConstantGate(true);
 		ConstantGate zeroGate = new ConstantGate(false);
 

@@ -38,7 +38,7 @@ public class NandGateTest {
 	@Test
 	public void testGetOutputValue() {
 		NandGate nand = new NandGate(2);
-		assertFalse(nand.getOutputValue(0));
+		assertTrue(nand.getOutputValue(0));
 	}
 
 	@Test
@@ -155,7 +155,7 @@ public class NandGateTest {
 	@Test
 	public void testUpdateOutput() {
 		NandGate nand = new NandGate(2);
-		assertFalse(nand.getOutputValue(0));
+		assertTrue(nand.getOutputValue(0));
 		ConstantGate oneGate1 = new ConstantGate(true);
 		ConstantGate oneGate2 = new ConstantGate(true);
 
