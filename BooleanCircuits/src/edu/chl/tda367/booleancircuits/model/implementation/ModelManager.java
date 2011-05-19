@@ -16,7 +16,7 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCi
 
 /**
  * A class which manages Models as workspaces.
- *
+ * 
  * @author Kaufmann
  */
 public final class ModelManager implements IObservable, IModelManager {
@@ -220,8 +220,9 @@ public final class ModelManager implements IObservable, IModelManager {
 			Point temp = new Point(gate.getPosition());
 			temp.x += moveX;
 			temp.y += moveY;
-			_addComponent(gate, temp);
+			gate.setPosition(temp);
 		}
+		this._getActiveWorkspaceModel().addComponents(component);
 		firePropertyChanged();
 	}
 
@@ -241,7 +242,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	private IModelWrapper _getActiveWorkspaceModel() {
-		if (selectedIndex>=0 && selectedIndex<modelList.size()) {
+		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
 			return modelList.get(selectedIndex);
 		} else {
 			return null;
