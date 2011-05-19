@@ -32,7 +32,7 @@ public final class MasterController implements IMasterController {
 
 	/**
 	 * Returns an instance of a MasterController
-	 * 
+	 *
 	 * @param mm
 	 *            the ModelManager to control
 	 * @throws NullPointerException
@@ -289,13 +289,14 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void importWorkspace() {
 		JFileChooser fc = new JFileChooser();
-		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION
+				&& modelManager.getActiveWorkspaceIndex() >= 0) {
 			List<ICircuitGate> importedComponents = fileManager.importFile(fc
 					.getSelectedFile());
-			modelManager.getActiveWorkspaceModel().addComponents(
-					importedComponents);
 			modelManager.getActiveSelectionModel().selectComponents(
 					importedComponents);
+			modelManager.addComponents(importedComponents);
+
 		}
 	}
 

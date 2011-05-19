@@ -24,6 +24,7 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	public AbstractCircuitGate(int inPorts, int outPorts) {
 		createOutputs(outPorts);
 		createInputs(inPorts);
+		update();
 	}
 
 	private void createOutputs(int amount) {
@@ -125,16 +126,37 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	@Override
 	public Collection<ICircuitGate> getRecoupledTo() {
 		Collection<ICircuitGate> col = new ArrayList<ICircuitGate>();
+		Collection<ICircuitGate> temp = new ArrayList<ICircuitGate>();
+		Collection<ICircuitGate> store = new ArrayList<ICircuitGate>();
 
 		for (IGateInput input : inputs) {
 			ICircuitGate inputGate = input.getInputComponent();
 			if (inputGate != null) {
 				if (inputGate.connectsTo(this)) {
-					col.add(inputGate);
+					temp.add(inputGate);
 				}
 			}
 		}
+		while (temp.size() > 0) {
+			for (ICircuitGate gate : temp) {
+				if (gate != this) {
+					Collection<IGateInput> gateInputs = gate.getInputs();
+					for (IGateInput input : gateInputs) {
+						ICircuitGate inputGate = input.getInputComponent();
+						if (inputGate != null) {
+							if (inputGate.connectsTo(this)) {
+								store.add(inputGate);
+							}
+						}
+					}
+				}
+			}
 
+			col.addAll(temp);
+			temp.clear();
+			temp.addAll(store);
+			store.clear();
+		}
 		return col;
 	}
 
