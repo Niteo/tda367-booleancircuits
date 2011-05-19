@@ -79,4 +79,11 @@ public interface IModel {
 	 * Updates the model's component's boolean values.
 	 */
 	public void updateComponents();
+
+	/**
+	 * Returns true if the circuit has infinite recursion.
+	 *
+	 * @return boolean
+	 */
+	public boolean hasInfiniteRecursion();
 }

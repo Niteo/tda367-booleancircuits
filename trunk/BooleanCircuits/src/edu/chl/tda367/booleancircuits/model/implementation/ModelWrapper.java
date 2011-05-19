@@ -8,30 +8,30 @@ import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
-public final class ModelWrapper implements IModelWrapper{
-	
+public final class ModelWrapper implements IModelWrapper {
+
 	private IModel model;
 	private File file;
 	private boolean isChanged;
 	private static int nWrappers = 0;
 	private int wrapperId;
-	
-	public ModelWrapper(){
+
+	public ModelWrapper() {
 		model = new Model();
 		wrapperId = ++nWrappers;
 	}
-	
-	public ModelWrapper(File file){
+
+	public ModelWrapper(File file) {
 		this();
 		this.file = file;
 	}
-	
-	public ModelWrapper(File file, Model model){
+
+	public ModelWrapper(File file, Model model) {
 		this(file);
 		this.model = model;
 		wrapperId = ++nWrappers;
 	}
-	
+
 	@Override
 	public void addComponent(ICircuitGate component, Point position) {
 		model.addComponent(component, position);
@@ -56,7 +56,7 @@ public final class ModelWrapper implements IModelWrapper{
 
 	@Override
 	public void removeComponent(ICircuitGate g) {
-		model.removeComponent(g);	
+		model.removeComponent(g);
 		isChanged = true;
 	}
 
@@ -74,21 +74,19 @@ public final class ModelWrapper implements IModelWrapper{
 	public boolean hasChanged() {
 		return isChanged;
 	}
-	
-	
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		String retString = "";
-		if(isChanged){
+		if (isChanged) {
 			retString += "*";
 		}
-		if(file != null){
+		if (file != null) {
 			retString += file.getName();
 		} else {
 			retString += "Untitled " + wrapperId;
 		}
-		
+
 		return retString;
 	}
 
@@ -101,9 +99,9 @@ public final class ModelWrapper implements IModelWrapper{
 	public void setChanged(boolean isChanged) {
 		this.isChanged = isChanged;
 	}
-	
+
 	@Override
-	public void setFile(File file){
+	public void setFile(File file) {
 		this.file = file;
 	}
 
@@ -120,5 +118,10 @@ public final class ModelWrapper implements IModelWrapper{
 	@Override
 	public int getNumberOfComponents() {
 		return model.getNumberOfComponents();
+	}
+
+	@Override
+	public boolean hasInfiniteRecursion() {
+		return model.hasInfiniteRecursion();
 	}
 }
