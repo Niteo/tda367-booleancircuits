@@ -1,14 +1,12 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import java.util.List;
-
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 public final class NorGate extends AbstractCircuitGate {
 
 	/**
 	 * Represents a NOR gate.
-	 * 
+	 *
 	 * @param inputs
 	 *            the amount of inputs for the gate
 	 */
@@ -28,12 +26,12 @@ public final class NorGate extends AbstractCircuitGate {
 
 		super.setOutput(0, !output);
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		return "NOR";
 	}
-	
+
 	@Override
 	protected AbstractCircuitGate emptyGateClone() {
 		return new NorGate(getNoOfInputs());

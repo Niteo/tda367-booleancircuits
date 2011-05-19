@@ -1,9 +1,10 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -31,7 +32,7 @@ public class NandGateTest {
 	@Test
 	public void testGetInputs() {
 		NandGate nand = new NandGate(2);
-		assertTrue(nand.getInputs().size()==2);
+		assertTrue(nand.getInputs().size() == 2);
 	}
 
 	@Test
@@ -44,7 +45,7 @@ public class NandGateTest {
 	public void testSetOutput() {
 		NandGate nand = new NandGate(2);
 		nand.setOutput(0, true);
-		assertEquals(true, nand.getOutputValue(0));
+		assertTrue(nand.getOutputValue(0));
 	}
 
 	@Test
@@ -157,7 +158,7 @@ public class NandGateTest {
 		assertFalse(nand.getOutputValue(0));
 		ConstantGate oneGate1 = new ConstantGate(true);
 		ConstantGate oneGate2 = new ConstantGate(true);
-		
+
 		nand.update();
 		assertTrue(nand.getOutputValue(0));
 

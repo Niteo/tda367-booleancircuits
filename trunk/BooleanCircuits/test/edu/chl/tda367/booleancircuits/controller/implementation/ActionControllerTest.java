@@ -1,9 +1,9 @@
 package edu.chl.tda367.booleancircuits.controller.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 
@@ -94,13 +94,6 @@ public class ActionControllerTest {
 		ActionController ac = new ActionController(new MasterController(new ModelManager()));
 		assertNotNull(ac.getRedoAction());
 		assertTrue(ac.getRedoAction() instanceof AbstractAction);
-	}
-
-	@Test
-	public void testGetExitAction() {
-		ActionController ac = new ActionController(new MasterController(new ModelManager()));
-		assertNotNull(ac.getExitAction());
-		assertTrue(ac.getExitAction() instanceof AbstractAction);
 	}
 
 	@Test

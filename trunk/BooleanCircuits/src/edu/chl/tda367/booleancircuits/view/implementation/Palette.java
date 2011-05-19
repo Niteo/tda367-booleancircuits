@@ -1,5 +1,6 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +15,23 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.implementation.ComponentFolder;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.*;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
+import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.XnorGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.XorGate;
 import edu.chl.tda367.booleancircuits.view.IPalette;
 
 /**
  * this class represents a palette containing folders with components
- * 
+ *
  * @author antonlin
- * 
+ *
  */
 
 public final class Palette implements IPalette {
@@ -38,7 +48,7 @@ public final class Palette implements IPalette {
 		specialList.add(new ConstantGate(false));
 		specialList.add(new ConstantGate(true));
 		specialList.add(new Clock());
-		
+
 		List<ICircuitGate> standardList = new ArrayList<ICircuitGate>();
 		standardList.add(new AndGate(2));
 		standardList.add(new NandGate(2));
@@ -78,6 +88,7 @@ public final class Palette implements IPalette {
 		componentTree.setRootVisible(false);
 
 		TreeSelectionListener tsl = new TreeSelectionListener() {
+			@SuppressWarnings("synthetic-access")
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) componentTree
@@ -96,22 +107,22 @@ public final class Palette implements IPalette {
 		componentTree.expandRow(8);
 
 		componentTree.getInputMap().put(
-				KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK),
+				KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK),
 				"none");
 		componentTree.getInputMap().put(
-				KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK),
+				KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK),
 				"none");
 		componentTree.getInputMap().put(
-				KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK),
+				KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK),
 				"none");
 		componentTree.getInputMap().put(
-				KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_MASK),
+				KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK),
 				"none");
 	}
 
 	/**
 	 * inserts component in to folder.
-	 * 
+	 *
 	 * @param folderNodeList
 	 * @param componentFolder
 	 */

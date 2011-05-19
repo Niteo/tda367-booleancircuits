@@ -1,9 +1,10 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -36,7 +37,7 @@ public class XorGateTest {
 	@Test
 	public void testGetInputs() {
 		XorGate xor = new XorGate(2);
-		assertTrue(xor.getInputs().size()==2);
+		assertTrue(xor.getInputs().size() == 2);
 	}
 
 	@Test
@@ -49,7 +50,7 @@ public class XorGateTest {
 	public void testSetOutput() {
 		XorGate xor = new XorGate(2);
 		xor.setOutput(0, true);
-		assertEquals(true, xor.getOutputValue(0));
+		assertTrue(xor.getOutputValue(0));
 	}
 
 	@Test
@@ -165,11 +166,11 @@ public class XorGateTest {
 
 		xor.update();
 		assertTrue(xor.getOutputValue(0));
-		
+
 		xor.connectInput(1, oneGate2, 0);
 		oneGate2.update();
 		assertTrue(xor.getInputs().get(1).getInputValue());
-		
+
 		xor.update();
 		assertFalse(xor.getOutputValue(0));
 	}

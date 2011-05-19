@@ -13,7 +13,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Locale;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -42,17 +41,19 @@ import edu.chl.tda367.booleancircuits.view.draw.implementation.GridBackground;
 
 /**
  * The Main window
- * 
+ *
  * @author Boel
  */
 public final class MainWindow extends JFrame implements PropertyChangeListener {
 
+	private static final long serialVersionUID = 1L;
 	private MasterController mc;
 	private ToolbarPanel toolbar = new ToolbarPanel();
 	private CenterStage cs;
 	private ActionController actionController;
 	private Palette palette;
 	private WindowAdapter windowAdapter = new WindowAdapter() {
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void windowClosing(WindowEvent arg0) {
 			if (mc.closeAllWorkspaces()) {
@@ -63,6 +64,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 
 	private ActionListener listener = new ActionListener() {
 
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == dotsRadioButtonMenuItem) {
@@ -81,6 +83,9 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 				Icon logo = new ImageIcon("resources/icons/cross-icon.png");
 				new AboutBox(Constants.creditsText, logo);
 			}
+			else if(e.getSource()==exitMenuItem){
+				windowAdapter.windowClosing(new WindowEvent(_getWindow(), 0));
+			}
 
 		}
 
@@ -89,6 +94,9 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 	private Action closeWorkspace = new AbstractAction("", new ImageIcon(
 			"resources/icons/cross-icon.png")) {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int tabCount = cs.getTabManager().getTabCount();
@@ -136,7 +144,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		initTabbedPane();
 		setTitle("Boolean Circuits");
 		setVisible(true);
-		setSize(new Dimension(800,500));
+		setSize(new Dimension(800, 500));
 		setIconImage(new ImageIcon("resources/icons/frameIcon.png").getImage());
 	}
 
@@ -161,7 +169,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		saveAsMenuItem.setAction(actionController.getSaveAsAction());
 		saveAllMenuItem
 				.setAction(actionController.getSaveAllWorkspacesAction());
-		exitMenuItem.setAction(actionController.getExitAction());
+		exitMenuItem.addActionListener(listener);
 
 		// init edit menu
 		undoMenuItem.setAction(actionController.getUndoAction());
@@ -344,6 +352,10 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 
 	private void initTabbedPane() {
 		cs.getTabManager().getTabbedPane().addChangeListener(actionController);
+	}
+
+	private MainWindow _getWindow(){
+		return this;
 	}
 
 	// GEN-BEGIN:initComponents

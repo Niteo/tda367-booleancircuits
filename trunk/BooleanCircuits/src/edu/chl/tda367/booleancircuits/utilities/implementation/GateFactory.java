@@ -22,11 +22,12 @@ public final class GateFactory {
 	}
 
 	private GateFactory() {
+		return;
 	}
 
 	/**
 	 * Gets an instance of the component
-	 * 
+	 *
 	 * @param: component the new component
 	 * @return: a new instance of the component
 	 */
@@ -45,7 +46,7 @@ public final class GateFactory {
 
 	/**
 	 * Gets an instance of the component with the specified amount of inputs
-	 * 
+	 *
 	 * @param: component the new component
 	 * @param: noOfInputs the amount of inputs on the component
 	 * @return: a new instance of the component

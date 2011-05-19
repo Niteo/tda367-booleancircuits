@@ -1,9 +1,10 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -36,7 +37,7 @@ public class OrGateTest {
 	@Test
 	public void testGetInputs() {
 		OrGate or = new OrGate(2);
-		assertTrue(or.getInputs().size()==2);
+		assertTrue(or.getInputs().size() == 2);
 	}
 
 	@Test
@@ -49,7 +50,7 @@ public class OrGateTest {
 	public void testSetOutput() {
 		OrGate or = new OrGate(2);
 		or.setOutput(0, true);
-		assertEquals(true, or.getOutputValue(0));
+		assertTrue(or.getOutputValue(0));
 	}
 
 	@Test

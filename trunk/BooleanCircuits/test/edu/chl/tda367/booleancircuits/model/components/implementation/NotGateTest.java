@@ -1,9 +1,10 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -42,7 +43,7 @@ public class NotGateTest {
 	public void testSetOutput() {
 		NotGate not = new NotGate();
 		not.setOutput(0, true);
-		assertEquals(true, not.getOutputValue(0));
+		assertTrue(not.getOutputValue(0));
 	}
 
 	@Test

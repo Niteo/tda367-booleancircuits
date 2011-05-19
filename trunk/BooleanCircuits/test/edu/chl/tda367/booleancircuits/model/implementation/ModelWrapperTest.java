@@ -1,6 +1,8 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
 import java.io.File;
@@ -14,7 +16,6 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
 
 public class ModelWrapperTest {
@@ -53,11 +54,11 @@ public class ModelWrapperTest {
 	public void testHasFile() {
 		ModelWrapper wrapper = new ModelWrapper();
 		File file = new File("file");
-		
+
 		wrapper.setFile(file);
-		assertNotNull(wrapper.hasFile());
+		assertTrue(wrapper.hasFile());
 	}
-	
+
 	@Test
 	public void testAddComponent() {
 		ModelWrapper wrapper = new ModelWrapper();
@@ -66,22 +67,22 @@ public class ModelWrapperTest {
 		assertTrue(wrapper.getComponent(new Point(10, 10)) instanceof ConstantGate);
 
 	}
-	
+
 	@Test
 	public void testHasChanged() {
 		ModelWrapper wrapper = new ModelWrapper();
 		assertTrue(wrapper.hasChanged()== false);
-		
+
 	}
-	
+
 	@Test
 	public void testSetChanged() {
 		ModelWrapper wrapper = new ModelWrapper();
 		wrapper.setChanged(true);
 		assertTrue(wrapper.hasChanged()== true);
-		
+
 	}
-	
+
 
 
 	@Test
@@ -161,10 +162,10 @@ public class ModelWrapperTest {
 	@Test
 	public void testGetFile() {
 		ModelWrapper wrapper = new ModelWrapper();
-		
+
 		assertNull(wrapper.getFile());
 		assertTrue(wrapper.hasChanged()==false);
-		
+
 	}
 
 	@Test
@@ -172,8 +173,8 @@ public class ModelWrapperTest {
 		ModelWrapper wrapper = new ModelWrapper();
 		File file = new File("file");
 		wrapper.setFile(file);
-		assertTrue(wrapper.getFile() instanceof File);
-		
+		assertTrue(wrapper.getFile().getName().equals("file"));
+
 	}
 
 
@@ -183,14 +184,14 @@ public class ModelWrapperTest {
 		File file = new File("file");
 		wrapper.setFile(file);
 		assertTrue(wrapper.toString().equals("file"));
-		
 
-		
+
+
 	}
 
 
 
-	
+
 
 
 }

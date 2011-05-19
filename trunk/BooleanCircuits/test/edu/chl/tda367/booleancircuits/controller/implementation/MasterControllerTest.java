@@ -1,7 +1,5 @@
 package edu.chl.tda367.booleancircuits.controller.implementation;
 
-import static org.junit.Assert.*;
-
 import java.awt.Point;
 
 import org.junit.Test;
@@ -58,7 +56,7 @@ public class MasterControllerTest {
 
 	@Test
 	public void testAddComponent() {
-		new MasterController(new ModelManager()).addComponent(new Point(0,0));
+		new MasterController(new ModelManager()).addComponent(new Point(0, 0));
 	}
 
 	@Test
@@ -73,7 +71,8 @@ public class MasterControllerTest {
 
 	@Test
 	public void testSelectComponent() {
-		new MasterController(new ModelManager()).selectComponent(new Point(0,0), false);
+		new MasterController(new ModelManager()).selectComponent(
+				new Point(0, 0), false);
 	}
 
 	@Test
@@ -90,25 +89,29 @@ public class MasterControllerTest {
 	public void testPasteSelectedComponents() {
 		new MasterController(new ModelManager()).pasteSelectedComponents();
 	}
-	
+
 	@Test
-	public void testPasteSelectedComponentsPoint(){
-		new MasterController(new ModelManager()).pasteSelectedComponents(new Point(0,0));
+	public void testPasteSelectedComponentsPoint() {
+		new MasterController(new ModelManager())
+				.pasteSelectedComponents(new Point(0, 0));
 	}
 
 	@Test
 	public void testSetChosenComponent() {
-		new MasterController(new ModelManager()).setChosenComponent(new AndGate(2));
+		new MasterController(new ModelManager())
+				.setChosenComponent(new AndGate(2));
 	}
 
 	@Test
 	public void testRemoveComponent() {
-		new MasterController(new ModelManager()).removeComponent(new AndGate(2));
+		new MasterController(new ModelManager())
+				.removeComponent(new AndGate(2));
 	}
 
 	@Test
 	public void testConnectComponent() {
-		new MasterController(new ModelManager()).connectComponent(new AndGate(2), 0);
+		new MasterController(new ModelManager()).connectComponent(
+				new AndGate(2), 0);
 	}
 
 }

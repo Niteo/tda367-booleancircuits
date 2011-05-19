@@ -1,32 +1,33 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 import java.awt.Point;
-import java.util.*;
-import edu.chl.tda367.booleancircuits.model.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
-import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 
 /**
  * Abstract class representing an abstract circuit component.
- * 
+ *
  * @author Kaufmann
- * 
+ *
  */
 public abstract class AbstractCircuitGate implements ICircuitGate {
 	private List<IGateInput> inputs;
-	private Boolean[] outputs;
+	private boolean[] outputs;
 	private boolean isInTiercalculation;
 	private boolean isInConnectToCalculation;
 	private Point position = new Point();
 
 	public AbstractCircuitGate(int inPorts, int outPorts){
 		createOutputs(outPorts);
-		createInputs(inPorts);	
+		createInputs(inPorts);
 	}
-	
+
 	private void createOutputs(int amount) {
-		outputs = new Boolean[amount];
+		outputs = new boolean[amount];
 		for (int i = 0; i < amount; i++) {
 			outputs[i] = false;
 		}
@@ -39,13 +40,14 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 		}
 	}
 
+	@Override
 	public List<IGateInput> getInputs() {
 		return inputs;
 	}
 
 	/**
 	 * Sets a specific output to a given value
-	 * 
+	 *
 	 * @param index
 	 *            specifies which output to set
 	 * @param value
@@ -55,12 +57,14 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 		outputs[index] = value;
 	}
 
+	@Override
 	public void overwriteGate(AbstractCircuitGate gate) {
 		this.inputs = gate.inputs;
 		this.isInTiercalculation = gate.isInTiercalculation;
 		this.outputs = gate.outputs;
 	}
 
+	@Override
 	public void connectInput(int inputPort, ICircuitGate component,
 			int outputPort)throws IllegalArgumentException {
 		if(inputPort > inputs.size()-1){
@@ -70,22 +74,27 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 		}
 	}
 
+	@Override
 	public boolean getOutputValue(int index) {
 		return outputs[index];
 	}
 
+	@Override
 	public int getNoOfInputs() {
 		return inputs.size();
 	}
 
+	@Override
 	public int getNoOfOutputs() {
 		return outputs.length;
 	}
 
+	@Override
 	public void update() {
 		updateOutput();
 	}
 
+	@Override
 	public int getComponentTier() {
 		if (isInTiercalculation) {
 			return 0;
@@ -109,7 +118,7 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	@Override
 	public Collection<ICircuitGate> getRecoupledTo() {
 		Collection<ICircuitGate> col = new ArrayList<ICircuitGate>();
-		
+
 		for(IGateInput input : inputs){
 			ICircuitGate inputGate = input.getInputComponent();
 			if(inputGate != null){
@@ -118,10 +127,11 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 				}
 			}
 		}
-		
+
 		return col;
 	}
-	
+
+	@Override
 	public boolean connectsTo(ICircuitGate gate){
 		boolean ret = false;
 		if(isInConnectToCalculation){
@@ -138,24 +148,28 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 				}
 			}
 		}
-		
+
 		isInConnectToCalculation = false;
 		return ret;
 	}
 
+	@Override
 	public Point getPosition() {
 		return this.position;
 	}
 
+	@Override
 	public void setPosition(Point position) {
 		this.position = position;
 	}
 
+	@Override
 	public void move(int deltaX, int deltaY) {
 		this.position = new Point(this.position.x + deltaX, this.position.y
 				+ deltaY);
 	}
 
+	@Override
 	public AbstractCircuitGate clone() {
 		AbstractCircuitGate c = emptyGateClone();
 
@@ -180,10 +194,11 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 
 	/**
 	 * Template-method for returning a gate of the used type.
-	 * 
+	 *
 	 * @return a gate of the used type
 	 */
 	protected abstract AbstractCircuitGate emptyGateClone();
 
+	@Override
 	public abstract String toString();
 }
