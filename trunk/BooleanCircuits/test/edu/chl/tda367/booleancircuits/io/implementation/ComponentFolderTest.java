@@ -19,13 +19,11 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.XorGate;
 public class ComponentFolderTest {
 	List<ICircuitGate> componentList;
 
-
-
 	@Test
 	public void testComponentFolderListOfAbstractCircuitGateString() {
 		componentList = new ArrayList<ICircuitGate>();
 		new ComponentFolder(componentList, "vippa");
-		
+
 	}
 
 	@Test
@@ -38,9 +36,8 @@ public class ComponentFolderTest {
 	public void testGetAllComponents() {
 		componentList = new ArrayList<ICircuitGate>();
 		ComponentFolder folder = new ComponentFolder(componentList, "vippa");
-		assertTrue(folder.getAllComponents().size()==0);
-		
-		//TODO:fix this
+		assertTrue(folder.getAllComponents().size() == 0);
+
 	}
 
 }
