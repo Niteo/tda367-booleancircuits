@@ -3,6 +3,7 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -31,7 +32,7 @@ public final class MasterController implements IMasterController {
 
 	/**
 	 * Returns an instance of a MasterController
-	 *
+	 * 
 	 * @param mm
 	 *            the ModelManager to control
 	 * @throws NullPointerException
@@ -289,8 +290,12 @@ public final class MasterController implements IMasterController {
 	public void importWorkspace() {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			modelManager.addComponents(fileManager.importFile(fc
-					.getSelectedFile()));
+			List<ICircuitGate> importedComponents = fileManager.importFile(fc
+					.getSelectedFile());
+			modelManager.getActiveWorkspaceModel().addComponents(
+					importedComponents);
+			modelManager.getActiveSelectionModel().selectComponents(
+					importedComponents);
 		}
 	}
 
