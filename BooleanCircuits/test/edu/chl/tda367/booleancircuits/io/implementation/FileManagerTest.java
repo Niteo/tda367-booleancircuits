@@ -1,8 +1,6 @@
 package edu.chl.tda367.booleancircuits.io.implementation;
 
-import static org.junit.Assert.*;
-
-import java.io.File;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 

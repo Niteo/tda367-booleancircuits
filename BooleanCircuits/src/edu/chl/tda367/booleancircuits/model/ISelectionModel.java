@@ -4,26 +4,25 @@ import java.util.Collection;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
  * An interface to describe a selection model.
- * 
+ *
  * @author Boel
- * 
+ *
  */
 public interface ISelectionModel {
 
-	
 	/**
 	 * Returns number of components currently selected.
+	 *
 	 * @return integer representing the amount of components selected
 	 */
 	public int getNumberOfComponents();
-	
+
 	/**
 	 * Selects all components in the collection.
-	 * 
+	 *
 	 * @param c
 	 *            Collection
 	 */
@@ -31,7 +30,7 @@ public interface ISelectionModel {
 
 	/**
 	 * Selects the given component in the active workspace.
-	 * 
+	 *
 	 * @param g
 	 *            IAbstractCircuitGate the gate to select
 	 * @param multiSelect
@@ -41,7 +40,7 @@ public interface ISelectionModel {
 
 	/**
 	 * Determinates if a component is currently selected.
-	 * 
+	 *
 	 * @param g
 	 *            AbstractCircuitGate
 	 * @return boolean
@@ -50,22 +49,22 @@ public interface ISelectionModel {
 
 	/**
 	 * Returns a list of the selected components.
-	 * 
+	 *
 	 * @return List
 	 */
 	public List<ICircuitGate> getSelectedComponents();
 
 	/**
 	 * Removes a collection of components from the selected list.
-	 * 
+	 *
 	 * @param c
 	 *            Collection components to remove
 	 */
 	public void removeComponents(Collection<ICircuitGate> c);
-	
+
 	/**
 	 * Removes a component from the selected list.
-	 * 
+	 *
 	 * @param g
 	 *            ICircuitGate component to remove
 	 */

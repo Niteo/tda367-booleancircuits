@@ -1,7 +1,11 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
 import java.awt.Point;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
@@ -18,7 +22,7 @@ public final class Model implements IModel {
 
 	/**
 	 * Returns an instance of Model
-	 * 
+	 *
 	 * @param name
 	 *            the name of the model
 	 */
@@ -26,15 +30,18 @@ public final class Model implements IModel {
 		componentList = new ArrayList<ICircuitGate>();
 	}
 
+	@Override
 	public void addComponent(ICircuitGate component, Point position) {
 		component.setPosition(position);
 		componentList.add(component);
 	}
 
+	@Override
 	public Collection<ICircuitGate> getComponents() {
-		return componentList;
+		return Collections.unmodifiableCollection(componentList);
 	}
 
+	@Override
 	public ICircuitGate getComponent(Point position) {
 		int size = Constants.componentSize;
 		for (ICircuitGate acg : componentList) {
@@ -55,12 +62,14 @@ public final class Model implements IModel {
 		return null;
 	}
 
+	@Override
 	public void removeComponents(Collection<ICircuitGate> list) {
 		for (ICircuitGate gate : list) {
 			_removeComponent(gate);
 		}
 	}
 
+	@Override
 	public void clock() {
 		for (ICircuitGate gate : componentList) {
 			if (gate instanceof Clock) {
@@ -70,6 +79,7 @@ public final class Model implements IModel {
 		updateComponents();
 	}
 
+	@Override
 	public void updateComponents() {
 		List<List<ICircuitGate>> groupList = new ArrayList<List<ICircuitGate>>();
 
@@ -80,7 +90,7 @@ public final class Model implements IModel {
 				}
 			}
 		}
-		
+
 		// Prepare tiers
 		int maxTier = 0;
 		for (ICircuitGate iGate : componentList) {

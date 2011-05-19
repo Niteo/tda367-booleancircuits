@@ -1,17 +1,12 @@
 package edu.chl.tda367.booleancircuits.controller.implementation;
 
 import java.awt.Desktop;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
@@ -19,13 +14,12 @@ import javax.swing.event.ChangeListener;
 
 import edu.chl.tda367.booleancircuits.controller.IActionController;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
-import edu.chl.tda367.booleancircuits.view.implementation.AboutBox;
 
 /**
  * A class to control action events.
- * 
+ *
  * @author Boel
- * 
+ *
  */
 public class ActionController implements ChangeListener, IActionController {
 
@@ -33,7 +27,7 @@ public class ActionController implements ChangeListener, IActionController {
 
 	/**
 	 * Returns an instance of ActionController.
-	 * 
+	 *
 	 * @param MasterController
 	 */
 	public ActionController(MasterController masterController) {
@@ -42,6 +36,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action saveAsAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.saveActiveWorkspace(true);
@@ -51,6 +48,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action newWorkspaceAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.newWorkspace();
@@ -60,6 +60,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action closeActiveWorkspaceAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			mc.closeActiveWorkspace();
@@ -68,6 +71,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action closeAllWorkspacesAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.closeAllWorkspaces();
@@ -75,6 +81,10 @@ public class ActionController implements ChangeListener, IActionController {
 	};
 
 	private final Action openWorkspaceAction = new AbstractAction() {
+
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.openWorkspace();
@@ -83,6 +93,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action saveActiveWorkspaceAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.saveActiveWorkspace(false);
@@ -91,6 +104,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action saveAllWorkspacesAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.saveAllWorkspaces();
@@ -99,6 +115,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action copySelectedComponentsAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.copySelectedComponents();
@@ -107,6 +126,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action cutSelectedComponentsAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.cutSelectedComponents();
@@ -115,6 +137,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action pasteSelectedComponentAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.pasteSelectedComponents();
@@ -122,6 +147,8 @@ public class ActionController implements ChangeListener, IActionController {
 	};
 
 	private final Action undoAction = new AbstractAction() {
+
+		private static final long serialVersionUID = 1L;
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -131,22 +158,19 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action redoAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO redo
 		}
 	};
 
-	private final Action exitAction = new AbstractAction() {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			System.exit(0);
-		}
-	};
-
 	private final Action removeSelectedComponentsAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.removeSelectedComponents();
@@ -155,6 +179,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action selectAllComponentsAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mc.selectAllComponents();
@@ -163,6 +190,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action pauseClockAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			pauseClockAction.setEnabled(false);
@@ -173,7 +203,9 @@ public class ActionController implements ChangeListener, IActionController {
 	};
 
 	private final Action startClockAction = new AbstractAction() {
+		private static final long serialVersionUID = 1L;
 
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			pauseClockAction.setEnabled(true);
@@ -184,6 +216,9 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action importWorkspaceAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			mc.importWorkspace();
@@ -192,18 +227,22 @@ public class ActionController implements ChangeListener, IActionController {
 
 	private final Action showHelpAction = new AbstractAction() {
 
+		private static final long serialVersionUID = 1L;
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			File file = new File(Constants.manualPath);
-			if(file.exists()){
+			if (file.exists()) {
 				Desktop desk = Desktop.getDesktop();
 				try {
 					desk.open(file);
 				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(null, "Couldn't open manual.pdf!");
+					JOptionPane.showMessageDialog(null,
+							"Couldn't open manual.pdf!");
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "Couldn't find manual.pdf!");
+				JOptionPane
+						.showMessageDialog(null, "Couldn't find manual.pdf!");
 			}
 		}
 	};
@@ -261,11 +300,6 @@ public class ActionController implements ChangeListener, IActionController {
 	@Override
 	public Action getRedoAction() {
 		return redoAction;
-	}
-
-	@Override
-	public Action getExitAction() {
-		return exitAction;
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public final class MasterController implements IMasterController {
 
 	/**
 	 * Returns an instance of a MasterController
-	 * 
+	 *
 	 * @param mm
 	 *            the ModelManager to control
 	 * @throws NullPointerException
@@ -46,6 +46,7 @@ public final class MasterController implements IMasterController {
 			clockTimer = new Timer(Constants.clockFrequency,
 					new ActionListener() {
 
+						@SuppressWarnings("synthetic-access")
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							modelManager.clockActiveModel();

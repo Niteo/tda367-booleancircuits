@@ -1,9 +1,10 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -36,7 +37,7 @@ public class NorGateTest {
 	@Test
 	public void testGetInputs() {
 		NorGate nor = new NorGate(2);
-		assertTrue(nor.getInputs().size()==2);
+		assertTrue(nor.getInputs().size() == 2);
 	}
 
 	@Test
@@ -49,7 +50,7 @@ public class NorGateTest {
 	public void testSetOutput() {
 		NorGate nor = new NorGate(2);
 		nor.setOutput(0, true);
-		assertEquals(true, nor.getOutputValue(0));
+		assertTrue(nor.getOutputValue(0));
 	}
 
 	@Test
@@ -157,7 +158,7 @@ public class NorGateTest {
 		assertFalse(nor.getOutputValue(0));
 		ConstantGate oneGate1 = new ConstantGate(true);
 		ConstantGate oneGate2 = new ConstantGate(true);
-		
+
 		nor.update();
 		assertTrue(nor.getOutputValue(0));
 

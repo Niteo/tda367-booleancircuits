@@ -1,15 +1,13 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
-import java.util.Collection;
-import java.util.List;
 
 import org.junit.Test;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 public class ConstantGateTest {
 	@Test
@@ -28,8 +26,6 @@ public class ConstantGateTest {
 		assertTrue(trueConstantGate.getInputs().size() == 0);
 
 	}
-
-	
 
 	@Test
 	public void testEmptyGateClone() {
@@ -127,31 +123,27 @@ public class ConstantGateTest {
 	@Test
 	public void testGetPosition() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
-		assertTrue(falseConstantGate.getPosition().equals(new Point(0,0)));
-		
-		
-	
+		assertTrue(falseConstantGate.getPosition().equals(new Point(0, 0)));
+
 	}
 
 	@Test
 	public void testSetPosition() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
-		
-		falseConstantGate.setPosition(new Point(10,10));
-		falseConstantGate.getPosition().equals(new Point(10,10));
-		
-		
+
+		falseConstantGate.setPosition(new Point(10, 10));
+		falseConstantGate.getPosition().equals(new Point(10, 10));
+
 	}
 
 	@Test
 	public void testMove() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
-		
-		falseConstantGate.setPosition(new Point(10,10));
-		falseConstantGate.move(15,10);
-		assertTrue(falseConstantGate.getPosition().x==25);
-		assertTrue(falseConstantGate.getPosition().y==20);
-		
+
+		falseConstantGate.setPosition(new Point(10, 10));
+		falseConstantGate.move(15, 10);
+		assertTrue(falseConstantGate.getPosition().x == 25);
+		assertTrue(falseConstantGate.getPosition().y == 20);
 
 	}
 
@@ -174,19 +166,18 @@ public class ConstantGateTest {
 		assertTrue(trueClone.getNoOfOutputs() == trueConstantGate
 				.getNoOfOutputs());
 	}
+
 	@Test
 	public void testUpdateOutput() {
-		
+
 		ConstantGate falseConstantGate = new ConstantGate(false);
 		ConstantGate trueConstantGate = new ConstantGate(true);
-		
+
 		falseConstantGate.update();
 		assertFalse(falseConstantGate.getOutputValue(0));
 		assertFalse(trueConstantGate.getOutputValue(0));
 		trueConstantGate.update();
 		assertTrue(trueConstantGate.getOutputValue(0));
-		
-		
-		
+
 	}
 }

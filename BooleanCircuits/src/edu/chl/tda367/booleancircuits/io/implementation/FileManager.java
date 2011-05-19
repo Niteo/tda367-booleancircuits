@@ -13,7 +13,6 @@ import java.util.Scanner;
 import edu.chl.tda367.booleancircuits.io.IFileManager;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 

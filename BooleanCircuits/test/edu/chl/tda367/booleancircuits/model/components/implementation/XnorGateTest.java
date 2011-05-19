@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -38,7 +37,7 @@ public class XnorGateTest {
 	@Test
 	public void testGetInputs() {
 		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getInputs().size()==2);
+		assertTrue(xnor.getInputs().size() == 2);
 	}
 
 	@Test
@@ -51,7 +50,7 @@ public class XnorGateTest {
 	public void testSetOutput() {
 		XnorGate xnor = new XnorGate(2);
 		xnor.setOutput(0, true);
-		assertEquals(true, xnor.getOutputValue(0));
+		assertTrue(xnor.getOutputValue(0));
 	}
 
 	@Test
@@ -159,7 +158,7 @@ public class XnorGateTest {
 		assertFalse(xnor.getOutputValue(0));
 		ConstantGate oneGate1 = new ConstantGate(true);
 		ConstantGate oneGate2 = new ConstantGate(true);
-		
+
 		xnor.update();
 		assertTrue(xnor.getOutputValue(0));
 

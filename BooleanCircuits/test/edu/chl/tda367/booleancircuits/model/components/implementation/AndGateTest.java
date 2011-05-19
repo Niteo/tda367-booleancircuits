@@ -1,9 +1,10 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -36,7 +37,7 @@ public class AndGateTest {
 	@Test
 	public void testGetInputs() {
 		AndGate and = new AndGate(2);
-		assertTrue(and.getInputs().size()==2);
+		assertTrue(and.getInputs().size() == 2);
 	}
 
 	@Test
@@ -49,7 +50,7 @@ public class AndGateTest {
 	public void testSetOutput() {
 		AndGate and = new AndGate(2);
 		and.setOutput(0, true);
-		assertEquals(true, and.getOutputValue(0));
+		assertTrue(and.getOutputValue(0));
 	}
 
 	@Test
@@ -161,10 +162,10 @@ public class AndGateTest {
 		and.connectInput(0, oneGate1, 0);
 		oneGate1.update();
 		assertTrue(and.getInputs().get(0).getInputValue());
-		
+
 		and.update();
 		assertFalse(and.getOutputValue(0));
-		
+
 		and.connectInput(1, oneGate2, 0);
 		oneGate2.update();
 		assertTrue(and.getInputs().get(1).getInputValue());

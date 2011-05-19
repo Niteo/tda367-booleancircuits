@@ -17,7 +17,7 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
 /**
  * A class which manages Models as workspaces.
- * 
+ *
  * @author Kaufmann
  */
 public final class ModelManager implements IObservable, IModelManager {
@@ -262,6 +262,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		}
 	}
 
+	@SuppressWarnings("boxing")
 	private void firePropertyChanged() {
 		pcs.firePropertyChange(new PropertyChangeEvent(this, "ModelManager", 0,
 				1));

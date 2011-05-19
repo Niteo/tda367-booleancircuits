@@ -1,8 +1,8 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +13,6 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
 
 public class SelectionModelTest {
 
@@ -37,12 +36,12 @@ public class SelectionModelTest {
 		assertTrue(sm.getSelectedComponents().size() == 1);
 		assertTrue(sm.getSelectedComponents().get(0) instanceof AndGate);
 	}
-	
+
 	@Test
-	public void testGetNumberOfComponents(){
+	public void testGetNumberOfComponents() {
 		SelectionModel sm = new SelectionModel();
 		assertTrue(sm.getNumberOfComponents() == 0);
-		
+
 		sm.selectComponent(new ConstantGate(true), false);
 		assertTrue(sm.getNumberOfComponents() == 1);
 	}
@@ -77,7 +76,7 @@ public class SelectionModelTest {
 	public void testRemoveComponent() {
 		SelectionModel sm = new SelectionModel();
 		AndGate and = new AndGate(2);
-		
+
 		sm.selectComponent(and, false);
 		assertTrue(sm.isSelectedComponent(and));
 		sm.removeComponent(and);
@@ -90,10 +89,10 @@ public class SelectionModelTest {
 		AndGate and = new AndGate(2);
 		NandGate nand = new NandGate(2);
 		Collection<ICircuitGate> collection = new ArrayList<ICircuitGate>();
-		
+
 		collection.add(and);
 		collection.add(nand);
-		
+
 		sm.selectComponents(collection);
 		assertTrue(sm.isSelectedComponent(and));
 		assertTrue(sm.isSelectedComponent(nand));

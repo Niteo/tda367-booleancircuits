@@ -7,13 +7,11 @@ import java.util.List;
 
 import javax.swing.Action;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
-import edu.chl.tda367.booleancircuits.model.implementation.Model;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.view.ICenterStage;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
@@ -21,9 +19,9 @@ import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 /**
  * A class that represents a workspace with a panel and potentially several
  * tabs.
- * 
+ *
  * @author Boel
- * 
+ *
  */
 public class CenterStage implements ICenterStage {
 
@@ -49,6 +47,8 @@ public class CenterStage implements ICenterStage {
 		tabPanel.getCloseButton().setToolTipText("Close");
 	}
 
+	@SuppressWarnings("boxing")
+	@Override
 	public synchronized void update(ModelManager modelManager) {
 		List<IModelWrapper> modelList = modelManager.getWorkspaces();
 		for (int i = 0; i < modelList.size(); i++) {
@@ -74,7 +74,7 @@ public class CenterStage implements ICenterStage {
 		} else {
 			for (Integer i : removeList) {
 				tabIdList.remove((int) i);
-				tabManager.removeTab((int) i);
+				tabManager.removeTab(i);
 			}
 		}
 
@@ -95,19 +95,23 @@ public class CenterStage implements ICenterStage {
 		tabManager.updateTabbedPane();
 	}
 
+	@Override
 	public JPanel getPanel() {
 		return centerStagePanel;
 	}
 
+	@Override
 	public TabManager getTabManager() {
 		return tabManager;
 	}
 
+	@Override
 	public void setBackground(IBackground background) {
 		Canvas.setBackground(background);
 		tabManager.updateTabbedPane();
 	}
 
+	@Override
 	public void setUSStandard(boolean bool) {
 		Canvas.setUSStandard(bool);
 		tabManager.updateTabbedPane();

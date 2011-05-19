@@ -5,16 +5,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
 
 /**
  * Popup menu for canvas
- * 
+ *
  * @author Kaufmann
- * 
+ *
  */
 public final class CanvasPopup extends JPopupMenu {
+
+	private static final long serialVersionUID = 1L;
 	private JMenuItem remove = new JMenuItem("Remove gate");
 	private JMenuItem copy = new JMenuItem("Copy gate");
 	private JMenuItem cut = new JMenuItem("Cut gate");
@@ -24,13 +24,13 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Creates a pop-up menu.
-	 * 
+	 *
 	 * @param l
 	 *            ActionListener
 	 */
 	public CanvasPopup(ActionListener listener) {
 		super();
-		
+
 		this.listener = listener;
 		remove.addActionListener(listener);
 		copy.addActionListener(listener);
@@ -46,7 +46,7 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Updates the menu to show items based on input parameters.
-	 * 
+	 *
 	 * @param inputs
 	 *            amount of inputs in the input menu
 	 * @param outputs
@@ -81,24 +81,24 @@ public final class CanvasPopup extends JPopupMenu {
 			temp.addActionListener(listener);
 			outputMenu.add(temp);
 		}
-		
+
 		enableIOMenu(inputs > 0, outputs > 0);
 	}
-	
-	private void enableIOMenu(boolean inputEnabled, boolean outputEnabled){
+
+	private void enableIOMenu(boolean inputEnabled, boolean outputEnabled) {
 		inputMenu.setEnabled(inputEnabled);
 		outputMenu.setEnabled(outputEnabled);
 	}
 
 	private void changeIOMenu(String input, String output) {
-		if(input == null){
+		if (input == null) {
 			inputMenu.setVisible(false);
 		} else {
 			inputMenu.setText(input);
 			inputMenu.setVisible(true);
 		}
-		
-		if(output == null){
+
+		if (output == null) {
 			outputMenu.setVisible(false);
 		} else {
 			outputMenu.setText(output);
@@ -108,7 +108,7 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Returns true if the JMenuItem is a remove button.
-	 * 
+	 *
 	 * @param item
 	 *            JMenuItem
 	 * @return boolean
@@ -116,10 +116,10 @@ public final class CanvasPopup extends JPopupMenu {
 	public boolean isRemoveButton(JMenuItem item) {
 		return remove == item;
 	}
-	
+
 	/**
 	 * Returns true if the JMenuItem is a copy button.
-	 * 
+	 *
 	 * @param item
 	 *            JMenuItem
 	 * @return boolean
@@ -127,10 +127,10 @@ public final class CanvasPopup extends JPopupMenu {
 	public boolean isCopyButton(JMenuItem item) {
 		return copy == item;
 	}
-	
+
 	/**
 	 * Returns true if the JMenuItem is a remove button.
-	 * 
+	 *
 	 * @param item
 	 *            JMenuItem
 	 * @return boolean
@@ -141,9 +141,10 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Returns the index of the input button.
-	 * 
+	 *
 	 * @param item
-	 * @return the index of the input button. Returns -1 if button is not an input button
+	 * @return the index of the input button. Returns -1 if button is not an
+	 *         input button
 	 */
 	public int getInputIndex(JMenuItem item) {
 		for (int i = 0; i < inputMenu.getItemCount(); i++) {
@@ -157,9 +158,10 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Returns the index of the output button.
-	 * 
+	 *
 	 * @param item
-	 * @return the index of the output button. Returns -1 if button is not an output button
+	 * @return the index of the output button. Returns -1 if button is not an
+	 *         output button
 	 */
 	public int getOutputIndex(JMenuItem item) {
 		for (int i = 0; i < outputMenu.getItemCount(); i++) {
@@ -170,22 +172,26 @@ public final class CanvasPopup extends JPopupMenu {
 
 		return -1;
 	}
-	
+
 	/**
 	 * Checks if item is an output button.
-	 * @param item the item to check
+	 *
+	 * @param item
+	 *            the item to check
 	 * @return true if item is output button
 	 */
-	public boolean isOutputItem(JMenuItem item){
+	public boolean isOutputItem(JMenuItem item) {
 		return getOutputIndex(item) != -1;
 	}
-	
+
 	/**
 	 * Checks if item is an input button.
-	 * @param item the item to check
+	 *
+	 * @param item
+	 *            the item to check
 	 * @return true if item is input button
 	 */
-	public boolean isInputItem(JMenuItem item){
+	public boolean isInputItem(JMenuItem item) {
 		return getInputIndex(item) != -1;
 	}
 }

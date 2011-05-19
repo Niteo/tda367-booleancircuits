@@ -6,70 +6,87 @@
 
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JSeparator;
 
 import edu.chl.tda367.booleancircuits.view.IToolbarPanel;
 
 /**
  * A tool bar containing several buttons.
- * 
+ *
  * @author Boel
  */
 public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
+
+	private static final long serialVersionUID = 1L;
 
 	/** Creates new form ToolbarPanel */
 	public ToolbarPanel() {
 		initComponents();
 	}
 
+	@Override
 	public JButton getCutButton() {
 		return cutButton;
 	}
 
+	@Override
 	public JButton getCopyButton() {
 		return copyButton;
 	}
 
+	@Override
 	public JButton getNewWorkspaceButton() {
 		return newWorkspaceButton;
 	}
 
+	@Override
 	public JButton getOpenFileButton() {
 		return openFileButton;
 	}
 
+	@Override
 	public JButton getPasteButton() {
 		return pasteButton;
 	}
 
+	@Override
 	public JButton getPauseClockButton() {
 		return pauseClockButton;
 	}
 
+	@Override
 	public JButton getRedoButton() {
 		return redoButton;
 	}
 
+	@Override
 	public JButton getSaveAllButton() {
 		return saveAllButton;
 	}
 
+	@Override
 	public JButton getSaveAsComponentButton() {
 		return saveAsComponentButton;
 	}
 
+	@Override
 	public JButton getSaveButton() {
 		return saveButton;
 	}
 
+	@Override
 	public JButton getStartClockButton() {
 		return startClockButton;
 	}
 
+	@Override
 	public JButton getUndoButton() {
 		return undoButton;
 	}
 
+	@Override
 	public void initIcons() {
 		newWorkspaceButton.setIcon(new ImageIcon(
 				"Resources/Icons/New-Document-icon.png"));
@@ -129,7 +146,7 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 
 		saveAllButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(saveAllButton);
-		
+
 		add(new JSeparator());
 
 		cutButton.setPreferredSize(new java.awt.Dimension(20, 20));
@@ -140,7 +157,7 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 
 		pasteButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(pasteButton);
-		
+
 		add(new JSeparator());
 
 		undoButton.setPreferredSize(new java.awt.Dimension(20, 20));
@@ -148,12 +165,12 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 
 		redoButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(redoButton);
-		
+
 		add(new JSeparator());
 
 		startClockButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(startClockButton);
-		
+
 		pauseClockButton.setPreferredSize(new java.awt.Dimension(20, 20));
 		add(pauseClockButton);
 	}// </editor-fold>

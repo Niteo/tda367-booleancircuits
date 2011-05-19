@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Collections;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -27,9 +26,9 @@ import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
 
 /**
  * A class where the components are drawn.
- * 
+ *
  * @author Boel, Anton
- * 
+ *
  */
 public class Canvas {
 
@@ -50,6 +49,7 @@ public class Canvas {
 	private Point drawSelect;
 	private ActionListener listener = new ActionListener() {
 
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JMenuItem menuItem = (JMenuItem) e.getSource();
@@ -86,6 +86,10 @@ public class Canvas {
 	};
 
 	private JPanel panel = new JPanel() {
+
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
@@ -111,7 +115,8 @@ public class Canvas {
 				}
 				// Draw connections
 				for (ICircuitGate circuitGate : model.getComponents()) {
-						drawer.drawGateConnections(g2d, circuitGate, new Point(posX, posY));
+					drawer.drawGateConnections(g2d, circuitGate, new Point(
+							posX, posY));
 				}
 			}
 
@@ -120,18 +125,18 @@ public class Canvas {
 				Point mousePos = panel.getMousePosition();
 				if (mousePos != null) {
 					g.setColor(Constants.drawSelectFill);
-					
-					int startX = drawSelect.x < mousePos.x ? drawSelect.x : mousePos.x;
-					int sizeX = drawSelect.x < mousePos.x ?
-							mousePos.x - drawSelect.x : drawSelect.x - mousePos.x;
-					int startY = drawSelect.y < mousePos.y ? drawSelect.y : mousePos.y;
-					int sizeY = drawSelect.y < mousePos.y ?
-							mousePos.y - drawSelect.y : drawSelect.y - mousePos.y;
-					
-					g2d.fillRect(startX, startY,
-							sizeX,
-							sizeY);
-				
+
+					int startX = drawSelect.x < mousePos.x ? drawSelect.x
+							: mousePos.x;
+					int sizeX = drawSelect.x < mousePos.x ? mousePos.x
+							- drawSelect.x : drawSelect.x - mousePos.x;
+					int startY = drawSelect.y < mousePos.y ? drawSelect.y
+							: mousePos.y;
+					int sizeY = drawSelect.y < mousePos.y ? mousePos.y
+							- drawSelect.y : drawSelect.y - mousePos.y;
+
+					g2d.fillRect(startX, startY, sizeX, sizeY);
+
 					g.setColor(Constants.drawSelectBorder);
 					int[] xArray = { drawSelect.x, mousePos.x, mousePos.x,
 							drawSelect.x };
@@ -149,6 +154,7 @@ public class Canvas {
 	};
 
 	private MouseAdapter mouseAdapter = new MouseInputAdapter() {
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void mouseDragged(MouseEvent evt) {
 			Point dragPosition = new Point(evt.getX() + posX, evt.getY() + posY);
@@ -170,7 +176,7 @@ public class Canvas {
 					ICircuitGate gate = model.getComponent(dragPosition);
 					if (gate != null && !panning) {
 						draggingMode = true;
-						if(!selectModel.isSelectedComponent(gate)){
+						if (!selectModel.isSelectedComponent(gate)) {
 							selectModel.selectComponent(gate, false);
 						}
 					} else {
@@ -183,6 +189,7 @@ public class Canvas {
 			panel.repaint();
 		}
 
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void mouseReleased(MouseEvent evt) {
 			final Point releasePoint = evt.getPoint();
@@ -198,6 +205,7 @@ public class Canvas {
 			}
 		}
 
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void mouseClicked(MouseEvent evt) {
 			mouseClickedActions(evt);
@@ -220,7 +228,7 @@ public class Canvas {
 
 	/**
 	 * Returns the canvas.
-	 * 
+	 *
 	 * @return JPanel
 	 */
 	public JPanel getCanvas() {
@@ -229,7 +237,7 @@ public class Canvas {
 
 	/**
 	 * Sets US standard. False is international.
-	 * 
+	 *
 	 * @param bool
 	 */
 	public static void setUSStandard(boolean bool) {
@@ -238,7 +246,7 @@ public class Canvas {
 
 	/**
 	 * Sets the background of the canvas.
-	 * 
+	 *
 	 * @param background
 	 *            IBackground
 	 */
@@ -282,6 +290,7 @@ public class Canvas {
 				final JMenuItem cutItem = new JMenuItem("Cut selected");
 				final JMenuItem pasteItem = new JMenuItem("Paste");
 				ActionListener menuListener = new ActionListener() {
+					@SuppressWarnings("synthetic-access")
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
 						if (arg0.getSource() == addItem) {

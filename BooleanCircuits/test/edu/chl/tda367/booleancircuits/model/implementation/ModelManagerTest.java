@@ -1,12 +1,12 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.junit.Test;
@@ -138,7 +138,7 @@ public class ModelManagerTest {
 
 					@Override
 					public void propertyChange(PropertyChangeEvent evt) {
-
+						return;
 					}
 				});
 	}
@@ -146,10 +146,10 @@ public class ModelManagerTest {
 	@Test
 	public void testRemovePropertyChangeListener() {
 		PropertyChangeListener listener = new PropertyChangeListener() {
-			
+
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				
+				return;
 			}
 		};
 		new ModelManager().addPropertyChangeListener(listener);
@@ -163,7 +163,7 @@ public class ModelManagerTest {
 
 	@Test
 	public void testSelectComponent() {
-		new ModelManager().selectComponent(new Point(0,0), false);
+		new ModelManager().selectComponent(new Point(0, 0), false);
 	}
 
 	@Test
@@ -178,7 +178,8 @@ public class ModelManagerTest {
 
 	@Test
 	public void testConnectComponents() {
-		new ModelManager().connectComponents(new AndGate(2), new NandGate(2), 0, 0);
+		new ModelManager().connectComponents(new AndGate(2), new NandGate(2),
+				0, 0);
 	}
 
 	@Test
@@ -192,12 +193,12 @@ public class ModelManagerTest {
 		list.add(new AndGate(2));
 		new ModelManager().addComponents(list);
 	}
-	
+
 	@Test
 	public void testAddComponentsListPoint() {
 		List<ICircuitGate> list = new ArrayList<ICircuitGate>();
 		list.add(new AndGate(2));
-		new ModelManager().addComponents(list, new Point(0,0));
+		new ModelManager().addComponents(list, new Point(0, 0));
 	}
 
 }
