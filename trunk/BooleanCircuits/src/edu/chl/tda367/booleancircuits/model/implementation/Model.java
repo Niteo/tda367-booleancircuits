@@ -111,26 +111,25 @@ public final class Model implements IModel {
 			Collection<ICircuitGate> recouples = iGate.getRecoupledTo();
 			System.out.println(recouples);
 			if (recouples.size() > 0) {
-				int recouplesMaxTier = iGate.getComponentTier();
+				int recouplesMinTier = iGate.getComponentTier();
 				for (ICircuitGate reGate : recouples) {
 					int tier = reGate.getComponentTier();
-					if (tier > recouplesMaxTier) {
-						recouplesMaxTier = tier;
+					if (tier < recouplesMinTier) {
+						recouplesMinTier = tier;
 					}
 				}
-				if (!groupList.get(recouplesMaxTier - 1).contains(iGate)) {
-					groupList.get(recouplesMaxTier - 1).add(iGate);
+				if (!groupList.get(recouplesMinTier - 1).contains(iGate)) {
+					groupList.get(recouplesMinTier - 1).add(iGate);
 				}
 				for (ICircuitGate addGate : recouples) {
-					if (!groupList.get(recouplesMaxTier - 1).contains(addGate)) {
-						groupList.get(recouplesMaxTier - 1).add(addGate);
+					if (!groupList.get(recouplesMinTier - 1).contains(addGate)) {
+						groupList.get(recouplesMinTier - 1).add(addGate);
 					}
 				}
 			} else {
 				groupList.get(iGate.getComponentTier() - 1).add(iGate);
 			}
 		}
-		System.out.println(groupList);
 		// Update each tier individually
 		boolean hasChanged;
 		int loop = 0;
@@ -141,6 +140,7 @@ public final class Model implements IModel {
 				for (ICircuitGate g : l) {
 					AbstractCircuitGate temp = g.clone();
 					if (temp.update()) {
+						System.out.println(temp);
 						hasChanged = true;
 					}
 					cloneList.add(temp);
