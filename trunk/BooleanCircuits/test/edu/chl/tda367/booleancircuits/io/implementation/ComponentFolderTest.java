@@ -10,7 +10,7 @@ import org.junit.Test;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 public class ComponentFolderTest {
-	List<ICircuitGate> componentList;
+	List<ICircuitGate> componentList = new ArrayList<ICircuitGate>();
 
 	@Test
 	public void testComponentFolderListOfAbstractCircuitGateString() {
@@ -29,8 +29,6 @@ public class ComponentFolderTest {
 	public void testGetAllComponents() {
 		ComponentFolder folder = new ComponentFolder(componentList, "vippa");
 		assertTrue(folder.getAllComponents().size() == 0);
-
-		// TODO:fix this
 	}
 
 }

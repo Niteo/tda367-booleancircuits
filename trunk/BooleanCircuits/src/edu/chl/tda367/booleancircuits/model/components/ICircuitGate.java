@@ -4,8 +4,6 @@ import java.awt.Point;
 import java.util.Collection;
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
-
 public interface ICircuitGate {
 
 	/**
@@ -38,7 +36,7 @@ public interface ICircuitGate {
 	 * @param gate
 	 *            the gate to override with
 	 */
-	public void overwriteGate(AbstractCircuitGate gate);
+	public void overwriteGate(ICircuitGate gate);
 
 	/**
 	 * Connects a specific input of this component with a specific output of
@@ -121,11 +119,18 @@ public interface ICircuitGate {
 	/**
 	 * Returns a copy of the gate.
 	 */
-	public AbstractCircuitGate clone();
+	public ICircuitGate clone();
 
 	/**
 	 * Returns the name of the gate.
 	 */
 	@Override
 	public abstract String toString();
+
+	/**
+	 * Returns the outputs.
+	 *
+	 * @return boolean
+	 */
+	public abstract boolean[] getOutputs();
 }

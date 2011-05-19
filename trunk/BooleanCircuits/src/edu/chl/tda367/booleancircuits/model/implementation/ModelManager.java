@@ -12,7 +12,6 @@ import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.IObservable;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 
 /**
  * A class which manages Models as workspaces.
@@ -143,7 +142,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public boolean isSelectedComponent(AbstractCircuitGate g) {
+	public boolean isSelectedComponent(ICircuitGate g) {
 		if (_getActiveSelectionModel() != null) {
 			return _getActiveSelectionModel().isSelectedComponent(g);
 		}
@@ -182,8 +181,10 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void addComponents(List<ICircuitGate> components) {
-		getActiveWorkspaceModel().addComponents(components);
-		firePropertyChanged();
+		if (getActiveWorkspaceModel() != null) {
+			getActiveWorkspaceModel().addComponents(components);
+			firePropertyChanged();
+		}
 	}
 
 	@Override

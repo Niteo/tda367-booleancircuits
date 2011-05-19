@@ -59,10 +59,9 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	}
 
 	@Override
-	public void overwriteGate(AbstractCircuitGate gate) {
-		this.inputs = gate.inputs;
-		this.isInTiercalculation = gate.isInTiercalculation;
-		this.outputs = gate.outputs;
+	public void overwriteGate(ICircuitGate gate) {
+		this.inputs = gate.getInputs();
+		this.outputs = gate.getOutputs();
 	}
 
 	@Override
@@ -144,7 +143,8 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 					for (IGateInput input : gateInputs) {
 						ICircuitGate inputGate = input.getInputComponent();
 						if (inputGate != null && inputGate != this) {
-							if (inputGate.connectsTo(this) && !col.contains(inputGate)) {
+							if (inputGate.connectsTo(this)
+									&& !col.contains(inputGate)) {
 								store.add(inputGate);
 							}
 						}
@@ -230,4 +230,9 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 
 	@Override
 	public abstract String toString();
+
+	@Override
+	public boolean[] getOutputs() {
+		return outputs.clone();
+	}
 }

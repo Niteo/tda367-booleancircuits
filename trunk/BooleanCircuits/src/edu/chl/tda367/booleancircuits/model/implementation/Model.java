@@ -10,7 +10,6 @@ import java.util.List;
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
@@ -109,7 +108,6 @@ public final class Model implements IModel {
 		// Sort components into tiers
 		for (ICircuitGate iGate : componentList) {
 			Collection<ICircuitGate> recouples = iGate.getRecoupledTo();
-			System.out.println(recouples);
 			if (recouples.size() > 0) {
 				int recouplesMinTier = iGate.getComponentTier();
 				for (ICircuitGate reGate : recouples) {
@@ -136,11 +134,10 @@ public final class Model implements IModel {
 		do {
 			hasChanged = false;
 			for (List<ICircuitGate> l : groupList) {
-				List<AbstractCircuitGate> cloneList = new ArrayList<AbstractCircuitGate>();
+				List<ICircuitGate> cloneList = new ArrayList<ICircuitGate>();
 				for (ICircuitGate g : l) {
-					AbstractCircuitGate temp = g.clone();
+					ICircuitGate temp = g.clone();
 					if (temp.update()) {
-						System.out.println(temp);
 						hasChanged = true;
 					}
 					cloneList.add(temp);
