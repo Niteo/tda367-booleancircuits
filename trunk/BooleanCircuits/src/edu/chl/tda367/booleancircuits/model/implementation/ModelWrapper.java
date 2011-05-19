@@ -113,6 +113,7 @@ public final class ModelWrapper implements IModelWrapper {
 	@Override
 	public void addComponents(Collection<ICircuitGate> components) {
 		model.addComponents(components);
+		isChanged = true;
 	}
 
 	@Override

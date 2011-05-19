@@ -109,6 +109,7 @@ public final class Model implements IModel {
 		// Sort components into tiers
 		for (ICircuitGate iGate : componentList) {
 			Collection<ICircuitGate> recouples = iGate.getRecoupledTo();
+			System.out.println(recouples);
 			if (recouples.size() > 0) {
 				int recouplesMaxTier = iGate.getComponentTier();
 				for (ICircuitGate reGate : recouples) {
@@ -129,6 +130,7 @@ public final class Model implements IModel {
 				groupList.get(iGate.getComponentTier() - 1).add(iGate);
 			}
 		}
+		System.out.println(groupList);
 		// Update each tier individually
 		boolean hasChanged;
 		int loop = 0;
