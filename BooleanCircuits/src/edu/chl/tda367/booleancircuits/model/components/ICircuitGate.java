@@ -79,8 +79,10 @@ public interface ICircuitGate {
 
 	/**
 	 * Updates this components output based on its input.
+	 *
+	 * @return boolean true if output changed
 	 */
-	public void update();
+	public boolean update();
 
 	/**
 	 * Calculates the component's tier.

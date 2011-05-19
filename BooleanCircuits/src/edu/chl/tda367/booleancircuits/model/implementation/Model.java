@@ -84,8 +84,8 @@ public final class Model implements IModel {
 		List<List<ICircuitGate>> groupList = new ArrayList<List<ICircuitGate>>();
 
 		for (ICircuitGate iGate : componentList) {
-			for(IGateInput input : iGate.getInputs()){
-				if(!componentList.contains(input.getInputComponent())){
+			for (IGateInput input : iGate.getInputs()) {
+				if (!componentList.contains(input.getInputComponent())) {
 					input.reset();
 				}
 			}
@@ -111,15 +111,15 @@ public final class Model implements IModel {
 				int recouplesMaxTier = iGate.getComponentTier();
 				for (ICircuitGate reGate : recouples) {
 					int tier = reGate.getComponentTier();
-					if(tier > recouplesMaxTier){
+					if (tier > recouplesMaxTier) {
 						recouplesMaxTier = tier;
 					}
 				}
-				if(!groupList.get(recouplesMaxTier - 1).contains(iGate)){
+				if (!groupList.get(recouplesMaxTier - 1).contains(iGate)) {
 					groupList.get(recouplesMaxTier - 1).add(iGate);
 				}
-				for(ICircuitGate addGate : recouples){
-					if(!groupList.get(recouplesMaxTier - 1).contains(addGate)){
+				for (ICircuitGate addGate : recouples) {
+					if (!groupList.get(recouplesMaxTier - 1).contains(addGate)) {
 						groupList.get(recouplesMaxTier - 1).add(addGate);
 					}
 				}
@@ -127,19 +127,24 @@ public final class Model implements IModel {
 				groupList.get(iGate.getComponentTier() - 1).add(iGate);
 			}
 		}
-
 		// Update each tier individually
-		for (List<ICircuitGate> l : groupList) {
-			List<AbstractCircuitGate> cloneList = new ArrayList<AbstractCircuitGate>();
-			for (ICircuitGate g : l) {
-				AbstractCircuitGate temp = g.clone();
-				temp.update();
-				cloneList.add(temp);
+		boolean hasChanged;
+		do {
+			hasChanged = false;
+			for (List<ICircuitGate> l : groupList) {
+				List<AbstractCircuitGate> cloneList = new ArrayList<AbstractCircuitGate>();
+				for (ICircuitGate g : l) {
+					AbstractCircuitGate temp = g.clone();
+					if (temp.update()) {
+						hasChanged = true;
+					}
+					cloneList.add(temp);
+				}
+				for (int i = 0; i < cloneList.size(); i++) {
+					l.get(i).overwriteGate(cloneList.get(i));
+				}
 			}
-			for (int i = 0; i < cloneList.size(); i++) {
-				l.get(i).overwriteGate(cloneList.get(i));
-			}
-		}
+		} while (hasChanged);
 	}
 
 	@Override
