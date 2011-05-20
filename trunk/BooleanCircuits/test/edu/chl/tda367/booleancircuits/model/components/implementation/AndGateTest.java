@@ -1,8 +1,6 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.awt.Point;
 
@@ -18,39 +16,14 @@ public class AndGateTest {
 	}
 
 	@Test
-	public void testGetNoOfInputs() {
+	public void testClone() {
 		AndGate and = new AndGate(2);
-		assertTrue(and.getNoOfInputs() == 2);
-	}
-
-	@Test
-	public void testGetNoOfOutputs() {
-		AndGate and = new AndGate(2);
-		assertTrue(and.getNoOfOutputs() == 1);
-	}
-
-	@Test
-	public void testToString() {
-		assertEquals("AND", new AndGate(2).toString());
-	}
-
-	@Test
-	public void testGetInputs() {
-		AndGate and = new AndGate(2);
-		assertTrue(and.getInputs().size() == 2);
-	}
-
-	@Test
-	public void testGetOutputValue() {
-		AndGate and = new AndGate(2);
-		assertFalse(and.getOutputValue(0));
-	}
-
-	@Test
-	public void testSetOutput() {
-		AndGate and = new AndGate(2);
-		and.setOutput(0, true);
-		assertTrue(and.getOutputValue(0));
+		ICircuitGate clone = and.clone();
+		assertTrue(clone instanceof AndGate);
+		assertTrue(clone.getPosition().x == and.getPosition().x
+				&& clone.getPosition().y == and.getPosition().y);
+		assertTrue(clone.getNoOfInputs() == and.getNoOfInputs());
+		assertTrue(clone.getNoOfOutputs() == and.getNoOfOutputs());
 	}
 
 	@Test
@@ -64,6 +37,60 @@ public class AndGateTest {
 	}
 
 	@Test
+	public void testConnectsTo() {
+		AndGate and = new AndGate(2);
+		AndGate testGate = new AndGate(2);
+		and.connectInput(0, testGate, 0);
+		assertTrue(and.connectsTo(testGate));
+	}
+
+	public void testEmptyGateClone() {
+		AndGate and = new AndGate(2);
+		ICircuitGate testGate = and.emptyGateClone();
+
+		assertTrue(testGate instanceof AndGate);
+		assertTrue(testGate.getNoOfInputs() == and.getNoOfInputs());
+	}
+
+	@Test
+	public void testGetComponentTier() {
+		AndGate and = new AndGate(2);
+		assertTrue(and.getComponentTier() == 1);
+		and.connectInput(0, new AndGate(2), 0);
+		assertTrue(and.getComponentTier() == 2);
+	}
+
+	@Test
+	public void testGetInputs() {
+		AndGate and = new AndGate(2);
+		assertTrue(and.getInputs().size() == 2);
+	}
+
+	@Test
+	public void testGetNoOfInputs() {
+		AndGate and = new AndGate(2);
+		assertTrue(and.getNoOfInputs() == 2);
+	}
+
+	@Test
+	public void testGetNoOfOutputs() {
+		AndGate and = new AndGate(2);
+		assertTrue(and.getNoOfOutputs() == 1);
+	}
+
+	@Test
+	public void testGetOutputValue() {
+		AndGate and = new AndGate(2);
+		assertFalse(and.getOutputValue(0));
+	}
+
+	@Test
+	public void testGetPosition() {
+		AndGate and = new AndGate(2);
+		assertTrue(and.getPosition().x == 0 && and.getPosition().y == 0);
+	}
+
+	@Test
 	public void testGetRecoupledTo() {
 		AndGate and = new AndGate(2);
 		AndGate testGate = new AndGate(2);
@@ -74,12 +101,12 @@ public class AndGateTest {
 		assertTrue(and.getRecoupledTo().size() == 1);
 	}
 
-	public void testEmptyGateClone() {
+	@Test
+	public void testMove() {
 		AndGate and = new AndGate(2);
-		ICircuitGate testGate = and.emptyGateClone();
-
-		assertTrue(testGate instanceof AndGate);
-		assertTrue(testGate.getNoOfInputs() == and.getNoOfInputs());
+		assertTrue(and.getPosition().x == 0 && and.getPosition().y == 0);
+		and.move(7, 8);
+		assertTrue(and.getPosition().x == 7 && and.getPosition().y == 8);
 	}
 
 	@Test
@@ -98,25 +125,10 @@ public class AndGateTest {
 	}
 
 	@Test
-	public void testConnectsTo() {
+	public void testSetOutput() {
 		AndGate and = new AndGate(2);
-		AndGate testGate = new AndGate(2);
-		and.connectInput(0, testGate, 0);
-		assertTrue(and.connectsTo(testGate));
-	}
-
-	@Test
-	public void testGetComponentTier() {
-		AndGate and = new AndGate(2);
-		assertTrue(and.getComponentTier() == 1);
-		and.connectInput(0, new AndGate(2), 0);
-		assertTrue(and.getComponentTier() == 2);
-	}
-
-	@Test
-	public void testGetPosition() {
-		AndGate and = new AndGate(2);
-		assertTrue(and.getPosition().x == 0 && and.getPosition().y == 0);
+		and.setOutput(0, true);
+		assertTrue(and.getOutputValue(0));
 	}
 
 	@Test
@@ -129,22 +141,8 @@ public class AndGateTest {
 	}
 
 	@Test
-	public void testMove() {
-		AndGate and = new AndGate(2);
-		assertTrue(and.getPosition().x == 0 && and.getPosition().y == 0);
-		and.move(7, 8);
-		assertTrue(and.getPosition().x == 7 && and.getPosition().y == 8);
-	}
-
-	@Test
-	public void testClone() {
-		AndGate and = new AndGate(2);
-		ICircuitGate clone = and.clone();
-		assertTrue(clone instanceof AndGate);
-		assertTrue(clone.getPosition().x == and.getPosition().x
-				&& clone.getPosition().y == and.getPosition().y);
-		assertTrue(clone.getNoOfInputs() == and.getNoOfInputs());
-		assertTrue(clone.getNoOfOutputs() == and.getNoOfOutputs());
+	public void testToString() {
+		assertEquals("AND", new AndGate(2).toString());
 	}
 
 	@Test

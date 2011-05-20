@@ -1,15 +1,10 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.IModel;
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+import edu.chl.tda367.booleancircuits.model.components.*;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
@@ -31,18 +26,28 @@ public final class Model implements IModel {
 	}
 
 	@Override
-	public void addComponent(ICircuitGate component, Point position) {
+	public void addComponent(final ICircuitGate component, final Point position) {
 		component.setPosition(position);
 		componentList.add(component);
 	}
 
 	@Override
-	public Collection<ICircuitGate> getComponents() {
-		return Collections.unmodifiableCollection(componentList);
+	public void addComponents(final Collection<ICircuitGate> components) {
+		componentList.addAll(components);
 	}
 
 	@Override
-	public ICircuitGate getComponent(Point position) {
+	public void clock() {
+		for (ICircuitGate gate : componentList) {
+			if (gate instanceof Clock) {
+				((Clock) gate).toggleClock();
+			}
+		}
+		updateComponents();
+	}
+
+	@Override
+	public ICircuitGate getComponent(final Point position) {
 		int size = Constants.componentSize;
 		for (ICircuitGate acg : componentList) {
 			// Check X
@@ -63,20 +68,31 @@ public final class Model implements IModel {
 	}
 
 	@Override
-	public void removeComponents(Collection<ICircuitGate> list) {
-		for (ICircuitGate gate : list) {
-			_removeComponent(gate);
-		}
+	public Collection<ICircuitGate> getComponents() {
+		return Collections.unmodifiableCollection(componentList);
 	}
 
 	@Override
-	public void clock() {
-		for (ICircuitGate gate : componentList) {
-			if (gate instanceof Clock) {
-				((Clock) gate).toggleClock();
-			}
-		}
+	public int getNumberOfComponents() {
+		return componentList.size();
+	}
+
+	@Override
+	public boolean hasInfiniteRecursion() {
+		return infiniteRecursion;
+	}
+
+	@Override
+	public void removeComponent(final ICircuitGate g) {
+		_removeComponent(g);
 		updateComponents();
+	}
+
+	@Override
+	public void removeComponents(final Collection<ICircuitGate> list) {
+		for (ICircuitGate gate : list) {
+			_removeComponent(gate);
+		}
 	}
 
 	@Override
@@ -153,28 +169,7 @@ public final class Model implements IModel {
 		} while (hasChanged);
 	}
 
-	@Override
-	public void removeComponent(ICircuitGate g) {
-		_removeComponent(g);
-		updateComponents();
-	}
-
-	@Override
-	public void addComponents(Collection<ICircuitGate> components) {
-		componentList.addAll(components);
-	}
-
-	@Override
-	public int getNumberOfComponents() {
-		return componentList.size();
-	}
-
-	@Override
-	public boolean hasInfiniteRecursion() {
-		return infiniteRecursion;
-	}
-
-	private void _removeComponent(ICircuitGate g) {
+	private void _removeComponent(final ICircuitGate g) {
 		componentList.remove(g);
 	}
 }

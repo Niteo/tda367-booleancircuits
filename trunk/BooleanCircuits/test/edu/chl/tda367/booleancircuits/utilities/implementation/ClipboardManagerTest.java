@@ -1,23 +1,15 @@
 package edu.chl.tda367.booleancircuits.utilities.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.junit.Test;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 
 public class ClipboardManagerTest {
-
-	@Test
-	public void testPaste() {
-		ClipboardManager manager = new ClipboardManager();
-		assertTrue(manager.paste().size() == 0);
-	}
 
 	@Test
 	public void testCopy() {
@@ -33,5 +25,11 @@ public class ClipboardManagerTest {
 		assertTrue(manager.paste().size() == 2);
 		assertTrue(manager.paste().get(0) instanceof AndGate);
 		assertTrue(manager.paste().get(1) instanceof NandGate);
+	}
+
+	@Test
+	public void testPaste() {
+		ClipboardManager manager = new ClipboardManager();
+		assertTrue(manager.paste().size() == 0);
 	}
 }

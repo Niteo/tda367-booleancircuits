@@ -6,13 +6,17 @@ public interface IObservable {
 
 	/**
 	 * Adds an observer to this observable class.
-	 * @param listener the observer
+	 *
+	 * @param listener
+	 *            the observer
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener listener);
-	
+
 	/**
 	 * Removes an observer from this observable class.
-	 * @param listener to remove
+	 *
+	 * @param listener
+	 *            to remove
 	 */
 	public void removePropertyChangeListener(PropertyChangeListener listener);
 }

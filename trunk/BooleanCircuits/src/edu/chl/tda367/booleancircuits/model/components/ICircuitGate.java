@@ -1,42 +1,14 @@
 package edu.chl.tda367.booleancircuits.model.components;
 
 import java.awt.Point;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public interface ICircuitGate {
 
 	/**
-	 * Returns true if gate is connected to the specified gate
-	 *
-	 * @param gate
-	 *            the gate specified
-	 * @throws IllegalArgumentException
+	 * Returns a copy of the gate.
 	 */
-	public boolean connectsTo(ICircuitGate gate)
-			throws IllegalArgumentException;
-
-	/**
-	 * Returns a list of all components this component is recoupled to.
-	 *
-	 * @return a list of components recoupled to
-	 */
-	public Collection<ICircuitGate> getRecoupledTo();
-
-	/**
-	 * Retrieves the inputs of the component
-	 *
-	 * @return inputs of the component
-	 */
-	public List<IGateInput> getInputs();
-
-	/**
-	 * Overwrites gate with another one, copying all properties.
-	 *
-	 * @param gate
-	 *            the gate to override with
-	 */
-	public void overwriteGate(ICircuitGate gate);
+	public ICircuitGate clone();
 
 	/**
 	 * Connects a specific input of this component with a specific output of
@@ -53,13 +25,28 @@ public interface ICircuitGate {
 			int outputPort);
 
 	/**
-	 * Retrieves the value of a specific port on this component
+	 * Returns true if gate is connected to the specified gate
 	 *
-	 * @param index
-	 *            the port to retrieve from
-	 * @return
+	 * @param gate
+	 *            the gate specified
+	 * @throws IllegalArgumentException
 	 */
-	public boolean getOutputValue(int index);
+	public boolean connectsTo(ICircuitGate gate)
+			throws IllegalArgumentException;
+
+	/**
+	 * Calculates the component's tier.
+	 *
+	 * @return the tier of the component
+	 */
+	public int getComponentTier();
+
+	/**
+	 * Retrieves the inputs of the component
+	 *
+	 * @return inputs of the component
+	 */
+	public List<IGateInput> getInputs();
 
 	/**
 	 * Gets the number of inputs
@@ -76,18 +63,20 @@ public interface ICircuitGate {
 	public int getNoOfOutputs();
 
 	/**
-	 * Updates this components output based on its input.
+	 * Returns the outputs.
 	 *
-	 * @return boolean true if output changed
+	 * @return boolean
 	 */
-	public boolean update();
+	public abstract boolean[] getOutputs();
 
 	/**
-	 * Calculates the component's tier.
+	 * Retrieves the value of a specific port on this component
 	 *
-	 * @return the tier of the component
+	 * @param index
+	 *            the port to retrieve from
+	 * @return
 	 */
-	public int getComponentTier();
+	public boolean getOutputValue(int index);
 
 	/**
 	 * Gets the position of the gate
@@ -97,12 +86,11 @@ public interface ICircuitGate {
 	public Point getPosition();
 
 	/**
-	 * Sets the position of the gate
+	 * Returns a list of all components this component is recoupled to.
 	 *
-	 * @param coordinates
-	 *            of the gate
+	 * @return a list of components recoupled to
 	 */
-	public void setPosition(Point position);
+	public Collection<ICircuitGate> getRecoupledTo();
 
 	/**
 	 * updates the position of the gate
@@ -117,9 +105,20 @@ public interface ICircuitGate {
 	public void move(int deltaX, int deltaY);
 
 	/**
-	 * Returns a copy of the gate.
+	 * Overwrites gate with another one, copying all properties.
+	 *
+	 * @param gate
+	 *            the gate to override with
 	 */
-	public ICircuitGate clone();
+	public void overwriteGate(ICircuitGate gate);
+
+	/**
+	 * Sets the position of the gate
+	 *
+	 * @param coordinates
+	 *            of the gate
+	 */
+	public void setPosition(Point position);
 
 	/**
 	 * Returns the name of the gate.
@@ -128,9 +127,9 @@ public interface ICircuitGate {
 	public abstract String toString();
 
 	/**
-	 * Returns the outputs.
+	 * Updates this components output based on its input.
 	 *
-	 * @return boolean
+	 * @return boolean true if output changed
 	 */
-	public abstract boolean[] getOutputs();
+	public boolean update();
 }

@@ -1,8 +1,6 @@
 package edu.chl.tda367.booleancircuits.view.draw;
 
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.*;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
@@ -13,19 +11,6 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
  *
  */
 public interface IDraw {
-
-	/**
-	 * Draws a gate's connections.
-	 *
-	 * @param g
-	 *            Graphics2D object to draw with
-	 * @param gate
-	 *            the gate to draw
-	 * @param offset
-	 *            Point offset values
-	 */
-	public void drawGateConnections(Graphics2D g, ICircuitGate gate,
-			Point offset);
 
 	/**
 	 * Draws a background.
@@ -50,6 +35,19 @@ public interface IDraw {
 	 *            Point offset values
 	 */
 	public void drawGate(Graphics2D g, ICircuitGate gate, Point offset);
+
+	/**
+	 * Draws a gate's connections.
+	 *
+	 * @param g
+	 *            Graphics2D object to draw with
+	 * @param gate
+	 *            the gate to draw
+	 * @param offset
+	 *            Point offset values
+	 */
+	public void drawGateConnections(Graphics2D g, ICircuitGate gate,
+			Point offset);
 
 	/**
 	 * Sets the background

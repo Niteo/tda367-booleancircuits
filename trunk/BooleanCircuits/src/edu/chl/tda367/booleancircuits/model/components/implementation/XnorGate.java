@@ -1,9 +1,10 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import edu.chl.tda367.booleancircuits.model.components.*;
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
  * Class representing a XNOR gate
+ *
  * @author Kaufmann
  *
  */
@@ -11,10 +12,22 @@ public final class XnorGate extends AbstractCircuitGate {
 
 	/**
 	 * Returns an instance of a XnorGate
-	 * @param inputs amount of inputs for the gate
+	 *
+	 * @param inputs
+	 *            amount of inputs for the gate
 	 */
-	public XnorGate(int inputs){
+	public XnorGate(final int inputs) {
 		super(inputs, 1);
+	}
+
+	@Override
+	public String toString() {
+		return "XNOR";
+	}
+
+	@Override
+	protected AbstractCircuitGate emptyGateClone() {
+		return new XnorGate(getNoOfInputs());
 	}
 
 	@Override
@@ -22,22 +35,12 @@ public final class XnorGate extends AbstractCircuitGate {
 		int nPositives = 0;
 		for (IGateInput c : super.getInputs()) {
 			if (c.getInputValue()) {
-				if(++nPositives > 1){
+				if (++nPositives > 1) {
 					break;
 				}
 			}
 		}
 
 		super.setOutput(0, nPositives != 1);
-	}
-	
-	@Override
-	public String toString(){
-		return "XNOR";
-	}
-	
-	@Override
-	protected AbstractCircuitGate emptyGateClone() {
-		return new XnorGate(getNoOfInputs());
 	}
 }

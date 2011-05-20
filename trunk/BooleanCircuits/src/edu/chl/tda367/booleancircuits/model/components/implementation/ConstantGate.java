@@ -1,6 +1,5 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-
 /**
  * Represents a constant value, determined at creation. This class uses no
  * inputs.
@@ -17,14 +16,9 @@ public class ConstantGate extends AbstractCircuitGate {
 	 * @param value
 	 *            the boolean value that the gate will output
 	 */
-	public ConstantGate(boolean value) {
+	public ConstantGate(final boolean value) {
 		super(0, 1);
 		constant = value;
-	}
-
-	@Override
-	protected void updateOutput() {
-		super.setOutput(0, constant);
 	}
 
 	@Override
@@ -35,5 +29,10 @@ public class ConstantGate extends AbstractCircuitGate {
 	@Override
 	protected AbstractCircuitGate emptyGateClone() {
 		return new ConstantGate(constant);
+	}
+
+	@Override
+	protected void updateOutput() {
+		super.setOutput(0, constant);
 	}
 }

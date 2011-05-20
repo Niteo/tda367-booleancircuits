@@ -3,49 +3,14 @@ package edu.chl.tda367.booleancircuits.model.implementation;
 import static org.junit.Assert.*;
 
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.junit.Test;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
-import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
-import edu.chl.tda367.booleancircuits.model.implementation.Model;
+import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 
 public class ModelTest {
-
-	@Test
-	public void testModel() {
-		new Model();
-	}
-	
-	@Test
-	public void testGetNumberOfComponents(){
-		Model m = new Model();
-		assertTrue(m.getNumberOfComponents() == 0);
-		m.addComponent(new ConstantGate(true), new Point(0,0));
-		assertTrue(m.getNumberOfComponents() == 1);
-	}
-
-	@Test
-	public void testGetComponents() {
-		Model model = new Model();
-
-		assertTrue(model.getComponents() != null);
-		assertTrue(model.getComponents().size() == 0);
-	}
-
-	@Test
-	public void testGetComponent() {
-		Model model = new Model();
-
-		assertNull(model.getComponent(new Point(0, 0)));
-	}
 
 	@Test
 	public void testAddComponent() {
@@ -71,20 +36,44 @@ public class ModelTest {
 	}
 
 	@Test
-	public void testRemoveComponents() {
+	public void testClock() {
 		Model model = new Model();
-		List<ICircuitGate> list = new ArrayList<ICircuitGate>();
+		Clock clock = new Clock();
+
+		model.addComponent(clock, new Point(0, 0));
+		clock.update();
+		assertFalse(clock.getOutputValue(0));
+		model.clock();
+		clock.update();
+		assertTrue(clock.getOutputValue(0));
+	}
+
+	@Test
+	public void testGetComponent() {
+		Model model = new Model();
+
+		assertNull(model.getComponent(new Point(0, 0)));
+	}
+
+	@Test
+	public void testGetComponents() {
+		Model model = new Model();
+
+		assertTrue(model.getComponents() != null);
 		assertTrue(model.getComponents().size() == 0);
+	}
 
-		list.add(new AndGate(2));
-		list.add(new NandGate(2));
-		list.add(new OrGate(2));
+	@Test
+	public void testGetNumberOfComponents(){
+		Model m = new Model();
+		assertTrue(m.getNumberOfComponents() == 0);
+		m.addComponent(new ConstantGate(true), new Point(0,0));
+		assertTrue(m.getNumberOfComponents() == 1);
+	}
 
-		model.addComponents(list);
-		assertTrue(model.getComponents().size() == 3);
-
-		model.removeComponents(list);
-		assertTrue(model.getComponents().size() == 0);
+	@Test
+	public void testModel() {
+		new Model();
 	}
 
 	@Test
@@ -101,16 +90,20 @@ public class ModelTest {
 	}
 
 	@Test
-	public void testClock() {
+	public void testRemoveComponents() {
 		Model model = new Model();
-		Clock clock = new Clock();
+		List<ICircuitGate> list = new ArrayList<ICircuitGate>();
+		assertTrue(model.getComponents().size() == 0);
 
-		model.addComponent(clock, new Point(0, 0));
-		clock.update();
-		assertFalse(clock.getOutputValue(0));
-		model.clock();
-		clock.update();
-		assertTrue(clock.getOutputValue(0));
+		list.add(new AndGate(2));
+		list.add(new NandGate(2));
+		list.add(new OrGate(2));
+
+		model.addComponents(list);
+		assertTrue(model.getComponents().size() == 3);
+
+		model.removeComponents(list);
+		assertTrue(model.getComponents().size() == 0);
 	}
 
 	@Test

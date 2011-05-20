@@ -1,8 +1,6 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.awt.Point;
 
@@ -18,39 +16,14 @@ public class XnorGateTest {
 	}
 
 	@Test
-	public void testGetNoOfInputs() {
+	public void testClone() {
 		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getNoOfInputs() == 2);
-	}
-
-	@Test
-	public void testGetNoOfOutputs() {
-		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getNoOfOutputs() == 1);
-	}
-
-	@Test
-	public void testToString() {
-		assertEquals("XNOR", new XnorGate(2).toString());
-	}
-
-	@Test
-	public void testGetInputs() {
-		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getInputs().size() == 2);
-	}
-
-	@Test
-	public void testGetOutputValue() {
-		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getOutputValue(0));
-	}
-
-	@Test
-	public void testSetOutput() {
-		XnorGate xnor = new XnorGate(2);
-		xnor.setOutput(0, true);
-		assertTrue(xnor.getOutputValue(0));
+		ICircuitGate clone = xnor.clone();
+		assertTrue(clone instanceof XnorGate);
+		assertTrue(clone.getPosition().x == xnor.getPosition().x
+				&& clone.getPosition().y == xnor.getPosition().y);
+		assertTrue(clone.getNoOfInputs() == xnor.getNoOfInputs());
+		assertTrue(clone.getNoOfOutputs() == xnor.getNoOfOutputs());
 	}
 
 	@Test
@@ -64,6 +37,60 @@ public class XnorGateTest {
 	}
 
 	@Test
+	public void testConnectsTo() {
+		XnorGate xnor = new XnorGate(2);
+		XnorGate testGate = new XnorGate(2);
+		xnor.connectInput(0, testGate, 0);
+		assertTrue(xnor.connectsTo(testGate));
+	}
+
+	public void testEmptyGateClone() {
+		XnorGate xnor = new XnorGate(2);
+		ICircuitGate testGate = xnor.emptyGateClone();
+
+		assertTrue(testGate instanceof XnorGate);
+		assertTrue(testGate.getNoOfInputs() == xnor.getNoOfInputs());
+	}
+
+	@Test
+	public void testGetComponentTier() {
+		XnorGate xnor = new XnorGate(2);
+		assertTrue(xnor.getComponentTier() == 1);
+		xnor.connectInput(0, new AndGate(2), 0);
+		assertTrue(xnor.getComponentTier() == 2);
+	}
+
+	@Test
+	public void testGetInputs() {
+		XnorGate xnor = new XnorGate(2);
+		assertTrue(xnor.getInputs().size() == 2);
+	}
+
+	@Test
+	public void testGetNoOfInputs() {
+		XnorGate xnor = new XnorGate(2);
+		assertTrue(xnor.getNoOfInputs() == 2);
+	}
+
+	@Test
+	public void testGetNoOfOutputs() {
+		XnorGate xnor = new XnorGate(2);
+		assertTrue(xnor.getNoOfOutputs() == 1);
+	}
+
+	@Test
+	public void testGetOutputValue() {
+		XnorGate xnor = new XnorGate(2);
+		assertTrue(xnor.getOutputValue(0));
+	}
+
+	@Test
+	public void testGetPosition() {
+		XnorGate xnor = new XnorGate(2);
+		assertTrue(xnor.getPosition().x == 0 && xnor.getPosition().y == 0);
+	}
+
+	@Test
 	public void testGetRecoupledTo() {
 		XnorGate xnor = new XnorGate(2);
 		XnorGate testGate = new XnorGate(2);
@@ -74,12 +101,12 @@ public class XnorGateTest {
 		assertTrue(xnor.getRecoupledTo().size() == 1);
 	}
 
-	public void testEmptyGateClone() {
+	@Test
+	public void testMove() {
 		XnorGate xnor = new XnorGate(2);
-		ICircuitGate testGate = xnor.emptyGateClone();
-
-		assertTrue(testGate instanceof XnorGate);
-		assertTrue(testGate.getNoOfInputs() == xnor.getNoOfInputs());
+		assertTrue(xnor.getPosition().x == 0 && xnor.getPosition().y == 0);
+		xnor.move(7, 8);
+		assertTrue(xnor.getPosition().x == 7 && xnor.getPosition().y == 8);
 	}
 
 	@Test
@@ -98,25 +125,10 @@ public class XnorGateTest {
 	}
 
 	@Test
-	public void testConnectsTo() {
+	public void testSetOutput() {
 		XnorGate xnor = new XnorGate(2);
-		XnorGate testGate = new XnorGate(2);
-		xnor.connectInput(0, testGate, 0);
-		assertTrue(xnor.connectsTo(testGate));
-	}
-
-	@Test
-	public void testGetComponentTier() {
-		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getComponentTier() == 1);
-		xnor.connectInput(0, new AndGate(2), 0);
-		assertTrue(xnor.getComponentTier() == 2);
-	}
-
-	@Test
-	public void testGetPosition() {
-		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getPosition().x == 0 && xnor.getPosition().y == 0);
+		xnor.setOutput(0, true);
+		assertTrue(xnor.getOutputValue(0));
 	}
 
 	@Test
@@ -129,22 +141,8 @@ public class XnorGateTest {
 	}
 
 	@Test
-	public void testMove() {
-		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getPosition().x == 0 && xnor.getPosition().y == 0);
-		xnor.move(7, 8);
-		assertTrue(xnor.getPosition().x == 7 && xnor.getPosition().y == 8);
-	}
-
-	@Test
-	public void testClone() {
-		XnorGate xnor = new XnorGate(2);
-		ICircuitGate clone = xnor.clone();
-		assertTrue(clone instanceof XnorGate);
-		assertTrue(clone.getPosition().x == xnor.getPosition().x
-				&& clone.getPosition().y == xnor.getPosition().y);
-		assertTrue(clone.getNoOfInputs() == xnor.getNoOfInputs());
-		assertTrue(clone.getNoOfOutputs() == xnor.getNoOfOutputs());
+	public void testToString() {
+		assertEquals("XNOR", new XnorGate(2).toString());
 	}
 
 	@Test

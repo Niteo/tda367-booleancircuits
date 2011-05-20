@@ -7,37 +7,15 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.event.*;
+import java.beans.*;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JSeparator;
-import javax.swing.JSplitPane;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
-import edu.chl.tda367.booleancircuits.controller.implementation.ActionController;
-import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
+import edu.chl.tda367.booleancircuits.controller.implementation.*;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
-import edu.chl.tda367.booleancircuits.view.draw.implementation.BlankBackground;
-import edu.chl.tda367.booleancircuits.view.draw.implementation.DottedBackground;
-import edu.chl.tda367.booleancircuits.view.draw.implementation.GridBackground;
+import edu.chl.tda367.booleancircuits.view.draw.implementation.*;
 
 /**
  * The Main window
@@ -47,26 +25,71 @@ import edu.chl.tda367.booleancircuits.view.draw.implementation.GridBackground;
 public final class MainWindow extends JFrame implements PropertyChangeListener {
 
 	private static final long serialVersionUID = 1L;
-	private MasterController mc;
-	private ToolbarPanel toolbar = new ToolbarPanel();
-	private CenterStage cs;
+	// GEN-BEGIN:variables
+	// Variables declaration - do not modify
+	private JMenuItem aboutMenuItem;
 	private ActionController actionController;
-	private Palette palette;
-	private WindowAdapter windowAdapter = new WindowAdapter() {
+	private ButtonGroup backgroundButtonGroup;
+	private JMenu backgroundMenu;
+	private JRadioButtonMenuItem blankRadioButtonMenuItem;
+	private JMenu clockpulseMenu;
+
+	private JMenuItem closeAllMenuItem;
+
+	private JMenuItem closeMenuItem;
+
+	private Action closeWorkspace = new AbstractAction("", new ImageIcon(
+			"resources/icons/cross-icon.png")) {
+
+		private static final long serialVersionUID = 1L;
+
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void windowClosing(WindowEvent arg0) {
-			if (mc.closeAllWorkspaces()) {
-				dispose();
+		public void actionPerformed(final ActionEvent e) {
+			int tabCount = cs.getTabManager().getTabCount();
+			JButton button = (JButton) e.getSource();
+			for (int i = 0; i < tabCount; i++) {
+				if (button == cs.getTabManager().getTabPanel(i)
+						.getCloseButton()) {
+					mc.closeWorkspace(i);
+					return;
+				}
 			}
 		}
 	};
 
+	private JMenuItem copyMenuItem;
+
+	private CenterStage cs;
+
+	private JMenuItem cutMenuItem;
+
+	private JMenuItem deleteMenuItem;
+
+	private JRadioButtonMenuItem dotsRadioButtonMenuItem;
+
+	private JMenu editMenu;
+
+	private JSeparator editSeparator1;
+
+	private JMenuItem exitMenuItem;
+
+	private JMenu fileMenu;
+
+	private JSeparator fileSeparator1;
+	private JSeparator fileSeparator2;
+	private JSeparator fileSeparator3;
+	private JRadioButtonMenuItem gridRadioButtonMenuItem;
+	private JMenu helpMenu;
+	private JMenuItem helpMenuItem;
+	private JSplitPane horizontalSplitPane;
+	private JRadioButtonMenuItem iecStandardRadioButtonMenuItem;
+	private JMenuItem importToWorkspaceMenuItem;
 	private ActionListener listener = new ActionListener() {
 
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			if (e.getSource() == dotsRadioButtonMenuItem) {
 				cs.setBackground(new DottedBackground());
 			} else if (e.getSource() == gridRadioButtonMenuItem) {
@@ -82,42 +105,43 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 			else if (e.getSource() == aboutMenuItem) {
 				Icon logo = new ImageIcon("resources/icons/cross-icon.png");
 				new AboutBox(Constants.creditsText, logo);
-			}
-			else if(e.getSource()==exitMenuItem){
+			} else if (e.getSource() == exitMenuItem) {
 				windowAdapter.windowClosing(new WindowEvent(_getWindow(), 0));
 			}
 
 		}
 
 	};
-
-	private Action closeWorkspace = new AbstractAction("", new ImageIcon(
-			"resources/icons/cross-icon.png")) {
-
-		private static final long serialVersionUID = 1L;
-
+	private MasterController mc;
+	private JMenuBar menuBar;
+	private JMenuItem newWorkspaceMenuItem;
+	private JMenuItem openFileMenuItem;
+	private Palette palette;
+	private JPanel paletteContainerPanel;
+	private JMenuItem pasteMenuItem;
+	private JMenuItem pauseClockMenuItem;
+	private JMenuItem redoMenuItem;
+	private ButtonGroup representationButtonGroup;
+	private JMenu representationMenu;
+	private JMenuItem saveAllMenuItem;
+	private JMenuItem saveAsMenuItem;
+	private JMenuItem saveMenuItem;
+	private JMenuItem selectAllMenuItem;
+	private JMenuItem startClockMenuItem;
+	private ToolbarPanel toolbar = new ToolbarPanel();
+	private JMenuItem undoMenuItem;
+	private JRadioButtonMenuItem usStandardRadioButtonMenuItem;
+	private JSplitPane verticalSplitPane;
+	private JMenu viewMenu;
+	private WindowAdapter windowAdapter = new WindowAdapter() {
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			int tabCount = cs.getTabManager().getTabCount();
-			JButton button = (JButton) e.getSource();
-			for (int i = 0; i < tabCount; i++) {
-				if (button == cs.getTabManager().getTabPanel(i)
-						.getCloseButton()) {
-					mc.closeWorkspace(i);
-					return;
-				}
+		public void windowClosing(final WindowEvent arg0) {
+			if (mc.closeAllWorkspaces()) {
+				dispose();
 			}
 		}
 	};
-
-	@Override
-	public synchronized void propertyChange(PropertyChangeEvent evt) {
-		if (evt.getSource() instanceof ModelManager) {
-			cs.update((ModelManager) evt.getSource());
-		}
-	}
-
 	/** Creates new form View */
 	public MainWindow() {
 		ModelManager mm = new ModelManager();
@@ -147,67 +171,15 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		setSize(new Dimension(800, 500));
 		setIconImage(new ImageIcon("resources/icons/frameIcon.png").getImage());
 	}
-
-	private void initToolbar() {
-		verticalSplitPane.setTopComponent(toolbar);
-		verticalSplitPane.setEnabled(false);
-		verticalSplitPane.setDividerSize(0);
+	@Override
+	public synchronized void propertyChange(final PropertyChangeEvent evt) {
+		if (evt.getSource() instanceof ModelManager) {
+			cs.update((ModelManager) evt.getSource());
+		}
 	}
-
-	private void initMenu() {
-		// init file menu
-		newWorkspaceMenuItem
-				.setAction(actionController.getNewWorkspaceAction());
-		importToWorkspaceMenuItem.setAction(actionController
-				.getImportWorkspaceAction());
-		openFileMenuItem.setAction(actionController.getOpenWorkspaceAction());
-		closeMenuItem.setAction(actionController
-				.getCloseActiveWorkspaceAction());
-		closeAllMenuItem.setAction(actionController
-				.getCloseAllWorkspacesAction());
-		saveMenuItem.setAction(actionController.getSaveActiveWorkspaceAction());
-		saveAsMenuItem.setAction(actionController.getSaveAsAction());
-		saveAllMenuItem
-				.setAction(actionController.getSaveAllWorkspacesAction());
-		exitMenuItem.addActionListener(listener);
-
-		// init edit menu
-		undoMenuItem.setAction(actionController.getUndoAction());
-		undoMenuItem.setEnabled(false);
-		redoMenuItem.setAction(actionController.getRedoAction());
-		redoMenuItem.setEnabled(false);
-		cutMenuItem
-				.setAction(actionController.getCutSelectedComponentsAction());
-		copyMenuItem.setAction(actionController
-				.getCopySelectedComponentsAction());
-		pasteMenuItem.setAction(actionController
-				.getPasteSelectedComponentAction());
-		deleteMenuItem.setAction(actionController
-				.getRemoveSelectedComponentsAction());
-		selectAllMenuItem.setAction(actionController
-				.getSelectAllComponentsAction());
-
-		// init clock pulse menu
-		startClockMenuItem.setAction(actionController.getStartClockAction());
-		pauseClockMenuItem.setAction(actionController.getPauseClockAction());
-
-		// init representation menu
-		iecStandardRadioButtonMenuItem.addActionListener(listener);
-		usStandardRadioButtonMenuItem.addActionListener(listener);
-		iecStandardRadioButtonMenuItem.setSelected(true);
-
-		// init background menu
-		dotsRadioButtonMenuItem.addActionListener(listener);
-		gridRadioButtonMenuItem.addActionListener(listener);
-		blankRadioButtonMenuItem.addActionListener(listener);
-		gridRadioButtonMenuItem.setSelected(true);
-
-		// init help menu
-		helpMenuItem.setAction(actionController.getShowHelpAction());
-		aboutMenuItem.addActionListener(listener);
-
+	private MainWindow _getWindow() {
+		return this;
 	}
-
 	private void initButtons() {
 
 		// Set actions
@@ -256,108 +228,6 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		toolbar.getUndoButton().setToolTipText("Undo (Ctrl+Z)");
 
 	}
-
-	private void initMenuItemText() {
-		// File menu
-		newWorkspaceMenuItem.setText("New Workspace");
-		importToWorkspaceMenuItem.setText("Import to Workspace...");
-		openFileMenuItem.setText("Open File...");
-		closeMenuItem.setText("Close");
-		closeAllMenuItem.setText("Close all");
-		saveMenuItem.setText("Save");
-		saveAsMenuItem.setText("Save As...");
-		saveAllMenuItem.setText("Save All");
-		exitMenuItem.setText("Exit");
-
-		// Edit menu
-		undoMenuItem.setText("Undo");
-		redoMenuItem.setText("Redo");
-		cutMenuItem.setText("Cut");
-		copyMenuItem.setText("Copy");
-		pasteMenuItem.setText("Paste");
-		deleteMenuItem.setText("Delete");
-		selectAllMenuItem.setText("Select All");
-
-		// Clock pulse menu
-		startClockMenuItem.setText("Start");
-		pauseClockMenuItem.setText("Pause");
-
-		// View menu
-		representationMenu.setText("Representation");
-		iecStandardRadioButtonMenuItem.setText("IEC Standard");
-		usStandardRadioButtonMenuItem.setText("US Standard");
-
-		backgroundMenu.setText("Background");
-		blankRadioButtonMenuItem.setText("Blank");
-		dotsRadioButtonMenuItem.setText("Dotted");
-		gridRadioButtonMenuItem.setText("Grid");
-
-		// Help menu
-		helpMenuItem.setText("Help");
-		aboutMenuItem.setText("About");
-	}
-
-	private void initShortcuts() {
-		closeAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_W,
-				java.awt.event.InputEvent.CTRL_DOWN_MASK
-						| java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-		startClockMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_S, 0));
-		pauseClockMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_P, 0));
-		helpMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_F1, 0));
-		closeMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_W,
-				java.awt.event.InputEvent.CTRL_MASK));
-		saveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_S,
-				java.awt.event.InputEvent.CTRL_MASK));
-		undoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_Z,
-				java.awt.event.InputEvent.CTRL_MASK));
-		redoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_Y,
-				java.awt.event.InputEvent.CTRL_MASK));
-		cutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_X,
-				java.awt.event.InputEvent.CTRL_MASK));
-		copyMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_C,
-				java.awt.event.InputEvent.CTRL_MASK));
-		pasteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_V,
-				java.awt.event.InputEvent.CTRL_MASK));
-		deleteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_DELETE, 0));
-		selectAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_A,
-				java.awt.event.InputEvent.CTRL_MASK));
-		newWorkspaceMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_N,
-				java.awt.event.InputEvent.CTRL_MASK));
-		openFileMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_O,
-				java.awt.event.InputEvent.CTRL_MASK));
-		saveAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
-				java.awt.event.KeyEvent.VK_S,
-				java.awt.event.InputEvent.CTRL_DOWN_MASK
-						| java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-		importToWorkspaceMenuItem.setAccelerator(javax.swing.KeyStroke
-				.getKeyStroke(java.awt.event.KeyEvent.VK_I,
-						java.awt.event.InputEvent.CTRL_MASK));
-
-	}
-
-	private void initTabbedPane() {
-		cs.getTabManager().getTabbedPane().addChangeListener(actionController);
-	}
-
-	private MainWindow _getWindow(){
-		return this;
-	}
-
 	// GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
@@ -514,51 +384,158 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		pack();
 	}// </editor-fold>
 		// GEN-END:initComponents
+	private void initMenu() {
+		// init file menu
+		newWorkspaceMenuItem
+				.setAction(actionController.getNewWorkspaceAction());
+		importToWorkspaceMenuItem.setAction(actionController
+				.getImportWorkspaceAction());
+		openFileMenuItem.setAction(actionController.getOpenWorkspaceAction());
+		closeMenuItem.setAction(actionController
+				.getCloseActiveWorkspaceAction());
+		closeAllMenuItem.setAction(actionController
+				.getCloseAllWorkspacesAction());
+		saveMenuItem.setAction(actionController.getSaveActiveWorkspaceAction());
+		saveAsMenuItem.setAction(actionController.getSaveAsAction());
+		saveAllMenuItem
+				.setAction(actionController.getSaveAllWorkspacesAction());
+		exitMenuItem.addActionListener(listener);
 
-	// GEN-BEGIN:variables
-	// Variables declaration - do not modify
-	private JMenuItem aboutMenuItem;
-	private ButtonGroup backgroundButtonGroup;
-	private JMenu backgroundMenu;
-	private JRadioButtonMenuItem blankRadioButtonMenuItem;
-	private JMenu clockpulseMenu;
-	private JMenuItem closeAllMenuItem;
-	private JMenuItem closeMenuItem;
-	private JMenuItem copyMenuItem;
-	private JMenuItem cutMenuItem;
-	private JMenuItem deleteMenuItem;
-	private JRadioButtonMenuItem dotsRadioButtonMenuItem;
-	private JMenu editMenu;
-	private JSeparator editSeparator1;
-	private JMenuItem exitMenuItem;
-	private JMenu fileMenu;
-	private JSeparator fileSeparator1;
-	private JSeparator fileSeparator2;
-	private JSeparator fileSeparator3;
-	private JRadioButtonMenuItem gridRadioButtonMenuItem;
-	private JMenu helpMenu;
-	private JMenuItem helpMenuItem;
-	private JSplitPane horizontalSplitPane;
-	private JRadioButtonMenuItem iecStandardRadioButtonMenuItem;
-	private JMenuItem importToWorkspaceMenuItem;
-	private JMenuBar menuBar;
-	private JMenuItem newWorkspaceMenuItem;
-	private JMenuItem openFileMenuItem;
-	private JPanel paletteContainerPanel;
-	private JMenuItem pasteMenuItem;
-	private JMenuItem pauseClockMenuItem;
-	private JMenuItem redoMenuItem;
-	private ButtonGroup representationButtonGroup;
-	private JMenu representationMenu;
-	private JMenuItem saveAllMenuItem;
-	private JMenuItem saveAsMenuItem;
-	private JMenuItem saveMenuItem;
-	private JMenuItem selectAllMenuItem;
-	private JMenuItem startClockMenuItem;
-	private JMenuItem undoMenuItem;
-	private JRadioButtonMenuItem usStandardRadioButtonMenuItem;
-	private JSplitPane verticalSplitPane;
-	private JMenu viewMenu;
+		// init edit menu
+		undoMenuItem.setAction(actionController.getUndoAction());
+		undoMenuItem.setEnabled(false);
+		redoMenuItem.setAction(actionController.getRedoAction());
+		redoMenuItem.setEnabled(false);
+		cutMenuItem
+				.setAction(actionController.getCutSelectedComponentsAction());
+		copyMenuItem.setAction(actionController
+				.getCopySelectedComponentsAction());
+		pasteMenuItem.setAction(actionController
+				.getPasteSelectedComponentAction());
+		deleteMenuItem.setAction(actionController
+				.getRemoveSelectedComponentsAction());
+		selectAllMenuItem.setAction(actionController
+				.getSelectAllComponentsAction());
+
+		// init clock pulse menu
+		startClockMenuItem.setAction(actionController.getStartClockAction());
+		pauseClockMenuItem.setAction(actionController.getPauseClockAction());
+
+		// init representation menu
+		iecStandardRadioButtonMenuItem.addActionListener(listener);
+		usStandardRadioButtonMenuItem.addActionListener(listener);
+		iecStandardRadioButtonMenuItem.setSelected(true);
+
+		// init background menu
+		dotsRadioButtonMenuItem.addActionListener(listener);
+		gridRadioButtonMenuItem.addActionListener(listener);
+		blankRadioButtonMenuItem.addActionListener(listener);
+		gridRadioButtonMenuItem.setSelected(true);
+
+		// init help menu
+		helpMenuItem.setAction(actionController.getShowHelpAction());
+		aboutMenuItem.addActionListener(listener);
+
+	}
+	private void initMenuItemText() {
+		// File menu
+		newWorkspaceMenuItem.setText("New Workspace");
+		importToWorkspaceMenuItem.setText("Import to Workspace...");
+		openFileMenuItem.setText("Open File...");
+		closeMenuItem.setText("Close");
+		closeAllMenuItem.setText("Close all");
+		saveMenuItem.setText("Save");
+		saveAsMenuItem.setText("Save As...");
+		saveAllMenuItem.setText("Save All");
+		exitMenuItem.setText("Exit");
+
+		// Edit menu
+		undoMenuItem.setText("Undo");
+		redoMenuItem.setText("Redo");
+		cutMenuItem.setText("Cut");
+		copyMenuItem.setText("Copy");
+		pasteMenuItem.setText("Paste");
+		deleteMenuItem.setText("Delete");
+		selectAllMenuItem.setText("Select All");
+
+		// Clock pulse menu
+		startClockMenuItem.setText("Start");
+		pauseClockMenuItem.setText("Pause");
+
+		// View menu
+		representationMenu.setText("Representation");
+		iecStandardRadioButtonMenuItem.setText("IEC Standard");
+		usStandardRadioButtonMenuItem.setText("US Standard");
+
+		backgroundMenu.setText("Background");
+		blankRadioButtonMenuItem.setText("Blank");
+		dotsRadioButtonMenuItem.setText("Dotted");
+		gridRadioButtonMenuItem.setText("Grid");
+
+		// Help menu
+		helpMenuItem.setText("Help");
+		aboutMenuItem.setText("About");
+	}
+	private void initShortcuts() {
+		closeAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_W,
+				java.awt.event.InputEvent.CTRL_DOWN_MASK
+						| java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+		startClockMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_S, 0));
+		pauseClockMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_P, 0));
+		helpMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_F1, 0));
+		closeMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_W,
+				java.awt.event.InputEvent.CTRL_MASK));
+		saveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_S,
+				java.awt.event.InputEvent.CTRL_MASK));
+		undoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_Z,
+				java.awt.event.InputEvent.CTRL_MASK));
+		redoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_Y,
+				java.awt.event.InputEvent.CTRL_MASK));
+		cutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_X,
+				java.awt.event.InputEvent.CTRL_MASK));
+		copyMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_C,
+				java.awt.event.InputEvent.CTRL_MASK));
+		pasteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_V,
+				java.awt.event.InputEvent.CTRL_MASK));
+		deleteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_DELETE, 0));
+		selectAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_A,
+				java.awt.event.InputEvent.CTRL_MASK));
+		newWorkspaceMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_N,
+				java.awt.event.InputEvent.CTRL_MASK));
+		openFileMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_O,
+				java.awt.event.InputEvent.CTRL_MASK));
+		saveAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
+				java.awt.event.KeyEvent.VK_S,
+				java.awt.event.InputEvent.CTRL_DOWN_MASK
+						| java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+		importToWorkspaceMenuItem.setAccelerator(javax.swing.KeyStroke
+				.getKeyStroke(java.awt.event.KeyEvent.VK_I,
+						java.awt.event.InputEvent.CTRL_MASK));
+
+	}
+	private void initTabbedPane() {
+		cs.getTabManager().getTabbedPane().addChangeListener(actionController);
+	}
+	private void initToolbar() {
+		verticalSplitPane.setTopComponent(toolbar);
+		verticalSplitPane.setEnabled(false);
+		verticalSplitPane.setDividerSize(0);
+	}
 
 	// End of variables declaration//GEN-END:variables
 

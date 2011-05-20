@@ -2,8 +2,7 @@ package edu.chl.tda367.booleancircuits.io.implementation;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.junit.Test;
 
@@ -20,15 +19,15 @@ public class ComponentFolderTest {
 	}
 
 	@Test
-	public void testGetName() {
-		ComponentFolder folder = new ComponentFolder(componentList, "vippa");
-		assertTrue(folder.getName().equals("vippa"));
-	}
-
-	@Test
 	public void testGetAllComponents() {
 		ComponentFolder folder = new ComponentFolder(componentList, "vippa");
 		assertTrue(folder.getAllComponents().size() == 0);
+	}
+
+	@Test
+	public void testGetName() {
+		ComponentFolder folder = new ComponentFolder(componentList, "vippa");
+		assertTrue(folder.getName().equals("vippa"));
 	}
 
 }

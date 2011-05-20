@@ -1,7 +1,6 @@
 package edu.chl.tda367.booleancircuits.io.implementation;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import edu.chl.tda367.booleancircuits.io.IComponentFolder;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
@@ -15,22 +14,13 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 public class ComponentFolder implements IComponentFolder {
 
-	private List<ICircuitGate> componentList= new ArrayList<ICircuitGate>();
+	private List<ICircuitGate> componentList = new ArrayList<ICircuitGate>();
 	private String name;
 
-	public ComponentFolder(List<ICircuitGate> componentList, String name) {
+	public ComponentFolder(final List<ICircuitGate> componentList,
+			final String name) {
 		this.name = name;
 		this.componentList = componentList;
-	}
-
-	/**
-	 * Returns name of componentfolder
-	 *
-	 * @return
-	 */
-	@Override
-	public String getName() {
-		return name;
 	}
 
 	/**
@@ -42,6 +32,16 @@ public class ComponentFolder implements IComponentFolder {
 	@Override
 	public List<ICircuitGate> getAllComponents() {
 		return componentList;
+	}
+
+	/**
+	 * Returns name of componentfolder
+	 *
+	 * @return
+	 */
+	@Override
+	public String getName() {
+		return name;
 	}
 
 }

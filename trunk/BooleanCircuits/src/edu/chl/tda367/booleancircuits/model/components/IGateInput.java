@@ -1,6 +1,5 @@
 package edu.chl.tda367.booleancircuits.model.components;
 
-
 public interface IGateInput {
 
 	/**
@@ -18,16 +17,6 @@ public interface IGateInput {
 	public int getInputPort();
 
 	/**
-	 * Connects a gate to a port.
-	 *
-	 * @param component
-	 *            the gate to connect
-	 * @param port
-	 *            the port to connect to
-	 */
-	public void setInputComponent(ICircuitGate component, int port);
-
-	/**
 	 * Returns the output of the connected component.
 	 *
 	 * @return boolean: output
@@ -38,4 +27,14 @@ public interface IGateInput {
 	 * Resets the input so that it is not connected to anything.
 	 */
 	public void reset();
+
+	/**
+	 * Connects a gate to a port.
+	 *
+	 * @param component
+	 *            the gate to connect
+	 * @param port
+	 *            the port to connect to
+	 */
+	public void setInputComponent(ICircuitGate component, int port);
 }
