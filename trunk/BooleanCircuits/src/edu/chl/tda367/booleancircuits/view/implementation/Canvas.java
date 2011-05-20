@@ -99,6 +99,12 @@ public class Canvas {
 
 			// Draw components
 			if (model != null) {
+				// Draw connections
+				for (ICircuitGate circuitGate : model.getComponents()) {
+					drawer.drawGateConnections(g2d, circuitGate, new Point(
+							posX, posY));
+				}
+				
 				// Draw non-selected
 				g2d.setColor(Color.BLACK);
 				for (ICircuitGate circuitGate : model.getComponents()) {
@@ -112,11 +118,6 @@ public class Canvas {
 					if (selectModel.isSelectedComponent(circuitGate)) {
 						drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
 					}
-				}
-				// Draw connections
-				for (ICircuitGate circuitGate : model.getComponents()) {
-					drawer.drawGateConnections(g2d, circuitGate, new Point(
-							posX, posY));
 				}
 			}
 
