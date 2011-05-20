@@ -7,21 +7,43 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Dimension;
-import java.awt.event.*;
-import java.beans.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
+import javax.swing.WindowConstants;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
-import edu.chl.tda367.booleancircuits.controller.implementation.*;
+import edu.chl.tda367.booleancircuits.controller.implementation.ActionController;
+import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 import edu.chl.tda367.booleancircuits.view.IPalette;
-import edu.chl.tda367.booleancircuits.view.draw.implementation.*;
+import edu.chl.tda367.booleancircuits.view.draw.implementation.BlankBackground;
+import edu.chl.tda367.booleancircuits.view.draw.implementation.DottedBackground;
+import edu.chl.tda367.booleancircuits.view.draw.implementation.GridBackground;
 
 /**
  * The Main window
- * 
+ *
  * @author Boel
  */
 public final class MainWindow extends JFrame implements PropertyChangeListener {
@@ -74,38 +96,12 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 	private JSplitPane horizontalSplitPane;
 	private JRadioButtonMenuItem iecStandardRadioButtonMenuItem;
 	private JMenuItem importToWorkspaceMenuItem;
-	private ActionListener listener = new ActionListener() {
-
-		@SuppressWarnings("synthetic-access")
-		@Override
-		public void actionPerformed(final ActionEvent e) {
-			if (e.getSource() == dotsRadioButtonMenuItem) {
-				cs.setBackground(new DottedBackground());
-			} else if (e.getSource() == gridRadioButtonMenuItem) {
-				cs.setBackground(new GridBackground());
-			} else if (e.getSource() == blankRadioButtonMenuItem) {
-				cs.setBackground(new BlankBackground());
-			} else if (e.getSource() == iecStandardRadioButtonMenuItem) {
-				cs.setUSStandard(false);
-			} else if (e.getSource() == usStandardRadioButtonMenuItem) {
-				cs.setUSStandard(true);
-			}
-
-			else if (e.getSource() == aboutMenuItem) {
-				Icon logo = new ImageIcon("resources/icons/cross-icon.png");
-				new AboutBox(Constants.creditsText, logo);
-			} else if (e.getSource() == exitMenuItem) {
-				windowAdapter.windowClosing(new WindowEvent(_getWindow(), 0));
-			}
-
-		}
-
-	};
-	private IMasterController mc;
+	private transient ActionListener listener;
+	private transient IMasterController mc;
 	private JMenuBar menuBar;
 	private JMenuItem newWorkspaceMenuItem;
 	private JMenuItem openFileMenuItem;
-	private IPalette palette;
+	private transient IPalette palette;
 	private JPanel paletteContainerPanel;
 	private JMenuItem pasteMenuItem;
 	private JMenuItem pauseClockMenuItem;
@@ -122,18 +118,47 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 	private JRadioButtonMenuItem usStandardRadioButtonMenuItem;
 	private JSplitPane verticalSplitPane;
 	private JMenu viewMenu;
-	private WindowAdapter windowAdapter = new WindowAdapter() {
-		@SuppressWarnings("synthetic-access")
-		@Override
-		public void windowClosing(final WindowEvent arg0) {
-			if (mc.closeAllWorkspaces()) {
-				dispose();
-			}
-		}
-	};
+	private transient WindowAdapter windowAdapter;
 
 	/** Creates new form View */
 	public MainWindow() {
+		listener = new ActionListener() {
+
+			@SuppressWarnings("synthetic-access")
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				if (e.getSource() == dotsRadioButtonMenuItem) {
+					cs.setBackground(new DottedBackground());
+				} else if (e.getSource() == gridRadioButtonMenuItem) {
+					cs.setBackground(new GridBackground());
+				} else if (e.getSource() == blankRadioButtonMenuItem) {
+					cs.setBackground(new BlankBackground());
+				} else if (e.getSource() == iecStandardRadioButtonMenuItem) {
+					cs.setUSStandard(false);
+				} else if (e.getSource() == usStandardRadioButtonMenuItem) {
+					cs.setUSStandard(true);
+				}
+
+				else if (e.getSource() == aboutMenuItem) {
+					Icon logo = new ImageIcon("resources/icons/cross-icon.png");
+					new AboutBox(Constants.creditsText, logo);
+				} else if (e.getSource() == exitMenuItem) {
+					windowAdapter.windowClosing(new WindowEvent(_getWindow(), 0));
+				}
+
+			}
+
+		};
+
+		windowAdapter = new WindowAdapter() {
+			@SuppressWarnings("synthetic-access")
+			@Override
+			public void windowClosing(final WindowEvent arg0) {
+				if (mc.closeAllWorkspaces()) {
+					dispose();
+				}
+			}
+		};
 		ModelManager mm = new ModelManager();
 		mm.addPropertyChangeListener(this);
 		mc = new MasterController(mm);

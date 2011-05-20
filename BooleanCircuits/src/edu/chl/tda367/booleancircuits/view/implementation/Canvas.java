@@ -1,25 +1,35 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.security.InvalidParameterException;
 
-import javax.swing.*;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.UIManager;
 import javax.swing.event.MouseInputAdapter;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
-import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
-import edu.chl.tda367.booleancircuits.model.*;
+import edu.chl.tda367.booleancircuits.model.IModel;
+import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
-import edu.chl.tda367.booleancircuits.view.draw.*;
+import edu.chl.tda367.booleancircuits.view.draw.IBackground;
+import edu.chl.tda367.booleancircuits.view.draw.IDraw;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
 
 /**
  * A class where the components are drawn.
- * 
+ *
  * @author Boel, Anton
- * 
+ *
  */
 public class Canvas {
 
@@ -27,7 +37,7 @@ public class Canvas {
 
 	/**
 	 * Sets the background of the canvas.
-	 * 
+	 *
 	 * @param background
 	 *            IBackground
 	 */
@@ -37,7 +47,7 @@ public class Canvas {
 
 	/**
 	 * Sets US standard. False is international.
-	 * 
+	 *
 	 * @param bool
 	 */
 	public static void setUSStandard(final boolean bool) {
@@ -246,7 +256,7 @@ public class Canvas {
 
 	/**
 	 * Returns the canvas.
-	 * 
+	 *
 	 * @return JPanel
 	 */
 	public JPanel getCanvas() {
