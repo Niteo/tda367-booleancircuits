@@ -1,15 +1,21 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
 import java.awt.Point;
-import java.beans.*;
-import java.util.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.*;
+import edu.chl.tda367.booleancircuits.model.IModelManager;
+import edu.chl.tda367.booleancircuits.model.IModelWrapper;
+import edu.chl.tda367.booleancircuits.model.IObservable;
+import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * A class which manages Models as workspaces.
- * 
+ *
  * @author Kaufmann
  */
 public final class ModelManager implements IObservable, IModelManager {
@@ -43,42 +49,44 @@ public final class ModelManager implements IObservable, IModelManager {
 	@Override
 	public void addComponents(final List<ICircuitGate> component,
 			final Point position) {
-		int minX = Integer.MAX_VALUE;
-		int maxX = Integer.MIN_VALUE;
-		int minY = Integer.MAX_VALUE;
-		int maxY = Integer.MIN_VALUE;
+		if (modelList.size() > 0) {
+			int minX = Integer.MAX_VALUE;
+			int maxX = Integer.MIN_VALUE;
+			int minY = Integer.MAX_VALUE;
+			int maxY = Integer.MIN_VALUE;
 
-		for (int i = 0; i < component.size(); i++) {
-			Point p = component.get(i).getPosition();
-			if (p.x > maxX) {
-				maxX = p.x;
+			for (int i = 0; i < component.size(); i++) {
+				Point p = component.get(i).getPosition();
+				if (p.x > maxX) {
+					maxX = p.x;
+				}
+				if (p.x < minX) {
+					minX = p.x;
+				}
+				if (p.y > maxY) {
+					maxY = p.y;
+				}
+				if (p.y < minY) {
+					minY = p.y;
+				}
 			}
-			if (p.x < minX) {
-				minX = p.x;
+
+			int deltaX = (maxX - minX) / 2 + minX;
+			int deltaY = (maxY - minY) / 2 + minY;
+
+			int moveX = (position.x - deltaX);
+			int moveY = (position.y - deltaY);
+
+			for (int i = 0; i < component.size(); i++) {
+				ICircuitGate gate = component.get(i);
+				Point temp = new Point(gate.getPosition());
+				temp.x += moveX;
+				temp.y += moveY;
+				gate.setPosition(temp);
 			}
-			if (p.y > maxY) {
-				maxY = p.y;
-			}
-			if (p.y < minY) {
-				minY = p.y;
-			}
+			this._getActiveWorkspaceModel().addComponents(component);
+			firePropertyChanged();
 		}
-
-		int deltaX = (maxX - minX) / 2 + minX;
-		int deltaY = (maxY - minY) / 2 + minY;
-
-		int moveX = (position.x - deltaX);
-		int moveY = (position.y - deltaY);
-
-		for (int i = 0; i < component.size(); i++) {
-			ICircuitGate gate = component.get(i);
-			Point temp = new Point(gate.getPosition());
-			temp.x += moveX;
-			temp.y += moveY;
-			gate.setPosition(temp);
-		}
-		this._getActiveWorkspaceModel().addComponents(component);
-		firePropertyChanged();
 	}
 
 	@Override

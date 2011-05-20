@@ -1,13 +1,17 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.GridLayout;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.JPanel;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
-import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
-import edu.chl.tda367.booleancircuits.model.*;
+import edu.chl.tda367.booleancircuits.model.IModel;
+import edu.chl.tda367.booleancircuits.model.IModelWrapper;
+import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.view.ICenterStage;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
@@ -15,9 +19,9 @@ import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 /**
  * A class that represents a workspace with a panel and potentially several
  * tabs.
- * 
+ *
  * @author Boel
- * 
+ *
  */
 public class CenterStage implements ICenterStage {
 

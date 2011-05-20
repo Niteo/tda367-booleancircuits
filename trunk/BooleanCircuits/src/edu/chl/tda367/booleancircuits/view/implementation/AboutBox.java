@@ -1,34 +1,42 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Dimension;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JSplitPane;
 
 public class AboutBox extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JSplitPane horizontalPane = new JSplitPane();
 	private JLabel infoLabel = new JLabel();
-	private ActionListener listener = new ActionListener() {
-
-		@Override
-		public void actionPerformed(final ActionEvent e) {
-			dispose();
-		}
-	};
+	private transient ActionListener listener;
 	private JButton okButton = new JButton("OK");
 	private JLabel picLabel = new JLabel();
 	private JSplitPane verticalPane = new JSplitPane();
 
 	/**
 	 * Returns an instance of aboutbox.
-	 * 
+	 *
 	 * @param s
 	 *            String the info text
 	 */
 	public AboutBox(final String s, final Icon i) {
 		super();
+
+		listener = new ActionListener() {
+
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				dispose();
+			}
+		};
+
 		setAlwaysOnTop(true);
 		setVisible(true);
 		setTitle("About");
