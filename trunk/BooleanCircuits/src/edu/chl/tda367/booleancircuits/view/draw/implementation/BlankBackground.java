@@ -6,9 +6,9 @@ import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 
 /**
  * A class to draw a blank background.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public final class BlankBackground implements IBackground {
 

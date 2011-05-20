@@ -47,7 +47,7 @@ public class ModelWrapperTest {
 		wrapper.clock();
 		clock.update();
 		assertTrue(clock.getOutputValue(0));
-		assertTrue(wrapper.hasChanged()==true);
+		assertTrue(wrapper.hasChanged() == true);
 	}
 
 	@Test
@@ -69,14 +69,14 @@ public class ModelWrapperTest {
 		ModelWrapper wrapper = new ModelWrapper();
 
 		assertNull(wrapper.getFile());
-		assertTrue(wrapper.hasChanged()==false);
+		assertTrue(wrapper.hasChanged() == false);
 
 	}
 
 	@Test
 	public void testHasChanged() {
 		ModelWrapper wrapper = new ModelWrapper();
-		assertTrue(wrapper.hasChanged()== false);
+		assertTrue(wrapper.hasChanged() == false);
 
 	}
 
@@ -94,8 +94,6 @@ public class ModelWrapperTest {
 		new ModelWrapper();
 
 	}
-
-
 
 	@Test
 	public void testModelWrapperFile() {
@@ -118,7 +116,7 @@ public class ModelWrapperTest {
 
 		wrapper.removeComponent(and);
 		assertTrue(wrapper.getComponents().size() == 0);
-		assertTrue(wrapper.hasChanged()==true);
+		assertTrue(wrapper.hasChanged() == true);
 	}
 
 	@Test
@@ -136,14 +134,14 @@ public class ModelWrapperTest {
 
 		wrapper.removeComponents(list);
 		assertTrue(wrapper.getComponents().size() == 0);
-		assertTrue(wrapper.hasChanged()==true);
+		assertTrue(wrapper.hasChanged() == true);
 	}
 
 	@Test
 	public void testSetChanged() {
 		ModelWrapper wrapper = new ModelWrapper();
 		wrapper.setChanged(true);
-		assertTrue(wrapper.hasChanged()== true);
+		assertTrue(wrapper.hasChanged() == true);
 
 	}
 
@@ -163,10 +161,7 @@ public class ModelWrapperTest {
 		wrapper.setFile(file);
 		assertTrue(wrapper.toString().equals("file"));
 
-
-
 	}
-
 
 	@Test
 	public void testUpdateComponents() {
@@ -179,12 +174,7 @@ public class ModelWrapperTest {
 		wrapper.clock();
 		wrapper.updateComponents();
 		assertTrue(clock.getOutputValue(0));
-		assertTrue(wrapper.hasChanged()==true);
+		assertTrue(wrapper.hasChanged() == true);
 	}
-
-
-
-
-
 
 }

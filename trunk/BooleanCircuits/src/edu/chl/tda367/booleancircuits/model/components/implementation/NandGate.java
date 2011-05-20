@@ -9,14 +9,14 @@ import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
  * A class representing a NANDgate.
- *
+ * 
  * @author Kaufmann
  */
 public final class NandGate extends AbstractCircuitGate {
 
 	/**
 	 * Creates an instance of a NAND-gate.
-	 *
+	 * 
 	 * @param inputs
 	 *            number of inputs of the gate
 	 */

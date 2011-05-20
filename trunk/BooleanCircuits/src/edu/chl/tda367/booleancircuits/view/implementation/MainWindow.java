@@ -12,14 +12,16 @@ import java.beans.*;
 
 import javax.swing.*;
 
+import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.controller.implementation.*;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
+import edu.chl.tda367.booleancircuits.view.IPalette;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.*;
 
 /**
  * The Main window
- *
+ * 
  * @author Boel
  */
 public final class MainWindow extends JFrame implements PropertyChangeListener {
@@ -33,11 +35,8 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 	private JMenu backgroundMenu;
 	private JRadioButtonMenuItem blankRadioButtonMenuItem;
 	private JMenu clockpulseMenu;
-
 	private JMenuItem closeAllMenuItem;
-
 	private JMenuItem closeMenuItem;
-
 	private Action closeWorkspace = new AbstractAction("", new ImageIcon(
 			"resources/icons/cross-icon.png")) {
 
@@ -57,25 +56,15 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 			}
 		}
 	};
-
 	private JMenuItem copyMenuItem;
-
 	private CenterStage cs;
-
 	private JMenuItem cutMenuItem;
-
 	private JMenuItem deleteMenuItem;
-
 	private JRadioButtonMenuItem dotsRadioButtonMenuItem;
-
 	private JMenu editMenu;
-
 	private JSeparator editSeparator1;
-
 	private JMenuItem exitMenuItem;
-
 	private JMenu fileMenu;
-
 	private JSeparator fileSeparator1;
 	private JSeparator fileSeparator2;
 	private JSeparator fileSeparator3;
@@ -112,11 +101,11 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		}
 
 	};
-	private MasterController mc;
+	private IMasterController mc;
 	private JMenuBar menuBar;
 	private JMenuItem newWorkspaceMenuItem;
 	private JMenuItem openFileMenuItem;
-	private Palette palette;
+	private IPalette palette;
 	private JPanel paletteContainerPanel;
 	private JMenuItem pasteMenuItem;
 	private JMenuItem pauseClockMenuItem;
@@ -142,6 +131,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 			}
 		}
 	};
+
 	/** Creates new form View */
 	public MainWindow() {
 		ModelManager mm = new ModelManager();
@@ -171,15 +161,18 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		setSize(new Dimension(800, 500));
 		setIconImage(new ImageIcon("resources/icons/frameIcon.png").getImage());
 	}
+
 	@Override
 	public synchronized void propertyChange(final PropertyChangeEvent evt) {
 		if (evt.getSource() instanceof ModelManager) {
 			cs.update((ModelManager) evt.getSource());
 		}
 	}
+
 	private MainWindow _getWindow() {
 		return this;
 	}
+
 	private void initButtons() {
 
 		// Set actions
@@ -228,6 +221,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		toolbar.getUndoButton().setToolTipText("Undo (Ctrl+Z)");
 
 	}
+
 	// GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
@@ -384,6 +378,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		pack();
 	}// </editor-fold>
 		// GEN-END:initComponents
+
 	private void initMenu() {
 		// init file menu
 		newWorkspaceMenuItem
@@ -437,6 +432,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		aboutMenuItem.addActionListener(listener);
 
 	}
+
 	private void initMenuItemText() {
 		// File menu
 		newWorkspaceMenuItem.setText("New Workspace");
@@ -476,6 +472,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		helpMenuItem.setText("Help");
 		aboutMenuItem.setText("About");
 	}
+
 	private void initShortcuts() {
 		closeAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_W,
@@ -528,9 +525,11 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 						java.awt.event.InputEvent.CTRL_MASK));
 
 	}
+
 	private void initTabbedPane() {
 		cs.getTabManager().getTabbedPane().addChangeListener(actionController);
 	}
+
 	private void initToolbar() {
 		verticalSplitPane.setTopComponent(toolbar);
 		verticalSplitPane.setEnabled(false);

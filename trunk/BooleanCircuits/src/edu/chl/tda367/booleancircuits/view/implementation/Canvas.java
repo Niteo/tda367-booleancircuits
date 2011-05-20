@@ -2,10 +2,12 @@ package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.security.InvalidParameterException;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 
+import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
@@ -15,38 +17,41 @@ import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
 
 /**
  * A class where the components are drawn.
- *
+ * 
  * @author Boel, Anton
- *
+ * 
  */
 public class Canvas {
 
 	private static IDraw drawer = new Draw();
+
 	/**
 	 * Sets the background of the canvas.
-	 *
+	 * 
 	 * @param background
 	 *            IBackground
 	 */
 	public static void setBackground(final IBackground background) {
 		drawer.setBackground(background);
 	}
+
 	/**
 	 * Sets US standard. False is international.
-	 *
+	 * 
 	 * @param bool
 	 */
 	public static void setUSStandard(final boolean bool) {
 		drawer.setUsStandard(bool);
 	}
-	private MasterController _masterController;
+
+	private final IMasterController _masterController;
 	private ICircuitGate connectBufferGate = null;
 	private int connectBufferPort = 0;
 	private boolean connectingInput;
 	private boolean connectingOutput;
 	private boolean draggingMode;
 	private Point drawSelect;
-	private ActionListener listener = new ActionListener() {
+	private final ActionListener listener = new ActionListener() {
 
 		@SuppressWarnings("synthetic-access")
 		@Override
@@ -83,9 +88,9 @@ public class Canvas {
 			}
 		}
 	};
-	private CanvasPopup menu;
-	private IModel model;
-	private MouseAdapter mouseAdapter = new MouseInputAdapter() {
+	private final CanvasPopup menu;
+	private final IModel model;
+	private final MouseAdapter mouseAdapter = new MouseInputAdapter() {
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public void mouseClicked(final MouseEvent evt) {
@@ -144,7 +149,7 @@ public class Canvas {
 		}
 	};
 	private Point oldDragPosition;
-	private JPanel panel = new JPanel() {
+	private final JPanel panel = new JPanel() {
 
 		private static final long serialVersionUID = 1L;
 
@@ -153,34 +158,36 @@ public class Canvas {
 		public void paint(final Graphics g) {
 			super.paint(g);
 			Graphics2D g2d = (Graphics2D) g;
-			// Draw background
+
 			drawer.drawBackground(g2d, new Point(posX, posY), panel.getSize());
-
-			// Draw components
-			if (model != null) {
-				// Draw connections
-				for (ICircuitGate circuitGate : model.getComponents()) {
-					drawer.drawGateConnections(g2d, circuitGate, new Point(
-							posX, posY));
-				}
-
-				// Draw non-selected
-				g2d.setColor(Color.BLACK);
-				for (ICircuitGate circuitGate : model.getComponents()) {
-					if (!selectModel.isSelectedComponent(circuitGate)) {
-						drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
-					}
-				}
-				// Draw selected
-				g2d.setColor(Color.BLUE);
-				for (ICircuitGate circuitGate : model.getComponents()) {
-					if (selectModel.isSelectedComponent(circuitGate)) {
-						drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
-					}
+			// Draw connections
+			for (ICircuitGate circuitGate : model.getComponents()) {
+				drawer.drawGateConnections(g2d, circuitGate, new Point(posX,
+						posY));
+			}
+			// Draw non-selected
+			g2d.setColor(Color.BLACK);
+			for (ICircuitGate circuitGate : model.getComponents()) {
+				if (!selectModel.isSelectedComponent(circuitGate)) {
+					drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
 				}
 			}
-
-			// Draw select
+			// Draw selected
+			g2d.setColor(Color.BLUE);
+			for (ICircuitGate circuitGate : model.getComponents()) {
+				if (selectModel.isSelectedComponent(circuitGate)) {
+					drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
+				}
+			}
+			// Draw position
+			g2d.setColor(Color.BLACK);
+			g2d.setFont(UIManager.getFont("TabbedPane.font"));
+			g2d.drawString("[" + posX + ", " + posY + "]", 5, 15);
+			if (model.hasInfiniteRecursion()) {
+				g2d.setColor(Color.RED);
+				g2d.drawString("Infinite recursion!", 5, 35);
+			}
+			// Draw selection box
 			if (drawSelect != null) {
 				Point mousePos = panel.getMousePosition();
 				if (mousePos != null) {
@@ -205,29 +212,26 @@ public class Canvas {
 					g2d.drawPolygon(xArray, yArray, 4);
 				}
 			}
-
-			// Draw position
-			g2d.setColor(Color.BLACK);
-			g2d.setFont(UIManager.getFont("TabbedPane.font"));
-			g2d.drawString("[" + posX + ", " + posY + "]", 5, 15);
-			if (model.hasInfiniteRecursion()) {
-				g2d.setColor(Color.RED);
-				g2d.drawString("Infinite recursion!", 5, 35);
-			}
 		}
 	};
 
 	private boolean panning;
-
 	private int posX, posY;
-
 	private ICircuitGate rightClickedGate = null;
-
-	private ISelectionModel selectModel;
+	private final ISelectionModel selectModel;
 
 	public Canvas(final IModel canvasModel,
 			final ISelectionModel selectionModel,
-			final MasterController masterController) {
+			final IMasterController masterController) {
+		if (masterController == null) {
+			throw new InvalidParameterException(
+					"masterController must not be null");
+		} else if (selectionModel == null) {
+			throw new InvalidParameterException(
+					"selectionModel must not be null");
+		} else if (canvasModel == null) {
+			throw new InvalidParameterException("canvasModel must not be null");
+		}
 		_masterController = masterController;
 		posX = 0;
 		posY = 0;
@@ -242,7 +246,7 @@ public class Canvas {
 
 	/**
 	 * Returns the canvas.
-	 *
+	 * 
 	 * @return JPanel
 	 */
 	public JPanel getCanvas() {

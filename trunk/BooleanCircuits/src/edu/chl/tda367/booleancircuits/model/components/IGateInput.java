@@ -4,21 +4,21 @@ public interface IGateInput {
 
 	/**
 	 * Returns the gate connected to the port.
-	 *
+	 * 
 	 * @return the connected gate
 	 */
 	public ICircuitGate getInputComponent();
 
 	/**
 	 * Returns the port connected to.
-	 *
+	 * 
 	 * @return int: the connected port
 	 */
 	public int getInputPort();
 
 	/**
 	 * Returns the output of the connected component.
-	 *
+	 * 
 	 * @return boolean: output
 	 */
 	public boolean getInputValue();
@@ -30,7 +30,7 @@ public interface IGateInput {
 
 	/**
 	 * Connects a gate to a port.
-	 *
+	 * 
 	 * @param component
 	 *            the gate to connect
 	 * @param port

@@ -6,14 +6,14 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * Controller for ModelManager.
- *
+ * 
  * @author Kaufmann
  */
 public interface IMasterController {
 	/**
 	 * Adds a CircuitComponent in the palette to the specified coordinate in the
 	 * active workspace.
-	 *
+	 * 
 	 * @param coord
 	 *            the coordinate to add to
 	 */
@@ -26,14 +26,14 @@ public interface IMasterController {
 
 	/**
 	 * Closes all workspaces.
-	 *
+	 * 
 	 * @return returns true if all workspaces has been closed successfully
 	 */
 	public boolean closeAllWorkspaces();
 
 	/**
 	 * Closes a specific workspace selected by int.
-	 *
+	 * 
 	 * @param i
 	 *            int number of the workspace
 	 * @return returns true if workspace has been closed successfully
@@ -43,7 +43,7 @@ public interface IMasterController {
 	/**
 	 * Connects component with another component. First call specifies input
 	 * component, second specifiec output.
-	 *
+	 * 
 	 * @param g
 	 *            component to connect. Enter null to clear component memory.
 	 * @param port
@@ -63,7 +63,7 @@ public interface IMasterController {
 
 	/**
 	 * Imports workspace into active workspace
-	 *
+	 * 
 	 * @param file
 	 */
 	public void importWorkspace();
@@ -75,7 +75,7 @@ public interface IMasterController {
 
 	/**
 	 * Opens the specified workspace.
-	 *
+	 * 
 	 * @param path
 	 *            Path to the workspace to open.
 	 */
@@ -90,7 +90,7 @@ public interface IMasterController {
 	/**
 	 * Pastes the selected components to the active workspace from the
 	 * clipboard.
-	 *
+	 * 
 	 * @param position
 	 *            Point position in the active model
 	 */
@@ -103,7 +103,7 @@ public interface IMasterController {
 
 	/**
 	 * Removes the given component if it exists in the active model.
-	 *
+	 * 
 	 * @param g
 	 *            IAbstractCircuitGate
 	 */
@@ -116,7 +116,7 @@ public interface IMasterController {
 
 	/**
 	 * Saves the active workspace.
-	 *
+	 * 
 	 * @param saveAs
 	 *            forces use of save dialog
 	 */
@@ -135,7 +135,7 @@ public interface IMasterController {
 	/**
 	 * Selects the first occurance of a component at the given coordinate in the
 	 * active workspace
-	 *
+	 * 
 	 * @param coord
 	 *            the coordinate to select from
 	 * @param multiSelect
@@ -145,7 +145,7 @@ public interface IMasterController {
 
 	/**
 	 * selects all components in selection square
-	 *
+	 * 
 	 * @param pos1
 	 * @param pos2
 	 */
@@ -153,7 +153,7 @@ public interface IMasterController {
 
 	/**
 	 * Sets the currently active workspace.
-	 *
+	 * 
 	 * @param i
 	 *            int index of the workspace
 	 */
@@ -161,7 +161,7 @@ public interface IMasterController {
 
 	/**
 	 * Sets the component chosen in the palette.
-	 *
+	 * 
 	 * @param g
 	 *            AbstractCircuitGate
 	 */

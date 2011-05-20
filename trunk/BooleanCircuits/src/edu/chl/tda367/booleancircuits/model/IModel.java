@@ -9,7 +9,7 @@ public interface IModel {
 
 	/**
 	 * Adds a component to the model.
-	 *
+	 * 
 	 * @param component
 	 *            the new component to add
 	 * @param position
@@ -19,7 +19,7 @@ public interface IModel {
 
 	/**
 	 * Adds components to the model.
-	 *
+	 * 
 	 * @param component
 	 *            the components to add
 	 */
@@ -32,7 +32,7 @@ public interface IModel {
 
 	/**
 	 * Get component.
-	 *
+	 * 
 	 * @param position
 	 *            the coordinate for the component
 	 * @return the gate found. Null if no gate was found
@@ -41,28 +41,28 @@ public interface IModel {
 
 	/**
 	 * Returns a list of components.
-	 *
+	 * 
 	 * @return a list of components
 	 */
 	public Collection<ICircuitGate> getComponents();
 
 	/**
 	 * Returns the amount of components in the model.
-	 *
+	 * 
 	 * @return integer representing the amount of components
 	 */
 	public int getNumberOfComponents();
 
 	/**
 	 * Returns true if the circuit has infinite recursion.
-	 *
+	 * 
 	 * @return boolean
 	 */
 	public boolean hasInfiniteRecursion();
 
 	/**
 	 * Removes the specified component.
-	 *
+	 * 
 	 * @param g
 	 *            IAbstractCircuitGate
 	 */
@@ -70,7 +70,7 @@ public interface IModel {
 
 	/**
 	 * Removes the specified components in the collection.
-	 *
+	 * 
 	 * @param list
 	 *            Collection
 	 */

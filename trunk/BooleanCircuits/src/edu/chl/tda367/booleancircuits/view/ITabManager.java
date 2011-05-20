@@ -6,15 +6,15 @@ import edu.chl.tda367.booleancircuits.view.implementation.*;
 
 /**
  * An interface to describe a tab manager.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public interface ITabManager {
 
 	/**
 	 * Adds a new tab to the tabbedPane.
-	 *
+	 * 
 	 * @param name
 	 *            String displayed name of the tab
 	 * @param canvas
@@ -24,14 +24,14 @@ public interface ITabManager {
 
 	/**
 	 * Returns the last added tabPanel.
-	 *
+	 * 
 	 * @return TabPanel
 	 */
 	public TabPanel getLastTabPanel();
 
 	/**
 	 * Returns the tabbedPane.
-	 *
+	 * 
 	 * @return JTabbedPane the tabbedPane containing the tabs
 	 */
 
@@ -39,14 +39,14 @@ public interface ITabManager {
 
 	/**
 	 * Returns the number of tabs on the tabbedPane.
-	 *
+	 * 
 	 * @return int number tabs
 	 */
 	public int getTabCount();
 
 	/**
 	 * Returns the tabPanel at a given index.
-	 *
+	 * 
 	 * @param i
 	 *            int index of the tabPanel
 	 * @return TabPanel
@@ -60,7 +60,7 @@ public interface ITabManager {
 
 	/**
 	 * Removes a tab from the tabbedPane.
-	 *
+	 * 
 	 * @param i
 	 *            int index of the tab
 	 */
@@ -68,7 +68,7 @@ public interface ITabManager {
 
 	/**
 	 * Sets the selected tab.
-	 *
+	 * 
 	 * @param i
 	 *            int index of the selected tab
 	 */

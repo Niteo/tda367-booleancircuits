@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.swing.*;
 
+import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
 import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
@@ -14,21 +15,21 @@ import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 /**
  * A class that represents a workspace with a panel and potentially several
  * tabs.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public class CenterStage implements ICenterStage {
 
 	private JPanel centerStagePanel = new JPanel();
 	private Action closeWorkspace;
-	private MasterController mc;
+	private IMasterController mc;
 	private List<IModel> tabIdList = new LinkedList<IModel>();
 	private TabManager tabManager = new TabManager();
 
 	/** Returns an instance of Canvas. */
 	public CenterStage(final Action closeWorkspace,
-			final MasterController masterController) {
+			final IMasterController masterController) {
 		mc = masterController;
 		centerStagePanel.add(tabManager.getTabbedPane());
 		centerStagePanel.setLayout(new GridLayout(1, 1));

@@ -9,7 +9,7 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * A class which manages Models as workspaces.
- *
+ * 
  * @author Kaufmann
  */
 public final class ModelManager implements IObservable, IModelManager {

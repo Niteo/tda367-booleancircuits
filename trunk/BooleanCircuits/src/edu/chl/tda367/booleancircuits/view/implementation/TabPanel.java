@@ -8,9 +8,9 @@ import edu.chl.tda367.booleancircuits.view.ITabPanel;
 
 /**
  * A graphical class containing a button and a label.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 
 public class TabPanel extends JPanel implements ITabPanel {
@@ -21,7 +21,7 @@ public class TabPanel extends JPanel implements ITabPanel {
 
 	/**
 	 * Returns an instance of TabPanel.
-	 *
+	 * 
 	 * @param title
 	 */
 	public TabPanel(final String title) {

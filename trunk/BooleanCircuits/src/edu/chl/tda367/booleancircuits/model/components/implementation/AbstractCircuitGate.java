@@ -7,9 +7,9 @@ import edu.chl.tda367.booleancircuits.model.components.*;
 
 /**
  * Abstract class representing an abstract circuit component.
- *
+ * 
  * @author Kaufmann
- *
+ * 
  */
 public abstract class AbstractCircuitGate implements ICircuitGate {
 	private List<IGateInput> inputs;
@@ -196,14 +196,14 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 
 	/**
 	 * Template-method for returning a gate of the used type.
-	 *
+	 * 
 	 * @return a gate of the used type
 	 */
 	protected abstract AbstractCircuitGate emptyGateClone();
 
 	/**
 	 * Sets a specific output to a given value
-	 *
+	 * 
 	 * @param index
 	 *            specifies which output to set
 	 * @param value
@@ -215,7 +215,7 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 
 	/**
 	 * Updates the output of the gate.
-	 *
+	 * 
 	 */
 	protected abstract void updateOutput();
 

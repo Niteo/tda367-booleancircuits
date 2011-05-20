@@ -6,7 +6,7 @@ public interface IObservable {
 
 	/**
 	 * Adds an observer to this observable class.
-	 *
+	 * 
 	 * @param listener
 	 *            the observer
 	 */
@@ -14,7 +14,7 @@ public interface IObservable {
 
 	/**
 	 * Removes an observer from this observable class.
-	 *
+	 * 
 	 * @param listener
 	 *            to remove
 	 */

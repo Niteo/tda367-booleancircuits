@@ -4,14 +4,14 @@ import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
  * Class to represent a XOR gate.
- *
+ * 
  * @author Kaufmann
- *
+ * 
  */
 public final class XorGate extends AbstractCircuitGate {
 	/**
 	 * Returns an instance of a XorGate.
-	 *
+	 * 
 	 * @param inputs
 	 *            number of inputs of the gate
 	 */

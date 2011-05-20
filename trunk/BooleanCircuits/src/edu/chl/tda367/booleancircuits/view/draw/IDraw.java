@@ -6,15 +6,15 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * A drawing interface.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public interface IDraw {
 
 	/**
 	 * Draws a background.
-	 *
+	 * 
 	 * @param g
 	 *            graphics
 	 * @param offset
@@ -26,7 +26,7 @@ public interface IDraw {
 
 	/**
 	 * Draws a gate.
-	 *
+	 * 
 	 * @param g
 	 *            Graphics2D object to draw with
 	 * @param gate
@@ -38,7 +38,7 @@ public interface IDraw {
 
 	/**
 	 * Draws a gate's connections.
-	 *
+	 * 
 	 * @param g
 	 *            Graphics2D object to draw with
 	 * @param gate
@@ -51,7 +51,7 @@ public interface IDraw {
 
 	/**
 	 * Sets the background
-	 *
+	 * 
 	 * @param background
 	 *            IBackground
 	 */
