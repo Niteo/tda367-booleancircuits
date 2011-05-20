@@ -34,6 +34,7 @@ public final class Palette implements IPalette {
 		specialList.add(new ConstantGate(false));
 		specialList.add(new ConstantGate(true));
 		specialList.add(new Clock());
+		specialList.add(new EqualGate());
 
 		List<ICircuitGate> standardList = new ArrayList<ICircuitGate>();
 		standardList.add(new AndGate(2));

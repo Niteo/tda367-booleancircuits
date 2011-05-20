@@ -42,6 +42,8 @@ public class Draw implements IDraw {
 			drawConstantGate(gate, g, offset);
 		} else if (gate instanceof Clock) {
 			drawClock(gate, g, offset);
+		} else if (gate instanceof EqualGate){
+			drawEqual(gate, g, offset);
 		}
 
 		for (int i = 0; i < gate.getNoOfOutputs(); i++) {
@@ -187,6 +189,12 @@ public class Draw implements IDraw {
 	private void drawClock(final ICircuitGate gate, final Graphics2D g,
 			final Point offset) {
 		symbol = "C";
+		drawRectangle(gate, g, offset);
+	}
+	
+	private void drawEqual(final ICircuitGate gate, final Graphics2D g,
+			final Point offset) {
+		symbol = "";
 		drawRectangle(gate, g, offset);
 	}
 
