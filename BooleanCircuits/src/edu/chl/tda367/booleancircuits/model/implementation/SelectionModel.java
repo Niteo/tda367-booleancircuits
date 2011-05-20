@@ -7,9 +7,9 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * A class that manages what components are selected.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public final class SelectionModel implements ISelectionModel {
 

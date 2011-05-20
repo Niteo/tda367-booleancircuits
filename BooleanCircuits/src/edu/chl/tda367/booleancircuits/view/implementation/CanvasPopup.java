@@ -6,9 +6,9 @@ import javax.swing.*;
 
 /**
  * Popup menu for canvas
- *
+ * 
  * @author Kaufmann
- *
+ * 
  */
 public final class CanvasPopup extends JPopupMenu {
 
@@ -22,7 +22,7 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Creates a pop-up menu.
-	 *
+	 * 
 	 * @param l
 	 *            ActionListener
 	 */
@@ -44,7 +44,7 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Returns the index of the input button.
-	 *
+	 * 
 	 * @param item
 	 * @return the index of the input button. Returns -1 if button is not an
 	 *         input button
@@ -61,7 +61,7 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Returns the index of the output button.
-	 *
+	 * 
 	 * @param item
 	 * @return the index of the output button. Returns -1 if button is not an
 	 *         output button
@@ -78,7 +78,7 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Returns true if the JMenuItem is a copy button.
-	 *
+	 * 
 	 * @param item
 	 *            JMenuItem
 	 * @return boolean
@@ -89,7 +89,7 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Returns true if the JMenuItem is a remove button.
-	 *
+	 * 
 	 * @param item
 	 *            JMenuItem
 	 * @return boolean
@@ -100,7 +100,7 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Checks if item is an input button.
-	 *
+	 * 
 	 * @param item
 	 *            the item to check
 	 * @return true if item is input button
@@ -111,7 +111,7 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Checks if item is an output button.
-	 *
+	 * 
 	 * @param item
 	 *            the item to check
 	 * @return true if item is output button
@@ -122,7 +122,7 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Returns true if the JMenuItem is a remove button.
-	 *
+	 * 
 	 * @param item
 	 *            JMenuItem
 	 * @return boolean
@@ -133,7 +133,7 @@ public final class CanvasPopup extends JPopupMenu {
 
 	/**
 	 * Updates the menu to show items based on input parameters.
-	 *
+	 * 
 	 * @param inputs
 	 *            amount of inputs in the input menu
 	 * @param outputs

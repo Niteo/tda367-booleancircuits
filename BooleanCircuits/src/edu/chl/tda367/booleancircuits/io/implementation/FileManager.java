@@ -11,9 +11,9 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 
 /**
  * Writes and reads save files.
- *
+ * 
  * @author antonlin
- *
+ * 
  */
 public final class FileManager implements IFileManager {
 
@@ -41,7 +41,7 @@ public final class FileManager implements IFileManager {
 
 	/**
 	 * Saves a circuit in form of a .txt file.
-	 *
+	 * 
 	 * @param components
 	 * @param name
 	 */

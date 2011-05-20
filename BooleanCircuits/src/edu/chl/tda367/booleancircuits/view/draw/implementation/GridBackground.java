@@ -7,9 +7,9 @@ import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 
 /**
  * A class to draw a squared background.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public final class GridBackground implements IBackground {
 

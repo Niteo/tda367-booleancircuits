@@ -7,14 +7,14 @@ import java.io.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import edu.chl.tda367.booleancircuits.controller.IActionController;
+import edu.chl.tda367.booleancircuits.controller.*;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
 /**
  * A class to control action events.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public class ActionController implements ChangeListener, IActionController {
 
@@ -73,7 +73,7 @@ public class ActionController implements ChangeListener, IActionController {
 		}
 	};
 
-	private MasterController mc;
+	private IMasterController mc;
 
 	private final Action newWorkspaceAction = new AbstractAction() {
 
@@ -235,10 +235,10 @@ public class ActionController implements ChangeListener, IActionController {
 
 	/**
 	 * Returns an instance of ActionController.
-	 *
+	 * 
 	 * @param MasterController
 	 */
-	public ActionController(final MasterController masterController) {
+	public ActionController(final IMasterController masterController) {
 		mc = masterController;
 	}
 

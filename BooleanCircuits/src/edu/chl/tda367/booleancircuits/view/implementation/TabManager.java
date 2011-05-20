@@ -6,9 +6,9 @@ import edu.chl.tda367.booleancircuits.view.ITabManager;
 
 /**
  * A class to represent a tab.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public final class TabManager implements ITabManager {
 

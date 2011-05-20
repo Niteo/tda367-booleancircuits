@@ -6,7 +6,7 @@ import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
  * Represents a NOT-gate. Outputs the inverse of the input.
- *
+ * 
  * @author Jennifer
  */
 public final class NotGate extends AbstractCircuitGate {

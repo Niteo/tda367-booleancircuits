@@ -4,15 +4,15 @@ import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
  * Represents a OR-gate
- *
+ * 
  * @author Jennifer
- *
+ * 
  */
 public class OrGate extends AbstractCircuitGate {
 
 	/**
 	 * Creates an instance of an OR-gate.
-	 *
+	 * 
 	 * @param inputs
 	 *            number of inputs of the gate
 	 */

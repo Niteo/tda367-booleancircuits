@@ -6,7 +6,7 @@ public final class NorGate extends AbstractCircuitGate {
 
 	/**
 	 * Represents a NOR gate.
-	 *
+	 * 
 	 * @param inputs
 	 *            the amount of inputs for the gate
 	 */

@@ -4,9 +4,9 @@ import edu.chl.tda367.booleancircuits.model.components.*;
 
 /**
  * Represents input-ports in a gate.
- *
+ * 
  * @author Kaufmann
- *
+ * 
  */
 public final class GateInput implements IGateInput {
 	private ICircuitGate inputComponent;

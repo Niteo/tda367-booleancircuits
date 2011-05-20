@@ -6,21 +6,21 @@ public interface IModelWrapper extends IModel {
 
 	/**
 	 * Returns an instance of the model's corresponding file.
-	 *
+	 * 
 	 * @return the file of the model
 	 */
 	public File getFile();
 
 	/**
 	 * Returns if true if the model has changed since last save
-	 *
+	 * 
 	 * @return
 	 */
 	public boolean hasChanged();
 
 	/**
 	 * Returns true if this class has a save file.
-	 *
+	 * 
 	 * @return boolean to indicate if class has save file
 	 */
 	public boolean hasFile();
@@ -32,7 +32,7 @@ public interface IModelWrapper extends IModel {
 
 	/**
 	 * Sets the model's associated file.
-	 *
+	 * 
 	 * @param file
 	 *            the file to set.
 	 */

@@ -15,9 +15,9 @@ import edu.chl.tda367.booleancircuits.view.IPalette;
 
 /**
  * this class represents a palette containing folders with components
- *
+ * 
  * @author antonlin
- *
+ * 
  */
 
 public final class Palette implements IPalette {
@@ -65,7 +65,7 @@ public final class Palette implements IPalette {
 
 	/**
 	 * inserts component in to folder.
-	 *
+	 * 
 	 * @param folderNodeList
 	 * @param componentFolder
 	 */

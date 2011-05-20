@@ -64,10 +64,10 @@ public class ModelTest {
 	}
 
 	@Test
-	public void testGetNumberOfComponents(){
+	public void testGetNumberOfComponents() {
 		Model m = new Model();
 		assertTrue(m.getNumberOfComponents() == 0);
-		m.addComponent(new ConstantGate(true), new Point(0,0));
+		m.addComponent(new ConstantGate(true), new Point(0, 0));
 		assertTrue(m.getNumberOfComponents() == 1);
 	}
 

@@ -23,7 +23,7 @@ public class AboutBox extends JDialog {
 
 	/**
 	 * Returns an instance of aboutbox.
-	 *
+	 * 
 	 * @param s
 	 *            String the info text
 	 */

@@ -17,7 +17,7 @@ public final class Model implements IModel {
 
 	/**
 	 * Returns an instance of Model
-	 *
+	 * 
 	 * @param name
 	 *            the name of the model
 	 */

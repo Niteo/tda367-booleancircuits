@@ -5,7 +5,7 @@ import java.awt.*;
 public interface IBackground {
 	/**
 	 * Draws the background
-	 *
+	 * 
 	 * @param g
 	 *            Graphics
 	 */

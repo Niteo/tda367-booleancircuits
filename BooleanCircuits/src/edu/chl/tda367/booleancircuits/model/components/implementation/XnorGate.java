@@ -4,15 +4,15 @@ import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
  * Class representing a XNOR gate
- *
+ * 
  * @author Kaufmann
- *
+ * 
  */
 public final class XnorGate extends AbstractCircuitGate {
 
 	/**
 	 * Returns an instance of a XnorGate
-	 *
+	 * 
 	 * @param inputs
 	 *            amount of inputs for the gate
 	 */

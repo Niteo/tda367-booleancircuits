@@ -7,9 +7,9 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * This class creates a folder in which there are a number of logical components
- *
+ * 
  * @author antonlin
- *
+ * 
  */
 
 public class ComponentFolder implements IComponentFolder {
@@ -26,7 +26,7 @@ public class ComponentFolder implements IComponentFolder {
 	/**
 	 * returns a list of AbstractCircuitGate, during tests(in development) it
 	 * will just return a list of strings
-	 *
+	 * 
 	 * @return
 	 */
 	@Override
@@ -36,7 +36,7 @@ public class ComponentFolder implements IComponentFolder {
 
 	/**
 	 * Returns name of componentfolder
-	 *
+	 * 
 	 * @return
 	 */
 	@Override

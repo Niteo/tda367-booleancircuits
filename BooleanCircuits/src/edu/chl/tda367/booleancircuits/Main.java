@@ -4,9 +4,9 @@ import edu.chl.tda367.booleancircuits.view.implementation.MainWindow;
 
 /**
  * The main class.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public class Main {
 
