@@ -1,7 +1,6 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+import edu.chl.tda367.booleancircuits.model.components.*;
 
 /**
  * Represents input-ports in a gate.
@@ -32,11 +31,6 @@ public final class GateInput implements IGateInput {
 	}
 
 	@Override
-	public void setInputComponent(ICircuitGate component, int port) {
-		this.inputComponent = component;
-	}
-
-	@Override
 	public boolean getInputValue() {
 		if (inputComponent == null) {
 			return false;
@@ -49,5 +43,10 @@ public final class GateInput implements IGateInput {
 	public void reset() {
 		inputComponent = null;
 		inputComponentPort = 0;
+	}
+
+	@Override
+	public void setInputComponent(final ICircuitGate component, final int port) {
+		this.inputComponent = component;
 	}
 }

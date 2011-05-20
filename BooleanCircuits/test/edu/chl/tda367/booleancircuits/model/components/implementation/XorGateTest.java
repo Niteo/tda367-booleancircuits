@@ -1,8 +1,6 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.awt.Point;
 
@@ -13,8 +11,54 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 public class XorGateTest {
 
 	@Test
-	public void testXorGate() {
-		new XorGate(2);
+	public void testClone() {
+		XorGate xor = new XorGate(2);
+		ICircuitGate clone = xor.clone();
+		assertTrue(clone instanceof XorGate);
+		assertTrue(clone.getPosition().x == xor.getPosition().x
+				&& clone.getPosition().y == xor.getPosition().y);
+		assertTrue(clone.getNoOfInputs() == xor.getNoOfInputs());
+		assertTrue(clone.getNoOfOutputs() == xor.getNoOfOutputs());
+	}
+
+	@Test
+	public void testConnectInput() {
+		XorGate xor = new XorGate(2);
+		XorGate test = new XorGate(1);
+
+		xor.connectInput(0, test, 0);
+
+		assertEquals(test, xor.getInputs().get(0).getInputComponent());
+	}
+
+	@Test
+	public void testConnectsTo() {
+		XorGate xor = new XorGate(2);
+		XorGate testGate = new XorGate(2);
+		xor.connectInput(0, testGate, 0);
+		assertTrue(xor.connectsTo(testGate));
+	}
+
+	public void testEmptyGateClone() {
+		XorGate xor = new XorGate(2);
+		ICircuitGate testGate = xor.emptyGateClone();
+
+		assertTrue(testGate instanceof XorGate);
+		assertTrue(testGate.getNoOfInputs() == xor.getNoOfInputs());
+	}
+
+	@Test
+	public void testGetComponentTier() {
+		XorGate xor = new XorGate(2);
+		assertTrue(xor.getComponentTier() == 1);
+		xor.connectInput(0, new XorGate(2), 0);
+		assertTrue(xor.getComponentTier() == 2);
+	}
+
+	@Test
+	public void testGetInputs() {
+		XorGate xor = new XorGate(2);
+		assertTrue(xor.getInputs().size() == 2);
 	}
 
 	@Test
@@ -30,37 +74,15 @@ public class XorGateTest {
 	}
 
 	@Test
-	public void testToString() {
-		assertEquals("XOR", new XorGate(2).toString());
-	}
-
-	@Test
-	public void testGetInputs() {
-		XorGate xor = new XorGate(2);
-		assertTrue(xor.getInputs().size() == 2);
-	}
-
-	@Test
 	public void testGetOutputValue() {
 		XorGate xor = new XorGate(2);
 		assertFalse(xor.getOutputValue(0));
 	}
 
 	@Test
-	public void testSetOutput() {
+	public void testGetPosition() {
 		XorGate xor = new XorGate(2);
-		xor.setOutput(0, true);
-		assertTrue(xor.getOutputValue(0));
-	}
-
-	@Test
-	public void testConnectInput() {
-		XorGate xor = new XorGate(2);
-		XorGate test = new XorGate(1);
-
-		xor.connectInput(0, test, 0);
-
-		assertEquals(test, xor.getInputs().get(0).getInputComponent());
+		assertTrue(xor.getPosition().x == 0 && xor.getPosition().y == 0);
 	}
 
 	@Test
@@ -75,12 +97,12 @@ public class XorGateTest {
 		assertTrue(xor.getRecoupledTo().size() == 1);
 	}
 
-	public void testEmptyGateClone() {
+	@Test
+	public void testMove() {
 		XorGate xor = new XorGate(2);
-		ICircuitGate testGate = xor.emptyGateClone();
-
-		assertTrue(testGate instanceof XorGate);
-		assertTrue(testGate.getNoOfInputs() == xor.getNoOfInputs());
+		assertTrue(xor.getPosition().x == 0 && xor.getPosition().y == 0);
+		xor.move(7, 8);
+		assertTrue(xor.getPosition().x == 7 && xor.getPosition().y == 8);
 	}
 
 	@Test
@@ -99,25 +121,10 @@ public class XorGateTest {
 	}
 
 	@Test
-	public void testConnectsTo() {
+	public void testSetOutput() {
 		XorGate xor = new XorGate(2);
-		XorGate testGate = new XorGate(2);
-		xor.connectInput(0, testGate, 0);
-		assertTrue(xor.connectsTo(testGate));
-	}
-
-	@Test
-	public void testGetComponentTier() {
-		XorGate xor = new XorGate(2);
-		assertTrue(xor.getComponentTier() == 1);
-		xor.connectInput(0, new XorGate(2), 0);
-		assertTrue(xor.getComponentTier() == 2);
-	}
-
-	@Test
-	public void testGetPosition() {
-		XorGate xor = new XorGate(2);
-		assertTrue(xor.getPosition().x == 0 && xor.getPosition().y == 0);
+		xor.setOutput(0, true);
+		assertTrue(xor.getOutputValue(0));
 	}
 
 	@Test
@@ -130,22 +137,8 @@ public class XorGateTest {
 	}
 
 	@Test
-	public void testMove() {
-		XorGate xor = new XorGate(2);
-		assertTrue(xor.getPosition().x == 0 && xor.getPosition().y == 0);
-		xor.move(7, 8);
-		assertTrue(xor.getPosition().x == 7 && xor.getPosition().y == 8);
-	}
-
-	@Test
-	public void testClone() {
-		XorGate xor = new XorGate(2);
-		ICircuitGate clone = xor.clone();
-		assertTrue(clone instanceof XorGate);
-		assertTrue(clone.getPosition().x == xor.getPosition().x
-				&& clone.getPosition().y == xor.getPosition().y);
-		assertTrue(clone.getNoOfInputs() == xor.getNoOfInputs());
-		assertTrue(clone.getNoOfOutputs() == xor.getNoOfOutputs());
+	public void testToString() {
+		assertEquals("XOR", new XorGate(2).toString());
 	}
 
 	@Test
@@ -173,6 +166,11 @@ public class XorGateTest {
 
 		xor.update();
 		assertFalse(xor.getOutputValue(0));
+	}
+
+	@Test
+	public void testXorGate() {
+		new XorGate(2);
 	}
 
 }

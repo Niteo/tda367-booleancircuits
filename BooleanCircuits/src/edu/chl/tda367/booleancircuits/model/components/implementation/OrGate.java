@@ -16,8 +16,18 @@ public class OrGate extends AbstractCircuitGate {
 	 * @param inputs
 	 *            number of inputs of the gate
 	 */
-	public OrGate(int inputs) {
+	public OrGate(final int inputs) {
 		super(inputs, 1);
+	}
+
+	@Override
+	public String toString() {
+		return "OR";
+	}
+
+	@Override
+	protected AbstractCircuitGate emptyGateClone() {
+		return new OrGate(getNoOfInputs());
 	}
 
 	@Override
@@ -30,15 +40,5 @@ public class OrGate extends AbstractCircuitGate {
 			}
 		}
 		super.setOutput(0, output);
-	}
-
-	@Override
-	public String toString() {
-		return "OR";
-	}
-
-	@Override
-	protected AbstractCircuitGate emptyGateClone() {
-		return new OrGate(getNoOfInputs());
 	}
 }

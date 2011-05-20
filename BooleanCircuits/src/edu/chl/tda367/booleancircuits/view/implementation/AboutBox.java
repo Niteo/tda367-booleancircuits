@@ -1,30 +1,25 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JSplitPane;
+import javax.swing.*;
 
 public class AboutBox extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private JLabel infoLabel = new JLabel();
-	private JLabel picLabel = new JLabel();
-	private JButton okButton = new JButton("OK");
-	private JSplitPane verticalPane = new JSplitPane();
 	private JSplitPane horizontalPane = new JSplitPane();
+	private JLabel infoLabel = new JLabel();
 	private ActionListener listener = new ActionListener() {
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			dispose();
 		}
 	};
+	private JButton okButton = new JButton("OK");
+	private JLabel picLabel = new JLabel();
+	private JSplitPane verticalPane = new JSplitPane();
 
 	/**
 	 * Returns an instance of aboutbox.
@@ -32,7 +27,7 @@ public class AboutBox extends JDialog {
 	 * @param s
 	 *            String the info text
 	 */
-	public AboutBox(String s, Icon i) {
+	public AboutBox(final String s, final Icon i) {
 		super();
 		setAlwaysOnTop(true);
 		setVisible(true);
@@ -61,11 +56,11 @@ public class AboutBox extends JDialog {
 		setModal(true);
 	}
 
-	private void setInfoText(String info) {
+	private void setInfoText(final String info) {
 		infoLabel.setText(info);
 	}
 
-	private void setPic(Icon i) {
+	private void setPic(final Icon i) {
 		picLabel.setIcon(i);
 	}
 }

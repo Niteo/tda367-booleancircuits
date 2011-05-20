@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
@@ -9,20 +9,31 @@ import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
  * A class representing a NANDgate.
+ *
  * @author Kaufmann
  */
 public final class NandGate extends AbstractCircuitGate {
 
 	/**
 	 * Creates an instance of a NAND-gate.
-	 * 
+	 *
 	 * @param inputs
 	 *            number of inputs of the gate
 	 */
-	public NandGate(int inputs){
+	public NandGate(final int inputs) {
 		super(inputs, 1);
 	}
-	
+
+	@Override
+	public String toString() {
+		return "NAND";
+	}
+
+	@Override
+	protected AbstractCircuitGate emptyGateClone() {
+		return new NandGate(getNoOfInputs());
+	}
+
 	@Override
 	protected void updateOutput() {
 		List<IGateInput> input = super.getInputs();
@@ -34,15 +45,5 @@ public final class NandGate extends AbstractCircuitGate {
 			}
 			super.setOutput(0, false);
 		}
-	}
-	
-	@Override
-	public String toString(){
-		return "NAND";
-	}
-	
-	@Override
-	protected AbstractCircuitGate emptyGateClone() {
-		return new NandGate(getNoOfInputs());
 	}
 }

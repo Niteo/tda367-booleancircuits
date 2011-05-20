@@ -1,8 +1,6 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.awt.Point;
 
@@ -13,8 +11,54 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 public class OrGateTest {
 
 	@Test
-	public void testOrGate() {
-		new OrGate(2);
+	public void testClone() {
+		OrGate or = new OrGate(2);
+		ICircuitGate clone = or.clone();
+		assertTrue(clone instanceof OrGate);
+		assertTrue(clone.getPosition().x == or.getPosition().x
+				&& clone.getPosition().y == or.getPosition().y);
+		assertTrue(clone.getNoOfInputs() == or.getNoOfInputs());
+		assertTrue(clone.getNoOfOutputs() == or.getNoOfOutputs());
+	}
+
+	@Test
+	public void testConnectInput() {
+		OrGate or = new OrGate(2);
+		OrGate test = new OrGate(2);
+
+		or.connectInput(0, test, 0);
+
+		assertEquals(test, or.getInputs().get(0).getInputComponent());
+	}
+
+	@Test
+	public void testConnectsTo() {
+		OrGate or = new OrGate(2);
+		OrGate testGate = new OrGate(2);
+		or.connectInput(0, testGate, 0);
+		assertTrue(or.connectsTo(testGate));
+	}
+
+	public void testEmptyGateClone() {
+		OrGate or = new OrGate(2);
+		ICircuitGate testGate = or.emptyGateClone();
+
+		assertTrue(testGate instanceof OrGate);
+		assertTrue(testGate.getNoOfInputs() == or.getNoOfInputs());
+	}
+
+	@Test
+	public void testGetComponentTier() {
+		OrGate or = new OrGate(2);
+		assertTrue(or.getComponentTier() == 1);
+		or.connectInput(0, new XorGate(2), 0);
+		assertTrue(or.getComponentTier() == 2);
+	}
+
+	@Test
+	public void testGetInputs() {
+		OrGate or = new OrGate(2);
+		assertTrue(or.getInputs().size() == 2);
 	}
 
 	@Test
@@ -30,37 +74,15 @@ public class OrGateTest {
 	}
 
 	@Test
-	public void testToString() {
-		assertEquals("OR", new OrGate(2).toString());
-	}
-
-	@Test
-	public void testGetInputs() {
-		OrGate or = new OrGate(2);
-		assertTrue(or.getInputs().size() == 2);
-	}
-
-	@Test
 	public void testGetOutputValue() {
 		OrGate or = new OrGate(2);
 		assertFalse(or.getOutputValue(0));
 	}
 
 	@Test
-	public void testSetOutput() {
+	public void testGetPosition() {
 		OrGate or = new OrGate(2);
-		or.setOutput(0, true);
-		assertTrue(or.getOutputValue(0));
-	}
-
-	@Test
-	public void testConnectInput() {
-		OrGate or = new OrGate(2);
-		OrGate test = new OrGate(2);
-
-		or.connectInput(0, test, 0);
-
-		assertEquals(test, or.getInputs().get(0).getInputComponent());
+		assertTrue(or.getPosition().x == 0 && or.getPosition().y == 0);
 	}
 
 	@Test
@@ -74,12 +96,17 @@ public class OrGateTest {
 		assertTrue(or.getRecoupledTo().size() == 1);
 	}
 
-	public void testEmptyGateClone() {
+	@Test
+	public void testMove() {
 		OrGate or = new OrGate(2);
-		ICircuitGate testGate = or.emptyGateClone();
+		assertTrue(or.getPosition().x == 0 && or.getPosition().y == 0);
+		or.move(7, 8);
+		assertTrue(or.getPosition().x == 7 && or.getPosition().y == 8);
+	}
 
-		assertTrue(testGate instanceof OrGate);
-		assertTrue(testGate.getNoOfInputs() == or.getNoOfInputs());
+	@Test
+	public void testOrGate() {
+		new OrGate(2);
 	}
 
 	@Test
@@ -98,25 +125,10 @@ public class OrGateTest {
 	}
 
 	@Test
-	public void testConnectsTo() {
+	public void testSetOutput() {
 		OrGate or = new OrGate(2);
-		OrGate testGate = new OrGate(2);
-		or.connectInput(0, testGate, 0);
-		assertTrue(or.connectsTo(testGate));
-	}
-
-	@Test
-	public void testGetComponentTier() {
-		OrGate or = new OrGate(2);
-		assertTrue(or.getComponentTier() == 1);
-		or.connectInput(0, new XorGate(2), 0);
-		assertTrue(or.getComponentTier() == 2);
-	}
-
-	@Test
-	public void testGetPosition() {
-		OrGate or = new OrGate(2);
-		assertTrue(or.getPosition().x == 0 && or.getPosition().y == 0);
+		or.setOutput(0, true);
+		assertTrue(or.getOutputValue(0));
 	}
 
 	@Test
@@ -129,22 +141,8 @@ public class OrGateTest {
 	}
 
 	@Test
-	public void testMove() {
-		OrGate or = new OrGate(2);
-		assertTrue(or.getPosition().x == 0 && or.getPosition().y == 0);
-		or.move(7, 8);
-		assertTrue(or.getPosition().x == 7 && or.getPosition().y == 8);
-	}
-
-	@Test
-	public void testClone() {
-		OrGate or = new OrGate(2);
-		ICircuitGate clone = or.clone();
-		assertTrue(clone instanceof OrGate);
-		assertTrue(clone.getPosition().x == or.getPosition().x
-				&& clone.getPosition().y == or.getPosition().y);
-		assertTrue(clone.getNoOfInputs() == or.getNoOfInputs());
-		assertTrue(clone.getNoOfOutputs() == or.getNoOfOutputs());
+	public void testToString() {
+		assertEquals("OR", new OrGate(2).toString());
 	}
 
 	@Test

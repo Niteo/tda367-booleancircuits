@@ -1,8 +1,6 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.awt.Point;
 
@@ -13,8 +11,55 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 public class NandGateTest {
 
 	@Test
-	public void testNandGate() {
-		new NandGate(2);
+	public void testClone() {
+		NandGate nand = new NandGate(2);
+		ICircuitGate clone = nand.clone();
+		assertTrue(clone instanceof NandGate);
+		assertTrue(clone.getPosition().x == nand.getPosition().x
+				&& clone.getPosition().y == nand.getPosition().y);
+		assertTrue(clone.getNoOfInputs() == nand.getNoOfInputs());
+		assertTrue(clone.getNoOfOutputs() == nand.getNoOfOutputs());
+	}
+
+	@Test
+	public void testConnectInput() {
+		NandGate nand = new NandGate(2);
+		NandGate test = new NandGate(1);
+
+		nand.connectInput(0, test, 0);
+
+		assertEquals(test, nand.getInputs().get(0).getInputComponent());
+	}
+
+	@Test
+	public void testConnectsTo() {
+		NandGate nand = new NandGate(2);
+		NandGate testGate = new NandGate(2);
+		nand.connectInput(0, testGate, 0);
+		assertTrue(nand.connectsTo(testGate));
+	}
+
+	@Test
+	public void testEmptyGateClone() {
+		NandGate nand = new NandGate(2);
+		ICircuitGate testGate = nand.emptyGateClone();
+
+		assertTrue(testGate instanceof NandGate);
+		assertTrue(testGate.getNoOfInputs() == nand.getNoOfInputs());
+	}
+
+	@Test
+	public void testGetComponentTier() {
+		NandGate nand = new NandGate(2);
+		assertTrue(nand.getComponentTier() == 1);
+		nand.connectInput(0, new NandGate(2), 0);
+		assertTrue(nand.getComponentTier() == 2);
+	}
+
+	@Test
+	public void testGetInputs() {
+		NandGate nand = new NandGate(2);
+		assertTrue(nand.getInputs().size() == 2);
 	}
 
 	@Test
@@ -30,36 +75,39 @@ public class NandGateTest {
 	}
 
 	@Test
-	public void testGetInputs() {
-		NandGate nand = new NandGate(2);
-		assertTrue(nand.getInputs().size() == 2);
-	}
-
-	@Test
 	public void testGetOutputValue() {
 		NandGate nand = new NandGate(2);
 		assertTrue(nand.getOutputValue(0));
 	}
 
 	@Test
-	public void testSetOutput() {
+	public void testGetPosition() {
 		NandGate nand = new NandGate(2);
-		nand.setOutput(0, true);
-		assertTrue(nand.getOutputValue(0));
+		assertTrue(nand.getPosition().x == 0 && nand.getPosition().y == 0);
 	}
 
 	@Test
-	public void testEmptyGateClone() {
+	public void testGetRecoupledTo() {
 		NandGate nand = new NandGate(2);
-		ICircuitGate testGate = nand.emptyGateClone();
+		NandGate testGate = new NandGate(2);
+		assertTrue(nand.getRecoupledTo().size() == 0);
 
-		assertTrue(testGate instanceof NandGate);
-		assertTrue(testGate.getNoOfInputs() == nand.getNoOfInputs());
+		nand.connectInput(0, testGate, 0);
+		testGate.connectInput(1, nand, 1);
+		assertTrue(nand.getRecoupledTo().size() == 1);
 	}
 
 	@Test
-	public void testToString() {
-		assertEquals("NAND", new NandGate(2).toString());
+	public void testMove() {
+		NandGate nand = new NandGate(2);
+		assertTrue(nand.getPosition().x == 0 && nand.getPosition().y == 0);
+		nand.move(7, 8);
+		assertTrue(nand.getPosition().x == 7 && nand.getPosition().y == 8);
+	}
+
+	@Test
+	public void testNandGate() {
+		new NandGate(2);
 	}
 
 	@Test
@@ -77,51 +125,10 @@ public class NandGateTest {
 	}
 
 	@Test
-	public void testConnectInput() {
+	public void testSetOutput() {
 		NandGate nand = new NandGate(2);
-		NandGate test = new NandGate(1);
-
-		nand.connectInput(0, test, 0);
-
-		assertEquals(test, nand.getInputs().get(0).getInputComponent());
-	}
-
-	@Test
-	public void testUpdate() {
-		new NandGate(2).update();
-	}
-
-	@Test
-	public void testGetComponentTier() {
-		NandGate nand = new NandGate(2);
-		assertTrue(nand.getComponentTier() == 1);
-		nand.connectInput(0, new NandGate(2), 0);
-		assertTrue(nand.getComponentTier() == 2);
-	}
-
-	@Test
-	public void testGetRecoupledTo() {
-		NandGate nand = new NandGate(2);
-		NandGate testGate = new NandGate(2);
-		assertTrue(nand.getRecoupledTo().size() == 0);
-
-		nand.connectInput(0, testGate, 0);
-		testGate.connectInput(1, nand, 1);
-		assertTrue(nand.getRecoupledTo().size() == 1);
-	}
-
-	@Test
-	public void testConnectsTo() {
-		NandGate nand = new NandGate(2);
-		NandGate testGate = new NandGate(2);
-		nand.connectInput(0, testGate, 0);
-		assertTrue(nand.connectsTo(testGate));
-	}
-
-	@Test
-	public void testGetPosition() {
-		NandGate nand = new NandGate(2);
-		assertTrue(nand.getPosition().x == 0 && nand.getPosition().y == 0);
+		nand.setOutput(0, true);
+		assertTrue(nand.getOutputValue(0));
 	}
 
 	@Test
@@ -134,22 +141,13 @@ public class NandGateTest {
 	}
 
 	@Test
-	public void testMove() {
-		NandGate nand = new NandGate(2);
-		assertTrue(nand.getPosition().x == 0 && nand.getPosition().y == 0);
-		nand.move(7, 8);
-		assertTrue(nand.getPosition().x == 7 && nand.getPosition().y == 8);
+	public void testToString() {
+		assertEquals("NAND", new NandGate(2).toString());
 	}
 
 	@Test
-	public void testClone() {
-		NandGate nand = new NandGate(2);
-		ICircuitGate clone = nand.clone();
-		assertTrue(clone instanceof NandGate);
-		assertTrue(clone.getPosition().x == nand.getPosition().x
-				&& clone.getPosition().y == nand.getPosition().y);
-		assertTrue(clone.getNoOfInputs() == nand.getNoOfInputs());
-		assertTrue(clone.getNoOfOutputs() == nand.getNoOfOutputs());
+	public void testUpdate() {
+		new NandGate(2).update();
 	}
 
 	@Test

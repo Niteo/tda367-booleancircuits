@@ -1,8 +1,6 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.awt.Point;
 
@@ -13,8 +11,55 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 public class NotGateTest {
 
 	@Test
-	public void testNotGate() {
-		new NotGate();
+	public void testClone() {
+		NotGate not = new NotGate();
+		ICircuitGate clone = not.clone();
+		assertTrue(clone instanceof NotGate);
+		assertTrue(clone.getPosition().x == not.getPosition().x
+				&& clone.getPosition().y == not.getPosition().y);
+		assertTrue(clone.getNoOfInputs() == not.getNoOfInputs());
+		assertTrue(clone.getNoOfOutputs() == not.getNoOfOutputs());
+	}
+
+	@Test
+	public void testConnectInput() {
+		NotGate not = new NotGate();
+		NotGate test = new NotGate();
+
+		not.connectInput(0, test, 0);
+
+		assertEquals(test, not.getInputs().get(0).getInputComponent());
+	}
+
+	@Test
+	public void testConnectsTo() {
+		NotGate not = new NotGate();
+		NotGate testGate = new NotGate();
+		not.connectInput(0, testGate, 0);
+		assertTrue(not.connectsTo(testGate));
+	}
+
+	@Test
+	public void testEmptyGateClone() {
+		NotGate not = new NotGate();
+		ICircuitGate testGate = not.emptyGateClone();
+
+		assertTrue(testGate instanceof NotGate);
+		assertTrue(testGate.getNoOfInputs() == not.getNoOfInputs());
+	}
+
+	@Test
+	public void testGetComponentTier() {
+		NotGate not = new NotGate();
+		assertTrue(not.getComponentTier() == 1);
+		not.connectInput(0, new NotGate(), 0);
+		assertTrue(not.getComponentTier() == 2);
+	}
+
+	@Test
+	public void testGetInputs() {
+		NotGate not = new NotGate();
+		assertTrue(not.getInputs().size() == 1);
 	}
 
 	@Test
@@ -28,32 +73,15 @@ public class NotGateTest {
 	}
 
 	@Test
-	public void testGetInputs() {
-		NotGate not = new NotGate();
-		assertTrue(not.getInputs().size() == 1);
-	}
-
-	@Test
 	public void testGetOutputValue() {
 		NotGate not = new NotGate();
 		assertTrue(not.getOutputValue(0));
 	}
 
 	@Test
-	public void testSetOutput() {
+	public void testGetPosition() {
 		NotGate not = new NotGate();
-		not.setOutput(0, true);
-		assertTrue(not.getOutputValue(0));
-	}
-
-	@Test
-	public void testConnectInput() {
-		NotGate not = new NotGate();
-		NotGate test = new NotGate();
-
-		not.connectInput(0, test, 0);
-
-		assertEquals(test, not.getInputs().get(0).getInputComponent());
+		assertTrue(not.getPosition().x == 0 && not.getPosition().y == 0);
 	}
 
 	@Test
@@ -68,18 +96,16 @@ public class NotGateTest {
 	}
 
 	@Test
-	public void testEmptyGateClone() {
+	public void testMove() {
 		NotGate not = new NotGate();
-		ICircuitGate testGate = not.emptyGateClone();
-
-		assertTrue(testGate instanceof NotGate);
-		assertTrue(testGate.getNoOfInputs() == not.getNoOfInputs());
+		assertTrue(not.getPosition().x == 0 && not.getPosition().y == 0);
+		not.move(7, 8);
+		assertTrue(not.getPosition().x == 7 && not.getPosition().y == 8);
 	}
 
 	@Test
-	public void testToString() {
-		NotGate not = new NotGate();
-		assertTrue(not.toString().equals("NOT"));
+	public void testNotGate() {
+		new NotGate();
 	}
 
 	@Test
@@ -97,25 +123,10 @@ public class NotGateTest {
 	}
 
 	@Test
-	public void testGetComponentTier() {
+	public void testSetOutput() {
 		NotGate not = new NotGate();
-		assertTrue(not.getComponentTier() == 1);
-		not.connectInput(0, new NotGate(), 0);
-		assertTrue(not.getComponentTier() == 2);
-	}
-
-	@Test
-	public void testConnectsTo() {
-		NotGate not = new NotGate();
-		NotGate testGate = new NotGate();
-		not.connectInput(0, testGate, 0);
-		assertTrue(not.connectsTo(testGate));
-	}
-
-	@Test
-	public void testGetPosition() {
-		NotGate not = new NotGate();
-		assertTrue(not.getPosition().x == 0 && not.getPosition().y == 0);
+		not.setOutput(0, true);
+		assertTrue(not.getOutputValue(0));
 	}
 
 	@Test
@@ -128,22 +139,9 @@ public class NotGateTest {
 	}
 
 	@Test
-	public void testMove() {
+	public void testToString() {
 		NotGate not = new NotGate();
-		assertTrue(not.getPosition().x == 0 && not.getPosition().y == 0);
-		not.move(7, 8);
-		assertTrue(not.getPosition().x == 7 && not.getPosition().y == 8);
-	}
-
-	@Test
-	public void testClone() {
-		NotGate not = new NotGate();
-		ICircuitGate clone = not.clone();
-		assertTrue(clone instanceof NotGate);
-		assertTrue(clone.getPosition().x == not.getPosition().x
-				&& clone.getPosition().y == not.getPosition().y);
-		assertTrue(clone.getNoOfInputs() == not.getNoOfInputs());
-		assertTrue(clone.getNoOfOutputs() == not.getNoOfOutputs());
+		assertTrue(not.toString().equals("NOT"));
 	}
 
 	@Test

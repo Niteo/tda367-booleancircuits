@@ -1,7 +1,6 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 
 import edu.chl.tda367.booleancircuits.view.ITabManager;
 
@@ -20,11 +19,17 @@ public final class TabManager implements ITabManager {
 	}
 
 	@Override
-	public void addTab(String name, Canvas canvas) {
+	public void addTab(final String name, final Canvas canvas) {
 		JScrollPane scrollPane = new JScrollPane(canvas.getCanvas());
 		tabbedPane.addTab(name, scrollPane);
 		tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1,
 				new TabPanel(name));
+	}
+
+	@Override
+	public TabPanel getLastTabPanel() {
+		return ((TabPanel) tabbedPane.getTabComponentAt(tabbedPane
+				.getTabCount() - 1));
 	}
 
 	@Override
@@ -33,8 +38,13 @@ public final class TabManager implements ITabManager {
 	}
 
 	@Override
-	public void removeTab(int i) {
-		tabbedPane.remove(i);
+	public int getTabCount() {
+		return tabbedPane.getTabCount();
+	}
+
+	@Override
+	public TabPanel getTabPanel(final int i) {
+		return ((TabPanel) tabbedPane.getTabComponentAt(i));
 	}
 
 	@Override
@@ -43,24 +53,13 @@ public final class TabManager implements ITabManager {
 	}
 
 	@Override
-	public void setSelectedTabIndex(int i) {
+	public void removeTab(final int i) {
+		tabbedPane.remove(i);
+	}
+
+	@Override
+	public void setSelectedTabIndex(final int i) {
 		tabbedPane.setSelectedIndex(i);
-	}
-
-	@Override
-	public int getTabCount() {
-		return tabbedPane.getTabCount();
-	}
-
-	@Override
-	public TabPanel getTabPanel(int i) {
-		return ((TabPanel) tabbedPane.getTabComponentAt(i));
-	}
-
-	@Override
-	public TabPanel getLastTabPanel() {
-		return ((TabPanel) tabbedPane.getTabComponentAt(tabbedPane
-				.getTabCount() - 1));
 	}
 
 	@Override

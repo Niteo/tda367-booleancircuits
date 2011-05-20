@@ -8,18 +8,6 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 public interface IModel {
 
 	/**
-	 * Clocks all clocks in the model.
-	 */
-	public void clock();
-
-	/**
-	 * Returns the amount of components in the model.
-	 *
-	 * @return integer representing the amount of components
-	 */
-	public int getNumberOfComponents();
-
-	/**
 	 * Adds a component to the model.
 	 *
 	 * @param component
@@ -38,11 +26,9 @@ public interface IModel {
 	public void addComponents(Collection<ICircuitGate> components);
 
 	/**
-	 * Returns a list of components.
-	 *
-	 * @return a list of components
+	 * Clocks all clocks in the model.
 	 */
-	public Collection<ICircuitGate> getComponents();
+	public void clock();
 
 	/**
 	 * Get component.
@@ -54,12 +40,25 @@ public interface IModel {
 	public ICircuitGate getComponent(Point position);
 
 	/**
-	 * Removes the specified components in the collection.
+	 * Returns a list of components.
 	 *
-	 * @param list
-	 *            Collection
+	 * @return a list of components
 	 */
-	public void removeComponents(Collection<ICircuitGate> list);
+	public Collection<ICircuitGate> getComponents();
+
+	/**
+	 * Returns the amount of components in the model.
+	 *
+	 * @return integer representing the amount of components
+	 */
+	public int getNumberOfComponents();
+
+	/**
+	 * Returns true if the circuit has infinite recursion.
+	 *
+	 * @return boolean
+	 */
+	public boolean hasInfiniteRecursion();
 
 	/**
 	 * Removes the specified component.
@@ -68,6 +67,14 @@ public interface IModel {
 	 *            IAbstractCircuitGate
 	 */
 	public void removeComponent(ICircuitGate g);
+
+	/**
+	 * Removes the specified components in the collection.
+	 *
+	 * @param list
+	 *            Collection
+	 */
+	public void removeComponents(Collection<ICircuitGate> list);
 
 	/**
 	 * Returns the name of the workspace.
@@ -79,11 +86,4 @@ public interface IModel {
 	 * Updates the model's component's boolean values.
 	 */
 	public void updateComponents();
-
-	/**
-	 * Returns true if the circuit has infinite recursion.
-	 *
-	 * @return boolean
-	 */
-	public boolean hasInfiniteRecursion();
 }

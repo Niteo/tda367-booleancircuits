@@ -4,9 +4,9 @@ import edu.chl.tda367.booleancircuits.view.implementation.MainWindow;
 
 /**
  * The main class.
- * 
+ *
  * @author Boel
- * 
+ *
  */
 public class Main {
 
@@ -14,7 +14,7 @@ public class Main {
 	 * @param args
 	 *            the command line arguments
 	 */
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		new MainWindow().setVisible(true);
 	}
 }

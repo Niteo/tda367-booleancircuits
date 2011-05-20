@@ -1,7 +1,6 @@
 package edu.chl.tda367.booleancircuits.model;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
@@ -21,12 +20,36 @@ public interface ISelectionModel {
 	public int getNumberOfComponents();
 
 	/**
-	 * Selects all components in the collection.
+	 * Returns a list of the selected components.
+	 *
+	 * @return List
+	 */
+	public List<ICircuitGate> getSelectedComponents();
+
+	/**
+	 * Determinates if a component is currently selected.
+	 *
+	 * @param g
+	 *            AbstractCircuitGate
+	 * @return boolean
+	 */
+	public boolean isSelectedComponent(ICircuitGate g);
+
+	/**
+	 * Removes a component from the selected list.
+	 *
+	 * @param g
+	 *            ICircuitGate component to remove
+	 */
+	public void removeComponent(ICircuitGate g);
+
+	/**
+	 * Removes a collection of components from the selected list.
 	 *
 	 * @param c
-	 *            Collection
+	 *            Collection components to remove
 	 */
-	public void selectComponents(Collection<ICircuitGate> c);
+	public void removeComponents(Collection<ICircuitGate> c);
 
 	/**
 	 * Selects the given component in the active workspace.
@@ -39,34 +62,10 @@ public interface ISelectionModel {
 	public void selectComponent(ICircuitGate g, boolean multiSelect);
 
 	/**
-	 * Determinates if a component is currently selected.
-	 *
-	 * @param g
-	 *            AbstractCircuitGate
-	 * @return boolean
-	 */
-	public boolean isSelectedComponent(ICircuitGate g);
-
-	/**
-	 * Returns a list of the selected components.
-	 *
-	 * @return List
-	 */
-	public List<ICircuitGate> getSelectedComponents();
-
-	/**
-	 * Removes a collection of components from the selected list.
+	 * Selects all components in the collection.
 	 *
 	 * @param c
-	 *            Collection components to remove
+	 *            Collection
 	 */
-	public void removeComponents(Collection<ICircuitGate> c);
-
-	/**
-	 * Removes a component from the selected list.
-	 *
-	 * @param g
-	 *            ICircuitGate component to remove
-	 */
-	public void removeComponent(ICircuitGate g);
+	public void selectComponents(Collection<ICircuitGate> c);
 }

@@ -1,20 +1,20 @@
 package edu.chl.tda367.booleancircuits.view.draw.implementation;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 
 /**
  * A class to draw a blank background.
+ *
  * @author Boel
  *
  */
 public final class BlankBackground implements IBackground {
 
 	@Override
-	public void draw(Graphics g, Point offset, Dimension canvasSize) {
+	public void draw(final Graphics g, final Point offset,
+			final Dimension canvasSize) {
 		return;
 	}
 

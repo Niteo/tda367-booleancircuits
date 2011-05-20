@@ -1,19 +1,19 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-public class Clock extends AbstractCircuitGate{
+public class Clock extends AbstractCircuitGate {
 	private boolean constant;
-	
-	public Clock(){
+
+	public Clock() {
 		super(0, 1);
 	}
-	
-	@Override
-	protected void updateOutput() {
-		super.setOutput(0, constant);
-	}
-	
-	public void toggleClock(){
+
+	public void toggleClock() {
 		constant = !constant;
+	}
+
+	@Override
+	public String toString() {
+		return "CLOCK";
 	}
 
 	@Override
@@ -22,9 +22,9 @@ public class Clock extends AbstractCircuitGate{
 		c.constant = this.constant;
 		return c;
 	}
-	
+
 	@Override
-	public String toString() {
-		return "CLOCK";
+	protected void updateOutput() {
+		super.setOutput(0, constant);
 	}
 }

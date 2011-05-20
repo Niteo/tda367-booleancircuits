@@ -1,37 +1,53 @@
 package edu.chl.tda367.booleancircuits.io.implementation;
 
 import java.awt.Point;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 import edu.chl.tda367.booleancircuits.io.IFileManager;
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+import edu.chl.tda367.booleancircuits.model.components.*;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 
 /**
  * Writes and reads save files.
- * 
+ *
  * @author antonlin
- * 
+ *
  */
 public final class FileManager implements IFileManager {
 
+	@Override
+	public List<ICircuitGate> importFile(final File file) {
+		return readFile(file);
+	}
+
+	/**
+	 * Opens a saved circuit by reading a saved .txt file.
+	 */
+	@Override
+	public ModelWrapper openFile(final File file) {
+
+		ModelWrapper model = new ModelWrapper(file);
+		List<ICircuitGate> components = readFile(file);
+
+		for (ICircuitGate component : components) {
+			model.addComponent(component, component.getPosition());
+		}
+
+		return model;
+
+	}
+
 	/**
 	 * Saves a circuit in form of a .txt file.
-	 * 
+	 *
 	 * @param components
 	 * @param name
 	 */
 	@Override
-	public void saveFile(Collection<ICircuitGate> components, File file) {
+	public void saveFile(final Collection<ICircuitGate> components,
+			final File file) {
 		try {
 			PrintWriter saveFile = new PrintWriter(file);
 			List<ICircuitGate> tempList = new ArrayList<ICircuitGate>();
@@ -66,29 +82,7 @@ public final class FileManager implements IFileManager {
 		}
 	}
 
-	/**
-	 * Opens a saved circuit by reading a saved .txt file.
-	 */
-	@Override
-	public ModelWrapper openFile(File file) {
-
-		ModelWrapper model = new ModelWrapper(file);
-		List<ICircuitGate> components = readFile(file);
-
-		for (ICircuitGate component : components) {
-			model.addComponent(component, component.getPosition());
-		}
-
-		return model;
-
-	}
-
-	@Override
-	public List<ICircuitGate> importFile(File file) {
-		return readFile(file);
-	}
-
-	private List<ICircuitGate> readFile(File file) {
+	private List<ICircuitGate> readFile(final File file) {
 
 		List<ICircuitGate> components = new ArrayList<ICircuitGate>();
 
@@ -103,8 +97,8 @@ public final class FileManager implements IFileManager {
 					int noOfInputs = sc.nextInt();
 					sc.next();
 					Point position = new Point(sc.nextInt(), sc.nextInt());
-					ICircuitGate component = GateFactory
-							.getNewComponent(name, noOfInputs);
+					ICircuitGate component = GateFactory.getNewComponent(name,
+							noOfInputs);
 					component.setPosition(position);
 					components.add(component);
 					sc.nextLine();
@@ -115,8 +109,7 @@ public final class FileManager implements IFileManager {
 					int inputNo = sc.nextInt();
 					int fromCptNo = sc.nextInt();
 					if (fromCptNo >= 0) {
-						ICircuitGate fromCpt = components
-								.get(fromCptNo);
+						ICircuitGate fromCpt = components.get(fromCptNo);
 						int output = sc.nextInt();
 						toCpt.connectInput(inputNo, fromCpt, output);
 

@@ -6,9 +6,7 @@
 
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JSeparator;
+import javax.swing.*;
 
 import edu.chl.tda367.booleancircuits.view.IToolbarPanel;
 
@@ -21,14 +19,36 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	// GEN-BEGIN:variables
+	// Variables declaration - do not modify
+	private javax.swing.JButton copyButton;
+
+	private javax.swing.JButton cutButton;
+
+	private javax.swing.JButton newWorkspaceButton;
+
+	private javax.swing.JButton openFileButton;
+
+	private javax.swing.JButton pasteButton;
+
+	private javax.swing.JButton pauseClockButton;
+
+	private javax.swing.JButton redoButton;
+
+	private javax.swing.JButton saveAllButton;
+
+	private javax.swing.JButton saveAsComponentButton;
+
+	private javax.swing.JButton saveButton;
+
+	private javax.swing.JButton startClockButton;
+	// End of variables declaration//GEN-END:variables
+
+	private javax.swing.JButton undoButton;
+
 	/** Creates new form ToolbarPanel */
 	public ToolbarPanel() {
 		initComponents();
-	}
-
-	@Override
-	public JButton getCutButton() {
-		return cutButton;
 	}
 
 	@Override
@@ -37,55 +57,50 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 	}
 
 	@Override
+	public JButton getCutButton() {
+		return cutButton;
+	}
+
+	@Override
 	public JButton getNewWorkspaceButton() {
 		return newWorkspaceButton;
 	}
-
 	@Override
 	public JButton getOpenFileButton() {
 		return openFileButton;
 	}
-
 	@Override
 	public JButton getPasteButton() {
 		return pasteButton;
 	}
-
 	@Override
 	public JButton getPauseClockButton() {
 		return pauseClockButton;
 	}
-
 	@Override
 	public JButton getRedoButton() {
 		return redoButton;
 	}
-
 	@Override
 	public JButton getSaveAllButton() {
 		return saveAllButton;
 	}
-
 	@Override
 	public JButton getSaveAsComponentButton() {
 		return saveAsComponentButton;
 	}
-
 	@Override
 	public JButton getSaveButton() {
 		return saveButton;
 	}
-
 	@Override
 	public JButton getStartClockButton() {
 		return startClockButton;
 	}
-
 	@Override
 	public JButton getUndoButton() {
 		return undoButton;
 	}
-
 	@Override
 	public void initIcons() {
 		newWorkspaceButton.setIcon(new ImageIcon(
@@ -106,7 +121,6 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 		undoButton.setIcon(new ImageIcon("Resources/Icons/Undo-icon.png"));
 		redoButton.setIcon(new ImageIcon("Resources/Icons/Redo-icon.png"));
 	}
-
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -175,21 +189,5 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 		add(pauseClockButton);
 	}// </editor-fold>
 		// GEN-END:initComponents
-
-	// GEN-BEGIN:variables
-	// Variables declaration - do not modify
-	private javax.swing.JButton copyButton;
-	private javax.swing.JButton cutButton;
-	private javax.swing.JButton newWorkspaceButton;
-	private javax.swing.JButton openFileButton;
-	private javax.swing.JButton pasteButton;
-	private javax.swing.JButton redoButton;
-	private javax.swing.JButton saveAllButton;
-	private javax.swing.JButton saveAsComponentButton;
-	private javax.swing.JButton saveButton;
-	private javax.swing.JButton undoButton;
-	private javax.swing.JButton pauseClockButton;
-	private javax.swing.JButton startClockButton;
-	// End of variables declaration//GEN-END:variables
 
 }

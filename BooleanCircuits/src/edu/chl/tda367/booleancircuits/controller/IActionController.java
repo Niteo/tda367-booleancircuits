@@ -11,13 +11,6 @@ import javax.swing.Action;
 public interface IActionController {
 
 	/**
-	 * Returns the newWorkspace action.
-	 *
-	 * @return Action
-	 */
-	public Action getNewWorkspaceAction();
-
-	/**
 	 * Returns the closeActiveWorkspace action.
 	 *
 	 * @return Action
@@ -32,11 +25,67 @@ public interface IActionController {
 	public Action getCloseAllWorkspacesAction();
 
 	/**
+	 * Returns the CopySelectedComponents action.
+	 *
+	 * @return Action
+	 */
+	public Action getCopySelectedComponentsAction();
+
+	/**
+	 * Returns the cutSelectedComponents action.
+	 *
+	 * @return Action
+	 */
+	public Action getCutSelectedComponentsAction();
+
+	/**
+	 * Returns the importWorkspace action.
+	 *
+	 * @return Action
+	 */
+	public Action getImportWorkspaceAction();
+
+	/**
+	 * Returns the newWorkspace action.
+	 *
+	 * @return Action
+	 */
+	public Action getNewWorkspaceAction();
+
+	/**
 	 * Returns the openWorkspace action.
 	 *
 	 * @return Action
 	 */
 	public Action getOpenWorkspaceAction();
+
+	/**
+	 * Returns the pasteSelectedComponent action.
+	 *
+	 * @return Action
+	 */
+	public Action getPasteSelectedComponentAction();
+
+	/**
+	 * Returns the pauseClock action.
+	 *
+	 * @return Action
+	 */
+	public Action getPauseClockAction();
+
+	/**
+	 * Returns the redo action.
+	 *
+	 * @return Action
+	 */
+	public Action getRedoAction();
+
+	/**
+	 * Returns the removeSelectedComponents action.
+	 *
+	 * @return Action
+	 */
+	public Action getRemoveSelectedComponentsAction();
 
 	/**
 	 * Returns the saveActiveWorkspace action.
@@ -60,53 +109,18 @@ public interface IActionController {
 	public Action getSaveAsAction();
 
 	/**
-	 * Returns the CopySelectedComponents action.
-	 *
-	 * @return Action
-	 */
-	public Action getCopySelectedComponentsAction();
-
-	/**
-	 * Returns the cutSelectedComponents action.
-	 *
-	 * @return Action
-	 */
-	public Action getCutSelectedComponentsAction();
-
-	/**
-	 * Returns the pasteSelectedComponent action.
-	 *
-	 * @return Action
-	 */
-	public Action getPasteSelectedComponentAction();
-
-	/**
-	 * Returns the undo action.
-	 *
-	 * @return Action
-	 */
-	public Action getUndoAction();
-
-	/**
-	 * Returns the redo action.
-	 *
-	 * @return Action
-	 */
-	public Action getRedoAction();
-
-	/**
-	 * Returns the removeSelectedComponents action.
-	 *
-	 * @return Action
-	 */
-	public Action getRemoveSelectedComponentsAction();
-
-	/**
 	 * Returns the selectAllComponents action.
 	 *
 	 * @return Action
 	 */
 	public Action getSelectAllComponentsAction();
+
+	/**
+	 * Returns the showHelp action
+	 *
+	 * @return Action
+	 */
+	public Action getShowHelpAction();
 
 	/**
 	 * Returns the startClock action.
@@ -116,23 +130,10 @@ public interface IActionController {
 	public Action getStartClockAction();
 
 	/**
-	 * Returns the pauseClock action.
+	 * Returns the undo action.
 	 *
 	 * @return Action
 	 */
-	public Action getPauseClockAction();
-
-	/**
-	 * Returns the importWorkspace action.
-	 *
-	 * @return Action
-	 */
-	public Action getImportWorkspaceAction();
-
-	/**
-	 *  Returns the showHelp action
-	 * @return Action
-	 */
-	public Action getShowHelpAction();
+	public Action getUndoAction();
 
 }

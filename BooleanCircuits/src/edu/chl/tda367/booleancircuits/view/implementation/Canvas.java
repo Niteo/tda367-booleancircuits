@@ -1,27 +1,16 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
-import edu.chl.tda367.booleancircuits.model.IModel;
-import edu.chl.tda367.booleancircuits.model.ISelectionModel;
+import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
-import edu.chl.tda367.booleancircuits.view.draw.IBackground;
-import edu.chl.tda367.booleancircuits.view.draw.IDraw;
+import edu.chl.tda367.booleancircuits.view.draw.*;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
 
 /**
@@ -33,25 +22,35 @@ import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
 public class Canvas {
 
 	private static IDraw drawer = new Draw();
-	private IModel model;
-	private ISelectionModel selectModel;
-	private ICircuitGate rightClickedGate = null;
+	/**
+	 * Sets the background of the canvas.
+	 *
+	 * @param background
+	 *            IBackground
+	 */
+	public static void setBackground(final IBackground background) {
+		drawer.setBackground(background);
+	}
+	/**
+	 * Sets US standard. False is international.
+	 *
+	 * @param bool
+	 */
+	public static void setUSStandard(final boolean bool) {
+		drawer.setUsStandard(bool);
+	}
+	private MasterController _masterController;
 	private ICircuitGate connectBufferGate = null;
 	private int connectBufferPort = 0;
-	private int posX, posY;
-	private Point oldDragPosition;
 	private boolean connectingInput;
 	private boolean connectingOutput;
 	private boolean draggingMode;
-	private boolean panning;
-	private MasterController _masterController;
-	private CanvasPopup menu;
 	private Point drawSelect;
 	private ActionListener listener = new ActionListener() {
 
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JMenuItem menuItem = (JMenuItem) e.getSource();
 
 			if (menu.isRemoveButton(menuItem)) {
@@ -84,14 +83,74 @@ public class Canvas {
 			}
 		}
 	};
+	private CanvasPopup menu;
+	private IModel model;
+	private MouseAdapter mouseAdapter = new MouseInputAdapter() {
+		@SuppressWarnings("synthetic-access")
+		@Override
+		public void mouseClicked(final MouseEvent evt) {
+			mouseClickedActions(evt);
+		}
 
+		@SuppressWarnings("synthetic-access")
+		@Override
+		public void mouseDragged(final MouseEvent evt) {
+			Point dragPosition = new Point(evt.getX() + posX, evt.getY() + posY);
+			if (oldDragPosition != null) {
+				int dx = (int) (evt.getPoint().getX() - oldDragPosition.getX());
+				int dy = (int) (evt.getPoint().getY() - oldDragPosition.getY());
+
+				if (evt.isShiftDown()) {
+					if (drawSelect == null) {
+						drawSelect = evt.getPoint();
+					}
+				} else if (draggingMode) {
+					// Move all selected components.
+					for (ICircuitGate selected : selectModel
+							.getSelectedComponents()) {
+						selected.move(dx, dy);
+					}
+				} else {
+					ICircuitGate gate = model.getComponent(dragPosition);
+					if (gate != null && !panning) {
+						draggingMode = true;
+						if (!selectModel.isSelectedComponent(gate)) {
+							selectModel.selectComponent(gate, false);
+						}
+					} else {
+						panCanvas(-dx, -dy);
+						panning = true;
+					}
+				}
+			}
+			oldDragPosition = evt.getPoint();
+			panel.repaint();
+		}
+
+		@SuppressWarnings("synthetic-access")
+		@Override
+		public void mouseReleased(final MouseEvent evt) {
+			final Point releasePoint = evt.getPoint();
+			oldDragPosition = null;
+			draggingMode = false;
+			panning = false;
+			if (drawSelect != null) {
+				_masterController.selectComponents(new Point(drawSelect.x
+						+ posX, drawSelect.y + posY), new Point(releasePoint.x
+						+ posX, releasePoint.y + posY));
+				drawSelect = null;
+				panel.repaint();
+			}
+		}
+	};
+	private Point oldDragPosition;
 	private JPanel panel = new JPanel() {
 
 		private static final long serialVersionUID = 1L;
 
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void paint(Graphics g) {
+		public void paint(final Graphics g) {
 			super.paint(g);
 			Graphics2D g2d = (Graphics2D) g;
 			// Draw background
@@ -104,7 +163,7 @@ public class Canvas {
 					drawer.drawGateConnections(g2d, circuitGate, new Point(
 							posX, posY));
 				}
-				
+
 				// Draw non-selected
 				g2d.setColor(Color.BLACK);
 				for (ICircuitGate circuitGate : model.getComponents()) {
@@ -158,67 +217,17 @@ public class Canvas {
 		}
 	};
 
-	private MouseAdapter mouseAdapter = new MouseInputAdapter() {
-		@SuppressWarnings("synthetic-access")
-		@Override
-		public void mouseDragged(MouseEvent evt) {
-			Point dragPosition = new Point(evt.getX() + posX, evt.getY() + posY);
-			if (oldDragPosition != null) {
-				int dx = (int) (evt.getPoint().getX() - oldDragPosition.getX());
-				int dy = (int) (evt.getPoint().getY() - oldDragPosition.getY());
+	private boolean panning;
 
-				if (evt.isShiftDown()) {
-					if (drawSelect == null) {
-						drawSelect = evt.getPoint();
-					}
-				} else if (draggingMode) {
-					// Move all selected components.
-					for (ICircuitGate selected : selectModel
-							.getSelectedComponents()) {
-						selected.move(dx, dy);
-					}
-				} else {
-					ICircuitGate gate = model.getComponent(dragPosition);
-					if (gate != null && !panning) {
-						draggingMode = true;
-						if (!selectModel.isSelectedComponent(gate)) {
-							selectModel.selectComponent(gate, false);
-						}
-					} else {
-						panCanvas(-dx, -dy);
-						panning = true;
-					}
-				}
-			}
-			oldDragPosition = evt.getPoint();
-			panel.repaint();
-		}
+	private int posX, posY;
 
-		@SuppressWarnings("synthetic-access")
-		@Override
-		public void mouseReleased(MouseEvent evt) {
-			final Point releasePoint = evt.getPoint();
-			oldDragPosition = null;
-			draggingMode = false;
-			panning = false;
-			if (drawSelect != null) {
-				_masterController.selectComponents(new Point(drawSelect.x
-						+ posX, drawSelect.y + posY), new Point(releasePoint.x
-						+ posX, releasePoint.y + posY));
-				drawSelect = null;
-				panel.repaint();
-			}
-		}
+	private ICircuitGate rightClickedGate = null;
 
-		@SuppressWarnings("synthetic-access")
-		@Override
-		public void mouseClicked(MouseEvent evt) {
-			mouseClickedActions(evt);
-		}
-	};
+	private ISelectionModel selectModel;
 
-	public Canvas(IModel canvasModel, ISelectionModel selectionModel,
-			MasterController masterController) {
+	public Canvas(final IModel canvasModel,
+			final ISelectionModel selectionModel,
+			final MasterController masterController) {
 		_masterController = masterController;
 		posX = 0;
 		posY = 0;
@@ -240,38 +249,7 @@ public class Canvas {
 		return panel;
 	}
 
-	/**
-	 * Sets US standard. False is international.
-	 *
-	 * @param bool
-	 */
-	public static void setUSStandard(boolean bool) {
-		drawer.setUsStandard(bool);
-	}
-
-	/**
-	 * Sets the background of the canvas.
-	 *
-	 * @param background
-	 *            IBackground
-	 */
-	public static void setBackground(IBackground background) {
-		drawer.setBackground(background);
-	}
-
-	private void panCanvas(int dx, int dy) {
-		posX += dx;
-		posY += dy;
-	}
-
-	private void resetConnecting() {
-		connectBufferGate = null;
-		connectingInput = false;
-		connectingOutput = false;
-		_masterController.connectComponent(null, -1);
-	}
-
-	private void mouseClickedActions(MouseEvent evt) {
+	private void mouseClickedActions(final MouseEvent evt) {
 		final Point pointClicked = new Point(evt.getX() + posX, evt.getY()
 				+ posY);
 		if (evt.getButton() == MouseEvent.BUTTON1) { // LeftMouseButton
@@ -297,7 +275,7 @@ public class Canvas {
 				ActionListener menuListener = new ActionListener() {
 					@SuppressWarnings("synthetic-access")
 					@Override
-					public void actionPerformed(ActionEvent arg0) {
+					public void actionPerformed(final ActionEvent arg0) {
 						if (arg0.getSource() == addItem) {
 							_masterController.addComponent(pointClicked);
 						} else if (arg0.getSource() == cutItem) {
@@ -331,5 +309,17 @@ public class Canvas {
 			jpm.show(evt.getComponent(), (int) evt.getPoint().getX(), (int) evt
 					.getPoint().getY());
 		}
+	}
+
+	private void panCanvas(final int dx, final int dy) {
+		posX += dx;
+		posY += dy;
+	}
+
+	private void resetConnecting() {
+		connectBufferGate = null;
+		connectingInput = false;
+		connectingOutput = false;
+		_masterController.connectComponent(null, -1);
 	}
 }

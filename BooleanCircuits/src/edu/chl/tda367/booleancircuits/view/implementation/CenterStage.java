@@ -1,17 +1,12 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-import javax.swing.Action;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
-import edu.chl.tda367.booleancircuits.model.IModel;
-import edu.chl.tda367.booleancircuits.model.IModelWrapper;
-import edu.chl.tda367.booleancircuits.model.ISelectionModel;
+import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.view.ICenterStage;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
@@ -26,30 +21,45 @@ import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 public class CenterStage implements ICenterStage {
 
 	private JPanel centerStagePanel = new JPanel();
-	private List<IModel> tabIdList = new LinkedList<IModel>();
-	private TabManager tabManager = new TabManager();
 	private Action closeWorkspace;
 	private MasterController mc;
+	private List<IModel> tabIdList = new LinkedList<IModel>();
+	private TabManager tabManager = new TabManager();
 
 	/** Returns an instance of Canvas. */
-	public CenterStage(Action closeWorkspace, MasterController masterController) {
+	public CenterStage(final Action closeWorkspace,
+			final MasterController masterController) {
 		mc = masterController;
 		centerStagePanel.add(tabManager.getTabbedPane());
 		centerStagePanel.setLayout(new GridLayout(1, 1));
 		this.closeWorkspace = closeWorkspace;
 	}
 
-	private void newTab(String s, IModel m, ISelectionModel sm) {
-		Canvas canvas = new Canvas(m, sm, mc);
-		tabManager.addTab(s, canvas);
-		TabPanel tabPanel = tabManager.getLastTabPanel();
-		tabPanel.getCloseButton().setAction(closeWorkspace);
-		tabPanel.getCloseButton().setToolTipText("Close");
+	@Override
+	public JPanel getPanel() {
+		return centerStagePanel;
+	}
+
+	@Override
+	public TabManager getTabManager() {
+		return tabManager;
+	}
+
+	@Override
+	public void setBackground(final IBackground background) {
+		Canvas.setBackground(background);
+		tabManager.updateTabbedPane();
+	}
+
+	@Override
+	public void setUSStandard(final boolean bool) {
+		Canvas.setUSStandard(bool);
+		tabManager.updateTabbedPane();
 	}
 
 	@SuppressWarnings("boxing")
 	@Override
-	public synchronized void update(ModelManager modelManager) {
+	public synchronized void update(final ModelManager modelManager) {
 		List<IModelWrapper> modelList = modelManager.getWorkspaces();
 		for (int i = 0; i < modelList.size(); i++) {
 			if (!tabIdList.contains(modelList.get(i))) {
@@ -95,26 +105,12 @@ public class CenterStage implements ICenterStage {
 		tabManager.updateTabbedPane();
 	}
 
-	@Override
-	public JPanel getPanel() {
-		return centerStagePanel;
-	}
-
-	@Override
-	public TabManager getTabManager() {
-		return tabManager;
-	}
-
-	@Override
-	public void setBackground(IBackground background) {
-		Canvas.setBackground(background);
-		tabManager.updateTabbedPane();
-	}
-
-	@Override
-	public void setUSStandard(boolean bool) {
-		Canvas.setUSStandard(bool);
-		tabManager.updateTabbedPane();
+	private void newTab(final String s, final IModel m, final ISelectionModel sm) {
+		Canvas canvas = new Canvas(m, sm, mc);
+		tabManager.addTab(s, canvas);
+		TabPanel tabPanel = tabManager.getLastTabPanel();
+		tabPanel.getCloseButton().setAction(closeWorkspace);
+		tabPanel.getCloseButton().setToolTipText("Close");
 	}
 
 }

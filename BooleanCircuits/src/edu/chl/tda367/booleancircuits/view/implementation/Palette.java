@@ -1,30 +1,16 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.*;
+import java.util.*;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.KeyStroke;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
+import javax.swing.*;
+import javax.swing.event.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.implementation.ComponentFolder;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
-import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.XnorGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.XorGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 import edu.chl.tda367.booleancircuits.view.IPalette;
 
 /**
@@ -36,12 +22,12 @@ import edu.chl.tda367.booleancircuits.view.IPalette;
 
 public final class Palette implements IPalette {
 
-	private JScrollPane scrollPane;
-	private List<ComponentFolder> folderList;
 	private JTree componentTree;
+	private List<ComponentFolder> folderList;
 	private IMasterController masterController;
+	private JScrollPane scrollPane;
 
-	public Palette(IMasterController masterController) {
+	public Palette(final IMasterController masterController) {
 		this.masterController = masterController;
 
 		List<ICircuitGate> specialList = new ArrayList<ICircuitGate>();
@@ -66,10 +52,31 @@ public final class Palette implements IPalette {
 		scrollPane = new JScrollPane(componentTree);
 	}
 
-	public Palette(List<ComponentFolder> folderList) {
+	public Palette(final List<ComponentFolder> folderList) {
 		this.folderList = folderList;
 		initPaletteTree();
 		scrollPane = new JScrollPane(componentTree);
+	}
+
+	@Override
+	public JScrollPane getView() {
+		return scrollPane;
+	}
+
+	/**
+	 * inserts component in to folder.
+	 *
+	 * @param folderNodeList
+	 * @param componentFolder
+	 */
+	private void initComponentNodes(
+			final DefaultMutableTreeNode folderNodeList,
+			final ComponentFolder componentFolder) {
+		// TODO:
+		for (ICircuitGate acg : componentFolder.getAllComponents()) {
+			folderNodeList.add(new DefaultMutableTreeNode(acg));
+		}
+
 	}
 
 	private void initPaletteTree() {
@@ -90,7 +97,7 @@ public final class Palette implements IPalette {
 		TreeSelectionListener tsl = new TreeSelectionListener() {
 			@SuppressWarnings("synthetic-access")
 			@Override
-			public void valueChanged(TreeSelectionEvent e) {
+			public void valueChanged(final TreeSelectionEvent e) {
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) componentTree
 						.getLastSelectedPathComponent();
 
@@ -118,26 +125,6 @@ public final class Palette implements IPalette {
 		componentTree.getInputMap().put(
 				KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK),
 				"none");
-	}
-
-	/**
-	 * inserts component in to folder.
-	 *
-	 * @param folderNodeList
-	 * @param componentFolder
-	 */
-	private void initComponentNodes(DefaultMutableTreeNode folderNodeList,
-			ComponentFolder componentFolder) {
-		// TODO:
-		for (ICircuitGate acg : componentFolder.getAllComponents()) {
-			folderNodeList.add(new DefaultMutableTreeNode(acg));
-		}
-
-	}
-
-	@Override
-	public JScrollPane getView() {
-		return scrollPane;
 	}
 
 }

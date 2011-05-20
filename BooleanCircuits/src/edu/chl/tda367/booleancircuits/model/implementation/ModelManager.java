@@ -1,29 +1,23 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
 import java.awt.Point;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.List;
+import java.beans.*;
+import java.util.*;
 
-import edu.chl.tda367.booleancircuits.model.IModelManager;
-import edu.chl.tda367.booleancircuits.model.IModelWrapper;
-import edu.chl.tda367.booleancircuits.model.IObservable;
-import edu.chl.tda367.booleancircuits.model.ISelectionModel;
+import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * A class which manages Models as workspaces.
- * 
+ *
  * @author Kaufmann
  */
 public final class ModelManager implements IObservable, IModelManager {
 
-	private ArrayList<IModelWrapper> modelList;
-	private int selectedIndex;
 	private static int workspaceCount = 1;
+	private ArrayList<IModelWrapper> modelList;
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private int selectedIndex;
 	private ArrayList<ISelectionModel> selectionModelList;
 
 	public ModelManager() {
@@ -33,154 +27,13 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void newWorkspace() {
-		addWorkspace(new ModelWrapper());
-	}
-
-	@Override
-	public void addWorkspace(IModelWrapper workspace) {
-		modelList.add(workspace);
-		selectionModelList.add(new SelectionModel());
-		_setActiveWorkspace(modelList.size() - 1);
-		workspaceCount++;
-	}
-
-	@Override
-	public void closeActiveWorkspace() {
-		if (selectedIndex < 0 || selectedIndex >= modelList.size()) {
-			return;
-		} else {
-			removeModel(selectedIndex);
-			firePropertyChanged();
-		}
-	}
-
-	@Override
-	public void closeAllWorkspaces() {
-		modelList.clear();
-		selectionModelList.clear();
-		_setActiveWorkspace(-1);
-	}
-
-	@Override
-	public void closeWorkspace(int i) {
-		removeModel(i);
-	}
-
-	@Override
-	public void setActiveWorkspace(int i) {
-		_setActiveWorkspace(i);
-	}
-
-	@Override
-	public int getActiveWorkspaceIndex() {
-		return selectedIndex;
-	}
-
-	@Override
-	public IModelWrapper getWorkspace(int i) {
-		return modelList.get(i);
-	}
-
-	@Override
-	public IModelWrapper getActiveWorkspaceModel() {
-		return _getActiveWorkspaceModel();
-	}
-
-	@Override
-	public ArrayList<IModelWrapper> getWorkspaces() {
-		return modelList;
-	}
-
-	@Override
-	public void addComponent(ICircuitGate component, Point position) {
+	public void addComponent(final ICircuitGate component, final Point position) {
 		_addComponent(component, position);
 		firePropertyChanged();
 	}
 
 	@Override
-	public void removeSelectedComponents() {
-		if (selectedIndex >= 0 && selectedIndex < selectionModelList.size()) {
-			_getActiveWorkspaceModel().removeComponents(
-					selectionModelList.get(selectedIndex)
-							.getSelectedComponents());
-			_getActiveSelectionModel().removeComponents(
-					selectionModelList.get(selectedIndex)
-							.getSelectedComponents());
-			_getActiveWorkspaceModel().updateComponents();
-			firePropertyChanged();
-		}
-	}
-
-	@Override
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
-	}
-
-	@Override
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		pcs.removePropertyChangeListener(listener);
-	}
-
-	@Override
-	public void selectAllComponents() {
-		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
-			_getActiveSelectionModel().selectComponents(
-					modelList.get(selectedIndex).getComponents());
-			firePropertyChanged();
-		}
-	}
-
-	@Override
-	public void selectComponent(Point position, boolean multiSelect) {
-		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
-			_getActiveSelectionModel().selectComponent(
-					modelList.get(selectedIndex).getComponent(position),
-					multiSelect);
-			firePropertyChanged();
-		}
-	}
-
-	@Override
-	public boolean isSelectedComponent(ICircuitGate g) {
-		if (_getActiveSelectionModel() != null) {
-			return _getActiveSelectionModel().isSelectedComponent(g);
-		}
-		return false;
-	}
-
-	@Override
-	public ISelectionModel getActiveSelectionModel() {
-		return _getActiveSelectionModel();
-	}
-
-	@Override
-	public void removeComponent(ICircuitGate g) {
-		if (_getActiveWorkspaceModel() != null) {
-			_getActiveWorkspaceModel().removeComponent(g);
-			_getActiveSelectionModel().removeComponent(g);
-			_getActiveWorkspaceModel().updateComponents();
-			firePropertyChanged();
-		}
-	}
-
-	@Override
-	public void connectComponents(ICircuitGate componentIn,
-			ICircuitGate componentOut, int portIn, int portOut) {
-		if (_getActiveWorkspaceModel() != null) {
-			componentIn.connectInput(portIn, componentOut, portOut);
-			_getActiveWorkspaceModel().updateComponents();
-			firePropertyChanged();
-		}
-	}
-
-	@Override
-	public void manualPropertyChanged() {
-		firePropertyChanged();
-	}
-
-	@Override
-	public void addComponents(List<ICircuitGate> components) {
+	public void addComponents(final List<ICircuitGate> components) {
 		if (getActiveWorkspaceModel() != null) {
 			getActiveWorkspaceModel().addComponents(components);
 			firePropertyChanged();
@@ -188,7 +41,8 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void addComponents(List<ICircuitGate> component, Point position) {
+	public void addComponents(final List<ICircuitGate> component,
+			final Point position) {
 		int minX = Integer.MAX_VALUE;
 		int maxX = Integer.MIN_VALUE;
 		int minY = Integer.MAX_VALUE;
@@ -228,6 +82,19 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+	}
+
+	@Override
+	public void addWorkspace(final IModelWrapper workspace) {
+		modelList.add(workspace);
+		selectionModelList.add(new SelectionModel());
+		_setActiveWorkspace(modelList.size() - 1);
+		workspaceCount++;
+	}
+
+	@Override
 	public void clockActiveModel() {
 		if (modelList.size() > 0) {
 			_getActiveWorkspaceModel().clock();
@@ -235,57 +102,132 @@ public final class ModelManager implements IObservable, IModelManager {
 		firePropertyChanged();
 	}
 
-	private void _addComponent(ICircuitGate component, Point position) {
-		if (_getActiveWorkspaceModel() != null) {
-			_getActiveWorkspaceModel().addComponent(component, position);
-			_getActiveWorkspaceModel().updateComponents();
-		}
-	}
-
-	private IModelWrapper _getActiveWorkspaceModel() {
-		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
-			return modelList.get(selectedIndex);
-		} else {
-			return null;
-		}
-	}
-
-	private ISelectionModel _getActiveSelectionModel() {
-		if (selectedIndex >= 0 && selectedIndex < selectionModelList.size()) {
-			return selectionModelList.get(selectedIndex);
-		} else {
-			return null;
-		}
-	}
-
-	@SuppressWarnings("boxing")
-	private void firePropertyChanged() {
-		pcs.firePropertyChange(new PropertyChangeEvent(this, "ModelManager", 0,
-				1));
-	}
-
-	private void _setActiveWorkspace(int i) {
-		selectedIndex = i;
-		firePropertyChanged();
-	}
-
-	private void removeModel(int i) {
-		if (i < 0 || i >= modelList.size()) {
+	@Override
+	public void closeActiveWorkspace() {
+		if (selectedIndex < 0 || selectedIndex >= modelList.size()) {
 			return;
 		} else {
-			modelList.remove(i);
-			selectionModelList.remove(i);
-			if (modelList.size() == 0) {
-				selectedIndex = -1;
-			} else if (selectedIndex >= modelList.size()) {
-				selectedIndex = modelList.size() - 1;
-			}
+			removeModel(selectedIndex);
 			firePropertyChanged();
 		}
 	}
 
 	@Override
-	public void selectComponents(Point pos1, Point pos2) {
+	public void closeAllWorkspaces() {
+		modelList.clear();
+		selectionModelList.clear();
+		_setActiveWorkspace(-1);
+	}
+
+	@Override
+	public void closeWorkspace(final int i) {
+		removeModel(i);
+	}
+
+	@Override
+	public void connectComponents(final ICircuitGate componentIn,
+			final ICircuitGate componentOut, final int portIn, final int portOut) {
+		if (_getActiveWorkspaceModel() != null) {
+			componentIn.connectInput(portIn, componentOut, portOut);
+			_getActiveWorkspaceModel().updateComponents();
+			firePropertyChanged();
+		}
+	}
+
+	@Override
+	public ISelectionModel getActiveSelectionModel() {
+		return _getActiveSelectionModel();
+	}
+
+	@Override
+	public int getActiveWorkspaceIndex() {
+		return selectedIndex;
+	}
+
+	@Override
+	public IModelWrapper getActiveWorkspaceModel() {
+		return _getActiveWorkspaceModel();
+	}
+
+	@Override
+	public IModelWrapper getWorkspace(final int i) {
+		return modelList.get(i);
+	}
+
+	@Override
+	public ArrayList<IModelWrapper> getWorkspaces() {
+		return modelList;
+	}
+
+	@Override
+	public boolean isSelectedComponent(final ICircuitGate g) {
+		if (_getActiveSelectionModel() != null) {
+			return _getActiveSelectionModel().isSelectedComponent(g);
+		}
+		return false;
+	}
+
+	@Override
+	public void manualPropertyChanged() {
+		firePropertyChanged();
+	}
+
+	@Override
+	public void newWorkspace() {
+		addWorkspace(new ModelWrapper());
+	}
+
+	@Override
+	public void removeComponent(final ICircuitGate g) {
+		if (_getActiveWorkspaceModel() != null) {
+			_getActiveWorkspaceModel().removeComponent(g);
+			_getActiveSelectionModel().removeComponent(g);
+			_getActiveWorkspaceModel().updateComponents();
+			firePropertyChanged();
+		}
+	}
+
+	@Override
+	public void removePropertyChangeListener(
+			final PropertyChangeListener listener) {
+		pcs.removePropertyChangeListener(listener);
+	}
+
+	@Override
+	public void removeSelectedComponents() {
+		if (selectedIndex >= 0 && selectedIndex < selectionModelList.size()) {
+			_getActiveWorkspaceModel().removeComponents(
+					selectionModelList.get(selectedIndex)
+							.getSelectedComponents());
+			_getActiveSelectionModel().removeComponents(
+					selectionModelList.get(selectedIndex)
+							.getSelectedComponents());
+			_getActiveWorkspaceModel().updateComponents();
+			firePropertyChanged();
+		}
+	}
+
+	@Override
+	public void selectAllComponents() {
+		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
+			_getActiveSelectionModel().selectComponents(
+					modelList.get(selectedIndex).getComponents());
+			firePropertyChanged();
+		}
+	}
+
+	@Override
+	public void selectComponent(final Point position, final boolean multiSelect) {
+		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
+			_getActiveSelectionModel().selectComponent(
+					modelList.get(selectedIndex).getComponent(position),
+					multiSelect);
+			firePropertyChanged();
+		}
+	}
+
+	@Override
+	public void selectComponents(final Point pos1, final Point pos2) {
 		List<ICircuitGate> selectedComponents = new ArrayList<ICircuitGate>();
 
 		for (ICircuitGate gate : _getActiveWorkspaceModel().getComponents()) {
@@ -298,5 +240,60 @@ public final class ModelManager implements IObservable, IModelManager {
 			}
 		}
 		this.getActiveSelectionModel().selectComponents(selectedComponents);
+	}
+
+	@Override
+	public void setActiveWorkspace(final int i) {
+		_setActiveWorkspace(i);
+	}
+
+	private void _addComponent(final ICircuitGate component,
+			final Point position) {
+		if (_getActiveWorkspaceModel() != null) {
+			_getActiveWorkspaceModel().addComponent(component, position);
+			_getActiveWorkspaceModel().updateComponents();
+		}
+	}
+
+	private ISelectionModel _getActiveSelectionModel() {
+		if (selectedIndex >= 0 && selectedIndex < selectionModelList.size()) {
+			return selectionModelList.get(selectedIndex);
+		} else {
+			return null;
+		}
+	}
+
+	private IModelWrapper _getActiveWorkspaceModel() {
+		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
+			return modelList.get(selectedIndex);
+		} else {
+			return null;
+		}
+	}
+
+	private void _setActiveWorkspace(final int i) {
+		selectedIndex = i;
+		firePropertyChanged();
+	}
+
+	@SuppressWarnings("boxing")
+	private void firePropertyChanged() {
+		pcs.firePropertyChange(new PropertyChangeEvent(this, "ModelManager", 0,
+				1));
+	}
+
+	private void removeModel(final int i) {
+		if (i < 0 || i >= modelList.size()) {
+			return;
+		} else {
+			modelList.remove(i);
+			selectionModelList.remove(i);
+			if (modelList.size() == 0) {
+				selectedIndex = -1;
+			} else if (selectedIndex >= modelList.size()) {
+				selectedIndex = modelList.size() - 1;
+			}
+			firePropertyChanged();
+		}
 	}
 }

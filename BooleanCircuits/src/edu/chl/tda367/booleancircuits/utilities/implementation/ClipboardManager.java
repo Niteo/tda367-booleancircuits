@@ -1,19 +1,15 @@
 package edu.chl.tda367.booleancircuits.utilities.implementation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+import edu.chl.tda367.booleancircuits.model.components.*;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 
 /**
  * handles copying and pasting components
- * 
+ *
  * @author antonlin
- * 
+ *
  */
 
 public class ClipboardManager implements IClipboardManager {
@@ -23,8 +19,14 @@ public class ClipboardManager implements IClipboardManager {
 	private List<ICircuitGate> lastPastedComponents = new ArrayList<ICircuitGate>();
 
 	@Override
-	public void copy(List<ICircuitGate> originalList) {
+	public void copy(final List<ICircuitGate> originalList) {
 		clipboardList = duplicateList(originalList);
+	}
+
+	@Override
+	public List<ICircuitGate> getLastPastedComponents() {
+
+		return lastPastedComponents;
 	}
 
 	@Override
@@ -33,7 +35,7 @@ public class ClipboardManager implements IClipboardManager {
 		return duplicateList(clipboardList);
 	}
 
-	private List<ICircuitGate> duplicateList(List<ICircuitGate> list) {
+	private List<ICircuitGate> duplicateList(final List<ICircuitGate> list) {
 
 		List<ICircuitGate> dupList = new ArrayList<ICircuitGate>();
 		for (ICircuitGate gate : list) {
@@ -60,11 +62,5 @@ public class ClipboardManager implements IClipboardManager {
 		}
 		lastPastedComponents = dupList;
 		return dupList;
-	}
-
-	@Override
-	public List<ICircuitGate> getLastPastedComponents() {
-
-		return lastPastedComponents;
 	}
 }

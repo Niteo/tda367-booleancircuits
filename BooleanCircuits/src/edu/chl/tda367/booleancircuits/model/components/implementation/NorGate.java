@@ -10,8 +10,18 @@ public final class NorGate extends AbstractCircuitGate {
 	 * @param inputs
 	 *            the amount of inputs for the gate
 	 */
-	public NorGate(int inputs) {
+	public NorGate(final int inputs) {
 		super(inputs, 1);
+	}
+
+	@Override
+	public String toString() {
+		return "NOR";
+	}
+
+	@Override
+	protected AbstractCircuitGate emptyGateClone() {
+		return new NorGate(getNoOfInputs());
 	}
 
 	@Override
@@ -25,15 +35,5 @@ public final class NorGate extends AbstractCircuitGate {
 		}
 
 		super.setOutput(0, !output);
-	}
-
-	@Override
-	public String toString() {
-		return "NOR";
-	}
-
-	@Override
-	protected AbstractCircuitGate emptyGateClone() {
-		return new NorGate(getNoOfInputs());
 	}
 }

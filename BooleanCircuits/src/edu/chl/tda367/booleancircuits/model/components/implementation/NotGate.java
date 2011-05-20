@@ -6,12 +6,22 @@ import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
  * Represents a NOT-gate. Outputs the inverse of the input.
- * 
+ *
  * @author Jennifer
  */
 public final class NotGate extends AbstractCircuitGate {
 	public NotGate() {
 		super(1, 1);
+	}
+
+	@Override
+	public String toString() {
+		return "NOT";
+	}
+
+	@Override
+	protected AbstractCircuitGate emptyGateClone() {
+		return new NotGate();
 	}
 
 	/**
@@ -21,15 +31,5 @@ public final class NotGate extends AbstractCircuitGate {
 	protected void updateOutput() {
 		List<IGateInput> input = super.getInputs();
 		super.setOutput(0, !input.get(0).getInputValue());
-	}
-	
-	@Override
-	public String toString(){
-		return "NOT";
-	}
-	
-	@Override
-	protected AbstractCircuitGate emptyGateClone() {
-		return new NotGate();
 	}
 }

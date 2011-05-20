@@ -1,10 +1,8 @@
 package edu.chl.tda367.booleancircuits.controller.implementation;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import javax.swing.AbstractAction;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 
 import org.junit.Test;
@@ -16,13 +14,6 @@ public class ActionControllerTest {
 	@Test
 	public void testActionController() {
 		new ActionController(new MasterController(new ModelManager()));
-	}
-
-	@Test
-	public void testGetNewWorkspaceAction() {
-		ActionController ac = new ActionController(new MasterController(new ModelManager()));
-		assertNotNull(ac.getNewWorkspaceAction());
-		assertTrue(ac.getNewWorkspaceAction() instanceof AbstractAction);
 	}
 
 	@Test
@@ -41,27 +32,6 @@ public class ActionControllerTest {
 	}
 
 	@Test
-	public void testGetOpenWorkspaceAction() {
-		ActionController ac = new ActionController(new MasterController(new ModelManager()));
-		assertNotNull(ac.getOpenWorkspaceAction());
-		assertTrue(ac.getOpenWorkspaceAction() instanceof AbstractAction);
-	}
-
-	@Test
-	public void testGetSaveActiveWorkspaceAction() {
-		ActionController ac = new ActionController(new MasterController(new ModelManager()));
-		assertNotNull(ac.getSaveActiveWorkspaceAction());
-		assertTrue(ac.getSaveActiveWorkspaceAction() instanceof AbstractAction);
-	}
-
-	@Test
-	public void testGetSaveAllWorkspacesAction() {
-		ActionController ac = new ActionController(new MasterController(new ModelManager()));
-		assertNotNull(ac.getSaveAllWorkspacesAction());
-		assertTrue(ac.getSaveAllWorkspacesAction() instanceof AbstractAction);
-	}
-
-	@Test
 	public void testGetCopySelectedComponentsAction() {
 		ActionController ac = new ActionController(new MasterController(new ModelManager()));
 		assertNotNull(ac.getCopySelectedComponentsAction());
@@ -76,6 +46,27 @@ public class ActionControllerTest {
 	}
 
 	@Test
+	public void testGetImportWorkspaceAction() {
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getImportWorkspaceAction());
+		assertTrue(ac.getImportWorkspaceAction() instanceof AbstractAction);
+	}
+
+	@Test
+	public void testGetNewWorkspaceAction() {
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getNewWorkspaceAction());
+		assertTrue(ac.getNewWorkspaceAction() instanceof AbstractAction);
+	}
+
+	@Test
+	public void testGetOpenWorkspaceAction() {
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getOpenWorkspaceAction());
+		assertTrue(ac.getOpenWorkspaceAction() instanceof AbstractAction);
+	}
+
+	@Test
 	public void testGetPasteSelectedComponentAction() {
 		ActionController ac = new ActionController(new MasterController(new ModelManager()));
 		assertNotNull(ac.getPasteSelectedComponentAction());
@@ -83,10 +74,11 @@ public class ActionControllerTest {
 	}
 
 	@Test
-	public void testGetUndoAction() {
+	public void testGetPauseClockAction() {
 		ActionController ac = new ActionController(new MasterController(new ModelManager()));
-		assertNotNull(ac.getUndoAction());
-		assertTrue(ac.getUndoAction() instanceof AbstractAction);
+		assertNotNull(ac.getPauseClockAction());
+		assertTrue(ac.getPauseClockAction() instanceof AbstractAction);
+
 	}
 
 	@Test
@@ -104,10 +96,17 @@ public class ActionControllerTest {
 	}
 
 	@Test
-	public void testGetSelectAllComponentsAction() {
+	public void testGetSaveActiveWorkspaceAction() {
 		ActionController ac = new ActionController(new MasterController(new ModelManager()));
-		assertNotNull(ac.getSelectAllComponentsAction());
-		assertTrue(ac.getSelectAllComponentsAction() instanceof AbstractAction);
+		assertNotNull(ac.getSaveActiveWorkspaceAction());
+		assertTrue(ac.getSaveActiveWorkspaceAction() instanceof AbstractAction);
+	}
+
+	@Test
+	public void testGetSaveAllWorkspacesAction() {
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getSaveAllWorkspacesAction());
+		assertTrue(ac.getSaveAllWorkspacesAction() instanceof AbstractAction);
 	}
 
 	@Test
@@ -118,25 +117,10 @@ public class ActionControllerTest {
 	}
 
 	@Test
-	public void testGetStartClockAction() {
+	public void testGetSelectAllComponentsAction() {
 		ActionController ac = new ActionController(new MasterController(new ModelManager()));
-		assertNotNull(ac.getStartClockAction());
-		assertTrue(ac.getStartClockAction() instanceof AbstractAction);
-	}
-
-	@Test
-	public void testGetPauseClockAction() {
-		ActionController ac = new ActionController(new MasterController(new ModelManager()));
-		assertNotNull(ac.getPauseClockAction());
-		assertTrue(ac.getPauseClockAction() instanceof AbstractAction);
-
-	}
-
-	@Test
-	public void testGetImportWorkspaceAction() {
-		ActionController ac = new ActionController(new MasterController(new ModelManager()));
-		assertNotNull(ac.getImportWorkspaceAction());
-		assertTrue(ac.getImportWorkspaceAction() instanceof AbstractAction);
+		assertNotNull(ac.getSelectAllComponentsAction());
+		assertTrue(ac.getSelectAllComponentsAction() instanceof AbstractAction);
 	}
 
 	@Test
@@ -144,6 +128,20 @@ public class ActionControllerTest {
 		ActionController ac = new ActionController(new MasterController(new ModelManager()));
 		assertNotNull(ac.getShowHelpAction());
 		assertTrue(ac.getShowHelpAction() instanceof AbstractAction);
+	}
+
+	@Test
+	public void testGetStartClockAction() {
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getStartClockAction());
+		assertTrue(ac.getStartClockAction() instanceof AbstractAction);
+	}
+
+	@Test
+	public void testGetUndoAction() {
+		ActionController ac = new ActionController(new MasterController(new ModelManager()));
+		assertNotNull(ac.getUndoAction());
+		assertTrue(ac.getUndoAction() instanceof AbstractAction);
 	}
 
 	@Test

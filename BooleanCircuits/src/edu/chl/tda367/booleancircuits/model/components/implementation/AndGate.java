@@ -17,8 +17,18 @@ public final class AndGate extends AbstractCircuitGate {
 	 * @param inputs
 	 *            Number of inputs to the AND-gate
 	 */
-	public AndGate(int inputs) {
+	public AndGate(final int inputs) {
 		super(inputs, 1);
+	}
+
+	@Override
+	public String toString() {
+		return "AND";
+	}
+
+	@Override
+	protected AbstractCircuitGate emptyGateClone() {
+		return new AndGate(getNoOfInputs());
 	}
 
 	/**
@@ -36,15 +46,5 @@ public final class AndGate extends AbstractCircuitGate {
 			}
 			super.setOutput(0, true);
 		}
-	}
-
-	@Override
-	public String toString() {
-		return "AND";
-	}
-
-	@Override
-	protected AbstractCircuitGate emptyGateClone() {
-		return new AndGate(getNoOfInputs());
 	}
 }

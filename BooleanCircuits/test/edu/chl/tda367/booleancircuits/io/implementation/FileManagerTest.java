@@ -7,7 +7,7 @@ import org.junit.Test;
 public class FileManagerTest {
 
 	@Test
-	public void testSaveFile() {
+	public void testImportFile() {
 		fail("Not yet implemented");
 	}
 
@@ -18,7 +18,7 @@ public class FileManagerTest {
 	}
 
 	@Test
-	public void testImportFile() {
+	public void testSaveFile() {
 		fail("Not yet implemented");
 	}
 
