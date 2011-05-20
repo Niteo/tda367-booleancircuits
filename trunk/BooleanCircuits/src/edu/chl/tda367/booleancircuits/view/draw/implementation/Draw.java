@@ -102,22 +102,49 @@ public class Draw implements IDraw {
 
 				int y1Offset = loopCount * Constants.componentSize / (nInputs)
 						+ Constants.componentSize / (nInputs * 2);
-				int x1 = (int) (gate.getPosition().x - offset.x - Constants.componentSize * 0.5);
-				int y1 = (int) (gate.getPosition().y - offset.y + y1Offset - Constants.componentSize * 0.5);
+				int xStart = (int) (gate.getPosition().x - offset.x - Constants.componentSize * 0.5);
+				int yStart = (int) (gate.getPosition().y - offset.y + y1Offset - Constants.componentSize * 0.5);
 
 				int y2Offset = (Constants.componentSize / (i
 						.getInputComponent().getNoOfOutputs() * 2))
 						* (i.getInputPort() + i.getInputComponent()
 								.getNoOfOutputs());
-				int x2 = (int) (i.getInputComponent().getPosition().x
+				int xEnd = (int) (i.getInputComponent().getPosition().x
 						- offset.x + Constants.componentSize * 0.5);
-				int y2 = (int) (i.getInputComponent().getPosition().y
+				int yEnd = (int) (i.getInputComponent().getPosition().y
 						- offset.y - Constants.componentSize * 0.5 + y2Offset);
 
-				int[] xPoints = { x1, x1 + (x2 - x1) / 2, x1 + (x2 - x1) / 2,
-						x2 };
-				int[] yPoints = { y1, y1, y2, y2 };
-				g.drawPolyline(xPoints, yPoints, 4);
+
+				if(xStart > xEnd + 20){
+					int []xPoints = new int [4];
+					xPoints[0] = xStart;
+					xPoints[1] = xPoints[0] + (xEnd - xStart) / 2;
+					xPoints[2] = xPoints[1];
+					xPoints[3] = xEnd;
+					
+					int[] yPoints = { yStart,yStart,yEnd, yEnd};
+					g.drawPolyline(xPoints, yPoints, 4);
+				} else 	if(Math.abs(yEnd - yStart) <= Constants.componentSize && xStart > xEnd){
+					g.drawLine(xStart, yStart, xEnd, yEnd);
+				} else {
+					int []xPoints = new int [6];
+					xPoints[0] = xStart;
+					xPoints[1] = xStart - 10;
+					xPoints[2] = xPoints[1];
+					xPoints[3] = xStart + xEnd - xStart + 10;
+					xPoints[4] = xPoints[3];
+					xPoints[5] = xEnd;
+					
+					int []yPoints = new int [6];
+					yPoints[0] = yStart;
+					yPoints[1] = yPoints[0];
+					yPoints[2] = yPoints[0] + (yEnd > yStart ? Constants.componentSize : -Constants.componentSize);
+					yPoints[3] = yPoints[2];
+					yPoints[4] = yEnd;
+					yPoints[5] = yPoints[4];
+									
+					g.drawPolyline(xPoints, yPoints, 6);
+				}
 			}
 			loopCount++;
 		}
