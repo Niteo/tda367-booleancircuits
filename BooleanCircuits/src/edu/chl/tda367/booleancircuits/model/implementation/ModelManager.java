@@ -205,11 +205,9 @@ public final class ModelManager implements IObservable, IModelManager {
 	public void removeSelectedComponents() {
 		if (selectedIndex >= 0 && selectedIndex < selectionModelList.size()) {
 			_getActiveWorkspaceModel().removeComponents(
-					selectionModelList.get(selectedIndex)
-							.getSelectedComponents());
+					_getActiveSelectionModel().getSelectedComponents());
 			_getActiveSelectionModel().removeComponents(
-					selectionModelList.get(selectedIndex)
-							.getSelectedComponents());
+					_getActiveSelectionModel().getSelectedComponents());
 			_getActiveWorkspaceModel().updateComponents();
 			firePropertyChanged();
 		}
@@ -248,6 +246,14 @@ public final class ModelManager implements IObservable, IModelManager {
 			}
 		}
 		this.getActiveSelectionModel().selectComponents(selectedComponents);
+	}
+
+	@Override
+	public void selectComponents(List<ICircuitGate> list){
+		_getActiveSelectionModel().getSelectedComponents().clear();
+		for(ICircuitGate gate: list){
+			selectComponent(gate.getPosition(), true);
+		}
 	}
 
 	@Override

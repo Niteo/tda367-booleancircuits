@@ -162,23 +162,19 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void pasteSelectedComponents() {
-		if (modelManager.getActiveSelectionModel() != null
-				&& modelManager.getActiveSelectionModel()
-						.getNumberOfComponents() != 0) {
+		if (modelManager.getActiveSelectionModel() != null) {
 			modelManager.addComponents(clipboardManager.paste());
-			modelManager.getActiveSelectionModel().selectComponents(
-					clipboardManager.getLastPastedComponents());
+			modelManager.selectComponents(clipboardManager
+					.getLastPastedComponents());
 		}
 	}
 
 	@Override
 	public void pasteSelectedComponents(final Point position) {
-		if (modelManager.getActiveSelectionModel() != null
-				&& modelManager.getActiveSelectionModel()
-						.getNumberOfComponents() != 0) {
+		if (modelManager.getActiveSelectionModel() != null) {
 			modelManager.addComponents(clipboardManager.paste(), position);
-			modelManager.getActiveSelectionModel().selectComponents(
-					clipboardManager.getLastPastedComponents());
+			modelManager.selectComponents(clipboardManager
+					.getLastPastedComponents());
 		}
 	}
 
