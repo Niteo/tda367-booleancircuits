@@ -1,15 +1,19 @@
 package edu.chl.tda367.booleancircuits.utilities.implementation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import edu.chl.tda367.booleancircuits.model.components.*;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 
 /**
  * handles copying and pasting components
- * 
+ *
  * @author antonlin
- * 
+ *
  */
 
 public class ClipboardManager implements IClipboardManager {
@@ -20,18 +24,17 @@ public class ClipboardManager implements IClipboardManager {
 
 	@Override
 	public void copy(final List<ICircuitGate> originalList) {
+		clipboardList.clear();
 		clipboardList = duplicateList(originalList);
 	}
 
 	@Override
 	public List<ICircuitGate> getLastPastedComponents() {
-
 		return lastPastedComponents;
 	}
 
 	@Override
 	public List<ICircuitGate> paste() {
-
 		return duplicateList(clipboardList);
 	}
 
