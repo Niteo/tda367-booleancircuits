@@ -1,19 +1,24 @@
 package edu.chl.tda367.booleancircuits.controller.implementation;
 
 import java.awt.Point;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.IFileManager;
 import edu.chl.tda367.booleancircuits.io.implementation.FileManager;
-import edu.chl.tda367.booleancircuits.model.*;
+import edu.chl.tda367.booleancircuits.model.IModelManager;
+import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
-import edu.chl.tda367.booleancircuits.utilities.implementation.*;
+import edu.chl.tda367.booleancircuits.utilities.implementation.ClipboardManager;
+import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
 public final class MasterController implements IMasterController {
 
@@ -27,7 +32,7 @@ public final class MasterController implements IMasterController {
 
 	/**
 	 * Returns an instance of a MasterController
-	 * 
+	 *
 	 * @param mm
 	 *            the ModelManager to control
 	 * @throws NullPointerException
@@ -120,9 +125,9 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void cutSelectedComponents() {
-		if (_copySelectedComponents()) {
-			modelManager.removeSelectedComponents();
-		}
+		_copySelectedComponents();
+		modelManager.removeSelectedComponents();
+
 	}
 
 	@Override
@@ -248,15 +253,12 @@ public final class MasterController implements IMasterController {
 		throw new UnsupportedOperationException();
 	}
 
-	private boolean _copySelectedComponents() {
-		if (modelManager.getActiveSelectionModel() == null
-				|| modelManager.getActiveSelectionModel()
-						.getNumberOfComponents() == 0) {
-			return false;
-		} else {
+	private void _copySelectedComponents() {
+		if (modelManager.getActiveSelectionModel() != null
+				&& modelManager.getActiveSelectionModel()
+						.getNumberOfComponents() != 0) {
 			clipboardManager.copy(modelManager.getActiveSelectionModel()
 					.getSelectedComponents());
-			return true;
 		}
 	}
 
