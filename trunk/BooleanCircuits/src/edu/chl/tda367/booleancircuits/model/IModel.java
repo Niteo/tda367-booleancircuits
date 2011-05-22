@@ -49,7 +49,7 @@ public interface IModel {
 	/**
 	 * Returns the amount of components in the model.
 	 * 
-	 * @return integer representing the amount of components
+	 * @return amount of components
 	 */
 	public int getNumberOfComponents();
 
@@ -64,15 +64,15 @@ public interface IModel {
 	 * Removes the specified component.
 	 * 
 	 * @param g
-	 *            IAbstractCircuitGate
+	 *            the component to remove
 	 */
 	public void removeComponent(ICircuitGate g);
 
 	/**
-	 * Removes the specified components in the collection.
+	 * Removes the specified components.
 	 * 
 	 * @param list
-	 *            Collection
+	 *            the components to remove
 	 */
 	public void removeComponents(Collection<ICircuitGate> list);
 
@@ -83,7 +83,7 @@ public interface IModel {
 	public String toString();
 
 	/**
-	 * Updates the model's component's boolean values.
+	 * Updates the model's components' boolean values.
 	 */
 	public void updateComponents();
 }

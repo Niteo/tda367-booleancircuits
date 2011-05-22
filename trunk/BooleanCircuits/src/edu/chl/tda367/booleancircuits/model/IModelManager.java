@@ -1,22 +1,21 @@
 package edu.chl.tda367.booleancircuits.model;
 
 import java.awt.Point;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * A class which manages Models as workspaces.
- *
+ * 
  * @author Kaufmann
  */
 public interface IModelManager {
 
 	/**
-	 * Adds a CircuitComponent in the palette to the specified coordinate in the
-	 * active workspace.
-	 *
+	 * Adds an ICircuitComponent to the specified coordinate in the active
+	 * workspace.
+	 * 
 	 * @param component
 	 *            the component to add
 	 * @param position
@@ -25,28 +24,27 @@ public interface IModelManager {
 	public void addComponent(ICircuitGate component, Point position);
 
 	/**
-	 * Adds a list of components to the active workspace. Position is relative
-	 * to the list components' position.
-	 *
+	 * Adds a list of components to the active workspace.
+	 * 
 	 * @param component
 	 *            List the components to add
 	 */
 	public void addComponents(List<ICircuitGate> component);
 
 	/**
-	 * Adds a list of components to the active workspace. Positions are relative
-	 * to the first given position.
-	 *
-	 * @param component
-	 *            List the components to add
+	 * Adds a list of components to the active workspace. Position is relative
+	 * to the list components' positions.
+	 * 
+	 * @param components
+	 *            the components to add
 	 * @param position
-	 *            Point the point the first component should be added to
+	 *            the position the components will be placed around
 	 */
-	public void addComponents(List<ICircuitGate> component, Point position);
+	public void addComponents(List<ICircuitGate> components, Point position);
 
 	/**
 	 * Adds a new workspace and makes it active.
-	 *
+	 * 
 	 * @param workspace
 	 *            the workspace to be added
 	 */
@@ -69,15 +67,15 @@ public interface IModelManager {
 
 	/**
 	 * Closes a specific workspace.
-	 *
+	 * 
 	 * @param i
-	 *            int index of the workspace
+	 *            index of the workspace to close
 	 */
 	public void closeWorkspace(int i);
 
 	/**
 	 * Connects to components in the active model.
-	 *
+	 * 
 	 * @param componentIn
 	 *            the component who's input is to be connected
 	 * @param componentOut
@@ -91,44 +89,47 @@ public interface IModelManager {
 			ICircuitGate componentOut, int portIn, int portOut);
 
 	/**
-	 * returns the active selection model.
-	 *
-	 * @return ISelectionModel the active selection model
+	 * Returns the active selection model.
+	 * 
+	 * @return the active selection model
 	 */
 	public ISelectionModel getActiveSelectionModel();
 
 	/**
 	 * Returns the index of the active workspace.
-	 *
-	 * @return int index of the workspace
+	 * 
+	 * @return index of the active workspace
 	 */
 	public int getActiveWorkspaceIndex();
 
 	/**
-	 * Returns the active workspace model.
-	 *
-	 * @return Model the active workspace to return.
+	 * Returns the active workspace.
+	 * 
+	 * @return the active workspace
 	 */
 	public IModelWrapper getActiveWorkspaceModel();
 
 	/**
-	 * Returns indexed workspace from internal model list.
+	 * Returns the specified workspace.
+	 * 
+	 * @param i
+	 *            the index of the workspace to return
 	 */
 	public IModelWrapper getWorkspace(int i);
 
 	/**
 	 * Returns all workspaces.
-	 *
-	 * @return list of all workspaces.
+	 * 
+	 * @return collection of all workspaces
 	 */
 	public Collection<IModelWrapper> getWorkspaces();
 
 	/**
-	 * Determinates if a component is currently selected.
-	 *
+	 * Determines if a component is currently selected.
+	 * 
 	 * @param g
-	 *            ICircuitGate
-	 * @return boolean
+	 *            component to check if selected
+	 * @return true if component is selected
 	 */
 	public boolean isSelectedComponent(ICircuitGate g);
 
@@ -144,9 +145,9 @@ public interface IModelManager {
 
 	/**
 	 * Removes the given component if it exists in the active model.
-	 *
+	 * 
 	 * @param g
-	 *            IAbstractCircuitGate
+	 *            component to remove
 	 */
 	public void removeComponent(ICircuitGate g);
 
@@ -156,43 +157,44 @@ public interface IModelManager {
 	public void removeSelectedComponents();
 
 	/**
-	 * Selects all components in the collection.
-	 *
+	 * Selects all components in the active workspace
+	 * 
 	 */
 	public void selectAllComponents();
 
 	/**
-	 * Selects the component at the given point in the active workspace.
-	 *
+	 * Selects first found component at the given point in the active workspace.
+	 * 
 	 * @param position
-	 *            Point The point of the component
+	 *            the point of the component
 	 * @param multiSelect
-	 *            boolean if false, all selected components will be deselected
+	 *            if false, all selected components will be deselected
 	 */
 	public void selectComponent(Point position, boolean multiSelect);
 
 	/**
-	 * Selects all the components in the square area, defined by two points
-	 *
-	 * @param positionStart
-	 * @param positionEnd
-	 * @param multiSelect
-	 */
-	public void selectComponents(Point pos1, Point pos2);
-
-	/**
-	 * Selects all components in a list.
-	 *
+	 * Selects all components existing in the active workspace.
+	 * 
 	 * @param list
-	 *            List
+	 *            components to select
 	 */
 	public void selectComponents(List<ICircuitGate> list);
 
 	/**
+	 * Selects all components existing in the square created by two points
+	 * 
+	 * @param positionStart
+	 *            start point
+	 * @param positionEnd
+	 *            end point
+	 */
+	public void selectComponents(Point positionStart, Point positionEnd);
+
+	/**
 	 * Sets the currently active workspace.
-	 *
+	 * 
 	 * @param i
-	 *            int index of the workspace
+	 *            index of the workspace to select
 	 */
 	public void setActiveWorkspace(int i);
 }

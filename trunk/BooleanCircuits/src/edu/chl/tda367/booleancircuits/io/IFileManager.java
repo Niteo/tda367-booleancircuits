@@ -3,11 +3,11 @@ package edu.chl.tda367.booleancircuits.io;
 import java.io.File;
 import java.util.*;
 
+import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 
 /**
- * describes how save files are written and read
+ * Class for saving and loading circuits/workspaces.
  * 
  * @author antonlin
  * 
@@ -15,29 +15,30 @@ import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 public interface IFileManager {
 
 	/**
-	 * Imports all the components in one workspace into another active
-	 * workspace.
+	 * Returns a list of components from a given workspace.
 	 * 
 	 * @param file
-	 * @return
+	 *            workspace to load
+	 * @return list of components from given workspace
 	 */
 	public List<ICircuitGate> importFile(File file);
 
 	/**
-	 * Creates a circuit from a previously saved .txt file
+	 * Creates a circuit from a previously saved file
 	 * 
 	 * @param file
-	 *            txt. file representing a previously saved model
+	 *            file representing a previously saved model
+	 * @return the circuit created from the given file
 	 */
-	public ModelWrapper openFile(File file);
+	public IModelWrapper openFile(File file);
 
 	/**
-	 * Saves a circuit in to a .txt file
+	 * Saves a circuit to file
 	 * 
 	 * @param components
 	 *            the components in the circuit
-	 * @param name
-	 *            name of the save file
+	 * @param file
+	 *            the file to save to
 	 */
 	public void saveFile(Collection<ICircuitGate> components, File file);
 }

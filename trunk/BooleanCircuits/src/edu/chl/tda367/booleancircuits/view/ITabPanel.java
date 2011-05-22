@@ -3,7 +3,7 @@ package edu.chl.tda367.booleancircuits.view;
 import javax.swing.JButton;
 
 /**
- * An interface to describe a tab panel.
+ * An interface describing a tab panel.
  * 
  * @author Boel
  * 
@@ -14,7 +14,7 @@ public interface ITabPanel {
 	/**
 	 * Returns the close button
 	 * 
-	 * @return JButton
+	 * @return close button
 	 */
 	public JButton getCloseButton();
 
@@ -22,7 +22,7 @@ public interface ITabPanel {
 	 * Sets the title of the tab panel.
 	 * 
 	 * @param title
-	 *            String
+	 *            title to set
 	 */
 	public void setTabPanelTitle(String title);
 

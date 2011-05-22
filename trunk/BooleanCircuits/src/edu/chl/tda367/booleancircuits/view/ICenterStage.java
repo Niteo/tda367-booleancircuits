@@ -15,9 +15,9 @@ import edu.chl.tda367.booleancircuits.view.implementation.TabManager;
 public interface ICenterStage {
 
 	/**
-	 * Returns the panel of the centerStage.
+	 * Returns the panel of the center stage.
 	 * 
-	 * @return canvas JPanel
+	 * @return center stage JPanel
 	 */
 	public JPanel getPanel();
 
@@ -29,10 +29,10 @@ public interface ICenterStage {
 	public TabManager getTabManager();
 
 	/**
-	 * Sets the background of the canvas.
+	 * Sets the background strategy of the canvas.
 	 * 
 	 * @param background
-	 *            IBackground
+	 *            the stategy to use
 	 */
 	public void setBackground(IBackground background);
 
@@ -40,14 +40,15 @@ public interface ICenterStage {
 	 * Sets the representation to US standard. False is international.
 	 * 
 	 * @param bool
-	 *            Boolean
+	 *            boolean
 	 */
 	public void setUSStandard(boolean bool);
 
 	/**
 	 * Updates the view by repainting the workspace.
 	 * 
-	 * @param modelManager
+	 * @param a
+	 *            reference to the modelmanager to pull data from
 	 */
 	public void update(ModelManager modelManager);
 

@@ -27,11 +27,11 @@ public interface ISelectionModel {
 	public List<ICircuitGate> getSelectedComponents();
 
 	/**
-	 * Determinates if a component is currently selected.
+	 * Determines if a component is currently selected.
 	 * 
 	 * @param g
-	 *            AbstractCircuitGate
-	 * @return boolean
+	 *            component to check if selected
+	 * @return true if given gate is selected
 	 */
 	public boolean isSelectedComponent(ICircuitGate g);
 
@@ -39,7 +39,7 @@ public interface ISelectionModel {
 	 * Removes a component from the selected list.
 	 * 
 	 * @param g
-	 *            ICircuitGate component to remove
+	 *            component to remove
 	 */
 	public void removeComponent(ICircuitGate g);
 
@@ -47,25 +47,26 @@ public interface ISelectionModel {
 	 * Removes a collection of components from the selected list.
 	 * 
 	 * @param c
-	 *            Collection components to remove
+	 *            collection of components to remove
 	 */
 	public void removeComponents(Collection<ICircuitGate> c);
 
 	/**
-	 * Selects the given component in the active workspace.
+	 * If it exists in, selects the given component in the active workspace.
 	 * 
 	 * @param g
-	 *            IAbstractCircuitGate the gate to select
+	 *            the gate to select
 	 * @param multiSelect
-	 *            boolean if false, all selected components will be deselected
+	 *            if false, all previously selected components will be
+	 *            deselected
 	 */
 	public void selectComponent(ICircuitGate g, boolean multiSelect);
 
 	/**
-	 * Selects all components in the collection.
+	 * Selects all components in the collection in the active workspace.
 	 * 
 	 * @param c
-	 *            Collection
+	 *            collection of components to select
 	 */
 	public void selectComponents(Collection<ICircuitGate> c);
 }

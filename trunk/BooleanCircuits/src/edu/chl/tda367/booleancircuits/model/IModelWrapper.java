@@ -2,6 +2,12 @@ package edu.chl.tda367.booleancircuits.model;
 
 import java.io.File;
 
+/**
+ * An interface for a wrapper around IModel, containing file information.
+ * 
+ * @author Kaufmann
+ * 
+ */
 public interface IModelWrapper extends IModel {
 
 	/**
@@ -26,7 +32,9 @@ public interface IModelWrapper extends IModel {
 	public boolean hasFile();
 
 	/**
-	 * Set model to unchanged.
+	 * Set model to be changed or not based on input parameter.
+	 * 
+	 * @param isChanged
 	 */
 	public void setChanged(boolean isChanged);
 
