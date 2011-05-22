@@ -140,8 +140,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 				}
 
 				else if (e.getSource() == aboutMenuItem) {
-					Icon logo = new ImageIcon("resources/icons/cross-icon.png");
-					new AboutBox(Constants.creditsText, logo);
+					new AboutBox(Constants.creditsText, Constants.aboutImage);
 				} else if (e.getSource() == exitMenuItem) {
 					windowAdapter.windowClosing(new WindowEvent(_getWindow(), 0));
 				}
