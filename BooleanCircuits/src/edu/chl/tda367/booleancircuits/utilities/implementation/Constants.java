@@ -2,6 +2,8 @@ package edu.chl.tda367.booleancircuits.utilities.implementation;
 
 import java.awt.Color;
 
+import javax.swing.*;
+
 public class Constants {
 	public static final int canvasBackgroundLineDistance = 32;
 	public static final int canvasDotDiameter = 1;
@@ -10,7 +12,7 @@ public class Constants {
 	public static final int componentSize = 32;
 	public static final Color connectionHigh = Color.red;
 	public static final Color connectionLow = Color.black;
-	public static final String creditsText = "<html><H1>Boolean Circuits</H1><H3>Version: 1.0</H3>"
+	public static final String creditsText = "<html><H1>Boolean Circuits</H1><H3>Version: Alpha</H3>"
 			+ "This software is developed by Robert Kaufmann, Anton Lin, "
 			+ "Boel Nelson and Jennifer Panditha at Chalmers university "
 			+ "of technology. It is published under GNU GPL v3.<br><br>"
@@ -22,4 +24,5 @@ public class Constants {
 	public static final Color drawSelectBorder = new Color(20, 20, 240, 180);
 	public static final Color drawSelectFill = new Color(100, 100, 240, 140);
 	public static final String manualPath = "manual.pdf";
+	public static final Icon aboutImage = new ImageIcon("resources/Images/aboutImage.png");
 }

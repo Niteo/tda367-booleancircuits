@@ -1,14 +1,11 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JSplitPane;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 public class AboutBox extends JDialog {
 
@@ -21,16 +18,17 @@ public class AboutBox extends JDialog {
 	private JSplitPane verticalPane = new JSplitPane();
 
 	/**
-	 * Returns an instance of aboutbox.
-	 *
+	 * Returns an instance of AboutBox.
+	 * 
 	 * @param s
 	 *            String the info text
+	 * @param i
+	 *            Icon to use as about image
 	 */
 	public AboutBox(final String s, final Icon i) {
 		super();
 
 		listener = new ActionListener() {
-
 			@Override
 			public void actionPerformed(final ActionEvent e) {
 				dispose();
@@ -44,10 +42,13 @@ public class AboutBox extends JDialog {
 		setResizable(false);
 		setInfoText(s);
 		setPic(i);
+		
 		verticalPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		horizontalPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
 		okButton.addActionListener(listener);
-
+		picLabel.setBorder(new LineBorder(Color.BLACK));
+		infoLabel.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));
+		
 		add(horizontalPane);
 		horizontalPane.setDividerLocation(150);
 		horizontalPane.setRightComponent(verticalPane);
