@@ -9,7 +9,7 @@ View
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>450</x>
-      <y>650</y>
+      <y>630</y>
       <w>430</w>
       <h>150</h>
     </coordinates>
@@ -72,10 +72,10 @@ View
       <x>560</x>
       <y>550</y>
       <w>50</w>
-      <h>120</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;100;30;30</additional_attributes>
+    <additional_attributes>30;80;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -148,12 +148,12 @@ UndoRedo
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>560</x>
-      <y>770</y>
+      <y>750</y>
       <w>50</w>
-      <h>100</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;80;30;30</additional_attributes>
+    <additional_attributes>30;100;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -185,12 +185,12 @@ IObservable
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>200</x>
-      <y>620</y>
+      <y>610</y>
       <w>270</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>30;30;250;40</additional_attributes>
+    <additional_attributes>30;40;250;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -207,12 +207,12 @@ IObservable
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>220</x>
-      <y>760</y>
+      <y>740</y>
       <w>250</w>
-      <h>50</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;230;30</additional_attributes>
+    <additional_attributes>30;50;230;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -226,21 +226,28 @@ IObservable
 --
 -coordinate: Coordinate
 --
++AbstractCircuitGate(int inPorts, int outPorts)
 #createInputs(int amount)
 #createOutputs(int amount)
 #setOutput(int index, boolean value)
-#getInputs():List&lt;GateInput&gt;
++getInputs():List&lt;GateInput&gt;
++overwriteGate(AbstractCircuitGate gate)
 +connectInput(int inputPort, AbstractCircuitGate component, int outputPort)
 +getOutputValue(int index)
 +getNoOfInputs():int
 +getNoOfOutputs():int
-+getPosition():Coordinate
++getPosition():Point
 +setPosition()
-+move()
-+update()
++move(int deltaX, int deltaY)
++update():boolean
 +getComponentTier():int
++getRecoupledTo():Collection &lt;ICircuitGate&gt;
++connectsTo(ICircuitGate gate): boolean
++clone(): AbstractCircuitGate
 /+updateOutput()/
-+clone()
+/+emptyGateClone()/:AbstractCircuitGate
+/+toString/:AbstractCircuitGate
+
 
 </panel_attributes>
     <additional_attributes/>
@@ -248,14 +255,14 @@ IObservable
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1050</x>
+      <x>920</x>
       <y>620</y>
-      <w>170</w>
+      <w>320</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>MainWindow
 --
-+main(String args[])
++propertyChange(final PropertyChangeEvent evt)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -274,28 +281,31 @@ IObservable
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>920</x>
-      <y>730</y>
-      <w>260</w>
-      <h>80</h>
+      <y>690</y>
+      <w>310</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>CenterStage
 --
-+update(ModelManager modelManager) 
 +getPanel():JPanel
-+getTab():Tab</panel_attributes>
++getTabManager()_TabManager
++setBackground(final Ibackground background)
++setUSStandard(final boolean bool)
++update(final ModelManager modelManager) </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1420</x>
-      <y>830</y>
+      <x>1500</x>
+      <y>620</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>Palette
 --
-+getView():JScrollPane  </panel_attributes>
++getView():JScrollPane 
+ </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -313,13 +323,13 @@ PropertyChangeListener</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1190</x>
+      <x>1210</x>
       <y>610</y>
-      <w>140</w>
+      <w>120</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>120;30;30;30</additional_attributes>
+    <additional_attributes>100;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -337,7 +347,6 @@ PropertyChangeListener</panel_attributes>
 +getCloseAllWorkspacesActions():Action
 +getOpenWorkspaceAction():Action
 +getSaveActiveWorkspaceAction():Action
-+getSaveActiveWorkspaceAsComponenAction():Action
 +getSaveAllWorkspacesAction():Action
 +getCopySelectedComponentsAction():Action
 +getCutSelectedComponentsAction():Action
@@ -368,72 +377,73 @@ PropertyChangeListener</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1050</x>
+      <x>1060</x>
       <y>640</y>
-      <w>60</w>
-      <h>110</h>
+      <w>50</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;90;40;30</additional_attributes>
+    <additional_attributes>30;50;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1190</x>
+      <x>1210</x>
       <y>630</y>
-      <w>320</w>
-      <h>220</h>
+      <w>330</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>300;200;300;60;100;60;100;30;30;30</additional_attributes>
+    <additional_attributes>310;40;310;70;80;70;80;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1120</x>
+      <x>1200</x>
       <y>640</y>
-      <w>200</w>
-      <h>210</h>
+      <w>80</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>180;190;180;70;30;70;30;30</additional_attributes>
+    <additional_attributes>60;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>850</x>
       <y>600</y>
-      <w>220</w>
-      <h>90</h>
+      <w>90</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>30;70;200;30</additional_attributes>
+    <additional_attributes>30;30;70;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>740</x>
+      <x>770</x>
       <y>640</y>
-      <w>350</w>
-      <h>230</h>
+      <w>170</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>30;210;330;30</additional_attributes>
+    <additional_attributes>30;260;120;260;120;40;150;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>550</x>
-      <y>1310</y>
+      <x>540</x>
+      <y>1210</y>
       <w>140</w>
-      <h>90</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>AndGate
 --
 +updateOutput()
 +toString: String
-+clone()
-:AbstractCircuitGate</panel_attributes>
++emptyGateClone()
+:AbstractCircuitGate
+#updateOutput()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -446,10 +456,10 @@ PropertyChangeListener</panel_attributes>
     </coordinates>
     <panel_attributes>OrGate
 --
-+updateOutput()
 +toString: String
-+clone()
-:AbstractCircuitGate</panel_attributes>
+#emptyGateClone()
+:AbstractCircuitGate
+#updateOutput()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -471,33 +481,33 @@ AbstractCircuitGate</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>190</x>
+      <x>180</x>
       <y>1390</y>
-      <w>130</w>
-      <h>90</h>
+      <w>140</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>NandGate
 --
-+updateOutput()
 +toString: String
-+clone()
-:AbstractCircuitGate </panel_attributes>
+#emptyGateClone()
+:AbstractCircuitGate
+#updateOutput()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>190</x>
+      <x>180</x>
       <y>1500</y>
-      <w>150</w>
+      <w>160</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>NorGate
 --
-+updateOutput()
 +toString: String
-+clone()
-:AbstractCircuitGate</panel_attributes>
+#emptyGateClone()
+:AbstractCircuitGate
+#updateOutput()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -510,38 +520,38 @@ AbstractCircuitGate</panel_attributes>
     </coordinates>
     <panel_attributes>XorGate
 --
-+updateOutput()
 +toString: String
-+clone()
-:AbstractCircuitGate</panel_attributes>
+#emptyGateClone()
+:AbstractCircuitGate
+#updateOutput()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>550</x>
-      <y>1430</y>
+      <x>540</x>
+      <y>1330</y>
       <w>150</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>NxorGate
+    <panel_attributes>XNorGate
 --
-+updateOutput()
 +toString: String
-+clone()
-:AbstractCircuitGate</panel_attributes>
+#emptyGateClone()
+:AbstractCircuitGate
+#updateOutput()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>490</x>
-      <y>1300</y>
-      <w>80</w>
+      <y>1200</y>
+      <w>70</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;60;30</additional_attributes>
+    <additional_attributes>30;30;50;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -601,13 +611,13 @@ AbstractCircuitGate</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>480</x>
-      <y>1330</y>
-      <w>90</w>
-      <h>170</h>
+      <x>490</x>
+      <y>1310</y>
+      <w>70</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;70;150</additional_attributes>
+    <additional_attributes>30;30;50;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -617,10 +627,10 @@ AbstractCircuitGate</panel_attributes>
       <w>260</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>Tab
+    <panel_attributes>TabPanel
 --
-+addTab(String name, Canvas canvas)
-+getTabbedPane():JTabbedPane
++getCloseButton():JButton
++setTabPanelTitle(final String title)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -629,26 +639,41 @@ AbstractCircuitGate</panel_attributes>
     <coordinates>
       <x>920</x>
       <y>920</y>
-      <w>150</w>
-      <h>50</h>
+      <w>310</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Canvas
 --
-+getCanvas():JPanel</panel_attributes>
++setBackground(final Ibackground background)
++setUSStandard(final boolean bool)
++getCanvas():JPanel
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1190</x>
-      <y>830</y>
+      <x>1240</x>
+      <y>710</y>
       <w>220</w>
-      <h>60</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>ToolbarPanel
 --
-+setTabPanelTitle(String title)
-+getCloseButton():JButton
++getCopyButton():JButton
++getCutButton:JButton
++getNewWorkspaceButton():JButton
++getOpenFileButton():JButton
++getPasteButton():JButton
++getPauseClockButton():JButton
++getRedoButton():JButton
++getSaveAllButton():JButton
++getSaveAsComponentButton()
+:JButton
++getSaveButton():JButton
++getStartClockButton():JButton
++getUndoButton():JButton
++initIcons()
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -679,13 +704,14 @@ AbstractCircuitGate</panel_attributes>
     <coordinates>
       <x>20</x>
       <y>190</y>
-      <w>310</w>
+      <w>350</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>ComponentFolder
 --
++ComponentFolder(List&lt;ICircuitGate&gt; componentList,
+ String name)
 +getName():String
-+getComponent(int index):AbstractCircuitGate 
 +getAllComponents(): List&lt;AbstractCircuitGate&gt;
 </panel_attributes>
     <additional_attributes/>
@@ -704,27 +730,31 @@ AbstractCircuitGate</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>550</x>
-      <y>1200</y>
-      <w>120</w>
-      <h>70</h>
+      <x>540</x>
+      <y>1050</y>
+      <w>250</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>GateInput
 --
-+updateOutput()
-+toString: String</panel_attributes>
++getInputComponent():ICircuitGate
++getInputPort():int
++getInputValue():boolean
++reset()
++setInputComponent(final ICircuitGate
+ component, final int port)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>490</x>
-      <y>1200</y>
-      <w>80</w>
-      <h>60</h>
+      <y>1140</y>
+      <w>70</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>60;30;30;40</additional_attributes>
+    <additional_attributes>50;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -736,9 +766,11 @@ AbstractCircuitGate</panel_attributes>
     </coordinates>
     <panel_attributes>ConstantGate
 --
-/#updateOutput/
-+clone()
-:AbstractCircuitGate
+
++toString:String
+#emptyGateClone():AbstractCircuitGate
+#updateOutput
+
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -747,8 +779,8 @@ AbstractCircuitGate</panel_attributes>
     <coordinates>
       <x>910</x>
       <y>590</y>
-      <w>680</w>
-      <h>460</h>
+      <w>880</w>
+      <h>510</h>
     </coordinates>
     <panel_attributes>View
 </panel_attributes>
@@ -759,8 +791,8 @@ AbstractCircuitGate</panel_attributes>
     <coordinates>
       <x>0</x>
       <y>1030</y>
-      <w>770</w>
-      <h>580</h>
+      <w>790</w>
+      <h>620</h>
     </coordinates>
     <panel_attributes>Components</panel_attributes>
     <additional_attributes/>
@@ -845,9 +877,9 @@ AbstractCircuitGate</panel_attributes>
     <type>com.umlet.element.Package</type>
     <coordinates>
       <x>800</x>
-      <y>1050</y>
+      <y>1180</y>
       <w>800</w>
-      <h>380</h>
+      <h>410</h>
     </coordinates>
     <panel_attributes>view.draw
 --
@@ -858,26 +890,28 @@ AbstractCircuitGate</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>810</x>
-      <y>1290</y>
+      <y>1430</y>
       <w>360</w>
-      <h>50</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>BlankBackground
 --
-+draw(Graphics g, Point offset, Dimension canvasSize)</panel_attributes>
++draw(final Graphics g,final Point offset,
+final Dimension canvasSize)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>810</x>
-      <y>1350</y>
+      <y>1500</y>
       <w>360</w>
-      <h>50</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>DottedBackground	
 --
-+draw(Graphics g, Point offset, Dimension canvasSize)
++draw(final Graphics g,final Point offset,
+ finalDimension canvasSize)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -885,20 +919,21 @@ AbstractCircuitGate</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>810</x>
-      <y>1230</y>
+      <y>1360</y>
       <w>360</w>
-      <h>50</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>GridBackground
 --
-+draw(Graphics g, Point offset, Dimension canvasSize)</panel_attributes>
++draw(final Graphics g,final Point offset,
+final Dimension canvasSize)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>1300</x>
-      <y>1260</y>
+      <y>1390</y>
       <w>180</w>
       <h>110</h>
     </coordinates>
@@ -914,7 +949,7 @@ Dimension canvasSize)</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>1140</x>
-      <y>1230</y>
+      <y>1360</y>
       <w>180</w>
       <h>110</h>
     </coordinates>
@@ -925,7 +960,7 @@ Dimension canvasSize)</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>1140</x>
-      <y>1290</y>
+      <y>1420</y>
       <w>180</w>
       <h>50</h>
     </coordinates>
@@ -936,31 +971,32 @@ Dimension canvasSize)</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>1140</x>
-      <y>1290</y>
+      <y>1420</y>
       <w>180</w>
-      <h>110</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>160;30;70;30;70;90;30;90</additional_attributes>
+    <additional_attributes>160;30;70;30;70;110;30;110</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>810</x>
-      <y>1090</y>
-      <w>360</w>
+      <y>1220</y>
+      <w>420</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>Draw
 --
-+setBackground(IBackground background)
-+drawBackground(Graphics2D g, Point offset, 
- Dimension canvasSize)
-+setUsStandard(boolean standard)
-+drawGate(Graphics2D g, ICircuitGate gate,
- Point offset)
-+drawGateConnections(Graphics2D g, ICircuitGate gate,
- Point offset)
+
++drawBackground(final Graphics2D g,final Point offset, 
+ final Dimension canvasSize)
++drawGate(final Graphics2D g,final ICircuitGate gate,
+ final Point offset)
++drawGateConnections(final Graphics2D g,final ICircuitGate gate,
+ final Point offset)
++setBackground(final IBackground background)
++setUsStandard(final boolean standard)
 
 
 </panel_attributes>
@@ -970,7 +1006,7 @@ Dimension canvasSize)</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>1260</x>
-      <y>1090</y>
+      <y>1220</y>
       <w>330</w>
       <h>130</h>
     </coordinates>
@@ -987,35 +1023,35 @@ IDraw
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1140</x>
-      <y>1120</y>
-      <w>140</w>
+      <x>1200</x>
+      <y>1250</y>
+      <w>80</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>120;30;30;30</additional_attributes>
+    <additional_attributes>60;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1140</x>
-      <y>1140</y>
-      <w>270</w>
-      <h>140</h>
+      <x>1200</x>
+      <y>1310</y>
+      <w>120</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>250;120;250;100;60;100;60;30;30;30</additional_attributes>
+    <additional_attributes>100;80;30;80;30;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>970</x>
-      <y>940</y>
+      <y>970</y>
       <w>480</w>
-      <h>170</h>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>460;150;460;80;30;80;30;30</additional_attributes>
+    <additional_attributes>460;250;460;70;30;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1030,6 +1066,107 @@ IDraw
 +copy(List&lt;ICircuitGate&gt; originalList)
 +paste():List&lt;ICircuitGate&gt;
 +getLastPastedComponents():List&lt;ICircuitGate&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>540</x>
+      <y>1430</y>
+      <w>150</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>EqualGate
+--
++toString:String
+#emptyGateClone()
+:AbstractCircuitGate
+#updateOutput()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>540</x>
+      <y>1540</y>
+      <w>140</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Clock
+--
++toggleClock
++toString:String
+#emptyGateClone()
+:AbstractCircuitGate
+#updateOutput</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>480</x>
+      <y>1330</y>
+      <w>80</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;290;60;290</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>490</x>
+      <y>1330</y>
+      <w>70</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;130;50;130</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1470</x>
+      <y>710</y>
+      <w>320</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>CanvasPopup
+--
++getInputIndex(final JMenuItem item):int
++getOutputIndex(final JMenuItem item):int
++isCopyButton(final JmenuItem item):boolean
++isCutButton(final JmenuItem item):boolean
++isInputButton(final JmenuItem item):boolean
++isOutputButton(final JmenuItem item):boolean
++isRemoveButton(final JmenuItem item):boolean
++updateMenu(final int inputs, final int outputs,
+ final boolean showInput, final boolean showOutput)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1470</x>
+      <y>910</y>
+      <w>320</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>TabManager
+--
++addTab(final String name, final Canvas canvas)
++getLastPanel(): TabPanel
++getTabbedPane():JTabbedPane
++getTabCount():int
++getTabPanel(final int i):TabPanel
++removeAllTabs()
++removeTab(final int i)
++setSelectedTabIndex(final int i)
++updateTabbedPane()
+
+
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
