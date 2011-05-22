@@ -16,11 +16,11 @@ public interface IDraw {
 	 * Draws a background.
 	 * 
 	 * @param g
-	 *            graphics
+	 *            graphics object to draw with
 	 * @param offset
-	 *            Point offset values
+	 *            offset values
 	 * @param canvasSize
-	 *            Dimension of the canvas
+	 *            dimension of the canvas
 	 */
 	public void drawBackground(Graphics2D g, Point offset, Dimension canvasSize);
 
@@ -28,11 +28,11 @@ public interface IDraw {
 	 * Draws a gate.
 	 * 
 	 * @param g
-	 *            Graphics2D object to draw with
+	 *            graphics object to draw with
 	 * @param gate
-	 *            the gate to draw
+	 *            the component to draw
 	 * @param offset
-	 *            Point offset values
+	 *            offset values
 	 */
 	public void drawGate(Graphics2D g, ICircuitGate gate, Point offset);
 
@@ -40,17 +40,17 @@ public interface IDraw {
 	 * Draws a gate's connections.
 	 * 
 	 * @param g
-	 *            Graphics2D object to draw with
+	 *            graphics object to draw with
 	 * @param gate
 	 *            the gate to draw
 	 * @param offset
-	 *            Point offset values
+	 *            offset values
 	 */
 	public void drawGateConnections(Graphics2D g, ICircuitGate gate,
 			Point offset);
 
 	/**
-	 * Sets the background
+	 * Sets the background strategy
 	 * 
 	 * @param background
 	 *            IBackground
@@ -58,8 +58,11 @@ public interface IDraw {
 	public void setBackground(IBackground background);
 
 	/**
-	 * sets the standard to the US standard
+	 * Sets if the US standard should be used.
+	 * 
+	 * @param value
+	 *            set to true if US standard should be used
 	 */
-	public void setUsStandard(boolean standard);
+	public void setUsStandard(boolean value);
 
 }

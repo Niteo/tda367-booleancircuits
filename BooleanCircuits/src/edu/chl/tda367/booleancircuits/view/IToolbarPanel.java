@@ -13,89 +13,89 @@ public interface IToolbarPanel {
 	/**
 	 * Returns the copy button.
 	 * 
-	 * @return JButton
+	 * @return copy button
 	 */
 	public JButton getCopyButton();
 
 	/**
 	 * Returns the cut button.
 	 * 
-	 * @return JButton
+	 * @return cut button
 	 */
 	public JButton getCutButton();
 
 	/**
-	 * Returns the new works space button.
+	 * Returns the new workspace button.
 	 * 
-	 * @return JButton
+	 * @return new workspace button
 	 */
 	public JButton getNewWorkspaceButton();
 
 	/**
 	 * Returns the open file button.
 	 * 
-	 * @return JButton
+	 * @return open file button
 	 */
 	public JButton getOpenFileButton();
 
 	/**
 	 * Returns the paste button.
 	 * 
-	 * @return JButton
+	 * @return paste button
 	 */
 	public JButton getPasteButton();
 
 	/**
 	 * Returns the pause clock button.
 	 * 
-	 * @return JButton
+	 * @return pause clock button
 	 */
 	public JButton getPauseClockButton();
 
 	/**
 	 * Returns the redo button.
 	 * 
-	 * @return JButton
+	 * @return redo button
 	 */
 	public JButton getRedoButton();
 
 	/**
 	 * Returns the save all button.
 	 * 
-	 * @return JButton
+	 * @return save all button
 	 */
 	public JButton getSaveAllButton();
 
 	/**
 	 * Returns the save as component button.
 	 * 
-	 * @return JButton
+	 * @return save as component button
 	 */
 	public JButton getSaveAsComponentButton();
 
 	/**
 	 * Returns the save button.
 	 * 
-	 * @return JButton
+	 * @return save button
 	 */
 	public JButton getSaveButton();
 
 	/**
 	 * Returns the start clock button.
 	 * 
-	 * @return JButton
+	 * @return start clock button
 	 */
 	public JButton getStartClockButton();
 
 	/**
 	 * Returns the undo button.
 	 * 
-	 * @return JButton
+	 * @return undo button
 	 */
 	public JButton getUndoButton();
 
 	/**
-	 * Sets all the toolbar icons.
+	 * Initiates all the toolbar icons.
 	 */
 	public void initIcons();
 

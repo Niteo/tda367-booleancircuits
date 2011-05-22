@@ -11,10 +11,10 @@ import javax.swing.JScrollPane;
 public interface IPalette {
 
 	/**
-	 * Returns the scrollpane containing the panel and all visual objects of the
+	 * Returns the ScrollPane containing the panel and all visual objects of the
 	 * palette.
 	 * 
-	 * @return JScrollPane
+	 * @return the ScrollPane
 	 */
 	public JScrollPane getView();
 

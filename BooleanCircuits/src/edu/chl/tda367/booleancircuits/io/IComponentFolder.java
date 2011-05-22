@@ -13,14 +13,14 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 public interface IComponentFolder {
 
 	/**
-	 * returns a list of all components if folder;
+	 * Returns a list of all components in folder;
 	 * 
-	 * @return list of AbstractCircuitGate
+	 * @return list of ICircuitGate
 	 */
 	public List<ICircuitGate> getAllComponents();
 
 	/**
-	 * returns name of componentfolder
+	 * Returns name of the folder.
 	 * 
 	 * @return
 	 */

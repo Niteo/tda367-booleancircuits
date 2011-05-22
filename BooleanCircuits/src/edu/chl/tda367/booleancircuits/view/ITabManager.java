@@ -5,7 +5,7 @@ import javax.swing.JTabbedPane;
 import edu.chl.tda367.booleancircuits.view.implementation.*;
 
 /**
- * An interface to describe a tab manager.
+ * An interface describing a tab manager.
  * 
  * @author Boel
  * 
@@ -16,40 +16,40 @@ public interface ITabManager {
 	 * Adds a new tab to the tabbedPane.
 	 * 
 	 * @param name
-	 *            String displayed name of the tab
+	 *            name of the tab
 	 * @param canvas
-	 *            Canvas the canvas connected to the tab
+	 *            the canvas connected to the tab
 	 */
 	public void addTab(String name, Canvas canvas);
 
 	/**
 	 * Returns the last added tabPanel.
 	 * 
-	 * @return TabPanel
+	 * @return the last added tabPanel
 	 */
 	public TabPanel getLastTabPanel();
 
 	/**
-	 * Returns the tabbedPane.
+	 * Returns the TabbedPane.
 	 * 
-	 * @return JTabbedPane the tabbedPane containing the tabs
+	 * @return the TabbedPane containing the tabs
 	 */
 
 	public JTabbedPane getTabbedPane();
 
 	/**
-	 * Returns the number of tabs on the tabbedPane.
+	 * Returns the number of tabs on the TabbedPane.
 	 * 
-	 * @return int number tabs
+	 * @return number tabs
 	 */
 	public int getTabCount();
 
 	/**
-	 * Returns the tabPanel at a given index.
+	 * Returns the tab panel at a given index.
 	 * 
 	 * @param i
 	 *            int index of the tabPanel
-	 * @return TabPanel
+	 * @return the panel at the specified index
 	 */
 	public TabPanel getTabPanel(int i);
 
@@ -62,7 +62,7 @@ public interface ITabManager {
 	 * Removes a tab from the tabbedPane.
 	 * 
 	 * @param i
-	 *            int index of the tab
+	 *            index of the tab to remove
 	 */
 	public void removeTab(int i);
 
@@ -70,7 +70,7 @@ public interface ITabManager {
 	 * Sets the selected tab.
 	 * 
 	 * @param i
-	 *            int index of the selected tab
+	 *            index of the tab to select
 	 */
 	public void setSelectedTabIndex(int i);
 

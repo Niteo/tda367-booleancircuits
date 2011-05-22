@@ -74,7 +74,7 @@ public interface ICircuitGate {
 	 * 
 	 * @param index
 	 *            the port to retrieve from
-	 * @return
+	 * @return port boolean value
 	 */
 	public boolean getOutputValue(int index);
 
@@ -86,9 +86,9 @@ public interface ICircuitGate {
 	public Point getPosition();
 
 	/**
-	 * Returns a list of all components this component is recoupled to.
+	 * Returns all components this component is recoupled to.
 	 * 
-	 * @return a list of components recoupled to
+	 * @return components recoupled to
 	 */
 	public Collection<ICircuitGate> getRecoupledTo();
 
@@ -108,7 +108,7 @@ public interface ICircuitGate {
 	 * Overwrites gate with another one, copying all properties.
 	 * 
 	 * @param gate
-	 *            the gate to override with
+	 *            the gate to overwrite with
 	 */
 	public void overwriteGate(ICircuitGate gate);
 

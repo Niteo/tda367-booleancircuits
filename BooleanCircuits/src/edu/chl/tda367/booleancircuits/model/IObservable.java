@@ -2,6 +2,12 @@ package edu.chl.tda367.booleancircuits.model;
 
 import java.beans.PropertyChangeListener;
 
+/**
+ * Interface for classes that wants to be observable by PropertyChangeListener.
+ * 
+ * @author Kaufmann
+ * 
+ */
 public interface IObservable {
 
 	/**

@@ -14,7 +14,7 @@ public interface IMasterController {
 	 * Adds a CircuitComponent in the palette to the specified coordinate in the
 	 * active workspace.
 	 * 
-	 * @param coord
+	 * @param position
 	 *            the coordinate to add to
 	 */
 	public void addComponent(Point position);
@@ -32,10 +32,10 @@ public interface IMasterController {
 	public boolean closeAllWorkspaces();
 
 	/**
-	 * Closes a specific workspace selected by int.
+	 * Closes a specific workspace selected by index
 	 * 
 	 * @param i
-	 *            int number of the workspace
+	 *            index of the workspace
 	 * @return returns true if workspace has been closed successfully
 	 */
 	public boolean closeWorkspace(int i);
@@ -45,7 +45,7 @@ public interface IMasterController {
 	 * component, second specifiec output.
 	 * 
 	 * @param g
-	 *            component to connect. Enter null to clear component memory.
+	 *            component to connect.
 	 * @param port
 	 *            port to connect
 	 */
@@ -62,9 +62,7 @@ public interface IMasterController {
 	public void cutSelectedComponents();
 
 	/**
-	 * Imports workspace into active workspace
-	 * 
-	 * @param file
+	 * Imports saved workspace into active workspace
 	 */
 	public void importWorkspace();
 
@@ -74,22 +72,17 @@ public interface IMasterController {
 	public void newWorkspace();
 
 	/**
-	 * Opens the specified workspace.
-	 * 
-	 * @param path
-	 *            Path to the workspace to open.
+	 * Lets the user choose a circuit, then opens it into a new workspace.
 	 */
 	public void openWorkspace();
 
 	/**
-	 * Pastes the selected components to the active workspace from the
-	 * clipboard.
+	 * Pastes clipboard components to the currently active workspace.
 	 */
 	public void pasteSelectedComponents();
 
 	/**
-	 * Pastes the selected components to the active workspace from the
-	 * clipboard.
+	 * Pastes clipboard components to the currently active workspace.
 	 * 
 	 * @param position
 	 *            Point position in the active model
@@ -136,7 +129,7 @@ public interface IMasterController {
 	 * Selects the first occurance of a component at the given coordinate in the
 	 * active workspace
 	 * 
-	 * @param coord
+	 * @param position
 	 *            the coordinate to select from
 	 * @param multiSelect
 	 *            boolean if false, all selected components will be deselected
@@ -144,10 +137,12 @@ public interface IMasterController {
 	public void selectComponent(Point position, boolean multiSelect);
 
 	/**
-	 * selects all components in selection square
+	 * Selects all components existing in the square created by two points
 	 * 
 	 * @param pos1
+	 *            start point
 	 * @param pos2
+	 *            end point
 	 */
 	public void selectComponents(Point pos1, Point pos2);
 
