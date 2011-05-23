@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 
 /**
@@ -18,36 +19,36 @@ import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 
 public class ClipboardManager implements IClipboardManager {
 
-	private List<ICircuitGate> clipboardList = new ArrayList<ICircuitGate>();
-	private Map<ICircuitGate, ICircuitGate> componentsMap = new HashMap<ICircuitGate, ICircuitGate>();
-	private List<ICircuitGate> lastPastedComponents = new ArrayList<ICircuitGate>();
+	private List<IGateWrapper> clipboardList = new ArrayList<IGateWrapper>();
+	private Map<IGateWrapper, IGateWrapper> componentsMap = new HashMap<IGateWrapper, IGateWrapper>();
+	private List<IGateWrapper> lastPastedComponents = new ArrayList<IGateWrapper>();
 
 	@Override
-	public void copy(final List<ICircuitGate> originalList) {
+	public void copy(final List<IGateWrapper> originalList) {
 		clipboardList.clear();
 		clipboardList = duplicateList(originalList);
 	}
 
 	@Override
-	public List<ICircuitGate> getLastPastedComponents() {
+	public List<IGateWrapper> getLastPastedComponents() {
 		return lastPastedComponents;
 	}
 
 	@Override
-	public List<ICircuitGate> paste() {
+	public List<IGateWrapper> paste() {
 		return duplicateList(clipboardList);
 	}
 
-	private List<ICircuitGate> duplicateList(final List<ICircuitGate> list) {
+	private List<IGateWrapper> duplicateList(final List<IGateWrapper> list) {
 
-		List<ICircuitGate> dupList = new ArrayList<ICircuitGate>();
-		for (ICircuitGate gate : list) {
+		List<IGateWrapper> dupList = new ArrayList<IGateWrapper>();
+		for (IGateWrapper gate : list) {
 			if (gate != null) {
-				componentsMap.put(gate, gate.clone());
+				componentsMap.put(gate, new GateWrapper(gate.getGateClone()));
 			}
 		}
 
-		for (ICircuitGate gate : list) {
+		for (IGateWrapper gate : list) {
 			if (gate != null) {
 				for (IGateInput input : gate.getInputs()) {
 					if (!list.contains(input.getInputComponent())) {
@@ -56,7 +57,7 @@ public class ClipboardManager implements IClipboardManager {
 					} else {
 						componentsMap.get(gate).connectInput(
 								gate.getInputs().indexOf(input),
-								componentsMap.get(input.getInputComponent()),
+								componentsMap.get(input.getInputComponent()).getGate(),
 								input.getInputPort());
 					}
 				}

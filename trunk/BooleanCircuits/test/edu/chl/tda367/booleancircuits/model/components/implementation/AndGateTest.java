@@ -1,8 +1,8 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
-
-import java.awt.Point;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -20,8 +20,6 @@ public class AndGateTest {
 		AndGate and = new AndGate(2);
 		ICircuitGate clone = and.clone();
 		assertTrue(clone instanceof AndGate);
-		assertTrue(clone.getPosition().x == and.getPosition().x
-				&& clone.getPosition().y == and.getPosition().y);
 		assertTrue(clone.getNoOfInputs() == and.getNoOfInputs());
 		assertTrue(clone.getNoOfOutputs() == and.getNoOfOutputs());
 	}
@@ -85,12 +83,6 @@ public class AndGateTest {
 	}
 
 	@Test
-	public void testGetPosition() {
-		AndGate and = new AndGate(2);
-		assertTrue(and.getPosition().x == 0 && and.getPosition().y == 0);
-	}
-
-	@Test
 	public void testGetRecoupledTo() {
 		AndGate and = new AndGate(2);
 		AndGate testGate = new AndGate(2);
@@ -99,14 +91,6 @@ public class AndGateTest {
 		and.connectInput(0, testGate, 0);
 		testGate.connectInput(1, and, 1);
 		assertTrue(and.getRecoupledTo().size() == 1);
-	}
-
-	@Test
-	public void testMove() {
-		AndGate and = new AndGate(2);
-		assertTrue(and.getPosition().x == 0 && and.getPosition().y == 0);
-		and.move(7, 8);
-		assertTrue(and.getPosition().x == 7 && and.getPosition().y == 8);
 	}
 
 	@Test
@@ -129,15 +113,6 @@ public class AndGateTest {
 		AndGate and = new AndGate(2);
 		and.setOutput(0, true);
 		assertTrue(and.getOutputValue(0));
-	}
-
-	@Test
-	public void testSetPosition() {
-		AndGate and = new AndGate(2);
-		assertTrue(and.getPosition().x == 0 && and.getPosition().y == 0);
-		Point p = new Point(8, 8);
-		and.setPosition(p);
-		assertTrue(and.getPosition() == p);
 	}
 
 	@Test

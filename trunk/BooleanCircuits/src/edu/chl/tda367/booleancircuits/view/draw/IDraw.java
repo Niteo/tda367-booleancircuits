@@ -1,20 +1,24 @@
 package edu.chl.tda367.booleancircuits.view.draw;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.util.Collection;
 
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.utilities.IConnection;
 
 /**
  * A drawing interface.
- * 
+ *
  * @author Boel
- * 
+ *
  */
 public interface IDraw {
 
 	/**
 	 * Draws a background.
-	 * 
+	 *
 	 * @param g
 	 *            graphics object to draw with
 	 * @param offset
@@ -26,7 +30,7 @@ public interface IDraw {
 
 	/**
 	 * Draws a gate.
-	 * 
+	 *
 	 * @param g
 	 *            graphics object to draw with
 	 * @param gate
@@ -34,24 +38,24 @@ public interface IDraw {
 	 * @param offset
 	 *            offset values
 	 */
-	public void drawGate(Graphics2D g, ICircuitGate gate, Point offset);
+	public void drawGate(Graphics2D g, IGateWrapper gate, Point offset);
 
 	/**
 	 * Draws a gate's connections.
-	 * 
+	 *
 	 * @param g
 	 *            graphics object to draw with
-	 * @param gate
-	 *            the gate to draw
+	 * @param coll
+	 *            connections to draw
 	 * @param offset
 	 *            offset values
 	 */
-	public void drawGateConnections(Graphics2D g, ICircuitGate gate,
+	public void drawGateConnections(Graphics2D g, Collection<IConnection> coll,
 			Point offset);
 
 	/**
 	 * Sets the background strategy
-	 * 
+	 *
 	 * @param background
 	 *            IBackground
 	 */
@@ -59,7 +63,7 @@ public interface IDraw {
 
 	/**
 	 * Sets if the US standard should be used.
-	 * 
+	 *
 	 * @param value
 	 *            set to true if US standard should be used
 	 */

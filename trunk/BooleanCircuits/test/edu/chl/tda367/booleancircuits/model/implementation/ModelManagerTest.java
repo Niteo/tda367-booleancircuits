@@ -1,15 +1,21 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Point;
-import java.beans.*;
-import java.util.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.*;
+import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
 
 public class ModelManagerTest {
 
@@ -18,22 +24,23 @@ public class ModelManagerTest {
 		ModelManager mm = new ModelManager();
 
 		mm.newWorkspace();
-		mm.addComponent(new ConstantGate(true), new Point(0, 0));
+		mm.addComponent(new GateWrapper(new ConstantGate(true)),
+				new Point(0, 0));
 
 		assertTrue(mm.getActiveWorkspaceModel().getComponent(new Point(0, 0)) instanceof ConstantGate);
 	}
 
 	@Test
 	public void testAddComponentsList() {
-		List<ICircuitGate> list = new ArrayList<ICircuitGate>();
-		list.add(new AndGate(2));
+		List<IGateWrapper> list = new ArrayList<IGateWrapper>();
+		list.add(new GateWrapper(new AndGate(2)));
 		new ModelManager().addComponents(list);
 	}
 
 	@Test
 	public void testAddComponentsListPoint() {
-		List<ICircuitGate> list = new ArrayList<ICircuitGate>();
-		list.add(new AndGate(2));
+		List<IGateWrapper> list = new ArrayList<IGateWrapper>();
+		list.add(new GateWrapper(new AndGate(2)));
 		new ModelManager().addComponents(list, new Point(0, 0));
 	}
 
@@ -98,8 +105,8 @@ public class ModelManagerTest {
 
 	@Test
 	public void testConnectComponents() {
-		new ModelManager().connectComponents(new AndGate(2), new NandGate(2),
-				0, 0);
+		new ModelManager().connectComponents(new GateWrapper(new AndGate(2)),
+				new GateWrapper(new NandGate(2)), 0, 0);
 	}
 
 	@Test
@@ -128,7 +135,7 @@ public class ModelManagerTest {
 
 	@Test
 	public void testIsSelectedComponent() {
-		new ModelManager().isSelectedComponent(new NandGate(220));
+		new ModelManager().isSelectedComponent(new GateWrapper(new NandGate(220)));
 	}
 
 	@Test
@@ -152,7 +159,7 @@ public class ModelManagerTest {
 
 	@Test
 	public void testRemoveComponent() {
-		new ModelManager().removeComponent(new ConstantGate(true));
+		new ModelManager().removeComponent(new GateWrapper(new ConstantGate(true)));
 	}
 
 	@Test

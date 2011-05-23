@@ -1,8 +1,8 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
-
-import java.awt.Point;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -15,8 +15,6 @@ public class NorGateTest {
 		NorGate nor = new NorGate(2);
 		ICircuitGate clone = nor.clone();
 		assertTrue(clone instanceof NorGate);
-		assertTrue(clone.getPosition().x == nor.getPosition().x
-				&& clone.getPosition().y == nor.getPosition().y);
 		assertTrue(clone.getNoOfInputs() == nor.getNoOfInputs());
 		assertTrue(clone.getNoOfOutputs() == nor.getNoOfOutputs());
 	}
@@ -80,12 +78,6 @@ public class NorGateTest {
 	}
 
 	@Test
-	public void testGetPosition() {
-		NorGate nor = new NorGate(2);
-		assertTrue(nor.getPosition().x == 0 && nor.getPosition().y == 0);
-	}
-
-	@Test
 	public void testGetRecoupledTo() {
 		NorGate nor = new NorGate(2);
 		NorGate testGate = new NorGate(2);
@@ -94,14 +86,6 @@ public class NorGateTest {
 		nor.connectInput(0, testGate, 0);
 		testGate.connectInput(1, nor, 1);
 		assertTrue(nor.getRecoupledTo().size() == 1);
-	}
-
-	@Test
-	public void testMove() {
-		NorGate nor = new NorGate(2);
-		assertTrue(nor.getPosition().x == 0 && nor.getPosition().y == 0);
-		nor.move(7, 8);
-		assertTrue(nor.getPosition().x == 7 && nor.getPosition().y == 8);
 	}
 
 	@Test
@@ -129,15 +113,6 @@ public class NorGateTest {
 		NorGate nor = new NorGate(2);
 		nor.setOutput(0, true);
 		assertTrue(nor.getOutputValue(0));
-	}
-
-	@Test
-	public void testSetPosition() {
-		NorGate nor = new NorGate(2);
-		assertTrue(nor.getPosition().x == 0 && nor.getPosition().y == 0);
-		Point p = new Point(8, 8);
-		nor.setPosition(p);
-		assertTrue(nor.getPosition() == p);
 	}
 
 	@Test

@@ -14,7 +14,8 @@ import edu.chl.tda367.booleancircuits.io.IFileManager;
 import edu.chl.tda367.booleancircuits.io.implementation.FileManager;
 import edu.chl.tda367.booleancircuits.model.IModelManager;
 import edu.chl.tda367.booleancircuits.model.IModelWrapper;
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 import edu.chl.tda367.booleancircuits.utilities.implementation.ClipboardManager;
@@ -22,10 +23,10 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
 public final class MasterController implements IMasterController {
 
-	private ICircuitGate chosenGate;
+	private IGateWrapper chosenGate;
 	private IClipboardManager clipboardManager = new ClipboardManager();
 	private Timer clockTimer;
-	private ICircuitGate connectComponent = null;
+	private IGateWrapper connectComponent = null;
 	private int connectPort = -1;
 	private IFileManager fileManager;
 	private final IModelManager modelManager;
@@ -60,7 +61,7 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void addComponent(final Point position) {
 		if (chosenGate != null) {
-			modelManager.addComponent(chosenGate.clone(), position);
+			modelManager.addComponent(new GateWrapper(chosenGate.getGateClone()), position);
 		}
 	}
 
@@ -104,7 +105,7 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void connectComponent(final ICircuitGate g, final int port) {
+	public void connectComponent(final IGateWrapper g, final int port) {
 		if (g == null) {
 			connectComponent = null;
 			return;
@@ -135,7 +136,7 @@ public final class MasterController implements IMasterController {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION
 				&& modelManager.getActiveWorkspaceIndex() >= 0) {
-			List<ICircuitGate> importedComponents = fileManager.importFile(fc
+			List<IGateWrapper> importedComponents = fileManager.importFile(fc
 					.getSelectedFile());
 			modelManager.getActiveSelectionModel().selectComponents(
 					importedComponents);
@@ -184,7 +185,7 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void removeComponent(final ICircuitGate g) {
+	public void removeComponent(final IGateWrapper g) {
 		modelManager.removeComponent(g);
 	}
 
@@ -231,8 +232,8 @@ public final class MasterController implements IMasterController {
 	}
 
 	@Override
-	public void setChosenComponent(final ICircuitGate g) {
-		chosenGate = g.clone();
+	public void setChosenComponent(final IGateWrapper g) {
+		chosenGate = new GateWrapper(g.getGateClone());
 	}
 
 	@Override

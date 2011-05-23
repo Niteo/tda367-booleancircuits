@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 
 /**
  * A class that manages what components are selected.
@@ -15,10 +15,10 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
  */
 public final class SelectionModel implements ISelectionModel {
 
-	private final List<ICircuitGate> selectedComponentList;
+	private final List<IGateWrapper> selectedComponentList;
 
 	public SelectionModel() {
-		selectedComponentList = new LinkedList<ICircuitGate>();
+		selectedComponentList = new LinkedList<IGateWrapper>();
 	}
 
 	@Override
@@ -27,27 +27,27 @@ public final class SelectionModel implements ISelectionModel {
 	}
 
 	@Override
-	public List<ICircuitGate> getSelectedComponents() {
+	public List<IGateWrapper> getSelectedComponents() {
 		return selectedComponentList;
 	}
 
 	@Override
-	public boolean isSelectedComponent(final ICircuitGate g) {
+	public boolean isSelectedComponent(final IGateWrapper g) {
 		return _isSelected(g);
 	}
 
 	@Override
-	public void removeComponent(final ICircuitGate g) {
+	public void removeComponent(final IGateWrapper g) {
 		selectedComponentList.remove(g);
 	}
 
 	@Override
-	public void removeComponents(final Collection<ICircuitGate> c) {
+	public void removeComponents(final Collection<IGateWrapper> c) {
 		selectedComponentList.removeAll(c);
 	}
 
 	@Override
-	public void selectComponent(final ICircuitGate g, final boolean multiSelect) {
+	public void selectComponent(final IGateWrapper g, final boolean multiSelect) {
 		if (multiSelect) {
 			if (_isSelected(g)) {
 				selectedComponentList.remove(g);
@@ -61,14 +61,14 @@ public final class SelectionModel implements ISelectionModel {
 	}
 
 	@Override
-	public void selectComponents(final Collection<ICircuitGate> c) {
+	public void selectComponents(final Collection<IGateWrapper> c) {
 		selectedComponentList.clear();
-		for (ICircuitGate gate : c) {
+		for (IGateWrapper gate : c) {
 			selectedComponentList.add(gate);
 		}
 	}
 
-	private boolean _isSelected(final ICircuitGate g) {
+	private boolean _isSelected(final IGateWrapper g) {
 		return selectedComponentList.contains(g);
 	}
 }

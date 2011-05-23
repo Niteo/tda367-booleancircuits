@@ -12,6 +12,7 @@ import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.IObservable;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 
 /**
  * A class which manages Models as workspaces.
@@ -33,13 +34,13 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void addComponent(final ICircuitGate component, final Point position) {
+	public void addComponent(final IGateWrapper component, final Point position) {
 		_addComponent(component, position);
 		firePropertyChanged();
 	}
 
 	@Override
-	public void addComponents(final List<ICircuitGate> components) {
+	public void addComponents(final List<IGateWrapper> components) {
 		if (getActiveWorkspaceModel() != null) {
 			getActiveWorkspaceModel().addComponents(components);
 			firePropertyChanged();
@@ -47,7 +48,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void addComponents(final List<ICircuitGate> component,
+	public void addComponents(final List<IGateWrapper> component,
 			final Point position) {
 		if (modelList.size() > 0) {
 			int minX = Integer.MAX_VALUE;
@@ -78,7 +79,7 @@ public final class ModelManager implements IObservable, IModelManager {
 			int moveY = (position.y - deltaY);
 
 			for (int i = 0; i < component.size(); i++) {
-				ICircuitGate gate = component.get(i);
+				IGateWrapper gate = component.get(i);
 				Point temp = new Point(gate.getPosition());
 				temp.x += moveX;
 				temp.y += moveY;
@@ -133,10 +134,10 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void connectComponents(final ICircuitGate componentIn,
-			final ICircuitGate componentOut, final int portIn, final int portOut) {
+	public void connectComponents(final IGateWrapper componentIn,
+			final IGateWrapper componentOut, final int portIn, final int portOut) {
 		if (_getActiveWorkspaceModel() != null) {
-			componentIn.connectInput(portIn, componentOut, portOut);
+			componentIn.connectInput(portIn, componentOut.getGate(), portOut);
 			_getActiveWorkspaceModel().updateComponents();
 			firePropertyChanged();
 		}
@@ -168,7 +169,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public boolean isSelectedComponent(final ICircuitGate g) {
+	public boolean isSelectedComponent(final IGateWrapper g) {
 		if (_getActiveSelectionModel() != null) {
 			return _getActiveSelectionModel().isSelectedComponent(g);
 		}
@@ -186,7 +187,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void removeComponent(final ICircuitGate g) {
+	public void removeComponent(final IGateWrapper g) {
 		if (_getActiveWorkspaceModel() != null) {
 			_getActiveWorkspaceModel().removeComponent(g);
 			_getActiveSelectionModel().removeComponent(g);
@@ -234,9 +235,9 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void selectComponents(final Point pos1, final Point pos2) {
-		List<ICircuitGate> selectedComponents = new ArrayList<ICircuitGate>();
+		List<IGateWrapper> selectedComponents = new ArrayList<IGateWrapper>();
 
-		for (ICircuitGate gate : _getActiveWorkspaceModel().getComponents()) {
+		for (IGateWrapper gate : _getActiveWorkspaceModel().getComponents()) {
 			Point gatePosition = gate.getPosition();
 			if (gatePosition.x >= Math.min(pos1.x, pos2.x)
 					&& gatePosition.x <= Math.max(pos1.x, pos2.x)
@@ -249,9 +250,9 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void selectComponents(List<ICircuitGate> list){
+	public void selectComponents(List<IGateWrapper> list){
 		_getActiveSelectionModel().getSelectedComponents().clear();
-		for(ICircuitGate gate: list){
+		for(IGateWrapper gate: list){
 			selectComponent(gate.getPosition(), true);
 		}
 	}
@@ -261,7 +262,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		_setActiveWorkspace(i);
 	}
 
-	private void _addComponent(final ICircuitGate component,
+	private void _addComponent(final IGateWrapper component,
 			final Point position) {
 		if (_getActiveWorkspaceModel() != null) {
 			_getActiveWorkspaceModel().addComponent(component, position);
@@ -309,5 +310,10 @@ public final class ModelManager implements IObservable, IModelManager {
 			}
 			firePropertyChanged();
 		}
+	}
+
+	@Override
+	public IGateWrapper getGateWrapper(ICircuitGate gate) {
+		return _getActiveWorkspaceModel().getGateWrapper(gate);
 	}
 }

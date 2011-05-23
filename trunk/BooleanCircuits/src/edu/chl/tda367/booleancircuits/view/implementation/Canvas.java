@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.security.InvalidParameterException;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -19,7 +21,10 @@ import javax.swing.event.MouseInputAdapter;
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.utilities.IConnection;
+import edu.chl.tda367.booleancircuits.utilities.implementation.Connection;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 import edu.chl.tda367.booleancircuits.view.ICanvas;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
@@ -56,7 +61,7 @@ public class Canvas implements ICanvas {
 	}
 
 	private final IMasterController _masterController;
-	private ICircuitGate connectBufferGate = null;
+	private IGateWrapper connectBufferGate = null;
 	private int connectBufferPort = 0;
 	private boolean connectingInput;
 	private boolean connectingOutput;
@@ -122,12 +127,12 @@ public class Canvas implements ICanvas {
 					}
 				} else if (draggingMode) {
 					// Move all selected components.
-					for (ICircuitGate selected : selectModel
+					for (IGateWrapper selected : selectModel
 							.getSelectedComponents()) {
 						selected.move(dx, dy);
 					}
 				} else {
-					ICircuitGate gate = model.getComponent(dragPosition);
+					IGateWrapper gate = model.getComponent(dragPosition);
 					if (gate != null && !panning) {
 						draggingMode = true;
 						if (!selectModel.isSelectedComponent(gate)) {
@@ -172,22 +177,34 @@ public class Canvas implements ICanvas {
 
 			drawer.drawBackground(g2d, new Point(posX, posY), panel.getSize());
 			// Draw connections
-			for (ICircuitGate circuitGate : model.getComponents()) {
-				drawer.drawGateConnections(g2d, circuitGate, new Point(posX,
-						posY));
+			for (IGateWrapper gate : model.getComponents()) {
+				Collection<IConnection> coll = new LinkedList<IConnection>();
+				int counter = 0;
+				for (IGateInput gi : gate.getInputs()) {
+					if (gi.getInputComponent() != null) {
+						IGateWrapper gw = model.getGateWrapper(gi
+								.getInputComponent());
+						if (gw != null) {
+							coll.add(new Connection(gate.getPosition(), gw
+									.getPosition(), gi.getInputValue(),
+									counter++, gate.getInputs().size()));
+						}
+					}
+				}
+				drawer.drawGateConnections(g2d, coll, new Point(posX, posY));
 			}
 			// Draw non-selected
 			g2d.setColor(Color.BLACK);
-			for (ICircuitGate circuitGate : model.getComponents()) {
-				if (!selectModel.isSelectedComponent(circuitGate)) {
-					drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
+			for (IGateWrapper gate : model.getComponents()) {
+				if (!selectModel.isSelectedComponent(gate)) {
+					drawer.drawGate(g2d, gate, new Point(posX, posY));
 				}
 			}
 			// Draw selected
 			g2d.setColor(Color.BLUE);
-			for (ICircuitGate circuitGate : model.getComponents()) {
-				if (selectModel.isSelectedComponent(circuitGate)) {
-					drawer.drawGate(g2d, circuitGate, new Point(posX, posY));
+			for (IGateWrapper gate : model.getComponents()) {
+				if (selectModel.isSelectedComponent(gate)) {
+					drawer.drawGate(g2d, gate, new Point(posX, posY));
 				}
 			}
 			// Draw position
@@ -228,7 +245,7 @@ public class Canvas implements ICanvas {
 
 	private boolean panning;
 	private int posX, posY;
-	private ICircuitGate rightClickedGate = null;
+	private IGateWrapper rightClickedGate = null;
 	private final ISelectionModel selectModel;
 
 	public Canvas(final IModel canvasModel,

@@ -1,8 +1,8 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
-
-import java.awt.Point;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -15,8 +15,6 @@ public class NandGateTest {
 		NandGate nand = new NandGate(2);
 		ICircuitGate clone = nand.clone();
 		assertTrue(clone instanceof NandGate);
-		assertTrue(clone.getPosition().x == nand.getPosition().x
-				&& clone.getPosition().y == nand.getPosition().y);
 		assertTrue(clone.getNoOfInputs() == nand.getNoOfInputs());
 		assertTrue(clone.getNoOfOutputs() == nand.getNoOfOutputs());
 	}
@@ -81,12 +79,6 @@ public class NandGateTest {
 	}
 
 	@Test
-	public void testGetPosition() {
-		NandGate nand = new NandGate(2);
-		assertTrue(nand.getPosition().x == 0 && nand.getPosition().y == 0);
-	}
-
-	@Test
 	public void testGetRecoupledTo() {
 		NandGate nand = new NandGate(2);
 		NandGate testGate = new NandGate(2);
@@ -95,14 +87,6 @@ public class NandGateTest {
 		nand.connectInput(0, testGate, 0);
 		testGate.connectInput(1, nand, 1);
 		assertTrue(nand.getRecoupledTo().size() == 1);
-	}
-
-	@Test
-	public void testMove() {
-		NandGate nand = new NandGate(2);
-		assertTrue(nand.getPosition().x == 0 && nand.getPosition().y == 0);
-		nand.move(7, 8);
-		assertTrue(nand.getPosition().x == 7 && nand.getPosition().y == 8);
 	}
 
 	@Test
@@ -129,15 +113,6 @@ public class NandGateTest {
 		NandGate nand = new NandGate(2);
 		nand.setOutput(0, true);
 		assertTrue(nand.getOutputValue(0));
-	}
-
-	@Test
-	public void testSetPosition() {
-		NandGate nand = new NandGate(2);
-		assertTrue(nand.getPosition().x == 0 && nand.getPosition().y == 0);
-		Point p = new Point(8, 8);
-		nand.setPosition(p);
-		assertTrue(nand.getPosition() == p);
 	}
 
 	@Test

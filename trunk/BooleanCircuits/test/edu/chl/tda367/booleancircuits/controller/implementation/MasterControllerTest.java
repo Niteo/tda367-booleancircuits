@@ -5,6 +5,7 @@ import java.awt.Point;
 import org.junit.Test;
 
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 
 public class MasterControllerTest {
@@ -31,8 +32,8 @@ public class MasterControllerTest {
 
 	@Test
 	public void testConnectComponent() {
-		new MasterController(new ModelManager()).connectComponent(
-				new AndGate(2), 0);
+		new MasterController(new ModelManager()).connectComponent(new GateWrapper(
+				new AndGate(2)), 0);
 	}
 
 	@Test
@@ -74,7 +75,7 @@ public class MasterControllerTest {
 	@Test
 	public void testRemoveComponent() {
 		new MasterController(new ModelManager())
-				.removeComponent(new AndGate(2));
+				.removeComponent(new GateWrapper(new AndGate(2)));
 	}
 
 	@Test
@@ -111,7 +112,7 @@ public class MasterControllerTest {
 	@Test
 	public void testSetChosenComponent() {
 		new MasterController(new ModelManager())
-				.setChosenComponent(new AndGate(2));
+				.setChosenComponent(new GateWrapper(new AndGate(2)));
 	}
 
 }
