@@ -18,7 +18,6 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -142,7 +141,8 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 				else if (e.getSource() == aboutMenuItem) {
 					new AboutBox(Constants.creditsText, Constants.aboutImage);
 				} else if (e.getSource() == exitMenuItem) {
-					windowAdapter.windowClosing(new WindowEvent(_getWindow(), 0));
+					windowAdapter
+							.windowClosing(new WindowEvent(_getWindow(), 0));
 				}
 
 			}
