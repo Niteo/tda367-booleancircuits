@@ -1,7 +1,9 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import javax.swing.*;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
+import edu.chl.tda367.booleancircuits.view.ICanvas;
 import edu.chl.tda367.booleancircuits.view.ITabManager;
 
 /**
@@ -19,7 +21,7 @@ public final class TabManager implements ITabManager {
 	}
 
 	@Override
-	public void addTab(final String name, final Canvas canvas) {
+	public void addTab(final String name, final ICanvas canvas) {
 		JScrollPane scrollPane = new JScrollPane(canvas.getCanvas());
 		tabbedPane.addTab(name, scrollPane);
 		tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1,

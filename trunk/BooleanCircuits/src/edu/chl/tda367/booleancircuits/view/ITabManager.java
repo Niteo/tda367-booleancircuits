@@ -2,8 +2,6 @@ package edu.chl.tda367.booleancircuits.view;
 
 import javax.swing.JTabbedPane;
 
-import edu.chl.tda367.booleancircuits.view.implementation.*;
-
 /**
  * An interface describing a tab manager.
  * 
@@ -20,14 +18,14 @@ public interface ITabManager {
 	 * @param canvas
 	 *            the canvas connected to the tab
 	 */
-	public void addTab(String name, Canvas canvas);
+	public void addTab(String name, ICanvas canvas);
 
 	/**
 	 * Returns the last added tabPanel.
 	 * 
 	 * @return the last added tabPanel
 	 */
-	public TabPanel getLastTabPanel();
+	public ITabPanel getLastTabPanel();
 
 	/**
 	 * Returns the TabbedPane.
@@ -51,7 +49,7 @@ public interface ITabManager {
 	 *            int index of the tabPanel
 	 * @return the panel at the specified index
 	 */
-	public TabPanel getTabPanel(int i);
+	public ITabPanel getTabPanel(int i);
 
 	/**
 	 * Removes all tabs from the tabbedPane.
