@@ -1,15 +1,17 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 /**
  * A class that manages what components are selected.
- * 
+ *
  * @author Boel
- * 
+ *
  */
 public final class SelectionModel implements ISelectionModel {
 
@@ -67,10 +69,6 @@ public final class SelectionModel implements ISelectionModel {
 	}
 
 	private boolean _isSelected(final ICircuitGate g) {
-		if (selectedComponentList.contains(g)) {
-			return true;
-		} else {
-			return false;
-		}
+		return selectedComponentList.contains(g);
 	}
 }
