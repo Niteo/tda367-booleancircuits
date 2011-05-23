@@ -1,11 +1,28 @@
 package edu.chl.tda367.booleancircuits.view.draw.implementation;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.util.Collection;
 
-import edu.chl.tda367.booleancircuits.model.components.*;
-import edu.chl.tda367.booleancircuits.model.components.implementation.*;
+import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
+import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.EqualGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.XnorGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.XorGate;
+import edu.chl.tda367.booleancircuits.utilities.IConnection;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
-import edu.chl.tda367.booleancircuits.view.draw.*;
+import edu.chl.tda367.booleancircuits.view.draw.IBackground;
+import edu.chl.tda367.booleancircuits.view.draw.IDraw;
 
 public class Draw implements IDraw {
 	private IBackground background;
@@ -20,29 +37,29 @@ public class Draw implements IDraw {
 	}
 
 	@Override
-	public void drawGate(final Graphics2D g, final ICircuitGate gate,
+	public void drawGate(final Graphics2D g, final IGateWrapper gate,
 			final Point offset) {
 		color = g.getColor();
 
-		if (gate instanceof AndGate) {
+		if (gate.getGate() instanceof AndGate) {
 			drawAndGate(gate, g, offset);
-		} else if (gate instanceof NandGate) {
+		} else if (gate.getGate() instanceof NandGate) {
 			drawNandGate(gate, g, offset);
-		} else if (gate instanceof OrGate) {
+		} else if (gate.getGate() instanceof OrGate) {
 			drawOrGate(gate, g, offset);
-		} else if (gate instanceof NorGate) {
+		} else if (gate.getGate() instanceof NorGate) {
 			drawNorGate(gate, g, offset);
-		} else if (gate instanceof XorGate) {
+		} else if (gate.getGate() instanceof XorGate) {
 			drawXorGate(gate, g, offset);
-		} else if (gate instanceof XnorGate) {
+		} else if (gate.getGate() instanceof XnorGate) {
 			drawXnorGate(gate, g, offset);
-		} else if (gate instanceof NotGate) {
+		} else if (gate.getGate() instanceof NotGate) {
 			drawNotGate(gate, g, offset);
-		} else if (gate instanceof ConstantGate) {
+		} else if (gate.getGate() instanceof ConstantGate) {
 			drawConstantGate(gate, g, offset);
-		} else if (gate instanceof Clock) {
+		} else if (gate.getGate() instanceof Clock) {
 			drawClock(gate, g, offset);
-		} else if (gate instanceof EqualGate){
+		} else if (gate.getGate() instanceof EqualGate) {
 			drawEqual(gate, g, offset);
 		}
 
@@ -67,66 +84,64 @@ public class Draw implements IDraw {
 
 	@Override
 	public void drawGateConnections(final Graphics2D g,
-			final ICircuitGate gate, final Point offset) {
+			Collection<IConnection> coll, final Point offset) {
 		g.setColor(color);
-		int nInputs = gate.getInputs().size();
+
+		int nInputs = coll.size();
 		int loopCount = 0;
-		for (IGateInput i : gate.getInputs()) {
-			if (i.getInputComponent() != null) {
-				if (i.getInputValue()) {
-					g.setColor(Constants.connectionHigh);
-				} else {
-					g.setColor(Constants.connectionLow);
-				}
+		for (IConnection i : coll) {
 
-				int y1Offset = loopCount * Constants.componentSize / (nInputs)
-						+ Constants.componentSize / (nInputs * 2);
-				int xStart = (int) (gate.getPosition().x - offset.x - Constants.componentSize * 0.5);
-				int yStart = (int) (gate.getPosition().y - offset.y + y1Offset - Constants.componentSize * 0.5);
-
-				int y2Offset = (Constants.componentSize / (i
-						.getInputComponent().getNoOfOutputs() * 2))
-						* (i.getInputPort() + i.getInputComponent()
-								.getNoOfOutputs());
-				int xEnd = (int) (i.getInputComponent().getPosition().x
-						- offset.x + Constants.componentSize * 0.5);
-				int yEnd = (int) (i.getInputComponent().getPosition().y
-						- offset.y - Constants.componentSize * 0.5 + y2Offset);
-
-				if (xStart > xEnd + 20) {
-					int[] xPoints = new int[4];
-					xPoints[0] = xStart;
-					xPoints[1] = xPoints[0] + (xEnd - xStart) / 2;
-					xPoints[2] = xPoints[1];
-					xPoints[3] = xEnd;
-
-					int[] yPoints = { yStart, yStart, yEnd, yEnd };
-					g.drawPolyline(xPoints, yPoints, 4);
-				} else if (Math.abs(yEnd - yStart) <= Constants.componentSize
-						&& xStart > xEnd) {
-					g.drawLine(xStart, yStart, xEnd, yEnd);
-				} else {
-					int[] xPoints = new int[6];
-					xPoints[0] = xStart;
-					xPoints[1] = xStart - 10;
-					xPoints[2] = xPoints[1];
-					xPoints[3] = xStart + xEnd - xStart + 10;
-					xPoints[4] = xPoints[3];
-					xPoints[5] = xEnd;
-
-					int[] yPoints = new int[6];
-					yPoints[0] = yStart;
-					yPoints[1] = yPoints[0];
-					yPoints[2] = yPoints[0]
-							+ (yEnd > yStart ? Constants.componentSize
-									: -Constants.componentSize);
-					yPoints[3] = yPoints[2];
-					yPoints[4] = yEnd;
-					yPoints[5] = yPoints[4];
-
-					g.drawPolyline(xPoints, yPoints, 6);
-				}
+			if (i.getValue()) {
+				g.setColor(Constants.connectionHigh);
+			} else {
+				g.setColor(Constants.connectionLow);
 			}
+
+			int y1Offset = loopCount * Constants.componentSize / (nInputs)
+					+ Constants.componentSize / (nInputs * 2);
+			int xStart = (int) (i.getStartPoint().x - offset.x - Constants.componentSize * 0.5);
+			int yStart = (int) (i.getStartPoint().y - offset.y + y1Offset - Constants.componentSize * 0.5);
+
+			int y2Offset = (Constants.componentSize / (i.getNoOfEndPorts() * 2))
+					* (i.getEndPortIndex() + i.getNoOfEndPorts());
+			int xEnd = (int) (i.getEndPoint().x - offset.x + Constants.componentSize * 0.5);
+			int yEnd = (int) (i.getEndPoint().y - offset.y
+					- Constants.componentSize * 0.5 + y2Offset);
+
+			if (xStart > xEnd + 20) {
+				int[] xPoints = new int[4];
+				xPoints[0] = xStart;
+				xPoints[1] = xPoints[0] + (xEnd - xStart) / 2;
+				xPoints[2] = xPoints[1];
+				xPoints[3] = xEnd;
+
+				int[] yPoints = { yStart, yStart, yEnd, yEnd };
+				g.drawPolyline(xPoints, yPoints, 4);
+			} else if (Math.abs(yEnd - yStart) <= Constants.componentSize
+					&& xStart > xEnd) {
+				g.drawLine(xStart, yStart, xEnd, yEnd);
+			} else {
+				int[] xPoints = new int[6];
+				xPoints[0] = xStart;
+				xPoints[1] = xStart - 10;
+				xPoints[2] = xPoints[1];
+				xPoints[3] = xStart + xEnd - xStart + 10;
+				xPoints[4] = xPoints[3];
+				xPoints[5] = xEnd;
+
+				int[] yPoints = new int[6];
+				yPoints[0] = yStart;
+				yPoints[1] = yPoints[0];
+				yPoints[2] = yPoints[0]
+						+ (yEnd > yStart ? Constants.componentSize
+								: -Constants.componentSize);
+				yPoints[3] = yPoints[2];
+				yPoints[4] = yEnd;
+				yPoints[5] = yPoints[4];
+
+				g.drawPolyline(xPoints, yPoints, 6);
+			}
+
 			loopCount++;
 		}
 		g.setColor(color);
@@ -142,7 +157,7 @@ public class Draw implements IDraw {
 		isUsStandard = standard;
 	}
 
-	private void drawAndGate(final ICircuitGate gate, final Graphics2D g,
+	private void drawAndGate(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 
 		if (isUsStandard) {
@@ -174,7 +189,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawCircle(final ICircuitGate gate, final Graphics g,
+	private void drawCircle(final IGateWrapper gate, final Graphics g,
 			final Point offset) {
 		g.setColor(Color.white);
 		g.fillOval(gate.getPosition().x - offset.x + Constants.componentSize
@@ -186,19 +201,19 @@ public class Draw implements IDraw {
 				/ 2, gate.getPosition().y - offset.y - 5, 10, 10);
 	}
 
-	private void drawClock(final ICircuitGate gate, final Graphics2D g,
+	private void drawClock(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 		symbol = "C";
 		drawRectangle(gate, g, offset);
 	}
-	
-	private void drawEqual(final ICircuitGate gate, final Graphics2D g,
+
+	private void drawEqual(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 		symbol = "";
 		drawRectangle(gate, g, offset);
 	}
 
-	private void drawConstantGate(final ICircuitGate gate, final Graphics2D g,
+	private void drawConstantGate(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 
 		symbol = gate.toString();
@@ -206,7 +221,7 @@ public class Draw implements IDraw {
 
 	}
 
-	private void drawNandGate(final ICircuitGate gate, final Graphics2D g,
+	private void drawNandGate(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 
 		if (isUsStandard) {
@@ -240,7 +255,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawNorGate(final ICircuitGate gate, final Graphics2D g,
+	private void drawNorGate(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 
 		if (isUsStandard) {
@@ -254,7 +269,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawNotGate(final ICircuitGate gate, final Graphics2D g,
+	private void drawNotGate(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 
 		if (isUsStandard) {
@@ -291,7 +306,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawOrGate(final ICircuitGate gate, final Graphics2D g,
+	private void drawOrGate(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 
 		if (isUsStandard) {
@@ -303,7 +318,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawRectangle(final ICircuitGate gate, final Graphics2D g,
+	private void drawRectangle(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 
 		g.setColor(Color.WHITE);
@@ -323,7 +338,7 @@ public class Draw implements IDraw {
 				+ Constants.componentSize / 4);
 	}
 
-	private void drawUSGateBody(final ICircuitGate gate, final Graphics2D g,
+	private void drawUSGateBody(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 		g.setColor(Color.white);
 		g.fillRect(gate.getPosition().x - (offset.x) - Constants.componentSize,
@@ -364,7 +379,7 @@ public class Draw implements IDraw {
 				180);
 	}
 
-	private void drawXnorGate(final ICircuitGate gate, final Graphics2D g,
+	private void drawXnorGate(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 
 		if (isUsStandard) {
@@ -382,7 +397,7 @@ public class Draw implements IDraw {
 		}
 	}
 
-	private void drawXorGate(final ICircuitGate gate, final Graphics2D g,
+	private void drawXorGate(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 
 		if (isUsStandard) {

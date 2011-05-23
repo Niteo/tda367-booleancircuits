@@ -1,8 +1,8 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
-
-import java.awt.Point;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -15,8 +15,6 @@ public class OrGateTest {
 		OrGate or = new OrGate(2);
 		ICircuitGate clone = or.clone();
 		assertTrue(clone instanceof OrGate);
-		assertTrue(clone.getPosition().x == or.getPosition().x
-				&& clone.getPosition().y == or.getPosition().y);
 		assertTrue(clone.getNoOfInputs() == or.getNoOfInputs());
 		assertTrue(clone.getNoOfOutputs() == or.getNoOfOutputs());
 	}
@@ -80,12 +78,6 @@ public class OrGateTest {
 	}
 
 	@Test
-	public void testGetPosition() {
-		OrGate or = new OrGate(2);
-		assertTrue(or.getPosition().x == 0 && or.getPosition().y == 0);
-	}
-
-	@Test
 	public void testGetRecoupledTo() {
 		OrGate or = new OrGate(2);
 		OrGate testGate = new OrGate(2);
@@ -94,14 +86,6 @@ public class OrGateTest {
 		or.connectInput(0, testGate, 0);
 		testGate.connectInput(1, or, 1);
 		assertTrue(or.getRecoupledTo().size() == 1);
-	}
-
-	@Test
-	public void testMove() {
-		OrGate or = new OrGate(2);
-		assertTrue(or.getPosition().x == 0 && or.getPosition().y == 0);
-		or.move(7, 8);
-		assertTrue(or.getPosition().x == 7 && or.getPosition().y == 8);
 	}
 
 	@Test
@@ -129,15 +113,6 @@ public class OrGateTest {
 		OrGate or = new OrGate(2);
 		or.setOutput(0, true);
 		assertTrue(or.getOutputValue(0));
-	}
-
-	@Test
-	public void testSetPosition() {
-		OrGate or = new OrGate(2);
-		assertTrue(or.getPosition().x == 0 && or.getPosition().y == 0);
-		Point p = new Point(8, 8);
-		or.setPosition(p);
-		assertTrue(or.getPosition() == p);
 	}
 
 	@Test

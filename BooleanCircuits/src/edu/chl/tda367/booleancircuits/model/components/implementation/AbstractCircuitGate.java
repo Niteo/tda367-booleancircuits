@@ -1,17 +1,21 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 import java.awt.Point;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.*;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICloneable;
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
  * Abstract class representing an abstract circuit component.
- * 
+ *
  * @author Kaufmann
- * 
+ *
  */
-public abstract class AbstractCircuitGate implements ICircuitGate {
+public abstract class AbstractCircuitGate implements ICircuitGate, ICloneable {
 	private List<IGateInput> inputs;
 	private boolean isInConnectToCalculation;
 	private boolean isInTiercalculation;
@@ -121,11 +125,6 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	}
 
 	@Override
-	public Point getPosition() {
-		return this.position;
-	}
-
-	@Override
 	public Collection<ICircuitGate> getRecoupledTo() {
 		Collection<ICircuitGate> col = new ArrayList<ICircuitGate>();
 		Collection<ICircuitGate> temp = new ArrayList<ICircuitGate>();
@@ -163,20 +162,9 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 	}
 
 	@Override
-	public void move(final int deltaX, final int deltaY) {
-		this.position = new Point(this.position.x + deltaX, this.position.y
-				+ deltaY);
-	}
-
-	@Override
 	public void overwriteGate(final ICircuitGate gate) {
 		this.inputs = gate.getInputs();
 		this.outputs = gate.getOutputs();
-	}
-
-	@Override
-	public void setPosition(final Point position) {
-		this.position = position;
 	}
 
 	@Override
@@ -196,14 +184,14 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 
 	/**
 	 * Template-method for returning a gate of the used type.
-	 * 
+	 *
 	 * @return a gate of the used type
 	 */
 	protected abstract AbstractCircuitGate emptyGateClone();
 
 	/**
 	 * Sets a specific output to a given value
-	 * 
+	 *
 	 * @param index
 	 *            specifies which output to set
 	 * @param value
@@ -215,7 +203,7 @@ public abstract class AbstractCircuitGate implements ICircuitGate {
 
 	/**
 	 * Updates the output of the gate.
-	 * 
+	 *
 	 */
 	protected abstract void updateOutput();
 

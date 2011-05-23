@@ -1,10 +1,16 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
 import java.awt.Point;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.IModel;
-import edu.chl.tda367.booleancircuits.model.components.*;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
@@ -12,44 +18,44 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
  * Model for managing and updating circuit components.
  */
 public final class Model implements IModel {
-	private final Collection<ICircuitGate> componentList;
+	private final Collection<IGateWrapper> componentList;
 	private boolean infiniteRecursion = false;
 
 	/**
 	 * Returns an instance of Model
-	 * 
+	 *
 	 * @param name
 	 *            the name of the model
 	 */
 	public Model() {
-		componentList = new ArrayList<ICircuitGate>();
+		componentList = new ArrayList<IGateWrapper>();
 	}
 
 	@Override
-	public void addComponent(final ICircuitGate component, final Point position) {
+	public void addComponent(final IGateWrapper component, final Point position) {
 		component.setPosition(position);
 		componentList.add(component);
 	}
 
 	@Override
-	public void addComponents(final Collection<ICircuitGate> components) {
+	public void addComponents(final Collection<IGateWrapper> components) {
 		componentList.addAll(components);
 	}
 
 	@Override
 	public void clock() {
-		for (ICircuitGate gate : componentList) {
-			if (gate instanceof Clock) {
-				((Clock) gate).toggleClock();
+		for (IGateWrapper gate : componentList) {
+			if (gate.getGate() instanceof Clock) {
+				((Clock) gate.getGate()).toggleClock();
 			}
 		}
 		updateComponents();
 	}
 
 	@Override
-	public ICircuitGate getComponent(final Point position) {
+	public IGateWrapper getComponent(final Point position) {
 		int size = Constants.componentSize;
-		for (ICircuitGate acg : componentList) {
+		for (IGateWrapper acg : componentList) {
 			// Check X
 			if (position.getX() >= acg.getPosition().getX() - size * 0.5f
 					&& position.getX() <= acg.getPosition().getX() + size
@@ -68,7 +74,7 @@ public final class Model implements IModel {
 	}
 
 	@Override
-	public Collection<ICircuitGate> getComponents() {
+	public Collection<IGateWrapper> getComponents() {
 		return Collections.unmodifiableCollection(componentList);
 	}
 
@@ -83,14 +89,14 @@ public final class Model implements IModel {
 	}
 
 	@Override
-	public void removeComponent(final ICircuitGate g) {
+	public void removeComponent(final IGateWrapper g) {
 		_removeComponent(g);
 		updateComponents();
 	}
 
 	@Override
-	public void removeComponents(final Collection<ICircuitGate> list) {
-		for (ICircuitGate gate : list) {
+	public void removeComponents(final Collection<IGateWrapper> list) {
+		for (IGateWrapper gate : list) {
 			_removeComponent(gate);
 		}
 	}
@@ -102,7 +108,7 @@ public final class Model implements IModel {
 
 		for (ICircuitGate iGate : componentList) {
 			for (IGateInput input : iGate.getInputs()) {
-				if (!componentList.contains(input.getInputComponent())) {
+				if (!componentList.contains(getGateWrapper(input.getInputComponent()))) {
 					input.reset();
 				}
 			}
@@ -144,6 +150,7 @@ public final class Model implements IModel {
 				groupList.get(iGate.getComponentTier() - 1).add(iGate);
 			}
 		}
+
 		// Update each tier individually
 		boolean hasChanged;
 		int loop = 0;
@@ -152,7 +159,7 @@ public final class Model implements IModel {
 			for (List<ICircuitGate> l : groupList) {
 				List<ICircuitGate> cloneList = new ArrayList<ICircuitGate>();
 				for (ICircuitGate g : l) {
-					ICircuitGate temp = g.clone();
+					ICircuitGate temp = ((IGateWrapper) g).getGateClone();
 					if (temp.update()) {
 						hasChanged = true;
 					}
@@ -171,5 +178,15 @@ public final class Model implements IModel {
 
 	private void _removeComponent(final ICircuitGate g) {
 		componentList.remove(g);
+	}
+
+	@Override
+	public IGateWrapper getGateWrapper(ICircuitGate gate) {
+		for (IGateWrapper g : componentList) {
+			if (g.getGate() == gate) {
+				return g;
+			}
+		}
+		return null;
 	}
 }

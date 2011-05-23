@@ -1,23 +1,39 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.KeyStroke;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.implementation.ComponentFolder;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.*;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
+import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.EqualGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.XnorGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.XorGate;
 import edu.chl.tda367.booleancircuits.view.IPalette;
 
 /**
  * this class represents a palette containing folders with components
- * 
+ *
  * @author antonlin
- * 
+ *
  */
 
 public final class Palette implements IPalette {
@@ -66,7 +82,7 @@ public final class Palette implements IPalette {
 
 	/**
 	 * inserts component in to folder.
-	 * 
+	 *
 	 * @param folderNodeList
 	 * @param componentFolder
 	 */
@@ -104,8 +120,8 @@ public final class Palette implements IPalette {
 
 				if (node.isLeaf()) {
 					masterController
-							.setChosenComponent(((AbstractCircuitGate) node
-									.getUserObject()).clone());
+							.setChosenComponent(new GateWrapper(((AbstractCircuitGate) node
+									.getUserObject()).clone()));
 				}
 			}
 		};

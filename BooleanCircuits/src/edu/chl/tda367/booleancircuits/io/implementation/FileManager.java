@@ -1,24 +1,33 @@
 package edu.chl.tda367.booleancircuits.io.implementation;
 
 import java.awt.Point;
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Scanner;
 
 import edu.chl.tda367.booleancircuits.io.IFileManager;
-import edu.chl.tda367.booleancircuits.model.components.*;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
 import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 
 /**
  * Writes and reads save files.
- * 
+ *
  * @author antonlin
- * 
+ *
  */
 public final class FileManager implements IFileManager {
 
 	@Override
-	public List<ICircuitGate> importFile(final File file) {
+	public List<IGateWrapper> importFile(final File file) {
 		return readFile(file);
 	}
 
@@ -29,9 +38,9 @@ public final class FileManager implements IFileManager {
 	public ModelWrapper openFile(final File file) {
 
 		ModelWrapper model = new ModelWrapper(file);
-		List<ICircuitGate> components = readFile(file);
+		List<IGateWrapper> components = readFile(file);
 
-		for (ICircuitGate component : components) {
+		for (IGateWrapper component : components) {
 			model.addComponent(component, component.getPosition());
 		}
 
@@ -41,18 +50,18 @@ public final class FileManager implements IFileManager {
 
 	/**
 	 * Saves a circuit in form of a .txt file.
-	 * 
+	 *
 	 * @param components
 	 * @param name
 	 */
 	@Override
-	public void saveFile(final Collection<ICircuitGate> components,
+	public void saveFile(final Collection<IGateWrapper> components,
 			final File file) {
 		try {
 			PrintWriter saveFile = new PrintWriter(file);
-			List<ICircuitGate> tempList = new ArrayList<ICircuitGate>();
+			List<IGateWrapper> tempList = new ArrayList<IGateWrapper>();
 			// Print all gates
-			for (ICircuitGate gate : components) {
+			for (IGateWrapper gate : components) {
 				String txt = "ADD";
 				tempList.add(gate);
 				txt += " " + gate.toString() + " " + gate.getNoOfInputs() + " "
@@ -61,7 +70,7 @@ public final class FileManager implements IFileManager {
 				saveFile.println(txt);
 			}
 			// Print all connections
-			for (ICircuitGate gate : components) {
+			for (IGateWrapper gate : components) {
 				List<IGateInput> gateInputs = gate.getInputs();
 
 				for (IGateInput input : gateInputs) {
@@ -82,9 +91,9 @@ public final class FileManager implements IFileManager {
 		}
 	}
 
-	private List<ICircuitGate> readFile(final File file) {
+	private List<IGateWrapper> readFile(final File file) {
 
-		List<ICircuitGate> components = new ArrayList<ICircuitGate>();
+		List<IGateWrapper> components = new ArrayList<IGateWrapper>();
 
 		try {
 			Scanner sc = new Scanner(file);
@@ -97,8 +106,8 @@ public final class FileManager implements IFileManager {
 					int noOfInputs = sc.nextInt();
 					sc.next();
 					Point position = new Point(sc.nextInt(), sc.nextInt());
-					ICircuitGate component = GateFactory.getNewComponent(name,
-							noOfInputs);
+					IGateWrapper component = new GateWrapper(
+							GateFactory.getNewComponent(name, noOfInputs));
 					component.setPosition(position);
 					components.add(component);
 					sc.nextLine();
@@ -109,9 +118,9 @@ public final class FileManager implements IFileManager {
 					int inputNo = sc.nextInt();
 					int fromCptNo = sc.nextInt();
 					if (fromCptNo >= 0) {
-						ICircuitGate fromCpt = components.get(fromCptNo);
+						IGateWrapper fromCpt = components.get(fromCptNo);
 						int output = sc.nextInt();
-						toCpt.connectInput(inputNo, fromCpt, output);
+						toCpt.connectInput(inputNo, fromCpt.getGate(), output);
 
 					}
 					sc.nextLine();

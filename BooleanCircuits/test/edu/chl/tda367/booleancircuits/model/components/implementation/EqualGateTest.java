@@ -1,9 +1,10 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import java.awt.Point;
 import org.junit.Test;
+
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 public class EqualGateTest {
@@ -18,8 +19,6 @@ public class EqualGateTest {
 		EqualGate gate = new EqualGate();
 		ICircuitGate clone = gate.clone();
 		assertTrue(clone instanceof EqualGate);
-		assertTrue(clone.getPosition().x == gate.getPosition().x
-				&& clone.getPosition().y == gate.getPosition().y);
 		assertTrue(clone.getNoOfInputs() == gate.getNoOfInputs());
 		assertTrue(clone.getNoOfOutputs() == gate.getNoOfOutputs());
 	}
@@ -80,24 +79,6 @@ public class EqualGateTest {
 	}
 
 	@Test
-	public void testGetPosition() {
-		EqualGate gate = new EqualGate();
-		assertTrue(gate.getPosition().equals(new Point(0, 0)));
-
-	}
-
-	@Test
-	public void testMove() {
-		EqualGate gate = new EqualGate();
-
-		gate.setPosition(new Point(10, 10));
-		gate.move(15, 10);
-		assertTrue(gate.getPosition().x == 25);
-		assertTrue(gate.getPosition().y == 20);
-
-	}
-
-	@Test
 	public void testOverwriteGate() {
 		EqualGate gate = new EqualGate();
 		gate.setOutput(0, false);
@@ -117,15 +98,6 @@ public class EqualGateTest {
 		gate.setOutput(0, true);
 
 		assertTrue(gate.getOutputValue(0) == true);
-	}
-
-	@Test
-	public void testSetPosition() {
-		EqualGate gate = new EqualGate();
-
-		gate.setPosition(new Point(10, 10));
-		gate.getPosition().equals(new Point(10, 10));
-
 	}
 
 	@Test

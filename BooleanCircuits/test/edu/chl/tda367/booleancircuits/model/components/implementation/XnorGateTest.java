@@ -1,8 +1,8 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
-
-import java.awt.Point;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -20,8 +20,6 @@ public class XnorGateTest {
 		XnorGate xnor = new XnorGate(2);
 		ICircuitGate clone = xnor.clone();
 		assertTrue(clone instanceof XnorGate);
-		assertTrue(clone.getPosition().x == xnor.getPosition().x
-				&& clone.getPosition().y == xnor.getPosition().y);
 		assertTrue(clone.getNoOfInputs() == xnor.getNoOfInputs());
 		assertTrue(clone.getNoOfOutputs() == xnor.getNoOfOutputs());
 	}
@@ -85,12 +83,6 @@ public class XnorGateTest {
 	}
 
 	@Test
-	public void testGetPosition() {
-		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getPosition().x == 0 && xnor.getPosition().y == 0);
-	}
-
-	@Test
 	public void testGetRecoupledTo() {
 		XnorGate xnor = new XnorGate(2);
 		XnorGate testGate = new XnorGate(2);
@@ -99,14 +91,6 @@ public class XnorGateTest {
 		xnor.connectInput(0, testGate, 0);
 		testGate.connectInput(1, xnor, 1);
 		assertTrue(xnor.getRecoupledTo().size() == 1);
-	}
-
-	@Test
-	public void testMove() {
-		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getPosition().x == 0 && xnor.getPosition().y == 0);
-		xnor.move(7, 8);
-		assertTrue(xnor.getPosition().x == 7 && xnor.getPosition().y == 8);
 	}
 
 	@Test
@@ -129,15 +113,6 @@ public class XnorGateTest {
 		XnorGate xnor = new XnorGate(2);
 		xnor.setOutput(0, true);
 		assertTrue(xnor.getOutputValue(0));
-	}
-
-	@Test
-	public void testSetPosition() {
-		XnorGate xnor = new XnorGate(2);
-		assertTrue(xnor.getPosition().x == 0 && xnor.getPosition().y == 0);
-		Point p = new Point(8, 8);
-		xnor.setPosition(p);
-		assertTrue(xnor.getPosition() == p);
 	}
 
 	@Test

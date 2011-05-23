@@ -1,8 +1,8 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
-
-import java.awt.Point;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -15,8 +15,6 @@ public class NotGateTest {
 		NotGate not = new NotGate();
 		ICircuitGate clone = not.clone();
 		assertTrue(clone instanceof NotGate);
-		assertTrue(clone.getPosition().x == not.getPosition().x
-				&& clone.getPosition().y == not.getPosition().y);
 		assertTrue(clone.getNoOfInputs() == not.getNoOfInputs());
 		assertTrue(clone.getNoOfOutputs() == not.getNoOfOutputs());
 	}
@@ -79,12 +77,6 @@ public class NotGateTest {
 	}
 
 	@Test
-	public void testGetPosition() {
-		NotGate not = new NotGate();
-		assertTrue(not.getPosition().x == 0 && not.getPosition().y == 0);
-	}
-
-	@Test
 	public void testGetRecoupledTo() {
 		NotGate not = new NotGate();
 		NotGate testGate = new NotGate();
@@ -93,14 +85,6 @@ public class NotGateTest {
 		not.connectInput(0, testGate, 0);
 		testGate.connectInput(0, not, 0);
 		assertTrue(not.getRecoupledTo().size() == 1);
-	}
-
-	@Test
-	public void testMove() {
-		NotGate not = new NotGate();
-		assertTrue(not.getPosition().x == 0 && not.getPosition().y == 0);
-		not.move(7, 8);
-		assertTrue(not.getPosition().x == 7 && not.getPosition().y == 8);
 	}
 
 	@Test
@@ -127,15 +111,6 @@ public class NotGateTest {
 		NotGate not = new NotGate();
 		not.setOutput(0, true);
 		assertTrue(not.getOutputValue(0));
-	}
-
-	@Test
-	public void testSetPosition() {
-		NotGate not = new NotGate();
-		assertTrue(not.getPosition().x == 0 && not.getPosition().y == 0);
-		Point p = new Point(8, 8);
-		not.setPosition(p);
-		assertTrue(not.getPosition() == p);
 	}
 
 	@Test

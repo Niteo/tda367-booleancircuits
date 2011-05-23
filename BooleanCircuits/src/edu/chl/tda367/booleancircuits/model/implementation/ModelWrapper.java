@@ -4,8 +4,10 @@ import java.awt.Point;
 import java.io.File;
 import java.util.Collection;
 
-import edu.chl.tda367.booleancircuits.model.*;
+import edu.chl.tda367.booleancircuits.model.IModel;
+import edu.chl.tda367.booleancircuits.model.IModelWrapper;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 
 public final class ModelWrapper implements IModelWrapper {
 
@@ -32,13 +34,13 @@ public final class ModelWrapper implements IModelWrapper {
 	}
 
 	@Override
-	public void addComponent(final ICircuitGate component, final Point position) {
+	public void addComponent(final IGateWrapper component, final Point position) {
 		model.addComponent(component, position);
 		isChanged = true;
 	}
 
 	@Override
-	public void addComponents(final Collection<ICircuitGate> components) {
+	public void addComponents(final Collection<IGateWrapper> components) {
 		model.addComponents(components);
 		isChanged = true;
 	}
@@ -49,12 +51,12 @@ public final class ModelWrapper implements IModelWrapper {
 	}
 
 	@Override
-	public ICircuitGate getComponent(final Point position) {
+	public IGateWrapper getComponent(final Point position) {
 		return model.getComponent(position);
 	}
 
 	@Override
-	public Collection<ICircuitGate> getComponents() {
+	public Collection<IGateWrapper> getComponents() {
 		return model.getComponents();
 	}
 
@@ -84,13 +86,13 @@ public final class ModelWrapper implements IModelWrapper {
 	}
 
 	@Override
-	public void removeComponent(final ICircuitGate g) {
+	public void removeComponent(final IGateWrapper g) {
 		model.removeComponent(g);
 		isChanged = true;
 	}
 
 	@Override
-	public void removeComponents(final Collection<ICircuitGate> list) {
+	public void removeComponents(final Collection<IGateWrapper> list) {
 		model.removeComponents(list);
 		isChanged = true;
 	}
@@ -123,5 +125,10 @@ public final class ModelWrapper implements IModelWrapper {
 	@Override
 	public void updateComponents() {
 		model.updateComponents();
+	}
+
+	@Override
+	public IGateWrapper getGateWrapper(ICircuitGate gate) {
+		return model.getGateWrapper(gate);
 	}
 }
