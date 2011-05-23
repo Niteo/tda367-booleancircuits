@@ -21,23 +21,24 @@ import edu.chl.tda367.booleancircuits.model.IModel;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
+import edu.chl.tda367.booleancircuits.view.ICanvas;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 import edu.chl.tda367.booleancircuits.view.draw.IDraw;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
 
 /**
  * A class where the components are drawn.
- *
+ * 
  * @author Boel, Anton
- *
+ * 
  */
-public class Canvas {
+public class Canvas implements ICanvas {
 
 	private static IDraw drawer = new Draw();
 
 	/**
 	 * Sets the background of the canvas.
-	 *
+	 * 
 	 * @param background
 	 *            IBackground
 	 */
@@ -47,7 +48,7 @@ public class Canvas {
 
 	/**
 	 * Sets US standard. False is international.
-	 *
+	 * 
 	 * @param bool
 	 */
 	public static void setUSStandard(final boolean bool) {
@@ -254,11 +255,7 @@ public class Canvas {
 		panel.addMouseMotionListener(mouseAdapter);
 	}
 
-	/**
-	 * Returns the canvas.
-	 *
-	 * @return JPanel
-	 */
+	@Override
 	public JPanel getCanvas() {
 		return panel;
 	}

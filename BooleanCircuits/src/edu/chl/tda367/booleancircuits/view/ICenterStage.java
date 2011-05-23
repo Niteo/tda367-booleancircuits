@@ -4,7 +4,6 @@ import javax.swing.JPanel;
 
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
-import edu.chl.tda367.booleancircuits.view.implementation.TabManager;
 
 /**
  * An interface to describe a center stage.
@@ -24,9 +23,9 @@ public interface ICenterStage {
 	/**
 	 * Returns the tabManager.
 	 * 
-	 * @return TabManager
+	 * @return ITabManager
 	 */
-	public TabManager getTabManager();
+	public ITabManager getTabManager();
 
 	/**
 	 * Sets the background strategy of the canvas.
