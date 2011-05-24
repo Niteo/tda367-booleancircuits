@@ -20,9 +20,9 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 
 /**
  * Writes and reads save files.
- *
+ * 
  * @author antonlin
- *
+ * 
  */
 public final class FileManager implements IFileManager {
 
@@ -50,7 +50,7 @@ public final class FileManager implements IFileManager {
 
 	/**
 	 * Saves a circuit in form of a .txt file.
-	 *
+	 * 
 	 * @param components
 	 * @param name
 	 */
@@ -59,11 +59,11 @@ public final class FileManager implements IFileManager {
 			final File file) {
 		try {
 			PrintWriter saveFile = new PrintWriter(file);
-			List<IGateWrapper> tempList = new ArrayList<IGateWrapper>();
+			List<ICircuitGate> tempList = new ArrayList<ICircuitGate>();
 			// Print all gates
 			for (IGateWrapper gate : components) {
 				String txt = "ADD";
-				tempList.add(gate);
+				tempList.add(gate.getGate());
 				txt += " " + gate.toString() + " " + gate.getNoOfInputs() + " "
 						+ gate.getNoOfOutputs() + " " + gate.getPosition().x
 						+ " " + gate.getPosition().y;
@@ -76,7 +76,7 @@ public final class FileManager implements IFileManager {
 				for (IGateInput input : gateInputs) {
 					if (input.getInputComponent() != null) {
 						String txt = "CNCT";
-						txt += " " + tempList.indexOf(gate) + " "
+						txt += " " + tempList.indexOf(gate.getGate()) + " "
 								+ gateInputs.indexOf(input) + " "
 								+ tempList.indexOf(input.getInputComponent())
 								+ " " + input.getInputPort();
