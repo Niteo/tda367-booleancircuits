@@ -38,6 +38,7 @@ public class AndGateTest {
 	public void testConnectsTo() {
 		AndGate and = new AndGate(2);
 		AndGate testGate = new AndGate(2);
+		assertFalse(and.connectsTo(testGate));
 		and.connectInput(0, testGate, 0);
 		assertTrue(and.connectsTo(testGate));
 	}
