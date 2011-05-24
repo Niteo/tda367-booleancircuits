@@ -162,7 +162,7 @@ public final class Model implements IModel {
 			for (List<IGateWrapper> l : groupList) {
 				List<ICircuitGate> cloneList = new ArrayList<ICircuitGate>();
 				for (IGateWrapper g : l) {
-					ICircuitGate temp = ((IGateWrapper) g).getGateClone();
+					ICircuitGate temp = g.getGateClone();
 					if (temp.update()) {
 						hasChanged = true;
 					}
