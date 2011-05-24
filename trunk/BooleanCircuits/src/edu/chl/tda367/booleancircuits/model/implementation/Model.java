@@ -103,10 +103,11 @@ public final class Model implements IModel {
 
 	@Override
 	public void updateComponents() {
-		List<List<ICircuitGate>> groupList = new ArrayList<List<ICircuitGate>>();
+		List<List<IGateWrapper>> groupList = new ArrayList<List<IGateWrapper>>();
 		infiniteRecursion = false;
 
-		for (ICircuitGate iGate : componentList) {
+		// Remove unconnected gate connections
+		for (IGateWrapper iGate : componentList) {
 			for (IGateInput input : iGate.getInputs()) {
 				if (!componentList.contains(getGateWrapper(input.getInputComponent()))) {
 					input.reset();
@@ -116,19 +117,19 @@ public final class Model implements IModel {
 
 		// Prepare tiers
 		int maxTier = 0;
-		for (ICircuitGate iGate : componentList) {
+		for (IGateWrapper iGate : componentList) {
 			int tier = iGate.getComponentTier();
 			if (tier > maxTier) {
 				// Add a list per each tier jump made
 				for (int i = maxTier; i < tier; i++) {
-					groupList.add(new LinkedList<ICircuitGate>());
+					groupList.add(new LinkedList<IGateWrapper>());
 				}
 				maxTier = tier;
 			}
 		}
 
 		// Sort components into tiers
-		for (ICircuitGate iGate : componentList) {
+		for (IGateWrapper iGate : componentList) {
 			Collection<ICircuitGate> recouples = iGate.getRecoupledTo();
 			if (recouples.size() > 0) {
 				int recouplesMinTier = iGate.getComponentTier();
@@ -142,8 +143,10 @@ public final class Model implements IModel {
 					groupList.get(recouplesMinTier - 1).add(iGate);
 				}
 				for (ICircuitGate addGate : recouples) {
-					if (!groupList.get(recouplesMinTier - 1).contains(addGate)) {
-						groupList.get(recouplesMinTier - 1).add(addGate);
+					if (!groupList.get(recouplesMinTier - 1).contains(
+							getGateWrapper(addGate))) {
+						groupList.get(recouplesMinTier - 1).add(
+								getGateWrapper(addGate));
 					}
 				}
 			} else {
@@ -156,9 +159,9 @@ public final class Model implements IModel {
 		int loop = 0;
 		do {
 			hasChanged = false;
-			for (List<ICircuitGate> l : groupList) {
+			for (List<IGateWrapper> l : groupList) {
 				List<ICircuitGate> cloneList = new ArrayList<ICircuitGate>();
-				for (ICircuitGate g : l) {
+				for (IGateWrapper g : l) {
 					ICircuitGate temp = ((IGateWrapper) g).getGateClone();
 					if (temp.update()) {
 						hasChanged = true;
