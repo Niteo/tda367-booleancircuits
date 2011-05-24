@@ -12,8 +12,7 @@ import javax.swing.Timer;
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.IFileManager;
 import edu.chl.tda367.booleancircuits.io.implementation.FileManager;
-import edu.chl.tda367.booleancircuits.model.IModelManager;
-import edu.chl.tda367.booleancircuits.model.IModelWrapper;
+import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
@@ -33,7 +32,7 @@ public final class MasterController implements IMasterController {
 
 	/**
 	 * Returns an instance of a MasterController
-	 *
+	 * 
 	 * @param mm
 	 *            the ModelManager to control
 	 * @throws NullPointerException
@@ -61,7 +60,8 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void addComponent(final Point position) {
 		if (chosenGate != null) {
-			modelManager.addComponent(new GateWrapper(chosenGate.getGateClone()), position);
+			modelManager.addComponent(
+					new GateWrapper(chosenGate.getGateClone()), position);
 		}
 	}
 
@@ -84,24 +84,22 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public boolean closeWorkspace(final int i) {
-		if (i >= 0 && i < modelManager.getWorkspaces().size()) {
-			int answer = saveMessage(modelManager.getWorkspace(i));
-			boolean closed = true;
+		IModelWrapper m = modelManager.getWorkspace(i);
+		boolean close = false;
+		if(m != null){
+			int answer = saveMessage(m);
 			if (answer == 0) {
-				if (_saveWorkspace(modelManager.getWorkspace(i))) {
-					modelManager.closeWorkspace(i);
-				} else {
-					closed = false;
+				if (_saveWorkspace(m)) {
+					close = true;
 				}
-			} else if (answer == 1) {
-				closed = false;
-			} else {
-				modelManager.closeWorkspace(i);
+			} else if (answer == 2) {
+				close =  true;
 			}
-			return closed;
-		} else {
-			return false;
 		}
+		if(close) {
+			modelManager.closeWorkspace(i);
+		}
+		return close;
 	}
 
 	@Override
@@ -134,14 +132,11 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void importWorkspace() {
 		JFileChooser fc = new JFileChooser();
-		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION
-				&& modelManager.getActiveWorkspaceIndex() >= 0) {
+		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			List<IGateWrapper> importedComponents = fileManager.importFile(fc
 					.getSelectedFile());
-			modelManager.getActiveSelectionModel().selectComponents(
-					importedComponents);
 			modelManager.addComponents(importedComponents);
-
+			modelManager.selectComponents(importedComponents);
 		}
 	}
 
@@ -163,20 +158,16 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void pasteSelectedComponents() {
-		if (modelManager.getActiveSelectionModel() != null) {
-			modelManager.addComponents(clipboardManager.paste());
-			modelManager.selectComponents(clipboardManager
-					.getLastPastedComponents());
-		}
+		modelManager.addComponents(clipboardManager.paste());
+		modelManager.selectComponents(clipboardManager
+				.getLastPastedComponents());
 	}
 
 	@Override
 	public void pasteSelectedComponents(final Point position) {
-		if (modelManager.getActiveSelectionModel() != null) {
-			modelManager.addComponents(clipboardManager.paste(), position);
-			modelManager.selectComponents(clipboardManager
-					.getLastPastedComponents());
-		}
+		modelManager.addComponents(clipboardManager.paste(), position);
+		modelManager.selectComponents(clipboardManager
+				.getLastPastedComponents());
 	}
 
 	@Override
@@ -251,11 +242,13 @@ public final class MasterController implements IMasterController {
 	}
 
 	private void _copySelectedComponents() {
-		if (modelManager.getActiveSelectionModel() != null
-				&& modelManager.getActiveSelectionModel()
-						.getNumberOfComponents() != 0) {
-			clipboardManager.copy(modelManager.getActiveSelectionModel()
-					.getSelectedComponents());
+		ISelectionModel s = modelManager.getActiveSelectionModel();
+		IModelWrapper m = modelManager.getActiveWorkspaceModel();
+		if (s != null && m != null){
+			if(m.getNumberOfComponents() != 0){
+				clipboardManager.copy(modelManager.getActiveSelectionModel()
+						.getSelectedComponents());
+			}
 		}
 	}
 

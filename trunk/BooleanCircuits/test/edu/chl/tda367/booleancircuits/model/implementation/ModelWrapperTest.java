@@ -26,8 +26,7 @@ public class ModelWrapperTest {
 		ModelWrapper wrapper = new ModelWrapper();
 		wrapper.addComponent(new GateWrapper(new ConstantGate(true)), new Point(10, 10));
 
-		assertTrue(wrapper.getComponent(new Point(10, 10)) instanceof ConstantGate);
-
+		assertTrue(wrapper.getComponent(new Point(10, 10)).getGate() instanceof ConstantGate);
 	}
 
 	@Test

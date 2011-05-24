@@ -7,10 +7,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.IModelManager;
-import edu.chl.tda367.booleancircuits.model.IModelWrapper;
-import edu.chl.tda367.booleancircuits.model.IObservable;
-import edu.chl.tda367.booleancircuits.model.ISelectionModel;
+import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 
@@ -41,8 +38,9 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void addComponents(final List<IGateWrapper> components) {
-		if (getActiveWorkspaceModel() != null) {
-			getActiveWorkspaceModel().addComponents(components);
+		IModelWrapper awm = _getActiveWorkspaceModel();
+		if (awm != null) {
+			awm.addComponents(components);
 			firePropertyChanged();
 		}
 	}
@@ -50,7 +48,8 @@ public final class ModelManager implements IObservable, IModelManager {
 	@Override
 	public void addComponents(final List<IGateWrapper> component,
 			final Point position) {
-		if (modelList.size() > 0) {
+		IModelWrapper awm = _getActiveWorkspaceModel();
+		if (awm != null) {
 			int minX = Integer.MAX_VALUE;
 			int maxX = Integer.MIN_VALUE;
 			int minY = Integer.MAX_VALUE;
@@ -85,7 +84,7 @@ public final class ModelManager implements IObservable, IModelManager {
 				temp.y += moveY;
 				gate.setPosition(temp);
 			}
-			this._getActiveWorkspaceModel().addComponents(component);
+			awm.addComponents(component);
 			firePropertyChanged();
 		}
 	}
@@ -105,20 +104,16 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void clockActiveModel() {
-		if (modelList.size() > 0) {
-			_getActiveWorkspaceModel().clock();
+		IModelWrapper w = _getActiveWorkspaceModel();
+		if (w != null) {
+			w.clock();
 		}
 		firePropertyChanged();
 	}
 
 	@Override
 	public void closeActiveWorkspace() {
-		if (selectedIndex < 0 || selectedIndex >= modelList.size()) {
-			return;
-		} else {
-			removeModel(selectedIndex);
-			firePropertyChanged();
-		}
+		removeModel(selectedIndex);
 	}
 
 	@Override
@@ -160,7 +155,10 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public IModelWrapper getWorkspace(final int i) {
-		return modelList.get(i);
+		if(i >= 0 && i < modelList.size()){
+			return modelList.get(i);
+		}
+		return null;
 	}
 
 	@Override
@@ -170,8 +168,9 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public boolean isSelectedComponent(final IGateWrapper g) {
-		if (_getActiveSelectionModel() != null) {
-			return _getActiveSelectionModel().isSelectedComponent(g);
+		ISelectionModel asm = _getActiveSelectionModel();
+		if (asm != null) {
+			return asm.isSelectedComponent(g);
 		}
 		return false;
 	}
@@ -188,10 +187,12 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void removeComponent(final IGateWrapper g) {
-		if (_getActiveWorkspaceModel() != null) {
-			_getActiveWorkspaceModel().removeComponent(g);
-			_getActiveSelectionModel().removeComponent(g);
-			_getActiveWorkspaceModel().updateComponents();
+		IModelWrapper m = _getActiveWorkspaceModel();
+		ISelectionModel s = _getActiveSelectionModel();
+		if (m != null && s != null) {
+			m.removeComponent(g);
+			m.updateComponents();
+			s.removeComponent(g);
 			firePropertyChanged();
 		}
 	}
@@ -204,31 +205,32 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void removeSelectedComponents() {
-		if (selectedIndex >= 0 && selectedIndex < selectionModelList.size()) {
-			_getActiveWorkspaceModel().removeComponents(
-					_getActiveSelectionModel().getSelectedComponents());
-			_getActiveSelectionModel().removeComponents(
-					_getActiveSelectionModel().getSelectedComponents());
-			_getActiveWorkspaceModel().updateComponents();
+		IModelWrapper m = _getActiveWorkspaceModel();
+		ISelectionModel s = _getActiveSelectionModel();
+		if (m != null && s != null) {
+			m.removeComponents(s.getSelectedComponents());
+			m.updateComponents();
+			s.removeComponents(s.getSelectedComponents());
 			firePropertyChanged();
 		}
 	}
 
 	@Override
 	public void selectAllComponents() {
-		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
-			_getActiveSelectionModel().selectComponents(
-					modelList.get(selectedIndex).getComponents());
+		IModelWrapper m = _getActiveWorkspaceModel();
+		ISelectionModel s = _getActiveSelectionModel();
+		if (m != null && s != null) {
+			s.selectComponents(m.getComponents());
 			firePropertyChanged();
 		}
 	}
 
 	@Override
 	public void selectComponent(final Point position, final boolean multiSelect) {
-		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
-			_getActiveSelectionModel().selectComponent(
-					modelList.get(selectedIndex).getComponent(position),
-					multiSelect);
+		IModelWrapper m = _getActiveWorkspaceModel();
+		ISelectionModel s = _getActiveSelectionModel();
+		if (m != null && s != null) {
+			s.selectComponent(m.getComponent(position), multiSelect);
 			firePropertyChanged();
 		}
 	}
@@ -237,23 +239,32 @@ public final class ModelManager implements IObservable, IModelManager {
 	public void selectComponents(final Point pos1, final Point pos2) {
 		List<IGateWrapper> selectedComponents = new ArrayList<IGateWrapper>();
 
-		for (IGateWrapper gate : _getActiveWorkspaceModel().getComponents()) {
-			Point gatePosition = gate.getPosition();
-			if (gatePosition.x >= Math.min(pos1.x, pos2.x)
-					&& gatePosition.x <= Math.max(pos1.x, pos2.x)
-					&& gatePosition.y >= Math.min(pos1.y, pos2.y)
-					&& gatePosition.y <= Math.max(pos1.y, pos2.y)) {
-				selectedComponents.add(gate);
+		IModelWrapper m = _getActiveWorkspaceModel();
+		if(m != null){
+			for (IGateWrapper gate : m.getComponents()) {
+				Point gatePosition = gate.getPosition();
+				if (gatePosition.x >= Math.min(pos1.x, pos2.x)
+						&& gatePosition.x <= Math.max(pos1.x, pos2.x)
+						&& gatePosition.y >= Math.min(pos1.y, pos2.y)
+						&& gatePosition.y <= Math.max(pos1.y, pos2.y)) {
+					selectedComponents.add(gate);
+				}
 			}
 		}
-		this.getActiveSelectionModel().selectComponents(selectedComponents);
+		
+		ISelectionModel s = _getActiveSelectionModel();
+		if (s != null) {
+			s.selectComponents(selectedComponents);
+			firePropertyChanged();
+		}
 	}
 
 	@Override
 	public void selectComponents(List<IGateWrapper> list){
-		_getActiveSelectionModel().getSelectedComponents().clear();
-		for(IGateWrapper gate: list){
-			selectComponent(gate.getPosition(), true);
+		ISelectionModel s = _getActiveSelectionModel();
+		if (s != null) {
+			s.selectComponents(list);
+			firePropertyChanged();
 		}
 	}
 
@@ -264,26 +275,25 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	private void _addComponent(final IGateWrapper component,
 			final Point position) {
-		if (_getActiveWorkspaceModel() != null) {
-			_getActiveWorkspaceModel().addComponent(component, position);
-			_getActiveWorkspaceModel().updateComponents();
+		IModelWrapper m = _getActiveWorkspaceModel();
+		if (m != null) {
+			m.addComponent(component, position);
+			m.updateComponents();
 		}
 	}
 
 	private ISelectionModel _getActiveSelectionModel() {
 		if (selectedIndex >= 0 && selectedIndex < selectionModelList.size()) {
 			return selectionModelList.get(selectedIndex);
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	private IModelWrapper _getActiveWorkspaceModel() {
 		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
 			return modelList.get(selectedIndex);
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	private void _setActiveWorkspace(final int i) {
@@ -314,6 +324,10 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public IGateWrapper getGateWrapper(ICircuitGate gate) {
-		return _getActiveWorkspaceModel().getGateWrapper(gate);
+		IModelWrapper m = _getActiveWorkspaceModel();
+		if(m != null){
+			return m.getGateWrapper(gate);	
+		}
+		return null;
 	}
 }
