@@ -44,7 +44,9 @@ public class ClipboardManager implements IClipboardManager {
 		List<IGateWrapper> dupList = new ArrayList<IGateWrapper>();
 		for (IGateWrapper gate : list) {
 			if (gate != null) {
-				componentsMap.put(gate, new GateWrapper(gate.getGateClone()));
+				GateWrapper temp = new GateWrapper(gate.getGateClone());
+				temp.setPosition(gate.getPosition());
+				componentsMap.put(gate, temp);
 			}
 		}
 
