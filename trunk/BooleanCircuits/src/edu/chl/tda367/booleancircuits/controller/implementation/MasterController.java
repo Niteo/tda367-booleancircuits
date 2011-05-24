@@ -3,7 +3,7 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.util.*;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -158,9 +158,13 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void pasteSelectedComponents() {
-		modelManager.addComponents(clipboardManager.paste());
-		modelManager.selectComponents(clipboardManager
-				.getLastPastedComponents());
+		List<IGateWrapper> col = clipboardManager.paste();
+		for(IGateWrapper gw : col){
+			gw.move(-Constants.componentSize, -Constants.componentSize);
+		}
+		modelManager.addComponents(col);
+		modelManager.selectComponents(col);
+		copySelectedComponents();
 	}
 
 	@Override
