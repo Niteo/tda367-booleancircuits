@@ -3,7 +3,9 @@ package edu.chl.tda367.booleancircuits.model.components.implementation;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
@@ -28,13 +30,25 @@ public class ConstantGateTest {
 				.getNoOfOutputs());
 	}
 
+	 
 	@Test(expected = IllegalArgumentException.class)
+
 	public void testConnectInput() throws IllegalArgumentException {
 		ConstantGate falseConstantGate = new ConstantGate(false);
 
 		falseConstantGate.connectInput(0, new ConstantGate(true), 1);
-		assertTrue(falseConstantGate.getInputs().get(0).getInputValue() == false);
+		
+        
 
+	}
+
+	@Test
+	public void testConnectsTo() {
+		ConstantGate falseGate = new ConstantGate(false);
+		ConstantGate trueGate = new ConstantGate(true);
+		
+		assertFalse(falseGate.connectsTo(trueGate));
+	
 	}
 
 	@Test
