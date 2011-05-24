@@ -3,16 +3,25 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 import java.awt.Point;
 
 import org.junit.Test;
+import org.junit.internal.runners.statements.ExpectException;
 
-import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
 
 public class MasterControllerTest {
+	
 
+	@Test(expected=NullPointerException.class)
+	public void testMasterController() {
+		new MasterController(new ModelManager());
+		new MasterController(null);
+	}
+	
 	@Test
 	public void testAddComponent() {
-		new MasterController(new ModelManager()).addComponent(new Point(0, 0));
+		MasterController mc = new MasterController(new ModelManager());
+		mc.setChosenComponent(new GateWrapper(new ConstantGate(true)));
+		mc.addComponent(new Point(0,0));
 	}
 
 	@Test
@@ -22,33 +31,41 @@ public class MasterControllerTest {
 
 	@Test
 	public void testCloseAllWorkspaces() {
-		new MasterController(new ModelManager()).closeAllWorkspaces();
+		MasterController mc = new MasterController(new ModelManager());
+		mc.newWorkspace();
+		mc.closeAllWorkspaces();
 	}
 
 	@Test
 	public void testCloseWorkspace() {
-		new MasterController(new ModelManager()).closeWorkspace(0);
+		MasterController mc = new MasterController(new ModelManager());
+		mc.newWorkspace();
+		mc.closeWorkspace(1);
+		mc.closeWorkspace(0);
 	}
 
 	@Test
 	public void testConnectComponent() {
-		new MasterController(new ModelManager()).connectComponent(new GateWrapper(
+		MasterController mc = new MasterController(new ModelManager());
+		mc.connectComponent(new GateWrapper(
 				new AndGate(2)), 0);
+		mc.connectComponent(new GateWrapper(
+				new AndGate(2)), 0);
+		mc.connectComponent(null, 0);
 	}
 
 	@Test
 	public void testCopySelectedComponents() {
-		new MasterController(new ModelManager()).copySelectedComponents();
+		MasterController mc = new MasterController(new ModelManager());
+		mc.newWorkspace();
+		mc.setChosenComponent(new GateWrapper(new ConstantGate(true)));
+		mc.addComponent(new Point(0,0));
+		mc.copySelectedComponents();
 	}
 
 	@Test
 	public void testCutSelectedComponents() {
 		new MasterController(new ModelManager()).cutSelectedComponents();
-	}
-
-	@Test
-	public void testMasterController() {
-		new MasterController(new ModelManager());
 	}
 
 	@Test
@@ -63,7 +80,16 @@ public class MasterControllerTest {
 
 	@Test
 	public void testPasteSelectedComponents() {
-		new MasterController(new ModelManager()).pasteSelectedComponents();
+		MasterController mc = new MasterController(new ModelManager());
+		mc.newWorkspace();
+		mc.copySelectedComponents();
+		mc.pasteSelectedComponents();
+	}
+	
+	@Test
+	public void testSelectComponents(){
+		MasterController mc = new MasterController(new ModelManager());
+		mc.selectComponents(new Point(0,0), new Point(50,50));
 	}
 
 	@Test
@@ -113,6 +139,13 @@ public class MasterControllerTest {
 	public void testSetChosenComponent() {
 		new MasterController(new ModelManager())
 				.setChosenComponent(new GateWrapper(new AndGate(2)));
+	}
+	
+	@Test
+	public void testToggleClockTimer(){
+		MasterController mc = new MasterController(new ModelManager());
+		mc.toggleClockTimer();
+		mc.toggleClockTimer();
 	}
 
 }

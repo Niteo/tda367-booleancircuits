@@ -102,7 +102,7 @@ public class EqualGateTest {
 
 	@Test
 	public void testToString() {
-		assertTrue(new EqualGate().toString().equals("Equal"));
+		assertTrue(new EqualGate().toString().equals("EQUAL"));
 	}
 
 	@Test

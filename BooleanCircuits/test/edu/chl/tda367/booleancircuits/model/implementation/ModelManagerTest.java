@@ -27,7 +27,9 @@ public class ModelManagerTest {
 		mm.addComponent(new GateWrapper(new ConstantGate(true)),
 				new Point(0, 0));
 
-		assertTrue(mm.getActiveWorkspaceModel().getComponent(new Point(0, 0)) instanceof ConstantGate);
+		assertTrue(mm.getActiveWorkspaceModel().
+				getComponent(new Point(0, 0)).
+				getGate() instanceof ConstantGate);
 	}
 
 	@Test
