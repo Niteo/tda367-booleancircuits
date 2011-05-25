@@ -102,4 +102,9 @@ public class GateWrapper implements IGateWrapper{
 		return gate.toString();
 	}
 
+	@Override
+	public boolean isFullyConnected() {
+		return gate.isFullyConnected();
+	}
+
 }

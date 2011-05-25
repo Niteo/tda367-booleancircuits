@@ -32,7 +32,6 @@ public abstract class AbstractCircuitGate implements ICircuitGate, ICloneableGat
 		for (int i = 0; i < this.outputs.length; i++) {
 			c.setOutput(i, outputs[i]);
 		}
-
 		int port = 0;
 		for (IGateInput gi : this.getInputs()) {
 			c.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
@@ -175,6 +174,15 @@ public abstract class AbstractCircuitGate implements ICircuitGate, ICloneableGat
 			}
 		}
 		return false;
+	}
+	
+	public boolean isFullyConnected(){
+		for(IGateInput gi : inputs){
+			if(gi.getInputComponent() == null){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
