@@ -39,6 +39,14 @@ public class Painter implements IPainter {
 			final Point offset) {
 		color = g.getColor();
 
+		if (!gate.isFullyConnected()) {
+			g.setColor(Color.RED);
+			g.drawOval(gate.getPosition().x - (offset.x)
+					- Constants.componentSize, gate.getPosition().y
+					- (offset.y) - Constants.componentSize,
+					Constants.componentSize * 2, Constants.componentSize * 2);
+		}
+
 		if (gate.getGate() instanceof AndGate) {
 			drawAndGate(gate, g, offset);
 		} else if (gate.getGate() instanceof NandGate) {
@@ -78,6 +86,7 @@ public class Painter implements IPainter {
 		}
 
 		g.setColor(color);
+		drawPin(gate, g, offset);
 	}
 
 	@Override
@@ -318,8 +327,7 @@ public class Painter implements IPainter {
 
 	private void drawRectangle(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
-
-		g.setColor(Color.WHITE);
+		g.setColor(Color.white);
 		g.fill3DRect(
 				(gate.getPosition().x - offset.x - Constants.componentSize / 2),
 				(gate.getPosition().y - offset.y - Constants.componentSize / 2),
@@ -338,7 +346,8 @@ public class Painter implements IPainter {
 
 	private void drawUSGateBody(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
-		g.setColor(Color.white);
+
+		g.setColor(Color.WHITE);
 		g.fillRect(gate.getPosition().x - (offset.x) - Constants.componentSize,
 				gate.getPosition().y - (offset.y) - Constants.componentSize / 3
 						- 3, Constants.componentSize,
@@ -375,6 +384,7 @@ public class Painter implements IPainter {
 				- (offset.y) - Constants.componentSize / 2 + 3,
 				Constants.componentSize / 2, Constants.componentSize - 6, -90,
 				180);
+
 	}
 
 	private void drawXnorGate(final IGateWrapper gate, final Graphics2D g,
@@ -411,6 +421,41 @@ public class Painter implements IPainter {
 			drawRectangle(gate, g, offset);
 
 		}
+	}
+
+	private void drawPin(final IGateWrapper gate, final Graphics2D g,
+			final Point offset) {
+
+		for (int i = 0; i < gate.getNoOfInputs(); i++) {
+
+			g.drawLine(gate.getPosition().x - offset.x
+					- Constants.componentSize,
+					(int) (gate.getPosition().y - offset.y),
+					gate.getPosition().x - offset.x - Constants.componentSize
+							/ 2, (int) (gate.getPosition().y - offset.y));
+		}
+		/*
+		 * g.setColor(color);
+		 * 
+		 * int nInputs = coll.size(); int loopCount = 0; for (IConnection i :
+		 * coll) {
+		 * 
+		 * if (i.getValue()) { g.setColor(Constants.connectionHigh); } else {
+		 * g.setColor(Constants.connectionLow); }
+		 * 
+		 * int y1Offset = loopCount * Constants.componentSize / (nInputs) +
+		 * Constants.componentSize / (nInputs * 2); int xStart = (int)
+		 * (i.getStartPoint().x - offset.x - Constants.componentSize * 0.5); int
+		 * yStart = (int) (i.getStartPoint().y - offset.y + y1Offset -
+		 * Constants.componentSize * 0.5);
+		 * 
+		 * int y2Offset = (Constants.componentSize / (i.getNoOfEndPorts() * 2))
+		 * (i.getEndPortIndex() + i.getNoOfEndPorts()); int xEnd = (int)
+		 * (i.getEndPoint().x - offset.x + Constants.componentSize * 0.5); int
+		 * yEnd = (int) (i.getEndPoint().y - offset.y - Constants.componentSize
+		 * * 0.5 + y2Offset);
+		 */
+
 	}
 
 }
