@@ -21,7 +21,7 @@ public class ModelManagerTest {
 
 	@Test
 	public void testAddComponent() {
-		ModelManager mm = new ModelManager();
+		CircuitManager mm = new CircuitManager();
 
 		mm.newWorkspace();
 		mm.addComponent(new GateWrapper(new ConstantGate(true)),
@@ -36,19 +36,19 @@ public class ModelManagerTest {
 	public void testAddComponentsList() {
 		List<IGateWrapper> list = new ArrayList<IGateWrapper>();
 		list.add(new GateWrapper(new AndGate(2)));
-		new ModelManager().addComponents(list);
+		new CircuitManager().addComponents(list);
 	}
 
 	@Test
 	public void testAddComponentsListPoint() {
 		List<IGateWrapper> list = new ArrayList<IGateWrapper>();
 		list.add(new GateWrapper(new AndGate(2)));
-		new ModelManager().addComponents(list, new Point(0, 0));
+		new CircuitManager().addComponents(list, new Point(0, 0));
 	}
 
 	@Test
 	public void testAddPropertyChangeListener() {
-		new ModelManager()
+		new CircuitManager()
 				.addPropertyChangeListener(new PropertyChangeListener() {
 
 					@Override
@@ -60,8 +60,8 @@ public class ModelManagerTest {
 
 	@Test
 	public void testAddWorkspace() {
-		ModelManager mm = new ModelManager();
-		ModelWrapper mw = new ModelWrapper();
+		CircuitManager mm = new CircuitManager();
+		CircuitWrapper mw = new CircuitWrapper();
 
 		mm.addWorkspace(mw);
 		assertTrue(mm.getWorkspaces().size() == 1);
@@ -69,9 +69,9 @@ public class ModelManagerTest {
 
 	@Test
 	public void testCloseActiveWorkspace() {
-		ModelManager mm = new ModelManager();
-		ModelWrapper mw1 = new ModelWrapper();
-		ModelWrapper mw2 = new ModelWrapper();
+		CircuitManager mm = new CircuitManager();
+		CircuitWrapper mw1 = new CircuitWrapper();
+		CircuitWrapper mw2 = new CircuitWrapper();
 
 		mm.addWorkspace(mw1);
 		mm.addWorkspace(mw2);
@@ -84,7 +84,7 @@ public class ModelManagerTest {
 
 	@Test
 	public void testCloseAllWorkspaces() {
-		ModelManager mm = new ModelManager();
+		CircuitManager mm = new CircuitManager();
 
 		mm.newWorkspace();
 		mm.newWorkspace();
@@ -94,9 +94,9 @@ public class ModelManagerTest {
 
 	@Test
 	public void testCloseWorkspace() {
-		ModelManager mm = new ModelManager();
-		ModelWrapper mw1 = new ModelWrapper();
-		ModelWrapper mw2 = new ModelWrapper();
+		CircuitManager mm = new CircuitManager();
+		CircuitWrapper mw1 = new CircuitWrapper();
+		CircuitWrapper mw2 = new CircuitWrapper();
 
 		mm.addWorkspace(mw1);
 		mm.addWorkspace(mw2);
@@ -107,52 +107,52 @@ public class ModelManagerTest {
 
 	@Test
 	public void testConnectComponents() {
-		new ModelManager().connectComponents(new GateWrapper(new AndGate(2)),
+		new CircuitManager().connectComponents(new GateWrapper(new AndGate(2)),
 				new GateWrapper(new NandGate(2)), 0, 0);
 	}
 
 	@Test
 	public void testGetActiveSelectionModel() {
-		ModelManager mm = new ModelManager();
+		CircuitManager mm = new CircuitManager();
 		assertNull(mm.getActiveSelectionModel());
 	}
 
 	@Test
 	public void testGetActiveWorkspaceIndex() {
-		ModelManager mm = new ModelManager();
+		CircuitManager mm = new CircuitManager();
 		assertTrue(mm.getActiveWorkspaceIndex() == -1);
 	}
 
 	@Test
 	public void testGetActiveWorkspaceModel() {
-		ModelManager mm = new ModelManager();
+		CircuitManager mm = new CircuitManager();
 		assertNull(mm.getActiveWorkspaceModel());
 	}
 
 	@Test
 	public void testGetWorkspaces() {
-		ModelManager mm = new ModelManager();
+		CircuitManager mm = new CircuitManager();
 		assertTrue(mm.getWorkspaces().size() == 0);
 	}
 
 	@Test
 	public void testIsSelectedComponent() {
-		new ModelManager().isSelectedComponent(new GateWrapper(new NandGate(220)));
+		new CircuitManager().isSelectedComponent(new GateWrapper(new NandGate(220)));
 	}
 
 	@Test
 	public void testManualPropertyChanged() {
-		new ModelManager().manualPropertyChanged();
+		new CircuitManager().manualPropertyChanged();
 	}
 
 	@Test
 	public void testModelManager() {
-		new ModelManager();
+		new CircuitManager();
 	}
 
 	@Test
 	public void testNewWorkspace() {
-		ModelManager mm = new ModelManager();
+		CircuitManager mm = new CircuitManager();
 
 		assertTrue(mm.getWorkspaces().size() == 0);
 		mm.newWorkspace();
@@ -161,7 +161,7 @@ public class ModelManagerTest {
 
 	@Test
 	public void testRemoveComponent() {
-		new ModelManager().removeComponent(new GateWrapper(new ConstantGate(true)));
+		new CircuitManager().removeComponent(new GateWrapper(new ConstantGate(true)));
 	}
 
 	@Test
@@ -173,30 +173,30 @@ public class ModelManagerTest {
 				return;
 			}
 		};
-		new ModelManager().addPropertyChangeListener(listener);
-		new ModelManager().removePropertyChangeListener(listener);
+		new CircuitManager().addPropertyChangeListener(listener);
+		new CircuitManager().removePropertyChangeListener(listener);
 	}
 
 	@Test
 	public void testRemoveSelectedComponents() {
-		new ModelManager().removeSelectedComponents();
+		new CircuitManager().removeSelectedComponents();
 	}
 
 	@Test
 	public void testSelectAllComponents() {
-		new ModelManager().selectAllComponents();
+		new CircuitManager().selectAllComponents();
 	}
 
 	@Test
 	public void testSelectComponent() {
-		new ModelManager().selectComponent(new Point(0, 0), false);
+		new CircuitManager().selectComponent(new Point(0, 0), false);
 	}
 
 	@Test
 	public void testSetActiveWorkspace() {
-		ModelManager mm = new ModelManager();
-		ModelWrapper mw1 = new ModelWrapper();
-		ModelWrapper mw2 = new ModelWrapper();
+		CircuitManager mm = new CircuitManager();
+		CircuitWrapper mw1 = new CircuitWrapper();
+		CircuitWrapper mw2 = new CircuitWrapper();
 
 		mm.addWorkspace(mw1);
 		mm.addWorkspace(mw2);

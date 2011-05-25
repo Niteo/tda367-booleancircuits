@@ -15,7 +15,7 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
-import edu.chl.tda367.booleancircuits.model.implementation.ModelWrapper;
+import edu.chl.tda367.booleancircuits.model.implementation.CircuitWrapper;
 import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;
 
 /**
@@ -35,9 +35,9 @@ public final class FileManager implements IFileManager {
 	 * Opens a saved circuit by reading a saved .txt file.
 	 */
 	@Override
-	public ModelWrapper openFile(final File file) {
+	public CircuitWrapper openFile(final File file) {
 
-		ModelWrapper model = new ModelWrapper(file);
+		CircuitWrapper model = new CircuitWrapper(file);
 		List<IGateWrapper> components = readFile(file);
 
 		for (IGateWrapper component : components) {

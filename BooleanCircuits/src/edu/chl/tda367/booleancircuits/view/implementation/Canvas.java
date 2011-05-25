@@ -19,17 +19,14 @@ import javax.swing.UIManager;
 import javax.swing.event.MouseInputAdapter;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
-import edu.chl.tda367.booleancircuits.model.IModel;
+import edu.chl.tda367.booleancircuits.model.ICircuit;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
-import edu.chl.tda367.booleancircuits.utilities.IConnection;
-import edu.chl.tda367.booleancircuits.utilities.implementation.Connection;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 import edu.chl.tda367.booleancircuits.view.ICanvas;
-import edu.chl.tda367.booleancircuits.view.draw.IBackground;
-import edu.chl.tda367.booleancircuits.view.draw.IDraw;
-import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
+import edu.chl.tda367.booleancircuits.view.draw.*;
+import edu.chl.tda367.booleancircuits.view.draw.implementation.*;
 
 /**
  * A class where the components are drawn.
@@ -39,7 +36,7 @@ import edu.chl.tda367.booleancircuits.view.draw.implementation.Draw;
  */
 public class Canvas implements ICanvas {
 
-	private static IDraw drawer = new Draw();
+	private static IPainter drawer = new Painter();
 
 	/**
 	 * Sets the background of the canvas.
@@ -105,7 +102,7 @@ public class Canvas implements ICanvas {
 		}
 	};
 	private final CanvasPopup menu;
-	private final IModel model;
+	private final ICircuit model;
 	private final MouseAdapter mouseAdapter = new MouseInputAdapter() {
 		@SuppressWarnings("synthetic-access")
 		@Override
@@ -248,7 +245,7 @@ public class Canvas implements ICanvas {
 	private IGateWrapper rightClickedGate = null;
 	private final ISelectionModel selectModel;
 
-	public Canvas(final IModel canvasModel,
+	public Canvas(final ICircuit canvasModel,
 			final ISelectionModel selectionModel,
 			final IMasterController masterController) {
 		if (masterController == null) {

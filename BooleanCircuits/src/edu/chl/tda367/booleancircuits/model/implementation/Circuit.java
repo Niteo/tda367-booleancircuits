@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.IModel;
+import edu.chl.tda367.booleancircuits.model.ICircuit;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
@@ -17,7 +17,7 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 /**
  * Model for managing and updating circuit components.
  */
-public final class Model implements IModel {
+public final class Circuit implements ICircuit {
 	private final Collection<IGateWrapper> componentList;
 	private boolean infiniteRecursion = false;
 
@@ -27,7 +27,7 @@ public final class Model implements IModel {
 	 * @param name
 	 *            the name of the model
 	 */
-	public Model() {
+	public Circuit() {
 		componentList = new ArrayList<IGateWrapper>();
 	}
 

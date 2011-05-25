@@ -6,7 +6,7 @@ import java.util.Collection;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 
-public interface IModel {
+public interface ICircuit {
 
 	/**
 	 * Adds a component to the model.

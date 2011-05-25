@@ -15,7 +15,7 @@ import edu.chl.tda367.booleancircuits.io.implementation.FileManager;
 import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
-import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
+import edu.chl.tda367.booleancircuits.model.implementation.CircuitManager;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 import edu.chl.tda367.booleancircuits.utilities.implementation.ClipboardManager;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
@@ -28,7 +28,7 @@ public final class MasterController implements IMasterController {
 	private IGateWrapper connectComponent = null;
 	private int connectPort = -1;
 	private IFileManager fileManager;
-	private final IModelManager modelManager;
+	private final ICircuitManager modelManager;
 
 	/**
 	 * Returns an instance of a MasterController
@@ -38,7 +38,7 @@ public final class MasterController implements IMasterController {
 	 * @throws NullPointerException
 	 *             if mm is null
 	 */
-	public MasterController(final ModelManager mm) {
+	public MasterController(final CircuitManager mm) {
 		if (mm == null) {
 			throw new NullPointerException("mm must not be null!");
 		} else {
@@ -84,7 +84,7 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public boolean closeWorkspace(final int i) {
-		IModelWrapper m = modelManager.getWorkspace(i);
+		ICircuitWrapper m = modelManager.getWorkspace(i);
 		boolean close = false;
 		if(m != null){
 			int answer = saveMessage(m);
@@ -149,7 +149,7 @@ public final class MasterController implements IMasterController {
 	public void openWorkspace() {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			IModelWrapper workspace = fileManager
+			ICircuitWrapper workspace = fileManager
 					.openFile(fc.getSelectedFile());
 			workspace.setChanged(false);
 			modelManager.addWorkspace(workspace);
@@ -200,7 +200,7 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void saveAllWorkspaces() {
-		for (IModelWrapper imw : modelManager.getWorkspaces()) {
+		for (ICircuitWrapper imw : modelManager.getWorkspaces()) {
 			_saveWorkspace(imw);
 		}
 	}
@@ -247,7 +247,7 @@ public final class MasterController implements IMasterController {
 
 	private void _copySelectedComponents() {
 		ISelectionModel s = modelManager.getActiveSelectionModel();
-		IModelWrapper m = modelManager.getActiveWorkspaceModel();
+		ICircuitWrapper m = modelManager.getActiveWorkspaceModel();
 		if (s != null && m != null){
 			if(m.getNumberOfComponents() != 0){
 				clipboardManager.copy(modelManager.getActiveSelectionModel()
@@ -256,7 +256,7 @@ public final class MasterController implements IMasterController {
 		}
 	}
 
-	private boolean _saveWorkspace(final IModelWrapper imw) {
+	private boolean _saveWorkspace(final ICircuitWrapper imw) {
 		if (modelManager.getActiveWorkspaceModel() != null) {
 			if (imw.getFile() != null) {
 				fileManager.saveFile(imw.getComponents(), imw.getFile());
@@ -271,7 +271,7 @@ public final class MasterController implements IMasterController {
 		}
 	}
 
-	private boolean _saveWorkspaceAs(final IModelWrapper imw) {
+	private boolean _saveWorkspaceAs(final ICircuitWrapper imw) {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 			fileManager.saveFile(imw.getComponents(), fc.getSelectedFile());
@@ -284,7 +284,7 @@ public final class MasterController implements IMasterController {
 		}
 	}
 
-	private int saveMessage(final IModelWrapper model) {
+	private int saveMessage(final ICircuitWrapper model) {
 		if (model.hasChanged()) {
 			// Custom button text
 			Object[] options = { "Yes", "Cancel", "No" };

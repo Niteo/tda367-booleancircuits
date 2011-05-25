@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.util.Collection;
 
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
-import edu.chl.tda367.booleancircuits.utilities.IConnection;
 
 /**
  * A drawing interface.
@@ -14,7 +13,7 @@ import edu.chl.tda367.booleancircuits.utilities.IConnection;
  * @author Boel
  *
  */
-public interface IDraw {
+public interface IPainter {
 
 	/**
 	 * Draws a background.

@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.ICloneable;
+import edu.chl.tda367.booleancircuits.common.ICloneableGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
@@ -15,12 +15,11 @@ import edu.chl.tda367.booleancircuits.model.components.IGateInput;
  * @author Kaufmann
  *
  */
-public abstract class AbstractCircuitGate implements ICircuitGate, ICloneable {
+public abstract class AbstractCircuitGate implements ICircuitGate, ICloneableGate {
 	private List<IGateInput> inputs;
 	private boolean isInConnectToCalculation;
 	private boolean isInTiercalculation;
 	private boolean[] outputs;
-	private Point position = new Point();
 
 	public AbstractCircuitGate(final int inPorts, final int outPorts) {
 		createOutputs(outPorts);
@@ -40,8 +39,6 @@ public abstract class AbstractCircuitGate implements ICircuitGate, ICloneable {
 		for (IGateInput gi : this.getInputs()) {
 			c.connectInput(port++, gi.getInputComponent(), gi.getInputPort());
 		}
-
-		c.position = position;
 
 		return c;
 	}
