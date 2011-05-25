@@ -100,4 +100,10 @@ public interface ICircuitGate{
 	 * @return boolean true if output changed
 	 */
 	public boolean update();
+	
+	/**
+	 * Checks whether the gate has connected all inputs.
+	 * @return true if all inputs are connected.
+	 */
+	public boolean isFullyConnected();
 }
