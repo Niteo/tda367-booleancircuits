@@ -1,6 +1,8 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -33,8 +35,11 @@ public class ClockTest {
 		assertFalse(clock.getOutputValue(0));
 		clock.toggleClock();
 		clock.update();
-		assertTrue(clock.getOutputValue(0)==true);
-		
+		assertTrue(clock.getOutputValue(0));
+		clock.toggleClock();
+		clock.update();
+		assertFalse(clock.getOutputValue(0));
+
 	}
 
 	@Test
@@ -44,12 +49,12 @@ public class ClockTest {
 		assertFalse(clock.getOutputValue(0));
 		and.connectInput(0,clock,0);
 		and.connectInput(0, new ConstantGate(true), 1);
-		
+
 		clock.toggleClock();
 		clock.update();
 		assertTrue(clock.getOutputValue(0)==true);
-		
-	
+
+
 
 	}
 

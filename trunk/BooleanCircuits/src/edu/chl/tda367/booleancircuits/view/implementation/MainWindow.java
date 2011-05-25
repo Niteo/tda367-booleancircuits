@@ -59,7 +59,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 	private JMenuItem closeAllMenuItem;
 	private JMenuItem closeMenuItem;
 	private Action closeWorkspace = new AbstractAction("", new ImageIcon(
-			"resources/icons/cross-icon.png")) {
+			"Resources/Icons/cross-icon.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -183,7 +183,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		setTitle("Boolean Circuits");
 		setVisible(true);
 		setSize(new Dimension(800, 500));
-		setIconImage(new ImageIcon("resources/icons/frameIcon.png").getImage());
+		setIconImage(new ImageIcon("Resources/Icons/frameIcon.png").getImage());
 	}
 
 	@Override

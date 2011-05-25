@@ -1,8 +1,11 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 public class GateInputTest {
 
@@ -51,6 +54,15 @@ public class GateInputTest {
 		GateInput input = new GateInput();
 		input.setInputComponent(new ConstantGate(false), 0);
 
+	}
+
+	@Test
+	public void testReset(){
+		IGateInput input = new GateInput();
+		input.setInputComponent(new AndGate(2), 0);
+		input.reset();
+		assertNull(input.getInputComponent());
+		assertTrue(input.getInputPort()==0);
 	}
 
 }
