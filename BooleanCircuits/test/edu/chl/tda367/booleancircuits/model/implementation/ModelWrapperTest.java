@@ -24,7 +24,8 @@ public class ModelWrapperTest {
 	@Test
 	public void testAddComponent() {
 		CircuitWrapper wrapper = new CircuitWrapper();
-		wrapper.addComponent(new GateWrapper(new ConstantGate(true)), new Point(10, 10));
+		wrapper.addComponent(new GateWrapper(new ConstantGate(true)),
+				new Point(10, 10));
 
 		assertTrue(wrapper.getComponent(new Point(10, 10)).getGate() instanceof ConstantGate);
 	}
@@ -84,12 +85,12 @@ public class ModelWrapperTest {
 	public void testHasChanged() {
 		CircuitWrapper wrapper = new CircuitWrapper();
 		assertTrue(wrapper.hasChanged() == false);
-
 	}
 
 	@Test
 	public void testHasFile() {
 		CircuitWrapper wrapper = new CircuitWrapper();
+		assertFalse(wrapper.hasFile());
 		File file = new File("file");
 
 		wrapper.setFile(file);
@@ -168,6 +169,8 @@ public class ModelWrapperTest {
 		wrapper.setFile(file);
 		assertTrue(wrapper.toString().equals("file"));
 
+		wrapper.setChanged(true);
+		assertTrue(wrapper.toString().equals("*file"));
 	}
 
 	@Test
@@ -182,6 +185,13 @@ public class ModelWrapperTest {
 		wrapper.updateComponents();
 		assertTrue(clock.getOutputValue(0));
 		assertTrue(wrapper.hasChanged() == true);
+	}
+
+	@Test
+	public void testHasInfiniteRecursion() {
+		CircuitWrapper wrapper = new CircuitWrapper();
+
+		assertFalse(wrapper.hasInfiniteRecursion());
 	}
 
 }

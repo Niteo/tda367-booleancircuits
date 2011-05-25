@@ -14,6 +14,7 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
 
 public class SelectionModelTest {
 
@@ -74,11 +75,17 @@ public class SelectionModelTest {
 	@Test
 	public void testSelectComponent() {
 		SelectionModel sm = new SelectionModel();
+		IGateWrapper or = new GateWrapper(new OrGate(2));
 		assertTrue(sm.getSelectedComponents().size() == 0);
 
 		sm.selectComponent(new GateWrapper(new AndGate(2)), false);
 		assertTrue(sm.getSelectedComponents().size() == 1);
 		assertTrue(sm.getSelectedComponents().get(0).getGate() instanceof AndGate);
+
+		sm.selectComponent(or, true);
+		assertTrue(sm.getSelectedComponents().size() == 2);
+		sm.selectComponent(or, true);
+		assertTrue(sm.getSelectedComponents().size() == 1);
 	}
 
 	@Test

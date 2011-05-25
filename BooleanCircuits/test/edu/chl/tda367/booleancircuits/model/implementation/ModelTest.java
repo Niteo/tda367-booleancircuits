@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import edu.chl.tda367.booleancircuits.model.ICircuit;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
@@ -70,6 +72,16 @@ public class ModelTest {
 
 		assertTrue(model.getComponents() != null);
 		assertTrue(model.getComponents().size() == 0);
+	}
+
+	@Test
+	public void testGetGateWrapper(){
+		ICircuit c = new Circuit();
+		ICircuitGate and = new AndGate(2);
+		IGateWrapper wrapper = new GateWrapper(and);
+
+		c.addComponent(wrapper, new Point(0,0));
+		assertTrue(c.getGateWrapper(and)==wrapper);
 	}
 
 	@Test
