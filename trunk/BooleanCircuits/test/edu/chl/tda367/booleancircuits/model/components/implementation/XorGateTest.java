@@ -37,6 +37,7 @@ public class XorGateTest {
 		assertTrue(xor.connectsTo(testGate));
 	}
 
+	@Test
 	public void testEmptyGateClone() {
 		XorGate xor = new XorGate(2);
 		ICircuitGate testGate = xor.emptyGateClone();
@@ -99,8 +100,8 @@ public class XorGateTest {
 
 		xor.overwriteGate(test);
 
-		assertTrue(xor.getInputs().equals(test.getInputs())
-				&& xor.getOutputValue(0) == test.getOutputValue(0));
+		assertTrue(xor.getInputs().equals(test.getInputs()));
+		assertTrue(xor.getOutputValue(0) == test.getOutputValue(0));
 
 	}
 

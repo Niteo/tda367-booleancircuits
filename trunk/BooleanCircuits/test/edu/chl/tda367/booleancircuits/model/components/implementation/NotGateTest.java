@@ -102,8 +102,8 @@ public class NotGateTest {
 
 		not.overwriteGate(test);
 
-		assertTrue(not.getInputs().equals(test.getInputs())
-				&& not.getOutputValue(0) == test.getOutputValue(0));
+		assertTrue(not.getInputs().equals(test.getInputs()));
+		assertTrue(not.getOutputValue(0) == test.getOutputValue(0));
 	}
 
 	@Test

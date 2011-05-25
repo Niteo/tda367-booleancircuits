@@ -19,7 +19,7 @@ public final class GateFactory {
 	}
 
 	public static enum PredefinedComponents {
-		CONSTANTGATE, NOT, CLOCK, EQUAL
+		CONSTANTGATE_ONE, CONSTANTGATE_ZERO, NOT, CLOCK, EQUAL
 	}
 
 	/**
@@ -64,7 +64,9 @@ public final class GateFactory {
 		switch (component) {
 		case NOT:
 			return new NotGate();
-		case CONSTANTGATE:
+		case CONSTANTGATE_ONE:
+			return new ConstantGate(true);
+		case CONSTANTGATE_ZERO:
 			return new ConstantGate(false);
 		case CLOCK:
 			return new Clock();

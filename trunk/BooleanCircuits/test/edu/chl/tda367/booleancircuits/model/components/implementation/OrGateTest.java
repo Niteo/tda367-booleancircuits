@@ -37,6 +37,7 @@ public class OrGateTest {
 		assertTrue(or.connectsTo(testGate));
 	}
 
+	@Test
 	public void testEmptyGateClone() {
 		OrGate or = new OrGate(2);
 		ICircuitGate testGate = or.emptyGateClone();
@@ -103,8 +104,8 @@ public class OrGateTest {
 
 		or.overwriteGate(test);
 
-		assertTrue(or.getInputs().equals(test.getInputs())
-				&& or.getOutputValue(0) == test.getOutputValue(0));
+		assertTrue(or.getInputs().equals(test.getInputs()));
+		assertTrue(or.getOutputValue(0) == test.getOutputValue(0));
 
 	}
 

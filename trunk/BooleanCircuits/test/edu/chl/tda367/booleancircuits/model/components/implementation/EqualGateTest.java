@@ -23,7 +23,6 @@ public class EqualGateTest {
 		assertTrue(clone.getNoOfOutputs() == gate.getNoOfOutputs());
 	}
 
-
 	@Test
 	public void testConnectInput() {
 		Equal gate = new Equal();
@@ -40,8 +39,7 @@ public class EqualGateTest {
 		ICircuitGate emptyGate = gate.emptyGateClone();
 
 		assertTrue(emptyGate instanceof Equal);
-		assertTrue(emptyGate.getNoOfInputs() == gate
-				.getNoOfInputs());
+		assertTrue(emptyGate.getNoOfInputs() == gate.getNoOfInputs());
 	}
 
 	@Test
@@ -87,8 +85,7 @@ public class EqualGateTest {
 		gate.overwriteGate(test);
 
 		assertTrue(gate.getInputs().equals(test.getInputs()));
-		assertTrue(test.getOutputValue(0) == test
-				.getOutputValue(0));
+		assertTrue(test.getOutputValue(0) == test.getOutputValue(0));
 	}
 
 	@Test

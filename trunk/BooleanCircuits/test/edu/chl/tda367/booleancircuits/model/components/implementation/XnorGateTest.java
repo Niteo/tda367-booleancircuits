@@ -42,6 +42,7 @@ public class XnorGateTest {
 		assertTrue(xnor.connectsTo(testGate));
 	}
 
+	@Test
 	public void testEmptyGateClone() {
 		XnorGate xnor = new XnorGate(2);
 		ICircuitGate testGate = xnor.emptyGateClone();
@@ -103,8 +104,8 @@ public class XnorGateTest {
 
 		xnor.overwriteGate(test);
 
-		assertTrue(xnor.getInputs().equals(test.getInputs())
-				&& xnor.getOutputValue(0) == test.getOutputValue(0));
+		assertTrue(xnor.getInputs().equals(test.getInputs()));
+		assertTrue(xnor.getOutputValue(0) == test.getOutputValue(0));
 
 	}
 
