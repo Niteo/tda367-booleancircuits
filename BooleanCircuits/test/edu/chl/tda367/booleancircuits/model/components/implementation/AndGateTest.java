@@ -43,6 +43,7 @@ public class AndGateTest {
 		assertTrue(and.connectsTo(testGate));
 	}
 
+	@Test
 	public void testEmptyGateClone() {
 		AndGate and = new AndGate(2);
 		ICircuitGate testGate = and.emptyGateClone();
@@ -104,8 +105,8 @@ public class AndGateTest {
 
 		and.overwriteGate(test);
 
-		assertTrue(and.getInputs().equals(test.getInputs())
-				&& and.getOutputValue(0) == test.getOutputValue(0));
+		assertTrue(and.getInputs().equals(test.getInputs()));
+		assertTrue(and.getOutputValue(0) == test.getOutputValue(0));
 
 	}
 

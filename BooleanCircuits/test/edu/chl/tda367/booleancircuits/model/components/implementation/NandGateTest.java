@@ -104,8 +104,8 @@ public class NandGateTest {
 
 		nand.overwriteGate(test);
 
-		assertTrue(nand.getInputs().equals(test.getInputs())
-				&& nand.getOutputValue(0) == test.getOutputValue(0));
+		assertTrue(nand.getInputs().equals(test.getInputs()));
+		assertTrue(nand.getOutputValue(0) == test.getOutputValue(0));
 	}
 
 	@Test

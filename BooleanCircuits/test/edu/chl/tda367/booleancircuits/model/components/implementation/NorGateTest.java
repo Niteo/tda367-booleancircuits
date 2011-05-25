@@ -37,6 +37,7 @@ public class NorGateTest {
 		assertTrue(nor.connectsTo(testGate));
 	}
 
+	@Test
 	public void testEmptyGateClone() {
 		NorGate nor = new NorGate(2);
 		ICircuitGate testGate = nor.emptyGateClone();
@@ -103,8 +104,8 @@ public class NorGateTest {
 
 		nor.overwriteGate(test);
 
-		assertTrue(nor.getInputs().equals(test.getInputs())
-				&& nor.getOutputValue(0) == test.getOutputValue(0));
+		assertTrue(nor.getInputs().equals(test.getInputs()));
+		assertTrue(nor.getOutputValue(0) == test.getOutputValue(0));
 
 	}
 

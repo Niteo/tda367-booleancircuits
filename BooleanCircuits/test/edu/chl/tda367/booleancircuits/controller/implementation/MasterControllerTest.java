@@ -3,20 +3,21 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 import java.awt.Point;
 
 import org.junit.Test;
-import org.junit.internal.runners.statements.ExpectException;
 
-import edu.chl.tda367.booleancircuits.model.components.implementation.*;
+import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
 import edu.chl.tda367.booleancircuits.model.implementation.CircuitManager;
 
 public class MasterControllerTest {
-	
+
 
 	@Test(expected=NullPointerException.class)
 	public void testMasterController() {
 		new MasterController(new CircuitManager());
 		new MasterController(null);
 	}
-	
+
 	@Test
 	public void testAddComponent() {
 		MasterController mc = new MasterController(new CircuitManager());
@@ -85,7 +86,7 @@ public class MasterControllerTest {
 		mc.copySelectedComponents();
 		mc.pasteSelectedComponents();
 	}
-	
+
 	@Test
 	public void testSelectComponents(){
 		MasterController mc = new MasterController(new CircuitManager());
@@ -140,7 +141,7 @@ public class MasterControllerTest {
 		new MasterController(new CircuitManager())
 				.setChosenComponent(new GateWrapper(new AndGate(2)));
 	}
-	
+
 	@Test
 	public void testToggleClockTimer(){
 		MasterController mc = new MasterController(new CircuitManager());

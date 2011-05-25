@@ -34,5 +34,15 @@ public class ClipboardManagerTest {
 	public void testPaste() {
 		ClipboardManager manager = new ClipboardManager();
 		assertTrue(manager.paste().size() == 0);
+
+		List<IGateWrapper> list = new ArrayList<IGateWrapper>();
+		IGateWrapper and = new GateWrapper(new AndGate(2));
+		IGateWrapper nand = new GateWrapper(new NandGate(2));
+
+		list.add(and);
+		list.add(nand);
+		manager.copy(list);
+
+		assertTrue(manager.paste().size() == 2);
 	}
 }
