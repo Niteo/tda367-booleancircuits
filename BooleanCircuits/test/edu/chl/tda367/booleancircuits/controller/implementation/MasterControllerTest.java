@@ -75,11 +75,6 @@ public class MasterControllerTest {
 	}
 
 	@Test
-	public void testOpenWorkspace() {
-		new MasterController(new CircuitManager()).openWorkspace();
-	}
-
-	@Test
 	public void testPasteSelectedComponents() {
 		MasterController mc = new MasterController(new CircuitManager());
 		mc.newWorkspace();

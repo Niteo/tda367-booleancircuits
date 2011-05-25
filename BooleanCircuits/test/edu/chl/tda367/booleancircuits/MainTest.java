@@ -8,6 +8,7 @@ public class MainTest {
 	@Test
 	public void testMain(){
 		new Main();
+		Main.main(null);
 	}
 
 }

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Collection;
+
 import org.junit.Test;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
@@ -38,9 +40,14 @@ public class AndGateTest {
 	public void testConnectsTo() {
 		AndGate and = new AndGate(2);
 		AndGate testGate = new AndGate(2);
+		AndGate notConnected = new AndGate(2);
+
 		assertFalse(and.connectsTo(testGate));
 		and.connectInput(0, testGate, 0);
 		assertTrue(and.connectsTo(testGate));
+		testGate.connectInput(0, and, 0);
+
+		assertFalse(and.connectsTo(notConnected));
 	}
 
 	@Test
@@ -55,9 +62,14 @@ public class AndGateTest {
 	@Test
 	public void testGetComponentTier() {
 		AndGate and = new AndGate(2);
+		AndGate testGate = new AndGate(2);
+
 		assertTrue(and.getComponentTier() == 1);
-		and.connectInput(0, new AndGate(2), 0);
+		and.connectInput(0, testGate, 0);
 		assertTrue(and.getComponentTier() == 2);
+		testGate.connectInput(0, and, 0);
+
+		testGate.getComponentTier();
 	}
 
 	@Test
@@ -86,13 +98,20 @@ public class AndGateTest {
 
 	@Test
 	public void testGetRecoupledTo() {
-		AndGate and = new AndGate(2);
-		AndGate testGate = new AndGate(2);
-		assertTrue(and.getRecoupledTo().size() == 0);
+		AndGate a = new AndGate(2);
+		AndGate b = new AndGate(2);
+		AndGate c = new AndGate(2);
+		AndGate d = new AndGate(2);
 
-		and.connectInput(0, testGate, 0);
-		testGate.connectInput(1, and, 1);
-		assertTrue(and.getRecoupledTo().size() == 1);
+		b.connectInput(1, a, 0);
+		b.connectInput(0, c, 0);
+		c.connectInput(1, b, 0);
+		c.connectInput(0, d, 0);
+		d.connectInput(0, c, 0);
+
+		Collection<ICircuitGate> coll = b.getRecoupledTo();
+		assertTrue(coll.contains(c));
+		assertTrue(coll.contains(d));
 	}
 
 	@Test

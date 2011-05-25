@@ -1,11 +1,12 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.*;
+import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
+import edu.chl.tda367.booleancircuits.model.components.ICloneableGate;
+import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 
 /**
  * Abstract class representing an abstract circuit component.
@@ -175,7 +176,8 @@ public abstract class AbstractCircuitGate implements ICircuitGate, ICloneableGat
 		}
 		return false;
 	}
-	
+
+	@Override
 	public boolean isFullyConnected(){
 		for(IGateInput gi : inputs){
 			if(gi.getInputComponent() == null){

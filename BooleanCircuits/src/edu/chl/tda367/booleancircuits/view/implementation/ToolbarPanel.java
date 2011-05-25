@@ -6,13 +6,18 @@
 
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JSeparator;
 
 import edu.chl.tda367.booleancircuits.view.IToolbarPanel;
 
 /**
  * A tool bar containing several buttons.
- * 
+ *
  * @author Boel
  */
 public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
@@ -21,30 +26,20 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 
 	// GEN-BEGIN:variables
 	// Variables declaration - do not modify
-	private javax.swing.JButton copyButton;
+	private JButton copyButton;
+	private JButton cutButton;
+	private JButton newWorkspaceButton;
+	private JButton openFileButton;
+	private JButton pasteButton;
+	private JButton pauseClockButton;
+	private JButton redoButton;
+	private JButton saveAllButton;
+	private JButton saveAsComponentButton;
+	private JButton saveButton;
+	private JButton startClockButton;
+	private JButton undoButton;
 
-	private javax.swing.JButton cutButton;
-
-	private javax.swing.JButton newWorkspaceButton;
-
-	private javax.swing.JButton openFileButton;
-
-	private javax.swing.JButton pasteButton;
-
-	private javax.swing.JButton pauseClockButton;
-
-	private javax.swing.JButton redoButton;
-
-	private javax.swing.JButton saveAllButton;
-
-	private javax.swing.JButton saveAsComponentButton;
-
-	private javax.swing.JButton saveButton;
-
-	private javax.swing.JButton startClockButton;
 	// End of variables declaration//GEN-END:variables
-
-	private javax.swing.JButton undoButton;
 
 	/** Creates new form ToolbarPanel */
 	public ToolbarPanel() {
@@ -141,62 +136,62 @@ public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
-		newWorkspaceButton = new javax.swing.JButton();
-		openFileButton = new javax.swing.JButton();
-		saveButton = new javax.swing.JButton();
-		saveAllButton = new javax.swing.JButton();
-		saveAsComponentButton = new javax.swing.JButton();
-		cutButton = new javax.swing.JButton();
-		copyButton = new javax.swing.JButton();
-		pasteButton = new javax.swing.JButton();
-		undoButton = new javax.swing.JButton();
-		redoButton = new javax.swing.JButton();
+		newWorkspaceButton = new JButton();
+		openFileButton = new JButton();
+		saveButton = new JButton();
+		saveAllButton = new JButton();
+		saveAsComponentButton = new JButton();
+		cutButton = new JButton();
+		copyButton = new JButton();
+		pasteButton = new JButton();
+		undoButton = new JButton();
+		redoButton = new JButton();
 		startClockButton = new JButton();
 		pauseClockButton = new JButton();
 
-		setPreferredSize(new java.awt.Dimension(260, 24));
-		setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+		setPreferredSize(new Dimension(260, 24));
+		setLayout(new FlowLayout(java.awt.FlowLayout.LEFT));
 
-		newWorkspaceButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		newWorkspaceButton.setPreferredSize(new Dimension(20, 20));
 		add(newWorkspaceButton);
 
-		openFileButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		openFileButton.setPreferredSize(new Dimension(20, 20));
 		add(openFileButton);
 
-		saveAsComponentButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		saveAsComponentButton.setPreferredSize(new Dimension(20, 20));
 		add(saveAsComponentButton);
 
-		saveButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		saveButton.setPreferredSize(new Dimension(20, 20));
 		add(saveButton);
 
-		saveAllButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		saveAllButton.setPreferredSize(new Dimension(20, 20));
 		add(saveAllButton);
 
 		add(new JSeparator());
 
-		cutButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		cutButton.setPreferredSize(new Dimension(20, 20));
 		add(cutButton);
 
-		copyButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		copyButton.setPreferredSize(new Dimension(20, 20));
 		add(copyButton);
 
-		pasteButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		pasteButton.setPreferredSize(new Dimension(20, 20));
 		add(pasteButton);
 
 		add(new JSeparator());
 
-		undoButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		undoButton.setPreferredSize(new Dimension(20, 20));
 		add(undoButton);
 
-		redoButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		redoButton.setPreferredSize(new Dimension(20, 20));
 		add(redoButton);
 
 		add(new JSeparator());
 
-		startClockButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		startClockButton.setPreferredSize(new Dimension(20, 20));
 		add(startClockButton);
 
-		pauseClockButton.setPreferredSize(new java.awt.Dimension(20, 20));
+		pauseClockButton.setPreferredSize(new Dimension(20, 20));
 		add(pauseClockButton);
 	}// </editor-fold>
 		// GEN-END:initComponents
