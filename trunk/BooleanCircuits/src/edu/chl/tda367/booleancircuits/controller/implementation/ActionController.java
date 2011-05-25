@@ -2,19 +2,25 @@ package edu.chl.tda367.booleancircuits.controller.implementation;
 
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-import edu.chl.tda367.booleancircuits.controller.*;
+import edu.chl.tda367.booleancircuits.controller.IActionController;
+import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
 /**
  * A class to control action events.
- * 
+ *
  * @author Boel
- * 
+ *
  */
 public class ActionController implements ChangeListener, IActionController {
 
@@ -235,7 +241,7 @@ public class ActionController implements ChangeListener, IActionController {
 
 	/**
 	 * Returns an instance of ActionController.
-	 * 
+	 *
 	 * @param MasterController
 	 */
 	public ActionController(final IMasterController masterController) {
@@ -343,6 +349,21 @@ public class ActionController implements ChangeListener, IActionController {
 			mc.setActiveWorkspace(selectedIndex);
 		}
 
+	}
+
+	@Override
+	public void setActionsEnabled(boolean value) {
+		closeActiveWorkspaceAction.setEnabled(value);
+		closeAllWorkspacesAction.setEnabled(value);
+		copySelectedComponentsAction.setEnabled(value);
+		cutSelectedComponentsAction.setEnabled(value);
+		importWorkspaceAction.setEnabled(value);
+		pasteSelectedComponentAction.setEnabled(value);
+		removeSelectedComponentsAction.setEnabled(value);
+		saveActiveWorkspaceAction.setEnabled(value);
+		saveAllWorkspacesAction.setEnabled(value);
+		saveAsAction.setEnabled(value);
+		selectAllComponentsAction.setEnabled(value);
 	}
 
 }
