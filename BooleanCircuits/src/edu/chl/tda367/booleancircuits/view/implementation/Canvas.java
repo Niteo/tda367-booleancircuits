@@ -190,14 +190,11 @@ public class Canvas implements ICanvas {
 				}
 				drawer.drawGateConnections(g2d, coll, new Point(posX, posY));
 			}
+			g2d.setColor(Color.BLACK);
 			// Draw non-selected
 			for (IGateWrapper gate : model.getComponents()) {
 				if (!selectModel.isSelectedComponent(gate)) {
-					if(gate.isFullyConnected()){
-						g2d.setColor(Color.BLACK);
-					} else {
-						g2d.setColor(Color.RED);
-					}
+					
 					drawer.drawGate(g2d, gate, new Point(posX, posY));
 				}
 			}
