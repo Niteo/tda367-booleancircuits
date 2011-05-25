@@ -4,10 +4,7 @@ import java.awt.Point;
 import java.util.Collection;
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.common.ICloneableGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateInput;
-import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.*;
 
 public class GateWrapper implements IGateWrapper{
 
