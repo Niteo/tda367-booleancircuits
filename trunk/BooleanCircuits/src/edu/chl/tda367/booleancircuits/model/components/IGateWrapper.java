@@ -1,5 +1,7 @@
 package edu.chl.tda367.booleancircuits.model.components;
 
+import edu.chl.tda367.booleancircuits.common.IPositionable;
+
 public interface IGateWrapper extends ICircuitGate, IPositionable {
 
 	/**

@@ -16,16 +16,16 @@ import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
  *
  * @author Kaufmann
  */
-public final class ModelManager implements IObservable, IModelManager {
+public final class CircuitManager implements IObservable, ICircuitManager {
 
 	private static int workspaceCount = 1;
-	private ArrayList<IModelWrapper> modelList;
+	private ArrayList<ICircuitWrapper> modelList;
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private int selectedIndex;
 	private ArrayList<ISelectionModel> selectionModelList;
 
-	public ModelManager() {
-		modelList = new ArrayList<IModelWrapper>();
+	public CircuitManager() {
+		modelList = new ArrayList<ICircuitWrapper>();
 		selectionModelList = new ArrayList<ISelectionModel>();
 		selectedIndex = -1;
 	}
@@ -38,7 +38,7 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void addComponents(final List<IGateWrapper> components) {
-		IModelWrapper awm = _getActiveWorkspaceModel();
+		ICircuitWrapper awm = _getActiveWorkspaceModel();
 		if (awm != null) {
 			awm.addComponents(components);
 			firePropertyChanged();
@@ -48,7 +48,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	@Override
 	public void addComponents(final List<IGateWrapper> component,
 			final Point position) {
-		IModelWrapper awm = _getActiveWorkspaceModel();
+		ICircuitWrapper awm = _getActiveWorkspaceModel();
 		if (awm != null) {
 			int minX = Integer.MAX_VALUE;
 			int maxX = Integer.MIN_VALUE;
@@ -95,7 +95,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public void addWorkspace(final IModelWrapper workspace) {
+	public void addWorkspace(final ICircuitWrapper workspace) {
 		modelList.add(workspace);
 		selectionModelList.add(new SelectionModel());
 		_setActiveWorkspace(modelList.size() - 1);
@@ -104,7 +104,7 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void clockActiveModel() {
-		IModelWrapper w = _getActiveWorkspaceModel();
+		ICircuitWrapper w = _getActiveWorkspaceModel();
 		if (w != null) {
 			w.clock();
 		}
@@ -149,12 +149,12 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public IModelWrapper getActiveWorkspaceModel() {
+	public ICircuitWrapper getActiveWorkspaceModel() {
 		return _getActiveWorkspaceModel();
 	}
 
 	@Override
-	public IModelWrapper getWorkspace(final int i) {
+	public ICircuitWrapper getWorkspace(final int i) {
 		if(i >= 0 && i < modelList.size()){
 			return modelList.get(i);
 		}
@@ -162,7 +162,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	}
 
 	@Override
-	public ArrayList<IModelWrapper> getWorkspaces() {
+	public ArrayList<ICircuitWrapper> getWorkspaces() {
 		return modelList;
 	}
 
@@ -182,12 +182,12 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void newWorkspace() {
-		addWorkspace(new ModelWrapper());
+		addWorkspace(new CircuitWrapper());
 	}
 
 	@Override
 	public void removeComponent(final IGateWrapper g) {
-		IModelWrapper m = _getActiveWorkspaceModel();
+		ICircuitWrapper m = _getActiveWorkspaceModel();
 		ISelectionModel s = _getActiveSelectionModel();
 		if (m != null && s != null) {
 			m.removeComponent(g);
@@ -205,7 +205,7 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void removeSelectedComponents() {
-		IModelWrapper m = _getActiveWorkspaceModel();
+		ICircuitWrapper m = _getActiveWorkspaceModel();
 		ISelectionModel s = _getActiveSelectionModel();
 		if (m != null && s != null) {
 			m.removeComponents(s.getSelectedComponents());
@@ -217,7 +217,7 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void selectAllComponents() {
-		IModelWrapper m = _getActiveWorkspaceModel();
+		ICircuitWrapper m = _getActiveWorkspaceModel();
 		ISelectionModel s = _getActiveSelectionModel();
 		if (m != null && s != null) {
 			s.selectComponents(m.getComponents());
@@ -227,7 +227,7 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public void selectComponent(final Point position, final boolean multiSelect) {
-		IModelWrapper m = _getActiveWorkspaceModel();
+		ICircuitWrapper m = _getActiveWorkspaceModel();
 		ISelectionModel s = _getActiveSelectionModel();
 		if (m != null && s != null) {
 			s.selectComponent(m.getComponent(position), multiSelect);
@@ -239,7 +239,7 @@ public final class ModelManager implements IObservable, IModelManager {
 	public void selectComponents(final Point pos1, final Point pos2) {
 		List<IGateWrapper> selectedComponents = new ArrayList<IGateWrapper>();
 
-		IModelWrapper m = _getActiveWorkspaceModel();
+		ICircuitWrapper m = _getActiveWorkspaceModel();
 		if(m != null){
 			for (IGateWrapper gate : m.getComponents()) {
 				Point gatePosition = gate.getPosition();
@@ -275,7 +275,7 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	private void _addComponent(final IGateWrapper component,
 			final Point position) {
-		IModelWrapper m = _getActiveWorkspaceModel();
+		ICircuitWrapper m = _getActiveWorkspaceModel();
 		if (m != null) {
 			m.addComponent(component, position);
 			m.updateComponents();
@@ -289,7 +289,7 @@ public final class ModelManager implements IObservable, IModelManager {
 		return null;
 	}
 
-	private IModelWrapper _getActiveWorkspaceModel() {
+	private ICircuitWrapper _getActiveWorkspaceModel() {
 		if (selectedIndex >= 0 && selectedIndex < modelList.size()) {
 			return modelList.get(selectedIndex);
 		}
@@ -324,7 +324,7 @@ public final class ModelManager implements IObservable, IModelManager {
 
 	@Override
 	public IGateWrapper getGateWrapper(ICircuitGate gate) {
-		IModelWrapper m = _getActiveWorkspaceModel();
+		ICircuitWrapper m = _getActiveWorkspaceModel();
 		if(m != null){
 			return m.getGateWrapper(gate);	
 		}

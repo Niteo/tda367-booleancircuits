@@ -19,7 +19,7 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.AbstractCi
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.EqualGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.Equal;
 import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
@@ -50,7 +50,7 @@ public final class Palette implements IPalette {
 		specialList.add(new ConstantGate(false));
 		specialList.add(new ConstantGate(true));
 		specialList.add(new Clock());
-		specialList.add(new EqualGate());
+		specialList.add(new Equal());
 
 		List<ICircuitGate> standardList = new ArrayList<ICircuitGate>();
 		standardList.add(new AndGate(2));

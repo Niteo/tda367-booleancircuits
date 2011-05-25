@@ -23,7 +23,7 @@ public class ModelTest {
 
 	@Test
 	public void testAddComponent() {
-		Model model = new Model();
+		Circuit model = new Circuit();
 
 		Point position = new Point(5, 5);
 		model.addComponent(new GateWrapper(new NotGate()), position);
@@ -32,7 +32,7 @@ public class ModelTest {
 
 	@Test
 	public void testAddComponents() {
-		Model model = new Model();
+		Circuit model = new Circuit();
 		List<IGateWrapper> list = new ArrayList<IGateWrapper>();
 		assertTrue(model.getComponents().size() == 0);
 
@@ -46,7 +46,7 @@ public class ModelTest {
 
 	@Test
 	public void testClock() {
-		Model model = new Model();
+		Circuit model = new Circuit();
 		IGateWrapper clock = new GateWrapper(new Clock());
 
 		model.addComponent(clock, new Point(0, 0));
@@ -59,14 +59,14 @@ public class ModelTest {
 
 	@Test
 	public void testGetComponent() {
-		Model model = new Model();
+		Circuit model = new Circuit();
 
 		assertNull(model.getComponent(new Point(0, 0)));
 	}
 
 	@Test
 	public void testGetComponents() {
-		Model model = new Model();
+		Circuit model = new Circuit();
 
 		assertTrue(model.getComponents() != null);
 		assertTrue(model.getComponents().size() == 0);
@@ -74,7 +74,7 @@ public class ModelTest {
 
 	@Test
 	public void testGetNumberOfComponents() {
-		Model m = new Model();
+		Circuit m = new Circuit();
 		assertTrue(m.getNumberOfComponents() == 0);
 		m.addComponent(new GateWrapper(new ConstantGate(true)), new Point(0, 0));
 		assertTrue(m.getNumberOfComponents() == 1);
@@ -82,12 +82,12 @@ public class ModelTest {
 
 	@Test
 	public void testModel() {
-		new Model();
+		new Circuit();
 	}
 
 	@Test
 	public void testRemoveComponent() {
-		Model model = new Model();
+		Circuit model = new Circuit();
 		IGateWrapper and = new GateWrapper(new AndGate(2));
 		model.addComponent(and, new Point(0, 0));
 
@@ -100,7 +100,7 @@ public class ModelTest {
 
 	@Test
 	public void testRemoveComponents() {
-		Model model = new Model();
+		Circuit model = new Circuit();
 		List<IGateWrapper> list = new ArrayList<IGateWrapper>();
 		assertTrue(model.getComponents().size() == 0);
 
@@ -117,7 +117,7 @@ public class ModelTest {
 
 	@Test
 	public void testUpdateComponents() {
-		Model model = new Model();
+		Circuit model = new Circuit();
 		IGateWrapper clock = new GateWrapper(new Clock());
 
 		model.addComponent(clock, new Point(0, 0));

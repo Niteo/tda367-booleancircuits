@@ -12,19 +12,17 @@ import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.EqualGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.Equal;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.XnorGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.XorGate;
-import edu.chl.tda367.booleancircuits.utilities.IConnection;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
-import edu.chl.tda367.booleancircuits.view.draw.IBackground;
-import edu.chl.tda367.booleancircuits.view.draw.IDraw;
+import edu.chl.tda367.booleancircuits.view.draw.*;
 
-public class Draw implements IDraw {
+public class Painter implements IPainter {
 	private IBackground background;
 	private Color color;
 	private boolean isUsStandard;
@@ -59,7 +57,7 @@ public class Draw implements IDraw {
 			drawConstantGate(gate, g, offset);
 		} else if (gate.getGate() instanceof Clock) {
 			drawClock(gate, g, offset);
-		} else if (gate.getGate() instanceof EqualGate) {
+		} else if (gate.getGate() instanceof Equal) {
 			drawEqual(gate, g, offset);
 		}
 

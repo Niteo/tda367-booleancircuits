@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
-import edu.chl.tda367.booleancircuits.model.IModelWrapper;
+import edu.chl.tda367.booleancircuits.model.ICircuitWrapper;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 
 /**
@@ -31,7 +31,7 @@ public interface IFileManager {
 	 *            file representing a previously saved model
 	 * @return the circuit created from the given file
 	 */
-	public IModelWrapper openFile(File file);
+	public ICircuitWrapper openFile(File file);
 
 	/**
 	 * Saves a circuit to file

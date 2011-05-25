@@ -33,7 +33,7 @@ import javax.swing.WindowConstants;
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.controller.implementation.ActionController;
 import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
-import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
+import edu.chl.tda367.booleancircuits.model.implementation.CircuitManager;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 import edu.chl.tda367.booleancircuits.view.IPalette;
 import edu.chl.tda367.booleancircuits.view.draw.implementation.BlankBackground;
@@ -158,7 +158,7 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 				}
 			}
 		};
-		ModelManager mm = new ModelManager();
+		CircuitManager mm = new CircuitManager();
 		mm.addPropertyChangeListener(this);
 		mc = new MasterController(mm);
 		actionController = new ActionController(mc);
@@ -188,8 +188,8 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 
 	@Override
 	public synchronized void propertyChange(final PropertyChangeEvent evt) {
-		if (evt.getSource() instanceof ModelManager) {
-			cs.update((ModelManager) evt.getSource());
+		if (evt.getSource() instanceof CircuitManager) {
+			cs.update((CircuitManager) evt.getSource());
 		}
 	}
 

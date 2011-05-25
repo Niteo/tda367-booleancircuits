@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.ICloneable;
+import edu.chl.tda367.booleancircuits.common.ICloneableGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateInput;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 
@@ -92,7 +92,7 @@ public class GateWrapper implements IGateWrapper{
 
 	@Override
 	public ICircuitGate getGateClone() {
-		return ((ICloneable) gate).clone();
+		return ((ICloneableGate) gate).clone();
 	}
 
 	@Override

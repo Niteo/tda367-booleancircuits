@@ -2,7 +2,7 @@ package edu.chl.tda367.booleancircuits.view;
 
 import javax.swing.JPanel;
 
-import edu.chl.tda367.booleancircuits.model.implementation.ModelManager;
+import edu.chl.tda367.booleancircuits.model.implementation.CircuitManager;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 
 /**
@@ -49,6 +49,6 @@ public interface ICenterStage {
 	 * @param a
 	 *            reference to the modelmanager to pull data from
 	 */
-	public void update(ModelManager modelManager);
+	public void update(CircuitManager modelManager);
 
 }

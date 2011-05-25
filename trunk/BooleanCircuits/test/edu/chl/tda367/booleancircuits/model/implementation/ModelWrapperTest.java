@@ -23,7 +23,7 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testAddComponent() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		wrapper.addComponent(new GateWrapper(new ConstantGate(true)), new Point(10, 10));
 
 		assertTrue(wrapper.getComponent(new Point(10, 10)).getGate() instanceof ConstantGate);
@@ -31,7 +31,7 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testAddComponents() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		List<IGateWrapper> list = new ArrayList<IGateWrapper>();
 		assertTrue(wrapper.getComponents().size() == 0);
 
@@ -45,7 +45,7 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testClock() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		IGateWrapper clock = new GateWrapper(new Clock());
 
 		wrapper.addComponent(clock, new Point(0, 0));
@@ -59,13 +59,13 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testGetComponent() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		assertNull(wrapper.getComponent(new Point(0, 0)));
 	}
 
 	@Test
 	public void testGetComponents() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 
 		assertTrue(wrapper.getComponents() != null);
 		assertTrue(wrapper.getComponents().size() == 0);
@@ -73,7 +73,7 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testGetFile() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 
 		assertNull(wrapper.getFile());
 		assertTrue(wrapper.hasChanged() == false);
@@ -82,14 +82,14 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testHasChanged() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		assertTrue(wrapper.hasChanged() == false);
 
 	}
 
 	@Test
 	public void testHasFile() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		File file = new File("file");
 
 		wrapper.setFile(file);
@@ -98,23 +98,23 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testModelWrapper() {
-		new ModelWrapper();
+		new CircuitWrapper();
 
 	}
 
 	@Test
 	public void testModelWrapperFile() {
-		new ModelWrapper(new File("test"));
+		new CircuitWrapper(new File("test"));
 	}
 
 	@Test
 	public void testModelWrapperFileModel() {
-		new ModelWrapper(new File("test"), new Model());
+		new CircuitWrapper(new File("test"), new Circuit());
 	}
 
 	@Test
 	public void testRemoveComponent() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		IGateWrapper and = new GateWrapper(new AndGate(2));
 		wrapper.addComponent(and, new Point(0, 0));
 
@@ -128,7 +128,7 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testRemoveComponents() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		List<IGateWrapper> list = new ArrayList<IGateWrapper>();
 		assertTrue(wrapper.getComponents().size() == 0);
 
@@ -146,7 +146,7 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testSetChanged() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		wrapper.setChanged(true);
 		assertTrue(wrapper.hasChanged() == true);
 
@@ -154,7 +154,7 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testSetFile() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		File file = new File("file");
 		wrapper.setFile(file);
 		assertTrue(wrapper.getFile().getName().equals("file"));
@@ -163,7 +163,7 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testToString() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		File file = new File("file");
 		wrapper.setFile(file);
 		assertTrue(wrapper.toString().equals("file"));
@@ -172,7 +172,7 @@ public class ModelWrapperTest {
 
 	@Test
 	public void testUpdateComponents() {
-		ModelWrapper wrapper = new ModelWrapper();
+		CircuitWrapper wrapper = new CircuitWrapper();
 		IGateWrapper clock = new GateWrapper(new Clock());
 
 		wrapper.addComponent(clock, new Point(0, 0));

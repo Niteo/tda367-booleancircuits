@@ -11,14 +11,14 @@ public class EqualGateTest {
 
 	@Test
 	public void testEqualGate() {
-		new EqualGate();
+		new Equal();
 	}
 
 	@Test
 	public void testClone() {
-		EqualGate gate = new EqualGate();
+		Equal gate = new Equal();
 		ICircuitGate clone = gate.clone();
-		assertTrue(clone instanceof EqualGate);
+		assertTrue(clone instanceof Equal);
 		assertTrue(clone.getNoOfInputs() == gate.getNoOfInputs());
 		assertTrue(clone.getNoOfOutputs() == gate.getNoOfOutputs());
 	}
@@ -26,8 +26,8 @@ public class EqualGateTest {
 
 	@Test
 	public void testConnectInput() {
-		EqualGate gate = new EqualGate();
-		EqualGate test = new EqualGate();
+		Equal gate = new Equal();
+		Equal test = new Equal();
 
 		gate.connectInput(0, test, 0);
 
@@ -36,42 +36,42 @@ public class EqualGateTest {
 
 	@Test
 	public void testEmptyGateClone() {
-		EqualGate gate = new EqualGate();
+		Equal gate = new Equal();
 		ICircuitGate emptyGate = gate.emptyGateClone();
 
-		assertTrue(emptyGate instanceof EqualGate);
+		assertTrue(emptyGate instanceof Equal);
 		assertTrue(emptyGate.getNoOfInputs() == gate
 				.getNoOfInputs());
 	}
 
 	@Test
 	public void testGetComponentTier() {
-		EqualGate gate = new EqualGate();
+		Equal gate = new Equal();
 		assertTrue(gate.getComponentTier() == 1);
 	}
 
 	@Test
 	public void testGetInputs() {
-		EqualGate gate = new EqualGate();
+		Equal gate = new Equal();
 		assertTrue(gate.getInputs().size() == 1);
 	}
 
 	@Test
 	public void testGetNoOfInputs() {
-		EqualGate gate = new EqualGate();
+		Equal gate = new Equal();
 		assertTrue(gate.getNoOfInputs() == 1);
 
 	}
 
 	@Test
 	public void testGetNoOfOutputs() {
-		EqualGate gate = new EqualGate();
+		Equal gate = new Equal();
 		assertTrue(gate.getNoOfOutputs() == 1);
 	}
 
 	@Test
 	public void testGetOutputValue() {
-		EqualGate gate = new EqualGate();
+		Equal gate = new Equal();
 
 		gate.setOutput(0, false);
 
@@ -80,9 +80,9 @@ public class EqualGateTest {
 
 	@Test
 	public void testOverwriteGate() {
-		EqualGate gate = new EqualGate();
+		Equal gate = new Equal();
 		gate.setOutput(0, false);
-		EqualGate test = new EqualGate();
+		Equal test = new Equal();
 		test.setOutput(0, true);
 		gate.overwriteGate(test);
 
@@ -93,7 +93,7 @@ public class EqualGateTest {
 
 	@Test
 	public void testSetOutput() {
-		EqualGate gate = new EqualGate();
+		Equal gate = new Equal();
 
 		gate.setOutput(0, true);
 
@@ -102,17 +102,17 @@ public class EqualGateTest {
 
 	@Test
 	public void testToString() {
-		assertTrue(new EqualGate().toString().equals("EQUAL"));
+		assertTrue(new Equal().toString().equals("EQUAL"));
 	}
 
 	@Test
 	public void testUpdate() {
-		new EqualGate().update();
+		new Equal().update();
 	}
 
 	@Test
 	public void testUpdateOutput() {
-		EqualGate gate = new EqualGate();
+		Equal gate = new Equal();
 		ConstantGate falseConstantGate = new ConstantGate(true);
 
 		gate.connectInput(0, falseConstantGate, 0);

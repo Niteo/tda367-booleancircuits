@@ -1,8 +1,8 @@
-package edu.chl.tda367.booleancircuits.utilities.implementation;
+package edu.chl.tda367.booleancircuits.view.draw.implementation;
 
 import java.awt.Point;
 
-import edu.chl.tda367.booleancircuits.utilities.IConnection;
+import edu.chl.tda367.booleancircuits.view.draw.IConnection;
 
 public class Connection implements IConnection {
 	private final Point startPoint;

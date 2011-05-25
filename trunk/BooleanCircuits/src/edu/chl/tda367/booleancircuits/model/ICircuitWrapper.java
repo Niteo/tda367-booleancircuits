@@ -8,7 +8,7 @@ import java.io.File;
  * @author Kaufmann
  * 
  */
-public interface IModelWrapper extends IModel {
+public interface ICircuitWrapper extends ICircuit {
 
 	/**
 	 * Returns an instance of the model's corresponding file.

@@ -4,30 +4,30 @@ import java.awt.Point;
 import java.io.File;
 import java.util.Collection;
 
-import edu.chl.tda367.booleancircuits.model.IModel;
-import edu.chl.tda367.booleancircuits.model.IModelWrapper;
+import edu.chl.tda367.booleancircuits.model.ICircuit;
+import edu.chl.tda367.booleancircuits.model.ICircuitWrapper;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 
-public final class ModelWrapper implements IModelWrapper {
+public final class CircuitWrapper implements ICircuitWrapper {
 
 	private static int nWrappers = 0;
 	private File file;
 	private boolean isChanged;
-	private IModel model;
+	private ICircuit model;
 	private int wrapperId;
 
-	public ModelWrapper() {
-		model = new Model();
+	public CircuitWrapper() {
+		model = new Circuit();
 		wrapperId = ++nWrappers;
 	}
 
-	public ModelWrapper(final File file) {
+	public CircuitWrapper(final File file) {
 		this();
 		this.file = file;
 	}
 
-	public ModelWrapper(final File file, final Model model) {
+	public CircuitWrapper(final File file, final Circuit model) {
 		this(file);
 		this.model = model;
 		wrapperId = ++nWrappers;

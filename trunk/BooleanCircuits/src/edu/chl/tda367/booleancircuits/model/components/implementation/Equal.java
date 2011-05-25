@@ -6,12 +6,12 @@ package edu.chl.tda367.booleancircuits.model.components.implementation;
  * @author Kaufmann
  *
  */
-public final class EqualGate extends AbstractCircuitGate {
+public final class Equal extends AbstractCircuitGate {
 
 	/**
 	 * Creates a new EqualGate.
 	 */
-	public EqualGate() {
+	public Equal() {
 		super(1, 1);
 	}
 
@@ -22,7 +22,7 @@ public final class EqualGate extends AbstractCircuitGate {
 
 	@Override
 	protected AbstractCircuitGate emptyGateClone() {
-		return new EqualGate();
+		return new Equal();
 	}
 
 	@Override

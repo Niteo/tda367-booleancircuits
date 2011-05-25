@@ -12,7 +12,7 @@ import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
  *
  * @author Kaufmann
  */
-public interface IModelManager {
+public interface ICircuitManager {
 
 	/**
 	 * Adds an IGateWrapper to the specified coordinate in the active workspace.
@@ -49,7 +49,7 @@ public interface IModelManager {
 	 * @param workspace
 	 *            the workspace to be added
 	 */
-	public void addWorkspace(IModelWrapper workspace);
+	public void addWorkspace(ICircuitWrapper workspace);
 
 	/**
 	 * Clocks the active model with a clock pulse.
@@ -108,7 +108,7 @@ public interface IModelManager {
 	 *
 	 * @return the active workspace
 	 */
-	public IModelWrapper getActiveWorkspaceModel();
+	public ICircuitWrapper getActiveWorkspaceModel();
 
 	/**
 	 * Returns the specified workspace.
@@ -116,14 +116,14 @@ public interface IModelManager {
 	 * @param i
 	 *            the index of the workspace to return
 	 */
-	public IModelWrapper getWorkspace(int i);
+	public ICircuitWrapper getWorkspace(int i);
 
 	/**
 	 * Returns all workspaces.
 	 *
 	 * @return collection of all workspaces
 	 */
-	public Collection<IModelWrapper> getWorkspaces();
+	public Collection<ICircuitWrapper> getWorkspaces();
 
 	/**
 	 * Determines if a component is currently selected.

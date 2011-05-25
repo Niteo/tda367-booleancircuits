@@ -4,7 +4,7 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.EqualGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.Equal;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
@@ -69,7 +69,7 @@ public final class GateFactory {
 		case CLOCK:
 			return new Clock();
 		case EQUAL:
-			return new EqualGate();
+			return new Equal();
 		default:
 			System.out.println("That's not a component!");
 
@@ -101,7 +101,7 @@ public final class GateFactory {
 		} else if (name.equals("CLOCK")) {
 			return new Clock();
 		} else if (name.equals("EQUAL")) {
-			return new EqualGate();
+			return new Equal();
 		} else {
 			System.out.println("Not a component!");
 			return null;
