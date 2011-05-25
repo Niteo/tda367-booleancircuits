@@ -11,33 +11,6 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 public class XorGateTest {
 
 	@Test
-	public void testClone() {
-		XorGate xor = new XorGate(2);
-		ICircuitGate clone = xor.clone();
-		assertTrue(clone instanceof XorGate);
-		assertTrue(clone.getNoOfInputs() == xor.getNoOfInputs());
-		assertTrue(clone.getNoOfOutputs() == xor.getNoOfOutputs());
-	}
-
-	@Test
-	public void testConnectInput() {
-		XorGate xor = new XorGate(2);
-		XorGate test = new XorGate(1);
-
-		xor.connectInput(0, test, 0);
-
-		assertEquals(test, xor.getInputs().get(0).getInputComponent());
-	}
-
-	@Test
-	public void testConnectsTo() {
-		XorGate xor = new XorGate(2);
-		XorGate testGate = new XorGate(2);
-		xor.connectInput(0, testGate, 0);
-		assertTrue(xor.connectsTo(testGate));
-	}
-
-	@Test
 	public void testEmptyGateClone() {
 		XorGate xor = new XorGate(2);
 		ICircuitGate testGate = xor.emptyGateClone();
@@ -47,79 +20,8 @@ public class XorGateTest {
 	}
 
 	@Test
-	public void testGetComponentTier() {
-		XorGate xor = new XorGate(2);
-		assertTrue(xor.getComponentTier() == 1);
-		xor.connectInput(0, new XorGate(2), 0);
-		assertTrue(xor.getComponentTier() == 2);
-	}
-
-	@Test
-	public void testGetInputs() {
-		XorGate xor = new XorGate(2);
-		assertTrue(xor.getInputs().size() == 2);
-	}
-
-	@Test
-	public void testGetNoOfInputs() {
-		XorGate xor = new XorGate(2);
-		assertTrue(xor.getNoOfInputs() == 2);
-	}
-
-	@Test
-	public void testGetNoOfOutputs() {
-		XorGate xor = new XorGate(2);
-		assertTrue(xor.getNoOfOutputs() == 1);
-	}
-
-	@Test
-	public void testGetOutputValue() {
-		XorGate xor = new XorGate(2);
-		assertFalse(xor.getOutputValue(0));
-	}
-
-	@Test
-	public void testGetRecoupledTo() {
-		XorGate xor = new XorGate(2);
-		XorGate testGate = new XorGate(2);
-
-		assertTrue(xor.getRecoupledTo().size() == 0);
-
-		xor.connectInput(0, testGate, 0);
-		testGate.connectInput(1, xor, 1);
-		assertTrue(xor.getRecoupledTo().size() == 1);
-	}
-
-	@Test
-	public void testOverwriteGate() {
-		XorGate xor = new XorGate(2);
-		xor.setOutput(0, true);
-
-		XorGate test = new XorGate(2);
-		test.setOutput(0, false);
-
-		xor.overwriteGate(test);
-
-		assertTrue(xor.getInputs().equals(test.getInputs()));
-		assertTrue(xor.getOutputValue(0) == test.getOutputValue(0));
-
-	}
-
-	@Test
-	public void testSetOutput() {
-		XorGate xor = new XorGate(2);
-		xor.setOutput(0, true);
-		assertTrue(xor.getOutputValue(0));
-	}
-
-	@Test
 	public void testToString() {
 		assertEquals("XOR", new XorGate(2).toString());
-	}
-
-	@Test
-	public void testUpdate() {
-		new XorGate(2).update();
 	}
 
 	@Test
