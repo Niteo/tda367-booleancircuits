@@ -114,7 +114,7 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 
 	@Override
 	public void closeActiveWorkspace() {
-		removeModel(selectedIndex);
+		removeCircuit(selectedIndex);
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 
 	@Override
 	public void closeWorkspace(final int i) {
-		removeModel(i);
+		removeCircuit(i);
 	}
 
 	@Override
@@ -308,7 +308,7 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 				1));
 	}
 
-	private void removeModel(final int i) {
+	private void removeCircuit(final int i) {
 		if (i < 0 || i >= modelList.size()) {
 			return;
 		} else {
