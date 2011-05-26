@@ -28,5 +28,5 @@ public class Constants {
 			+ "Cross<br><i>www.iconarchive.com/artist/yusuke-kamiyamane.html</i></html>";
 	public static final Color drawSelectBorder = new Color(20, 20, 240, 180);
 	public static final Color drawSelectFill = new Color(100, 100, 240, 140);
-	public static final String manualPath = "manual.pdf";
+	public static final String manualPath = "Manual.pdf";
 }
