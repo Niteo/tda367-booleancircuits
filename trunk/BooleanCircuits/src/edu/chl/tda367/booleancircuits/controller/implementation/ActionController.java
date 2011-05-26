@@ -6,7 +6,6 @@ import java.io.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.text.DefaultEditorKit.CutAction;
 
 import edu.chl.tda367.booleancircuits.controller.*;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
@@ -202,12 +201,12 @@ public class ActionController implements ChangeListener, IActionController {
 				try {
 					desk.open(file);
 				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(null,
-							"Couldn't open " + Constants.manualPath + "!");
+					JOptionPane.showMessageDialog(null, "Couldn't open "
+							+ Constants.manualPath + "!");
 				}
 			} else {
-				JOptionPane
-						.showMessageDialog(null, "Couldn't find " + Constants.manualPath + "!");
+				JOptionPane.showMessageDialog(null, "Couldn't find "
+						+ Constants.manualPath + "!");
 			}
 		}
 	};
@@ -349,6 +348,12 @@ public class ActionController implements ChangeListener, IActionController {
 	}
 
 	@Override
+	public void setCCEnabled(final boolean value) {
+		cutSelectedComponentsAction.setEnabled(value);
+		copySelectedComponentsAction.setEnabled(value);
+	}
+
+	@Override
 	public void stateChanged(final ChangeEvent e) {
 		JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
 		int selectedIndex = tabbedPane.getSelectedIndex();
@@ -359,12 +364,6 @@ public class ActionController implements ChangeListener, IActionController {
 			mc.setActiveWorkspace(selectedIndex);
 		}
 
-	}
-
-	@Override
-	public void setCCEnabled(boolean value) {
-		cutSelectedComponentsAction.setEnabled(value);
-		copySelectedComponentsAction.setEnabled(value);
 	}
 
 }

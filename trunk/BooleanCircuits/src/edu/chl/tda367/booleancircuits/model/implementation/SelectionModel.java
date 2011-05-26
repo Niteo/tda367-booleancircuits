@@ -52,20 +52,21 @@ public final class SelectionModel implements ISelectionModel {
 			_addComponent(g, multiSelect);
 		}
 	}
-	
-	private void _addComponent(final IGateWrapper g, final boolean multiSelect){
-		if(!multiSelect){
-			selectedComponentList.clear();
-		}
-		if(g != null){
-			selectedComponentList.add(g);
-		}
-	}
+
 	@Override
 	public void selectComponents(final Collection<IGateWrapper> c) {
 		selectedComponentList.clear();
 		for (IGateWrapper gate : c) {
 			selectedComponentList.add(gate);
+		}
+	}
+
+	private void _addComponent(final IGateWrapper g, final boolean multiSelect) {
+		if (!multiSelect) {
+			selectedComponentList.clear();
+		}
+		if (g != null) {
+			selectedComponentList.add(g);
 		}
 	}
 

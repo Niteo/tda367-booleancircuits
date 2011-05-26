@@ -32,8 +32,9 @@ public final class CircuitWrapper implements ICircuitWrapper {
 	}
 
 	@Override
-	public boolean addComponent(final IGateWrapper component, final Point position) {
-		if(model.addComponent(component, position)){
+	public boolean addComponent(final IGateWrapper component,
+			final Point position) {
+		if (model.addComponent(component, position)) {
 			return isChanged = true;
 		}
 		return false;
@@ -41,7 +42,7 @@ public final class CircuitWrapper implements ICircuitWrapper {
 
 	@Override
 	public boolean addComponents(final Collection<IGateWrapper> components) {
-		if(model.addComponents(components)){
+		if (model.addComponents(components)) {
 			return isChanged = true;
 		}
 		return false;
@@ -94,7 +95,7 @@ public final class CircuitWrapper implements ICircuitWrapper {
 
 	@Override
 	public boolean removeComponent(final IGateWrapper g) {
-		if(model.removeComponent(g)){
+		if (model.removeComponent(g)) {
 			isChanged = true;
 			return true;
 		}
@@ -103,7 +104,7 @@ public final class CircuitWrapper implements ICircuitWrapper {
 
 	@Override
 	public boolean removeComponents(final Collection<IGateWrapper> list) {
-		if(model.removeComponents(list)){
+		if (model.removeComponents(list)) {
 			isChanged = true;
 			return true;
 		}
