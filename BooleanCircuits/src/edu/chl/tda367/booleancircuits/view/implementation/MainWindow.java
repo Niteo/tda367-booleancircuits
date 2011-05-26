@@ -170,6 +170,10 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 		if (evt.getSource() instanceof CircuitManager) {
 			CircuitManager cm = (CircuitManager) evt.getSource();
 			actionController.setActionsEnabled(cm.getCircuits().size() > 0);
+			if (cm.getActiveSelectionModel() != null) {
+				actionController.setCCEnabled(cm.getActiveSelectionModel()
+						.getNumberOfComponents() != 0);
+			}
 			if (cm.getActiveCircuit() != null) {
 				actionController.getSaveActiveWorkspaceAction().setEnabled(
 						cm.getActiveCircuit().hasChanged());

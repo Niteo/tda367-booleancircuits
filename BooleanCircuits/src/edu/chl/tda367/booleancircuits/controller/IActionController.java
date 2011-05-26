@@ -143,5 +143,13 @@ public interface IActionController {
 	 *            boolean
 	 */
 	public void setActionsEnabled(boolean value);
+	
+	/**
+	 * Sets the state of the Cut and Copy actions.
+	 * 
+	 * @param value
+	 *            boolean
+	 */
+	public void setCCEnabled(boolean value);
 
 }

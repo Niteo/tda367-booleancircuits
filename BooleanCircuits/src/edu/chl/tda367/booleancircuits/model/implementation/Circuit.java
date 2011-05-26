@@ -24,14 +24,14 @@ public final class Circuit implements ICircuit {
 	}
 
 	@Override
-	public void addComponent(final IGateWrapper component, final Point position) {
+	public boolean addComponent(final IGateWrapper component, final Point position) {
 		component.setPosition(position);
-		componentList.add(component);
+		return componentList.add(component);
 	}
 
 	@Override
-	public void addComponents(final Collection<IGateWrapper> components) {
-		componentList.addAll(components);
+	public boolean addComponents(final Collection<IGateWrapper> components) {
+		return componentList.addAll(components);
 	}
 
 	@Override
@@ -91,16 +91,21 @@ public final class Circuit implements ICircuit {
 	}
 
 	@Override
-	public void removeComponent(final IGateWrapper g) {
-		_removeComponent(g);
+	public boolean removeComponent(final IGateWrapper g) {
+		boolean ret = _removeComponent(g);
 		updateComponents();
+		return ret;
 	}
 
 	@Override
-	public void removeComponents(final Collection<IGateWrapper> list) {
+	public boolean removeComponents(final Collection<IGateWrapper> list) {
+		boolean ret = false;
 		for (IGateWrapper gate : list) {
-			_removeComponent(gate);
+			if(_removeComponent(gate)){
+				ret = true;
+			}
 		}
+		return ret;
 	}
 
 	@Override
@@ -182,7 +187,7 @@ public final class Circuit implements ICircuit {
 		} while (hasChanged);
 	}
 
-	private void _removeComponent(final ICircuitGate g) {
-		componentList.remove(g);
+	private boolean _removeComponent(final ICircuitGate g) {
+		return componentList.remove(g);
 	}
 }

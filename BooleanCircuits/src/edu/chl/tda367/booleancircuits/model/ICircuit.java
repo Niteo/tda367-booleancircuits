@@ -14,16 +14,18 @@ public interface ICircuit {
 	 *            the new component to add
 	 * @param position
 	 *            position to add component at
+	 * @return true if a component were added
 	 */
-	public void addComponent(IGateWrapper component, Point position);
+	public boolean addComponent(IGateWrapper component, Point position);
 
 	/**
 	 * Adds components to the circuit.
 	 * 
 	 * @param component
 	 *            the components to add
+	 * @return true if any components were added
 	 */
-	public void addComponents(Collection<IGateWrapper> components);
+	public boolean addComponents(Collection<IGateWrapper> components);
 
 	/**
 	 * Clocks all clocks in the circuit.
@@ -74,16 +76,18 @@ public interface ICircuit {
 	 * 
 	 * @param g
 	 *            the component to remove
+	 * @return true if a component were removed
 	 */
-	public void removeComponent(IGateWrapper g);
+	public boolean removeComponent(IGateWrapper g);
 
 	/**
 	 * Removes the specified components.
 	 * 
 	 * @param list
 	 *            the components to remove
+	 * @return true if any components were removed
 	 */
-	public void removeComponents(Collection<IGateWrapper> list);
+	public boolean removeComponents(Collection<IGateWrapper> list);
 
 	/**
 	 * Updates the circuit's components' boolean values.

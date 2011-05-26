@@ -24,7 +24,7 @@ public final class MasterController implements IMasterController {
 	private IGateWrapper connectComponent = null;
 	private int connectPort = -1;
 	private IFileManager fileManager;
-	private final ICircuitManager modelManager;
+	private final ICircuitManager circuitManager;
 
 	/**
 	 * Returns an instance of a MasterController
@@ -38,7 +38,7 @@ public final class MasterController implements IMasterController {
 		if (mm == null) {
 			throw new NullPointerException("mm must not be null!");
 		} else {
-			modelManager = mm;
+			circuitManager = mm;
 			fileManager = new FileManager();
 			clockTimer = new Timer(Constants.clockFrequency,
 					new ActionListener() {
@@ -46,7 +46,7 @@ public final class MasterController implements IMasterController {
 						@SuppressWarnings("synthetic-access")
 						@Override
 						public void actionPerformed(final ActionEvent e) {
-							modelManager.clockActiveCircuit();
+							circuitManager.clockActiveCircuit();
 						}
 
 					});
@@ -56,31 +56,31 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void addComponent(final Point position) {
 		if (chosenGate != null) {
-			modelManager.addComponent(
+			circuitManager.addComponent(
 					new GateWrapper(chosenGate.getGateClone()), position);
 		}
 	}
 
 	@Override
 	public void closeActiveWorkspace() {
-		closeWorkspace(modelManager.getActiveCircuitIndex());
+		closeWorkspace(circuitManager.getActiveCircuitIndex());
 	}
 
 	@Override
 	public boolean closeAllWorkspaces() {
-		int size = modelManager.getCircuits().size();
+		int size = circuitManager.getCircuits().size();
 		int counter = 0;
 		for (int i = 0; i < size; i++) {
 			if (!closeWorkspace(counter)) {
 				counter++;
 			}
 		}
-		return modelManager.getCircuits().size() == 0;
+		return circuitManager.getCircuits().size() == 0;
 	}
 
 	@Override
 	public boolean closeWorkspace(final int i) {
-		ICircuitWrapper m = modelManager.getCircuit(i);
+		ICircuitWrapper m = circuitManager.getCircuit(i);
 		boolean close = false;
 		if (m != null) {
 			int answer = saveMessage(m);
@@ -93,7 +93,7 @@ public final class MasterController implements IMasterController {
 			}
 		}
 		if (close) {
-			modelManager.closeCircuit(i);
+			circuitManager.closeCircuit(i);
 		}
 		return close;
 	}
@@ -107,7 +107,7 @@ public final class MasterController implements IMasterController {
 			connectComponent = g;
 			connectPort = port;
 		} else {
-			modelManager.connectComponents(connectComponent, g, connectPort,
+			circuitManager.connectComponents(connectComponent, g, connectPort,
 					port);
 			connectComponent = null;
 		}
@@ -121,8 +121,7 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void cutSelectedComponents() {
 		_copySelectedComponents();
-		modelManager.removeSelectedComponents();
-
+		circuitManager.removeSelectedComponents();
 	}
 
 	@Override
@@ -131,14 +130,14 @@ public final class MasterController implements IMasterController {
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			List<IGateWrapper> importedComponents = fileManager.importFile(fc
 					.getSelectedFile());
-			modelManager.addComponents(importedComponents);
-			modelManager.selectComponents(importedComponents);
+			circuitManager.addComponents(importedComponents);
+			circuitManager.selectComponents(importedComponents);
 		}
 	}
 
 	@Override
 	public void newWorkspace() {
-		modelManager.newCircuit();
+		circuitManager.newCircuit();
 	}
 
 	@Override
@@ -148,7 +147,7 @@ public final class MasterController implements IMasterController {
 			ICircuitWrapper workspace = fileManager.openFile(fc
 					.getSelectedFile());
 			workspace.setChanged(false);
-			modelManager.addCircuit(workspace);
+			circuitManager.addCircuit(workspace);
 		}
 	}
 
@@ -158,15 +157,15 @@ public final class MasterController implements IMasterController {
 		for (IGateWrapper gw : col) {
 			gw.move(-Constants.componentSize, -Constants.componentSize);
 		}
-		modelManager.addComponents(col);
-		modelManager.selectComponents(col);
+		circuitManager.addComponents(col);
+		circuitManager.selectComponents(col);
 		copySelectedComponents();
 	}
 
 	@Override
 	public void pasteSelectedComponents(final Point position) {
-		modelManager.addComponents(clipboardManager.paste(), position);
-		modelManager.selectComponents(clipboardManager
+		circuitManager.addComponents(clipboardManager.paste(), position);
+		circuitManager.selectComponents(clipboardManager
 				.getLastPastedComponents());
 	}
 
@@ -177,49 +176,49 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void removeComponent(final IGateWrapper g) {
-		modelManager.removeComponent(g);
+		circuitManager.removeComponent(g);
 	}
 
 	@Override
 	public void removeSelectedComponents() {
-		modelManager.removeSelectedComponents();
+		circuitManager.removeSelectedComponents();
 	}
 
 	@Override
 	public void saveActiveWorkspace(final boolean saveAs) {
 		if (saveAs) {
-			_saveWorkspaceAs(modelManager.getActiveCircuit());
+			_saveWorkspaceAs(circuitManager.getActiveCircuit());
 		} else {
-			_saveWorkspace(modelManager.getActiveCircuit());
+			_saveWorkspace(circuitManager.getActiveCircuit());
 		}
 	}
 
 	@Override
 	public void saveAllWorkspaces() {
-		for (ICircuitWrapper imw : modelManager.getCircuits()) {
+		for (ICircuitWrapper imw : circuitManager.getCircuits()) {
 			_saveWorkspace(imw);
 		}
 	}
 
 	@Override
 	public void selectAllComponents() {
-		modelManager.selectAllComponents();
+		circuitManager.selectAllComponents();
 	}
 
 	@Override
 	public void selectComponent(final Point position, final boolean multiSelect) {
-		modelManager.selectComponent(position, multiSelect);
+		circuitManager.selectComponent(position, multiSelect);
 	}
 
 	@Override
 	public void selectComponents(final Point pos1, final Point pos2) {
-		modelManager.selectComponents(pos1, pos2);
+		circuitManager.selectComponents(pos1, pos2);
 
 	}
 
 	@Override
 	public void setActiveWorkspace(final int i) {
-		modelManager.setActiveCircuit(i);
+		circuitManager.setActiveCircuit(i);
 	}
 
 	@Override
@@ -242,22 +241,21 @@ public final class MasterController implements IMasterController {
 	}
 
 	private void _copySelectedComponents() {
-		ISelectionModel s = modelManager.getActiveSelectionModel();
-		ICircuitWrapper m = modelManager.getActiveCircuit();
+		ISelectionModel s = circuitManager.getActiveSelectionModel();
+		ICircuitWrapper m = circuitManager.getActiveCircuit();
 		if (s != null && m != null) {
-			if (m.getNumberOfComponents() != 0) {
-				clipboardManager.copy(modelManager.getActiveSelectionModel()
-						.getSelectedComponents());
+			if (s.getNumberOfComponents() != 0) {
+				clipboardManager.copy(s.getSelectedComponents());
 			}
 		}
 	}
 
 	private boolean _saveWorkspace(final ICircuitWrapper imw) {
-		if (modelManager.getActiveCircuit() != null) {
+		if (circuitManager.getActiveCircuit() != null) {
 			if (imw.getFile() != null) {
 				fileManager.saveFile(imw.getComponents(), imw.getFile());
 				imw.setChanged(false);
-				modelManager.manualPropertyChanged();
+				circuitManager.manualPropertyChanged();
 				return true;
 			} else {
 				return _saveWorkspaceAs(imw);
@@ -273,7 +271,7 @@ public final class MasterController implements IMasterController {
 			fileManager.saveFile(imw.getComponents(), fc.getSelectedFile());
 			imw.setFile(fc.getSelectedFile());
 			imw.setChanged(false);
-			modelManager.manualPropertyChanged();
+			circuitManager.manualPropertyChanged();
 			return true;
 		} else {
 			return false;

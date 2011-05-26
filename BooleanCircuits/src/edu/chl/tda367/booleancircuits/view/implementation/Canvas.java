@@ -330,6 +330,10 @@ public class Canvas implements ICanvas {
 				jpm.add(copyItem);
 				jpm.add(cutItem);
 				jpm.add(pasteItem);
+				if(selectModel.getNumberOfComponents() == 0){
+					cutItem.setEnabled(false);
+					copyItem.setEnabled(false);
+				}
 			} else {
 				jpm = menu;
 				menu.updateMenu(rightClickedGate.getNoOfInputs(),
