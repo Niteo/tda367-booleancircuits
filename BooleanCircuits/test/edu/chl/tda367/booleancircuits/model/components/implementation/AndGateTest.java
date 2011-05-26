@@ -18,12 +18,30 @@ public class AndGateTest {
 	}
 
 	@Test
+	public void testGetNoOfInputs() {
+		AndGate and = new AndGate(2);
+		assertTrue(and.getNoOfInputs() == 2);
+	}
+
+	@Test
+	public void testGetNoOfOutputs() {
+		AndGate and = new AndGate(2);
+		assertTrue(and.getNoOfOutputs() == 1);
+	}
+
+	@Test
 	public void testClone() {
 		AndGate and = new AndGate(2);
 		ICircuitGate clone = and.clone();
 		assertTrue(clone instanceof AndGate);
 		assertTrue(clone.getNoOfInputs() == and.getNoOfInputs());
 		assertTrue(clone.getNoOfOutputs() == and.getNoOfOutputs());
+	}
+
+	@Test
+	public void testGetInputs() {
+		AndGate and = new AndGate(2);
+		assertTrue(and.getInputs().size() == 2);
 	}
 
 	@Test
@@ -73,24 +91,6 @@ public class AndGateTest {
 	}
 
 	@Test
-	public void testGetInputs() {
-		AndGate and = new AndGate(2);
-		assertTrue(and.getInputs().size() == 2);
-	}
-
-	@Test
-	public void testGetNoOfInputs() {
-		AndGate and = new AndGate(2);
-		assertTrue(and.getNoOfInputs() == 2);
-	}
-
-	@Test
-	public void testGetNoOfOutputs() {
-		AndGate and = new AndGate(2);
-		assertTrue(and.getNoOfOutputs() == 1);
-	}
-
-	@Test
 	public void testGetOutputValue() {
 		AndGate and = new AndGate(2);
 		assertFalse(and.getOutputValue(0));
@@ -115,6 +115,13 @@ public class AndGateTest {
 	}
 
 	@Test
+	public void testSetOutput() {
+		AndGate and = new AndGate(2);
+		and.setOutput(0, true);
+		assertTrue(and.getOutputValue(0));
+	}
+
+	@Test
 	public void testOverwriteGate() {
 		AndGate and = new AndGate(1);
 		and.setOutput(0, true);
@@ -127,13 +134,6 @@ public class AndGateTest {
 		assertTrue(and.getInputs().equals(test.getInputs()));
 		assertTrue(and.getOutputValue(0) == test.getOutputValue(0));
 
-	}
-
-	@Test
-	public void testSetOutput() {
-		AndGate and = new AndGate(2);
-		and.setOutput(0, true);
-		assertTrue(and.getOutputValue(0));
 	}
 
 	@Test

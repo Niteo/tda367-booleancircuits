@@ -1,13 +1,14 @@
 package edu.chl.tda367.booleancircuits.controller.implementation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 
 import org.junit.Test;
 
-import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.model.implementation.CircuitManager;
 
 public class ActionControllerTest {
@@ -169,13 +170,14 @@ public class ActionControllerTest {
 				.stateChanged(new ChangeEvent(new JTabbedPane()));
 
 	}
+
 	@Test
-	public void testSetEnabledAction(){
-		MasterController mc=new MasterController(new CircuitManager());
+	public void testSetEnabledAction() {
+		MasterController mc = new MasterController(new CircuitManager());
 		ActionController ac = new ActionController(mc);
-		
+
 		ac.setActionsEnabled(true);
-		
+
 	}
 
 }

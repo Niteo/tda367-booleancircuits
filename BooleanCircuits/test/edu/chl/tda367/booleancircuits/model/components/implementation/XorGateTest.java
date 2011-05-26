@@ -11,6 +11,11 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 public class XorGateTest {
 
 	@Test
+	public void testXorGate() {
+		new XorGate(2);
+	}
+
+	@Test
 	public void testEmptyGateClone() {
 		XorGate xor = new XorGate(2);
 		ICircuitGate testGate = xor.emptyGateClone();
@@ -44,11 +49,6 @@ public class XorGateTest {
 
 		xor.update();
 		assertFalse(xor.getOutputValue(0));
-	}
-
-	@Test
-	public void testXorGate() {
-		new XorGate(2);
 	}
 
 }

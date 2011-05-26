@@ -17,6 +17,49 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
 import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
 
 public class SelectionModelTest {
+	
+	@Test
+	public void testSelectionModel() {
+		new SelectionModel();
+	}
+	
+	@Test
+	public void testGetSelectedComponents() {
+		SelectionModel sm = new SelectionModel();
+		assertTrue(sm.getSelectedComponents().size() == 0);
+	}
+	
+	@Test
+	public void testSelectComponent() {
+		SelectionModel sm = new SelectionModel();
+		IGateWrapper or = new GateWrapper(new OrGate(2));
+		assertTrue(sm.getSelectedComponents().size() == 0);
+
+		sm.selectComponent(new GateWrapper(new AndGate(2)), false);
+		assertTrue(sm.getSelectedComponents().size() == 1);
+		assertTrue(sm.getSelectedComponents().get(0).getGate() instanceof AndGate);
+
+		sm.selectComponent(or, true);
+		assertTrue(sm.getSelectedComponents().size() == 2);
+		sm.selectComponent(or, true);
+		assertTrue(sm.getSelectedComponents().size() == 1);
+	}
+
+	@Test
+	public void testSelectComponents() {
+		SelectionModel sm = new SelectionModel();
+		assertTrue(sm.getSelectedComponents().size() == 0);
+		List<IGateWrapper> list = new ArrayList<IGateWrapper>();
+
+		list.add(new GateWrapper(new AndGate(2)));
+		list.add(new GateWrapper(new NandGate(2)));
+
+		sm.selectComponents(list);
+		assertTrue(sm.getSelectedComponents().size() == 2);
+		assertTrue(sm.getSelectedComponents().get(0).getGate() instanceof AndGate);
+		assertTrue(sm.getSelectedComponents().get(1).getGate() instanceof NandGate);
+
+	}
 
 	@Test
 	public void testGetNumberOfComponents() {
@@ -25,12 +68,6 @@ public class SelectionModelTest {
 
 		sm.selectComponent(new GateWrapper(new ConstantGate(true)), false);
 		assertTrue(sm.getNumberOfComponents() == 1);
-	}
-
-	@Test
-	public void testGetSelectedComponents() {
-		SelectionModel sm = new SelectionModel();
-		assertTrue(sm.getSelectedComponents().size() == 0);
 	}
 
 	@Test
@@ -71,42 +108,4 @@ public class SelectionModelTest {
 		assertFalse(sm.isSelectedComponent(and));
 		assertFalse(sm.isSelectedComponent(nand));
 	}
-
-	@Test
-	public void testSelectComponent() {
-		SelectionModel sm = new SelectionModel();
-		IGateWrapper or = new GateWrapper(new OrGate(2));
-		assertTrue(sm.getSelectedComponents().size() == 0);
-
-		sm.selectComponent(new GateWrapper(new AndGate(2)), false);
-		assertTrue(sm.getSelectedComponents().size() == 1);
-		assertTrue(sm.getSelectedComponents().get(0).getGate() instanceof AndGate);
-
-		sm.selectComponent(or, true);
-		assertTrue(sm.getSelectedComponents().size() == 2);
-		sm.selectComponent(or, true);
-		assertTrue(sm.getSelectedComponents().size() == 1);
-	}
-
-	@Test
-	public void testSelectComponents() {
-		SelectionModel sm = new SelectionModel();
-		assertTrue(sm.getSelectedComponents().size() == 0);
-		List<IGateWrapper> list = new ArrayList<IGateWrapper>();
-
-		list.add(new GateWrapper(new AndGate(2)));
-		list.add(new GateWrapper(new NandGate(2)));
-
-		sm.selectComponents(list);
-		assertTrue(sm.getSelectedComponents().size() == 2);
-		assertTrue(sm.getSelectedComponents().get(0).getGate() instanceof AndGate);
-		assertTrue(sm.getSelectedComponents().get(1).getGate() instanceof NandGate);
-
-	}
-
-	@Test
-	public void testSelectionModel() {
-		new SelectionModel();
-	}
-
 }

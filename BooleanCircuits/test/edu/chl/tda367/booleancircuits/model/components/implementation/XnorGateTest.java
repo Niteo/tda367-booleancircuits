@@ -11,7 +11,7 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 public class XnorGateTest {
 
 	@Test
-	public void testAndGate() {
+	public void testXnorGate() {
 		new XnorGate(2);
 	}
 

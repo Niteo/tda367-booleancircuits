@@ -11,17 +11,17 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 public class NandGateTest {
 
 	@Test
+	public void testNandGate() {
+		new NandGate(2);
+	}
+
+	@Test
 	public void testEmptyGateClone() {
 		NandGate nand = new NandGate(2);
 		ICircuitGate testGate = nand.emptyGateClone();
 
 		assertTrue(testGate instanceof NandGate);
 		assertTrue(testGate.getNoOfInputs() == nand.getNoOfInputs());
-	}
-
-	@Test
-	public void testNandGate() {
-		new NandGate(2);
 	}
 
 	@Test
