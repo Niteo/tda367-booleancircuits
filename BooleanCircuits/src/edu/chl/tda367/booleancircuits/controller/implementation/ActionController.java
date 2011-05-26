@@ -202,11 +202,11 @@ public class ActionController implements ChangeListener, IActionController {
 					desk.open(file);
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(null,
-							"Couldn't open manual.pdf!");
+							"Couldn't open " + Constants.manualPath + "!");
 				}
 			} else {
 				JOptionPane
-						.showMessageDialog(null, "Couldn't find manual.pdf!");
+						.showMessageDialog(null, "Couldn't find " + Constants.manualPath + "!");
 			}
 		}
 	};
