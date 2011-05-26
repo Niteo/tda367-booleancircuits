@@ -24,6 +24,26 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
 public class ModelTest {
 
 	@Test
+	public void testModel() {
+		new Circuit();
+	}
+
+	@Test
+	public void testGetComponent() {
+		Circuit model = new Circuit();
+
+		assertNull(model.getComponent(new Point(0, 0)));
+	}
+
+	@Test
+	public void testGetComponents() {
+		Circuit model = new Circuit();
+
+		assertTrue(model.getComponents() != null);
+		assertTrue(model.getComponents().size() == 0);
+	}
+
+	@Test
 	public void testAddComponent() {
 		Circuit model = new Circuit();
 
@@ -60,28 +80,13 @@ public class ModelTest {
 	}
 
 	@Test
-	public void testGetComponent() {
-		Circuit model = new Circuit();
-
-		assertNull(model.getComponent(new Point(0, 0)));
-	}
-
-	@Test
-	public void testGetComponents() {
-		Circuit model = new Circuit();
-
-		assertTrue(model.getComponents() != null);
-		assertTrue(model.getComponents().size() == 0);
-	}
-
-	@Test
-	public void testGetGateWrapper(){
+	public void testGetGateWrapper() {
 		ICircuit c = new Circuit();
 		ICircuitGate and = new AndGate(2);
 		IGateWrapper wrapper = new GateWrapper(and);
 
-		c.addComponent(wrapper, new Point(0,0));
-		assertTrue(c.getGateWrapper(and)==wrapper);
+		c.addComponent(wrapper, new Point(0, 0));
+		assertTrue(c.getGateWrapper(and) == wrapper);
 	}
 
 	@Test
@@ -90,11 +95,6 @@ public class ModelTest {
 		assertTrue(m.getNumberOfComponents() == 0);
 		m.addComponent(new GateWrapper(new ConstantGate(true)), new Point(0, 0));
 		assertTrue(m.getNumberOfComponents() == 1);
-	}
-
-	@Test
-	public void testModel() {
-		new Circuit();
 	}
 
 	@Test

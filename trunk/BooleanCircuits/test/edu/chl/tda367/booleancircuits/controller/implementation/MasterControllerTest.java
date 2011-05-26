@@ -143,11 +143,5 @@ public class MasterControllerTest {
 		mc.toggleClockTimer();
 		mc.toggleClockTimer();
 	}
-	
-	@Test
-	public void testImportWorkspace(){
-		MasterController mc = new MasterController(new CircuitManager());
-		mc.importWorkspace();
-	}
 
 }

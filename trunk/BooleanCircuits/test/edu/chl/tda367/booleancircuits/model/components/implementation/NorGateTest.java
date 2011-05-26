@@ -11,17 +11,17 @@ import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 public class NorGateTest {
 
 	@Test
+	public void testNorGate() {
+		new NorGate(2);
+	}
+
+	@Test
 	public void testEmptyGateClone() {
 		NorGate nor = new NorGate(2);
 		ICircuitGate testGate = nor.emptyGateClone();
 
 		assertTrue(testGate instanceof NorGate);
 		assertTrue(testGate.getNoOfInputs() == nor.getNoOfInputs());
-	}
-
-	@Test
-	public void testNorGate() {
-		new NorGate(2);
 	}
 
 	@Test

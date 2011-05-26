@@ -8,6 +8,28 @@ import org.junit.Test;
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
 
 public class ConstantGateTest {
+
+	@Test
+	public void testConstantGate() {
+		new ConstantGate(false);
+		new ConstantGate(true);
+
+	}
+
+	@Test
+	public void testGetNoOfInputs() {
+		ConstantGate falseConstantGate = new ConstantGate(false);
+		assertTrue(falseConstantGate.getNoOfInputs() == 0);
+
+	}
+
+	@Test
+	public void testGetNoOfOutputs() {
+		ConstantGate falseConstantGate = new ConstantGate(false);
+		assertTrue(falseConstantGate.getNoOfOutputs() == 1);
+
+	}
+
 	@Test
 	public void testClone() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
@@ -45,13 +67,6 @@ public class ConstantGateTest {
 	}
 
 	@Test
-	public void testConstantGate() {
-		new ConstantGate(false);
-		new ConstantGate(true);
-
-	}
-
-	@Test
 	public void testEmptyGateClone() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
 		ICircuitGate emptyGate = falseConstantGate.emptyGateClone();
@@ -59,6 +74,33 @@ public class ConstantGateTest {
 		assertTrue(emptyGate instanceof ConstantGate);
 		assertTrue(emptyGate.getNoOfInputs() == falseConstantGate
 				.getNoOfInputs());
+	}
+
+	@Test
+	public void testGetOutputValue() {
+		ConstantGate falseConstantGate = new ConstantGate(false);
+		ConstantGate trueConstantGate = new ConstantGate(true);
+
+		falseConstantGate.setOutput(0, false);
+		trueConstantGate.setOutput(0, true);
+
+		assertTrue(falseConstantGate.getOutputValue(0) == false);
+		assertTrue(trueConstantGate.getOutputValue(0) == true);
+	}
+
+	@Test
+	public void testSetOutput() {
+		ConstantGate falseConstantGate = new ConstantGate(false);
+		ConstantGate trueConstantGate = new ConstantGate(true);
+
+		falseConstantGate.setOutput(0, false);
+		trueConstantGate.setOutput(0, true);
+
+		assertTrue(falseConstantGate.getNoOfOutputs() == 1);
+		assertTrue(falseConstantGate.getOutputValue(0) == false);
+
+		assertTrue(trueConstantGate.getNoOfOutputs() == 1);
+		assertTrue(trueConstantGate.getOutputValue(0) == true);
 	}
 
 	@Test
@@ -82,56 +124,14 @@ public class ConstantGateTest {
 	}
 
 	@Test
-	public void testGetNoOfInputs() {
-		ConstantGate falseConstantGate = new ConstantGate(false);
-		assertTrue(falseConstantGate.getNoOfInputs() == 0);
-
-	}
-
-	@Test
-	public void testGetNoOfOutputs() {
-		ConstantGate falseConstantGate = new ConstantGate(false);
-		assertTrue(falseConstantGate.getNoOfOutputs() == 1);
-
-	}
-
-	@Test
-	public void testGetOutputValue() {
-		ConstantGate falseConstantGate = new ConstantGate(false);
-		ConstantGate trueConstantGate = new ConstantGate(true);
-
-		falseConstantGate.setOutput(0, false);
-		trueConstantGate.setOutput(0, true);
-
-		assertTrue(falseConstantGate.getOutputValue(0) == false);
-		assertTrue(trueConstantGate.getOutputValue(0) == true);
-	}
-
-	@Test
 	public void testOverwriteGate() {
 		ConstantGate falseConstantGate = new ConstantGate(false);
 		ConstantGate test = new ConstantGate(true);
-		falseConstantGate.overwriteGate(test);
 
 		assertTrue(falseConstantGate.getInputs().equals(test.getInputs()));
 		assertTrue(falseConstantGate.getOutputValue(0) == test
 				.getOutputValue(0));
 
-	}
-
-	@Test
-	public void testSetOutput() {
-		ConstantGate falseConstantGate = new ConstantGate(false);
-		ConstantGate trueConstantGate = new ConstantGate(true);
-
-		falseConstantGate.setOutput(0, false);
-		trueConstantGate.setOutput(0, true);
-
-		assertTrue(falseConstantGate.getNoOfOutputs() == 1);
-		assertTrue(falseConstantGate.getOutputValue(0) == false);
-
-		assertTrue(trueConstantGate.getNoOfOutputs() == 1);
-		assertTrue(trueConstantGate.getOutputValue(0) == true);
 	}
 
 	@Test

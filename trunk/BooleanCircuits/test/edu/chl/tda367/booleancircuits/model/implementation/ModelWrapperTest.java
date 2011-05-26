@@ -22,6 +22,39 @@ import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
 public class ModelWrapperTest {
 
 	@Test
+	public void testModelWrapper() {
+		new CircuitWrapper();
+
+	}
+
+	@Test
+	public void testModelWrapperFile() {
+		new CircuitWrapper(new File("test"));
+	}
+
+	@Test
+	public void testModelWrapperFileModel() {
+		new CircuitWrapper(new File("test"), new Circuit());
+	}
+
+	@Test
+	public void testGetComponents() {
+		CircuitWrapper wrapper = new CircuitWrapper();
+
+		assertTrue(wrapper.getComponents() != null);
+		assertTrue(wrapper.getComponents().size() == 0);
+	}
+
+	@Test
+	public void testGetFile() {
+		CircuitWrapper wrapper = new CircuitWrapper();
+
+		assertNull(wrapper.getFile());
+		assertTrue(wrapper.hasChanged() == false);
+
+	}
+
+	@Test
 	public void testAddComponent() {
 		CircuitWrapper wrapper = new CircuitWrapper();
 		wrapper.addComponent(new GateWrapper(new ConstantGate(true)),
@@ -45,6 +78,12 @@ public class ModelWrapperTest {
 	}
 
 	@Test
+	public void testHasChanged() {
+		CircuitWrapper wrapper = new CircuitWrapper();
+		assertTrue(wrapper.hasChanged() == false);
+	}
+
+	@Test
 	public void testClock() {
 		CircuitWrapper wrapper = new CircuitWrapper();
 		IGateWrapper clock = new GateWrapper(new Clock());
@@ -65,26 +104,12 @@ public class ModelWrapperTest {
 	}
 
 	@Test
-	public void testGetComponents() {
+	public void testSetFile() {
 		CircuitWrapper wrapper = new CircuitWrapper();
+		File file = new File("file");
+		wrapper.setFile(file);
+		assertTrue(wrapper.getFile().getName().equals("file"));
 
-		assertTrue(wrapper.getComponents() != null);
-		assertTrue(wrapper.getComponents().size() == 0);
-	}
-
-	@Test
-	public void testGetFile() {
-		CircuitWrapper wrapper = new CircuitWrapper();
-
-		assertNull(wrapper.getFile());
-		assertTrue(wrapper.hasChanged() == false);
-
-	}
-
-	@Test
-	public void testHasChanged() {
-		CircuitWrapper wrapper = new CircuitWrapper();
-		assertTrue(wrapper.hasChanged() == false);
 	}
 
 	@Test
@@ -95,22 +120,6 @@ public class ModelWrapperTest {
 
 		wrapper.setFile(file);
 		assertTrue(wrapper.hasFile());
-	}
-
-	@Test
-	public void testModelWrapper() {
-		new CircuitWrapper();
-
-	}
-
-	@Test
-	public void testModelWrapperFile() {
-		new CircuitWrapper(new File("test"));
-	}
-
-	@Test
-	public void testModelWrapperFileModel() {
-		new CircuitWrapper(new File("test"), new Circuit());
 	}
 
 	@Test
@@ -150,15 +159,6 @@ public class ModelWrapperTest {
 		CircuitWrapper wrapper = new CircuitWrapper();
 		wrapper.setChanged(true);
 		assertTrue(wrapper.hasChanged() == true);
-
-	}
-
-	@Test
-	public void testSetFile() {
-		CircuitWrapper wrapper = new CircuitWrapper();
-		File file = new File("file");
-		wrapper.setFile(file);
-		assertTrue(wrapper.getFile().getName().equals("file"));
 
 	}
 

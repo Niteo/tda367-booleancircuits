@@ -15,6 +15,13 @@ public class GateInputTest {
 	}
 
 	@Test
+	public void testSetInputComponent() {
+		GateInput input = new GateInput();
+		input.setInputComponent(new ConstantGate(false), 0);
+
+	}
+
+	@Test
 	public void testGetInputComponent() {
 		GateInput input = new GateInput();
 		assertNull(input.getInputComponent());
@@ -50,19 +57,12 @@ public class GateInputTest {
 	}
 
 	@Test
-	public void testSetInputComponent() {
-		GateInput input = new GateInput();
-		input.setInputComponent(new ConstantGate(false), 0);
-
-	}
-
-	@Test
-	public void testReset(){
+	public void testReset() {
 		IGateInput input = new GateInput();
 		input.setInputComponent(new AndGate(2), 0);
 		input.reset();
 		assertNull(input.getInputComponent());
-		assertTrue(input.getInputPort()==0);
+		assertTrue(input.getInputPort() == 0);
 	}
 
 }

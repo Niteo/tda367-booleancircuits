@@ -19,22 +19,22 @@ public class GateWrapperTest {
 	@Test
 	public void testGetPosition() {
 		IGateWrapper and = new GateWrapper(new AndGate(2));
-		assertTrue(and.getPosition().equals(new Point(0,0)));
+		assertTrue(and.getPosition().equals(new Point(0, 0)));
 	}
 
 	@Test
 	public void testSetPosition() {
 		IGateWrapper and = new GateWrapper(new AndGate(2));
-		and.setPosition(new Point(8,9));
-		assertTrue(and.getPosition().equals(new Point(8,9)));
+		and.setPosition(new Point(8, 9));
+		assertTrue(and.getPosition().equals(new Point(8, 9)));
 	}
 
 	@Test
 	public void testMove() {
 		IGateWrapper and = new GateWrapper(new AndGate(2));
-		and.setPosition(new Point(8,8));
+		and.setPosition(new Point(8, 8));
 		and.move(4, 4);
-		assertTrue(and.getPosition().equals(new Point(12,12)));
+		assertTrue(and.getPosition().equals(new Point(12, 12)));
 	}
 
 	@Test
@@ -49,13 +49,13 @@ public class GateWrapperTest {
 	@Test
 	public void testGetNoOfInputs() {
 		IGateWrapper and = new GateWrapper(new AndGate(2));
-		assertTrue(and.getNoOfInputs()==2);
+		assertTrue(and.getNoOfInputs() == 2);
 	}
 
 	@Test
 	public void testGetNoOfOutputs() {
 		IGateWrapper and = new GateWrapper(new AndGate(2));
-		assertTrue(and.getNoOfOutputs()==1);
+		assertTrue(and.getNoOfOutputs() == 1);
 	}
 
 	@Test
@@ -76,8 +76,7 @@ public class GateWrapperTest {
 
 	@Test
 	public void testToString() {
-		IGateWrapper and = new GateWrapper(new AndGate(2));
-		assertTrue(and.toString().equals("AND"));
+		assertTrue(new GateWrapper(new AndGate(2)).toString().equals("AND"));
 	}
 
 	@Test
