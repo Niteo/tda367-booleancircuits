@@ -189,8 +189,12 @@ public final class MainWindow extends JFrame implements PropertyChangeListener {
 	@Override
 	public synchronized void propertyChange(final PropertyChangeEvent evt) {
 		if (evt.getSource() instanceof CircuitManager) {
-			CircuitManager cm =(CircuitManager) evt.getSource();
-			actionController.setActionsEnabled(cm.getWorkspaces().size()>0);
+			CircuitManager cm = (CircuitManager) evt.getSource();
+			actionController.setActionsEnabled(cm.getWorkspaces().size() > 0);
+			if (cm.getActiveWorkspaceModel() != null) {
+				actionController.getSaveActiveWorkspaceAction().setEnabled(
+						cm.getActiveWorkspaceModel().hasChanged());
+			}
 			cs.update(cm);
 		}
 	}
