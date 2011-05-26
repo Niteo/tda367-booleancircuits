@@ -50,7 +50,7 @@ public final class MasterController implements IMasterController {
 						@SuppressWarnings("synthetic-access")
 						@Override
 						public void actionPerformed(final ActionEvent e) {
-							modelManager.clockActiveModel();
+							modelManager.clockActiveCircuit();
 						}
 
 					});
@@ -67,24 +67,24 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void closeActiveWorkspace() {
-		closeWorkspace(modelManager.getActiveWorkspaceIndex());
+		closeWorkspace(modelManager.getActiveCircuitIndex());
 	}
 
 	@Override
 	public boolean closeAllWorkspaces() {
-		int size = modelManager.getWorkspaces().size();
+		int size = modelManager.getCircuits().size();
 		int counter = 0;
 		for (int i = 0; i < size; i++) {
 			if (!closeWorkspace(counter)) {
 				counter++;
 			}
 		}
-		return modelManager.getWorkspaces().size() == 0;
+		return modelManager.getCircuits().size() == 0;
 	}
 
 	@Override
 	public boolean closeWorkspace(final int i) {
-		ICircuitWrapper m = modelManager.getWorkspace(i);
+		ICircuitWrapper m = modelManager.getCircuit(i);
 		boolean close = false;
 		if(m != null){
 			int answer = saveMessage(m);
@@ -97,7 +97,7 @@ public final class MasterController implements IMasterController {
 			}
 		}
 		if(close) {
-			modelManager.closeWorkspace(i);
+			modelManager.closeCircuit(i);
 		}
 		return close;
 	}
@@ -142,7 +142,7 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void newWorkspace() {
-		modelManager.newWorkspace();
+		modelManager.newCircuit();
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public final class MasterController implements IMasterController {
 			ICircuitWrapper workspace = fileManager
 					.openFile(fc.getSelectedFile());
 			workspace.setChanged(false);
-			modelManager.addWorkspace(workspace);
+			modelManager.addCircuit(workspace);
 		}
 	}
 
@@ -192,15 +192,15 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void saveActiveWorkspace(final boolean saveAs) {
 		if (saveAs) {
-			_saveWorkspaceAs(modelManager.getActiveWorkspaceModel());
+			_saveWorkspaceAs(modelManager.getActiveCircuit());
 		} else {
-			_saveWorkspace(modelManager.getActiveWorkspaceModel());
+			_saveWorkspace(modelManager.getActiveCircuit());
 		}
 	}
 
 	@Override
 	public void saveAllWorkspaces() {
-		for (ICircuitWrapper imw : modelManager.getWorkspaces()) {
+		for (ICircuitWrapper imw : modelManager.getCircuits()) {
 			_saveWorkspace(imw);
 		}
 	}
@@ -223,7 +223,7 @@ public final class MasterController implements IMasterController {
 
 	@Override
 	public void setActiveWorkspace(final int i) {
-		modelManager.setActiveWorkspace(i);
+		modelManager.setActiveCircuit(i);
 	}
 
 	@Override
@@ -247,7 +247,7 @@ public final class MasterController implements IMasterController {
 
 	private void _copySelectedComponents() {
 		ISelectionModel s = modelManager.getActiveSelectionModel();
-		ICircuitWrapper m = modelManager.getActiveWorkspaceModel();
+		ICircuitWrapper m = modelManager.getActiveCircuit();
 		if (s != null && m != null){
 			if(m.getNumberOfComponents() != 0){
 				clipboardManager.copy(modelManager.getActiveSelectionModel()
@@ -257,7 +257,7 @@ public final class MasterController implements IMasterController {
 	}
 
 	private boolean _saveWorkspace(final ICircuitWrapper imw) {
-		if (modelManager.getActiveWorkspaceModel() != null) {
+		if (modelManager.getActiveCircuit() != null) {
 			if (imw.getFile() != null) {
 				fileManager.saveFile(imw.getComponents(), imw.getFile());
 				imw.setChanged(false);

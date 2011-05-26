@@ -96,7 +96,7 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	}
 
 	@Override
-	public void addWorkspace(final ICircuitWrapper workspace) {
+	public void addCircuit(final ICircuitWrapper workspace) {
 		modelList.add(workspace);
 		selectionModelList.add(new SelectionModel());
 		_setActiveWorkspace(modelList.size() - 1);
@@ -104,7 +104,7 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	}
 
 	@Override
-	public void clockActiveModel() {
+	public void clockActiveCircuit() {
 		ICircuitWrapper w = _getActiveWorkspaceModel();
 		if (w != null) {
 			w.clock();
@@ -113,19 +113,19 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	}
 
 	@Override
-	public void closeActiveWorkspace() {
+	public void closeActiveCircuit() {
 		removeCircuit(selectedIndex);
 	}
 
 	@Override
-	public void closeAllWorkspaces() {
+	public void closeAllCircuits() {
 		modelList.clear();
 		selectionModelList.clear();
 		_setActiveWorkspace(-1);
 	}
 
 	@Override
-	public void closeWorkspace(final int i) {
+	public void closeCircuit(final int i) {
 		removeCircuit(i);
 	}
 
@@ -145,17 +145,17 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	}
 
 	@Override
-	public int getActiveWorkspaceIndex() {
+	public int getActiveCircuitIndex() {
 		return selectedIndex;
 	}
 
 	@Override
-	public ICircuitWrapper getActiveWorkspaceModel() {
+	public ICircuitWrapper getActiveCircuit() {
 		return _getActiveWorkspaceModel();
 	}
 
 	@Override
-	public ICircuitWrapper getWorkspace(final int i) {
+	public ICircuitWrapper getCircuit(final int i) {
 		if(i >= 0 && i < modelList.size()){
 			return modelList.get(i);
 		}
@@ -163,7 +163,7 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	}
 
 	@Override
-	public ArrayList<ICircuitWrapper> getWorkspaces() {
+	public ArrayList<ICircuitWrapper> getCircuits() {
 		return modelList;
 	}
 
@@ -182,8 +182,8 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	}
 
 	@Override
-	public void newWorkspace() {
-		addWorkspace(new CircuitWrapper());
+	public void newCircuit() {
+		addCircuit(new CircuitWrapper());
 	}
 
 	@Override
@@ -270,7 +270,7 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	}
 
 	@Override
-	public void setActiveWorkspace(final int i) {
+	public void setActiveCircuit(final int i) {
 		_setActiveWorkspace(i);
 	}
 

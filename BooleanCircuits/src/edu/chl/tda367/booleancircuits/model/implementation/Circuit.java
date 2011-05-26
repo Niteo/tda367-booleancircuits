@@ -22,10 +22,8 @@ public final class Circuit implements ICircuit {
 	private boolean infiniteRecursion = false;
 
 	/**
-	 * Returns an instance of Model
+	 * Returns an instance of Circuit
 	 *
-	 * @param name
-	 *            the name of the model
 	 */
 	public Circuit() {
 		componentList = new ArrayList<IGateWrapper>();
