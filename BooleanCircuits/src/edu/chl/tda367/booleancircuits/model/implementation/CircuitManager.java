@@ -1,20 +1,16 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
 import java.awt.Point;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.List;
+import java.beans.*;
+import java.util.*;
 
 import edu.chl.tda367.booleancircuits.common.IObservable;
 import edu.chl.tda367.booleancircuits.model.*;
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.*;
 
 /**
  * A class which manages Models as workspaces.
- *
+ * 
  * @author Kaufmann
  */
 public final class CircuitManager implements IObservable, ICircuitManager {
@@ -29,6 +25,14 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 		modelList = new ArrayList<ICircuitWrapper>();
 		selectionModelList = new ArrayList<ISelectionModel>();
 		selectedIndex = -1;
+	}
+
+	@Override
+	public void addCircuit(final ICircuitWrapper workspace) {
+		modelList.add(workspace);
+		selectionModelList.add(new SelectionModel());
+		_setActiveWorkspace(modelList.size() - 1);
+		workspaceCount++;
 	}
 
 	@Override
@@ -96,14 +100,6 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	}
 
 	@Override
-	public void addCircuit(final ICircuitWrapper workspace) {
-		modelList.add(workspace);
-		selectionModelList.add(new SelectionModel());
-		_setActiveWorkspace(modelList.size() - 1);
-		workspaceCount++;
-	}
-
-	@Override
 	public void clockActiveCircuit() {
 		ICircuitWrapper w = _getActiveWorkspaceModel();
 		if (w != null) {
@@ -140,8 +136,8 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	}
 
 	@Override
-	public ISelectionModel getActiveSelectionModel() {
-		return _getActiveSelectionModel();
+	public ICircuitWrapper getActiveCircuit() {
+		return _getActiveWorkspaceModel();
 	}
 
 	@Override
@@ -150,13 +146,13 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	}
 
 	@Override
-	public ICircuitWrapper getActiveCircuit() {
-		return _getActiveWorkspaceModel();
+	public ISelectionModel getActiveSelectionModel() {
+		return _getActiveSelectionModel();
 	}
 
 	@Override
 	public ICircuitWrapper getCircuit(final int i) {
-		if(i >= 0 && i < modelList.size()){
+		if (i >= 0 && i < modelList.size()) {
 			return modelList.get(i);
 		}
 		return null;
@@ -165,6 +161,15 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	@Override
 	public ArrayList<ICircuitWrapper> getCircuits() {
 		return modelList;
+	}
+
+	@Override
+	public IGateWrapper getGateWrapper(final ICircuitGate gate) {
+		ICircuitWrapper m = _getActiveWorkspaceModel();
+		if (m != null) {
+			return m.getGateWrapper(gate);
+		}
+		return null;
 	}
 
 	@Override
@@ -237,11 +242,20 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 	}
 
 	@Override
+	public void selectComponents(final List<IGateWrapper> list) {
+		ISelectionModel s = _getActiveSelectionModel();
+		if (s != null) {
+			s.selectComponents(list);
+			firePropertyChanged();
+		}
+	}
+
+	@Override
 	public void selectComponents(final Point pos1, final Point pos2) {
 		List<IGateWrapper> selectedComponents = new ArrayList<IGateWrapper>();
 
 		ICircuitWrapper m = _getActiveWorkspaceModel();
-		if(m != null){
+		if (m != null) {
 			for (IGateWrapper gate : m.getComponents()) {
 				Point gatePosition = gate.getPosition();
 				if (gatePosition.x >= Math.min(pos1.x, pos2.x)
@@ -252,19 +266,10 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 				}
 			}
 		}
-		
+
 		ISelectionModel s = _getActiveSelectionModel();
 		if (s != null) {
 			s.selectComponents(selectedComponents);
-			firePropertyChanged();
-		}
-	}
-
-	@Override
-	public void selectComponents(List<IGateWrapper> list){
-		ISelectionModel s = _getActiveSelectionModel();
-		if (s != null) {
-			s.selectComponents(list);
 			firePropertyChanged();
 		}
 	}
@@ -321,14 +326,5 @@ public final class CircuitManager implements IObservable, ICircuitManager {
 			}
 			firePropertyChanged();
 		}
-	}
-
-	@Override
-	public IGateWrapper getGateWrapper(ICircuitGate gate) {
-		ICircuitWrapper m = _getActiveWorkspaceModel();
-		if(m != null){
-			return m.getGateWrapper(gate);	
-		}
-		return null;
 	}
 }

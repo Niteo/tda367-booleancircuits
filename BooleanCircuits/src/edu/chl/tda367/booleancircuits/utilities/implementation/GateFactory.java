@@ -1,16 +1,7 @@
 package edu.chl.tda367.booleancircuits.utilities.implementation;
 
 import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.AndGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
-import edu.chl.tda367.booleancircuits.model.components.implementation.ConstantGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.Equal;
-import edu.chl.tda367.booleancircuits.model.components.implementation.NandGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.NorGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.NotGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.OrGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.XnorGate;
-import edu.chl.tda367.booleancircuits.model.components.implementation.XorGate;
+import edu.chl.tda367.booleancircuits.model.components.implementation.*;
 
 public final class GateFactory {
 
@@ -19,12 +10,12 @@ public final class GateFactory {
 	}
 
 	public static enum PredefinedComponents {
-		CONSTANTGATE_ONE, CONSTANTGATE_ZERO, NOT, CLOCK, EQUAL
+		CLOCK, CONSTANTGATE_ONE, CONSTANTGATE_ZERO, EQUAL, NOT
 	}
 
 	/**
 	 * Gets an instance of the component with the specified amount of inputs
-	 *
+	 * 
 	 * @param: component the new component
 	 * @param: noOfInputs the amount of inputs on the component
 	 * @return: a new instance of the component
@@ -32,20 +23,20 @@ public final class GateFactory {
 	public static ICircuitGate getNewComponent(final Components component,
 			final int noOfInputs) {
 		switch (component) {
-		case AND:
-			return new AndGate(noOfInputs);
-		case NAND:
-			return new NandGate(noOfInputs);
-		case OR:
-			return new OrGate(noOfInputs);
-		case NOR:
-			return new NorGate(noOfInputs);
-		case XOR:
-			return new XorGate(noOfInputs);
-		case XNOR:
-			return new XnorGate(noOfInputs);
-		default:
-			System.out.println("That's not a component!");
+			case AND:
+				return new AndGate(noOfInputs);
+			case NAND:
+				return new NandGate(noOfInputs);
+			case OR:
+				return new OrGate(noOfInputs);
+			case NOR:
+				return new NorGate(noOfInputs);
+			case XOR:
+				return new XorGate(noOfInputs);
+			case XNOR:
+				return new XnorGate(noOfInputs);
+			default:
+				System.out.println("That's not a component!");
 
 		}
 
@@ -55,25 +46,25 @@ public final class GateFactory {
 
 	/**
 	 * Gets an instance of the component
-	 *
+	 * 
 	 * @param: component the new component
 	 * @return: a new instance of the component
 	 */
 	public static ICircuitGate getNewComponent(
 			final PredefinedComponents component) {
 		switch (component) {
-		case NOT:
-			return new NotGate();
-		case CONSTANTGATE_ONE:
-			return new ConstantGate(true);
-		case CONSTANTGATE_ZERO:
-			return new ConstantGate(false);
-		case CLOCK:
-			return new Clock();
-		case EQUAL:
-			return new Equal();
-		default:
-			System.out.println("That's not a component!");
+			case NOT:
+				return new NotGate();
+			case CONSTANTGATE_ONE:
+				return new ConstantGate(true);
+			case CONSTANTGATE_ZERO:
+				return new ConstantGate(false);
+			case CLOCK:
+				return new Clock();
+			case EQUAL:
+				return new Equal();
+			default:
+				System.out.println("That's not a component!");
 
 		}
 		return null;

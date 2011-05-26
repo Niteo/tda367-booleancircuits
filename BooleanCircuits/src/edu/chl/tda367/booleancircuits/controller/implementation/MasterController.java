@@ -1,13 +1,10 @@
 package edu.chl.tda367.booleancircuits.controller.implementation;
 
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.*;
+import java.awt.event.*;
+import java.util.List;
 
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
+import javax.swing.*;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.io.IFileManager;
@@ -17,8 +14,7 @@ import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
 import edu.chl.tda367.booleancircuits.model.implementation.CircuitManager;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
-import edu.chl.tda367.booleancircuits.utilities.implementation.ClipboardManager;
-import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
+import edu.chl.tda367.booleancircuits.utilities.implementation.*;
 
 public final class MasterController implements IMasterController {
 
@@ -86,17 +82,17 @@ public final class MasterController implements IMasterController {
 	public boolean closeWorkspace(final int i) {
 		ICircuitWrapper m = modelManager.getCircuit(i);
 		boolean close = false;
-		if(m != null){
+		if (m != null) {
 			int answer = saveMessage(m);
 			if (answer == 0) {
 				if (_saveWorkspace(m)) {
 					close = true;
 				}
 			} else if (answer == 2) {
-				close =  true;
+				close = true;
 			}
 		}
-		if(close) {
+		if (close) {
 			modelManager.closeCircuit(i);
 		}
 		return close;
@@ -149,8 +145,8 @@ public final class MasterController implements IMasterController {
 	public void openWorkspace() {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			ICircuitWrapper workspace = fileManager
-					.openFile(fc.getSelectedFile());
+			ICircuitWrapper workspace = fileManager.openFile(fc
+					.getSelectedFile());
 			workspace.setChanged(false);
 			modelManager.addCircuit(workspace);
 		}
@@ -159,7 +155,7 @@ public final class MasterController implements IMasterController {
 	@Override
 	public void pasteSelectedComponents() {
 		List<IGateWrapper> col = clipboardManager.paste();
-		for(IGateWrapper gw : col){
+		for (IGateWrapper gw : col) {
 			gw.move(-Constants.componentSize, -Constants.componentSize);
 		}
 		modelManager.addComponents(col);
@@ -248,8 +244,8 @@ public final class MasterController implements IMasterController {
 	private void _copySelectedComponents() {
 		ISelectionModel s = modelManager.getActiveSelectionModel();
 		ICircuitWrapper m = modelManager.getActiveCircuit();
-		if (s != null && m != null){
-			if(m.getNumberOfComponents() != 0){
+		if (s != null && m != null) {
+			if (m.getNumberOfComponents() != 0) {
 				clipboardManager.copy(modelManager.getActiveSelectionModel()
 						.getSelectedComponents());
 			}

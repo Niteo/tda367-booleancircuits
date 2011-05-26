@@ -1,23 +1,15 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.security.InvalidParameterException;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.*;
 
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
-import edu.chl.tda367.booleancircuits.model.ICircuit;
-import edu.chl.tda367.booleancircuits.model.ISelectionModel;
+import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.components.*;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 import edu.chl.tda367.booleancircuits.view.ICanvas;
@@ -53,7 +45,6 @@ public class Canvas implements ICanvas {
 		drawer.setUsStandard(bool);
 	}
 
-	private final IMasterController mc;
 	private IGateWrapper connectBufferGate = null;
 	private int connectBufferPort = 0;
 	private boolean connectingInput;
@@ -96,6 +87,7 @@ public class Canvas implements ICanvas {
 			}
 		}
 	};
+	private final IMasterController mc;
 	private final CanvasPopup menu;
 	private final ICircuit model;
 	private final MouseAdapter mouseAdapter = new MouseInputAdapter() {
@@ -108,7 +100,8 @@ public class Canvas implements ICanvas {
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public void mouseDragged(final MouseEvent evt) {
-			Point dragPosition = new Point(evt.getX() + position.x, evt.getY() + position.y);
+			Point dragPosition = new Point(evt.getX() + position.x, evt.getY()
+					+ position.y);
 			if (oldDragPosition != null) {
 				int dx = (int) (evt.getPoint().getX() - oldDragPosition.getX());
 				int dy = (int) (evt.getPoint().getY() - oldDragPosition.getY());
@@ -148,9 +141,9 @@ public class Canvas implements ICanvas {
 			draggingMode = false;
 			panning = false;
 			if (drawSelect != null) {
-				mc.selectComponents(new Point(drawSelect.x + position.x, drawSelect.y
-						+ position.y), new Point(releasePoint.x + position.x,
-						releasePoint.y + position.y));
+				mc.selectComponents(new Point(drawSelect.x + position.x,
+						drawSelect.y + position.y), new Point(releasePoint.x
+						+ position.x, releasePoint.y + position.y));
 				drawSelect = null;
 				panel.repaint();
 			}
@@ -167,64 +160,69 @@ public class Canvas implements ICanvas {
 			super.paint(g);
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
+					RenderingHints.VALUE_ANTIALIAS_ON);
 
 			drawer.drawBackground(g2d, position, panel.getSize());
-			
+
 			Collection<IConnection> connections = new LinkedList<IConnection>();
 			LinkedList<IGateWrapper> components = new LinkedList<IGateWrapper>();
 			int nonSelectedComponents = 0;
-			
+
 			// Fill list of connections, gates and selected gates
 			for (IGateWrapper gate : model.getComponents()) {
-					// Add connections
-					for (IGateInput gi : gate.getInputs()) {
-						IGateWrapper gw = model.getGateWrapper(gi
-								.getInputComponent());
-						if (gw != null) {
-							connections.add(new Connection(gate.getPosition(), gw
-									.getPosition(), gi.getInputValue(), gate
-									.getInputs().indexOf(gi), gate
-									.getNoOfInputs(), gi.getInputPort(), gw
-									.getNoOfOutputs()));
-						}
+				// Add connections
+				for (IGateInput gi : gate.getInputs()) {
+					IGateWrapper gw = model.getGateWrapper(gi
+							.getInputComponent());
+					if (gw != null) {
+						connections.add(new Connection(gate.getPosition(), gw
+								.getPosition(), gi.getInputValue(), gate
+								.getInputs().indexOf(gi), gate.getNoOfInputs(),
+								gi.getInputPort(), gw.getNoOfOutputs()));
 					}
-					// Only include gates in view!
-					if (gate.getPosition().x >= position.x - Constants.componentSize
-							&& gate.getPosition().x < position.x + panel.getSize().width + Constants.componentSize
-							&& gate.getPosition().y >= position.y - Constants.componentSize
-							&& gate.getPosition().y < position.y + panel.getSize().height + Constants.componentSize) {
-						// Add to list
-						if (selectModel.isSelectedComponent(gate)) {
-							components.addLast(gate);
-						} else {
-							components.addFirst(gate);
-							nonSelectedComponents++;
-						}
+				}
+				// Only include gates in view!
+				if (gate.getPosition().x >= position.x
+						- Constants.componentSize
+						&& gate.getPosition().x < position.x
+								+ panel.getSize().width
+								+ Constants.componentSize
+						&& gate.getPosition().y >= position.y
+								- Constants.componentSize
+						&& gate.getPosition().y < position.y
+								+ panel.getSize().height
+								+ Constants.componentSize) {
+					// Add to list
+					if (selectModel.isSelectedComponent(gate)) {
+						components.addLast(gate);
+					} else {
+						components.addFirst(gate);
+						nonSelectedComponents++;
 					}
+				}
 			}
-			
+
 			drawer.drawGateConnections(g2d, connections, position);
 			g2d.setColor(Color.BLACK);
 			int loops = 0;
-			for (IGateWrapper gate : components){
-				if(loops++ == nonSelectedComponents){
+			for (IGateWrapper gate : components) {
+				if (loops++ == nonSelectedComponents) {
 					g2d.setColor(Color.BLUE);
 				}
 				drawer.drawGate(g2d, gate, position);
 			}
-			
+
 			// Draw Position
 			g2d.setColor(Color.BLACK);
 			g2d.setFont(UIManager.getFont("TabbedPane.font"));
 			g2d.drawString("[" + position.x + ", " + position.y + "]", 5, 15);
-			
+
 			// Draw infinite recursion
 			if (model.hasInfiniteRecursion()) {
 				g2d.setColor(Color.RED);
 				g2d.drawString("Infinite recursion!", 5, 35);
 			}
-			
+
 			// Draw selection box
 			if (drawSelect != null) {
 				Point mousePos = panel.getMousePosition();
@@ -254,7 +252,7 @@ public class Canvas implements ICanvas {
 	};
 
 	private boolean panning;
-	private Point position = new Point(0,0);
+	private Point position = new Point(0, 0);
 	private IGateWrapper rightClickedGate = null;
 	private final ISelectionModel selectModel;
 
@@ -286,8 +284,8 @@ public class Canvas implements ICanvas {
 	}
 
 	private void mouseClickedActions(final MouseEvent evt) {
-		final Point pointClicked = new Point(evt.getX() + position.x, evt.getY()
-				+ position.y);
+		final Point pointClicked = new Point(evt.getX() + position.x,
+				evt.getY() + position.y);
 		if (evt.getButton() == MouseEvent.BUTTON1) { // LeftMouseButton
 			resetConnecting();
 
