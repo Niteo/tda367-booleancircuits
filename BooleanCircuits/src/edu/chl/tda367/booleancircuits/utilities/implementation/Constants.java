@@ -10,8 +10,6 @@ public class Constants {
 	public static final int clockFrequency = 500;
 	public static final int componentCircleRadius = 10;
 	public static final int componentSize = 32;
-	public static final Color connectionHigh = Color.red;
-	public static final Color connectionLow = Color.black;
 	public static final String creditsText = "<html><H1>Boolean Circuits</H1><H3>Version: Alpha</H3>"
 			+ "This software is developed by Robert Kaufmann, Anton Lin, "
 			+ "Boel Nelson and Jennifer Panditha at Chalmers university "
@@ -23,6 +21,9 @@ public class Constants {
 			+ "Cross<br><i>www.iconarchive.com/artist/yusuke-kamiyamane.html</i></html>";
 	public static final Color drawSelectBorder = new Color(20, 20, 240, 180);
 	public static final Color drawSelectFill = new Color(100, 100, 240, 140);
+	public static final Color componentWarningFill = new Color(255, 50, 50, 140);
+	public static final Color connectionHigh = Color.red;
+	public static final Color connectionLow = Color.black;
 	public static final String manualPath = "manual.pdf";
 	public static final Icon aboutImage = new ImageIcon("resources/Images/aboutImage.png");
 }

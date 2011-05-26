@@ -24,9 +24,8 @@ import edu.chl.tda367.booleancircuits.view.draw.*;
 
 public class Painter implements IPainter {
 	private IBackground background;
-	private Color color;
 	private boolean isUsStandard;
-	private String symbol;
+	private Color color;
 
 	@Override
 	public void drawBackground(final Graphics2D g, final Point offset,
@@ -41,10 +40,12 @@ public class Painter implements IPainter {
 
 		if (!gate.isFullyConnected()) {
 			g.setColor(Color.RED);
-			g.drawOval(gate.getPosition().x - (offset.x)
-					- Constants.componentSize, gate.getPosition().y
-					- (offset.y) - Constants.componentSize,
-					Constants.componentSize * 2, Constants.componentSize * 2);
+			int x = gate.getPosition().x - offset.x - Constants.componentSize;
+			int y = gate.getPosition().y - offset.y - Constants.componentSize;
+			int r = Constants.componentSize * 2;
+			g.drawRect(x, y, r, r);
+			g.setColor(Constants.componentWarningFill);
+			g.fillRect(x, y, r, r);
 		}
 
 		if (gate.getGate() instanceof AndGate) {
@@ -86,25 +87,23 @@ public class Painter implements IPainter {
 		}
 
 		g.setColor(color);
-		drawPin(gate, g, offset);
+		drawPins(gate, g, offset);
 	}
 
 	@Override
 	public void drawGateConnections(final Graphics2D g,
 			Collection<IConnection> coll, final Point offset) {
-		g.setColor(color);
-
-		int nInputs = coll.size();
-		int loopCount = 0;
 		for (IConnection i : coll) {
-
 			if (i.getValue()) {
 				g.setColor(Constants.connectionHigh);
 			} else {
 				g.setColor(Constants.connectionLow);
 			}
 
-			int y1Offset = loopCount * Constants.componentSize / (nInputs)
+			int nInputs = i.getNoOfStartPorts();
+			int inputIndex = i.getStartPortIndex();
+
+			int y1Offset = inputIndex * Constants.componentSize / (nInputs)
 					+ Constants.componentSize / (nInputs * 2);
 			int xStart = (int) (i.getStartPoint().x - offset.x - Constants.componentSize * 0.5);
 			int yStart = (int) (i.getStartPoint().y - offset.y + y1Offset - Constants.componentSize * 0.5);
@@ -148,8 +147,6 @@ public class Painter implements IPainter {
 
 				g.drawPolyline(xPoints, yPoints, 6);
 			}
-
-			loopCount++;
 		}
 		g.setColor(color);
 	}
@@ -169,16 +166,16 @@ public class Painter implements IPainter {
 
 		if (isUsStandard) {
 			g.setColor(Color.WHITE);
-			g.fill3DRect(
+			g.fillRect(
 					(gate.getPosition().x - offset.x - Constants.componentSize / 2),
 					(gate.getPosition().y - offset.y - Constants.componentSize / 2),
-					Constants.componentSize / 2, Constants.componentSize, true);
+					Constants.componentSize / 2, Constants.componentSize);
 
 			g.setColor(color);
-			g.draw3DRect(
+			g.drawRect(
 					(gate.getPosition().x - (offset.x) - Constants.componentSize / 2),
 					(gate.getPosition().y - (offset.y) - Constants.componentSize / 2),
-					Constants.componentSize / 2, Constants.componentSize, true);
+					Constants.componentSize / 2, Constants.componentSize);
 			g.setColor(Color.WHITE);
 			g.fillOval(gate.getPosition().x - Constants.componentSize / 2
 					- (offset.x), gate.getPosition().y
@@ -191,12 +188,11 @@ public class Painter implements IPainter {
 					Constants.componentSize, Constants.componentSize, -90, 180);
 
 		} else {
-			symbol = "&";
-			drawRectangle(gate, g, offset);
+			drawRectangle(gate, g, offset, "&");
 		}
 	}
 
-	private void drawCircle(final IGateWrapper gate, final Graphics g,
+	private void drawCircle(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 		g.setColor(Color.white);
 		g.fillOval(gate.getPosition().x - offset.x + Constants.componentSize
@@ -210,21 +206,17 @@ public class Painter implements IPainter {
 
 	private void drawClock(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
-		symbol = "C";
-		drawRectangle(gate, g, offset);
+		drawRectangle(gate, g, offset, "C");
 	}
 
 	private void drawEqual(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
-		symbol = "";
-		drawRectangle(gate, g, offset);
+		drawRectangle(gate, g, offset, "");
 	}
 
 	private void drawConstantGate(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
-
-		symbol = gate.toString();
-		drawRectangle(gate, g, offset);
+		drawRectangle(gate, g, offset, gate.toString());
 
 	}
 
@@ -233,16 +225,16 @@ public class Painter implements IPainter {
 
 		if (isUsStandard) {
 			g.setColor(Color.WHITE);
-			g.fill3DRect(
+			g.fillRect(
 					(gate.getPosition().x - offset.x - Constants.componentSize / 2),
 					(gate.getPosition().y - offset.y - Constants.componentSize / 2),
-					Constants.componentSize / 2, Constants.componentSize, true);
+					Constants.componentSize / 2, Constants.componentSize);
 
 			g.setColor(color);
-			g.draw3DRect(
+			g.drawRect(
 					(gate.getPosition().x - (offset.x) - Constants.componentSize / 2),
 					(gate.getPosition().y - (offset.y) - Constants.componentSize / 2),
-					Constants.componentSize / 2, Constants.componentSize, true);
+					Constants.componentSize / 2, Constants.componentSize);
 			g.setColor(Color.WHITE);
 			g.fillOval(gate.getPosition().x - (offset.x)
 					- Constants.componentSize / 2, gate.getPosition().y
@@ -255,9 +247,7 @@ public class Painter implements IPainter {
 					Constants.componentSize, Constants.componentSize, -90, 180);
 			drawCircle(gate, g, offset);
 		} else {
-
-			symbol = "&";
-			drawRectangle(gate, g, offset);
+			drawRectangle(gate, g, offset, "&");
 			drawCircle(gate, g, offset);
 		}
 	}
@@ -269,9 +259,7 @@ public class Painter implements IPainter {
 			drawUSGateBody(gate, g, offset);
 			drawCircle(gate, g, offset);
 		} else {
-
-			symbol = "\u2265" + "1";
-			drawRectangle(gate, g, offset);
+			drawRectangle(gate, g, offset, "\u2265" + "1");
 			drawCircle(gate, g, offset);
 		}
 	}
@@ -306,8 +294,7 @@ public class Painter implements IPainter {
 			drawCircle(gate, g, offset);
 
 		} else {
-			symbol = "1";
-			drawRectangle(gate, g, offset);
+			drawRectangle(gate, g, offset, "1");
 			drawCircle(gate, g, offset);
 
 		}
@@ -320,24 +307,23 @@ public class Painter implements IPainter {
 			drawUSGateBody(gate, g, offset);
 
 		} else {
-			symbol = "\u2265" + "1";
-			drawRectangle(gate, g, offset);
+			drawRectangle(gate, g, offset, "\u2265" + "1");
 		}
 	}
 
 	private void drawRectangle(final IGateWrapper gate, final Graphics2D g,
-			final Point offset) {
+			final Point offset, final String symbol) {
 		g.setColor(Color.white);
-		g.fill3DRect(
+		g.fillRect(
 				(gate.getPosition().x - offset.x - Constants.componentSize / 2),
 				(gate.getPosition().y - offset.y - Constants.componentSize / 2),
-				Constants.componentSize, Constants.componentSize, true);
+				Constants.componentSize, Constants.componentSize);
 		g.setColor(color);
 
-		g.draw3DRect(
+		g.drawRect(
 				(gate.getPosition().x - offset.x - Constants.componentSize / 2),
 				(gate.getPosition().y - offset.y - Constants.componentSize / 2),
-				Constants.componentSize, Constants.componentSize, true);
+				Constants.componentSize, Constants.componentSize);
 		g.setFont(new Font("Arial", Font.BOLD, 18));
 		g.drawString(symbol, gate.getPosition().x - offset.x
 				- Constants.componentSize / 4, gate.getPosition().y - offset.y
@@ -399,8 +385,7 @@ public class Painter implements IPainter {
 					Constants.componentSize / 2, Constants.componentSize - 6,
 					-90, 180);
 		} else {
-			symbol = "=1";
-			drawRectangle(gate, g, offset);
+			drawRectangle(gate, g, offset, "=1");
 			drawCircle(gate, g, offset);
 		}
 	}
@@ -417,45 +402,31 @@ public class Painter implements IPainter {
 					-90, 180);
 
 		} else {
-			symbol = "=1";
-			drawRectangle(gate, g, offset);
-
+			drawRectangle(gate, g, offset, "=1");
 		}
 	}
 
-	private void drawPin(final IGateWrapper gate, final Graphics2D g,
+	private void drawPins(final IGateWrapper gate, final Graphics2D g,
 			final Point offset) {
 
+		// Draw input pins
 		for (int i = 0; i < gate.getNoOfInputs(); i++) {
-
-			g.drawLine(gate.getPosition().x - offset.x
-					- Constants.componentSize,
-					(int) (gate.getPosition().y - offset.y),
-					gate.getPosition().x - offset.x - Constants.componentSize
-							/ 2, (int) (gate.getPosition().y - offset.y));
+			int yOffset = i * Constants.componentSize / (gate.getNoOfInputs())
+					+ Constants.componentSize / (gate.getNoOfInputs() * 2);
+			int xStart = (int) (gate.getPosition().x - offset.x - Constants.componentSize * 0.5);
+			int yStart = (int) (gate.getPosition().y - offset.y + yOffset - Constants.componentSize * 0.5);
+			g.drawLine(xStart, yStart, xStart - 10, yStart);
 		}
-		/*
-		 * g.setColor(color);
-		 * 
-		 * int nInputs = coll.size(); int loopCount = 0; for (IConnection i :
-		 * coll) {
-		 * 
-		 * if (i.getValue()) { g.setColor(Constants.connectionHigh); } else {
-		 * g.setColor(Constants.connectionLow); }
-		 * 
-		 * int y1Offset = loopCount * Constants.componentSize / (nInputs) +
-		 * Constants.componentSize / (nInputs * 2); int xStart = (int)
-		 * (i.getStartPoint().x - offset.x - Constants.componentSize * 0.5); int
-		 * yStart = (int) (i.getStartPoint().y - offset.y + y1Offset -
-		 * Constants.componentSize * 0.5);
-		 * 
-		 * int y2Offset = (Constants.componentSize / (i.getNoOfEndPorts() * 2))
-		 * (i.getEndPortIndex() + i.getNoOfEndPorts()); int xEnd = (int)
-		 * (i.getEndPoint().x - offset.x + Constants.componentSize * 0.5); int
-		 * yEnd = (int) (i.getEndPoint().y - offset.y - Constants.componentSize
-		 * * 0.5 + y2Offset);
-		 */
 
+		// Draw output pins
+		for (int i = 0; i < gate.getNoOfOutputs(); i++) {
+			int yOffset = (Constants.componentSize / (gate.getNoOfOutputs() * 2))
+					* (i + gate.getNoOfOutputs());
+			int xStart = (int) (gate.getPosition().x - offset.x + Constants.componentSize * 0.5);
+			int yStart = (int) (gate.getPosition().y - offset.y
+					- Constants.componentSize * 0.5 + yOffset);
+			g.drawLine(xStart, yStart, xStart + 10, yStart);
+		}
 	}
 
 }
