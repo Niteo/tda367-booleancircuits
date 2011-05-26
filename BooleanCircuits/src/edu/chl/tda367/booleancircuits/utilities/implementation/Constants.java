@@ -11,7 +11,7 @@ public class Constants {
 	public static final int canvasDotDiameter = 1;
 	public static final int clockFrequency = 500;
 	public static final int componentCircleRadius = 7;
-	public static final int componentSize = 32;
+	public static final int componentSize = 34;
 	public static final Color componentWarningBorder = new Color(255, 0, 0, 255);
 	public static final Color componentWarningFill = new Color(255, 50, 50, 120);
 	public static final Color connectionHigh = Color.red;
