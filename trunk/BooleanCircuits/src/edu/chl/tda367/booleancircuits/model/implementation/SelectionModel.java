@@ -1,17 +1,15 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 
 /**
  * A class that manages what components are selected.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public final class SelectionModel implements ISelectionModel {
 

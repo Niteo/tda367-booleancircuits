@@ -2,9 +2,9 @@ package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 /**
  * A gate which output value is a copy of its input value.
- *
+ * 
  * @author Kaufmann
- *
+ * 
  */
 public final class Equal extends AbstractCircuitGate {
 

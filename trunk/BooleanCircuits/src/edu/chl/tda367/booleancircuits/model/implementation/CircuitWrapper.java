@@ -4,10 +4,8 @@ import java.awt.Point;
 import java.io.File;
 import java.util.Collection;
 
-import edu.chl.tda367.booleancircuits.model.ICircuit;
-import edu.chl.tda367.booleancircuits.model.ICircuitWrapper;
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.*;
+import edu.chl.tda367.booleancircuits.model.components.*;
 
 public final class CircuitWrapper implements ICircuitWrapper {
 
@@ -63,6 +61,11 @@ public final class CircuitWrapper implements ICircuitWrapper {
 	@Override
 	public File getFile() {
 		return file;
+	}
+
+	@Override
+	public IGateWrapper getGateWrapper(final ICircuitGate gate) {
+		return model.getGateWrapper(gate);
 	}
 
 	@Override
@@ -130,10 +133,5 @@ public final class CircuitWrapper implements ICircuitWrapper {
 	@Override
 	public void updateComponents() {
 		model.updateComponents();
-	}
-
-	@Override
-	public IGateWrapper getGateWrapper(ICircuitGate gate) {
-		return model.getGateWrapper(gate);
 	}
 }

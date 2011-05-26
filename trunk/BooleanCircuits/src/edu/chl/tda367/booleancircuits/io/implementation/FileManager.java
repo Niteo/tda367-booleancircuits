@@ -1,19 +1,11 @@
 package edu.chl.tda367.booleancircuits.io.implementation;
 
 import java.awt.Point;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 import edu.chl.tda367.booleancircuits.io.IFileManager;
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateInput;
-import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.*;
 import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
 import edu.chl.tda367.booleancircuits.model.implementation.CircuitWrapper;
 import edu.chl.tda367.booleancircuits.utilities.implementation.GateFactory;

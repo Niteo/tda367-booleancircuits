@@ -1,43 +1,27 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
 import java.awt.Point;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.components.*;
 
-public class GateWrapper implements IGateWrapper{
+public class GateWrapper implements IGateWrapper {
 
-	private Point position = new Point();
 	private ICircuitGate gate;
+	private Point position = new Point();
 
-	public GateWrapper(ICircuitGate gate) {
+	public GateWrapper(final ICircuitGate gate) {
 		this.gate = gate;
 	}
 
 	@Override
-	public Point getPosition() {
-		return new Point(position);
-	}
-
-	@Override
-	public void move(int deltaX, int deltaY) {
-		position = new Point(position.x + deltaX, position.y + deltaY);
-	}
-
-	@Override
-	public void setPosition(Point position) {
-		this.position = position;
-	}
-
-	@Override
-	public void connectInput(int inputPort, ICircuitGate component,
-			int outputPort) {
+	public void connectInput(final int inputPort, final ICircuitGate component,
+			final int outputPort) {
 		gate.connectInput(inputPort, component, outputPort);
 	}
 
 	@Override
-	public boolean connectsTo(ICircuitGate g)
+	public boolean connectsTo(final ICircuitGate g)
 			throws IllegalArgumentException {
 		return gate.connectsTo(g);
 	}
@@ -45,6 +29,16 @@ public class GateWrapper implements IGateWrapper{
 	@Override
 	public int getComponentTier() {
 		return gate.getComponentTier();
+	}
+
+	@Override
+	public ICircuitGate getGate() {
+		return gate;
+	}
+
+	@Override
+	public ICircuitGate getGateClone() {
+		return ((ICloneableGate) gate).clone();
 	}
 
 	@Override
@@ -68,8 +62,13 @@ public class GateWrapper implements IGateWrapper{
 	}
 
 	@Override
-	public boolean getOutputValue(int index) {
+	public boolean getOutputValue(final int index) {
 		return gate.getOutputValue(index);
+	}
+
+	@Override
+	public Point getPosition() {
+		return new Point(position);
 	}
 
 	@Override
@@ -78,33 +77,33 @@ public class GateWrapper implements IGateWrapper{
 	}
 
 	@Override
-	public void overwriteGate(ICircuitGate g) {
+	public boolean isFullyConnected() {
+		return gate.isFullyConnected();
+	}
+
+	@Override
+	public void move(final int deltaX, final int deltaY) {
+		position = new Point(position.x + deltaX, position.y + deltaY);
+	}
+
+	@Override
+	public void overwriteGate(final ICircuitGate g) {
 		gate.overwriteGate(g);
+	}
+
+	@Override
+	public void setPosition(final Point position) {
+		this.position = position;
+	}
+
+	@Override
+	public String toString() {
+		return gate.toString();
 	}
 
 	@Override
 	public boolean update() {
 		return gate.update();
-	}
-
-	@Override
-	public ICircuitGate getGateClone() {
-		return ((ICloneableGate) gate).clone();
-	}
-
-	@Override
-	public ICircuitGate getGate() {
-		return gate;
-	}
-
-	@Override
-	public String toString(){
-		return gate.toString();
-	}
-
-	@Override
-	public boolean isFullyConnected() {
-		return gate.isFullyConnected();
 	}
 
 }

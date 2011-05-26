@@ -1,16 +1,10 @@
 package edu.chl.tda367.booleancircuits.model.implementation;
 
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import edu.chl.tda367.booleancircuits.model.ICircuit;
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateInput;
-import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.*;
 import edu.chl.tda367.booleancircuits.model.components.implementation.Clock;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 
@@ -23,7 +17,7 @@ public final class Circuit implements ICircuit {
 
 	/**
 	 * Returns an instance of Circuit
-	 *
+	 * 
 	 */
 	public Circuit() {
 		componentList = new ArrayList<IGateWrapper>();
@@ -77,6 +71,16 @@ public final class Circuit implements ICircuit {
 	}
 
 	@Override
+	public IGateWrapper getGateWrapper(final ICircuitGate gate) {
+		for (IGateWrapper g : componentList) {
+			if (g.getGate() == gate) {
+				return g;
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public int getNumberOfComponents() {
 		return componentList.size();
 	}
@@ -107,7 +111,8 @@ public final class Circuit implements ICircuit {
 		// Remove unconnected gate connections
 		for (IGateWrapper iGate : componentList) {
 			for (IGateInput input : iGate.getInputs()) {
-				if (!componentList.contains(getGateWrapper(input.getInputComponent()))) {
+				if (!componentList.contains(getGateWrapper(input
+						.getInputComponent()))) {
 					input.reset();
 				}
 			}
@@ -179,15 +184,5 @@ public final class Circuit implements ICircuit {
 
 	private void _removeComponent(final ICircuitGate g) {
 		componentList.remove(g);
-	}
-
-	@Override
-	public IGateWrapper getGateWrapper(ICircuitGate gate) {
-		for (IGateWrapper g : componentList) {
-			if (g.getGate() == gate) {
-				return g;
-			}
-		}
-		return null;
 	}
 }

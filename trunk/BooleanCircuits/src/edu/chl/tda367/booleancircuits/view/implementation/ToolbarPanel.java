@@ -6,18 +6,15 @@
 
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JSeparator;
+import javax.swing.*;
 
 import edu.chl.tda367.booleancircuits.view.IToolbarPanel;
 
 /**
  * A tool bar containing several buttons.
- *
+ * 
  * @author Boel
  */
 public class ToolbarPanel extends javax.swing.JPanel implements IToolbarPanel {

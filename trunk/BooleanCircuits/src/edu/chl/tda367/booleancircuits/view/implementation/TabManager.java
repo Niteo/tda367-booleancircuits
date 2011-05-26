@@ -1,10 +1,8 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 
-import edu.chl.tda367.booleancircuits.view.ICanvas;
-import edu.chl.tda367.booleancircuits.view.ITabManager;
+import edu.chl.tda367.booleancircuits.view.*;
 
 /**
  * A class to represent a tab.

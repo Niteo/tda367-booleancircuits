@@ -7,42 +7,21 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.event.*;
+import java.beans.*;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JSeparator;
-import javax.swing.JSplitPane;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
-import edu.chl.tda367.booleancircuits.controller.implementation.ActionController;
-import edu.chl.tda367.booleancircuits.controller.implementation.MasterController;
+import edu.chl.tda367.booleancircuits.controller.implementation.*;
 import edu.chl.tda367.booleancircuits.model.implementation.CircuitManager;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 import edu.chl.tda367.booleancircuits.view.IPalette;
-import edu.chl.tda367.booleancircuits.view.draw.implementation.BlankBackground;
-import edu.chl.tda367.booleancircuits.view.draw.implementation.DottedBackground;
-import edu.chl.tda367.booleancircuits.view.draw.implementation.GridBackground;
+import edu.chl.tda367.booleancircuits.view.draw.implementation.*;
 
 /**
  * The Main window
- *
+ * 
  * @author Boel
  */
 public final class MainWindow extends JFrame implements PropertyChangeListener {

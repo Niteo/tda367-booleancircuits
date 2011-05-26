@@ -1,8 +1,7 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -42,13 +41,13 @@ public class AboutBox extends JDialog {
 		setResizable(false);
 		setInfoText(s);
 		setPic(i);
-		
+
 		verticalPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		horizontalPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
 		okButton.addActionListener(listener);
 		picLabel.setBorder(new LineBorder(Color.BLACK));
-		infoLabel.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));
-		
+		infoLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+
 		add(horizontalPane);
 		horizontalPane.setDividerLocation(150);
 		horizontalPane.setRightComponent(verticalPane);

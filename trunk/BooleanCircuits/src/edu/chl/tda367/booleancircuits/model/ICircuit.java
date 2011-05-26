@@ -3,14 +3,13 @@ package edu.chl.tda367.booleancircuits.model;
 import java.awt.Point;
 import java.util.Collection;
 
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.*;
 
 public interface ICircuit {
 
 	/**
 	 * Adds a component to the circuit.
-	 *
+	 * 
 	 * @param component
 	 *            the new component to add
 	 * @param position
@@ -20,7 +19,7 @@ public interface ICircuit {
 
 	/**
 	 * Adds components to the circuit.
-	 *
+	 * 
 	 * @param component
 	 *            the components to add
 	 */
@@ -33,7 +32,7 @@ public interface ICircuit {
 
 	/**
 	 * Get component.
-	 *
+	 * 
 	 * @param position
 	 *            the coordinate for the component
 	 * @return the gate found. Null if no gate was found
@@ -42,28 +41,37 @@ public interface ICircuit {
 
 	/**
 	 * Returns a list of components.
-	 *
+	 * 
 	 * @return a list of components
 	 */
 	public Collection<IGateWrapper> getComponents();
 
 	/**
+	 * Returns the corresponding IGateWrapper that contains the given gate.
+	 * 
+	 * @param gate
+	 *            ICircuitGate
+	 * @return IGateWrapper
+	 */
+	public IGateWrapper getGateWrapper(ICircuitGate gate);
+
+	/**
 	 * Returns the amount of components in the circuit.
-	 *
+	 * 
 	 * @return amount of components
 	 */
 	public int getNumberOfComponents();
 
 	/**
 	 * Returns true if the circuit has infinite recursion.
-	 *
+	 * 
 	 * @return boolean
 	 */
 	public boolean hasInfiniteRecursion();
 
 	/**
 	 * Removes the specified component.
-	 *
+	 * 
 	 * @param g
 	 *            the component to remove
 	 */
@@ -71,7 +79,7 @@ public interface ICircuit {
 
 	/**
 	 * Removes the specified components.
-	 *
+	 * 
 	 * @param list
 	 *            the components to remove
 	 */
@@ -81,13 +89,4 @@ public interface ICircuit {
 	 * Updates the circuit's components' boolean values.
 	 */
 	public void updateComponents();
-
-	/**
-	 * Returns the corresponding IGateWrapper that contains the given gate.
-	 *
-	 * @param gate
-	 *            ICircuitGate
-	 * @return IGateWrapper
-	 */
-	public IGateWrapper getGateWrapper(ICircuitGate gate);
 }

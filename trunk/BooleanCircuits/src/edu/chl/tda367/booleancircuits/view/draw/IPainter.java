@@ -1,23 +1,21 @@
 package edu.chl.tda367.booleancircuits.view.draw;
 
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.*;
 import java.util.Collection;
 
 import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 
 /**
  * A drawing interface.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public interface IPainter {
 
 	/**
 	 * Draws a background.
-	 *
+	 * 
 	 * @param g
 	 *            graphics object to draw with
 	 * @param offset
@@ -29,7 +27,7 @@ public interface IPainter {
 
 	/**
 	 * Draws a gate.
-	 *
+	 * 
 	 * @param g
 	 *            graphics object to draw with
 	 * @param gate
@@ -41,7 +39,7 @@ public interface IPainter {
 
 	/**
 	 * Draws a gate's connections.
-	 *
+	 * 
 	 * @param g
 	 *            graphics object to draw with
 	 * @param coll
@@ -54,7 +52,7 @@ public interface IPainter {
 
 	/**
 	 * Sets the background strategy
-	 *
+	 * 
 	 * @param background
 	 *            IBackground
 	 */
@@ -62,7 +60,7 @@ public interface IPainter {
 
 	/**
 	 * Sets if the US standard should be used.
-	 *
+	 * 
 	 * @param value
 	 *            set to true if US standard should be used
 	 */

@@ -1,20 +1,17 @@
 package edu.chl.tda367.booleancircuits.model.components.implementation;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.ICloneableGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateInput;
+import edu.chl.tda367.booleancircuits.model.components.*;
 
 /**
  * Abstract class representing an abstract circuit component.
- *
+ * 
  * @author Kaufmann
- *
+ * 
  */
-public abstract class AbstractCircuitGate implements ICircuitGate, ICloneableGate {
+public abstract class AbstractCircuitGate implements ICircuitGate,
+		ICloneableGate {
 	private List<IGateInput> inputs;
 	private boolean isInConnectToCalculation;
 	private boolean isInTiercalculation;
@@ -157,6 +154,16 @@ public abstract class AbstractCircuitGate implements ICircuitGate, ICloneableGat
 	}
 
 	@Override
+	public boolean isFullyConnected() {
+		for (IGateInput gi : inputs) {
+			if (gi.getInputComponent() == null) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
 	public void overwriteGate(final ICircuitGate gate) {
 		this.inputs = gate.getInputs();
 		this.outputs = gate.getOutputs();
@@ -177,26 +184,16 @@ public abstract class AbstractCircuitGate implements ICircuitGate, ICloneableGat
 		return false;
 	}
 
-	@Override
-	public boolean isFullyConnected(){
-		for(IGateInput gi : inputs){
-			if(gi.getInputComponent() == null){
-				return false;
-			}
-		}
-		return true;
-	}
-
 	/**
 	 * Template-method for returning a gate of the used type.
-	 *
+	 * 
 	 * @return a gate of the used type
 	 */
 	protected abstract AbstractCircuitGate emptyGateClone();
 
 	/**
 	 * Sets a specific output to a given value
-	 *
+	 * 
 	 * @param index
 	 *            specifies which output to set
 	 * @param value
@@ -208,7 +205,7 @@ public abstract class AbstractCircuitGate implements ICircuitGate, ICloneableGat
 
 	/**
 	 * Updates the output of the gate.
-	 *
+	 * 
 	 */
 	protected abstract void updateOutput();
 

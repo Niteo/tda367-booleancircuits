@@ -1,17 +1,12 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
 import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-import javax.swing.Action;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
-import edu.chl.tda367.booleancircuits.model.ICircuit;
-import edu.chl.tda367.booleancircuits.model.ICircuitWrapper;
-import edu.chl.tda367.booleancircuits.model.ISelectionModel;
+import edu.chl.tda367.booleancircuits.model.*;
 import edu.chl.tda367.booleancircuits.model.implementation.CircuitManager;
 import edu.chl.tda367.booleancircuits.view.ICenterStage;
 import edu.chl.tda367.booleancircuits.view.draw.IBackground;
@@ -19,9 +14,9 @@ import edu.chl.tda367.booleancircuits.view.draw.IBackground;
 /**
  * A class that represents a workspace with a panel and potentially several
  * tabs.
- *
+ * 
  * @author Boel
- *
+ * 
  */
 public class CenterStage implements ICenterStage {
 
@@ -94,8 +89,8 @@ public class CenterStage implements ICenterStage {
 		}
 
 		if (modelManager.getActiveCircuitIndex() >= 1) {
-			tabManager.setSelectedTabIndex(modelManager
-					.getActiveCircuitIndex());
+			tabManager
+					.setSelectedTabIndex(modelManager.getActiveCircuitIndex());
 		}
 		if (modelManager.getCircuits().size() > 0) {
 			for (int i = 0; i < tabManager.getTabCount(); i++) {
@@ -110,7 +105,8 @@ public class CenterStage implements ICenterStage {
 		tabManager.updateTabbedPane();
 	}
 
-	private void newTab(final String s, final ICircuit m, final ISelectionModel sm) {
+	private void newTab(final String s, final ICircuit m,
+			final ISelectionModel sm) {
 		Canvas canvas = new Canvas(m, sm, mc);
 		tabManager.addTab(s, canvas);
 		TabPanel tabPanel = tabManager.getLastTabPanel();

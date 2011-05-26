@@ -1,13 +1,8 @@
 package edu.chl.tda367.booleancircuits.utilities.implementation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import edu.chl.tda367.booleancircuits.model.components.ICircuitGate;
-import edu.chl.tda367.booleancircuits.model.components.IGateInput;
-import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.*;
 import edu.chl.tda367.booleancircuits.model.components.implementation.GateWrapper;
 import edu.chl.tda367.booleancircuits.utilities.IClipboardManager;
 
