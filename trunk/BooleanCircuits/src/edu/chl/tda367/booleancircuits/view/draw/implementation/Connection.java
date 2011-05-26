@@ -4,20 +4,24 @@ import java.awt.Point;
 
 import edu.chl.tda367.booleancircuits.view.draw.IConnection;
 
-public class Connection implements IConnection {
+public final class Connection implements IConnection {
 	private final Point startPoint;
 	private final Point endPoint;
 	private final boolean value;
 	private final int endPorts;
+	private final int startPorts;
 	private final int endPortIndex;
+	private final int startPortIndex;
 
 	public Connection(final Point start, final Point end, final boolean value,
-			final int endPortIndex, final int endPorts) {
+			final int startPortIndex, final int startPorts, final int endPortIndex, final int endPorts) {
 		startPoint = start;
 		endPoint = end;
 		this.value = value;
 		this.endPorts = endPorts;
 		this.endPortIndex = endPortIndex;
+		this.startPorts = startPorts;
+		this.startPortIndex = startPortIndex;
 	}
 
 	@Override
@@ -43,6 +47,16 @@ public class Connection implements IConnection {
 	@Override
 	public int getEndPortIndex() {
 		return endPortIndex;
+	}
+
+	@Override
+	public int getNoOfStartPorts() {
+		return startPorts;
+	}
+
+	@Override
+	public int getStartPortIndex() {
+		return startPortIndex;
 	}
 
 }

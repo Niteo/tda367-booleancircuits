@@ -1,9 +1,6 @@
 package edu.chl.tda367.booleancircuits.view.implementation;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -21,8 +18,7 @@ import javax.swing.event.MouseInputAdapter;
 import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.model.ICircuit;
 import edu.chl.tda367.booleancircuits.model.ISelectionModel;
-import edu.chl.tda367.booleancircuits.model.components.IGateInput;
-import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
+import edu.chl.tda367.booleancircuits.model.components.*;
 import edu.chl.tda367.booleancircuits.utilities.implementation.Constants;
 import edu.chl.tda367.booleancircuits.view.ICanvas;
 import edu.chl.tda367.booleancircuits.view.draw.*;
@@ -57,7 +53,7 @@ public class Canvas implements ICanvas {
 		drawer.setUsStandard(bool);
 	}
 
-	private final IMasterController _masterController;
+	private final IMasterController mc;
 	private IGateWrapper connectBufferGate = null;
 	private int connectBufferPort = 0;
 	private boolean connectingInput;
@@ -72,20 +68,19 @@ public class Canvas implements ICanvas {
 			JMenuItem menuItem = (JMenuItem) e.getSource();
 
 			if (menu.isRemoveButton(menuItem)) {
-				_masterController.removeComponent(rightClickedGate);
+				mc.removeComponent(rightClickedGate);
 			} else if (menu.isInputItem(menuItem)) {
-				_masterController.connectComponent(rightClickedGate,
+				mc.connectComponent(rightClickedGate,
 						menu.getInputIndex(menuItem));
 				if (connectingOutput) {
-					_masterController.connectComponent(connectBufferGate,
-							connectBufferPort);
+					mc.connectComponent(connectBufferGate, connectBufferPort);
 					resetConnecting();
 				} else {
 					connectingInput = true;
 				}
 			} else if (menu.isOutputItem(menuItem)) {
 				if (connectingInput) {
-					_masterController.connectComponent(rightClickedGate,
+					mc.connectComponent(rightClickedGate,
 							menu.getInputIndex(menuItem));
 					resetConnecting();
 				} else {
@@ -94,10 +89,10 @@ public class Canvas implements ICanvas {
 				}
 			} else if (menu.isCopyButton(menuItem)) {
 				selectModel.selectComponent(rightClickedGate, false);
-				_masterController.copySelectedComponents();
+				mc.copySelectedComponents();
 			} else if (menu.isCutButton(menuItem)) {
 				selectModel.selectComponent(rightClickedGate, false);
-				_masterController.cutSelectedComponents();
+				mc.cutSelectedComponents();
 			}
 		}
 	};
@@ -113,7 +108,7 @@ public class Canvas implements ICanvas {
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public void mouseDragged(final MouseEvent evt) {
-			Point dragPosition = new Point(evt.getX() + posX, evt.getY() + posY);
+			Point dragPosition = new Point(evt.getX() + position.x, evt.getY() + position.y);
 			if (oldDragPosition != null) {
 				int dx = (int) (evt.getPoint().getX() - oldDragPosition.getX());
 				int dy = (int) (evt.getPoint().getY() - oldDragPosition.getY());
@@ -153,9 +148,9 @@ public class Canvas implements ICanvas {
 			draggingMode = false;
 			panning = false;
 			if (drawSelect != null) {
-				_masterController.selectComponents(new Point(drawSelect.x
-						+ posX, drawSelect.y + posY), new Point(releasePoint.x
-						+ posX, releasePoint.y + posY));
+				mc.selectComponents(new Point(drawSelect.x + position.x, drawSelect.y
+						+ position.y), new Point(releasePoint.x + position.x,
+						releasePoint.y + position.y));
 				drawSelect = null;
 				panel.repaint();
 			}
@@ -171,48 +166,65 @@ public class Canvas implements ICanvas {
 		public void paint(final Graphics g) {
 			super.paint(g);
 			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
 
-			drawer.drawBackground(g2d, new Point(posX, posY), panel.getSize());
-			// Draw connections
+			drawer.drawBackground(g2d, position, panel.getSize());
+			
+			Collection<IConnection> connections = new LinkedList<IConnection>();
+			LinkedList<IGateWrapper> components = new LinkedList<IGateWrapper>();
+			int nonSelectedComponents = 0;
+			
+			// Fill list of connections, gates and selected gates
 			for (IGateWrapper gate : model.getComponents()) {
-				Collection<IConnection> coll = new LinkedList<IConnection>();
-				int counter = 0;
-				for (IGateInput gi : gate.getInputs()) {
-					if (gi.getInputComponent() != null) {
+				// Don't include gates out of view!
+				if (gate.getPosition().x >= position.x
+						&& gate.getPosition().x < position.x + panel.getSize().width
+						&& gate.getPosition().y >= position.y
+						&& gate.getPosition().y < position.y + panel.getSize().height) {
+					// Add connections
+					for (IGateInput gi : gate.getInputs()) {
 						IGateWrapper gw = model.getGateWrapper(gi
 								.getInputComponent());
 						if (gw != null) {
-							coll.add(new Connection(gate.getPosition(), gw
-									.getPosition(), gi.getInputValue(),
-									counter++, gate.getInputs().size()));
+							connections.add(new Connection(gate.getPosition(), gw
+									.getPosition(), gi.getInputValue(), gate
+									.getInputs().indexOf(gi), gate
+									.getNoOfInputs(), gi.getInputPort(), gw
+									.getNoOfOutputs()));
 						}
 					}
+					// Add to list
+					if (selectModel.isSelectedComponent(gate)) {
+						components.addLast(gate);
+					} else {
+						components.addFirst(gate);
+						nonSelectedComponents++;
+					}
 				}
-				drawer.drawGateConnections(g2d, coll, new Point(posX, posY));
 			}
+			
+			drawer.drawGateConnections(g2d, connections, position);
 			g2d.setColor(Color.BLACK);
-			// Draw non-selected
-			for (IGateWrapper gate : model.getComponents()) {
-				if (!selectModel.isSelectedComponent(gate)) {
-					
-					drawer.drawGate(g2d, gate, new Point(posX, posY));
+			int loops = 0;
+			for (IGateWrapper gate : components){
+				if(loops++ == nonSelectedComponents){
+					g2d.setColor(Color.BLUE);
 				}
+				drawer.drawGate(g2d, gate, position);;	
 			}
-			// Draw selected
-			g2d.setColor(Color.BLUE);
-			for (IGateWrapper gate : model.getComponents()) {
-				if (selectModel.isSelectedComponent(gate)) {
-					drawer.drawGate(g2d, gate, new Point(posX, posY));
-				}
-			}
-			// Draw position
+			
+			// Draw Position
 			g2d.setColor(Color.BLACK);
 			g2d.setFont(UIManager.getFont("TabbedPane.font"));
-			g2d.drawString("[" + posX + ", " + posY + "]", 5, 15);
+			g2d.drawString("[" + position.x + ", " + position.y + "]", 5, 15);
+			
+			// Draw infinite recursion
 			if (model.hasInfiniteRecursion()) {
 				g2d.setColor(Color.RED);
 				g2d.drawString("Infinite recursion!", 5, 35);
 			}
+			
 			// Draw selection box
 			if (drawSelect != null) {
 				Point mousePos = panel.getMousePosition();
@@ -242,7 +254,7 @@ public class Canvas implements ICanvas {
 	};
 
 	private boolean panning;
-	private int posX, posY;
+	private Point position = new Point(0,0);
 	private IGateWrapper rightClickedGate = null;
 	private final ISelectionModel selectModel;
 
@@ -258,9 +270,7 @@ public class Canvas implements ICanvas {
 		} else if (canvasModel == null) {
 			throw new InvalidParameterException("canvasModel must not be null");
 		}
-		_masterController = masterController;
-		posX = 0;
-		posY = 0;
+		mc = masterController;
 		model = canvasModel;
 		selectModel = selectionModel;
 		menu = new CanvasPopup(listener);
@@ -276,17 +286,16 @@ public class Canvas implements ICanvas {
 	}
 
 	private void mouseClickedActions(final MouseEvent evt) {
-		final Point pointClicked = new Point(evt.getX() + posX, evt.getY()
-				+ posY);
+		final Point pointClicked = new Point(evt.getX() + position.x, evt.getY()
+				+ position.y);
 		if (evt.getButton() == MouseEvent.BUTTON1) { // LeftMouseButton
 			resetConnecting();
 
 			if (evt.getClickCount() == 1) {
-				_masterController.selectComponent(pointClicked,
-						evt.isShiftDown());
+				mc.selectComponent(pointClicked, evt.isShiftDown());
 			} else if (evt.getClickCount() == 2) {
 				if (model.getComponent(pointClicked) == null) {
-					_masterController.addComponent(pointClicked);
+					mc.addComponent(pointClicked);
 				}
 			}
 		} else if (evt.getButton() == MouseEvent.BUTTON3) { // RightMouseButton
@@ -303,14 +312,13 @@ public class Canvas implements ICanvas {
 					@Override
 					public void actionPerformed(final ActionEvent arg0) {
 						if (arg0.getSource() == addItem) {
-							_masterController.addComponent(pointClicked);
+							mc.addComponent(pointClicked);
 						} else if (arg0.getSource() == cutItem) {
-							_masterController.cutSelectedComponents();
+							mc.cutSelectedComponents();
 						} else if (arg0.getSource() == copyItem) {
-							_masterController.copySelectedComponents();
+							mc.copySelectedComponents();
 						} else if (arg0.getSource() == pasteItem) {
-							_masterController
-									.pasteSelectedComponents(pointClicked);
+							mc.pasteSelectedComponents(pointClicked);
 						}
 					}
 
@@ -338,14 +346,14 @@ public class Canvas implements ICanvas {
 	}
 
 	private void panCanvas(final int dx, final int dy) {
-		posX += dx;
-		posY += dy;
+		position.x += dx;
+		position.y += dy;
 	}
 
 	private void resetConnecting() {
 		connectBufferGate = null;
 		connectingInput = false;
 		connectingOutput = false;
-		_masterController.connectComponent(null, -1);
+		mc.connectComponent(null, -1);
 	}
 }
