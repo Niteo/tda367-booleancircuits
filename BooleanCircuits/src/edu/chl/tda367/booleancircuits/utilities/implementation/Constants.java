@@ -27,5 +27,5 @@ public class Constants {
 	public static final Color connectionHigh = Color.red;
 	public static final Color connectionLow = Color.black;
 	public static final String manualPath = "manual.pdf";
-	public static final Icon aboutImage = new ImageIcon("resources/Images/aboutImage.png");
+	public static final Icon aboutImage = new ImageIcon("Resources/Images/aboutImage.png");
 }
