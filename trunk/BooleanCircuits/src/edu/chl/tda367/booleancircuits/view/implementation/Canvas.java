@@ -177,11 +177,6 @@ public class Canvas implements ICanvas {
 			
 			// Fill list of connections, gates and selected gates
 			for (IGateWrapper gate : model.getComponents()) {
-				// Don't include gates out of view!
-				if (gate.getPosition().x >= position.x
-						&& gate.getPosition().x < position.x + panel.getSize().width
-						&& gate.getPosition().y >= position.y
-						&& gate.getPosition().y < position.y + panel.getSize().height) {
 					// Add connections
 					for (IGateInput gi : gate.getInputs()) {
 						IGateWrapper gw = model.getGateWrapper(gi
@@ -194,14 +189,19 @@ public class Canvas implements ICanvas {
 									.getNoOfOutputs()));
 						}
 					}
-					// Add to list
-					if (selectModel.isSelectedComponent(gate)) {
-						components.addLast(gate);
-					} else {
-						components.addFirst(gate);
-						nonSelectedComponents++;
+					// Only include gates in view!
+					if (gate.getPosition().x >= position.x - Constants.componentSize
+							&& gate.getPosition().x < position.x + panel.getSize().width + Constants.componentSize
+							&& gate.getPosition().y >= position.y - Constants.componentSize
+							&& gate.getPosition().y < position.y + panel.getSize().height + Constants.componentSize) {
+						// Add to list
+						if (selectModel.isSelectedComponent(gate)) {
+							components.addLast(gate);
+						} else {
+							components.addFirst(gate);
+							nonSelectedComponents++;
+						}
 					}
-				}
 			}
 			
 			drawer.drawGateConnections(g2d, connections, position);
@@ -211,7 +211,7 @@ public class Canvas implements ICanvas {
 				if(loops++ == nonSelectedComponents){
 					g2d.setColor(Color.BLUE);
 				}
-				drawer.drawGate(g2d, gate, position);;	
+				drawer.drawGate(g2d, gate, position);
 			}
 			
 			// Draw Position
