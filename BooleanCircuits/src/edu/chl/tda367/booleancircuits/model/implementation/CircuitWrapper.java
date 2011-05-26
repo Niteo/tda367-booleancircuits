@@ -107,6 +107,12 @@ public final class CircuitWrapper implements ICircuitWrapper {
 		this.file = file;
 	}
 
+	/**
+	 * Returns the wrapper's corresponding filename. If no file is set, it will
+	 * return untitled X, where X is a unique identifier for the circuit.
+	 * 
+	 * @return a string representation of this circuit's name.
+	 */
 	@Override
 	public String toString() {
 		String retString = "";
@@ -118,7 +124,7 @@ public final class CircuitWrapper implements ICircuitWrapper {
 		} else {
 			retString += "Untitled " + wrapperId;
 		}
-
+		Integer x = 5;
 		return retString;
 	}
 
