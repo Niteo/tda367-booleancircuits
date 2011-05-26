@@ -124,7 +124,6 @@ public final class CircuitWrapper implements ICircuitWrapper {
 		} else {
 			retString += "Untitled " + wrapperId;
 		}
-		Integer x = 5;
 		return retString;
 	}
 
