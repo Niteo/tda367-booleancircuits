@@ -7,6 +7,7 @@ import javax.swing.event.ChangeEvent;
 
 import org.junit.Test;
 
+import edu.chl.tda367.booleancircuits.controller.IMasterController;
 import edu.chl.tda367.booleancircuits.model.implementation.CircuitManager;
 
 public class ActionControllerTest {
@@ -166,6 +167,15 @@ public class ActionControllerTest {
 	public void testStateChanged() {
 		new ActionController(new MasterController(new CircuitManager()))
 				.stateChanged(new ChangeEvent(new JTabbedPane()));
+
+	}
+	@Test
+	public void testSetEnabledAction(){
+		MasterController mc=new MasterController(new CircuitManager());
+		ActionController ac = new ActionController(mc);
+		
+		ac.setActionsEnabled(true);
+		
 	}
 
 }
