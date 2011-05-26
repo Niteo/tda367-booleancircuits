@@ -15,7 +15,7 @@ import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 public interface ICircuitManager {
 
 	/**
-	 * Adds an IGateWrapper to the specified coordinate in the active workspace.
+	 * Adds an IGateWrapper to the specified coordinate in the active circuit.
 	 *
 	 * @param component
 	 *            the component to add
@@ -25,7 +25,7 @@ public interface ICircuitManager {
 	public void addComponent(IGateWrapper component, Point position);
 
 	/**
-	 * Adds a list of components to the active workspace.
+	 * Adds a list of components to the active circuit.
 	 *
 	 * @param component
 	 *            List the components to add
@@ -33,7 +33,7 @@ public interface ICircuitManager {
 	public void addComponents(List<IGateWrapper> component);
 
 	/**
-	 * Adds a list of components to the active workspace. Position is relative
+	 * Adds a list of components to the active circuit. Position is relative
 	 * to the list components' positions.
 	 *
 	 * @param components
@@ -44,38 +44,38 @@ public interface ICircuitManager {
 	public void addComponents(List<IGateWrapper> components, Point position);
 
 	/**
-	 * Adds a new workspace and makes it active.
+	 * Adds a new circuit and makes it active.
 	 *
-	 * @param workspace
-	 *            the workspace to be added
+	 * @param circuit
+	 *            the circuit to be added
 	 */
-	public void addWorkspace(ICircuitWrapper workspace);
+	public void addCircuit(ICircuitWrapper workspace);
 
 	/**
-	 * Clocks the active model with a clock pulse.
+	 * Clocks the active circuit with a clock pulse.
 	 */
-	public void clockActiveModel();
+	public void clockActiveCircuit();
 
 	/**
-	 * Closes the active workspace.
+	 * Closes the active circuit.
 	 */
-	public void closeActiveWorkspace();
+	public void closeActiveCircuit();
 
 	/**
-	 * Closes all workspaces.
+	 * Closes all circuits.
 	 */
-	public void closeAllWorkspaces();
+	public void closeAllCircuits();
 
 	/**
-	 * Closes a specific workspace.
+	 * Closes a specific circuit.
 	 *
 	 * @param i
-	 *            index of the workspace to close
+	 *            index of the circuit to close
 	 */
-	public void closeWorkspace(int i);
+	public void closeCircuit(int i);
 
 	/**
-	 * Connects to components in the active model.
+	 * Connects to components in the active circuit.
 	 *
 	 * @param componentIn
 	 *            the component who's input is to be connected
@@ -97,33 +97,33 @@ public interface ICircuitManager {
 	public ISelectionModel getActiveSelectionModel();
 
 	/**
-	 * Returns the index of the active workspace.
+	 * Returns the index of the active circuit.
 	 *
-	 * @return index of the active workspace
+	 * @return index of the active circuit
 	 */
-	public int getActiveWorkspaceIndex();
+	public int getActiveCircuitIndex();
 
 	/**
-	 * Returns the active workspace.
+	 * Returns the active circuit.
 	 *
-	 * @return the active workspace
+	 * @return the active circuit
 	 */
-	public ICircuitWrapper getActiveWorkspaceModel();
+	public ICircuitWrapper getActiveCircuit();
 
 	/**
-	 * Returns the specified workspace.
+	 * Returns the specified circuit.
 	 *
 	 * @param i
-	 *            the index of the workspace to return
+	 *            the index of the circuit to return
 	 */
-	public ICircuitWrapper getWorkspace(int i);
+	public ICircuitWrapper getCircuit(int i);
 
 	/**
-	 * Returns all workspaces.
+	 * Returns all circuits.
 	 *
-	 * @return collection of all workspaces
+	 * @return collection of all circuits
 	 */
-	public Collection<ICircuitWrapper> getWorkspaces();
+	public Collection<ICircuitWrapper> getCircuits();
 
 	/**
 	 * Determines if a component is currently selected.
@@ -140,12 +140,12 @@ public interface ICircuitManager {
 	public void manualPropertyChanged();
 
 	/**
-	 * Creates a new workspace and makes it active.
+	 * Creates a new circuit and makes it active.
 	 */
-	public void newWorkspace();
+	public void newCircuit();
 
 	/**
-	 * Removes the given component if it exists in the active model.
+	 * Removes the given component if it exists in the active circuit.
 	 *
 	 * @param g
 	 *            component to remove
@@ -153,18 +153,18 @@ public interface ICircuitManager {
 	public void removeComponent(IGateWrapper g);
 
 	/**
-	 * Removes the selected components.
+	 * Removes the selected components from the active circuit.
 	 */
 	public void removeSelectedComponents();
 
 	/**
-	 * Selects all components in the active workspace
+	 * Selects all components in the active circuit.
 	 *
 	 */
 	public void selectAllComponents();
 
 	/**
-	 * Selects first found component at the given point in the active workspace.
+	 * Selects first found component at the given point in the active circuit.
 	 *
 	 * @param position
 	 *            the point of the component
@@ -174,7 +174,7 @@ public interface ICircuitManager {
 	public void selectComponent(Point position, boolean multiSelect);
 
 	/**
-	 * Selects all components existing in the active workspace.
+	 * Selects all components existing in the active circuit.
 	 *
 	 * @param list
 	 *            components to select
@@ -192,12 +192,12 @@ public interface ICircuitManager {
 	public void selectComponents(Point positionStart, Point positionEnd);
 
 	/**
-	 * Sets the currently active workspace.
+	 * Sets the currently active circuit.
 	 *
 	 * @param i
-	 *            index of the workspace to select
+	 *            index of the circuit to select
 	 */
-	public void setActiveWorkspace(int i);
+	public void setActiveCircuit(int i);
 
 	/**
 	 * Returns the corresponding IGateWrapper that contains the given gate.

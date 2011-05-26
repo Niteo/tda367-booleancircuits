@@ -9,7 +9,7 @@ import edu.chl.tda367.booleancircuits.model.components.IGateWrapper;
 public interface ICircuit {
 
 	/**
-	 * Adds a component to the model.
+	 * Adds a component to the circuit.
 	 *
 	 * @param component
 	 *            the new component to add
@@ -19,7 +19,7 @@ public interface ICircuit {
 	public void addComponent(IGateWrapper component, Point position);
 
 	/**
-	 * Adds components to the model.
+	 * Adds components to the circuit.
 	 *
 	 * @param component
 	 *            the components to add
@@ -27,7 +27,7 @@ public interface ICircuit {
 	public void addComponents(Collection<IGateWrapper> components);
 
 	/**
-	 * Clocks all clocks in the model.
+	 * Clocks all clocks in the circuit.
 	 */
 	public void clock();
 
@@ -48,7 +48,7 @@ public interface ICircuit {
 	public Collection<IGateWrapper> getComponents();
 
 	/**
-	 * Returns the amount of components in the model.
+	 * Returns the amount of components in the circuit.
 	 *
 	 * @return amount of components
 	 */
@@ -78,13 +78,7 @@ public interface ICircuit {
 	public void removeComponents(Collection<IGateWrapper> list);
 
 	/**
-	 * Returns the name of the workspace.
-	 */
-	@Override
-	public String toString();
-
-	/**
-	 * Updates the model's components' boolean values.
+	 * Updates the circuit's components' boolean values.
 	 */
 	public void updateComponents();
 

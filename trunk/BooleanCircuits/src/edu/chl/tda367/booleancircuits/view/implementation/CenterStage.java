@@ -65,12 +65,12 @@ public class CenterStage implements ICenterStage {
 	@SuppressWarnings("boxing")
 	@Override
 	public synchronized void update(final CircuitManager modelManager) {
-		List<ICircuitWrapper> modelList = modelManager.getWorkspaces();
+		List<ICircuitWrapper> modelList = modelManager.getCircuits();
 		for (int i = 0; i < modelList.size(); i++) {
 			if (!tabIdList.contains(modelList.get(i))) {
 				tabIdList.add(modelList.get(i));
 				newTab(modelList.get(i).toString(),
-						modelManager.getActiveWorkspaceModel(),
+						modelManager.getActiveCircuit(),
 						modelManager.getActiveSelectionModel());
 			}
 		}
@@ -93,15 +93,15 @@ public class CenterStage implements ICenterStage {
 			}
 		}
 
-		if (modelManager.getActiveWorkspaceIndex() >= 1) {
+		if (modelManager.getActiveCircuitIndex() >= 1) {
 			tabManager.setSelectedTabIndex(modelManager
-					.getActiveWorkspaceIndex());
+					.getActiveCircuitIndex());
 		}
-		if (modelManager.getWorkspaces().size() > 0) {
+		if (modelManager.getCircuits().size() > 0) {
 			for (int i = 0; i < tabManager.getTabCount(); i++) {
 				TabPanel panel = tabManager.getTabPanel(i);
 				if (panel != null) {
-					panel.setTabPanelTitle(modelManager.getWorkspaces().get(i)
+					panel.setTabPanelTitle(modelManager.getCircuits().get(i)
 							.toString());
 				}
 			}
