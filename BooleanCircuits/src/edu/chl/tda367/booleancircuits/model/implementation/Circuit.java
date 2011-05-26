@@ -24,7 +24,8 @@ public final class Circuit implements ICircuit {
 	}
 
 	@Override
-	public boolean addComponent(final IGateWrapper component, final Point position) {
+	public boolean addComponent(final IGateWrapper component,
+			final Point position) {
 		component.setPosition(position);
 		return componentList.add(component);
 	}
@@ -101,7 +102,7 @@ public final class Circuit implements ICircuit {
 	public boolean removeComponents(final Collection<IGateWrapper> list) {
 		boolean ret = false;
 		for (IGateWrapper gate : list) {
-			if(_removeComponent(gate)){
+			if (_removeComponent(gate)) {
 				ret = true;
 			}
 		}

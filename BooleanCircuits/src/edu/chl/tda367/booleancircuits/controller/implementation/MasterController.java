@@ -19,12 +19,12 @@ import edu.chl.tda367.booleancircuits.utilities.implementation.*;
 public final class MasterController implements IMasterController {
 
 	private IGateWrapper chosenGate;
+	private final ICircuitManager circuitManager;
 	private IClipboardManager clipboardManager = new ClipboardManager();
 	private Timer clockTimer;
 	private IGateWrapper connectComponent = null;
 	private int connectPort = -1;
 	private IFileManager fileManager;
-	private final ICircuitManager circuitManager;
 
 	/**
 	 * Returns an instance of a MasterController

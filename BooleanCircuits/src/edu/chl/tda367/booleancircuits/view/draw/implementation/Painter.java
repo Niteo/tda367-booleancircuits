@@ -94,7 +94,8 @@ public class Painter implements IPainter {
 				g.drawPolyline(xPoints, yPoints, 4);
 			} else if (Math.abs(yEnd - yStart) <= Constants.componentSize
 					&& xStart > xEnd) {
-				g.drawLine(xStart - Constants.connectorLength, yStart, xEnd + Constants.connectorLength, yEnd);
+				g.drawLine(xStart - Constants.connectorLength, yStart, xEnd
+						+ Constants.connectorLength, yEnd);
 			} else {
 				int[] xPoints = new int[6];
 				xPoints[0] = xStart;
